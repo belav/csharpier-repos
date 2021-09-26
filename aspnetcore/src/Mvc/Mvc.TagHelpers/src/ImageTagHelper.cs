@@ -23,7 +23,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
     [HtmlTargetElement(
         "img",
         Attributes = AppendVersionAttributeName + "," + SrcAttributeName,
-        TagStructure = TagStructure.WithoutEndTag)]
+        TagStructure = TagStructure.WithoutEndTag
+    )]
     public class ImageTagHelper : UrlResolutionTagHelper
     {
         private const string AppendVersionAttributeName = "asp-append-version";
@@ -41,8 +42,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         public ImageTagHelper(
             IFileVersionProvider fileVersionProvider,
             HtmlEncoder htmlEncoder,
-            IUrlHelperFactory urlHelperFactory)
-            : base(urlHelperFactory, htmlEncoder)
+            IUrlHelperFactory urlHelperFactory
+        ) : base(urlHelperFactory, htmlEncoder)
         {
             FileVersionProvider = fileVersionProvider;
         }
@@ -62,8 +63,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             TagHelperMemoryCacheProvider cacheProvider,
             IFileVersionProvider fileVersionProvider,
             HtmlEncoder htmlEncoder,
-            IUrlHelperFactory urlHelperFactory)
-            : base(urlHelperFactory, htmlEncoder)
+            IUrlHelperFactory urlHelperFactory
+        ) : base(urlHelperFactory, htmlEncoder)
         {
             HostingEnvironment = hostingEnvironment;
             Cache = cacheProvider.Cache;
@@ -132,7 +133,13 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 // not function properly.
                 Src = output.Attributes[SrcAttributeName].Value as string;
 
-                output.Attributes.SetAttribute(SrcAttributeName, FileVersionProvider.AddFileVersionToPath(ViewContext.HttpContext.Request.PathBase, Src));
+                output.Attributes.SetAttribute(
+                    SrcAttributeName,
+                    FileVersionProvider.AddFileVersionToPath(
+                        ViewContext.HttpContext.Request.PathBase,
+                        Src
+                    )
+                );
             }
         }
 
@@ -140,7 +147,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         {
             if (FileVersionProvider == null)
             {
-                FileVersionProvider = ViewContext.HttpContext.RequestServices.GetRequiredService<IFileVersionProvider>();
+                FileVersionProvider =
+                    ViewContext.HttpContext.RequestServices.GetRequiredService<IFileVersionProvider>();
             }
         }
     }

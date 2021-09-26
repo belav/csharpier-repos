@@ -35,10 +35,14 @@ namespace Microsoft.AspNetCore.JsonPatch
         }
 
         // Create from list of operations
-        public JsonPatchDocument(List<Operation<TModel>> operations, IContractResolver contractResolver)
+        public JsonPatchDocument(
+            List<Operation<TModel>> operations,
+            IContractResolver contractResolver
+        )
         {
             Operations = operations ?? throw new ArgumentNullException(nameof(operations));
-            ContractResolver = contractResolver ?? throw new ArgumentNullException(nameof(contractResolver));
+            ContractResolver =
+                contractResolver ?? throw new ArgumentNullException(nameof(contractResolver));
         }
 
         /// <summary>
@@ -49,18 +53,19 @@ namespace Microsoft.AspNetCore.JsonPatch
         /// <param name="path">target location</param>
         /// <param name="value">value</param>
         /// <returns>The <see cref="JsonPatchDocument{TModel}"/> for chaining.</returns>
-        public JsonPatchDocument<TModel> Add<TProp>(Expression<Func<TModel, TProp>> path, TProp value)
+        public JsonPatchDocument<TModel> Add<TProp>(
+            Expression<Func<TModel, TProp>> path,
+            TProp value
+        )
         {
             if (path == null)
             {
                 throw new ArgumentNullException(nameof(path));
             }
 
-            Operations.Add(new Operation<TModel>(
-                "add",
-                GetPath(path, null),
-                from: null,
-                value: value));
+            Operations.Add(
+                new Operation<TModel>("add", GetPath(path, null), from: null, value: value)
+            );
 
             return this;
         }
@@ -76,18 +81,22 @@ namespace Microsoft.AspNetCore.JsonPatch
         public JsonPatchDocument<TModel> Add<TProp>(
             Expression<Func<TModel, IList<TProp>>> path,
             TProp value,
-            int position)
+            int position
+        )
         {
             if (path == null)
             {
                 throw new ArgumentNullException(nameof(path));
             }
 
-            Operations.Add(new Operation<TModel>(
-                "add",
-                GetPath(path, position.ToString(CultureInfo.InvariantCulture)),
-                from: null,
-                value: value));
+            Operations.Add(
+                new Operation<TModel>(
+                    "add",
+                    GetPath(path, position.ToString(CultureInfo.InvariantCulture)),
+                    from: null,
+                    value: value
+                )
+            );
 
             return this;
         }
@@ -99,18 +108,19 @@ namespace Microsoft.AspNetCore.JsonPatch
         /// <param name="path">target location</param>
         /// <param name="value">value</param>
         /// <returns>The <see cref="JsonPatchDocument{TModel}"/> for chaining.</returns>
-        public JsonPatchDocument<TModel> Add<TProp>(Expression<Func<TModel, IList<TProp>>> path, TProp value)
+        public JsonPatchDocument<TModel> Add<TProp>(
+            Expression<Func<TModel, IList<TProp>>> path,
+            TProp value
+        )
         {
             if (path == null)
             {
                 throw new ArgumentNullException(nameof(path));
             }
 
-            Operations.Add(new Operation<TModel>(
-                "add",
-                GetPath(path, "-"),
-                from: null,
-                value: value));
+            Operations.Add(
+                new Operation<TModel>("add", GetPath(path, "-"), from: null, value: value)
+            );
 
             return this;
         }
@@ -140,17 +150,23 @@ namespace Microsoft.AspNetCore.JsonPatch
         /// <param name="path">target location</param>
         /// <param name="position">position</param>
         /// <returns>The <see cref="JsonPatchDocument{TModel}"/> for chaining.</returns>
-        public JsonPatchDocument<TModel> Remove<TProp>(Expression<Func<TModel, IList<TProp>>> path, int position)
+        public JsonPatchDocument<TModel> Remove<TProp>(
+            Expression<Func<TModel, IList<TProp>>> path,
+            int position
+        )
         {
             if (path == null)
             {
                 throw new ArgumentNullException(nameof(path));
             }
 
-            Operations.Add(new Operation<TModel>(
-                "remove",
-                GetPath(path, position.ToString(CultureInfo.InvariantCulture)),
-                from: null));
+            Operations.Add(
+                new Operation<TModel>(
+                    "remove",
+                    GetPath(path, position.ToString(CultureInfo.InvariantCulture)),
+                    from: null
+                )
+            );
 
             return this;
         }
@@ -168,10 +184,7 @@ namespace Microsoft.AspNetCore.JsonPatch
                 throw new ArgumentNullException(nameof(path));
             }
 
-            Operations.Add(new Operation<TModel>(
-                "remove",
-                GetPath(path, "-"),
-                from: null));
+            Operations.Add(new Operation<TModel>("remove", GetPath(path, "-"), from: null));
 
             return this;
         }
@@ -183,18 +196,19 @@ namespace Microsoft.AspNetCore.JsonPatch
         /// <param name="path">target location</param>
         /// <param name="value">value</param>
         /// <returns>The <see cref="JsonPatchDocument{TModel}"/> for chaining.</returns>
-        public JsonPatchDocument<TModel> Replace<TProp>(Expression<Func<TModel, TProp>> path, TProp value)
+        public JsonPatchDocument<TModel> Replace<TProp>(
+            Expression<Func<TModel, TProp>> path,
+            TProp value
+        )
         {
             if (path == null)
             {
                 throw new ArgumentNullException(nameof(path));
             }
 
-            Operations.Add(new Operation<TModel>(
-                "replace",
-                GetPath(path, null),
-                from: null,
-                value: value));
+            Operations.Add(
+                new Operation<TModel>("replace", GetPath(path, null), from: null, value: value)
+            );
 
             return this;
         }
@@ -207,19 +221,25 @@ namespace Microsoft.AspNetCore.JsonPatch
         /// <param name="value">value</param>
         /// <param name="position">position</param>
         /// <returns>The <see cref="JsonPatchDocument{TModel}"/> for chaining.</returns>
-        public JsonPatchDocument<TModel> Replace<TProp>(Expression<Func<TModel, IList<TProp>>> path,
-            TProp value, int position)
+        public JsonPatchDocument<TModel> Replace<TProp>(
+            Expression<Func<TModel, IList<TProp>>> path,
+            TProp value,
+            int position
+        )
         {
             if (path == null)
             {
                 throw new ArgumentNullException(nameof(path));
             }
 
-            Operations.Add(new Operation<TModel>(
-                "replace",
-                GetPath(path, position.ToString(CultureInfo.InvariantCulture)),
-                from: null,
-                value: value));
+            Operations.Add(
+                new Operation<TModel>(
+                    "replace",
+                    GetPath(path, position.ToString(CultureInfo.InvariantCulture)),
+                    from: null,
+                    value: value
+                )
+            );
 
             return this;
         }
@@ -231,18 +251,19 @@ namespace Microsoft.AspNetCore.JsonPatch
         /// <param name="path">target location</param>
         /// <param name="value">value</param>
         /// <returns>The <see cref="JsonPatchDocument{TModel}"/> for chaining.</returns>
-        public JsonPatchDocument<TModel> Replace<TProp>(Expression<Func<TModel, IList<TProp>>> path, TProp value)
+        public JsonPatchDocument<TModel> Replace<TProp>(
+            Expression<Func<TModel, IList<TProp>>> path,
+            TProp value
+        )
         {
             if (path == null)
             {
                 throw new ArgumentNullException(nameof(path));
             }
 
-            Operations.Add(new Operation<TModel>(
-                "replace",
-                GetPath(path, "-"),
-                from: null,
-                value: value));
+            Operations.Add(
+                new Operation<TModel>("replace", GetPath(path, "-"), from: null, value: value)
+            );
 
             return this;
         }
@@ -254,18 +275,19 @@ namespace Microsoft.AspNetCore.JsonPatch
         /// <param name="path">target location</param>
         /// <param name="value">value</param>
         /// <returns>The <see cref="JsonPatchDocument{TModel}"/> for chaining.</returns>
-        public JsonPatchDocument<TModel> Test<TProp>(Expression<Func<TModel, TProp>> path, TProp value)
+        public JsonPatchDocument<TModel> Test<TProp>(
+            Expression<Func<TModel, TProp>> path,
+            TProp value
+        )
         {
             if (path == null)
             {
                 throw new ArgumentNullException(nameof(path));
             }
 
-            Operations.Add(new Operation<TModel>(
-                "test",
-                GetPath(path, null),
-                from: null,
-                value: value));
+            Operations.Add(
+                new Operation<TModel>("test", GetPath(path, null), from: null, value: value)
+            );
 
             return this;
         }
@@ -278,19 +300,25 @@ namespace Microsoft.AspNetCore.JsonPatch
         /// <param name="value">value</param>
         /// <param name="position">position</param>
         /// <returns>The <see cref="JsonPatchDocument{TModel}"/> for chaining.</returns>
-        public JsonPatchDocument<TModel> Test<TProp>(Expression<Func<TModel, IList<TProp>>> path,
-            TProp value, int position)
+        public JsonPatchDocument<TModel> Test<TProp>(
+            Expression<Func<TModel, IList<TProp>>> path,
+            TProp value,
+            int position
+        )
         {
             if (path == null)
             {
                 throw new ArgumentNullException(nameof(path));
             }
 
-            Operations.Add(new Operation<TModel>(
-                "test",
-                GetPath(path, position.ToString(CultureInfo.InvariantCulture)),
-                from: null,
-                value: value));
+            Operations.Add(
+                new Operation<TModel>(
+                    "test",
+                    GetPath(path, position.ToString(CultureInfo.InvariantCulture)),
+                    from: null,
+                    value: value
+                )
+            );
 
             return this;
         }
@@ -302,18 +330,19 @@ namespace Microsoft.AspNetCore.JsonPatch
         /// <param name="path">target location</param>
         /// <param name="value">value</param>
         /// <returns>The <see cref="JsonPatchDocument{TModel}"/> for chaining.</returns>
-        public JsonPatchDocument<TModel> Test<TProp>(Expression<Func<TModel, IList<TProp>>> path, TProp value)
+        public JsonPatchDocument<TModel> Test<TProp>(
+            Expression<Func<TModel, IList<TProp>>> path,
+            TProp value
+        )
         {
             if (path == null)
             {
                 throw new ArgumentNullException(nameof(path));
             }
 
-            Operations.Add(new Operation<TModel>(
-                "test",
-                GetPath(path, "-"),
-                from: null,
-                value: value));
+            Operations.Add(
+                new Operation<TModel>("test", GetPath(path, "-"), from: null, value: value)
+            );
 
             return this;
         }
@@ -327,7 +356,8 @@ namespace Microsoft.AspNetCore.JsonPatch
         /// <returns>The <see cref="JsonPatchDocument{TModel}"/> for chaining.</returns>
         public JsonPatchDocument<TModel> Move<TProp>(
             Expression<Func<TModel, TProp>> from,
-            Expression<Func<TModel, TProp>> path)
+            Expression<Func<TModel, TProp>> path
+        )
         {
             if (from == null)
             {
@@ -339,10 +369,7 @@ namespace Microsoft.AspNetCore.JsonPatch
                 throw new ArgumentNullException(nameof(path));
             }
 
-            Operations.Add(new Operation<TModel>(
-                "move",
-                GetPath(path, null),
-                GetPath(from, null)));
+            Operations.Add(new Operation<TModel>("move", GetPath(path, null), GetPath(from, null)));
 
             return this;
         }
@@ -358,7 +385,8 @@ namespace Microsoft.AspNetCore.JsonPatch
         public JsonPatchDocument<TModel> Move<TProp>(
             Expression<Func<TModel, IList<TProp>>> from,
             int positionFrom,
-            Expression<Func<TModel, TProp>> path)
+            Expression<Func<TModel, TProp>> path
+        )
         {
             if (from == null)
             {
@@ -370,10 +398,13 @@ namespace Microsoft.AspNetCore.JsonPatch
                 throw new ArgumentNullException(nameof(path));
             }
 
-            Operations.Add(new Operation<TModel>(
-                "move",
-                GetPath(path, null),
-                GetPath(from, positionFrom.ToString(CultureInfo.InvariantCulture))));
+            Operations.Add(
+                new Operation<TModel>(
+                    "move",
+                    GetPath(path, null),
+                    GetPath(from, positionFrom.ToString(CultureInfo.InvariantCulture))
+                )
+            );
 
             return this;
         }
@@ -389,7 +420,8 @@ namespace Microsoft.AspNetCore.JsonPatch
         public JsonPatchDocument<TModel> Move<TProp>(
             Expression<Func<TModel, TProp>> from,
             Expression<Func<TModel, IList<TProp>>> path,
-            int positionTo)
+            int positionTo
+        )
         {
             if (from == null)
             {
@@ -401,10 +433,13 @@ namespace Microsoft.AspNetCore.JsonPatch
                 throw new ArgumentNullException(nameof(path));
             }
 
-            Operations.Add(new Operation<TModel>(
-                "move",
-                GetPath(path, positionTo.ToString(CultureInfo.InvariantCulture)),
-                GetPath(from, null)));
+            Operations.Add(
+                new Operation<TModel>(
+                    "move",
+                    GetPath(path, positionTo.ToString(CultureInfo.InvariantCulture)),
+                    GetPath(from, null)
+                )
+            );
 
             return this;
         }
@@ -422,7 +457,8 @@ namespace Microsoft.AspNetCore.JsonPatch
             Expression<Func<TModel, IList<TProp>>> from,
             int positionFrom,
             Expression<Func<TModel, IList<TProp>>> path,
-            int positionTo)
+            int positionTo
+        )
         {
             if (from == null)
             {
@@ -434,10 +470,13 @@ namespace Microsoft.AspNetCore.JsonPatch
                 throw new ArgumentNullException(nameof(path));
             }
 
-            Operations.Add(new Operation<TModel>(
-                "move",
-                GetPath(path, positionTo.ToString(CultureInfo.InvariantCulture)),
-                GetPath(from, positionFrom.ToString(CultureInfo.InvariantCulture))));
+            Operations.Add(
+                new Operation<TModel>(
+                    "move",
+                    GetPath(path, positionTo.ToString(CultureInfo.InvariantCulture)),
+                    GetPath(from, positionFrom.ToString(CultureInfo.InvariantCulture))
+                )
+            );
 
             return this;
         }
@@ -453,7 +492,8 @@ namespace Microsoft.AspNetCore.JsonPatch
         public JsonPatchDocument<TModel> Move<TProp>(
             Expression<Func<TModel, IList<TProp>>> from,
             int positionFrom,
-            Expression<Func<TModel, IList<TProp>>> path)
+            Expression<Func<TModel, IList<TProp>>> path
+        )
         {
             if (from == null)
             {
@@ -465,10 +505,13 @@ namespace Microsoft.AspNetCore.JsonPatch
                 throw new ArgumentNullException(nameof(path));
             }
 
-            Operations.Add(new Operation<TModel>(
-                "move",
-                GetPath(path, "-"),
-                GetPath(from, positionFrom.ToString(CultureInfo.InvariantCulture))));
+            Operations.Add(
+                new Operation<TModel>(
+                    "move",
+                    GetPath(path, "-"),
+                    GetPath(from, positionFrom.ToString(CultureInfo.InvariantCulture))
+                )
+            );
 
             return this;
         }
@@ -481,8 +524,9 @@ namespace Microsoft.AspNetCore.JsonPatch
         /// <param name="path">target location</param>
         /// <returns>The <see cref="JsonPatchDocument{TModel}"/> for chaining.</returns>
         public JsonPatchDocument<TModel> Move<TProp>(
-           Expression<Func<TModel, TProp>> from,
-           Expression<Func<TModel, IList<TProp>>> path)
+            Expression<Func<TModel, TProp>> from,
+            Expression<Func<TModel, IList<TProp>>> path
+        )
         {
             if (from == null)
             {
@@ -494,10 +538,7 @@ namespace Microsoft.AspNetCore.JsonPatch
                 throw new ArgumentNullException(nameof(path));
             }
 
-            Operations.Add(new Operation<TModel>(
-                "move",
-                GetPath(path, "-"),
-                GetPath(from, null)));
+            Operations.Add(new Operation<TModel>("move", GetPath(path, "-"), GetPath(from, null)));
 
             return this;
         }
@@ -510,8 +551,9 @@ namespace Microsoft.AspNetCore.JsonPatch
         /// <param name="path">target location</param>
         /// <returns>The <see cref="JsonPatchDocument{TModel}"/> for chaining.</returns>
         public JsonPatchDocument<TModel> Copy<TProp>(
-           Expression<Func<TModel, TProp>> from,
-           Expression<Func<TModel, TProp>> path)
+            Expression<Func<TModel, TProp>> from,
+            Expression<Func<TModel, TProp>> path
+        )
         {
             if (from == null)
             {
@@ -523,10 +565,7 @@ namespace Microsoft.AspNetCore.JsonPatch
                 throw new ArgumentNullException(nameof(path));
             }
 
-            Operations.Add(new Operation<TModel>(
-                "copy",
-                GetPath(path, null),
-                GetPath(from, null)));
+            Operations.Add(new Operation<TModel>("copy", GetPath(path, null), GetPath(from, null)));
 
             return this;
         }
@@ -540,9 +579,10 @@ namespace Microsoft.AspNetCore.JsonPatch
         /// <param name="path">target location</param>
         /// <returns>The <see cref="JsonPatchDocument{TModel}"/> for chaining.</returns>
         public JsonPatchDocument<TModel> Copy<TProp>(
-           Expression<Func<TModel, IList<TProp>>> from,
+            Expression<Func<TModel, IList<TProp>>> from,
             int positionFrom,
-           Expression<Func<TModel, TProp>> path)
+            Expression<Func<TModel, TProp>> path
+        )
         {
             if (from == null)
             {
@@ -554,10 +594,13 @@ namespace Microsoft.AspNetCore.JsonPatch
                 throw new ArgumentNullException(nameof(path));
             }
 
-            Operations.Add(new Operation<TModel>(
-                "copy",
-                GetPath(path, null),
-                GetPath(from, positionFrom.ToString(CultureInfo.InvariantCulture))));
+            Operations.Add(
+                new Operation<TModel>(
+                    "copy",
+                    GetPath(path, null),
+                    GetPath(from, positionFrom.ToString(CultureInfo.InvariantCulture))
+                )
+            );
 
             return this;
         }
@@ -573,7 +616,8 @@ namespace Microsoft.AspNetCore.JsonPatch
         public JsonPatchDocument<TModel> Copy<TProp>(
             Expression<Func<TModel, TProp>> from,
             Expression<Func<TModel, IList<TProp>>> path,
-            int positionTo)
+            int positionTo
+        )
         {
             if (from == null)
             {
@@ -585,10 +629,13 @@ namespace Microsoft.AspNetCore.JsonPatch
                 throw new ArgumentNullException(nameof(path));
             }
 
-            Operations.Add(new Operation<TModel>(
-                "copy",
-                GetPath(path, positionTo.ToString(CultureInfo.InvariantCulture)),
-                GetPath(from, null)));
+            Operations.Add(
+                new Operation<TModel>(
+                    "copy",
+                    GetPath(path, positionTo.ToString(CultureInfo.InvariantCulture)),
+                    GetPath(from, null)
+                )
+            );
 
             return this;
         }
@@ -606,7 +653,8 @@ namespace Microsoft.AspNetCore.JsonPatch
             Expression<Func<TModel, IList<TProp>>> from,
             int positionFrom,
             Expression<Func<TModel, IList<TProp>>> path,
-            int positionTo)
+            int positionTo
+        )
         {
             if (from == null)
             {
@@ -618,10 +666,13 @@ namespace Microsoft.AspNetCore.JsonPatch
                 throw new ArgumentNullException(nameof(path));
             }
 
-            Operations.Add(new Operation<TModel>(
-                "copy",
-                GetPath(path, positionTo.ToString(CultureInfo.InvariantCulture)),
-                GetPath(from, positionFrom.ToString(CultureInfo.InvariantCulture))));
+            Operations.Add(
+                new Operation<TModel>(
+                    "copy",
+                    GetPath(path, positionTo.ToString(CultureInfo.InvariantCulture)),
+                    GetPath(from, positionFrom.ToString(CultureInfo.InvariantCulture))
+                )
+            );
 
             return this;
         }
@@ -637,7 +688,8 @@ namespace Microsoft.AspNetCore.JsonPatch
         public JsonPatchDocument<TModel> Copy<TProp>(
             Expression<Func<TModel, IList<TProp>>> from,
             int positionFrom,
-            Expression<Func<TModel, IList<TProp>>> path)
+            Expression<Func<TModel, IList<TProp>>> path
+        )
         {
             if (from == null)
             {
@@ -649,10 +701,13 @@ namespace Microsoft.AspNetCore.JsonPatch
                 throw new ArgumentNullException(nameof(path));
             }
 
-            Operations.Add(new Operation<TModel>(
-                "copy",
-                GetPath(path, "-"),
-                GetPath(from, positionFrom.ToString(CultureInfo.InvariantCulture))));
+            Operations.Add(
+                new Operation<TModel>(
+                    "copy",
+                    GetPath(path, "-"),
+                    GetPath(from, positionFrom.ToString(CultureInfo.InvariantCulture))
+                )
+            );
 
             return this;
         }
@@ -666,7 +721,8 @@ namespace Microsoft.AspNetCore.JsonPatch
         /// <returns>The <see cref="JsonPatchDocument{TModel}"/> for chaining.</returns>
         public JsonPatchDocument<TModel> Copy<TProp>(
             Expression<Func<TModel, TProp>> from,
-            Expression<Func<TModel, IList<TProp>>> path)
+            Expression<Func<TModel, IList<TProp>>> path
+        )
         {
             if (from == null)
             {
@@ -678,10 +734,7 @@ namespace Microsoft.AspNetCore.JsonPatch
                 throw new ArgumentNullException(nameof(path));
             }
 
-            Operations.Add(new Operation<TModel>(
-                "copy",
-                GetPath(path, "-"),
-                GetPath(from, null)));
+            Operations.Add(new Operation<TModel>("copy", GetPath(path, "-"), GetPath(from, null)));
 
             return this;
         }
@@ -697,7 +750,10 @@ namespace Microsoft.AspNetCore.JsonPatch
                 throw new ArgumentNullException(nameof(objectToApplyTo));
             }
 
-            ApplyTo(objectToApplyTo, new ObjectAdapter(ContractResolver, null, AdapterFactory.Default));
+            ApplyTo(
+                objectToApplyTo,
+                new ObjectAdapter(ContractResolver, null, AdapterFactory.Default)
+            );
         }
 
         /// <summary>
@@ -707,7 +763,11 @@ namespace Microsoft.AspNetCore.JsonPatch
         /// <param name="logErrorAction">Action to log errors</param>
         public void ApplyTo(TModel objectToApplyTo, Action<JsonPatchError> logErrorAction)
         {
-            ApplyTo(objectToApplyTo, new ObjectAdapter(ContractResolver, logErrorAction, AdapterFactory.Default), logErrorAction);
+            ApplyTo(
+                objectToApplyTo,
+                new ObjectAdapter(ContractResolver, logErrorAction, AdapterFactory.Default),
+                logErrorAction
+            );
         }
 
         /// <summary>
@@ -716,7 +776,11 @@ namespace Microsoft.AspNetCore.JsonPatch
         /// <param name="objectToApplyTo">Object to apply the JsonPatchDocument to</param>
         /// <param name="adapter">IObjectAdapter instance to use when applying</param>
         /// <param name="logErrorAction">Action to log errors</param>
-        public void ApplyTo(TModel objectToApplyTo, IObjectAdapter adapter, Action<JsonPatchError> logErrorAction)
+        public void ApplyTo(
+            TModel objectToApplyTo,
+            IObjectAdapter adapter,
+            Action<JsonPatchError> logErrorAction
+        )
         {
             if (objectToApplyTo == null)
             {
@@ -737,8 +801,9 @@ namespace Microsoft.AspNetCore.JsonPatch
                 catch (JsonPatchException jsonPatchException)
                 {
                     var errorReporter = logErrorAction ?? ErrorReporter.Default;
-                    errorReporter(new JsonPatchError(objectToApplyTo, op, jsonPatchException.Message));
-
+                    errorReporter(
+                        new JsonPatchError(objectToApplyTo, op, jsonPatchException.Message)
+                    );
                     // As per JSON Patch spec if an operation results in error, further operations should not be executed.
                     break;
                 }
@@ -842,18 +907,22 @@ namespace Microsoft.AspNetCore.JsonPatch
                     return listOfSegments;
 
                 default:
-                    throw new InvalidOperationException(Resources.FormatExpressionTypeNotSupported(expr));
+                    throw new InvalidOperationException(
+                        Resources.FormatExpressionTypeNotSupported(expr)
+                    );
             }
         }
 
         private string GetPropertyNameFromMemberExpression(MemberExpression memberExpression)
         {
-            var jsonObjectContract = ContractResolver.ResolveContract(memberExpression.Expression.Type) as JsonObjectContract;
+            var jsonObjectContract =
+                ContractResolver.ResolveContract(memberExpression.Expression.Type)
+                as JsonObjectContract;
             if (jsonObjectContract != null)
             {
-                return jsonObjectContract.Properties
-                    .First(jsonProperty => jsonProperty.UnderlyingName == memberExpression.Member.Name)
-                    .PropertyName;
+                return jsonObjectContract.Properties.First(
+                    jsonProperty => jsonProperty.UnderlyingName == memberExpression.Member.Name
+                ).PropertyName;
             }
 
             return null;

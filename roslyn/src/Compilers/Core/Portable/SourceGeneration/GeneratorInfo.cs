@@ -16,7 +16,11 @@ namespace Microsoft.CodeAnalysis
 
         internal bool Initialized { get; }
 
-        internal GeneratorInfo(EditCallback<AdditionalFileEdit>? editCallback, SyntaxContextReceiverCreator? receiverCreator, Action<GeneratorPostInitializationContext>? postInitCallback)
+        internal GeneratorInfo(
+            EditCallback<AdditionalFileEdit>? editCallback,
+            SyntaxContextReceiverCreator? receiverCreator,
+            Action<GeneratorPostInitializationContext>? postInitCallback
+        )
         {
             EditCallback = editCallback;
             SyntaxContextReceiverCreator = receiverCreator;
@@ -32,7 +36,8 @@ namespace Microsoft.CodeAnalysis
 
             internal Action<GeneratorPostInitializationContext>? PostInitCallback { get; set; }
 
-            public GeneratorInfo ToImmutable() => new GeneratorInfo(EditCallback, SyntaxContextReceiverCreator, PostInitCallback);
+            public GeneratorInfo ToImmutable() =>
+                new GeneratorInfo(EditCallback, SyntaxContextReceiverCreator, PostInitCallback);
         }
     }
 }

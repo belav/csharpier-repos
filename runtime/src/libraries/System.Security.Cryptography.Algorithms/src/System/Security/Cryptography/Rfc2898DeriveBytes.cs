@@ -32,48 +32,71 @@ namespace System.Security.Cryptography
         public HashAlgorithmName HashAlgorithm { get; }
 
         public Rfc2898DeriveBytes(byte[] password, byte[] salt, int iterations)
-            : this(password, salt, iterations, HashAlgorithmName.SHA1)
-        {
-        }
+            : this(password, salt, iterations, HashAlgorithmName.SHA1) { }
 
-        public Rfc2898DeriveBytes(byte[] password, byte[] salt, int iterations, HashAlgorithmName hashAlgorithm)
-            :this(password, salt, iterations, hashAlgorithm, clearPassword: false, requireMinimumSaltLength: true)
-        {
-        }
+        public Rfc2898DeriveBytes(
+            byte[] password,
+            byte[] salt,
+            int iterations,
+            HashAlgorithmName hashAlgorithm
+        )
+            : this(
+                password,
+                salt,
+                iterations,
+                hashAlgorithm,
+                clearPassword: false,
+                requireMinimumSaltLength: true
+            ) { }
 
-        public Rfc2898DeriveBytes(string password, byte[] salt)
-             : this(password, salt, 1000)
-        {
-        }
+        public Rfc2898DeriveBytes(string password, byte[] salt) : this(password, salt, 1000) { }
 
         public Rfc2898DeriveBytes(string password, byte[] salt, int iterations)
-            : this(password, salt, iterations, HashAlgorithmName.SHA1)
-        {
-        }
+            : this(password, salt, iterations, HashAlgorithmName.SHA1) { }
 
-        public Rfc2898DeriveBytes(string password, byte[] salt, int iterations, HashAlgorithmName hashAlgorithm)
-            : this(Encoding.UTF8.GetBytes(password), salt, iterations, hashAlgorithm, clearPassword: true, requireMinimumSaltLength: true)
-        {
-        }
+        public Rfc2898DeriveBytes(
+            string password,
+            byte[] salt,
+            int iterations,
+            HashAlgorithmName hashAlgorithm
+        )
+            : this(
+                Encoding.UTF8.GetBytes(password),
+                salt,
+                iterations,
+                hashAlgorithm,
+                clearPassword: true,
+                requireMinimumSaltLength: true
+            ) { }
 
-        public Rfc2898DeriveBytes(string password, int saltSize)
-            : this(password, saltSize, 1000)
-        {
-        }
+        public Rfc2898DeriveBytes(string password, int saltSize) : this(password, saltSize, 1000)
+        { }
 
         public Rfc2898DeriveBytes(string password, int saltSize, int iterations)
-            : this(password, saltSize, iterations, HashAlgorithmName.SHA1)
-        {
-        }
+            : this(password, saltSize, iterations, HashAlgorithmName.SHA1) { }
 
-        public Rfc2898DeriveBytes(string password, int saltSize, int iterations, HashAlgorithmName hashAlgorithm)
+        public Rfc2898DeriveBytes(
+            string password,
+            int saltSize,
+            int iterations,
+            HashAlgorithmName hashAlgorithm
+        )
         {
             if (saltSize < 0)
-                throw new ArgumentOutOfRangeException(nameof(saltSize), SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(saltSize),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
             if (saltSize < MinimumSaltSize)
-                throw new ArgumentException(SR.Cryptography_PasswordDerivedBytes_FewBytesSalt, nameof(saltSize));
+                throw new ArgumentException(
+                    SR.Cryptography_PasswordDerivedBytes_FewBytesSalt,
+                    nameof(saltSize)
+                );
             if (iterations <= 0)
-                throw new ArgumentOutOfRangeException(nameof(iterations), SR.ArgumentOutOfRange_NeedPosNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(iterations),
+                    SR.ArgumentOutOfRange_NeedPosNum
+                );
 
             _salt = new byte[saltSize + sizeof(uint)];
             RandomNumberGenerator.Fill(_salt.AsSpan(0, saltSize));
@@ -89,16 +112,29 @@ namespace System.Security.Cryptography
             Initialize();
         }
 
-        internal Rfc2898DeriveBytes(byte[] password, byte[] salt, int iterations, HashAlgorithmName hashAlgorithm, bool clearPassword, bool requireMinimumSaltLength)
+        internal Rfc2898DeriveBytes(
+            byte[] password,
+            byte[] salt,
+            int iterations,
+            HashAlgorithmName hashAlgorithm,
+            bool clearPassword,
+            bool requireMinimumSaltLength
+        )
         {
             if (salt is null)
                 throw new ArgumentNullException(nameof(salt));
             if (requireMinimumSaltLength && salt.Length < MinimumSaltSize)
-                throw new ArgumentException(SR.Cryptography_PasswordDerivedBytes_FewBytesSalt, nameof(salt));
+                throw new ArgumentException(
+                    SR.Cryptography_PasswordDerivedBytes_FewBytesSalt,
+                    nameof(salt)
+                );
             if (iterations <= 0)
-                throw new ArgumentOutOfRangeException(nameof(iterations), SR.ArgumentOutOfRange_NeedPosNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(iterations),
+                    SR.ArgumentOutOfRange_NeedPosNum
+                );
             if (password is null)
-                throw new NullReferenceException();  // This "should" be ArgumentNullException but for compat, we throw NullReferenceException.
+                throw new NullReferenceException(); // This "should" be ArgumentNullException but for compat, we throw NullReferenceException.
 
             _salt = new byte[salt.Length + sizeof(uint)];
             salt.AsSpan().CopyTo(_salt);
@@ -118,15 +154,14 @@ namespace System.Security.Cryptography
 
         public int IterationCount
         {
-            get
-            {
-                return (int)_iterations;
-            }
-
+            get { return (int)_iterations; }
             set
             {
                 if (value <= 0)
-                    throw new ArgumentOutOfRangeException(nameof(value), SR.ArgumentOutOfRange_NeedPosNum);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        SR.ArgumentOutOfRange_NeedPosNum
+                    );
                 _iterations = (uint)value;
                 Initialize();
             }
@@ -134,11 +169,7 @@ namespace System.Security.Cryptography
 
         public byte[] Salt
         {
-            get
-            {
-                return _salt.AsSpan(0, _salt.Length - sizeof(uint)).ToArray();
-            }
-
+            get { return _salt.AsSpan(0, _salt.Length - sizeof(uint)).ToArray(); }
             set
             {
                 if (value == null)
@@ -196,7 +227,10 @@ namespace System.Security.Cryptography
                 }
             }
 
-            Debug.Assert(_startIndex == 0 && _endIndex == 0, "Invalid start or end index in the internal buffer.");
+            Debug.Assert(
+                _startIndex == 0 && _endIndex == 0,
+                "Invalid start or end index in the internal buffer."
+            );
 
             while (offset < cb)
             {
@@ -234,7 +268,11 @@ namespace System.Security.Cryptography
             Initialize();
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA5350", Justification = "HMACSHA1 is needed for compat. (https://github.com/dotnet/runtime/issues/17618)")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Security",
+            "CA5350",
+            Justification = "HMACSHA1 is needed for compat. (https://github.com/dotnet/runtime/issues/17618)"
+        )]
         private HMAC OpenHmac(byte[] password)
         {
             Debug.Assert(password != null);
@@ -253,7 +291,9 @@ namespace System.Security.Cryptography
             if (hashAlgorithm == HashAlgorithmName.SHA512)
                 return new HMACSHA512(password);
 
-            throw new CryptographicException(SR.Format(SR.Cryptography_UnknownHashAlgorithm, hashAlgorithm.Name));
+            throw new CryptographicException(
+                SR.Format(SR.Cryptography_UnknownHashAlgorithm, hashAlgorithm.Name)
+            );
         }
 
         [MemberNotNull(nameof(_buffer))]
@@ -276,7 +316,10 @@ namespace System.Security.Cryptography
             if (_block == uint.MaxValue)
                 throw new CryptographicException(SR.Cryptography_ExceedKdfExtractLimit);
 
-            BinaryPrimitives.WriteUInt32BigEndian(_salt.AsSpan(_salt.Length - sizeof(uint)), _block + 1);
+            BinaryPrimitives.WriteUInt32BigEndian(
+                _salt.AsSpan(_salt.Length - sizeof(uint)),
+                _block + 1
+            );
             Debug.Assert(_blockSize == _buffer.Length);
 
             // The biggest _blockSize we have is from SHA512, which is 64 bytes.
@@ -286,7 +329,10 @@ namespace System.Security.Cryptography
             Span<byte> uiSpan = stackalloc byte[64];
             uiSpan = uiSpan.Slice(0, _blockSize);
 
-            if (!_hmac.TryComputeHash(_salt, uiSpan, out int bytesWritten) || bytesWritten != _blockSize)
+            if (
+                !_hmac.TryComputeHash(_salt, uiSpan, out int bytesWritten)
+                || bytesWritten != _blockSize
+            )
             {
                 throw new CryptographicException();
             }
@@ -295,7 +341,10 @@ namespace System.Security.Cryptography
 
             for (int i = 2; i <= _iterations; i++)
             {
-                if (!_hmac.TryComputeHash(uiSpan, uiSpan, out bytesWritten) || bytesWritten != _blockSize)
+                if (
+                    !_hmac.TryComputeHash(uiSpan, uiSpan, out bytesWritten)
+                    || bytesWritten != _blockSize
+                )
                 {
                     throw new CryptographicException();
                 }

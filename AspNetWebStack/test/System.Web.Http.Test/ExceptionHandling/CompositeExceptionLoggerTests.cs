@@ -37,7 +37,6 @@ namespace System.Web.Http.ExceptionHandling
             Assert.NotNull(loggers);
             IExceptionLogger logger = Assert.Single(loggers);
             Assert.Same(expectedLogger, logger);
-
         }
 
         [Fact]
@@ -66,7 +65,10 @@ namespace System.Web.Http.ExceptionHandling
             IExceptionLogger expectedLogger2 = CreateDummyLogger();
 
             // Act
-            CompositeExceptionLogger product = new CompositeExceptionLogger(expectedLogger1, expectedLogger2);
+            CompositeExceptionLogger product = new CompositeExceptionLogger(
+                expectedLogger1,
+                expectedLogger2
+            );
 
             // Assert
             IEnumerable<IExceptionLogger> loggers = product.Loggers;
@@ -80,13 +82,27 @@ namespace System.Web.Http.ExceptionHandling
         public async Task LogAsync_DelegatesToLoggers()
         {
             // Arrange
-            Mock<IExceptionLogger> exceptionLogger1Mock = new Mock<IExceptionLogger>(MockBehavior.Strict);
-            Mock<IExceptionLogger> exceptionLogger2Mock = new Mock<IExceptionLogger>(MockBehavior.Strict);
-            exceptionLogger1Mock
-                .Setup(l => l.LogAsync(It.IsAny<ExceptionLoggerContext>(), It.IsAny<CancellationToken>()))
+            Mock<IExceptionLogger> exceptionLogger1Mock = new Mock<IExceptionLogger>(
+                MockBehavior.Strict
+            );
+            Mock<IExceptionLogger> exceptionLogger2Mock = new Mock<IExceptionLogger>(
+                MockBehavior.Strict
+            );
+            exceptionLogger1Mock.Setup(
+                    l =>
+                        l.LogAsync(
+                            It.IsAny<ExceptionLoggerContext>(),
+                            It.IsAny<CancellationToken>()
+                        )
+                )
                 .Returns(Task.FromResult(0));
-            exceptionLogger2Mock
-                .Setup(l => l.LogAsync(It.IsAny<ExceptionLoggerContext>(), It.IsAny<CancellationToken>()))
+            exceptionLogger2Mock.Setup(
+                    l =>
+                        l.LogAsync(
+                            It.IsAny<ExceptionLoggerContext>(),
+                            It.IsAny<CancellationToken>()
+                        )
+                )
                 .Returns(Task.FromResult(0));
             IEnumerable<IExceptionLogger> loggers = new IExceptionLogger[]
             {
@@ -102,8 +118,14 @@ namespace System.Web.Http.ExceptionHandling
             await product.LogAsync(expectedContext, expectedCancellationToken);
 
             // Assert
-            exceptionLogger1Mock.Verify(l => l.LogAsync(expectedContext, expectedCancellationToken), Times.Once());
-            exceptionLogger2Mock.Verify(l => l.LogAsync(expectedContext, expectedCancellationToken), Times.Once());
+            exceptionLogger1Mock.Verify(
+                l => l.LogAsync(expectedContext, expectedCancellationToken),
+                Times.Once()
+            );
+            exceptionLogger2Mock.Verify(
+                l => l.LogAsync(expectedContext, expectedCancellationToken),
+                Times.Once()
+            );
         }
 
         [Fact]
@@ -117,9 +139,10 @@ namespace System.Web.Http.ExceptionHandling
             CancellationToken cancellationToken = CreateCancellationToken();
 
             // Act & Assert
-            Assert.Throws<InvalidOperationException>(() => product.LogAsync(context, cancellationToken),
-                "The IExceptionLogger instance must not be null.");
-
+            Assert.Throws<InvalidOperationException>(
+                () => product.LogAsync(context, cancellationToken),
+                "The IExceptionLogger instance must not be null."
+            );
         }
 
         private static CancellationToken CreateCancellationToken()
@@ -130,7 +153,9 @@ namespace System.Web.Http.ExceptionHandling
 
         private static ExceptionLoggerContext CreateMinimalValidContext()
         {
-            return new ExceptionLoggerContext(new ExceptionContext(new Exception(), ExceptionCatchBlocks.HttpServer));
+            return new ExceptionLoggerContext(
+                new ExceptionContext(new Exception(), ExceptionCatchBlocks.HttpServer)
+            );
         }
 
         private static IExceptionLogger CreateDummyLogger()
@@ -138,7 +163,9 @@ namespace System.Web.Http.ExceptionHandling
             return new Mock<IExceptionLogger>(MockBehavior.Strict).Object;
         }
 
-        private static CompositeExceptionLogger CreateProductUnderTest(IEnumerable<IExceptionLogger> loggers)
+        private static CompositeExceptionLogger CreateProductUnderTest(
+            IEnumerable<IExceptionLogger> loggers
+        )
         {
             return new CompositeExceptionLogger(loggers);
         }

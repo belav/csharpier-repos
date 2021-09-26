@@ -7,7 +7,8 @@ using System.Text.Json.Serialization;
 
 namespace Microsoft.JSInterop.Infrastructure
 {
-    internal sealed class DotNetObjectReferenceJsonConverter<TValue> : JsonConverter<DotNetObjectReference<TValue>> where TValue : class
+    internal sealed class DotNetObjectReferenceJsonConverter<TValue>
+        : JsonConverter<DotNetObjectReference<TValue>> where TValue : class
     {
         public DotNetObjectReferenceJsonConverter(JSRuntime jsRuntime)
         {
@@ -18,7 +19,11 @@ namespace Microsoft.JSInterop.Infrastructure
 
         public JSRuntime JSRuntime { get; }
 
-        public override DotNetObjectReference<TValue> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override DotNetObjectReference<TValue> Read(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
             long dotNetObjectId = 0;
 
@@ -26,7 +31,10 @@ namespace Microsoft.JSInterop.Infrastructure
             {
                 if (reader.TokenType == JsonTokenType.PropertyName)
                 {
-                    if (dotNetObjectId == 0 && reader.ValueTextEquals(DotNetObjectRefKey.EncodedUtf8Bytes))
+                    if (
+                        dotNetObjectId == 0
+                        && reader.ValueTextEquals(DotNetObjectRefKey.EncodedUtf8Bytes)
+                    )
                     {
                         reader.Read();
                         dotNetObjectId = reader.GetInt64();
@@ -51,7 +59,11 @@ namespace Microsoft.JSInterop.Infrastructure
             return value;
         }
 
-        public override void Write(Utf8JsonWriter writer, DotNetObjectReference<TValue> value, JsonSerializerOptions options)
+        public override void Write(
+            Utf8JsonWriter writer,
+            DotNetObjectReference<TValue> value,
+            JsonSerializerOptions options
+        )
         {
             var objectId = JSRuntime.TrackObjectReference<TValue>(value);
 

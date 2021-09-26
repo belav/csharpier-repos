@@ -22,8 +22,10 @@ namespace Microsoft.AspNetCore.Routing
         private readonly static char[] UrlQueryDelimiters = new char[] { '?', '#' };
         private readonly List<IRouter> _routes = new List<IRouter>();
         private readonly List<IRouter> _unnamedRoutes = new List<IRouter>();
-        private readonly Dictionary<string, INamedRouter> _namedRoutes =
-                                    new Dictionary<string, INamedRouter>(StringComparer.OrdinalIgnoreCase);
+        private readonly Dictionary<string, INamedRouter> _namedRoutes = new Dictionary<
+            string,
+            INamedRouter
+        >(StringComparer.OrdinalIgnoreCase);
 
         private RouteOptions? _options;
 
@@ -90,6 +92,7 @@ namespace Microsoft.AspNetCore.Routing
                         break;
                     }
                 }
+
                 finally
                 {
                     if (context.Handler == null)
@@ -119,7 +122,9 @@ namespace Microsoft.AspNetCore.Routing
                 // If the named route and one of the unnamed routes also matches, then we have an ambiguity.
                 if (namedRoutePathData != null && pathData != null)
                 {
-                    var message = Resources.FormatNamedRoutes_AmbiguousRoutesFound(context.RouteName);
+                    var message = Resources.FormatNamedRoutes_AmbiguousRoutesFound(
+                        context.RouteName
+                    );
                     throw new InvalidOperationException(message);
                 }
 
@@ -158,7 +163,10 @@ namespace Microsoft.AspNetCore.Routing
 
             var url = pathData.VirtualPath;
 
-            if (!string.IsNullOrEmpty(url) && (_options.LowercaseUrls || _options.AppendTrailingSlash))
+            if (
+                !string.IsNullOrEmpty(url)
+                && (_options.LowercaseUrls || _options.AppendTrailingSlash)
+            )
             {
                 var indexOfSeparator = url.IndexOfAny(UrlQueryDelimiters);
                 var urlWithoutQueryString = url;
@@ -180,7 +188,10 @@ namespace Microsoft.AspNetCore.Routing
                     queryString = queryString.ToLowerInvariant();
                 }
 
-                if (_options.AppendTrailingSlash && !urlWithoutQueryString.EndsWith("/", StringComparison.Ordinal))
+                if (
+                    _options.AppendTrailingSlash
+                    && !urlWithoutQueryString.EndsWith("/", StringComparison.Ordinal)
+                )
                 {
                     urlWithoutQueryString += "/";
                 }
@@ -199,7 +210,8 @@ namespace Microsoft.AspNetCore.Routing
         {
             if (_options == null)
             {
-                _options = context.RequestServices.GetRequiredService<IOptions<RouteOptions>>().Value;
+                _options =
+                    context.RequestServices.GetRequiredService<IOptions<RouteOptions>>().Value;
             }
         }
     }

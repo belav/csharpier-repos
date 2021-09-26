@@ -5,6 +5,5 @@ namespace RazorWebSite
 {
     public class SingleType
     {
-
     }
 }

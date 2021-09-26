@@ -29,7 +29,11 @@ namespace System.Web.Mvc.Test
             ActionResult originalResult = new JsonResult();
 
             // Act
-            ActionResult returnedActionResult = invoker.PublicCreateActionResult(null, null, originalResult);
+            ActionResult returnedActionResult = invoker.PublicCreateActionResult(
+                null,
+                null,
+                originalResult
+            );
 
             // Assert
             Assert.Same(originalResult, returnedActionResult);
@@ -56,7 +60,11 @@ namespace System.Web.Mvc.Test
             object originalReturnValue = new CultureReflector();
 
             // Act
-            ActionResult returnedActionResult = invoker.PublicCreateActionResult(null, null, originalReturnValue);
+            ActionResult returnedActionResult = invoker.PublicCreateActionResult(
+                null,
+                null,
+                originalReturnValue
+            );
 
             // Assert
             ContentResult contentResult = Assert.IsType<ContentResult>(returnedActionResult);
@@ -76,7 +84,11 @@ namespace System.Web.Mvc.Test
             mockCd.Setup(cd => cd.FindAction(controllerContext, "someAction")).Returns(expectedAd);
 
             // Act
-            ActionDescriptor returnedAd = helper.PublicFindAction(controllerContext, mockCd.Object, "someAction");
+            ActionDescriptor returnedAd = helper.PublicFindAction(
+                controllerContext,
+                mockCd.Object,
+                "someAction"
+            );
 
             // Assert
             Assert.Equal(expectedAd, returnedAd);
@@ -90,7 +102,9 @@ namespace System.Web.Mvc.Test
             // Arrange
             Controller controller = new FindMethodController();
             ControllerContext context = GetControllerContext(controller);
-            ControllerDescriptor cd = new ReflectedControllerDescriptor(typeof(FindMethodController));
+            ControllerDescriptor cd = new ReflectedControllerDescriptor(
+                typeof(FindMethodController)
+            );
 
             ControllerActionInvokerHelper helper = new ControllerActionInvokerHelper();
 
@@ -111,7 +125,9 @@ namespace System.Web.Mvc.Test
             // Arrange
             Controller controller = new FindMethodController();
             ControllerContext context = GetControllerContext(controller);
-            ControllerDescriptor cd = new ReflectedControllerDescriptor(typeof(FindMethodController));
+            ControllerDescriptor cd = new ReflectedControllerDescriptor(
+                typeof(FindMethodController)
+            );
 
             ControllerActionInvokerHelper helper = new ControllerActionInvokerHelper();
 
@@ -130,7 +146,9 @@ namespace System.Web.Mvc.Test
             // Arrange
             Controller controller = new FindMethodController();
             ControllerContext context = GetControllerContext(controller);
-            ControllerDescriptor cd = new ReflectedControllerDescriptor(typeof(FindMethodController));
+            ControllerDescriptor cd = new ReflectedControllerDescriptor(
+                typeof(FindMethodController)
+            );
 
             ControllerActionInvokerHelper helper = new ControllerActionInvokerHelper();
 
@@ -151,7 +169,12 @@ namespace System.Web.Mvc.Test
             ControllerDescriptor cd = new ReflectedControllerDescriptor(typeof(BlankController));
             ControllerContext context = GetControllerContext(controller);
             ControllerActionInvokerHelper helper = new ControllerActionInvokerHelper();
-            var methods = typeof(Controller).GetMethods(BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
+            var methods = typeof(Controller).GetMethods(
+                BindingFlags.Instance
+                    | BindingFlags.Static
+                    | BindingFlags.Public
+                    | BindingFlags.NonPublic
+            );
 
             // Act & Assert
             foreach (var method in methods)
@@ -162,9 +185,14 @@ namespace System.Web.Mvc.Test
                     ActionDescriptor ad = helper.PublicFindAction(context, cd, method.Name);
                     wasFound = (ad != null);
                 }
+
                 finally
                 {
-                    Assert.False(wasFound, "FindAction() should return false for methods defined on the Controller class: " + method);
+                    Assert.False(
+                        wasFound,
+                        "FindAction() should return false for methods defined on the Controller class: "
+                            + method
+                    );
                 }
             }
         }
@@ -177,7 +205,9 @@ namespace System.Web.Mvc.Test
             // Arrange
             Controller controller = new FindMethodController();
             ControllerContext context = GetControllerContext(controller);
-            ControllerDescriptor cd = new ReflectedControllerDescriptor(typeof(FindMethodController));
+            ControllerDescriptor cd = new ReflectedControllerDescriptor(
+                typeof(FindMethodController)
+            );
 
             ControllerActionInvokerHelper helper = new ControllerActionInvokerHelper();
 
@@ -196,7 +226,9 @@ namespace System.Web.Mvc.Test
             // Arrange
             Controller controller = new FindMethodController();
             ControllerContext context = GetControllerContext(controller);
-            ControllerDescriptor cd = new ReflectedControllerDescriptor(typeof(FindMethodController));
+            ControllerDescriptor cd = new ReflectedControllerDescriptor(
+                typeof(FindMethodController)
+            );
 
             ControllerActionInvokerHelper helper = new ControllerActionInvokerHelper();
 
@@ -215,7 +247,9 @@ namespace System.Web.Mvc.Test
             // Arrange
             Controller controller = new DerivedFindMethodController();
             ControllerContext context = GetControllerContext(controller);
-            ControllerDescriptor cd = new ReflectedControllerDescriptor(typeof(DerivedFindMethodController));
+            ControllerDescriptor cd = new ReflectedControllerDescriptor(
+                typeof(DerivedFindMethodController)
+            );
 
             ControllerActionInvokerHelper helper = new ControllerActionInvokerHelper();
 
@@ -234,7 +268,9 @@ namespace System.Web.Mvc.Test
             // Arrange
             Controller controller = new FindMethodController();
             ControllerContext context = GetControllerContext(controller);
-            ControllerDescriptor cd = new ReflectedControllerDescriptor(typeof(FindMethodController));
+            ControllerDescriptor cd = new ReflectedControllerDescriptor(
+                typeof(FindMethodController)
+            );
 
             ControllerActionInvokerHelper helper = new ControllerActionInvokerHelper();
 
@@ -253,7 +289,9 @@ namespace System.Web.Mvc.Test
             // Arrange
             Controller controller = new FindMethodController();
             ControllerContext context = GetControllerContext(controller);
-            ControllerDescriptor cd = new ReflectedControllerDescriptor(typeof(FindMethodController));
+            ControllerDescriptor cd = new ReflectedControllerDescriptor(
+                typeof(FindMethodController)
+            );
 
             ControllerActionInvokerHelper helper = new ControllerActionInvokerHelper();
 
@@ -272,7 +310,9 @@ namespace System.Web.Mvc.Test
             // Arrange
             Controller controller = new FindMethodController();
             ControllerContext context = GetControllerContext(controller);
-            ControllerDescriptor cd = new ReflectedControllerDescriptor(typeof(FindMethodController));
+            ControllerDescriptor cd = new ReflectedControllerDescriptor(
+                typeof(FindMethodController)
+            );
 
             ControllerActionInvokerHelper helper = new ControllerActionInvokerHelper();
 
@@ -289,8 +329,12 @@ namespace System.Web.Mvc.Test
             // Arrange
             Controller controller = new FindMethodController();
             ControllerContext context = GetControllerContext(controller);
-            ControllerDescriptor cd = new ReflectedControllerDescriptor(typeof(FindMethodController));
-            MethodInfo expectedMethodInfo = typeof(FindMethodController).GetMethod("ValidActionMethod");
+            ControllerDescriptor cd = new ReflectedControllerDescriptor(
+                typeof(FindMethodController)
+            );
+            MethodInfo expectedMethodInfo = typeof(FindMethodController).GetMethod(
+                "ValidActionMethod"
+            );
 
             ControllerActionInvokerHelper helper = new ControllerActionInvokerHelper();
 
@@ -313,8 +357,12 @@ namespace System.Web.Mvc.Test
             // Arrange
             Controller controller = new GenericFindMethodController<int>();
             ControllerContext context = GetControllerContext(controller);
-            ControllerDescriptor cd = new ReflectedControllerDescriptor(typeof(GenericFindMethodController<int>));
-            MethodInfo expectedMethodInfo = typeof(GenericFindMethodController<int>).GetMethod("ClosedGenericMethod");
+            ControllerDescriptor cd = new ReflectedControllerDescriptor(
+                typeof(GenericFindMethodController<int>)
+            );
+            MethodInfo expectedMethodInfo = typeof(GenericFindMethodController<int>).GetMethod(
+                "ClosedGenericMethod"
+            );
 
             ControllerActionInvokerHelper helper = new ControllerActionInvokerHelper();
 
@@ -335,8 +383,12 @@ namespace System.Web.Mvc.Test
             // Arrange
             Controller controller = new DerivedFindMethodController();
             ControllerContext context = GetControllerContext(controller);
-            ControllerDescriptor cd = new ReflectedControllerDescriptor(typeof(DerivedFindMethodController));
-            MethodInfo expectedMethodInfo = typeof(DerivedFindMethodController).GetMethod("DerivedIsActionMethod");
+            ControllerDescriptor cd = new ReflectedControllerDescriptor(
+                typeof(DerivedFindMethodController)
+            );
+            MethodInfo expectedMethodInfo = typeof(DerivedFindMethodController).GetMethod(
+                "DerivedIsActionMethod"
+            );
 
             ControllerActionInvokerHelper helper = new ControllerActionInvokerHelper();
 
@@ -374,7 +426,14 @@ namespace System.Web.Mvc.Test
             IAuthenticationFilter authenticationFilter = new Mock<IAuthenticationFilter>().Object;
             IExceptionFilter exFilter = new Mock<IExceptionFilter>().Object;
             object noneOfTheAbove = new object();
-            ControllerActionInvokerHelper invoker = new ControllerActionInvokerHelper(actionFilter, authorizationFilter, authenticationFilter, exFilter, resultFilter, noneOfTheAbove);
+            ControllerActionInvokerHelper invoker = new ControllerActionInvokerHelper(
+                actionFilter,
+                authorizationFilter,
+                authenticationFilter,
+                exFilter,
+                resultFilter,
+                noneOfTheAbove
+            );
             ControllerContext context = new ControllerContext();
             ActionDescriptor descriptor = new Mock<ActionDescriptor>().Object;
 
@@ -397,11 +456,20 @@ namespace System.Web.Mvc.Test
             ControllerContext controllerContext = GetControllerContext(controller);
             ControllerActionInvokerHelper helper = new ControllerActionInvokerHelper();
 
-            ParameterInfo paramWithoutBindAttribute = typeof(CustomConverterController).GetMethod("ParameterWithoutBindAttribute").GetParameters()[0];
-            ReflectedParameterDescriptor pd = new ReflectedParameterDescriptor(paramWithoutBindAttribute, new Mock<ActionDescriptor>().Object);
+            ParameterInfo paramWithoutBindAttribute = typeof(CustomConverterController).GetMethod(
+                    "ParameterWithoutBindAttribute"
+                )
+                .GetParameters()[0];
+            ReflectedParameterDescriptor pd = new ReflectedParameterDescriptor(
+                paramWithoutBindAttribute,
+                new Mock<ActionDescriptor>().Object
+            );
 
             // Act
-            object valueWithoutBindAttribute = helper.PublicGetParameterValue(controllerContext, pd);
+            object valueWithoutBindAttribute = helper.PublicGetParameterValue(
+                controllerContext,
+                pd
+            );
 
             // Assert
             Assert.Equal("foo=True&bar=True", valueWithoutBindAttribute);
@@ -416,19 +484,40 @@ namespace System.Web.Mvc.Test
 
             // Arrange
             CustomConverterController controller = new CustomConverterController();
-            Dictionary<string, object> values = new Dictionary<string, object> { { "foo", "fooValue" } };
+            Dictionary<string, object> values = new Dictionary<string, object>
+            {
+                { "foo", "fooValue" }
+            };
             ControllerContext controllerContext = GetControllerContext(controller, values);
             controller.ControllerContext = controllerContext;
             ControllerActionInvokerHelper helper = new ControllerActionInvokerHelper();
 
-            ParameterInfo paramWithOneConverter = typeof(CustomConverterController).GetMethod("ParameterHasOneConverter").GetParameters()[0];
-            ReflectedParameterDescriptor pdOneConverter = new ReflectedParameterDescriptor(paramWithOneConverter, new Mock<ActionDescriptor>().Object);
-            ParameterInfo paramWithNoConverters = typeof(CustomConverterController).GetMethod("ParameterHasNoConverters").GetParameters()[0];
-            ReflectedParameterDescriptor pdNoConverters = new ReflectedParameterDescriptor(paramWithNoConverters, new Mock<ActionDescriptor>().Object);
+            ParameterInfo paramWithOneConverter = typeof(CustomConverterController).GetMethod(
+                    "ParameterHasOneConverter"
+                )
+                .GetParameters()[0];
+            ReflectedParameterDescriptor pdOneConverter = new ReflectedParameterDescriptor(
+                paramWithOneConverter,
+                new Mock<ActionDescriptor>().Object
+            );
+            ParameterInfo paramWithNoConverters = typeof(CustomConverterController).GetMethod(
+                    "ParameterHasNoConverters"
+                )
+                .GetParameters()[0];
+            ReflectedParameterDescriptor pdNoConverters = new ReflectedParameterDescriptor(
+                paramWithNoConverters,
+                new Mock<ActionDescriptor>().Object
+            );
 
             // Act
-            object valueWithOneConverter = helper.PublicGetParameterValue(controllerContext, pdOneConverter);
-            object valueWithNoConverters = helper.PublicGetParameterValue(controllerContext, pdNoConverters);
+            object valueWithOneConverter = helper.PublicGetParameterValue(
+                controllerContext,
+                pdOneConverter
+            );
+            object valueWithNoConverters = helper.PublicGetParameterValue(
+                controllerContext,
+                pdNoConverters
+            );
 
             // Assert
             Assert.Equal("foo_String", valueWithOneConverter);
@@ -443,8 +532,14 @@ namespace System.Web.Mvc.Test
             ControllerContext controllerContext = GetControllerContext(controller);
             ControllerActionInvokerHelper helper = new ControllerActionInvokerHelper();
 
-            ParameterInfo paramWithBindAttribute = typeof(CustomConverterController).GetMethod("ParameterHasBindAttribute").GetParameters()[0];
-            ReflectedParameterDescriptor pd = new ReflectedParameterDescriptor(paramWithBindAttribute, new Mock<ActionDescriptor>().Object);
+            ParameterInfo paramWithBindAttribute = typeof(CustomConverterController).GetMethod(
+                    "ParameterHasBindAttribute"
+                )
+                .GetParameters()[0];
+            ReflectedParameterDescriptor pd = new ReflectedParameterDescriptor(
+                paramWithBindAttribute,
+                new Mock<ActionDescriptor>().Object
+            );
 
             // Act
             object valueWithBindAttribute = helper.PublicGetParameterValue(controllerContext, pd);
@@ -458,14 +553,24 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             CustomConverterController controller = new CustomConverterController();
-            Dictionary<string, object> values = new Dictionary<string, object> { { "foo", "fooValue" }, { "bar", "barValue" } };
+            Dictionary<string, object> values = new Dictionary<string, object>
+            {
+                { "foo", "fooValue" },
+                { "bar", "barValue" }
+            };
             ControllerContext controllerContext = GetControllerContext(controller, values);
             controller.ControllerContext = controllerContext;
 
             ControllerActionInvokerHelper helper = new ControllerActionInvokerHelper();
 
-            ParameterInfo paramWithFieldPrefix = typeof(CustomConverterController).GetMethod("ParameterHasFieldPrefix").GetParameters()[0];
-            ReflectedParameterDescriptor pd = new ReflectedParameterDescriptor(paramWithFieldPrefix, new Mock<ActionDescriptor>().Object);
+            ParameterInfo paramWithFieldPrefix = typeof(CustomConverterController).GetMethod(
+                    "ParameterHasFieldPrefix"
+                )
+                .GetParameters()[0];
+            ReflectedParameterDescriptor pd = new ReflectedParameterDescriptor(
+                paramWithFieldPrefix,
+                new Mock<ActionDescriptor>().Object
+            );
 
             // Act
             object parameterValue = helper.PublicGetParameterValue(controllerContext, pd);
@@ -479,17 +584,28 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             CustomConverterController controller = new CustomConverterController();
-            Dictionary<string, object> values = new Dictionary<string, object> { { "intprop", "123" }, { "stringprop", "hello" } };
+            Dictionary<string, object> values = new Dictionary<string, object>
+            {
+                { "intprop", "123" },
+                { "stringprop", "hello" }
+            };
             ControllerContext controllerContext = GetControllerContext(controller, values);
             controller.ControllerContext = controllerContext;
 
             ControllerActionInvokerHelper helper = new ControllerActionInvokerHelper();
 
-            ParameterInfo paramWithFieldPrefix = typeof(CustomConverterController).GetMethod("ParameterHasPrefixAndComplexType").GetParameters()[0];
-            ReflectedParameterDescriptor pd = new ReflectedParameterDescriptor(paramWithFieldPrefix, new Mock<ActionDescriptor>().Object);
+            ParameterInfo paramWithFieldPrefix = typeof(CustomConverterController).GetMethod(
+                    "ParameterHasPrefixAndComplexType"
+                )
+                .GetParameters()[0];
+            ReflectedParameterDescriptor pd = new ReflectedParameterDescriptor(
+                paramWithFieldPrefix,
+                new Mock<ActionDescriptor>().Object
+            );
 
             // Act
-            MySimpleModel parameterValue = helper.PublicGetParameterValue(controllerContext, pd) as MySimpleModel;
+            MySimpleModel parameterValue =
+                helper.PublicGetParameterValue(controllerContext, pd) as MySimpleModel;
 
             // Assert
             Assert.Null(parameterValue);
@@ -500,14 +616,24 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             CustomConverterController controller = new CustomConverterController();
-            Dictionary<string, object> values = new Dictionary<string, object> { { "foo", "fooValue" }, { "bar", "barValue" } };
+            Dictionary<string, object> values = new Dictionary<string, object>
+            {
+                { "foo", "fooValue" },
+                { "bar", "barValue" }
+            };
             ControllerContext controllerContext = GetControllerContext(controller, values);
             controller.ControllerContext = controllerContext;
 
             ControllerActionInvokerHelper helper = new ControllerActionInvokerHelper();
 
-            ParameterInfo paramWithFieldPrefix = typeof(CustomConverterController).GetMethod("ParameterHasNullFieldPrefix").GetParameters()[0];
-            ReflectedParameterDescriptor pd = new ReflectedParameterDescriptor(paramWithFieldPrefix, new Mock<ActionDescriptor>().Object);
+            ParameterInfo paramWithFieldPrefix = typeof(CustomConverterController).GetMethod(
+                    "ParameterHasNullFieldPrefix"
+                )
+                .GetParameters()[0];
+            ReflectedParameterDescriptor pd = new ReflectedParameterDescriptor(
+                paramWithFieldPrefix,
+                new Mock<ActionDescriptor>().Object
+            );
 
             // Act
             object parameterValue = helper.PublicGetParameterValue(controllerContext, pd);
@@ -521,17 +647,28 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             CustomConverterController controller = new CustomConverterController();
-            Dictionary<string, object> values = new Dictionary<string, object> { { "intprop", "123" }, { "stringprop", "hello" } };
+            Dictionary<string, object> values = new Dictionary<string, object>
+            {
+                { "intprop", "123" },
+                { "stringprop", "hello" }
+            };
             ControllerContext controllerContext = GetControllerContext(controller, values);
             controller.ControllerContext = controllerContext;
 
             ControllerActionInvokerHelper helper = new ControllerActionInvokerHelper();
 
-            ParameterInfo paramWithFieldPrefix = typeof(CustomConverterController).GetMethod("ParameterHasNoPrefixAndComplexType").GetParameters()[0];
-            ReflectedParameterDescriptor pd = new ReflectedParameterDescriptor(paramWithFieldPrefix, new Mock<ActionDescriptor>().Object);
+            ParameterInfo paramWithFieldPrefix = typeof(CustomConverterController).GetMethod(
+                    "ParameterHasNoPrefixAndComplexType"
+                )
+                .GetParameters()[0];
+            ReflectedParameterDescriptor pd = new ReflectedParameterDescriptor(
+                paramWithFieldPrefix,
+                new Mock<ActionDescriptor>().Object
+            );
 
             // Act
-            MySimpleModel parameterValue = helper.PublicGetParameterValue(controllerContext, pd) as MySimpleModel;
+            MySimpleModel parameterValue =
+                helper.PublicGetParameterValue(controllerContext, pd) as MySimpleModel;
 
             // Assert
             Assert.NotNull(parameterValue);
@@ -544,17 +681,30 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             CustomConverterController controller = new CustomConverterController();
-            Dictionary<string, object> values = new Dictionary<string, object> { { "foo", "fooValue" }, { "bar", "barValue" }, { "intprop", "123" }, { "stringprop", "hello" } };
+            Dictionary<string, object> values = new Dictionary<string, object>
+            {
+                { "foo", "fooValue" },
+                { "bar", "barValue" },
+                { "intprop", "123" },
+                { "stringprop", "hello" }
+            };
             ControllerContext controllerContext = GetControllerContext(controller, values);
             controller.ControllerContext = controllerContext;
 
             ControllerActionInvokerHelper helper = new ControllerActionInvokerHelper();
 
-            ParameterInfo paramWithFieldPrefix = typeof(CustomConverterController).GetMethod("ParameterHasEmptyFieldPrefix").GetParameters()[0];
-            ReflectedParameterDescriptor pd = new ReflectedParameterDescriptor(paramWithFieldPrefix, new Mock<ActionDescriptor>().Object);
+            ParameterInfo paramWithFieldPrefix = typeof(CustomConverterController).GetMethod(
+                    "ParameterHasEmptyFieldPrefix"
+                )
+                .GetParameters()[0];
+            ReflectedParameterDescriptor pd = new ReflectedParameterDescriptor(
+                paramWithFieldPrefix,
+                new Mock<ActionDescriptor>().Object
+            );
 
             // Act
-            MySimpleModel parameterValue = helper.PublicGetParameterValue(controllerContext, pd) as MySimpleModel;
+            MySimpleModel parameterValue =
+                helper.PublicGetParameterValue(controllerContext, pd) as MySimpleModel;
 
             // Assert
             Assert.NotNull(parameterValue);
@@ -571,11 +721,19 @@ namespace System.Web.Mvc.Test
             ControllerActionInvokerHelper helper = new ControllerActionInvokerHelper();
             controller.ValueProvider = new SimpleValueProvider();
 
-            ParameterInfo paramWithDefaultValueAttribute = typeof(CustomConverterController).GetMethod("ParameterHasDefaultValueAttribute").GetParameters()[0];
-            ReflectedParameterDescriptor pd = new ReflectedParameterDescriptor(paramWithDefaultValueAttribute, new Mock<ActionDescriptor>().Object);
+            ParameterInfo paramWithDefaultValueAttribute =
+                typeof(CustomConverterController).GetMethod("ParameterHasDefaultValueAttribute")
+                    .GetParameters()[0];
+            ReflectedParameterDescriptor pd = new ReflectedParameterDescriptor(
+                paramWithDefaultValueAttribute,
+                new Mock<ActionDescriptor>().Object
+            );
 
             // Act
-            object valueWithDefaultValueAttribute = helper.PublicGetParameterValue(controllerContext, pd);
+            object valueWithDefaultValueAttribute = helper.PublicGetParameterValue(
+                controllerContext,
+                pd
+            );
 
             // Assert
             Assert.Equal(42, valueWithDefaultValueAttribute);
@@ -596,7 +754,10 @@ namespace System.Web.Mvc.Test
             ControllerActionInvokerHelper helper = new ControllerActionInvokerHelper();
             MethodInfo mi = typeof(ParameterTestingController).GetMethod("TakesNullableInt");
             ParameterInfo[] pis = mi.GetParameters();
-            ReflectedParameterDescriptor pd = new ReflectedParameterDescriptor(pis[0], new Mock<ActionDescriptor>().Object);
+            ReflectedParameterDescriptor pd = new ReflectedParameterDescriptor(
+                pis[0],
+                new Mock<ActionDescriptor>().Object
+            );
 
             // Act
             object oValue = helper.PublicGetParameterValue(context, pd);
@@ -617,7 +778,10 @@ namespace System.Web.Mvc.Test
             ControllerActionInvokerHelper helper = new ControllerActionInvokerHelper();
             MethodInfo mi = typeof(ParameterTestingController).GetMethod("TakesNullableInt");
             ParameterInfo[] pis = mi.GetParameters();
-            ReflectedParameterDescriptor pd = new ReflectedParameterDescriptor(pis[0], new Mock<ActionDescriptor>().Object);
+            ReflectedParameterDescriptor pd = new ReflectedParameterDescriptor(
+                pis[0],
+                new Mock<ActionDescriptor>().Object
+            );
 
             // Act
             object oValue = helper.PublicGetParameterValue(context, pd);
@@ -638,7 +802,10 @@ namespace System.Web.Mvc.Test
             ControllerActionInvokerHelper helper = new ControllerActionInvokerHelper();
             MethodInfo mi = typeof(ParameterTestingController).GetMethod("Foo");
             ParameterInfo[] pis = mi.GetParameters();
-            ReflectedParameterDescriptor pd = new ReflectedParameterDescriptor(pis[0], new Mock<ActionDescriptor>().Object);
+            ReflectedParameterDescriptor pd = new ReflectedParameterDescriptor(
+                pis[0],
+                new Mock<ActionDescriptor>().Object
+            );
 
             // Act
             object oValue = helper.PublicGetParameterValue(context, pd);
@@ -655,13 +822,24 @@ namespace System.Web.Mvc.Test
             IDictionary<string, object> dict = new Dictionary<string, object>();
             ControllerContext context = GetControllerContext(controller);
             MethodInfo mi = typeof(ParameterTestingController).GetMethod("Foo");
-            ReflectedActionDescriptor ad = new ReflectedActionDescriptor(mi, "Foo", new Mock<ControllerDescriptor>().Object);
+            ReflectedActionDescriptor ad = new ReflectedActionDescriptor(
+                mi,
+                "Foo",
+                new Mock<ControllerDescriptor>().Object
+            );
             ParameterDescriptor[] pds = ad.GetParameters();
 
-            Mock<ControllerActionInvokerHelper> mockHelper = new Mock<ControllerActionInvokerHelper>() { CallBase = true };
-            mockHelper.Setup(h => h.PublicGetParameterValue(context, pds[0])).Returns("Myfoo").Verifiable();
-            mockHelper.Setup(h => h.PublicGetParameterValue(context, pds[1])).Returns("Mybar").Verifiable();
-            mockHelper.Setup(h => h.PublicGetParameterValue(context, pds[2])).Returns("Mybaz").Verifiable();
+            Mock<ControllerActionInvokerHelper> mockHelper =
+                new Mock<ControllerActionInvokerHelper>() { CallBase = true };
+            mockHelper.Setup(h => h.PublicGetParameterValue(context, pds[0]))
+                .Returns("Myfoo")
+                .Verifiable();
+            mockHelper.Setup(h => h.PublicGetParameterValue(context, pds[1]))
+                .Returns("Mybar")
+                .Verifiable();
+            mockHelper.Setup(h => h.PublicGetParameterValue(context, pds[2]))
+                .Returns("Mybaz")
+                .Verifiable();
             ControllerActionInvokerHelper helper = mockHelper.Object;
 
             // Act
@@ -683,7 +861,11 @@ namespace System.Web.Mvc.Test
             ControllerContext context = GetControllerContext(controller);
             ControllerActionInvokerHelper helper = new ControllerActionInvokerHelper();
             MethodInfo mi = typeof(ParameterTestingController).GetMethod("Parameterless");
-            ReflectedActionDescriptor ad = new ReflectedActionDescriptor(mi, "Parameterless", new Mock<ControllerDescriptor>().Object);
+            ReflectedActionDescriptor ad = new ReflectedActionDescriptor(
+                mi,
+                "Parameterless",
+                new Mock<ControllerDescriptor>().Object
+            );
 
             // Act
             IDictionary<string, object> parameters = helper.PublicGetParameterValues(context, ad);
@@ -710,7 +892,11 @@ namespace System.Web.Mvc.Test
 
             ControllerActionInvokerHelper helper = new ControllerActionInvokerHelper();
             MethodInfo mi = typeof(ParameterTestingController).GetMethod("Foo");
-            ReflectedActionDescriptor ad = new ReflectedActionDescriptor(mi, "Foo", new Mock<ControllerDescriptor>().Object);
+            ReflectedActionDescriptor ad = new ReflectedActionDescriptor(
+                mi,
+                "Foo",
+                new Mock<ControllerDescriptor>().Object
+            );
 
             // Act
             IDictionary<string, object> parameters = helper.PublicGetParameterValues(context, ad);
@@ -735,8 +921,14 @@ namespace System.Web.Mvc.Test
             ControllerContext controllerContext = GetControllerContext(controller, values);
             ControllerActionInvokerHelper helper = new ControllerActionInvokerHelper();
 
-            ParameterInfo parameter = typeof(CustomConverterController).GetMethod("ParameterHasNoConverters").GetParameters()[0];
-            ReflectedParameterDescriptor pd = new ReflectedParameterDescriptor(parameter, new Mock<ActionDescriptor>().Object);
+            ParameterInfo parameter = typeof(CustomConverterController).GetMethod(
+                    "ParameterHasNoConverters"
+                )
+                .GetParameters()[0];
+            ReflectedParameterDescriptor pd = new ReflectedParameterDescriptor(
+                parameter,
+                new Mock<ActionDescriptor>().Object
+            );
 
             // Act
             object parameterValue = helper.PublicGetParameterValue(controllerContext, pd);
@@ -759,25 +951,85 @@ namespace System.Web.Mvc.Test
             IDictionary<string, object> parameters = new Dictionary<string, object>();
             MethodInfo methodInfo = typeof(object).GetMethod("ToString");
             ActionResult actionResult = new EmptyResult();
-            ActionExecutedContext postContext = new ActionExecutedContext(context, ad, false /* canceled */, null /* exception */)
-            {
+            ActionExecutedContext postContext = new ActionExecutedContext(
+                context,
+                ad,
+                false /* canceled */
+                ,
+                null /* exception */
+            ) {
                 Result = actionResult
             };
             ActionResult challengeResult = new EmptyResult();
             AuthenticationContext authenticationContext = new AuthenticationContext();
             AuthorizationContext authorizationContext = new AuthorizationContext();
-            AuthenticationChallengeContext authenticationChallengeContext = new AuthenticationChallengeContext() { Result = challengeResult };
+            AuthenticationChallengeContext authenticationChallengeContext =
+                new AuthenticationChallengeContext() { Result = challengeResult };
 
-            Mock<ControllerActionInvokerHelper> mockHelper = new Mock<ControllerActionInvokerHelper>() { CallBase = true };
-            mockHelper.Setup(h => h.PublicGetControllerDescriptor(context)).Returns(cd).Verifiable();
-            mockHelper.Setup(h => h.PublicFindAction(context, cd, "SomeMethod")).Returns(ad).Verifiable();
+            Mock<ControllerActionInvokerHelper> mockHelper =
+                new Mock<ControllerActionInvokerHelper>() { CallBase = true };
+            mockHelper.Setup(h => h.PublicGetControllerDescriptor(context))
+                .Returns(cd)
+                .Verifiable();
+            mockHelper.Setup(h => h.PublicFindAction(context, cd, "SomeMethod"))
+                .Returns(ad)
+                .Verifiable();
             mockHelper.Setup(h => h.PublicGetFilters(context, ad)).Returns(filterInfo).Verifiable();
-            mockHelper.Setup(h => h.PublicInvokeAuthenticationFilters(context, filterInfo.AuthenticationFilters, ad)).Returns(authenticationContext).Verifiable();
-            mockHelper.Setup(h => h.PublicInvokeAuthorizationFilters(context, filterInfo.AuthorizationFilters, ad)).Returns(authorizationContext).Verifiable();
-            mockHelper.Setup(h => h.PublicGetParameterValues(context, ad)).Returns(parameters).Verifiable();
-            mockHelper.Setup(h => h.PublicInvokeActionMethodWithFilters(context, filterInfo.ActionFilters, ad, parameters)).Returns(postContext).Verifiable();
-            mockHelper.Setup(h => h.PublicInvokeAuthenticationFiltersChallenge(context, filterInfo.AuthenticationFilters, ad, actionResult)).Returns(authenticationChallengeContext).Verifiable();
-            mockHelper.Setup(h => h.PublicInvokeActionResultWithFilters(context, filterInfo.ResultFilters, challengeResult)).Returns((ResultExecutedContext)null).Verifiable();
+            mockHelper.Setup(
+                    h =>
+                        h.PublicInvokeAuthenticationFilters(
+                            context,
+                            filterInfo.AuthenticationFilters,
+                            ad
+                        )
+                )
+                .Returns(authenticationContext)
+                .Verifiable();
+            mockHelper.Setup(
+                    h =>
+                        h.PublicInvokeAuthorizationFilters(
+                            context,
+                            filterInfo.AuthorizationFilters,
+                            ad
+                        )
+                )
+                .Returns(authorizationContext)
+                .Verifiable();
+            mockHelper.Setup(h => h.PublicGetParameterValues(context, ad))
+                .Returns(parameters)
+                .Verifiable();
+            mockHelper.Setup(
+                    h =>
+                        h.PublicInvokeActionMethodWithFilters(
+                            context,
+                            filterInfo.ActionFilters,
+                            ad,
+                            parameters
+                        )
+                )
+                .Returns(postContext)
+                .Verifiable();
+            mockHelper.Setup(
+                    h =>
+                        h.PublicInvokeAuthenticationFiltersChallenge(
+                            context,
+                            filterInfo.AuthenticationFilters,
+                            ad,
+                            actionResult
+                        )
+                )
+                .Returns(authenticationChallengeContext)
+                .Verifiable();
+            mockHelper.Setup(
+                    h =>
+                        h.PublicInvokeActionResultWithFilters(
+                            context,
+                            filterInfo.ResultFilters,
+                            challengeResult
+                        )
+                )
+                .Returns((ResultExecutedContext)null)
+                .Verifiable();
             ControllerActionInvokerHelper helper = mockHelper.Object;
 
             // Act
@@ -794,20 +1046,50 @@ namespace System.Web.Mvc.Test
             controller.ValidateRequest = true;
             bool validateInputWasCalled = false;
 
-            ControllerContext context = GetControllerContext(controller, null, validateInputCallback: () => { validateInputWasCalled = true; });
+            ControllerContext context = GetControllerContext(
+                controller,
+                null,
+                validateInputCallback: () =>
+                {
+                    validateInputWasCalled = true;
+                }
+            );
             ControllerDescriptor cd = new Mock<ControllerDescriptor>().Object;
             ActionDescriptor ad = new Mock<ActionDescriptor>().Object;
             FilterInfo filterInfo = new FilterInfo();
             AuthenticationContext authenticationContext = new AuthenticationContext();
             AuthorizationContext authorizationContext = new AuthorizationContext();
 
-            Mock<ControllerActionInvokerHelper> mockHelper = new Mock<ControllerActionInvokerHelper>();
+            Mock<ControllerActionInvokerHelper> mockHelper =
+                new Mock<ControllerActionInvokerHelper>();
             mockHelper.CallBase = true;
-            mockHelper.Setup(h => h.PublicGetControllerDescriptor(context)).Returns(cd).Verifiable();
-            mockHelper.Setup(h => h.PublicFindAction(context, cd, "SomeMethod")).Returns(ad).Verifiable();
+            mockHelper.Setup(h => h.PublicGetControllerDescriptor(context))
+                .Returns(cd)
+                .Verifiable();
+            mockHelper.Setup(h => h.PublicFindAction(context, cd, "SomeMethod"))
+                .Returns(ad)
+                .Verifiable();
             mockHelper.Setup(h => h.PublicGetFilters(context, ad)).Returns(filterInfo).Verifiable();
-            mockHelper.Setup(h => h.PublicInvokeAuthenticationFilters(context, filterInfo.AuthenticationFilters, ad)).Returns(authenticationContext).Verifiable();
-            mockHelper.Setup(h => h.PublicInvokeAuthorizationFilters(context, filterInfo.AuthorizationFilters, ad)).Returns(authorizationContext).Verifiable();
+            mockHelper.Setup(
+                    h =>
+                        h.PublicInvokeAuthenticationFilters(
+                            context,
+                            filterInfo.AuthenticationFilters,
+                            ad
+                        )
+                )
+                .Returns(authenticationContext)
+                .Verifiable();
+            mockHelper.Setup(
+                    h =>
+                        h.PublicInvokeAuthorizationFilters(
+                            context,
+                            filterInfo.AuthorizationFilters,
+                            ad
+                        )
+                )
+                .Returns(authorizationContext)
+                .Verifiable();
             ControllerActionInvokerHelper helper = mockHelper.Object;
 
             // Act
@@ -833,13 +1115,36 @@ namespace System.Web.Mvc.Test
             AuthenticationContext authenticationContext = new AuthenticationContext();
             AuthorizationContext authorizationContext = new AuthorizationContext();
 
-            Mock<ControllerActionInvokerHelper> mockHelper = new Mock<ControllerActionInvokerHelper>();
+            Mock<ControllerActionInvokerHelper> mockHelper =
+                new Mock<ControllerActionInvokerHelper>();
             mockHelper.CallBase = true;
-            mockHelper.Setup(h => h.PublicGetControllerDescriptor(context)).Returns(cd).Verifiable();
-            mockHelper.Setup(h => h.PublicFindAction(context, cd, "SomeMethod")).Returns(ad).Verifiable();
+            mockHelper.Setup(h => h.PublicGetControllerDescriptor(context))
+                .Returns(cd)
+                .Verifiable();
+            mockHelper.Setup(h => h.PublicFindAction(context, cd, "SomeMethod"))
+                .Returns(ad)
+                .Verifiable();
             mockHelper.Setup(h => h.PublicGetFilters(context, ad)).Returns(filterInfo).Verifiable();
-            mockHelper.Setup(h => h.PublicInvokeAuthenticationFilters(context, filterInfo.AuthenticationFilters, ad)).Returns(authenticationContext).Verifiable();
-            mockHelper.Setup(h => h.PublicInvokeAuthorizationFilters(context, filterInfo.AuthorizationFilters, ad)).Returns(authorizationContext).Verifiable();
+            mockHelper.Setup(
+                    h =>
+                        h.PublicInvokeAuthenticationFilters(
+                            context,
+                            filterInfo.AuthenticationFilters,
+                            ad
+                        )
+                )
+                .Returns(authenticationContext)
+                .Verifiable();
+            mockHelper.Setup(
+                    h =>
+                        h.PublicInvokeAuthorizationFilters(
+                            context,
+                            filterInfo.AuthorizationFilters,
+                            ad
+                        )
+                )
+                .Returns(authorizationContext)
+                .Verifiable();
             ControllerActionInvokerHelper helper = mockHelper.Object;
 
             // Act
@@ -861,7 +1166,10 @@ namespace System.Web.Mvc.Test
 
             ActionFilterImpl filter = new ActionFilterImpl()
             {
-                OnActionExecutingImpl = delegate(ActionExecutingContext filterContext) { actions.Add("OnActionExecuting"); },
+                OnActionExecutingImpl = delegate(ActionExecutingContext filterContext)
+                {
+                    actions.Add("OnActionExecuting");
+                },
                 OnActionExecutedImpl = delegate(ActionExecutedContext filterContext)
                 {
                     actions.Add("OnActionExecuted");
@@ -877,10 +1185,18 @@ namespace System.Web.Mvc.Test
                 throw exception;
             };
 
-            ActionExecutingContext context = new ActionExecutingContext(GetControllerContext(new EmptyController()), action, parameters);
+            ActionExecutingContext context = new ActionExecutingContext(
+                GetControllerContext(new EmptyController()),
+                action,
+                parameters
+            );
 
             // Act
-            ActionExecutedContext result = ControllerActionInvoker.InvokeActionMethodFilter(filter, context, continuation);
+            ActionExecutedContext result = ControllerActionInvoker.InvokeActionMethodFilter(
+                filter,
+                context,
+                continuation
+            );
 
             // Assert
             Assert.Equal(3, actions.Count);
@@ -902,7 +1218,10 @@ namespace System.Web.Mvc.Test
 
             ActionFilterImpl filter = new ActionFilterImpl()
             {
-                OnActionExecutingImpl = delegate(ActionExecutingContext filterContext) { actions.Add("OnActionExecuting"); },
+                OnActionExecutingImpl = delegate(ActionExecutingContext filterContext)
+                {
+                    actions.Add("OnActionExecuting");
+                },
                 OnActionExecutedImpl = delegate(ActionExecutedContext filterContext)
                 {
                     Assert.NotNull(filterContext.Exception);
@@ -917,12 +1236,20 @@ namespace System.Web.Mvc.Test
                 throw new Exception("Some exception message.");
             };
 
-            ActionExecutingContext context = new ActionExecutingContext(GetControllerContext(new EmptyController()), action, parameters);
+            ActionExecutingContext context = new ActionExecutingContext(
+                GetControllerContext(new EmptyController()),
+                action,
+                parameters
+            );
 
             // Act & Assert
             Assert.Throws<Exception>(
-                delegate { ControllerActionInvoker.InvokeActionMethodFilter(filter, context, continuation); },
-                "Some exception message.");
+                delegate
+                {
+                    ControllerActionInvoker.InvokeActionMethodFilter(filter, context, continuation);
+                },
+                "Some exception message."
+            );
             Assert.Equal(3, actions.Count);
             Assert.Equal("OnActionExecuting", actions[0]);
             Assert.Equal("Continuation", actions[1]);
@@ -939,7 +1266,10 @@ namespace System.Web.Mvc.Test
 
             ActionFilterImpl filter = new ActionFilterImpl()
             {
-                OnActionExecutingImpl = delegate(ActionExecutingContext filterContext) { actions.Add("OnActionExecuting"); },
+                OnActionExecutingImpl = delegate(ActionExecutingContext filterContext)
+                {
+                    actions.Add("OnActionExecuting");
+                },
                 OnActionExecutedImpl = delegate(ActionExecutedContext filterContext)
                 {
                     Thread.ResetAbort();
@@ -956,12 +1286,20 @@ namespace System.Web.Mvc.Test
                 return null;
             };
 
-            ActionExecutingContext context = new ActionExecutingContext(new Mock<ControllerContext>().Object, action, new Dictionary<string, object>());
+            ActionExecutingContext context = new ActionExecutingContext(
+                new Mock<ControllerContext>().Object,
+                action,
+                new Dictionary<string, object>()
+            );
 
             // Act & Assert
             Assert.Throws<ThreadAbortException>(
-                delegate { ControllerActionInvoker.InvokeActionMethodFilter(filter, context, continuation); },
-                "Thread was being aborted.");
+                delegate
+                {
+                    ControllerActionInvoker.InvokeActionMethodFilter(filter, context, continuation);
+                },
+                "Thread was being aborted."
+            );
             Assert.Equal(3, actions.Count);
             Assert.Equal("OnActionExecuting", actions[0]);
             Assert.Equal("Continuation", actions[1]);
@@ -994,10 +1332,18 @@ namespace System.Web.Mvc.Test
                 return null;
             };
 
-            ActionExecutingContext context = new ActionExecutingContext(GetControllerContext(new EmptyController()), action, parameters);
+            ActionExecutingContext context = new ActionExecutingContext(
+                GetControllerContext(new EmptyController()),
+                action,
+                parameters
+            );
 
             // Act
-            ActionExecutedContext result = ControllerActionInvoker.InvokeActionMethodFilter(filter, context, continuation);
+            ActionExecutedContext result = ControllerActionInvoker.InvokeActionMethodFilter(
+                filter,
+                context,
+                continuation
+            );
 
             // Assert
             Assert.True(wasCalled);
@@ -1015,7 +1361,11 @@ namespace System.Web.Mvc.Test
             Dictionary<string, object> parameters = new Dictionary<string, object>();
             ActionDescriptor action = new Mock<ActionDescriptor>().Object;
 
-            ActionExecutingContext preContext = new ActionExecutingContext(GetControllerContext(new EmptyController()), action, parameters);
+            ActionExecutingContext preContext = new ActionExecutingContext(
+                GetControllerContext(new EmptyController()),
+                action,
+                parameters
+            );
             Mock<ActionExecutedContext> mockPostContext = new Mock<ActionExecutedContext>();
 
             ActionFilterImpl filter = new ActionFilterImpl()
@@ -1039,7 +1389,11 @@ namespace System.Web.Mvc.Test
             };
 
             // Act
-            ActionExecutedContext result = ControllerActionInvoker.InvokeActionMethodFilter(filter, preContext, continuation);
+            ActionExecutedContext result = ControllerActionInvoker.InvokeActionMethodFilter(
+                filter,
+                preContext,
+                continuation
+            );
 
             // Assert
             Assert.Equal(3, actions.Count);
@@ -1069,12 +1423,35 @@ namespace System.Web.Mvc.Test
                 Result = actionResult
             };
 
-            Mock<ControllerActionInvokerHelper> mockHelper = new Mock<ControllerActionInvokerHelper>() { CallBase = true };
-            mockHelper.Setup(h => h.PublicGetControllerDescriptor(context)).Returns(cd).Verifiable();
-            mockHelper.Setup(h => h.PublicFindAction(context, cd, "SomeMethod")).Returns(ad).Verifiable();
+            Mock<ControllerActionInvokerHelper> mockHelper =
+                new Mock<ControllerActionInvokerHelper>() { CallBase = true };
+            mockHelper.Setup(h => h.PublicGetControllerDescriptor(context))
+                .Returns(cd)
+                .Verifiable();
+            mockHelper.Setup(h => h.PublicFindAction(context, cd, "SomeMethod"))
+                .Returns(ad)
+                .Verifiable();
             mockHelper.Setup(h => h.PublicGetFilters(context, ad)).Returns(filterInfo).Verifiable();
-            mockHelper.Setup(h => h.PublicInvokeAuthenticationFilters(context, filterInfo.AuthenticationFilters, ad)).Throws(exception).Verifiable();
-            mockHelper.Setup(h => h.PublicInvokeExceptionFilters(context, filterInfo.ExceptionFilters, exception)).Returns(exContext).Verifiable();
+            mockHelper.Setup(
+                    h =>
+                        h.PublicInvokeAuthenticationFilters(
+                            context,
+                            filterInfo.AuthenticationFilters,
+                            ad
+                        )
+                )
+                .Throws(exception)
+                .Verifiable();
+            mockHelper.Setup(
+                    h =>
+                        h.PublicInvokeExceptionFilters(
+                            context,
+                            filterInfo.ExceptionFilters,
+                            exception
+                        )
+                )
+                .Returns(exContext)
+                .Verifiable();
             mockHelper.Setup(h => h.PublicInvokeActionResult(context, actionResult)).Verifiable();
             ControllerActionInvokerHelper helper = mockHelper.Object;
 
@@ -1099,19 +1476,64 @@ namespace System.Web.Mvc.Test
             Exception exception = new Exception();
             ExceptionContext exContext = new ExceptionContext(context, exception);
 
-            Mock<ControllerActionInvokerHelper> mockHelper = new Mock<ControllerActionInvokerHelper>() { CallBase = true };
-            mockHelper.Setup(h => h.PublicGetControllerDescriptor(context)).Returns(cd).Verifiable();
-            mockHelper.Setup(h => h.PublicFindAction(context, cd, "SomeMethod")).Returns(ad).Verifiable();
+            Mock<ControllerActionInvokerHelper> mockHelper =
+                new Mock<ControllerActionInvokerHelper>() { CallBase = true };
+            mockHelper.Setup(h => h.PublicGetControllerDescriptor(context))
+                .Returns(cd)
+                .Verifiable();
+            mockHelper.Setup(h => h.PublicFindAction(context, cd, "SomeMethod"))
+                .Returns(ad)
+                .Verifiable();
             mockHelper.Setup(h => h.PublicGetFilters(context, ad)).Returns(filterInfo).Verifiable();
-            mockHelper.Setup(h => h.PublicInvokeAuthenticationFilters(context, filterInfo.AuthenticationFilters, ad)).Returns(authenticationContext).Verifiable();
-            mockHelper.Setup(h => h.PublicInvokeAuthorizationFilters(context, filterInfo.AuthorizationFilters, ad)).Throws(exception).Verifiable();
-            mockHelper.Setup(h => h.PublicInvokeExceptionFilters(context, filterInfo.ExceptionFilters, exception)).Returns(exContext).Verifiable();
-            mockHelper.Setup(h => h.PublicInvokeActionResult(context, It.IsAny<ActionResult>())).Callback(delegate { Assert.True(false, "InvokeActionResult() shouldn't be called if the exception was unhandled by filters."); });
+            mockHelper.Setup(
+                    h =>
+                        h.PublicInvokeAuthenticationFilters(
+                            context,
+                            filterInfo.AuthenticationFilters,
+                            ad
+                        )
+                )
+                .Returns(authenticationContext)
+                .Verifiable();
+            mockHelper.Setup(
+                    h =>
+                        h.PublicInvokeAuthorizationFilters(
+                            context,
+                            filterInfo.AuthorizationFilters,
+                            ad
+                        )
+                )
+                .Throws(exception)
+                .Verifiable();
+            mockHelper.Setup(
+                    h =>
+                        h.PublicInvokeExceptionFilters(
+                            context,
+                            filterInfo.ExceptionFilters,
+                            exception
+                        )
+                )
+                .Returns(exContext)
+                .Verifiable();
+            mockHelper.Setup(h => h.PublicInvokeActionResult(context, It.IsAny<ActionResult>()))
+                .Callback(
+                    delegate
+                    {
+                        Assert.True(
+                            false,
+                            "InvokeActionResult() shouldn't be called if the exception was unhandled by filters."
+                        );
+                    }
+                );
             ControllerActionInvokerHelper helper = mockHelper.Object;
 
             // Act
             Exception thrownException = Assert.Throws<Exception>(
-                delegate { helper.InvokeAction(context, "SomeMethod"); });
+                delegate
+                {
+                    helper.InvokeAction(context, "SomeMethod");
+                }
+            );
 
             // Assert
             Assert.Same(exception, thrownException);
@@ -1130,17 +1552,46 @@ namespace System.Web.Mvc.Test
             FilterInfo filterInfo = new FilterInfo();
 
             ActionResult actionResult = new EmptyResult();
-            AuthenticationContext authenticationContext = new AuthenticationContext() { Result = actionResult };
+            AuthenticationContext authenticationContext = new AuthenticationContext()
+            {
+                Result = actionResult
+            };
             ActionResult challengeActionResult = new EmptyResult();
-            AuthenticationChallengeContext authenticationChallengeContext = new AuthenticationChallengeContext() { Result = challengeActionResult };
+            AuthenticationChallengeContext authenticationChallengeContext =
+                new AuthenticationChallengeContext() { Result = challengeActionResult };
 
-            Mock<ControllerActionInvokerHelper> mockHelper = new Mock<ControllerActionInvokerHelper>() { CallBase = true };
-            mockHelper.Setup(h => h.PublicGetControllerDescriptor(context)).Returns(cd).Verifiable();
-            mockHelper.Setup(h => h.PublicFindAction(context, cd, "SomeMethod")).Returns(ad).Verifiable();
+            Mock<ControllerActionInvokerHelper> mockHelper =
+                new Mock<ControllerActionInvokerHelper>() { CallBase = true };
+            mockHelper.Setup(h => h.PublicGetControllerDescriptor(context))
+                .Returns(cd)
+                .Verifiable();
+            mockHelper.Setup(h => h.PublicFindAction(context, cd, "SomeMethod"))
+                .Returns(ad)
+                .Verifiable();
             mockHelper.Setup(h => h.PublicGetFilters(context, ad)).Returns(filterInfo).Verifiable();
-            mockHelper.Setup(h => h.PublicInvokeAuthenticationFilters(context, filterInfo.AuthenticationFilters, ad)).Returns(authenticationContext).Verifiable();
-            mockHelper.Setup(h => h.PublicInvokeAuthenticationFiltersChallenge(context, filterInfo.AuthenticationFilters, ad, actionResult)).Returns(authenticationChallengeContext).Verifiable();
-            mockHelper.Setup(h => h.PublicInvokeActionResult(context, challengeActionResult)).Verifiable();
+            mockHelper.Setup(
+                    h =>
+                        h.PublicInvokeAuthenticationFilters(
+                            context,
+                            filterInfo.AuthenticationFilters,
+                            ad
+                        )
+                )
+                .Returns(authenticationContext)
+                .Verifiable();
+            mockHelper.Setup(
+                    h =>
+                        h.PublicInvokeAuthenticationFiltersChallenge(
+                            context,
+                            filterInfo.AuthenticationFilters,
+                            ad,
+                            actionResult
+                        )
+                )
+                .Returns(authenticationChallengeContext)
+                .Verifiable();
+            mockHelper.Setup(h => h.PublicInvokeActionResult(context, challengeActionResult))
+                .Verifiable();
             ControllerActionInvokerHelper helper = mockHelper.Object;
 
             // Act
@@ -1162,18 +1613,56 @@ namespace System.Web.Mvc.Test
 
             ActionResult actionResult = new EmptyResult();
             AuthenticationContext authenticationContext = new AuthenticationContext();
-            AuthorizationContext authorizationContext = new AuthorizationContext() { Result = actionResult };
+            AuthorizationContext authorizationContext = new AuthorizationContext()
+            {
+                Result = actionResult
+            };
             ActionResult challengeResult = new EmptyResult();
-            AuthenticationChallengeContext authenticationChallengeContext = new AuthenticationChallengeContext() { Result = challengeResult };
+            AuthenticationChallengeContext authenticationChallengeContext =
+                new AuthenticationChallengeContext() { Result = challengeResult };
 
-            Mock<ControllerActionInvokerHelper> mockHelper = new Mock<ControllerActionInvokerHelper>() { CallBase = true };
-            mockHelper.Setup(h => h.PublicGetControllerDescriptor(context)).Returns(cd).Verifiable();
-            mockHelper.Setup(h => h.PublicFindAction(context, cd, "SomeMethod")).Returns(ad).Verifiable();
+            Mock<ControllerActionInvokerHelper> mockHelper =
+                new Mock<ControllerActionInvokerHelper>() { CallBase = true };
+            mockHelper.Setup(h => h.PublicGetControllerDescriptor(context))
+                .Returns(cd)
+                .Verifiable();
+            mockHelper.Setup(h => h.PublicFindAction(context, cd, "SomeMethod"))
+                .Returns(ad)
+                .Verifiable();
             mockHelper.Setup(h => h.PublicGetFilters(context, ad)).Returns(filterInfo).Verifiable();
-            mockHelper.Setup(h => h.PublicInvokeAuthenticationFilters(context, filterInfo.AuthenticationFilters, ad)).Returns(authenticationContext).Verifiable();
-            mockHelper.Setup(h => h.PublicInvokeAuthorizationFilters(context, filterInfo.AuthorizationFilters, ad)).Returns(authorizationContext).Verifiable();
-            mockHelper.Setup(h => h.PublicInvokeAuthenticationFiltersChallenge(context, filterInfo.AuthenticationFilters, ad, actionResult)).Returns(authenticationChallengeContext).Verifiable();
-            mockHelper.Setup(h => h.PublicInvokeActionResult(context, challengeResult)).Verifiable();
+            mockHelper.Setup(
+                    h =>
+                        h.PublicInvokeAuthenticationFilters(
+                            context,
+                            filterInfo.AuthenticationFilters,
+                            ad
+                        )
+                )
+                .Returns(authenticationContext)
+                .Verifiable();
+            mockHelper.Setup(
+                    h =>
+                        h.PublicInvokeAuthorizationFilters(
+                            context,
+                            filterInfo.AuthorizationFilters,
+                            ad
+                        )
+                )
+                .Returns(authorizationContext)
+                .Verifiable();
+            mockHelper.Setup(
+                    h =>
+                        h.PublicInvokeAuthenticationFiltersChallenge(
+                            context,
+                            filterInfo.AuthenticationFilters,
+                            ad,
+                            actionResult
+                        )
+                )
+                .Returns(authenticationChallengeContext)
+                .Verifiable();
+            mockHelper.Setup(h => h.PublicInvokeActionResult(context, challengeResult))
+                .Verifiable();
             ControllerActionInvokerHelper helper = mockHelper.Object;
 
             // Act
@@ -1195,12 +1684,20 @@ namespace System.Web.Mvc.Test
             Mock<ActionDescriptor> mockAd = new Mock<ActionDescriptor>();
             mockAd.Setup(ad => ad.Execute(controllerContext, parameters)).Returns("hello world");
 
-            Mock<ControllerActionInvokerHelper> mockHelper = new Mock<ControllerActionInvokerHelper>() { CallBase = true };
-            mockHelper.Setup(h => h.PublicCreateActionResult(controllerContext, mockAd.Object, "hello world")).Returns(expectedResult);
+            Mock<ControllerActionInvokerHelper> mockHelper =
+                new Mock<ControllerActionInvokerHelper>() { CallBase = true };
+            mockHelper.Setup(
+                    h => h.PublicCreateActionResult(controllerContext, mockAd.Object, "hello world")
+                )
+                .Returns(expectedResult);
             ControllerActionInvokerHelper helper = mockHelper.Object;
 
             // Act
-            ActionResult returnedResult = helper.PublicInvokeActionMethod(controllerContext, mockAd.Object, parameters);
+            ActionResult returnedResult = helper.PublicInvokeActionMethod(
+                controllerContext,
+                mockAd.Object,
+                parameters
+            );
 
             // Assert
             Assert.Same(expectedResult, returnedResult);
@@ -1216,13 +1713,25 @@ namespace System.Web.Mvc.Test
 
             ActionFilterImpl filter1 = new ActionFilterImpl()
             {
-                OnActionExecutingImpl = delegate(ActionExecutingContext filterContext) { actions.Add("OnActionExecuting1"); },
-                OnActionExecutedImpl = delegate(ActionExecutedContext filterContext) { actions.Add("OnActionExecuted1"); }
+                OnActionExecutingImpl = delegate(ActionExecutingContext filterContext)
+                {
+                    actions.Add("OnActionExecuting1");
+                },
+                OnActionExecutedImpl = delegate(ActionExecutedContext filterContext)
+                {
+                    actions.Add("OnActionExecuted1");
+                }
             };
             ActionFilterImpl filter2 = new ActionFilterImpl()
             {
-                OnActionExecutingImpl = delegate(ActionExecutingContext filterContext) { actions.Add("OnActionExecuting2"); },
-                OnActionExecutedImpl = delegate(ActionExecutedContext filterContext) { actions.Add("OnActionExecuted2"); }
+                OnActionExecutingImpl = delegate(ActionExecutingContext filterContext)
+                {
+                    actions.Add("OnActionExecuting2");
+                },
+                OnActionExecutedImpl = delegate(ActionExecutedContext filterContext)
+                {
+                    actions.Add("OnActionExecuted2");
+                }
             };
             Func<ActionResult> continuation = delegate
             {
@@ -1231,12 +1740,21 @@ namespace System.Web.Mvc.Test
             };
             ControllerBase controller = new ContinuationController(continuation);
             ControllerContext context = GetControllerContext(controller);
-            ActionDescriptor actionDescriptor = new ReflectedActionDescriptor(ContinuationController.GoMethod, "someName", new Mock<ControllerDescriptor>().Object);
+            ActionDescriptor actionDescriptor = new ReflectedActionDescriptor(
+                ContinuationController.GoMethod,
+                "someName",
+                new Mock<ControllerDescriptor>().Object
+            );
             ControllerActionInvokerHelper helper = new ControllerActionInvokerHelper();
             List<IActionFilter> filters = new List<IActionFilter>() { filter1, filter2 };
 
             // Act
-            helper.PublicInvokeActionMethodWithFilters(context, filters, actionDescriptor, parameters);
+            helper.PublicInvokeActionMethodWithFilters(
+                context,
+                filters,
+                actionDescriptor,
+                parameters
+            );
 
             // Assert
             Assert.Equal(5, actions.Count);
@@ -1273,11 +1791,20 @@ namespace System.Web.Mvc.Test
             ControllerBase controller = new ContinuationController(continuation);
             ControllerContext context = GetControllerContext(controller);
             ControllerActionInvokerHelper helper = new ControllerActionInvokerHelper();
-            ActionDescriptor actionDescriptor = new ReflectedActionDescriptor(ContinuationController.GoMethod, "someName", new Mock<ControllerDescriptor>().Object);
+            ActionDescriptor actionDescriptor = new ReflectedActionDescriptor(
+                ContinuationController.GoMethod,
+                "someName",
+                new Mock<ControllerDescriptor>().Object
+            );
             List<IActionFilter> filters = new List<IActionFilter>() { filter };
 
             // Act
-            ActionExecutedContext result = helper.PublicInvokeActionMethodWithFilters(context, filters, actionDescriptor, parameters);
+            ActionExecutedContext result = helper.PublicInvokeActionMethodWithFilters(
+                context,
+                filters,
+                actionDescriptor,
+                parameters
+            );
 
             // Assert
             Assert.True(wasCalled);
@@ -1299,26 +1826,59 @@ namespace System.Web.Mvc.Test
             FilterInfo filterInfo = new FilterInfo();
 
             ActionResult actionResult = new EmptyResult();
-            ActionExecutedContext postContext = new ActionExecutedContext(context, ad, false /* canceled */, null /* exception */)
-            {
+            ActionExecutedContext postContext = new ActionExecutedContext(
+                context,
+                ad,
+                false /* canceled */
+                ,
+                null /* exception */
+            ) {
                 Result = actionResult
             };
             AuthenticationContext authenticationContext = new AuthenticationContext();
-            AuthorizationContext authorizationContext = new AuthorizationContext() { Result = actionResult };
+            AuthorizationContext authorizationContext = new AuthorizationContext()
+            {
+                Result = actionResult
+            };
 
-            Mock<ControllerActionInvokerHelper> mockHelper = new Mock<ControllerActionInvokerHelper>() { CallBase = true };
-            mockHelper.Setup(h => h.PublicGetControllerDescriptor(context)).Returns(cd).Verifiable();
-            mockHelper.Setup(h => h.PublicFindAction(context, cd, "SomeMethod")).Returns(ad).Verifiable();
+            Mock<ControllerActionInvokerHelper> mockHelper =
+                new Mock<ControllerActionInvokerHelper>() { CallBase = true };
+            mockHelper.Setup(h => h.PublicGetControllerDescriptor(context))
+                .Returns(cd)
+                .Verifiable();
+            mockHelper.Setup(h => h.PublicFindAction(context, cd, "SomeMethod"))
+                .Returns(ad)
+                .Verifiable();
             mockHelper.Setup(h => h.PublicGetFilters(context, ad)).Returns(filterInfo).Verifiable();
-            mockHelper.Setup(h => h.PublicInvokeAuthenticationFilters(context, filterInfo.AuthenticationFilters, ad)).Returns(authenticationContext).Verifiable();
-            mockHelper
-                .Setup(h => h.PublicInvokeAuthorizationFilters(context, filterInfo.AuthorizationFilters, ad))
+            mockHelper.Setup(
+                    h =>
+                        h.PublicInvokeAuthenticationFilters(
+                            context,
+                            filterInfo.AuthenticationFilters,
+                            ad
+                        )
+                )
+                .Returns(authenticationContext)
+                .Verifiable();
+            mockHelper.Setup(
+                    h =>
+                        h.PublicInvokeAuthorizationFilters(
+                            context,
+                            filterInfo.AuthorizationFilters,
+                            ad
+                        )
+                )
                 .Returns(
-                    delegate(ControllerContext cc, IList<IAuthorizationFilter> f, ActionDescriptor a)
+                    delegate(
+                        ControllerContext cc,
+                        IList<IAuthorizationFilter> f,
+                        ActionDescriptor a
+                    )
                     {
                         Thread.CurrentThread.Abort();
                         return null;
-                    });
+                    }
+                );
             ControllerActionInvokerHelper helper = mockHelper.Object;
 
             bool wasAborted = false;
@@ -1362,7 +1922,12 @@ namespace System.Web.Mvc.Test
 
             // Act & Assert
             Assert.ThrowsArgumentNull(
-                delegate { invoker.InvokeAction(null, "actionName"); }, "controllerContext");
+                delegate
+                {
+                    invoker.InvokeAction(null, "actionName");
+                },
+                "controllerContext"
+            );
         }
 
         [Fact]
@@ -1375,8 +1940,12 @@ namespace System.Web.Mvc.Test
 
             // Act & Assert
             Assert.ThrowsArgumentNullOrEmpty(
-                delegate { invoker.InvokeAction(context, String.Empty); },
-                "actionName");
+                delegate
+                {
+                    invoker.InvokeAction(context, String.Empty);
+                },
+                "actionName"
+            );
         }
 
         [Fact]
@@ -1389,8 +1958,15 @@ namespace System.Web.Mvc.Test
 
             // Act & Assert
             Assert.ThrowsArgumentNullOrEmpty(
-                delegate { invoker.InvokeAction(context, null /* actionName */); },
-                "actionName");
+                delegate
+                {
+                    invoker.InvokeAction(
+                        context,
+                        null /* actionName */
+                    );
+                },
+                "actionName"
+            );
         }
 
         [Fact]
@@ -1406,12 +1982,18 @@ namespace System.Web.Mvc.Test
             FilterInfo filterInfo = new FilterInfo();
             AuthenticationContext authenticationContext = new AuthenticationContext();
             AuthorizationContext authorizationContext = new AuthorizationContext();
-            AuthenticationChallengeContext authenticationChallengeContext = new AuthenticationChallengeContext();
+            AuthenticationChallengeContext authenticationChallengeContext =
+                new AuthenticationChallengeContext();
 
             Exception exception = new Exception();
             ActionResult actionResult = new EmptyResult();
-            ActionExecutedContext postContext = new ActionExecutedContext(context, ad, false /* canceled */, null /* exception */)
-            {
+            ActionExecutedContext postContext = new ActionExecutedContext(
+                context,
+                ad,
+                false /* canceled */
+                ,
+                null /* exception */
+            ) {
                 Result = actionResult
             };
             ExceptionContext exContext = new ExceptionContext(context, exception)
@@ -1420,17 +2002,80 @@ namespace System.Web.Mvc.Test
                 Result = actionResult
             };
 
-            Mock<ControllerActionInvokerHelper> mockHelper = new Mock<ControllerActionInvokerHelper>() { CallBase = true };
-            mockHelper.Setup(h => h.PublicGetControllerDescriptor(context)).Returns(cd).Verifiable();
-            mockHelper.Setup(h => h.PublicFindAction(context, cd, "SomeMethod")).Returns(ad).Verifiable();
+            Mock<ControllerActionInvokerHelper> mockHelper =
+                new Mock<ControllerActionInvokerHelper>() { CallBase = true };
+            mockHelper.Setup(h => h.PublicGetControllerDescriptor(context))
+                .Returns(cd)
+                .Verifiable();
+            mockHelper.Setup(h => h.PublicFindAction(context, cd, "SomeMethod"))
+                .Returns(ad)
+                .Verifiable();
             mockHelper.Setup(h => h.PublicGetFilters(context, ad)).Returns(filterInfo).Verifiable();
-            mockHelper.Setup(h => h.PublicInvokeAuthenticationFilters(context, filterInfo.AuthenticationFilters, ad)).Returns(authenticationContext).Verifiable();
-            mockHelper.Setup(h => h.PublicInvokeAuthorizationFilters(context, filterInfo.AuthorizationFilters, ad)).Returns(authorizationContext).Verifiable();
-            mockHelper.Setup(h => h.PublicGetParameterValues(context, ad)).Returns(parameters).Verifiable();
-            mockHelper.Setup(h => h.PublicInvokeActionMethodWithFilters(context, filterInfo.ActionFilters, ad, parameters)).Returns(postContext).Verifiable();
-            mockHelper.Setup(h => h.PublicInvokeActionResultWithFilters(context, filterInfo.ResultFilters, actionResult)).Throws(exception).Verifiable();
-            mockHelper.Setup(h => h.PublicInvokeAuthenticationFiltersChallenge(context, filterInfo.AuthenticationFilters, ad, actionResult)).Returns(authenticationChallengeContext).Verifiable();
-            mockHelper.Setup(h => h.PublicInvokeExceptionFilters(context, filterInfo.ExceptionFilters, exception)).Returns(exContext).Verifiable();
+            mockHelper.Setup(
+                    h =>
+                        h.PublicInvokeAuthenticationFilters(
+                            context,
+                            filterInfo.AuthenticationFilters,
+                            ad
+                        )
+                )
+                .Returns(authenticationContext)
+                .Verifiable();
+            mockHelper.Setup(
+                    h =>
+                        h.PublicInvokeAuthorizationFilters(
+                            context,
+                            filterInfo.AuthorizationFilters,
+                            ad
+                        )
+                )
+                .Returns(authorizationContext)
+                .Verifiable();
+            mockHelper.Setup(h => h.PublicGetParameterValues(context, ad))
+                .Returns(parameters)
+                .Verifiable();
+            mockHelper.Setup(
+                    h =>
+                        h.PublicInvokeActionMethodWithFilters(
+                            context,
+                            filterInfo.ActionFilters,
+                            ad,
+                            parameters
+                        )
+                )
+                .Returns(postContext)
+                .Verifiable();
+            mockHelper.Setup(
+                    h =>
+                        h.PublicInvokeActionResultWithFilters(
+                            context,
+                            filterInfo.ResultFilters,
+                            actionResult
+                        )
+                )
+                .Throws(exception)
+                .Verifiable();
+            mockHelper.Setup(
+                    h =>
+                        h.PublicInvokeAuthenticationFiltersChallenge(
+                            context,
+                            filterInfo.AuthenticationFilters,
+                            ad,
+                            actionResult
+                        )
+                )
+                .Returns(authenticationChallengeContext)
+                .Verifiable();
+            mockHelper.Setup(
+                    h =>
+                        h.PublicInvokeExceptionFilters(
+                            context,
+                            filterInfo.ExceptionFilters,
+                            exception
+                        )
+                )
+                .Returns(exContext)
+                .Verifiable();
             mockHelper.Setup(h => h.PublicInvokeActionResult(context, actionResult)).Verifiable();
             ControllerActionInvokerHelper helper = mockHelper.Object;
 
@@ -1455,7 +2100,11 @@ namespace System.Web.Mvc.Test
             IAuthorizationFilter[] filters = new IAuthorizationFilter[] { filter1, filter2 };
 
             // Act
-            AuthorizationContext postContext = helper.PublicInvokeAuthorizationFilters(controllerContext, filters, ad);
+            AuthorizationContext postContext = helper.PublicInvokeAuthorizationFilters(
+                controllerContext,
+                filters,
+                ad
+            );
 
             // Assert
             Assert.Equal(ad, postContext.ActionDescriptor);
@@ -1475,12 +2124,19 @@ namespace System.Web.Mvc.Test
             ActionResult result = new EmptyResult();
 
             List<AuthorizationFilterHelper> callQueue = new List<AuthorizationFilterHelper>();
-            AuthorizationFilterHelper filter1 = new AuthorizationFilterHelper(callQueue) { ShortCircuitResult = result };
+            AuthorizationFilterHelper filter1 = new AuthorizationFilterHelper(callQueue)
+            {
+                ShortCircuitResult = result
+            };
             AuthorizationFilterHelper filter2 = new AuthorizationFilterHelper(callQueue);
             IAuthorizationFilter[] filters = new IAuthorizationFilter[] { filter1, filter2 };
 
             // Act
-            AuthorizationContext postContext = helper.PublicInvokeAuthorizationFilters(controllerContext, filters, ad);
+            AuthorizationContext postContext = helper.PublicInvokeAuthorizationFilters(
+                controllerContext,
+                filters,
+                ad
+            );
 
             // Assert
             Assert.Equal(ad, postContext.ActionDescriptor);
@@ -1507,7 +2163,11 @@ namespace System.Web.Mvc.Test
             using (new ThreadCurrentPrincipalContext())
             {
                 // Act
-                postContext = helper.PublicInvokeAuthenticationFilters(controllerContext, filters, ad);
+                postContext = helper.PublicInvokeAuthenticationFilters(
+                    controllerContext,
+                    filters,
+                    ad
+                );
             }
 
             // Assert
@@ -1537,7 +2197,11 @@ namespace System.Web.Mvc.Test
             using (new ThreadCurrentPrincipalContext())
             {
                 // Act
-                postContext = helper.PublicInvokeAuthenticationFilters(controllerContext, filters, ad);
+                postContext = helper.PublicInvokeAuthenticationFilters(
+                    controllerContext,
+                    filters,
+                    ad
+                );
             }
 
             // Assert
@@ -1559,7 +2223,10 @@ namespace System.Web.Mvc.Test
             ActionResult result = new EmptyResult();
 
             List<AuthenticationFilterHelper> callQueue = new List<AuthenticationFilterHelper>();
-            AuthenticationFilterHelper filter1 = new AuthenticationFilterHelper(callQueue) { ShortCircuitResult = result };
+            AuthenticationFilterHelper filter1 = new AuthenticationFilterHelper(callQueue)
+            {
+                ShortCircuitResult = result
+            };
             AuthenticationFilterHelper filter2 = new AuthenticationFilterHelper(callQueue);
             IAuthenticationFilter[] filters = new IAuthenticationFilter[] { filter1, filter2 };
             AuthenticationContext postContext;
@@ -1567,7 +2234,11 @@ namespace System.Web.Mvc.Test
             using (new ThreadCurrentPrincipalContext())
             {
                 // Act
-                postContext = helper.PublicInvokeAuthenticationFilters(controllerContext, filters, ad);
+                postContext = helper.PublicInvokeAuthenticationFilters(
+                    controllerContext,
+                    filters,
+                    ad
+                );
             }
 
             // Assert
@@ -1589,14 +2260,21 @@ namespace System.Web.Mvc.Test
             IPrincipal principal = new ClaimsPrincipal();
 
             List<AuthenticationFilterHelper> callQueue = new List<AuthenticationFilterHelper>();
-            AuthenticationFilterHelper filter = new AuthenticationFilterHelper(callQueue) { Principal = principal };
+            AuthenticationFilterHelper filter = new AuthenticationFilterHelper(callQueue)
+            {
+                Principal = principal
+            };
             IAuthenticationFilter[] filters = new IAuthenticationFilter[] { filter };
             AuthenticationContext postContext;
 
             using (new ThreadCurrentPrincipalContext())
             {
                 // Act
-                postContext = helper.PublicInvokeAuthenticationFilters(controllerContext, filters, ad);
+                postContext = helper.PublicInvokeAuthenticationFilters(
+                    controllerContext,
+                    filters,
+                    ad
+                );
             }
 
             // Assert
@@ -1618,13 +2296,20 @@ namespace System.Web.Mvc.Test
             IPrincipal principal = new ClaimsPrincipal();
 
             List<AuthenticationFilterHelper> callQueue = new List<AuthenticationFilterHelper>();
-            AuthenticationFilterHelper filter = new AuthenticationFilterHelper(callQueue) { Principal = principal };
+            AuthenticationFilterHelper filter = new AuthenticationFilterHelper(callQueue)
+            {
+                Principal = principal
+            };
             IAuthenticationFilter[] filters = new IAuthenticationFilter[] { filter };
 
             using (new ThreadCurrentPrincipalContext())
             {
                 // Act
-                AuthenticationContext postContext = helper.PublicInvokeAuthenticationFilters(controllerContext, filters, ad);
+                AuthenticationContext postContext = helper.PublicInvokeAuthenticationFilters(
+                    controllerContext,
+                    filters,
+                    ad
+                );
 
                 // Assert
                 Assert.Same(ad, postContext.ActionDescriptor);
@@ -1654,7 +2339,11 @@ namespace System.Web.Mvc.Test
             using (new ThreadCurrentPrincipalContext())
             {
                 // Act
-                AuthenticationContext postContext = helper.PublicInvokeAuthenticationFilters(controllerContext, filters, ad);
+                AuthenticationContext postContext = helper.PublicInvokeAuthenticationFilters(
+                    controllerContext,
+                    filters,
+                    ad
+                );
 
                 // Assert
                 Assert.Same(ad, postContext.ActionDescriptor);
@@ -1681,7 +2370,13 @@ namespace System.Web.Mvc.Test
             ActionResult result = new EmptyResult();
 
             // Act
-            AuthenticationChallengeContext postContext = helper.PublicInvokeAuthenticationFiltersChallenge(controllerContext, filters, ad, result);
+            AuthenticationChallengeContext postContext =
+                helper.PublicInvokeAuthenticationFiltersChallenge(
+                    controllerContext,
+                    filters,
+                    ad,
+                    result
+                );
 
             // Assert
             Assert.Same(ad, postContext.ActionDescriptor);
@@ -1707,7 +2402,11 @@ namespace System.Web.Mvc.Test
             IExceptionFilter[] filters = new IExceptionFilter[] { filter1, filter2 };
 
             // Act
-            ExceptionContext postContext = helper.PublicInvokeExceptionFilters(controllerContext, filters, exception);
+            ExceptionContext postContext = helper.PublicInvokeExceptionFilters(
+                controllerContext,
+                filters,
+                exception
+            );
 
             // Assert
             Assert.Same(exception, postContext.Exception);
@@ -1728,12 +2427,19 @@ namespace System.Web.Mvc.Test
             ControllerActionInvokerHelper helper = new ControllerActionInvokerHelper();
 
             List<ExceptionFilterHelper> callQueue = new List<ExceptionFilterHelper>();
-            ExceptionFilterHelper filter1 = new ExceptionFilterHelper(callQueue) { ShouldHandleException = true };
+            ExceptionFilterHelper filter1 = new ExceptionFilterHelper(callQueue)
+            {
+                ShouldHandleException = true
+            };
             ExceptionFilterHelper filter2 = new ExceptionFilterHelper(callQueue);
             IExceptionFilter[] filters = new IExceptionFilter[] { filter1, filter2 };
 
             // Act
-            ExceptionContext postContext = helper.PublicInvokeExceptionFilters(controllerContext, filters, exception);
+            ExceptionContext postContext = helper.PublicInvokeExceptionFilters(
+                controllerContext,
+                filters,
+                exception
+            );
 
             // Assert
             Assert.Same(exception, postContext.Exception);
@@ -1751,15 +2457,30 @@ namespace System.Web.Mvc.Test
             List<string> actions = new List<string>();
             ActionFilterImpl filter1 = new ActionFilterImpl()
             {
-                OnResultExecutingImpl = delegate(ResultExecutingContext filterContext) { actions.Add("OnResultExecuting1"); },
-                OnResultExecutedImpl = delegate(ResultExecutedContext filterContext) { actions.Add("OnResultExecuted1"); }
+                OnResultExecutingImpl = delegate(ResultExecutingContext filterContext)
+                {
+                    actions.Add("OnResultExecuting1");
+                },
+                OnResultExecutedImpl = delegate(ResultExecutedContext filterContext)
+                {
+                    actions.Add("OnResultExecuted1");
+                }
             };
             ActionFilterImpl filter2 = new ActionFilterImpl()
             {
-                OnResultExecutingImpl = delegate(ResultExecutingContext filterContext) { actions.Add("OnResultExecuting2"); },
-                OnResultExecutedImpl = delegate(ResultExecutedContext filterContext) { actions.Add("OnResultExecuted2"); }
+                OnResultExecutingImpl = delegate(ResultExecutingContext filterContext)
+                {
+                    actions.Add("OnResultExecuting2");
+                },
+                OnResultExecutedImpl = delegate(ResultExecutedContext filterContext)
+                {
+                    actions.Add("OnResultExecuted2");
+                }
             };
-            Action continuation = delegate { actions.Add("Continuation"); };
+            Action continuation = delegate
+            {
+                actions.Add("Continuation");
+            };
             ActionResult actionResult = new ContinuationResult(continuation);
             ControllerBase controller = new Mock<ControllerBase>().Object;
             ControllerContext context = GetControllerContext(controller);
@@ -1783,7 +2504,10 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             bool wasCalled = false;
-            Action continuation = delegate { Assert.True(false, "Continuation should not be called."); };
+            Action continuation = delegate
+            {
+                Assert.True(false, "Continuation should not be called.");
+            };
             ActionResult actionResult = new ContinuationResult(continuation);
             ControllerBase controller = new Mock<ControllerBase>().Object;
             ControllerContext context = GetControllerContext(controller);
@@ -1802,7 +2526,11 @@ namespace System.Web.Mvc.Test
             List<IResultFilter> filters = new List<IResultFilter>() { filter };
 
             // Act
-            ResultExecutedContext result = helper.PublicInvokeActionResultWithFilters(context, filters, actionResult);
+            ResultExecutedContext result = helper.PublicInvokeActionResultWithFilters(
+                context,
+                filters,
+                actionResult
+            );
 
             // Assert
             Assert.True(wasCalled);
@@ -1844,7 +2572,11 @@ namespace System.Web.Mvc.Test
             ControllerActionInvokerHelper helper = new ControllerActionInvokerHelper();
 
             // Act
-            ResultExecutedContext postContext = helper.PublicInvokeActionResultWithFilters(context, filters, result);
+            ResultExecutedContext postContext = helper.PublicInvokeActionResultWithFilters(
+                context,
+                filters,
+                result
+            );
 
             // Assert
             Assert.Same(result, postContext.Result);
@@ -1864,7 +2596,10 @@ namespace System.Web.Mvc.Test
             ActionResult actionResult = new ContinuationResult(continuation);
             ActionFilterImpl filter = new ActionFilterImpl()
             {
-                OnResultExecutingImpl = delegate(ResultExecutingContext filterContext) { actions.Add("OnResultExecuting"); },
+                OnResultExecutingImpl = delegate(ResultExecutingContext filterContext)
+                {
+                    actions.Add("OnResultExecuting");
+                },
                 OnResultExecutedImpl = delegate(ResultExecutedContext filterContext)
                 {
                     actions.Add("OnResultExecuted");
@@ -1875,13 +2610,18 @@ namespace System.Web.Mvc.Test
                 }
             };
 
-            Mock<ResultExecutingContext> mockResultExecutingContext = new Mock<ResultExecutingContext>() { DefaultValue = DefaultValue.Mock };
+            Mock<ResultExecutingContext> mockResultExecutingContext =
+                new Mock<ResultExecutingContext>() { DefaultValue = DefaultValue.Mock };
             mockResultExecutingContext.Setup(c => c.Result).Returns(actionResult);
             List<IResultFilter> filters = new List<IResultFilter>() { filter, };
             ControllerActionInvokerHelper helper = new ControllerActionInvokerHelper();
 
             // Act
-            ResultExecutedContext result = helper.PublicInvokeActionResultWithFilters(mockResultExecutingContext.Object, filters, actionResult);
+            ResultExecutedContext result = helper.PublicInvokeActionResultWithFilters(
+                mockResultExecutingContext.Object,
+                filters,
+                actionResult
+            );
 
             // Assert
             Assert.Equal(3, actions.Count);
@@ -1906,18 +2646,33 @@ namespace System.Web.Mvc.Test
             ActionResult actionResult = new ContinuationResult(continuation);
             ActionFilterImpl filter = new ActionFilterImpl()
             {
-                OnResultExecutingImpl = delegate(ResultExecutingContext filterContext) { actions.Add("OnResultExecuting"); },
-                OnResultExecutedImpl = delegate(ResultExecutedContext filterContext) { actions.Add("OnResultExecuted"); }
+                OnResultExecutingImpl = delegate(ResultExecutingContext filterContext)
+                {
+                    actions.Add("OnResultExecuting");
+                },
+                OnResultExecutedImpl = delegate(ResultExecutedContext filterContext)
+                {
+                    actions.Add("OnResultExecuted");
+                }
             };
-            Mock<ResultExecutingContext> mockResultExecutingContext = new Mock<ResultExecutingContext>() { DefaultValue = DefaultValue.Mock };
+            Mock<ResultExecutingContext> mockResultExecutingContext =
+                new Mock<ResultExecutingContext>() { DefaultValue = DefaultValue.Mock };
             mockResultExecutingContext.Setup(c => c.Result).Returns(actionResult);
             List<IResultFilter> filters = new List<IResultFilter>() { filter, };
             ControllerActionInvokerHelper helper = new ControllerActionInvokerHelper();
 
             // Act & Assert
             Assert.Throws<Exception>(
-                delegate { helper.PublicInvokeActionResultWithFilters(mockResultExecutingContext.Object, filters, actionResult); },
-                "Some exception message.");
+                delegate
+                {
+                    helper.PublicInvokeActionResultWithFilters(
+                        mockResultExecutingContext.Object,
+                        filters,
+                        actionResult
+                    );
+                },
+                "Some exception message."
+            );
             Assert.Equal(3, actions.Count);
             Assert.Equal("OnResultExecuting", actions[0]);
             Assert.Equal("Continuation", actions[1]);
@@ -1936,11 +2691,17 @@ namespace System.Web.Mvc.Test
                 Thread.CurrentThread.Abort();
             };
             ActionResult actionResult = new ContinuationResult(continuation);
-            Mock<ResultExecutingContext> mockPreContext = new Mock<ResultExecutingContext>() { DefaultValue = DefaultValue.Mock };
+            Mock<ResultExecutingContext> mockPreContext = new Mock<ResultExecutingContext>()
+            {
+                DefaultValue = DefaultValue.Mock
+            };
             mockPreContext.Setup(c => c.Result).Returns(actionResult);
             ActionFilterImpl filter = new ActionFilterImpl()
             {
-                OnResultExecutingImpl = delegate(ResultExecutingContext filterContext) { actions.Add("OnResultExecuting"); },
+                OnResultExecutingImpl = delegate(ResultExecutingContext filterContext)
+                {
+                    actions.Add("OnResultExecuting");
+                },
                 OnResultExecutedImpl = delegate(ResultExecutedContext filterContext)
                 {
                     Thread.ResetAbort();
@@ -1955,8 +2716,16 @@ namespace System.Web.Mvc.Test
 
             // Act & Assert
             Assert.Throws<ThreadAbortException>(
-                delegate { helper.PublicInvokeActionResultWithFilters(mockPreContext.Object, filters, actionResult); },
-                "Thread was being aborted.");
+                delegate
+                {
+                    helper.PublicInvokeActionResultWithFilters(
+                        mockPreContext.Object,
+                        filters,
+                        actionResult
+                    );
+                },
+                "Thread was being aborted."
+            );
             Assert.Equal(3, actions.Count);
             Assert.Equal("OnResultExecuting", actions[0]);
             Assert.Equal("Continuation", actions[1]);
@@ -2008,8 +2777,12 @@ namespace System.Web.Mvc.Test
 
             // Act
             Assert.Throws<Exception>(
-                delegate { helper.PublicInvokeActionResultWithFilters(context, filters, actionResult); },
-                expectedExceptionMessage);
+                delegate
+                {
+                    helper.PublicInvokeActionResultWithFilters(context, filters, actionResult);
+                },
+                expectedExceptionMessage
+            );
 
             // Assert
             Assert.Equal(5, actions.Count);
@@ -2063,7 +2836,11 @@ namespace System.Web.Mvc.Test
             List<IResultFilter> filters = new List<IResultFilter>() { filter1, filter2 };
 
             // Act
-            ResultExecutedContext result = helper.PublicInvokeActionResultWithFilters(context, filters, actionResult);
+            ResultExecutedContext result = helper.PublicInvokeActionResultWithFilters(
+                context,
+                filters,
+                actionResult
+            );
 
             // Assert
             Assert.Equal(5, actions.Count);
@@ -2120,7 +2897,11 @@ namespace System.Web.Mvc.Test
             List<IResultFilter> filters = new List<IResultFilter>() { filter1, filter2 };
 
             // Act
-            ResultExecutedContext result = helper.PublicInvokeActionResultWithFilters(context, filters, actionResult);
+            ResultExecutedContext result = helper.PublicInvokeActionResultWithFilters(
+                context,
+                filters,
+                actionResult
+            );
 
             // Assert
             Assert.Equal(5, actions.Count);
@@ -2156,13 +2937,18 @@ namespace System.Web.Mvc.Test
             };
             ActionResult actionResult = new ContinuationResult(continuation);
 
-            Mock<ResultExecutingContext> mockResultExecutingContext = new Mock<ResultExecutingContext>() { DefaultValue = DefaultValue.Mock };
+            Mock<ResultExecutingContext> mockResultExecutingContext =
+                new Mock<ResultExecutingContext>() { DefaultValue = DefaultValue.Mock };
             mockResultExecutingContext.Setup(c => c.Result).Returns(actionResult);
             List<IResultFilter> filters = new List<IResultFilter>() { filter, };
             ControllerActionInvokerHelper helper = new ControllerActionInvokerHelper();
 
             // Act
-            ResultExecutedContext result = helper.PublicInvokeActionResultWithFilters(mockResultExecutingContext.Object, filters, actionResult);
+            ResultExecutedContext result = helper.PublicInvokeActionResultWithFilters(
+                mockResultExecutingContext.Object,
+                filters,
+                actionResult
+            );
 
             // Assert
             Assert.True(wasCalled);
@@ -2210,7 +2996,11 @@ namespace System.Web.Mvc.Test
             List<IResultFilter> filters = new List<IResultFilter>() { filter1, filter2 };
 
             // Act
-            ResultExecutedContext result = helper.PublicInvokeActionResultWithFilters(context, filters, actionResult);
+            ResultExecutedContext result = helper.PublicInvokeActionResultWithFilters(
+                context,
+                filters,
+                actionResult
+            );
 
             // Assert
             string action = Assert.Single(actions);
@@ -2260,7 +3050,11 @@ namespace System.Web.Mvc.Test
             List<IResultFilter> filters = new List<IResultFilter>() { filter1, filter2 };
 
             // Act
-            ResultExecutedContext result = helper.PublicInvokeActionResultWithFilters(context, filters, actionResult);
+            ResultExecutedContext result = helper.PublicInvokeActionResultWithFilters(
+                context,
+                filters,
+                actionResult
+            );
 
             // Assert
             Assert.Equal(3, actions.Count);
@@ -2299,13 +3093,18 @@ namespace System.Web.Mvc.Test
                     actions.Add("OnResultExecuted");
                 }
             };
-            Mock<ResultExecutingContext> mockResultExecutingContext = new Mock<ResultExecutingContext>();
+            Mock<ResultExecutingContext> mockResultExecutingContext =
+                new Mock<ResultExecutingContext>();
             mockResultExecutingContext.Setup(c => c.Result).Returns(actionResult);
             List<IResultFilter> filters = new List<IResultFilter>() { filter, };
             ControllerActionInvokerHelper helper = new ControllerActionInvokerHelper();
 
             // Act
-            ResultExecutedContext result = helper.PublicInvokeActionResultWithFilters(mockResultExecutingContext.Object, filters, actionResult);
+            ResultExecutedContext result = helper.PublicInvokeActionResultWithFilters(
+                mockResultExecutingContext.Object,
+                filters,
+                actionResult
+            );
 
             // Assert
             Assert.Equal(3, actions.Count);
@@ -2323,7 +3122,11 @@ namespace System.Web.Mvc.Test
             ControllerContext context = GetControllerContext(controller);
             CustomResultInvoker helper = new CustomResultInvoker();
             MethodInfo mi = typeof(CustomResultInvokerController).GetMethod("ReturnCustomResult");
-            ReflectedActionDescriptor ad = new ReflectedActionDescriptor(mi, "ReturnCustomResult", new Mock<ControllerDescriptor>().Object);
+            ReflectedActionDescriptor ad = new ReflectedActionDescriptor(
+                mi,
+                "ReturnCustomResult",
+                new Mock<ControllerDescriptor>().Object
+            );
             IDictionary<string, object> parameters = new Dictionary<string, object>();
 
             // Act
@@ -2339,17 +3142,26 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             Type controllerType = typeof(WithRoutingAttributeController);
-            ControllerDescriptor controllerDescriptor = new ReflectedControllerDescriptor(controllerType);
+            ControllerDescriptor controllerDescriptor = new ReflectedControllerDescriptor(
+                controllerType
+            );
 
             var context = new ControllerContext();
             context.RouteData = new RouteData();
-            context.RouteData.Route = DirectRouteTestHelpers.BuildDirectRouteFromMethod<WithRoutingAttributeController>(c => c.Action());
+            context.RouteData.Route =
+                DirectRouteTestHelpers.BuildDirectRouteFromMethod<WithRoutingAttributeController>(
+                    c => c.Action()
+                );
             context.RouteData.AddDirectRouteMatches();
 
             var actionInvoker = new ControllerActionInvokerHelper();
 
             // Act
-            ActionDescriptor actionDescriptor = actionInvoker.PublicFindAction(context, controllerDescriptor, actionName: null);
+            ActionDescriptor actionDescriptor = actionInvoker.PublicFindAction(
+                context,
+                controllerDescriptor,
+                actionName: null
+            );
 
             var matchedMethod = ((ReflectedActionDescriptor)actionDescriptor).MethodInfo;
 
@@ -2362,24 +3174,40 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             Type controllerType = typeof(AttributeRoutingOnTheController);
-            ControllerDescriptor controllerDescriptor = new ReflectedControllerDescriptor(controllerType);
+            ControllerDescriptor controllerDescriptor = new ReflectedControllerDescriptor(
+                controllerType
+            );
 
             var context = new ControllerContext();
             context.RouteData = new RouteData();
-            context.RouteData.Route = DirectRouteTestHelpers.BuildDirectRouteFromController<AttributeRoutingOnTheController>();
+            context.RouteData.Route =
+                DirectRouteTestHelpers.BuildDirectRouteFromController<AttributeRoutingOnTheController>();
 
             // Simulate a match that binds the action parameter
-            context.RouteData.AddDirectRouteMatches((r, rd) => { rd.Values.Add("action", "Action1"); return true; });
+            context.RouteData.AddDirectRouteMatches(
+                (r, rd) =>
+                {
+                    rd.Values.Add("action", "Action1");
+                    return true;
+                }
+            );
 
             ControllerActionInvokerHelper invoker = new ControllerActionInvokerHelper();
 
             // Act
-            ActionDescriptor actionDescriptor = invoker.PublicFindAction(context, controllerDescriptor, actionName: null);
+            ActionDescriptor actionDescriptor = invoker.PublicFindAction(
+                context,
+                controllerDescriptor,
+                actionName: null
+            );
 
             var matchedMethod = ((ReflectedActionDescriptor)actionDescriptor).MethodInfo;
 
             // Assert
-            Assert.Equal(typeof(AttributeRoutingOnTheController).GetMethod("Action1"), matchedMethod);
+            Assert.Equal(
+                typeof(AttributeRoutingOnTheController).GetMethod("Action1"),
+                matchedMethod
+            );
         }
 
         [Fact]
@@ -2387,19 +3215,32 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             Type controllerType = typeof(AttributeRoutingOnTheController);
-            ControllerDescriptor controllerDescriptor = new ReflectedControllerDescriptor(controllerType);
+            ControllerDescriptor controllerDescriptor = new ReflectedControllerDescriptor(
+                controllerType
+            );
 
             var context = new ControllerContext();
             context.RouteData = new RouteData();
-            context.RouteData.Route = DirectRouteTestHelpers.BuildDirectRouteFromController<AttributeRoutingOnTheController>();
+            context.RouteData.Route =
+                DirectRouteTestHelpers.BuildDirectRouteFromController<AttributeRoutingOnTheController>();
 
             // Simulate a match that binds the action parameter
-            context.RouteData.AddDirectRouteMatches((r, rd) => { rd.Values.Add("action", "Action3"); return true; });
+            context.RouteData.AddDirectRouteMatches(
+                (r, rd) =>
+                {
+                    rd.Values.Add("action", "Action3");
+                    return true;
+                }
+            );
 
             ControllerActionInvokerHelper invoker = new ControllerActionInvokerHelper();
 
             // Act
-            ActionDescriptor actionDescriptor = invoker.PublicFindAction(context, controllerDescriptor, actionName: null);
+            ActionDescriptor actionDescriptor = invoker.PublicFindAction(
+                context,
+                controllerDescriptor,
+                actionName: null
+            );
 
             // Assert
             Assert.Null(actionDescriptor);
@@ -2410,19 +3251,30 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             Type controllerType = typeof(AttributeRoutingOnTheController);
-            ControllerDescriptor controllerDescriptor = new ReflectedControllerDescriptor(controllerType);
+            ControllerDescriptor controllerDescriptor = new ReflectedControllerDescriptor(
+                controllerType
+            );
 
             var context = new ControllerContext();
             context.RouteData = new RouteData();
-            context.RouteData.Route = DirectRouteTestHelpers.BuildDirectRouteFromController<AttributeRoutingOnTheController>();
+            context.RouteData.Route =
+                DirectRouteTestHelpers.BuildDirectRouteFromController<AttributeRoutingOnTheController>();
 
             // Simulate a match that binds the action parameter
-            context.RouteData.AddDirectRouteMatches((r, rd) => { rd.Values.Add("action", "Action2"); return true; });
+            context.RouteData.AddDirectRouteMatches(
+                (r, rd) =>
+                {
+                    rd.Values.Add("action", "Action2");
+                    return true;
+                }
+            );
 
             ControllerActionInvokerHelper invoker = new ControllerActionInvokerHelper();
 
             // Act & Assert
-            Assert.Throws<AmbiguousMatchException>(() => invoker.PublicFindAction(context, controllerDescriptor, actionName: null));
+            Assert.Throws<AmbiguousMatchException>(
+                () => invoker.PublicFindAction(context, controllerDescriptor, actionName: null)
+            );
         }
 
         [Fact]
@@ -2430,17 +3282,26 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             Type controllerType = typeof(WithRoutingAttributeController);
-            ControllerDescriptor controllerDescriptor = new ReflectedControllerDescriptor(controllerType);
+            ControllerDescriptor controllerDescriptor = new ReflectedControllerDescriptor(
+                controllerType
+            );
 
             var context = new ControllerContext();
             context.RouteData = new RouteData();
-            context.RouteData.Route = DirectRouteTestHelpers.BuildDirectRouteFromMethod<WithRoutingAttributeController>(c => c.Action());
+            context.RouteData.Route =
+                DirectRouteTestHelpers.BuildDirectRouteFromMethod<WithRoutingAttributeController>(
+                    c => c.Action()
+                );
             context.RouteData.AddDirectRouteMatches();
 
             ControllerActionInvokerHelper invoker = new ControllerActionInvokerHelper();
 
             // Act
-            ActionDescriptor actionDescriptor = invoker.PublicFindAction(context, controllerDescriptor, actionName: null);
+            ActionDescriptor actionDescriptor = invoker.PublicFindAction(
+                context,
+                controllerDescriptor,
+                actionName: null
+            );
             MethodInfo matchedMethod = ((ReflectedActionDescriptor)actionDescriptor).MethodInfo;
 
             // Assert
@@ -2452,7 +3313,11 @@ namespace System.Web.Mvc.Test
             return GetControllerContext(controller, null);
         }
 
-        private static ControllerContext GetControllerContext(ControllerBase controller, IDictionary<string, object> values, Action validateInputCallback = null)
+        private static ControllerContext GetControllerContext(
+            ControllerBase controller,
+            IDictionary<string, object> values,
+            Action validateInputCallback = null
+        )
         {
             SimpleValueProvider valueProvider = new SimpleValueProvider();
             controller.ValueProvider = valueProvider;
@@ -2467,20 +3332,27 @@ namespace System.Web.Mvc.Test
             Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>();
             mockControllerContext.SetupGet(c => c.RouteData).Returns(new RouteData());
 
-            mockControllerContext.Setup(c => c.HttpContext.Request.ValidateInput()).Callback(() =>
-            {
-                if (!controller.ValidateRequest)
-                {
-                    Assert.True(false, "ValidateRequest() should not be called if the controller opted out.");
-                }
-                if (validateInputCallback != null)
-                {
-                    // signal to caller that ValidateInput was called
-                    validateInputCallback();
-                }
-            });
+            mockControllerContext.Setup(c => c.HttpContext.Request.ValidateInput())
+                .Callback(
+                    () =>
+                    {
+                        if (!controller.ValidateRequest)
+                        {
+                            Assert.True(
+                                false,
+                                "ValidateRequest() should not be called if the controller opted out."
+                            );
+                        }
+                        if (validateInputCallback != null)
+                        {
+                            // signal to caller that ValidateInput was called
+                            validateInputCallback();
+                        }
+                    }
+                );
 
-            mockControllerContext.Setup(c => c.HttpContext.Session).Returns((HttpSessionStateBase)null);
+            mockControllerContext.Setup(c => c.HttpContext.Session)
+                .Returns((HttpSessionStateBase)null);
             mockControllerContext.Setup(c => c.Controller).Returns(controller);
             return mockControllerContext.Object;
         }
@@ -2549,12 +3421,13 @@ namespace System.Web.Mvc.Test
 
         private sealed class CustomResultInvoker : ControllerActionInvokerHelper
         {
-            protected override ActionResult CreateActionResult(ControllerContext controllerContext, ActionDescriptor actionDescriptor, object actionReturnValue)
+            protected override ActionResult CreateActionResult(
+                ControllerContext controllerContext,
+                ActionDescriptor actionDescriptor,
+                object actionReturnValue
+            )
             {
-                return new CustomResult
-                {
-                    ReturnValue = actionReturnValue
-                };
+                return new CustomResult { ReturnValue = actionReturnValue };
             }
         }
 
@@ -2627,9 +3500,7 @@ namespace System.Web.Mvc.Test
                 return null;
             }
 
-            public void WrongReturnType()
-            {
-            }
+            public void WrongReturnType() { }
 
             protected ActionResult ProtectedMethod()
             {
@@ -2714,13 +3585,9 @@ namespace System.Web.Mvc.Test
                 foo = null;
             }
 
-            public void HasRefParam(ref string foo)
-            {
-            }
+            public void HasRefParam(ref string foo) { }
 
-            public void Parameterless()
-            {
-            }
+            public void Parameterless() { }
 
             public void TakesInt(int id)
             {
@@ -2733,13 +3600,9 @@ namespace System.Web.Mvc.Test
                 return null;
             }
 
-            public void TakesString(string id)
-            {
-            }
+            public void TakesString(string id) { }
 
-            public void TakesDateTime(DateTime id)
-            {
-            }
+            public void TakesDateTime(DateTime id) { }
         }
 
         // Provides access to the protected members of ControllerActionInvoker
@@ -2751,149 +3614,300 @@ namespace System.Web.Mvc.Test
                 DescriptorCache = new ControllerDescriptorCache();
             }
 
-            public ControllerActionInvokerHelper(params object[] filters)
-                : base(filters)
+            public ControllerActionInvokerHelper(params object[] filters) : base(filters)
             {
                 // set instance caches to prevent modifying global test application state
                 DescriptorCache = new ControllerDescriptorCache();
             }
 
-            public virtual ActionResult PublicCreateActionResult(ControllerContext controllerContext, ActionDescriptor actionDescriptor, object actionReturnValue)
+            public virtual ActionResult PublicCreateActionResult(
+                ControllerContext controllerContext,
+                ActionDescriptor actionDescriptor,
+                object actionReturnValue
+            )
             {
-                return base.CreateActionResult(controllerContext, actionDescriptor, actionReturnValue);
+                return base.CreateActionResult(
+                    controllerContext,
+                    actionDescriptor,
+                    actionReturnValue
+                );
             }
 
-            protected override ActionResult CreateActionResult(ControllerContext controllerContext, ActionDescriptor actionDescriptor, object actionReturnValue)
+            protected override ActionResult CreateActionResult(
+                ControllerContext controllerContext,
+                ActionDescriptor actionDescriptor,
+                object actionReturnValue
+            )
             {
-                return PublicCreateActionResult(controllerContext, actionDescriptor, actionReturnValue);
+                return PublicCreateActionResult(
+                    controllerContext,
+                    actionDescriptor,
+                    actionReturnValue
+                );
             }
 
-            public virtual ActionDescriptor PublicFindAction(ControllerContext controllerContext, ControllerDescriptor controllerDescriptor, string actionName)
+            public virtual ActionDescriptor PublicFindAction(
+                ControllerContext controllerContext,
+                ControllerDescriptor controllerDescriptor,
+                string actionName
+            )
             {
                 return base.FindAction(controllerContext, controllerDescriptor, actionName);
             }
 
-            protected override ActionDescriptor FindAction(ControllerContext controllerContext, ControllerDescriptor controllerDescriptor, string actionName)
+            protected override ActionDescriptor FindAction(
+                ControllerContext controllerContext,
+                ControllerDescriptor controllerDescriptor,
+                string actionName
+            )
             {
                 return PublicFindAction(controllerContext, controllerDescriptor, actionName);
             }
 
-            public virtual ControllerDescriptor PublicGetControllerDescriptor(ControllerContext controllerContext)
+            public virtual ControllerDescriptor PublicGetControllerDescriptor(
+                ControllerContext controllerContext
+            )
             {
                 return base.GetControllerDescriptor(controllerContext);
             }
 
-            protected override ControllerDescriptor GetControllerDescriptor(ControllerContext controllerContext)
+            protected override ControllerDescriptor GetControllerDescriptor(
+                ControllerContext controllerContext
+            )
             {
                 return PublicGetControllerDescriptor(controllerContext);
             }
 
-            public virtual FilterInfo PublicGetFilters(ControllerContext controllerContext, ActionDescriptor actionDescriptor)
+            public virtual FilterInfo PublicGetFilters(
+                ControllerContext controllerContext,
+                ActionDescriptor actionDescriptor
+            )
             {
                 return base.GetFilters(controllerContext, actionDescriptor);
             }
 
-            protected override FilterInfo GetFilters(ControllerContext controllerContext, ActionDescriptor actionDescriptor)
+            protected override FilterInfo GetFilters(
+                ControllerContext controllerContext,
+                ActionDescriptor actionDescriptor
+            )
             {
                 return PublicGetFilters(controllerContext, actionDescriptor);
             }
 
-            public virtual object PublicGetParameterValue(ControllerContext controllerContext, ParameterDescriptor parameterDescriptor)
+            public virtual object PublicGetParameterValue(
+                ControllerContext controllerContext,
+                ParameterDescriptor parameterDescriptor
+            )
             {
                 return base.GetParameterValue(controllerContext, parameterDescriptor);
             }
 
-            protected override object GetParameterValue(ControllerContext controllerContext, ParameterDescriptor parameterDescriptor)
+            protected override object GetParameterValue(
+                ControllerContext controllerContext,
+                ParameterDescriptor parameterDescriptor
+            )
             {
                 return PublicGetParameterValue(controllerContext, parameterDescriptor);
             }
 
-            public virtual IDictionary<string, object> PublicGetParameterValues(ControllerContext controllerContext, ActionDescriptor actionDescriptor)
+            public virtual IDictionary<string, object> PublicGetParameterValues(
+                ControllerContext controllerContext,
+                ActionDescriptor actionDescriptor
+            )
             {
                 return base.GetParameterValues(controllerContext, actionDescriptor);
             }
 
-            protected override IDictionary<string, object> GetParameterValues(ControllerContext controllerContext, ActionDescriptor actionDescriptor)
+            protected override IDictionary<string, object> GetParameterValues(
+                ControllerContext controllerContext,
+                ActionDescriptor actionDescriptor
+            )
             {
                 return PublicGetParameterValues(controllerContext, actionDescriptor);
             }
 
-            public virtual ActionResult PublicInvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary<string, object> parameters)
+            public virtual ActionResult PublicInvokeActionMethod(
+                ControllerContext controllerContext,
+                ActionDescriptor actionDescriptor,
+                IDictionary<string, object> parameters
+            )
             {
                 return base.InvokeActionMethod(controllerContext, actionDescriptor, parameters);
             }
 
-            protected override ActionResult InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary<string, object> parameters)
+            protected override ActionResult InvokeActionMethod(
+                ControllerContext controllerContext,
+                ActionDescriptor actionDescriptor,
+                IDictionary<string, object> parameters
+            )
             {
                 return PublicInvokeActionMethod(controllerContext, actionDescriptor, parameters);
             }
 
-            public virtual ActionExecutedContext PublicInvokeActionMethodWithFilters(ControllerContext controllerContext, IList<IActionFilter> filters, ActionDescriptor actionDescriptor, IDictionary<string, object> parameters)
+            public virtual ActionExecutedContext PublicInvokeActionMethodWithFilters(
+                ControllerContext controllerContext,
+                IList<IActionFilter> filters,
+                ActionDescriptor actionDescriptor,
+                IDictionary<string, object> parameters
+            )
             {
-                return base.InvokeActionMethodWithFilters(controllerContext, filters, actionDescriptor, parameters);
+                return base.InvokeActionMethodWithFilters(
+                    controllerContext,
+                    filters,
+                    actionDescriptor,
+                    parameters
+                );
             }
 
-            protected override ActionExecutedContext InvokeActionMethodWithFilters(ControllerContext controllerContext, IList<IActionFilter> filters, ActionDescriptor actionDescriptor, IDictionary<string, object> parameters)
+            protected override ActionExecutedContext InvokeActionMethodWithFilters(
+                ControllerContext controllerContext,
+                IList<IActionFilter> filters,
+                ActionDescriptor actionDescriptor,
+                IDictionary<string, object> parameters
+            )
             {
-                return PublicInvokeActionMethodWithFilters(controllerContext, filters, actionDescriptor, parameters);
+                return PublicInvokeActionMethodWithFilters(
+                    controllerContext,
+                    filters,
+                    actionDescriptor,
+                    parameters
+                );
             }
 
-            public virtual void PublicInvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+            public virtual void PublicInvokeActionResult(
+                ControllerContext controllerContext,
+                ActionResult actionResult
+            )
             {
                 base.InvokeActionResult(controllerContext, actionResult);
             }
 
-            protected override void InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+            protected override void InvokeActionResult(
+                ControllerContext controllerContext,
+                ActionResult actionResult
+            )
             {
                 PublicInvokeActionResult(controllerContext, actionResult);
             }
 
-            public virtual ResultExecutedContext PublicInvokeActionResultWithFilters(ControllerContext controllerContext, IList<IResultFilter> filters, ActionResult actionResult)
+            public virtual ResultExecutedContext PublicInvokeActionResultWithFilters(
+                ControllerContext controllerContext,
+                IList<IResultFilter> filters,
+                ActionResult actionResult
+            )
             {
                 return base.InvokeActionResultWithFilters(controllerContext, filters, actionResult);
             }
 
-            protected override ResultExecutedContext InvokeActionResultWithFilters(ControllerContext controllerContext, IList<IResultFilter> filters, ActionResult actionResult)
+            protected override ResultExecutedContext InvokeActionResultWithFilters(
+                ControllerContext controllerContext,
+                IList<IResultFilter> filters,
+                ActionResult actionResult
+            )
             {
-                return PublicInvokeActionResultWithFilters(controllerContext, filters, actionResult);
+                return PublicInvokeActionResultWithFilters(
+                    controllerContext,
+                    filters,
+                    actionResult
+                );
             }
 
-            public virtual AuthorizationContext PublicInvokeAuthorizationFilters(ControllerContext controllerContext, IList<IAuthorizationFilter> filters, ActionDescriptor actionDescriptor)
+            public virtual AuthorizationContext PublicInvokeAuthorizationFilters(
+                ControllerContext controllerContext,
+                IList<IAuthorizationFilter> filters,
+                ActionDescriptor actionDescriptor
+            )
             {
-                return base.InvokeAuthorizationFilters(controllerContext, filters, actionDescriptor);
+                return base.InvokeAuthorizationFilters(
+                    controllerContext,
+                    filters,
+                    actionDescriptor
+                );
             }
 
-            protected override AuthorizationContext InvokeAuthorizationFilters(ControllerContext controllerContext, IList<IAuthorizationFilter> filters, ActionDescriptor actionDescriptor)
+            protected override AuthorizationContext InvokeAuthorizationFilters(
+                ControllerContext controllerContext,
+                IList<IAuthorizationFilter> filters,
+                ActionDescriptor actionDescriptor
+            )
             {
-                return PublicInvokeAuthorizationFilters(controllerContext, filters, actionDescriptor);
+                return PublicInvokeAuthorizationFilters(
+                    controllerContext,
+                    filters,
+                    actionDescriptor
+                );
             }
 
-            public virtual AuthenticationContext PublicInvokeAuthenticationFilters(ControllerContext controllerContext, IList<IAuthenticationFilter> filters, ActionDescriptor actionDescriptor)
+            public virtual AuthenticationContext PublicInvokeAuthenticationFilters(
+                ControllerContext controllerContext,
+                IList<IAuthenticationFilter> filters,
+                ActionDescriptor actionDescriptor
+            )
             {
-                return base.InvokeAuthenticationFilters(controllerContext, filters, actionDescriptor);
+                return base.InvokeAuthenticationFilters(
+                    controllerContext,
+                    filters,
+                    actionDescriptor
+                );
             }
 
-            protected override AuthenticationContext InvokeAuthenticationFilters(ControllerContext controllerContext, IList<IAuthenticationFilter> filters, ActionDescriptor actionDescriptor)
+            protected override AuthenticationContext InvokeAuthenticationFilters(
+                ControllerContext controllerContext,
+                IList<IAuthenticationFilter> filters,
+                ActionDescriptor actionDescriptor
+            )
             {
-                return PublicInvokeAuthenticationFilters(controllerContext, filters, actionDescriptor);
+                return PublicInvokeAuthenticationFilters(
+                    controllerContext,
+                    filters,
+                    actionDescriptor
+                );
             }
 
-            public virtual AuthenticationChallengeContext PublicInvokeAuthenticationFiltersChallenge(ControllerContext controllerContext, IList<IAuthenticationFilter> filters, ActionDescriptor actionDescriptor, ActionResult result)
+            public virtual AuthenticationChallengeContext PublicInvokeAuthenticationFiltersChallenge(
+                ControllerContext controllerContext,
+                IList<IAuthenticationFilter> filters,
+                ActionDescriptor actionDescriptor,
+                ActionResult result
+            )
             {
-                return base.InvokeAuthenticationFiltersChallenge(controllerContext, filters, actionDescriptor, result);
+                return base.InvokeAuthenticationFiltersChallenge(
+                    controllerContext,
+                    filters,
+                    actionDescriptor,
+                    result
+                );
             }
 
-            protected override AuthenticationChallengeContext InvokeAuthenticationFiltersChallenge(ControllerContext controllerContext, IList<IAuthenticationFilter> filters, ActionDescriptor actionDescriptor, ActionResult result)
+            protected override AuthenticationChallengeContext InvokeAuthenticationFiltersChallenge(
+                ControllerContext controllerContext,
+                IList<IAuthenticationFilter> filters,
+                ActionDescriptor actionDescriptor,
+                ActionResult result
+            )
             {
-                return PublicInvokeAuthenticationFiltersChallenge(controllerContext, filters, actionDescriptor, result);
+                return PublicInvokeAuthenticationFiltersChallenge(
+                    controllerContext,
+                    filters,
+                    actionDescriptor,
+                    result
+                );
             }
 
-            public virtual ExceptionContext PublicInvokeExceptionFilters(ControllerContext controllerContext, IList<IExceptionFilter> filters, Exception exception)
+            public virtual ExceptionContext PublicInvokeExceptionFilters(
+                ControllerContext controllerContext,
+                IList<IExceptionFilter> filters,
+                Exception exception
+            )
             {
                 return base.InvokeExceptionFilters(controllerContext, filters, exception);
             }
 
-            protected override ExceptionContext InvokeExceptionFilters(ControllerContext controllerContext, IList<IExceptionFilter> filters, Exception exception)
+            protected override ExceptionContext InvokeExceptionFilters(
+                ControllerContext controllerContext,
+                IList<IExceptionFilter> filters,
+                Exception exception
+            )
             {
                 return PublicInvokeExceptionFilters(controllerContext, filters, exception);
             }
@@ -2973,49 +3987,33 @@ namespace System.Web.Mvc.Test
 
         private class CustomConverterController : Controller
         {
-            public void ParameterWithoutBindAttribute([PredicateReflector] string someParam)
-            {
-            }
+            public void ParameterWithoutBindAttribute([PredicateReflector] string someParam) { }
 
-            public void ParameterHasBindAttribute([Bind(Include = "foo"), PredicateReflector] string someParam)
-            {
-            }
+            public void ParameterHasBindAttribute(
+                [Bind(Include = "foo"), PredicateReflector] string someParam
+            ) { }
 
-            public void ParameterHasDefaultValueAttribute([DefaultValue(42)] int foo)
-            {
-            }
+            public void ParameterHasDefaultValueAttribute([DefaultValue(42)] int foo) { }
 
-            public void ParameterHasFieldPrefix([Bind(Prefix = "bar")] string foo)
-            {
-            }
+            public void ParameterHasFieldPrefix([Bind(Prefix = "bar")] string foo) { }
 
-            public void ParameterHasNullFieldPrefix([Bind(Include = "whatever")] string foo)
-            {
-            }
+            public void ParameterHasNullFieldPrefix([Bind(Include = "whatever")] string foo) { }
 
-            public void ParameterHasEmptyFieldPrefix([Bind(Prefix = "")] MySimpleModel foo)
-            {
-            }
+            public void ParameterHasEmptyFieldPrefix([Bind(Prefix = "")] MySimpleModel foo) { }
 
-            public void ParameterHasNoPrefixAndComplexType(MySimpleModel foo)
-            {
-            }
+            public void ParameterHasNoPrefixAndComplexType(MySimpleModel foo) { }
 
-            public void ParameterHasPrefixAndComplexType([Bind(Prefix = "badprefix")] MySimpleModel foo)
-            {
-            }
+            public void ParameterHasPrefixAndComplexType(
+                [Bind(Prefix = "badprefix")] MySimpleModel foo
+            ) { }
 
-            public void ParameterHasNoConverters(string foo)
-            {
-            }
+            public void ParameterHasNoConverters(string foo) { }
 
-            public void ParameterHasOneConverter([MyCustomConverter] string foo)
-            {
-            }
+            public void ParameterHasOneConverter([MyCustomConverter] string foo) { }
 
-            public void ParameterHasTwoConverters([MyCustomConverter, MyCustomConverter] string foo)
-            {
-            }
+            public void ParameterHasTwoConverters(
+                [MyCustomConverter, MyCustomConverter] string foo
+            ) { }
         }
 
         public class MySimpleModel
@@ -3034,9 +4032,16 @@ namespace System.Web.Mvc.Test
 
             private class MyConverter : IModelBinder
             {
-                public object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
+                public object BindModel(
+                    ControllerContext controllerContext,
+                    ModelBindingContext bindingContext
+                )
                 {
-                    string s = String.Format("foo={0}&bar={1}", bindingContext.PropertyFilter("foo"), bindingContext.PropertyFilter("bar"));
+                    string s = String.Format(
+                        "foo={0}&bar={1}",
+                        bindingContext.PropertyFilter("foo"),
+                        bindingContext.PropertyFilter("bar")
+                    );
                     return s;
                 }
             }
@@ -3052,7 +4057,10 @@ namespace System.Web.Mvc.Test
 
             private class MyConverter : IModelBinder
             {
-                public object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
+                public object BindModel(
+                    ControllerContext controllerContext,
+                    ModelBindingContext bindingContext
+                )
                 {
                     string s = bindingContext.ModelName + "_" + bindingContext.ModelType.Name;
                     return s;
@@ -3095,30 +4103,20 @@ namespace System.Web.Mvc.Test
         {
             [Route("route")]
             [ActionName("Action")] // to make things confusing
-            public void ActionWithoutRoute()
-            {
-            }
+            public void ActionWithoutRoute() { }
 
             [Route("route")]
-            public void Action()
-            {
-            }
+            public void Action() { }
         }
 
         [Route("controller/{action}")]
         private class AttributeRoutingOnTheController : Controller
         {
-            public void Action1()
-            {
-            }
+            public void Action1() { }
 
-            public void Action2()
-            {
-            }
+            public void Action2() { }
 
-            public void Action2(string name)
-            {
-            }
+            public void Action2(string name) { }
         }
 
         private class MatchAttribute : ActionMethodSelectorAttribute
@@ -3130,7 +4128,10 @@ namespace System.Web.Mvc.Test
                 _match = match;
             }
 
-            public override bool IsValidForRequest(ControllerContext controllerContext, MethodInfo methodInfo)
+            public override bool IsValidForRequest(
+                ControllerContext controllerContext,
+                MethodInfo methodInfo
+            )
             {
                 return _match;
             }

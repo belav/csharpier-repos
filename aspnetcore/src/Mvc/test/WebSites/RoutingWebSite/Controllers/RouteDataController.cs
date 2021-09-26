@@ -30,7 +30,10 @@ namespace RoutingWebSite
         {
             if (!context.RouteData.DataTokens.ContainsKey("actionName"))
             {
-                context.RouteData.DataTokens.Add("actionName", ((ControllerActionDescriptor)context.ActionDescriptor).ActionName);
+                context.RouteData.DataTokens.Add(
+                    "actionName",
+                    ((ControllerActionDescriptor)context.ActionDescriptor).ActionName
+                );
             }
         }
 
@@ -39,11 +42,7 @@ namespace RoutingWebSite
             var routers = RouteData.Routers.Select(r => r.GetType().FullName).ToArray();
             var dataTokens = RouteData.DataTokens;
 
-            return new
-            {
-                DataTokens = dataTokens,
-                Routers = routers
-            };
+            return new { DataTokens = dataTokens, Routers = routers };
         }
     }
 }

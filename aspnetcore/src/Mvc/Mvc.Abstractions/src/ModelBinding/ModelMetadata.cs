@@ -57,10 +57,7 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         /// </summary>
         public virtual ModelMetadata? ContainerMetadata
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         /// <summary>
@@ -82,12 +79,14 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         /// <summary>
         /// Gets the name of the parameter if this metadata is for a parameter; <see langword="null"/> otherwise.
         /// </summary>
-        public string? ParameterName => MetadataKind == ModelMetadataKind.Parameter ? Identity.Name : null;
+        public string? ParameterName =>
+            MetadataKind == ModelMetadataKind.Parameter ? Identity.Name : null;
 
         /// <summary>
         /// Gets the name of the property if this metadata is for a property; <see langword="null"/> otherwise.
         /// </summary>
-        public string? PropertyName => MetadataKind == ModelMetadataKind.Property ? Identity.Name : null;
+        public string? PropertyName =>
+            MetadataKind == ModelMetadataKind.Property ? Identity.Name : null;
 
         /// <summary>
         /// Gets the key for the current instance.
@@ -125,9 +124,17 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
 
                     foreach (var metadata in Properties)
                     {
-                        if (!boundParameters.Any(p =>
-                            string.Equals(p.ParameterName, metadata.PropertyName, StringComparison.Ordinal)
-                            && p.ModelType == metadata.ModelType))
+                        if (
+                            !boundParameters.Any(
+                                p =>
+                                    string.Equals(
+                                        p.ParameterName,
+                                        metadata.PropertyName,
+                                        StringComparison.Ordinal
+                                    )
+                                    && p.ModelType == metadata.ModelType
+                            )
+                        )
                         {
                             boundProperties.Add(metadata);
                         }
@@ -147,7 +154,10 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         {
             get
             {
-                Debug.Assert(BoundConstructor != null, "This API can be only called for types with bound constructors.");
+                Debug.Assert(
+                    BoundConstructor != null,
+                    "This API can be only called for types with bound constructors."
+                );
                 CalculateRecordTypeConstructorDetails();
 
                 return _parameterMapping;
@@ -162,7 +172,10 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         {
             get
             {
-                Debug.Assert(BoundConstructor != null, "This API can be only called for types with bound constructors.");
+                Debug.Assert(
+                    BoundConstructor != null,
+                    "This API can be only called for types with bound constructors."
+                );
                 CalculateRecordTypeConstructorDetails();
 
                 return _boundConstructorPropertyMapping;
@@ -250,7 +263,9 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         /// An <see cref="IEnumerable{T}"/> of <see cref="KeyValuePair{EnumGroupAndName, String}"/> of mappings between
         /// <see cref="Enum"/> field groups, names and values. <c>null</c> if <see cref="IsEnum"/> is <c>false</c>.
         /// </value>
-        public abstract IEnumerable<KeyValuePair<EnumGroupAndName, string>>? EnumGroupedDisplayNamesAndValues { get; }
+        public abstract IEnumerable<
+            KeyValuePair<EnumGroupAndName, string>
+        >? EnumGroupedDisplayNamesAndValues { get; }
 
         /// <summary>
         /// Gets the names and values of all <see cref="Enum"/> values in <see cref="UnderlyingOrModelType"/>.
@@ -524,9 +539,11 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
 
             foreach (var parameter in boundParameters)
             {
-                var property = Properties.FirstOrDefault(p =>
-                    string.Equals(p.Name, parameter.ParameterName, StringComparison.Ordinal) &&
-                    p.ModelType == parameter.ModelType);
+                var property = Properties.FirstOrDefault(
+                    p =>
+                        string.Equals(p.Name, parameter.ParameterName, StringComparison.Ordinal)
+                        && p.ModelType == parameter.ModelType
+                );
 
                 if (property != null)
                 {
@@ -540,12 +557,16 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
                         // This will help us throw during validation if a user defines validation attributes
                         // on the property of a record type.
                         _recordTypeValidatorsOnPropertiesError = new InvalidOperationException(
-                            Resources.FormatRecordTypeHasValidationOnProperties(ModelType, property.Name));
+                            Resources.FormatRecordTypeHasValidationOnProperties(
+                                ModelType,
+                                property.Name
+                            )
+                        );
                     }
                 }
             }
 
-             _recordTypeConstructorDetailsCalculated = true;
+            _recordTypeConstructorDetailsCalculated = true;
             _parameterMapping = parameterMapping;
             _boundConstructorPropertyMapping = propertyMapping;
         }
@@ -608,7 +629,10 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             IsReferenceOrNullableType = !ModelType.IsValueType || IsNullableValueType;
             UnderlyingOrModelType = Nullable.GetUnderlyingType(ModelType) ?? ModelType;
 
-            var collectionType = ClosedGenericMatcher.ExtractGenericInterface(ModelType, typeof(ICollection<>));
+            var collectionType = ClosedGenericMatcher.ExtractGenericInterface(
+                ModelType,
+                typeof(ICollection<>)
+            );
             IsCollectionType = collectionType != null;
 
             if (ModelType == typeof(string) || !typeof(IEnumerable).IsAssignableFrom(ModelType))
@@ -624,7 +648,10 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             {
                 IsEnumerableType = true;
 
-                var enumerableType = ClosedGenericMatcher.ExtractGenericInterface(ModelType, typeof(IEnumerable<>));
+                var enumerableType = ClosedGenericMatcher.ExtractGenericInterface(
+                    ModelType,
+                    typeof(IEnumerable<>)
+                );
                 ElementType = enumerableType?.GenericTypeArguments[0]!;
 
                 if (ElementType == null)
@@ -635,7 +662,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
 
                 Debug.Assert(
                     ElementType != null,
-                    $"Unable to find element type for '{ModelType.FullName}' though IsEnumerableType is true.");
+                    $"Unable to find element type for '{ModelType.FullName}' though IsEnumerableType is true."
+                );
             }
         }
 

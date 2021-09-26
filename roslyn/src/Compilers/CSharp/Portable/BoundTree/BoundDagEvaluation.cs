@@ -9,13 +9,14 @@ namespace Microsoft.CodeAnalysis.CSharp
 {
     partial class BoundDagEvaluation
     {
-        public override bool Equals([NotNullWhen(true)] object? obj) => obj is BoundDagEvaluation other && this.Equals(other);
+        public override bool Equals([NotNullWhen(true)] object? obj) =>
+            obj is BoundDagEvaluation other && this.Equals(other);
         public virtual bool Equals(BoundDagEvaluation other)
         {
-            return this == other ||
-                this.Kind == other.Kind &&
-                this.Input.Equals(other.Input) &&
-                this.Symbol.Equals(other.Symbol, TypeCompareKind.AllIgnoreOptions);
+            return this == other
+                || this.Kind == other.Kind
+                    && this.Input.Equals(other.Input)
+                    && this.Symbol.Equals(other.Symbol, TypeCompareKind.AllIgnoreOptions);
         }
         private Symbol Symbol
         {
@@ -23,12 +24,18 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 switch (this)
                 {
-                    case BoundDagFieldEvaluation e: return e.Field.CorrespondingTupleField ?? e.Field;
-                    case BoundDagPropertyEvaluation e: return e.Property;
-                    case BoundDagTypeEvaluation e: return e.Type;
-                    case BoundDagDeconstructEvaluation e: return e.DeconstructMethod;
-                    case BoundDagIndexEvaluation e: return e.Property;
-                    default: throw ExceptionUtilities.UnexpectedValue(this.Kind);
+                    case BoundDagFieldEvaluation e:
+                        return e.Field.CorrespondingTupleField ?? e.Field;
+                    case BoundDagPropertyEvaluation e:
+                        return e.Property;
+                    case BoundDagTypeEvaluation e:
+                        return e.Type;
+                    case BoundDagDeconstructEvaluation e:
+                        return e.DeconstructMethod;
+                    case BoundDagIndexEvaluation e:
+                        return e.Property;
+                    default:
+                        throw ExceptionUtilities.UnexpectedValue(this.Kind);
                 }
             }
         }
@@ -44,10 +51,11 @@ namespace Microsoft.CodeAnalysis.CSharp
         public override int GetHashCode() => base.GetHashCode() ^ this.Index;
         public override bool Equals(BoundDagEvaluation obj)
         {
-            return this == obj ||
-                base.Equals(obj) &&
-                // base.Equals checks the kind field, so the following cast is safe
-                this.Index == ((BoundDagIndexEvaluation)obj).Index;
+            return this == obj
+                || base.Equals(obj)
+                    &&
+                    // base.Equals checks the kind field, so the following cast is safe
+                    this.Index == ((BoundDagIndexEvaluation)obj).Index;
         }
     }
 }

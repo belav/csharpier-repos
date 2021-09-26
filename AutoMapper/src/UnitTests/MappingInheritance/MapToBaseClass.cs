@@ -11,11 +11,14 @@
         public class A { }
         public class B : A { }
 
-        protected override MapperConfiguration Configuration => new MapperConfiguration(c =>
-        {
-            c.CreateMap<Input, A>().Include<Input, B>();
-            c.CreateMap<Input, B>();
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                c =>
+                {
+                    c.CreateMap<Input, A>().Include<Input, B>();
+                    c.CreateMap<Input, B>();
+                }
+            );
 
         protected override void Because_of()
         {
@@ -42,14 +45,18 @@
         class DestinationDerived : Destination
         {
         }
-        protected override MapperConfiguration Configuration => new MapperConfiguration(c =>
-        {
-            c.CreateMap<Source, Destination>().Include<SourceDerived, DestinationDerived>();
-            c.CreateMap<SourceDerived, DestinationDerived>();
-            c.CreateMap<SourceDerived, Destination>();
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                c =>
+                {
+                    c.CreateMap<Source, Destination>().Include<SourceDerived, DestinationDerived>();
+                    c.CreateMap<SourceDerived, DestinationDerived>();
+                    c.CreateMap<SourceDerived, Destination>();
+                }
+            );
         [Fact]
-        public void ExplicitMapShouldApply() => Map<Destination>(new SourceDerived()).ShouldBeOfType<Destination>();
+        public void ExplicitMapShouldApply() =>
+            Map<Destination>(new SourceDerived()).ShouldBeOfType<Destination>();
     }
     public class IncludeAs : AutoMapperSpecBase
     {
@@ -66,14 +73,18 @@
         {
         }
         class DestinationConcrete : Destination { }
-        protected override MapperConfiguration Configuration => new MapperConfiguration(c =>
-        {
-            c.CreateMap<Source, Destination>().Include<SourceDerived, DestinationDerived>();
-            c.CreateMap<SourceDerived, Destination>().As<DestinationConcrete>();
-            c.CreateMap<SourceDerived, DestinationDerived>();
-            c.CreateMap<SourceDerived, DestinationConcrete>();
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                c =>
+                {
+                    c.CreateMap<Source, Destination>().Include<SourceDerived, DestinationDerived>();
+                    c.CreateMap<SourceDerived, Destination>().As<DestinationConcrete>();
+                    c.CreateMap<SourceDerived, DestinationDerived>();
+                    c.CreateMap<SourceDerived, DestinationConcrete>();
+                }
+            );
         [Fact]
-        public void RedirectedMapShouldApply() => Map<Destination>(new SourceDerived()).ShouldBeOfType<DestinationConcrete>();
+        public void RedirectedMapShouldApply() =>
+            Map<Destination>(new SourceDerived()).ShouldBeOfType<DestinationConcrete>();
     }
 }

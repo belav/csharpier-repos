@@ -65,7 +65,6 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Metadata
         public virtual ValueGenerated? ValueGenerated { get; set; }
 
         /// <inheritdoc />
-        public override string ToString()
-            => Name ?? "<UNKNOWN>";
+        public override string ToString() => Name ?? "<UNKNOWN>";
     }
 }

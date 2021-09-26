@@ -6,17 +6,18 @@ using System.Security.Cryptography;
 
 namespace Internal.Cryptography
 {
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA5350", Justification = "We are providing the implementation for RC2, not consuming it.")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Security",
+        "CA5350",
+        Justification = "We are providing the implementation for RC2, not consuming it."
+    )]
     internal sealed partial class RC2Implementation : RC2
     {
         private const int BitsPerByte = 8;
 
         public override int EffectiveKeySize
         {
-            get
-            {
-                return KeySizeValue;
-            }
+            get { return KeySizeValue; }
             set
             {
                 if (value != KeySizeValue)
@@ -78,13 +79,29 @@ namespace Internal.Cryptography
             }
 
             int effectiveKeySize = EffectiveKeySizeValue == 0 ? (int)keySize : EffectiveKeySize;
-            return CreateTransformCore(Mode, Padding, rgbKey, effectiveKeySize, rgbIV, BlockSize / BitsPerByte, FeedbackSize / BitsPerByte, GetPaddingSize(), encrypting);
+            return CreateTransformCore(
+                Mode,
+                Padding,
+                rgbKey,
+                effectiveKeySize,
+                rgbIV,
+                BlockSize / BitsPerByte,
+                FeedbackSize / BitsPerByte,
+                GetPaddingSize(),
+                encrypting
+            );
         }
 
         private static void ValidateCFBFeedbackSize(int feedback)
         {
             // CFB not supported at all
-            throw new CryptographicException(string.Format(SR.Cryptography_CipherModeFeedbackNotSupported, feedback, CipherMode.CFB));
+            throw new CryptographicException(
+                string.Format(
+                    SR.Cryptography_CipherModeFeedbackNotSupported,
+                    feedback,
+                    CipherMode.CFB
+                )
+            );
         }
 
         private int GetPaddingSize()

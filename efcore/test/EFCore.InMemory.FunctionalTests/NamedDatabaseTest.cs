@@ -15,8 +15,7 @@ namespace Microsoft.EntityFrameworkCore
         {
             using (var context = new PusheenContext())
             {
-                context.Add(
-                    new Pusheen { Activity = "In a box" });
+                context.Add(new Pusheen { Activity = "In a box" });
                 context.SaveChanges();
             }
 
@@ -31,8 +30,7 @@ namespace Microsoft.EntityFrameworkCore
         {
             using (var context = new PusheenContext(nameof(PusheenContext)))
             {
-                context.Add(
-                    new Pusheen { Activity = "In a box" });
+                context.Add(new Pusheen { Activity = "In a box" });
                 context.SaveChanges();
             }
 
@@ -45,13 +43,14 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Database_per_service_provider_is_default()
         {
-            var provider1 = new ServiceCollection().AddEntityFrameworkInMemoryDatabase().BuildServiceProvider();
-            var provider2 = new ServiceCollection().AddEntityFrameworkInMemoryDatabase().BuildServiceProvider();
+            var provider1 = new ServiceCollection().AddEntityFrameworkInMemoryDatabase()
+                .BuildServiceProvider();
+            var provider2 = new ServiceCollection().AddEntityFrameworkInMemoryDatabase()
+                .BuildServiceProvider();
 
             using (var context = new PusheenContext(nameof(PusheenContext), provider1))
             {
-                context.Add(
-                    new Pusheen { Activity = "In a box" });
+                context.Add(new Pusheen { Activity = "In a box" });
                 context.SaveChanges();
             }
 
@@ -59,8 +58,7 @@ namespace Microsoft.EntityFrameworkCore
             {
                 Assert.Empty(context.Pusheens);
 
-                context.Add(
-                    new Pusheen { Activity = "With some yarn" });
+                context.Add(new Pusheen { Activity = "With some yarn" });
                 context.SaveChanges();
             }
 
@@ -80,8 +78,7 @@ namespace Microsoft.EntityFrameworkCore
         {
             using (var context = new PusheenContext("Cats"))
             {
-                context.Add(
-                    new Pusheen { Activity = "In a box" });
+                context.Add(new Pusheen { Activity = "In a box" });
                 context.SaveChanges();
             }
 
@@ -89,8 +86,7 @@ namespace Microsoft.EntityFrameworkCore
             {
                 Assert.Empty(context.Pusheens);
 
-                context.Add(
-                    new Pusheen { Activity = "With some yarn" });
+                context.Add(new Pusheen { Activity = "With some yarn" });
                 context.SaveChanges();
             }
 
@@ -108,13 +104,14 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Named_databases_shared_per_service_provider()
         {
-            var provider1 = new ServiceCollection().AddEntityFrameworkInMemoryDatabase().BuildServiceProvider();
-            var provider2 = new ServiceCollection().AddEntityFrameworkInMemoryDatabase().BuildServiceProvider();
+            var provider1 = new ServiceCollection().AddEntityFrameworkInMemoryDatabase()
+                .BuildServiceProvider();
+            var provider2 = new ServiceCollection().AddEntityFrameworkInMemoryDatabase()
+                .BuildServiceProvider();
 
             using (var context = new PusheenContext("Cats", provider1))
             {
-                context.Add(
-                    new Pusheen { Activity = "In a box" });
+                context.Add(new Pusheen { Activity = "In a box" });
                 context.SaveChanges();
             }
 
@@ -122,8 +119,7 @@ namespace Microsoft.EntityFrameworkCore
             {
                 Assert.Empty(context.Pusheens);
 
-                context.Add(
-                    new Pusheen { Activity = "With some yarn" });
+                context.Add(new Pusheen { Activity = "With some yarn" });
                 context.SaveChanges();
             }
 
@@ -131,8 +127,7 @@ namespace Microsoft.EntityFrameworkCore
             {
                 Assert.Empty(context.Pusheens);
 
-                context.Add(
-                    new Pusheen { Activity = "On a scooter" });
+                context.Add(new Pusheen { Activity = "On a scooter" });
                 context.SaveChanges();
             }
 
@@ -140,8 +135,7 @@ namespace Microsoft.EntityFrameworkCore
             {
                 Assert.Empty(context.Pusheens);
 
-                context.Add(
-                    new Pusheen { Activity = "Is a DJ" });
+                context.Add(new Pusheen { Activity = "Is a DJ" });
                 context.SaveChanges();
             }
 
@@ -149,8 +143,7 @@ namespace Microsoft.EntityFrameworkCore
             {
                 Assert.Empty(context.Pusheens);
 
-                context.Add(
-                    new Pusheen { Activity = "Goes to sleep" });
+                context.Add(new Pusheen { Activity = "Goes to sleep" });
                 context.SaveChanges();
             }
 
@@ -158,8 +151,7 @@ namespace Microsoft.EntityFrameworkCore
             {
                 Assert.Empty(context.Pusheens);
 
-                context.Add(
-                    new Pusheen { Activity = "Loves magic unicorns" });
+                context.Add(new Pusheen { Activity = "Loves magic unicorns" });
                 context.SaveChanges();
             }
 
@@ -200,9 +192,7 @@ namespace Microsoft.EntityFrameworkCore
             private readonly IServiceProvider _serviceProvider;
 
             public PusheenContext(IServiceProvider serviceProvider = null)
-                : this(null, serviceProvider)
-            {
-            }
+                : this(null, serviceProvider) { }
 
             public PusheenContext(string databaseName, IServiceProvider serviceProvider = null)
             {
@@ -218,8 +208,7 @@ namespace Microsoft.EntityFrameworkCore
 
                 if (_databaseName == null)
                 {
-                    optionsBuilder
-                        .EnableServiceProviderCaching(false)
+                    optionsBuilder.EnableServiceProviderCaching(false)
                         .UseInMemoryDatabase(Guid.NewGuid().ToString());
                 }
                 else

@@ -36,12 +36,13 @@ namespace System.IO
             if (directoryPath.Length > 0)
             {
                 char c = directoryPath[directoryPath.Length - 1];
-                hasSeparator = c == Path.DirectorySeparatorChar || c == Path.AltDirectorySeparatorChar;
+                hasSeparator =
+                    c == Path.DirectorySeparatorChar || c == Path.AltDirectorySeparatorChar;
             }
 
-            return hasSeparator ?
-                directoryPath + name :
-                directoryPath + Path.DirectorySeparatorChar + name;
+            return hasSeparator
+              ? directoryPath + name
+              : directoryPath + Path.DirectorySeparatorChar + name;
         }
 
         /// <devdoc>
@@ -49,10 +50,7 @@ namespace System.IO
         /// </devdoc>
         public WatcherChangeTypes ChangeType
         {
-            get
-            {
-                return _changeType;
-            }
+            get { return _changeType; }
         }
 
         /// <devdoc>
@@ -60,22 +58,15 @@ namespace System.IO
         /// </devdoc>
         public string FullPath
         {
-            get
-            {
-                return _fullPath;
-            }
+            get { return _fullPath; }
         }
-
 
         /// <devdoc>
         ///       Gets the name of the affected file or directory.
         /// </devdoc>
         public string? Name
         {
-            get
-            {
-                return _name;
-            }
+            get { return _name; }
         }
     }
 }

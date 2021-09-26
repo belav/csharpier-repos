@@ -21,7 +21,10 @@ using Microsoft.VisualStudio.Imaging;
 namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
 {
     [ExportWorkspaceServiceFactory(typeof(IPreviewPaneService), ServiceLayer.Host), Shared]
-    internal class PreviewPaneService : ForegroundThreadAffinitizedObject, IPreviewPaneService, IWorkspaceServiceFactory
+    internal class PreviewPaneService
+        : ForegroundThreadAffinitizedObject,
+          IPreviewPaneService,
+          IWorkspaceServiceFactory
     {
         private readonly IImageService imageService;
 
@@ -33,7 +36,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
             this.imageService = imageService;
         }
 
-        IWorkspaceService IWorkspaceServiceFactory.CreateService(HostWorkspaceServices workspaceServices)
+        IWorkspaceService IWorkspaceServiceFactory.CreateService(
+            HostWorkspaceServices workspaceServices
+        )
         {
             return this;
         }
@@ -61,14 +66,18 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
 
             if (moniker.HasValue)
             {
-                return (NSImage)imageService.GetImage(new ImageId(KnownImageIds.ImageCatalogGuid, moniker.Value));
+                return (NSImage)imageService.GetImage(
+                    new ImageId(KnownImageIds.ImageCatalogGuid, moniker.Value)
+                );
             }
 
             return null;
         }
 
         object IPreviewPaneService.GetPreviewPane(
-            DiagnosticData data, IReadOnlyList<object> previewContent)
+            DiagnosticData data,
+            IReadOnlyList<object> previewContent
+        )
         {
             var title = data?.Message;
 
@@ -82,8 +91,15 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
                 }
 
                 return new PreviewPane(
-                    severityIcon: null, id: null, title: null, description: null, helpLink: null, helpLinkToolTipText: null,
-                    previewContent: previewContent, logIdVerbatimInTelemetry: false);
+                    severityIcon: null,
+                    id: null,
+                    title: null,
+                    description: null,
+                    helpLink: null,
+                    helpLinkToolTipText: null,
+                    previewContent: previewContent,
+                    logIdVerbatimInTelemetry: false
+                );
             }
             else
             {
@@ -105,14 +121,18 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
             }
 
             return new PreviewPane(
-                severityIcon: null,//TODO: Mac GetSeverityIconForDiagnostic(diagnostic),
-                id: data.Id, title: title,
+                severityIcon: null, //TODO: Mac GetSeverityIconForDiagnostic(diagnostic),
+                id: data.Id,
+                title: title,
                 description: data.Description.ToString(CultureInfo.CurrentUICulture),
                 helpLink: helpLinkUri,
                 helpLinkToolTipText: helpLinkToolTip,
                 previewContent: previewContent,
-                logIdVerbatimInTelemetry: data.CustomTags.Contains(WellKnownDiagnosticTags.Telemetry),
-                optionPageGuid: optionPageGuid);
+                logIdVerbatimInTelemetry: data.CustomTags.Contains(
+                    WellKnownDiagnosticTags.Telemetry
+                ),
+                optionPageGuid: optionPageGuid
+            );
         }
     }
 }

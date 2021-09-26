@@ -22,7 +22,6 @@ namespace Microsoft.CodeAnalysis.RuntimeMembers
         // END Mutually exclusive Member kinds
 
         KindMask = 0x1F,
-
         Static = 0x20,
         Virtual = 0x40, // Virtual in CLR terms, i.e. sealed should be accepted.
     }
@@ -51,8 +50,8 @@ namespace Microsoft.CodeAnalysis.RuntimeMembers
             get
             {
                 return DeclaringTypeId <= (int)SpecialType.Count
-                           ? ((SpecialType)DeclaringTypeId).GetMetadataName()
-                           : ((WellKnownType)DeclaringTypeId).GetMetadataName();
+                  ? ((SpecialType)DeclaringTypeId).GetMetadataName()
+                  : ((WellKnownType)DeclaringTypeId).GetMetadataName();
             }
         }
 
@@ -98,7 +97,8 @@ namespace Microsoft.CodeAnalysis.RuntimeMembers
             short DeclaringTypeId,
             string Name,
             ImmutableArray<byte> Signature,
-            ushort Arity = 0)
+            ushort Arity = 0
+        )
         {
             this.Flags = Flags;
             this.DeclaringTypeId = DeclaringTypeId;
@@ -107,7 +107,10 @@ namespace Microsoft.CodeAnalysis.RuntimeMembers
             this.Signature = Signature;
         }
 
-        internal static ImmutableArray<MemberDescriptor> InitializeFromStream(Stream stream, string[] nameTable)
+        internal static ImmutableArray<MemberDescriptor> InitializeFromStream(
+            Stream stream,
+            string[] nameTable
+        )
         {
             int count = nameTable.Length;
 
@@ -130,7 +133,15 @@ namespace Microsoft.CodeAnalysis.RuntimeMembers
                     ParseMethodOrPropertySignature(signatureBuilder, stream);
                 }
 
-                builder.Add(new MemberDescriptor(flags, declaringTypeId, nameTable[i], signatureBuilder.ToImmutable(), arity));
+                builder.Add(
+                    new MemberDescriptor(
+                        flags,
+                        declaringTypeId,
+                        nameTable[i],
+                        signatureBuilder.ToImmutable(),
+                        arity
+                    )
+                );
                 signatureBuilder.Clear();
             }
 
@@ -156,7 +167,10 @@ namespace Microsoft.CodeAnalysis.RuntimeMembers
             }
         }
 
-        private static void ParseMethodOrPropertySignature(ImmutableArray<byte>.Builder builder, Stream stream)
+        private static void ParseMethodOrPropertySignature(
+            ImmutableArray<byte>.Builder builder,
+            Stream stream
+        )
         {
             int paramCount = stream.ReadByte();
             builder.Add((byte)paramCount);
@@ -171,7 +185,11 @@ namespace Microsoft.CodeAnalysis.RuntimeMembers
             }
         }
 
-        private static void ParseType(ImmutableArray<byte>.Builder builder, Stream stream, bool allowByRef = false)
+        private static void ParseType(
+            ImmutableArray<byte>.Builder builder,
+            Stream stream,
+            bool allowByRef = false
+        )
         {
             while (true)
             {
@@ -193,7 +211,8 @@ namespace Microsoft.CodeAnalysis.RuntimeMembers
                         return;
 
                     case SignatureTypeCode.ByReference:
-                        if (!allowByRef) goto default;
+                        if (!allowByRef)
+                            goto default;
                         break;
 
                     case SignatureTypeCode.SZArray:
@@ -227,7 +246,10 @@ namespace Microsoft.CodeAnalysis.RuntimeMembers
             }
         }
 
-        private static void ParseGenericTypeInstance(ImmutableArray<byte>.Builder builder, Stream stream)
+        private static void ParseGenericTypeInstance(
+            ImmutableArray<byte>.Builder builder,
+            Stream stream
+        )
         {
             ParseType(builder, stream);
 

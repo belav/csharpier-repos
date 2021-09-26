@@ -22,7 +22,9 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
     public class SqlServerLineStringMethodTranslator : IMethodCallTranslator
     {
         private static readonly MethodInfo _getPointN = typeof(LineString).GetRequiredRuntimeMethod(
-            nameof(LineString.GetPointN), new[] { typeof(int) });
+            nameof(LineString.GetPointN),
+            new[] { typeof(int) }
+        );
 
         private readonly IRelationalTypeMappingSource _typeMappingSource;
         private readonly ISqlExpressionFactory _sqlExpressionFactory;
@@ -35,7 +37,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         /// </summary>
         public SqlServerLineStringMethodTranslator(
             IRelationalTypeMappingSource typeMappingSource,
-            ISqlExpressionFactory sqlExpressionFactory)
+            ISqlExpressionFactory sqlExpressionFactory
+        )
         {
             _typeMappingSource = typeMappingSource;
             _sqlExpressionFactory = sqlExpressionFactory;
@@ -51,29 +54,31 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
             SqlExpression? instance,
             MethodInfo method,
             IReadOnlyList<SqlExpression> arguments,
-            IDiagnosticsLogger<DbLoggerCategory.Query> logger)
+            IDiagnosticsLogger<DbLoggerCategory.Query> logger
+        )
         {
             Check.NotNull(method, nameof(method));
             Check.NotNull(arguments, nameof(arguments));
             Check.NotNull(logger, nameof(logger));
 
-            if (Equals(method, _getPointN)
-                && instance != null)
+            if (Equals(method, _getPointN) && instance != null)
             {
                 return _sqlExpressionFactory.Function(
                     instance,
                     "STPointN",
                     new[]
                     {
-                        _sqlExpressionFactory.Add(
-                            arguments[0],
-                            _sqlExpressionFactory.Constant(1))
+                        _sqlExpressionFactory.Add(arguments[0], _sqlExpressionFactory.Constant(1))
                     },
                     nullable: true,
                     instancePropagatesNullability: true,
                     argumentsPropagateNullability: new[] { true },
                     method.ReturnType,
-                    _typeMappingSource.FindMapping(method.ReturnType, instance.TypeMapping!.StoreType));
+                    _typeMappingSource.FindMapping(
+                        method.ReturnType,
+                        instance.TypeMapping!.StoreType
+                    )
+                );
             }
 
             return null;

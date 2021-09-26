@@ -13,7 +13,8 @@ using Microsoft.CodeAnalysis.DesignerAttribute;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.DesignerAttribute
 {
-    internal sealed class InProcDesignerAttributeIncrementalAnalyzer : AbstractDesignerAttributeIncrementalAnalyzer
+    internal sealed class InProcDesignerAttributeIncrementalAnalyzer
+        : AbstractDesignerAttributeIncrementalAnalyzer
     {
         private readonly IDesignerAttributeListener _listener;
 
@@ -22,10 +23,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.DesignerAttribu
             _listener = listener;
         }
 
-        protected override ValueTask ReportProjectRemovedAsync(ProjectId projectId, CancellationToken cancellationToken)
-            => _listener.OnProjectRemovedAsync(projectId, cancellationToken);
+        protected override ValueTask ReportProjectRemovedAsync(
+            ProjectId projectId,
+            CancellationToken cancellationToken
+        ) => _listener.OnProjectRemovedAsync(projectId, cancellationToken);
 
-        protected override ValueTask ReportDesignerAttributeDataAsync(ImmutableArray<DesignerAttributeData> data, CancellationToken cancellationToken)
-            => _listener.ReportDesignerAttributeDataAsync(data, cancellationToken);
+        protected override ValueTask ReportDesignerAttributeDataAsync(
+            ImmutableArray<DesignerAttributeData> data,
+            CancellationToken cancellationToken
+        ) => _listener.ReportDesignerAttributeDataAsync(data, cancellationToken);
     }
 }

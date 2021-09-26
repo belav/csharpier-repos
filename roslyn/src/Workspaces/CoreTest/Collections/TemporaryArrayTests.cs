@@ -20,18 +20,22 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             Assert.Equal(0, new TemporaryArray<int>().Count);
 
             Assert.Throws<IndexOutOfRangeException>(() => TemporaryArray<int>.Empty[-1]);
-            Assert.Throws<IndexOutOfRangeException>(() =>
-            {
-                using var array = TemporaryArray<int>.Empty;
-                array.AsRef()[-1] = 1;
-            });
+            Assert.Throws<IndexOutOfRangeException>(
+                () =>
+                {
+                    using var array = TemporaryArray<int>.Empty;
+                    array.AsRef()[-1] = 1;
+                }
+            );
 
             Assert.Throws<IndexOutOfRangeException>(() => TemporaryArray<int>.Empty[0]);
-            Assert.Throws<IndexOutOfRangeException>(() =>
-            {
-                using var array = TemporaryArray<int>.Empty;
-                array.AsRef()[0] = 1;
-            });
+            Assert.Throws<IndexOutOfRangeException>(
+                () =>
+                {
+                    using var array = TemporaryArray<int>.Empty;
+                    array.AsRef()[0] = 1;
+                }
+            );
 
             Assert.False(TemporaryArray<int>.Empty.GetEnumerator().MoveNext());
         }
@@ -88,7 +92,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         public void TestDisposeFreesBuilder()
         {
             var array = TemporaryArray<int>.Empty;
-            array.AddRange(Enumerable.Range(0, TemporaryArray<int>.TestAccessor.InlineCapacity + 1).ToImmutableArray());
+            array.AddRange(
+                Enumerable.Range(0, TemporaryArray<int>.TestAccessor.InlineCapacity + 1)
+                    .ToImmutableArray()
+            );
             Assert.True(TemporaryArray<int>.TestAccessor.HasDynamicStorage(in array));
 
             array.Dispose();
@@ -97,7 +104,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
 
         [Theory]
         [CombinatorialData]
-        public void TestAddRange([CombinatorialRange(0, 6)] int initialItems, [CombinatorialRange(0, 6)] int addedItems)
+        public void TestAddRange(
+            [CombinatorialRange(0, 6)] int initialItems,
+            [CombinatorialRange(0, 6)] int addedItems
+        )
         {
             using var array = TemporaryArray<int>.Empty;
             for (var i = 0; i < initialItems; i++)
@@ -142,7 +152,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             // on the count prior to calling Clear.
             Assert.Equal(
                 initialItems > TemporaryArray<int>.TestAccessor.InlineCapacity,
-                TemporaryArray<int>.TestAccessor.HasDynamicStorage(in array));
+                TemporaryArray<int>.TestAccessor.HasDynamicStorage(in array)
+            );
         }
 
         [Theory]
@@ -184,7 +195,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             // assertion on the count prior to calling Clear.
             Assert.Equal(
                 initialItems > TemporaryArray<int>.TestAccessor.InlineCapacity,
-                TemporaryArray<int>.TestAccessor.HasDynamicStorage(in array));
+                TemporaryArray<int>.TestAccessor.HasDynamicStorage(in array)
+            );
         }
     }
 }

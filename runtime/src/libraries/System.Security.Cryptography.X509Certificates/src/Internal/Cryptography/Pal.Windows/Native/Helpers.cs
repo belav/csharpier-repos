@@ -33,7 +33,6 @@ namespace Internal.Cryptography.Pal.Native
             {
                 oidStrings[i] = oids[i].Value!;
             }
-
             unsafe
             {
                 int allocationSize = checked(oidStrings.Length * sizeof(void*));
@@ -45,7 +44,9 @@ namespace Internal.Cryptography.Pal.Native
                     }
                 }
 
-                SafeLocalAllocHandle safeLocalAllocHandle = SafeLocalAllocHandle.Create(allocationSize);
+                SafeLocalAllocHandle safeLocalAllocHandle = SafeLocalAllocHandle.Create(
+                    allocationSize
+                );
                 byte** pOidPointers = (byte**)(safeLocalAllocHandle.DangerousGetHandle());
                 byte* pOidContents = (byte*)(pOidPointers + oidStrings.Length);
 
@@ -55,7 +56,10 @@ namespace Internal.Cryptography.Pal.Native
 
                     pOidPointers[i] = pOidContents;
 
-                    int bytesWritten = Encoding.ASCII.GetBytes(oidString, new Span<byte>(pOidContents, oidString.Length));
+                    int bytesWritten = Encoding.ASCII.GetBytes(
+                        oidString,
+                        new Span<byte>(pOidContents, oidString.Length)
+                    );
                     Debug.Assert(bytesWritten == oidString.Length);
 
                     pOidContents[oidString.Length] = 0;
@@ -72,40 +76,53 @@ namespace Internal.Cryptography.Pal.Native
             return Encoding.ASCII.GetBytes(oid.Value!);
         }
 
-        public unsafe delegate void DecodedObjectReceiver(void* pvDecodedObject, int cbDecodedObject);
-        public unsafe delegate TResult DecodedObjectReceiver<TResult>(void* pvDecodedObject, int cbDecodedObject);
+        public unsafe delegate void DecodedObjectReceiver(
+            void* pvDecodedObject,
+            int cbDecodedObject
+        );
+        public unsafe delegate TResult DecodedObjectReceiver<TResult>(
+            void* pvDecodedObject,
+            int cbDecodedObject
+        );
 
         public static TResult DecodeObject<TResult>(
             this byte[] encoded,
             CryptDecodeObjectStructType lpszStructType,
-            DecodedObjectReceiver<TResult> receiver)
+            DecodedObjectReceiver<TResult> receiver
+        )
         {
             unsafe
             {
                 int cb = 0;
 
-                if (!Interop.crypt32.CryptDecodeObjectPointer(
-                    CertEncodingType.All,
-                    lpszStructType,
-                    encoded,
-                    encoded.Length,
-                    CryptDecodeObjectFlags.None,
-                    null,
-                    ref cb))
+                if (
+                    !Interop.crypt32.CryptDecodeObjectPointer(
+                        CertEncodingType.All,
+                        lpszStructType,
+                        encoded,
+                        encoded.Length,
+                        CryptDecodeObjectFlags.None,
+                        null,
+                        ref cb
+                    )
+                )
                 {
                     throw Marshal.GetLastWin32Error().ToCryptographicException();
                 }
 
                 byte* decoded = stackalloc byte[cb];
 
-                if (!Interop.crypt32.CryptDecodeObjectPointer(
-                    CertEncodingType.All,
-                    lpszStructType,
-                    encoded,
-                    encoded.Length,
-                    CryptDecodeObjectFlags.None,
-                    decoded,
-                    ref cb))
+                if (
+                    !Interop.crypt32.CryptDecodeObjectPointer(
+                        CertEncodingType.All,
+                        lpszStructType,
+                        encoded,
+                        encoded.Length,
+                        CryptDecodeObjectFlags.None,
+                        decoded,
+                        ref cb
+                    )
+                )
                 {
                     throw Marshal.GetLastWin32Error().ToCryptographicException();
                 }
@@ -117,34 +134,41 @@ namespace Internal.Cryptography.Pal.Native
         public static TResult DecodeObject<TResult>(
             this byte[] encoded,
             string lpszStructType,
-            DecodedObjectReceiver<TResult> receiver)
+            DecodedObjectReceiver<TResult> receiver
+        )
         {
             unsafe
             {
                 int cb = 0;
 
-                if (!Interop.crypt32.CryptDecodeObjectPointer(
-                    CertEncodingType.All,
-                    lpszStructType,
-                    encoded,
-                    encoded.Length,
-                    CryptDecodeObjectFlags.None,
-                    null,
-                    ref cb))
+                if (
+                    !Interop.crypt32.CryptDecodeObjectPointer(
+                        CertEncodingType.All,
+                        lpszStructType,
+                        encoded,
+                        encoded.Length,
+                        CryptDecodeObjectFlags.None,
+                        null,
+                        ref cb
+                    )
+                )
                 {
                     throw Marshal.GetLastWin32Error().ToCryptographicException();
                 }
 
                 byte* decoded = stackalloc byte[cb];
 
-                if (!Interop.crypt32.CryptDecodeObjectPointer(
-                    CertEncodingType.All,
-                    lpszStructType,
-                    encoded,
-                    encoded.Length,
-                    CryptDecodeObjectFlags.None,
-                    decoded,
-                    ref cb))
+                if (
+                    !Interop.crypt32.CryptDecodeObjectPointer(
+                        CertEncodingType.All,
+                        lpszStructType,
+                        encoded,
+                        encoded.Length,
+                        CryptDecodeObjectFlags.None,
+                        decoded,
+                        ref cb
+                    )
+                )
                 {
                     throw Marshal.GetLastWin32Error().ToCryptographicException();
                 }
@@ -156,34 +180,41 @@ namespace Internal.Cryptography.Pal.Native
         public static bool DecodeObjectNoThrow(
             this byte[] encoded,
             CryptDecodeObjectStructType lpszStructType,
-            DecodedObjectReceiver receiver)
+            DecodedObjectReceiver receiver
+        )
         {
             unsafe
             {
                 int cb = 0;
 
-                if (!Interop.crypt32.CryptDecodeObjectPointer(
-                    CertEncodingType.All,
-                    lpszStructType,
-                    encoded,
-                    encoded.Length,
-                    CryptDecodeObjectFlags.None,
-                    null,
-                    ref cb))
+                if (
+                    !Interop.crypt32.CryptDecodeObjectPointer(
+                        CertEncodingType.All,
+                        lpszStructType,
+                        encoded,
+                        encoded.Length,
+                        CryptDecodeObjectFlags.None,
+                        null,
+                        ref cb
+                    )
+                )
                 {
                     return false;
                 }
 
                 byte* decoded = stackalloc byte[cb];
 
-                if (!Interop.crypt32.CryptDecodeObjectPointer(
-                    CertEncodingType.All,
-                    lpszStructType,
-                    encoded,
-                    encoded.Length,
-                    CryptDecodeObjectFlags.None,
-                    decoded,
-                    ref cb))
+                if (
+                    !Interop.crypt32.CryptDecodeObjectPointer(
+                        CertEncodingType.All,
+                        lpszStructType,
+                        encoded,
+                        encoded.Length,
+                        CryptDecodeObjectFlags.None,
+                        decoded,
+                        ref cb
+                    )
+                )
                 {
                     return false;
                 }

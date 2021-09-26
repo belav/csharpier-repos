@@ -12,7 +12,7 @@ using System;
 // the originally added arg as a "normal" arg that shouldn't be there.
 //
 // So, in summary, for a call A->B, to see this failure, we need:
-// 
+//
 // 1. The call is considered a potential tailcall (by the importer)
 // 2. The call requires non-standard arguments that add call argument IR in fgInitArgInfo()
 //    (e.g., VSD call -- in this case, a generic interface call)
@@ -32,7 +32,18 @@ namespace GitHub_49078
 
     public struct BigStruct
     {
-        public IntPtr a, b, c, d, e, f, g, h, j, k, l, m;
+        public IntPtr a,
+            b,
+            c,
+            d,
+            e,
+            f,
+            g,
+            h,
+            j,
+            k,
+            l,
+            m;
 
         public BigStruct(IntPtr a1)
         {
@@ -73,6 +84,7 @@ namespace GitHub_49078
                     i += j;
                 }
             }
+
             finally
             {
                 i += 2;

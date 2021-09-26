@@ -36,9 +36,7 @@ namespace Microsoft.Extensions.SecretManager.Tools.Internal
 
             _reporter.Verbose(Resources.FormatMessage_Project_File_Path(projectFile));
 
-            configuration = !string.IsNullOrEmpty(configuration)
-                ? configuration
-                : DefaultConfig;
+            configuration = !string.IsNullOrEmpty(configuration) ? configuration : DefaultConfig;
 
             var outputFile = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
             try
@@ -68,10 +66,7 @@ namespace Microsoft.Extensions.SecretManager.Tools.Internal
                 _reporter.Verbose($"Invoking '{psi.FileName} {psi.Arguments}'");
 #endif
 
-                using var process = new Process()
-                {
-                    StartInfo = psi,
-                };
+                using var process = new Process() { StartInfo = psi, };
 
                 var outputBuilder = new StringBuilder();
                 var errorBuilder = new StringBuilder();
@@ -99,22 +94,28 @@ namespace Microsoft.Extensions.SecretManager.Tools.Internal
                     _reporter.Verbose(outputBuilder.ToString());
                     _reporter.Verbose(errorBuilder.ToString());
                     _reporter.Error($"Exit code: {process.ExitCode}");
-                    throw new InvalidOperationException(Resources.FormatError_ProjectFailedToLoad(projectFile));
+                    throw new InvalidOperationException(
+                        Resources.FormatError_ProjectFailedToLoad(projectFile)
+                    );
                 }
 
                 if (!File.Exists(outputFile))
                 {
-                    throw new InvalidOperationException(Resources.FormatError_ProjectMissingId(projectFile));
+                    throw new InvalidOperationException(
+                        Resources.FormatError_ProjectMissingId(projectFile)
+                    );
                 }
 
                 var id = File.ReadAllText(outputFile)?.Trim();
                 if (string.IsNullOrEmpty(id))
                 {
-                    throw new InvalidOperationException(Resources.FormatError_ProjectMissingId(projectFile));
+                    throw new InvalidOperationException(
+                        Resources.FormatError_ProjectMissingId(projectFile)
+                    );
                 }
                 return id;
-
             }
+
             finally
             {
                 TryDelete(outputFile);
@@ -132,7 +133,8 @@ namespace Microsoft.Extensions.SecretManager.Tools.Internal
                 assemblyDir,
             };
 
-            var targetPath = searchPaths.Select(p => Path.Combine(p, "SecretManager.targets")).FirstOrDefault(File.Exists);
+            var targetPath = searchPaths.Select(p => Path.Combine(p, "SecretManager.targets"))
+                .FirstOrDefault(File.Exists);
             if (targetPath == null)
             {
                 _reporter.Error("Fatal error: could not find SecretManager.targets");

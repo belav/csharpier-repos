@@ -6,7 +6,11 @@ using System.Security.Cryptography;
 
 namespace Internal.Cryptography
 {
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA5350", Justification = "We are providing the implementation for RC2, not consuming it.")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Security",
+        "CA5350",
+        Justification = "We are providing the implementation for RC2, not consuming it."
+    )]
     internal sealed partial class RC2Implementation : RC2
     {
         private static ICryptoTransform CreateTransformCore(
@@ -18,9 +22,12 @@ namespace Internal.Cryptography
             int blockSize,
             int feedbackSizeInBytes,
             int paddingSize,
-            bool encrypting)
+            bool encrypting
+        )
         {
-            throw new PlatformNotSupportedException(SR.Format(SR.Cryptography_AlgorithmNotSupported, nameof(RC2)));
+            throw new PlatformNotSupportedException(
+                SR.Format(SR.Cryptography_AlgorithmNotSupported, nameof(RC2))
+            );
         }
     }
 }

@@ -24,8 +24,10 @@ namespace System.Xml.Schema
             set { _name = value; }
         }
 
-        [XmlElement("attribute", typeof(XmlSchemaAttribute)),
-         XmlElement("attributeGroup", typeof(XmlSchemaAttributeGroupRef))]
+        [
+            XmlElement("attribute", typeof(XmlSchemaAttribute)),
+            XmlElement("attributeGroup", typeof(XmlSchemaAttributeGroupRef))
+        ]
         public XmlSchemaObjectCollection Attributes
         {
             get { return _attributes; }

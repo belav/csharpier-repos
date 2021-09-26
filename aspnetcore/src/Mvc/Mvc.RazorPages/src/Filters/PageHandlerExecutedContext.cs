@@ -30,8 +30,8 @@ namespace Microsoft.AspNetCore.Mvc.Filters
             PageContext pageContext,
             IList<IFilterMetadata> filters,
             HandlerMethodDescriptor handlerMethod,
-            object handlerInstance)
-            : base(pageContext, filters)
+            object handlerInstance
+        ) : base(pageContext, filters)
         {
             if (handlerInstance == null)
             {
@@ -80,7 +80,6 @@ namespace Microsoft.AspNetCore.Mvc.Filters
                     return _exception;
                 }
             }
-
             set
             {
                 _exceptionDispatchInfo = null;
@@ -95,7 +94,6 @@ namespace Microsoft.AspNetCore.Mvc.Filters
         public virtual ExceptionDispatchInfo ExceptionDispatchInfo
         {
             get => _exceptionDispatchInfo;
-
             set
             {
                 _exception = null;

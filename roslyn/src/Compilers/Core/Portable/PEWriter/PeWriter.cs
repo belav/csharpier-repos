@@ -28,9 +28,7 @@ namespace Microsoft.Cci
 {
     internal sealed class PeWritingException : Exception
     {
-        public PeWritingException(Exception inner)
-            : base(inner.Message, inner)
-        { }
+        public PeWritingException(Exception inner) : base(inner.Message, inner) { }
     }
 
     internal static class PeWriter
@@ -47,13 +45,21 @@ namespace Microsoft.Cci
             bool isDeterministic,
             bool emitTestCoverageData,
             RSAParameters? privateKeyOpt,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             // If PDB writer is given, we have to have PDB path.
             Debug.Assert(nativePdbWriterOpt == null || pdbPathOpt != null);
 
-            var mdWriter = FullMetadataWriter.Create(context, messageProvider, metadataOnly, isDeterministic,
-                emitTestCoverageData, getPortablePdbStreamOpt != null, cancellationToken);
+            var mdWriter = FullMetadataWriter.Create(
+                context,
+                messageProvider,
+                metadataOnly,
+                isDeterministic,
+                emitTestCoverageData,
+                getPortablePdbStreamOpt != null,
+                cancellationToken
+            );
 
             var properties = context.Module.SerializationProperties;
 
@@ -68,7 +74,8 @@ namespace Microsoft.Cci
             var mappedFieldDataBuilder = new BlobBuilder();
             var managedResourceBuilder = new BlobBuilder(1024);
 
-            Blob mvidFixup, mvidStringFixup;
+            Blob mvidFixup,
+                mvidStringFixup;
             mdWriter.BuildMetadataAndIL(
                 nativePdbWriterOpt,
                 ilBuilder,
@@ -76,7 +83,8 @@ namespace Microsoft.Cci
                 managedResourceBuilder,
                 pdbOptionsBlobReader,
                 out mvidFixup,
-                out mvidStringFixup);
+                out mvidStringFixup
+            );
 
             MethodDefinitionHandle entryPointHandle;
             MethodDefinitionHandle debugEntryPointHandle;
@@ -98,18 +106,24 @@ namespace Microsoft.Cci
                 {
                     // Dev12: If compiling to winmdobj, we need to add to PDB source spans of
                     //        all types and members for better error reporting by WinMDExp.
-                    nativePdbWriterOpt.WriteDefinitionLocations(mdWriter.Module.GetSymbolToLocationMap());
+                    nativePdbWriterOpt.WriteDefinitionLocations(
+                        mdWriter.Module.GetSymbolToLocationMap()
+                    );
                 }
                 else
                 {
 #if DEBUG
                     // validate that all definitions are writable
                     // if same scenario would happen in a winmdobj project
-                    nativePdbWriterOpt.AssertAllDefinitionsHaveTokens(mdWriter.Module.GetSymbolToLocationMap());
+                    nativePdbWriterOpt.AssertAllDefinitionsHaveTokens(
+                        mdWriter.Module.GetSymbolToLocationMap()
+                    );
 #endif
                 }
 
-                nativePdbWriterOpt.WriteRemainingDebugDocuments(mdWriter.Module.DebugDocumentsBuilder.DebugDocuments);
+                nativePdbWriterOpt.WriteRemainingDebugDocuments(
+                    mdWriter.Module.DebugDocumentsBuilder.DebugDocuments
+                );
             }
 
             Stream peStream = getPeStream();
@@ -145,11 +159,17 @@ namespace Microsoft.Cci
                 sizeOfStackReserve: properties.SizeOfStackReserve,
                 sizeOfStackCommit: properties.SizeOfStackCommit,
                 sizeOfHeapReserve: properties.SizeOfHeapReserve,
-                sizeOfHeapCommit: properties.SizeOfHeapCommit);
+                sizeOfHeapCommit: properties.SizeOfHeapCommit
+            );
 
-            var peIdProvider = isDeterministic ?
-                new Func<IEnumerable<Blob>, BlobContentId>(content => BlobContentId.FromHash(CryptographicHashProvider.ComputeSourceHash(content))) :
-                null;
+            var peIdProvider = isDeterministic
+                ? new Func<IEnumerable<Blob>, BlobContentId>(
+                      content =>
+                          BlobContentId.FromHash(
+                              CryptographicHashProvider.ComputeSourceHash(content)
+                          )
+                  )
+                : null;
 
             // We need to calculate the PDB checksum, so we may as well use the calculated hash for PDB ID regardless of whether deterministic build is requested.
             var portablePdbContentHash = default(ImmutableArray<byte>);
@@ -157,17 +177,33 @@ namespace Microsoft.Cci
             BlobBuilder portablePdbToEmbed = null;
             if (mdWriter.EmitPortableDebugMetadata)
             {
-                mdWriter.AddRemainingDebugDocuments(mdWriter.Module.DebugDocumentsBuilder.DebugDocuments);
+                mdWriter.AddRemainingDebugDocuments(
+                    mdWriter.Module.DebugDocumentsBuilder.DebugDocuments
+                );
 
                 // The algorithm must be specified for deterministic builds (checked earlier).
                 Debug.Assert(!isDeterministic || context.Module.PdbChecksumAlgorithm.Name != null);
 
-                var portablePdbIdProvider = (context.Module.PdbChecksumAlgorithm.Name != null) ?
-                    new Func<IEnumerable<Blob>, BlobContentId>(content => BlobContentId.FromHash(portablePdbContentHash = CryptographicHashProvider.ComputeHash(context.Module.PdbChecksumAlgorithm, content))) :
-                    null;
+                var portablePdbIdProvider =
+                    (context.Module.PdbChecksumAlgorithm.Name != null)
+                        ? new Func<IEnumerable<Blob>, BlobContentId>(
+                              content =>
+                                  BlobContentId.FromHash(
+                                      portablePdbContentHash =
+                                          CryptographicHashProvider.ComputeHash(
+                                              context.Module.PdbChecksumAlgorithm,
+                                              content
+                                          )
+                                  )
+                          )
+                        : null;
 
                 var portablePdbBlob = new BlobBuilder();
-                var portablePdbBuilder = mdWriter.GetPortablePdbBuilder(metadataRootBuilder.Sizes.RowCounts, debugEntryPointHandle, portablePdbIdProvider);
+                var portablePdbBuilder = mdWriter.GetPortablePdbBuilder(
+                    metadataRootBuilder.Sizes.RowCounts,
+                    debugEntryPointHandle,
+                    portablePdbIdProvider
+                );
                 pdbContentId = portablePdbBuilder.Serialize(portablePdbBlob);
                 portablePdbVersion = portablePdbBuilder.FormatVersion;
 
@@ -201,14 +237,21 @@ namespace Microsoft.Cci
                 if (pdbPathOpt != null)
                 {
                     string paddedPath = isDeterministic ? pdbPathOpt : PadPdbPath(pdbPathOpt);
-                    debugDirectoryBuilder.AddCodeViewEntry(paddedPath, pdbContentId, portablePdbVersion);
+                    debugDirectoryBuilder.AddCodeViewEntry(
+                        paddedPath,
+                        pdbContentId,
+                        portablePdbVersion
+                    );
 
                     if (!portablePdbContentHash.IsDefault)
                     {
-                        // Emit PDB Checksum entry for Portable and Embedded PDBs. The checksum is not as useful when the PDB is embedded, 
-                        // however it allows the client to efficiently validate a standalone Portable PDB that 
+                        // Emit PDB Checksum entry for Portable and Embedded PDBs. The checksum is not as useful when the PDB is embedded,
+                        // however it allows the client to efficiently validate a standalone Portable PDB that
                         // has been extracted from Embedded PDB and placed next to the PE file.
-                        debugDirectoryBuilder.AddPdbChecksumEntry(context.Module.PdbChecksumAlgorithm.Name, portablePdbContentHash);
+                        debugDirectoryBuilder.AddPdbChecksumEntry(
+                            context.Module.PdbChecksumAlgorithm.Name,
+                            portablePdbContentHash
+                        );
                     }
                 }
 
@@ -219,7 +262,10 @@ namespace Microsoft.Cci
 
                 if (portablePdbToEmbed != null)
                 {
-                    debugDirectoryBuilder.AddEmbeddedPortablePdbEntry(portablePdbToEmbed, portablePdbVersion);
+                    debugDirectoryBuilder.AddEmbeddedPortablePdbEntry(
+                        portablePdbToEmbed,
+                        portablePdbVersion
+                    );
                 }
             }
             else
@@ -242,7 +288,8 @@ namespace Microsoft.Cci
                 entryPointHandle,
                 corFlags,
                 peIdProvider,
-                metadataOnly && !context.IncludePrivateMembers);
+                metadataOnly && !context.IncludePrivateMembers
+            );
 
             var peBlob = new BlobBuilder();
             var peContentId = peBuilder.Serialize(peBlob, out Blob mvidSectionFixup);
@@ -277,14 +324,18 @@ namespace Microsoft.Cci
                     .Single();
             }
 
-            return (uint)s_calculateChecksumMethod.Invoke(null, new object[]
-            {
-                peBlob,
-                checksumBlob,
-            });
+            return (uint)s_calculateChecksumMethod.Invoke(
+                null,
+                new object[] { peBlob, checksumBlob, }
+            );
         }
 
-        private static void PatchModuleVersionIds(Blob guidFixup, Blob guidSectionFixup, Blob stringFixup, Guid mvid)
+        private static void PatchModuleVersionIds(
+            Blob guidFixup,
+            Blob guidSectionFixup,
+            Blob stringFixup,
+            Guid mvid
+        )
         {
             if (!guidFixup.IsDefault)
             {
@@ -314,10 +365,13 @@ namespace Microsoft.Cci
         private static string PadPdbPath(string path)
         {
             const int minLength = 260;
-            return path + new string('\0', Math.Max(0, minLength - Encoding.UTF8.GetByteCount(path) - 1));
+            return path
+                + new string('\0', Math.Max(0, minLength - Encoding.UTF8.GetByteCount(path) - 1));
         }
 
-        private static ResourceSectionBuilder CreateNativeResourceSectionSerializer(CommonPEModuleBuilder module)
+        private static ResourceSectionBuilder CreateNativeResourceSectionSerializer(
+            CommonPEModuleBuilder module
+        )
         {
             // Win32 resources are supplied to the compiler in one of two forms, .RES (the output of the resource compiler),
             // or .OBJ (the output of running cvtres.exe on a .RES file). A .RES file is parsed and processed into
@@ -360,7 +414,11 @@ namespace Microsoft.Cci
 
             protected override void Serialize(BlobBuilder builder, SectionLocation location)
             {
-                NativeResourceWriter.SerializeWin32Resources(builder, _resourceSection, location.RelativeVirtualAddress);
+                NativeResourceWriter.SerializeWin32Resources(
+                    builder,
+                    _resourceSection,
+                    location.RelativeVirtualAddress
+                );
             }
         }
 
@@ -376,7 +434,11 @@ namespace Microsoft.Cci
 
             protected override void Serialize(BlobBuilder builder, SectionLocation location)
             {
-                NativeResourceWriter.SerializeWin32Resources(builder, _resources, location.RelativeVirtualAddress);
+                NativeResourceWriter.SerializeWin32Resources(
+                    builder,
+                    _resources,
+                    location.RelativeVirtualAddress
+                );
             }
         }
 

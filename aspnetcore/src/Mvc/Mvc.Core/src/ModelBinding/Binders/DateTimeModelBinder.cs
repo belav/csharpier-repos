@@ -87,7 +87,9 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
                     modelState.TryAddModelError(
                         modelName,
                         metadata.ModelBindingMessageProvider.ValueMustNotBeNullAccessor(
-                            valueProviderResult.ToString()));
+                            valueProviderResult.ToString()
+                        )
+                    );
                 }
                 else
                 {

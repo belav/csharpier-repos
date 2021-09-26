@@ -20,12 +20,14 @@ internal static partial class Interop
             int exportPrivate,
             SafeCreateHandle cfExportPassphrase,
             out SafeCFDataHandle cfDataOut,
-            out int pOSStatus);
+            out int pOSStatus
+        );
 
         internal static SafeCFDataHandle SecKeyExportData(
             SafeSecKeyRefHandle? key,
             bool exportPrivate,
-            ReadOnlySpan<char> password)
+            ReadOnlySpan<char> password
+        )
         {
             SafeCreateHandle exportPassword = exportPrivate
                 ? CoreFoundation.CFStringCreateFromSpan(password)
@@ -42,8 +44,10 @@ internal static partial class Interop
                     exportPrivate ? 1 : 0,
                     exportPassword,
                     out cfData,
-                    out osStatus);
+                    out osStatus
+                );
             }
+
             finally
             {
                 if (exportPassword != s_nullExportString)
@@ -71,7 +75,8 @@ internal static partial class Interop
         internal static byte[] SecKeyExport(
             SafeSecKeyRefHandle? key,
             bool exportPrivate,
-            string password)
+            string password
+        )
         {
             using (SafeCFDataHandle cfData = SecKeyExportData(key, exportPrivate, password))
             {

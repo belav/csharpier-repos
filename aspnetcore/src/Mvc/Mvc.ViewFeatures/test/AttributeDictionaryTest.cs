@@ -28,7 +28,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 attributes,
                 kvp => Assert.Equal(new KeyValuePair<string, string>("one", "1"), kvp),
                 kvp => Assert.Equal(new KeyValuePair<string, string>("two", "2"), kvp),
-                kvp => Assert.Equal(new KeyValuePair<string, string>("zero", "0"), kvp));
+                kvp => Assert.Equal(new KeyValuePair<string, string>("zero", "0"), kvp)
+            );
         }
 
         [Fact]
@@ -48,7 +49,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 attributes,
                 kvp => Assert.Equal(new KeyValuePair<string, string>("one", "1"), kvp),
                 kvp => Assert.Equal(new KeyValuePair<string, string>("two", "2"), kvp),
-                kvp => Assert.Equal(new KeyValuePair<string, string>("zero", "0"), kvp));
+                kvp => Assert.Equal(new KeyValuePair<string, string>("zero", "0"), kvp)
+            );
         }
 
         [Fact]
@@ -172,7 +174,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 kvp => Assert.Equal(default(KeyValuePair<string, string>), kvp),
                 kvp => Assert.Equal(new KeyValuePair<string, string>("one", "1"), kvp),
                 kvp => Assert.Equal(new KeyValuePair<string, string>("two", "2"), kvp),
-                kvp => Assert.Equal(new KeyValuePair<string, string>("zero", "0"), kvp));
+                kvp => Assert.Equal(new KeyValuePair<string, string>("zero", "0"), kvp)
+            );
         }
 
         [Fact]
@@ -207,7 +210,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 keys,
                 key => Assert.Equal("one", key),
                 key => Assert.Equal("two", key),
-                key => Assert.Equal("zero", key));
+                key => Assert.Equal("zero", key)
+            );
         }
 
         [Fact]
@@ -229,7 +233,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             Assert.Collection(
                 attributes,
                 kvp => Assert.Equal(new KeyValuePair<string, string>("two", "2"), kvp),
-                kvp => Assert.Equal(new KeyValuePair<string, string>("zero", "0"), kvp));
+                kvp => Assert.Equal(new KeyValuePair<string, string>("zero", "0"), kvp)
+            );
         }
 
         [Fact]
@@ -252,7 +257,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 attributes,
                 kvp => Assert.Equal(new KeyValuePair<string, string>("one", "1"), kvp),
                 kvp => Assert.Equal(new KeyValuePair<string, string>("two", "2"), kvp),
-                kvp => Assert.Equal(new KeyValuePair<string, string>("zero", "0"), kvp));
+                kvp => Assert.Equal(new KeyValuePair<string, string>("zero", "0"), kvp)
+            );
         }
 
         [Fact]
@@ -274,7 +280,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             Assert.Collection(
                 attributes,
                 kvp => Assert.Equal(new KeyValuePair<string, string>("two", "2"), kvp),
-                kvp => Assert.Equal(new KeyValuePair<string, string>("zero", "0"), kvp));
+                kvp => Assert.Equal(new KeyValuePair<string, string>("zero", "0"), kvp)
+            );
         }
 
         [Fact]
@@ -297,7 +304,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 attributes,
                 kvp => Assert.Equal(new KeyValuePair<string, string>("one", "1"), kvp),
                 kvp => Assert.Equal(new KeyValuePair<string, string>("two", "2"), kvp),
-                kvp => Assert.Equal(new KeyValuePair<string, string>("zero", "0"), kvp));
+                kvp => Assert.Equal(new KeyValuePair<string, string>("zero", "0"), kvp)
+            );
         }
 
         [Fact]
@@ -335,7 +343,6 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             // Act
             var result = attributes.TryGetValue("nada", out value);
 
-
             // Assert
             Assert.False(result);
             Assert.Null(value);
@@ -360,7 +367,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 values,
                 key => Assert.Equal("1", key),
                 key => Assert.Equal("2", key),
-                key => Assert.Equal("0", key));
+                key => Assert.Equal("0", key)
+            );
         }
 
         [Fact]
@@ -413,7 +421,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 attributes,
                 kvp => Assert.Equal(new KeyValuePair<string, string>("one", "1!"), kvp),
                 kvp => Assert.Equal(new KeyValuePair<string, string>("two", "2"), kvp),
-                kvp => Assert.Equal(new KeyValuePair<string, string>("zero", "0"), kvp));
+                kvp => Assert.Equal(new KeyValuePair<string, string>("zero", "0"), kvp)
+            );
         }
 
         [Fact]
@@ -436,7 +445,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 kvp => Assert.Equal(new KeyValuePair<string, string>("exciting!", "1!"), kvp),
                 kvp => Assert.Equal(new KeyValuePair<string, string>("one", "1"), kvp),
                 kvp => Assert.Equal(new KeyValuePair<string, string>("two", "2"), kvp),
-                kvp => Assert.Equal(new KeyValuePair<string, string>("zero", "0"), kvp));
+                kvp => Assert.Equal(new KeyValuePair<string, string>("zero", "0"), kvp)
+            );
         }
 
         [Fact]
@@ -458,7 +468,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 attributes,
                 kvp => Assert.Equal(new KeyValuePair<string, string>("oNe", "1!"), kvp),
                 kvp => Assert.Equal(new KeyValuePair<string, string>("two", "2"), kvp),
-                kvp => Assert.Equal(new KeyValuePair<string, string>("zero", "0"), kvp));
+                kvp => Assert.Equal(new KeyValuePair<string, string>("zero", "0"), kvp)
+            );
         }
     }
 }

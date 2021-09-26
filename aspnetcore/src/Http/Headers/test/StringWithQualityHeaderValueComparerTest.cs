@@ -9,7 +9,10 @@ namespace Microsoft.Net.Http.Headers
 {
     public class StringWithQualityHeaderValueComparerTest
     {
-        public static TheoryData<string[], string[]> StringWithQualityHeaderValueComparerTestsBeforeAfterSortedValues
+        public static TheoryData<
+            string[],
+            string[]
+        > StringWithQualityHeaderValueComparerTestsBeforeAfterSortedValues
         {
             get
             {
@@ -51,12 +54,21 @@ namespace Microsoft.Net.Http.Headers
 
         [Theory]
         [MemberData(nameof(StringWithQualityHeaderValueComparerTestsBeforeAfterSortedValues))]
-        public void SortStringWithQualityHeaderValuesByQFactor_SortsCorrectly(IEnumerable<string> unsorted, IEnumerable<string> expectedSorted)
+        public void SortStringWithQualityHeaderValuesByQFactor_SortsCorrectly(
+            IEnumerable<string> unsorted,
+            IEnumerable<string> expectedSorted
+        )
         {
             var unsortedValues = StringWithQualityHeaderValue.ParseList(unsorted.ToList());
-            var expectedSortedValues = StringWithQualityHeaderValue.ParseList(expectedSorted.ToList());
+            var expectedSortedValues = StringWithQualityHeaderValue.ParseList(
+                expectedSorted.ToList()
+            );
 
-            var actualSorted = unsortedValues.OrderByDescending(k => k, StringWithQualityHeaderValueComparer.QualityComparer).ToList();
+            var actualSorted = unsortedValues.OrderByDescending(
+                    k => k,
+                    StringWithQualityHeaderValueComparer.QualityComparer
+                )
+                .ToList();
 
             Assert.True(expectedSortedValues.SequenceEqual(actualSorted));
         }

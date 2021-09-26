@@ -46,8 +46,9 @@ namespace System.Text.Json.Node.Tests
         public static void QuotedNumbers_Deserialize()
         {
             var options = new JsonSerializerOptions();
-            options.NumberHandling = JsonNumberHandling.AllowReadingFromString |
-                JsonNumberHandling.AllowNamedFloatingPointLiterals;
+            options.NumberHandling =
+                JsonNumberHandling.AllowReadingFromString
+                | JsonNumberHandling.AllowNamedFloatingPointLiterals;
 
             JsonNode node = JsonSerializer.Deserialize<JsonNode>("\"42\"", options);
             Assert.IsAssignableFrom<JsonValue>(node);
@@ -58,8 +59,14 @@ namespace System.Text.Json.Node.Tests
 
             node = JsonSerializer.Deserialize<JsonNode>("\"NaN\"", options);
             Assert.IsAssignableFrom<JsonValue>(node);
-            Assert.Equal(double.NaN, JsonSerializer.Deserialize<double>(node.ToJsonString(), options));
-            Assert.Equal(float.NaN, JsonSerializer.Deserialize<float>(node.ToJsonString(), options));
+            Assert.Equal(
+                double.NaN,
+                JsonSerializer.Deserialize<double>(node.ToJsonString(), options)
+            );
+            Assert.Equal(
+                float.NaN,
+                JsonSerializer.Deserialize<float>(node.ToJsonString(), options)
+            );
         }
 
         [Fact]
@@ -249,7 +256,9 @@ namespace System.Text.Json.Node.Tests
         public static void FromElement_WrongNodeTypeThrows(string json)
         {
             using (JsonDocument document = JsonDocument.Parse(json))
-                Assert.Throws<InvalidOperationException>(() => JsonValue.Create(document.RootElement));
+                Assert.Throws<InvalidOperationException>(
+                    () => JsonValue.Create(document.RootElement)
+                );
         }
 
         [Fact]

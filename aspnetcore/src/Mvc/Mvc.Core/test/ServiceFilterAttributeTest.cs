@@ -15,8 +15,7 @@ namespace Microsoft.AspNetCore.Mvc
         {
             // Arrange
             var expected = new TestFilter();
-            var serviceProvider = new ServiceCollection()
-                .AddSingleton(expected)
+            var serviceProvider = new ServiceCollection().AddSingleton(expected)
                 .BuildServiceProvider();
 
             var serviceFilter = new ServiceFilterAttribute(typeof(TestFilter));
@@ -32,8 +31,7 @@ namespace Microsoft.AspNetCore.Mvc
         public void CreateService_UnwrapsFilterFactory()
         {
             // Arrange
-            var serviceProvider = new ServiceCollection()
-                .AddSingleton(new TestFilterFactory())
+            var serviceProvider = new ServiceCollection().AddSingleton(new TestFilterFactory())
                 .BuildServiceProvider();
 
             var serviceFilter = new ServiceFilterAttribute(typeof(TestFilterFactory));

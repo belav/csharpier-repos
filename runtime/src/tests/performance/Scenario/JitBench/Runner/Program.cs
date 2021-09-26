@@ -41,16 +41,18 @@ namespace JitBench
                 Iterations = 11
             };
 
-            if(options.OutputDirectory != null)
+            if (options.OutputDirectory != null)
             {
                 run.OutputDir = options.OutputDirectory;
             }
 
-            if(options.CoreCLRBinaryDir != null)
+            if (options.CoreCLRBinaryDir != null)
             {
-                if(!Directory.Exists(options.CoreCLRBinaryDir))
+                if (!Directory.Exists(options.CoreCLRBinaryDir))
                 {
-                    throw new Exception("coreclr-bin-dir directory " + options.CoreCLRBinaryDir + " does not exist");
+                    throw new Exception(
+                        "coreclr-bin-dir directory " + options.CoreCLRBinaryDir + " does not exist"
+                    );
                 }
                 run.PrivateCoreCLRBinDir = options.CoreCLRBinaryDir;
             }
@@ -61,7 +63,9 @@ namespace JitBench
                 {
                     if (!Directory.Exists(coreRootEnv))
                     {
-                        throw new Exception("CORE_ROOT directory " + coreRootEnv + " does not exist");
+                        throw new Exception(
+                            "CORE_ROOT directory " + coreRootEnv + " does not exist"
+                        );
                     }
                     run.PrivateCoreCLRBinDir = coreRootEnv;
                 }
@@ -69,7 +73,7 @@ namespace JitBench
                 {
                     //maybe we've got private coreclr binaries in our current directory? Use those if so.
                     string currentDirectory = Directory.GetCurrentDirectory();
-                    if(File.Exists(Path.Combine(currentDirectory, "System.Private.CoreLib.dll")))
+                    if (File.Exists(Path.Combine(currentDirectory, "System.Private.CoreLib.dll")))
                     {
                         run.PrivateCoreCLRBinDir = currentDirectory;
                     }
@@ -80,28 +84,31 @@ namespace JitBench
                 }
             }
 
-            if(options.DotnetFrameworkVersion != null)
+            if (options.DotnetFrameworkVersion != null)
             {
                 run.DotnetFrameworkVersion = options.DotnetFrameworkVersion;
             }
 
-            if(options.DotnetSdkVersion != null)
+            if (options.DotnetSdkVersion != null)
             {
                 run.DotnetSdkVersion = options.DotnetSdkVersion;
             }
             else
             {
-                run.DotnetSdkVersion = DotNetSetup.GetCompatibleDefaultSDKVersionForRuntimeVersion(run.DotnetFrameworkVersion);
+                run.DotnetSdkVersion = DotNetSetup.GetCompatibleDefaultSDKVersionForRuntimeVersion(
+                    run.DotnetFrameworkVersion
+                );
             }
-            
 
-            if(options.TargetArchitecture != null)
+            if (options.TargetArchitecture != null)
             {
-                if(options.TargetArchitecture.Equals("x64", StringComparison.OrdinalIgnoreCase))
+                if (options.TargetArchitecture.Equals("x64", StringComparison.OrdinalIgnoreCase))
                 {
                     run.Architecture = Architecture.X64;
                 }
-                else if(options.TargetArchitecture.Equals("x86", StringComparison.OrdinalIgnoreCase))
+                else if (
+                    options.TargetArchitecture.Equals("x86", StringComparison.OrdinalIgnoreCase)
+                )
                 {
                     run.Architecture = Architecture.X86;
                 }
@@ -115,7 +122,7 @@ namespace JitBench
                 run.Architecture = RuntimeInformation.ProcessArchitecture;
             }
 
-            if(options.Iterations > 0)
+            if (options.Iterations > 0)
             {
                 run.Iterations = (int)options.Iterations;
             }
@@ -137,20 +144,25 @@ namespace JitBench
 
         static IEnumerable<Benchmark> GetBenchmarkSelection(CommandLineOptions options)
         {
-            if(options.BenchmarkName == null)
+            if (options.BenchmarkName == null)
             {
                 return GetAllBenchmarks();
             }
             else
             {
                 string[] names = options.BenchmarkName.Split(';');
-                return GetAllBenchmarks().Where(b => names.Any(n => n.Equals(b.Name, StringComparison.OrdinalIgnoreCase)));
+                return GetAllBenchmarks()
+                    .Where(
+                        b => names.Any(n => n.Equals(b.Name, StringComparison.OrdinalIgnoreCase))
+                    );
             }
         }
 
         static IEnumerable<Benchmark> GetAllBenchmarks()
         {
-            IEnumerable<Type> benchmarkTypes = typeof(Program).GetTypeInfo().Assembly.GetTypes().Where(t => typeof(Benchmark).IsAssignableFrom(t));
+            IEnumerable<Type> benchmarkTypes = typeof(Program).GetTypeInfo()
+                .Assembly.GetTypes()
+                .Where(t => typeof(Benchmark).IsAssignableFrom(t));
             foreach (Type bt in benchmarkTypes)
             {
                 ConstructorInfo c = bt.GetConstructor(Type.EmptyTypes);
@@ -161,14 +173,16 @@ namespace JitBench
             }
         }
 
-        static IEnumerable<BenchmarkConfiguration> GetBenchmarkConfigurations(CommandLineOptions options)
+        static IEnumerable<BenchmarkConfiguration> GetBenchmarkConfigurations(
+            CommandLineOptions options
+        )
         {
             string tieredEnv = Environment.GetEnvironmentVariable("COMPlus_TieredCompilation");
             string minoptsEnv = Environment.GetEnvironmentVariable("COMPlus_JitMinopts");
             string r2rEnv = Environment.GetEnvironmentVariable("COMPlus_ReadyToRun");
             string noNgenEnv = Environment.GetEnvironmentVariable("COMPlus_ZapDisable");
             BenchmarkConfiguration envConfig = new BenchmarkConfiguration();
-            if(tieredEnv != null && tieredEnv == "0")
+            if (tieredEnv != null && tieredEnv == "0")
             {
                 envConfig.WithoutTiering();
             }
@@ -176,11 +190,11 @@ namespace JitBench
             {
                 envConfig.WithMinOpts();
             }
-            if(r2rEnv != null && r2rEnv == "0")
+            if (r2rEnv != null && r2rEnv == "0")
             {
                 envConfig.WithNoR2R();
             }
-            if(noNgenEnv != null && noNgenEnv != "0")
+            if (noNgenEnv != null && noNgenEnv != "0")
             {
                 envConfig.WithNoNgen();
             }
@@ -188,7 +202,9 @@ namespace JitBench
             string[] configNames = options.Configs.Distinct().ToArray();
             if (!envConfig.IsDefault && configNames.Length != 0)
             {
-                throw new Exception("ERROR: Benchmarks cannot be configured via both environment variables and the --configs command line option at the same time. Use one or the other.");
+                throw new Exception(
+                    "ERROR: Benchmarks cannot be configured via both environment variables and the --configs command line option at the same time. Use one or the other."
+                );
             }
             if (configNames.Length == 0)
             {
@@ -216,10 +232,13 @@ namespace JitBench
                 new BenchmarkConfiguration().WithNoNgen().WithoutTiering(),
                 new BenchmarkConfiguration().WithoutTiering().WithNoNgen()
             };
-            foreach(string configName in configNames)
+            foreach (string configName in configNames)
             {
-                BenchmarkConfiguration config = possibleConfigs.Where(c => c.Name.Equals(configName, StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
-                if(config == null)
+                BenchmarkConfiguration config = possibleConfigs.Where(
+                        c => c.Name.Equals(configName, StringComparison.OrdinalIgnoreCase)
+                    )
+                    .FirstOrDefault();
+                if (config == null)
                 {
                     throw new ArgumentException("Unrecognized config value: " + configName);
                 }

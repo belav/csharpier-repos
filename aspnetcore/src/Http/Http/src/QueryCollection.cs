@@ -21,7 +21,9 @@ namespace Microsoft.AspNetCore.Http
         private static readonly StringValues[] EmptyValues = Array.Empty<StringValues>();
         private static readonly Enumerator EmptyEnumerator = new Enumerator();
         // Pre-box
-        private static readonly IEnumerator<KeyValuePair<string, StringValues>> EmptyIEnumeratorType = EmptyEnumerator;
+        private static readonly IEnumerator<
+            KeyValuePair<string, StringValues>
+        > EmptyIEnumeratorType = EmptyEnumerator;
         private static readonly IEnumerator EmptyIEnumerator = EmptyEnumerator;
 
         private Dictionary<string, StringValues>? Store { get; }
@@ -29,9 +31,7 @@ namespace Microsoft.AspNetCore.Http
         /// <summary>
         /// Initializes a new instance of <see cref="QueryCollection"/>.
         /// </summary>
-        public QueryCollection()
-        {
-        }
+        public QueryCollection() { }
 
         /// <summary>
         /// Initializes a new instance of <see cref="QueryCollection"/>.
@@ -57,7 +57,10 @@ namespace Microsoft.AspNetCore.Http
         /// <param name="capacity">The initial number of query items that this instance can contain.</param>
         public QueryCollection(int capacity)
         {
-            Store = new Dictionary<string, StringValues>(capacity, StringComparer.OrdinalIgnoreCase);
+            Store = new Dictionary<string, StringValues>(
+                capacity,
+                StringComparer.OrdinalIgnoreCase
+            );
         }
 
         /// <summary>
@@ -161,7 +164,9 @@ namespace Microsoft.AspNetCore.Http
         /// Returns an enumerator that iterates through a collection.
         /// </summary>
         /// <returns>An <see cref="IEnumerator{T}" /> object that can be used to iterate through the collection.</returns>
-        IEnumerator<KeyValuePair<string, StringValues>> IEnumerable<KeyValuePair<string, StringValues>>.GetEnumerator()
+        IEnumerator<KeyValuePair<string, StringValues>> IEnumerable<
+            KeyValuePair<string, StringValues>
+        >.GetEnumerator()
         {
             if (Store == null || Store.Count == 0)
             {
@@ -230,16 +235,11 @@ namespace Microsoft.AspNetCore.Http
             }
 
             /// <inheritdoc />
-            public void Dispose()
-            {
-            }
+            public void Dispose() { }
 
             object IEnumerator.Current
             {
-                get
-                {
-                    return Current;
-                }
+                get { return Current; }
             }
 
             void IEnumerator.Reset()

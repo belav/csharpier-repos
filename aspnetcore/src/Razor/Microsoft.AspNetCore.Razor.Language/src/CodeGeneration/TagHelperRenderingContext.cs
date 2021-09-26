@@ -17,7 +17,9 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
             {
                 if (_renderedBoundAttributes == null)
                 {
-                    _renderedBoundAttributes = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+                    _renderedBoundAttributes = new Dictionary<string, string>(
+                        StringComparer.OrdinalIgnoreCase
+                    );
                 }
 
                 return _renderedBoundAttributes;

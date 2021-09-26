@@ -18,7 +18,11 @@ namespace Microsoft.AspNetCore.SignalR.Tests
 #endif
     static class HubConnectionContextUtils
     {
-        public static HubConnectionContext Create(ConnectionContext connection, IHubProtocol protocol = null, string userIdentifier = null)
+        public static HubConnectionContext Create(
+            ConnectionContext connection,
+            IHubProtocol protocol = null,
+            string userIdentifier = null
+        )
         {
             var contextOptions = new HubConnectionContextOptions()
             {
@@ -40,21 +44,28 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                 ClientTimeoutInterval = TimeSpan.FromSeconds(15),
                 StreamBufferCapacity = 10,
             };
-            return new MockHubConnectionContext(connection, contextOptions, NullLoggerFactory.Instance);
+            return new MockHubConnectionContext(
+                connection,
+                contextOptions,
+                NullLoggerFactory.Instance
+            );
         }
 
         public class MockHubConnectionContext : HubConnectionContext
         {
-            public MockHubConnectionContext(ConnectionContext connectionContext, HubConnectionContextOptions contextOptions, ILoggerFactory loggerFactory)
-                : base(connectionContext, contextOptions, loggerFactory)
-            {
-            }
+            public MockHubConnectionContext(
+                ConnectionContext connectionContext,
+                HubConnectionContextOptions contextOptions,
+                ILoggerFactory loggerFactory
+            ) : base(connectionContext, contextOptions, loggerFactory) { }
 
-            public override ValueTask WriteAsync(HubMessage message, CancellationToken cancellationToken = default)
+            public override ValueTask WriteAsync(
+                HubMessage message,
+                CancellationToken cancellationToken = default
+            )
             {
                 throw new Exception();
             }
         }
     }
-
 }

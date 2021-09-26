@@ -44,8 +44,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.ValueGeneration.Internal
             ISqlServerSequenceValueGeneratorFactory sequenceFactory,
             ISqlServerConnection connection,
             IRawSqlCommandBuilder rawSqlCommandBuilder,
-            IRelationalCommandDiagnosticsLogger commandLogger)
-            : base(dependencies)
+            IRelationalCommandDiagnosticsLogger commandLogger
+        ) : base(dependencies)
         {
             _sequenceFactory = sequenceFactory;
             _connection = connection;
@@ -59,8 +59,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.ValueGeneration.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public new virtual ISqlServerValueGeneratorCache Cache
-            => (ISqlServerValueGeneratorCache)base.Cache;
+        public new virtual ISqlServerValueGeneratorCache Cache =>
+            (ISqlServerValueGeneratorCache)base.Cache;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -73,15 +73,18 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.ValueGeneration.Internal
             Check.NotNull(property, nameof(property));
             Check.NotNull(entityType, nameof(entityType));
 
-            return property.GetValueGeneratorFactory() == null
-                && property.GetValueGenerationStrategy() == SqlServerValueGenerationStrategy.SequenceHiLo
-                    ? _sequenceFactory.Create(
-                        property,
-                        Cache.GetOrAddSequenceState(property, _connection),
-                        _connection,
-                        _rawSqlCommandBuilder,
-                        _commandLogger)
-                    : base.Select(property, entityType);
+            return
+                property.GetValueGeneratorFactory() == null
+                && property.GetValueGenerationStrategy()
+                    == SqlServerValueGenerationStrategy.SequenceHiLo
+              ? _sequenceFactory.Create(
+                    property,
+                    Cache.GetOrAddSequenceState(property, _connection),
+                    _connection,
+                    _rawSqlCommandBuilder,
+                    _commandLogger
+                )
+              : base.Select(property, entityType);
         }
 
         /// <summary>
@@ -96,10 +99,11 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.ValueGeneration.Internal
             Check.NotNull(entityType, nameof(entityType));
 
             return property.ClrType.UnwrapNullableType() == typeof(Guid)
-                ? property.ValueGenerated == ValueGenerated.Never || property.GetDefaultValueSql() != null
-                    ? (ValueGenerator)new TemporaryGuidValueGenerator()
-                    : new SequentialGuidValueGenerator()
-                : base.Create(property, entityType);
+              ? property.ValueGenerated == ValueGenerated.Never
+                || property.GetDefaultValueSql() != null
+                  ? (ValueGenerator)new TemporaryGuidValueGenerator()
+                  : new SequentialGuidValueGenerator()
+              : base.Create(property, entityType);
         }
     }
 }

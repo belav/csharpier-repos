@@ -64,10 +64,12 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
         /// <param name="keyManagementOptions">The <see cref="IOptions{KeyManagementOptions}"/> instance that provides the configuration.</param>
         /// <param name="activator">The <see cref="IActivator"/>.</param>
 #pragma warning disable PUB0001 // Pubternal type IActivator in public API
-        public XmlKeyManager(IOptions<KeyManagementOptions> keyManagementOptions, IActivator activator)
+        public XmlKeyManager(
+            IOptions<KeyManagementOptions> keyManagementOptions,
+            IActivator activator
+        )
 #pragma warning restore PUB0001 // Pubternal type IActivator in public API
-            : this(keyManagementOptions, activator, NullLoggerFactory.Instance)
-        { }
+            : this(keyManagementOptions, activator, NullLoggerFactory.Instance) { }
 
         /// <summary>
         /// Creates an <see cref="XmlKeyManager"/>.
@@ -76,20 +78,32 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
         /// <param name="activator">The <see cref="IActivator"/>.</param>
         /// <param name="loggerFactory">The <see cref="ILoggerFactory"/>.</param>
 #pragma warning disable PUB0001 // Pubternal type IActivator in public API
-        public XmlKeyManager(IOptions<KeyManagementOptions> keyManagementOptions, IActivator activator, ILoggerFactory loggerFactory)
+        public XmlKeyManager(
+            IOptions<KeyManagementOptions> keyManagementOptions,
+            IActivator activator,
+            ILoggerFactory loggerFactory
+        )
 #pragma warning restore PUB0001 // Pubternal type IActivator in public API
-            : this(keyManagementOptions, activator, loggerFactory, DefaultKeyStorageDirectories.Instance)
-        { }
+            : this(
+                keyManagementOptions,
+                activator,
+                loggerFactory,
+                DefaultKeyStorageDirectories.Instance
+            ) { }
 
         internal XmlKeyManager(
             IOptions<KeyManagementOptions> keyManagementOptions,
             IActivator activator,
             ILoggerFactory loggerFactory,
-            IDefaultKeyStorageDirectories keyStorageDirectories)
+            IDefaultKeyStorageDirectories keyStorageDirectories
+        )
         {
-            _loggerFactory = loggerFactory ?? throw new ArgumentNullException(nameof(loggerFactory));
+            _loggerFactory =
+                loggerFactory ?? throw new ArgumentNullException(nameof(loggerFactory));
             _logger = _loggerFactory.CreateLogger<XmlKeyManager>();
-            _keyStorageDirectories = keyStorageDirectories ?? throw new ArgumentNullException(nameof(keyStorageDirectories));
+            _keyStorageDirectories =
+                keyStorageDirectories
+                ?? throw new ArgumentNullException(nameof(keyStorageDirectories));
 
             var keyRepository = keyManagementOptions.Value.XmlRepository;
             var keyEncryptor = keyManagementOptions.Value.XmlEncryptor;
@@ -98,7 +112,11 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
                 if (keyEncryptor != null)
                 {
                     throw new InvalidOperationException(
-                        Resources.FormatXmlKeyManager_IXmlRepositoryNotFound(nameof(IXmlRepository), nameof(IXmlEncryptor)));
+                        Resources.FormatXmlKeyManager_IXmlRepositoryNotFound(
+                            nameof(IXmlRepository),
+                            nameof(IXmlEncryptor)
+                        )
+                    );
                 }
                 else
                 {
@@ -111,7 +129,8 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
             KeyRepository = keyRepository;
             KeyEncryptor = keyEncryptor;
 
-            _authenticatedEncryptorConfiguration = keyManagementOptions.Value.AuthenticatedEncryptorConfiguration!;
+            _authenticatedEncryptorConfiguration =
+                keyManagementOptions.Value.AuthenticatedEncryptorConfiguration!;
 
             var escrowSinks = keyManagementOptions.Value.KeyEscrowSinks;
             _keyEscrowSink = escrowSinks.Count > 0 ? new AggregateKeyEscrowSink(escrowSinks) : null;
@@ -126,8 +145,8 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
             IOptions<KeyManagementOptions> keyManagementOptions,
             IActivator activator,
             ILoggerFactory loggerFactory,
-            IInternalXmlKeyManager internalXmlKeyManager)
-            : this(keyManagementOptions, activator, loggerFactory)
+            IInternalXmlKeyManager internalXmlKeyManager
+        ) : this(keyManagementOptions, activator, loggerFactory)
         {
             _internalKeyManager = internalXmlKeyManager;
         }
@@ -143,13 +162,17 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
                 keyId: Guid.NewGuid(),
                 creationDate: DateTimeOffset.UtcNow,
                 activationDate: activationDate,
-                expirationDate: expirationDate);
+                expirationDate: expirationDate
+            );
         }
 
         private static string DateTimeOffsetToFilenameSafeString(DateTimeOffset dateTime)
         {
             // similar to the XML format for dates, but with punctuation stripped
-            return dateTime.UtcDateTime.ToString("yyyyMMddTHHmmssFFFFFFFZ", CultureInfo.InvariantCulture);
+            return dateTime.UtcDateTime.ToString(
+                "yyyyMMddTHHmmssFFFFFFFZ",
+                CultureInfo.InvariantCulture
+            );
         }
 
         /// <inheritdoc/>
@@ -194,7 +217,10 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
                     {
                         // all keys as of a certain date were revoked
                         DateTimeOffset thisMassRevocationDate = (DateTimeOffset)revocationInfo;
-                        if (!mostRecentMassRevocationDate.HasValue || mostRecentMassRevocationDate < thisMassRevocationDate)
+                        if (
+                            !mostRecentMassRevocationDate.HasValue
+                            || mostRecentMassRevocationDate < thisMassRevocationDate
+                        )
                         {
                             mostRecentMassRevocationDate = thisMassRevocationDate;
                         }
@@ -250,9 +276,16 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
         /// <inheritdoc/>
         public CancellationToken GetCacheExpirationToken()
         {
-            Debug.Assert(_cacheExpirationTokenSource != null, $"{nameof(TriggerAndResetCacheExpirationToken)} must have been called first.");
+            Debug.Assert(
+                _cacheExpirationTokenSource != null,
+                $"{nameof(TriggerAndResetCacheExpirationToken)} must have been called first."
+            );
 
-            return Interlocked.CompareExchange<CancellationTokenSource?>(ref _cacheExpirationTokenSource, null, null).Token;
+            return Interlocked.CompareExchange<CancellationTokenSource?>(
+                ref _cacheExpirationTokenSource,
+                null,
+                null
+            ).Token;
         }
 
         private KeyBase? ProcessKeyElement(XElement keyElement)
@@ -263,9 +296,15 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
             {
                 // Read metadata and prepare the key for deferred instantiation
                 Guid keyId = (Guid)keyElement.Attribute(IdAttributeName)!;
-                DateTimeOffset creationDate = (DateTimeOffset)keyElement.Element(CreationDateElementName)!;
-                DateTimeOffset activationDate = (DateTimeOffset)keyElement.Element(ActivationDateElementName)!;
-                DateTimeOffset expirationDate = (DateTimeOffset)keyElement.Element(ExpirationDateElementName)!;
+                DateTimeOffset creationDate = (DateTimeOffset)keyElement.Element(
+                    CreationDateElementName
+                )!;
+                DateTimeOffset activationDate = (DateTimeOffset)keyElement.Element(
+                    ActivationDateElementName
+                )!;
+                DateTimeOffset expirationDate = (DateTimeOffset)keyElement.Element(
+                    ExpirationDateElementName
+                )!;
 
                 _logger.FoundKey(keyId);
 
@@ -276,7 +315,8 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
                     expirationDate: expirationDate,
                     keyManager: this,
                     keyElement: keyElement,
-                    encryptorFactories: _encryptorFactories);
+                    encryptorFactories: _encryptorFactories
+                );
             }
             catch (Exception ex)
             {
@@ -294,11 +334,15 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
 
             try
             {
-                string keyIdAsString = (string)revocationElement.Element(KeyElementName)!.Attribute(IdAttributeName)!;
+                string keyIdAsString = (string)revocationElement.Element(KeyElementName)!.Attribute(
+                    IdAttributeName
+                )!;
                 if (keyIdAsString == RevokeAllKeysValue)
                 {
                     // this is a mass revocation of all keys as of the specified revocation date
-                    DateTimeOffset massRevocationDate = (DateTimeOffset)revocationElement.Element(RevocationDateElementName)!;
+                    DateTimeOffset massRevocationDate = (DateTimeOffset)revocationElement.Element(
+                        RevocationDateElementName
+                    )!;
                     _logger.FoundRevocationOfAllKeysCreatedPriorTo(massRevocationDate);
                     return massRevocationDate;
                 }
@@ -331,16 +375,18 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
 
             _logger.RevokingAllKeysAsOfForReason(revocationDate, reason);
 
-            var revocationElement = new XElement(RevocationElementName,
+            var revocationElement = new XElement(
+                RevocationElementName,
                 new XAttribute(VersionAttributeName, 1),
                 new XElement(RevocationDateElementName, revocationDate),
                 new XComment(" All keys created before the revocation date are revoked. "),
-                new XElement(KeyElementName,
-                    new XAttribute(IdAttributeName, RevokeAllKeysValue)),
-                new XElement(ReasonElementName, reason));
+                new XElement(KeyElementName, new XAttribute(IdAttributeName, RevokeAllKeysValue)),
+                new XElement(ReasonElementName, reason)
+            );
 
             // Persist it to the underlying repository and trigger the cancellation token
-            string friendlyName = "revocation-" + DateTimeOffsetToFilenameSafeString(revocationDate);
+            string friendlyName =
+                "revocation-" + DateTimeOffsetToFilenameSafeString(revocationDate);
             KeyRepository.StoreElement(revocationElement, friendlyName);
             TriggerAndResetCacheExpirationToken();
         }
@@ -351,17 +397,24 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
             _internalKeyManager.RevokeSingleKey(
                 keyId: keyId,
                 revocationDate: DateTimeOffset.UtcNow,
-                reason: reason);
+                reason: reason
+            );
         }
 
-        private void TriggerAndResetCacheExpirationToken([CallerMemberName] string? opName = null, bool suppressLogging = false)
+        private void TriggerAndResetCacheExpirationToken(
+            [CallerMemberName] string? opName = null,
+            bool suppressLogging = false
+        )
         {
             if (!suppressLogging)
             {
                 _logger.KeyCacheExpirationTokenTriggeredByOperation(opName!);
             }
 
-            Interlocked.Exchange(ref _cacheExpirationTokenSource, new CancellationTokenSource())?.Cancel();
+            Interlocked.Exchange(
+                ref _cacheExpirationTokenSource,
+                new CancellationTokenSource()
+            )?.Cancel();
         }
 
         private void WriteKeyDeserializationErrorToLog(Exception error, XElement keyElement)
@@ -376,10 +429,14 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
 
             // write full <key> element
             _logger.AnExceptionOccurredWhileProcessingElementDebug(keyElement, error);
-
         }
 
-        IKey IInternalXmlKeyManager.CreateNewKey(Guid keyId, DateTimeOffset creationDate, DateTimeOffset activationDate, DateTimeOffset expirationDate)
+        IKey IInternalXmlKeyManager.CreateNewKey(
+            Guid keyId,
+            DateTimeOffset creationDate,
+            DateTimeOffset activationDate,
+            DateTimeOffset expirationDate
+        )
         {
             // <key id="{guid}" version="1">
             //   <creationDate>...</creationDate>
@@ -392,22 +449,35 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
 
             _logger.CreatingKey(keyId, creationDate, activationDate, expirationDate);
 
-            var newDescriptor = _authenticatedEncryptorConfiguration.CreateNewDescriptor()
-                ?? CryptoUtil.Fail<IAuthenticatedEncryptorDescriptor>("CreateNewDescriptor returned null.");
+            var newDescriptor =
+                _authenticatedEncryptorConfiguration.CreateNewDescriptor()
+                ?? CryptoUtil.Fail<IAuthenticatedEncryptorDescriptor>(
+                    "CreateNewDescriptor returned null."
+                );
             var descriptorXmlInfo = newDescriptor.ExportToXml();
 
-            _logger.DescriptorDeserializerTypeForKeyIs(keyId, descriptorXmlInfo.DeserializerType.AssemblyQualifiedName!);
+            _logger.DescriptorDeserializerTypeForKeyIs(
+                keyId,
+                descriptorXmlInfo.DeserializerType.AssemblyQualifiedName!
+            );
 
             // build the <key> element
-            var keyElement = new XElement(KeyElementName,
+            var keyElement = new XElement(
+                KeyElementName,
                 new XAttribute(IdAttributeName, keyId),
                 new XAttribute(VersionAttributeName, 1),
                 new XElement(CreationDateElementName, creationDate),
                 new XElement(ActivationDateElementName, activationDate),
                 new XElement(ExpirationDateElementName, expirationDate),
-                new XElement(DescriptorElementName,
-                    new XAttribute(DeserializerTypeAttributeName, descriptorXmlInfo.DeserializerType.AssemblyQualifiedName!),
-                    descriptorXmlInfo.SerializedDescriptorElement));
+                new XElement(
+                    DescriptorElementName,
+                    new XAttribute(
+                        DeserializerTypeAttributeName,
+                        descriptorXmlInfo.DeserializerType.AssemblyQualifiedName!
+                    ),
+                    descriptorXmlInfo.SerializedDescriptorElement
+                )
+            );
 
             // If key escrow policy is in effect, write the *unencrypted* key now.
             if (_keyEscrowSink != null)
@@ -425,7 +495,8 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
             {
                 _logger.NoXMLEncryptorConfiguredKeyMayBePersistedToStorageInUnencryptedForm(keyId);
             }
-            var possiblyEncryptedKeyElement = KeyEncryptor?.EncryptIfNecessary(keyElement) ?? keyElement;
+            var possiblyEncryptedKeyElement =
+                KeyEncryptor?.EncryptIfNecessary(keyElement) ?? keyElement;
 
             // Persist it to the underlying repository and trigger the cancellation token.
             var friendlyName = string.Format(CultureInfo.InvariantCulture, "key-{0:D}", keyId);
@@ -439,23 +510,38 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
                 activationDate: activationDate,
                 expirationDate: expirationDate,
                 descriptor: newDescriptor,
-                encryptorFactories: _encryptorFactories);
+                encryptorFactories: _encryptorFactories
+            );
         }
 
-        IAuthenticatedEncryptorDescriptor IInternalXmlKeyManager.DeserializeDescriptorFromKeyElement(XElement keyElement)
+        IAuthenticatedEncryptorDescriptor IInternalXmlKeyManager.DeserializeDescriptorFromKeyElement(
+            XElement keyElement
+        )
         {
             try
             {
                 // Figure out who will be deserializing this
                 var descriptorElement = keyElement.Element(DescriptorElementName);
-                string descriptorDeserializerTypeName = (string)descriptorElement!.Attribute(DeserializerTypeAttributeName)!;
+                string descriptorDeserializerTypeName = (string)descriptorElement!.Attribute(
+                    DeserializerTypeAttributeName
+                )!;
 
                 // Decrypt the descriptor element and pass it to the descriptor for consumption
-                var unencryptedInputToDeserializer = descriptorElement.Elements().Single().DecryptElement(_activator);
-                var deserializerInstance = _activator.CreateInstance<IAuthenticatedEncryptorDescriptorDeserializer>(descriptorDeserializerTypeName);
-                var descriptorInstance = deserializerInstance.ImportFromXml(unencryptedInputToDeserializer);
+                var unencryptedInputToDeserializer = descriptorElement.Elements()
+                    .Single()
+                    .DecryptElement(_activator);
+                var deserializerInstance =
+                    _activator.CreateInstance<IAuthenticatedEncryptorDescriptorDeserializer>(
+                        descriptorDeserializerTypeName
+                    );
+                var descriptorInstance = deserializerInstance.ImportFromXml(
+                    unencryptedInputToDeserializer
+                );
 
-                return descriptorInstance ?? CryptoUtil.Fail<IAuthenticatedEncryptorDescriptor>("ImportFromXml returned null.");
+                return descriptorInstance
+                    ?? CryptoUtil.Fail<IAuthenticatedEncryptorDescriptor>(
+                        "ImportFromXml returned null."
+                    );
             }
             catch (Exception ex)
             {
@@ -464,7 +550,11 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
             }
         }
 
-        void IInternalXmlKeyManager.RevokeSingleKey(Guid keyId, DateTimeOffset revocationDate, string? reason)
+        void IInternalXmlKeyManager.RevokeSingleKey(
+            Guid keyId,
+            DateTimeOffset revocationDate,
+            string? reason
+        )
         {
             // <revocation version="1">
             //   <revocationDate>...</revocationDate>
@@ -474,26 +564,35 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
 
             _logger.RevokingKeyForReason(keyId, revocationDate, reason);
 
-            var revocationElement = new XElement(RevocationElementName,
+            var revocationElement = new XElement(
+                RevocationElementName,
                 new XAttribute(VersionAttributeName, 1),
                 new XElement(RevocationDateElementName, revocationDate),
-                new XElement(KeyElementName,
-                    new XAttribute(IdAttributeName, keyId)),
-                new XElement(ReasonElementName, reason));
+                new XElement(KeyElementName, new XAttribute(IdAttributeName, keyId)),
+                new XElement(ReasonElementName, reason)
+            );
 
             // Persist it to the underlying repository and trigger the cancellation token
-            var friendlyName = string.Format(CultureInfo.InvariantCulture, "revocation-{0:D}", keyId);
+            var friendlyName = string.Format(
+                CultureInfo.InvariantCulture,
+                "revocation-{0:D}",
+                keyId
+            );
             KeyRepository.StoreElement(revocationElement, friendlyName);
             TriggerAndResetCacheExpirationToken();
         }
 
-        internal KeyValuePair<IXmlRepository, IXmlEncryptor?> GetFallbackKeyRepositoryEncryptorPair()
+        internal KeyValuePair<
+            IXmlRepository,
+            IXmlEncryptor?
+        > GetFallbackKeyRepositoryEncryptorPair()
         {
             IXmlRepository? repository = null;
             IXmlEncryptor? encryptor = null;
 
             // If we're running in Azure Web Sites, the key repository goes in the %HOME% directory.
-            var azureWebSitesKeysFolder = _keyStorageDirectories.GetKeyStorageDirectoryForAzureWebSites();
+            var azureWebSitesKeysFolder =
+                _keyStorageDirectories.GetKeyStorageDirectoryForAzureWebSites();
             if (azureWebSitesKeysFolder != null)
             {
                 _logger.UsingAzureAsKeyRepository(azureWebSitesKeysFolder.FullName);
@@ -516,13 +615,19 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
                         // Probe to see if protecting to local user is available, and use it as the default if so.
                         encryptor = new DpapiXmlEncryptor(
                             protectToLocalMachine: !DpapiSecretSerializerHelper.CanProtectToCurrentUserAccount(),
-                            loggerFactory: _loggerFactory);
+                            loggerFactory: _loggerFactory
+                        );
                     }
-                    repository = new FileSystemXmlRepository(localAppDataKeysFolder, _loggerFactory);
+                    repository = new FileSystemXmlRepository(
+                        localAppDataKeysFolder,
+                        _loggerFactory
+                    );
 
                     if (encryptor != null)
                     {
-                        _logger.UsingProfileAsKeyRepositoryWithDPAPI(localAppDataKeysFolder.FullName);
+                        _logger.UsingProfileAsKeyRepositoryWithDPAPI(
+                            localAppDataKeysFolder.FullName
+                        );
                     }
                     else
                     {
@@ -544,7 +649,10 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
                         regKeyStorageKey = RegistryXmlRepository.DefaultRegistryKey;
 
                         // If the user profile isn't available, we can protect using DPAPI (to machine).
-                        encryptor = new DpapiXmlEncryptor(protectToLocalMachine: true, loggerFactory: _loggerFactory);
+                        encryptor = new DpapiXmlEncryptor(
+                            protectToLocalMachine: true,
+                            loggerFactory: _loggerFactory
+                        );
                         repository = new RegistryXmlRepository(regKeyStorageKey!, _loggerFactory);
 
                         _logger.UsingRegistryAsKeyRepositoryWithDPAPI(regKeyStorageKey!.Name);

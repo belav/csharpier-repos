@@ -17,20 +17,37 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
 {
     internal sealed class CallsGraphQuery : IGraphQuery
     {
-        public async Task<GraphBuilder> GetGraphAsync(Solution solution, IGraphContext context, CancellationToken cancellationToken)
+        public async Task<GraphBuilder> GetGraphAsync(
+            Solution solution,
+            IGraphContext context,
+            CancellationToken cancellationToken
+        )
         {
-            var graphBuilder = await GraphBuilder.CreateForInputNodesAsync(solution, context.InputNodes, cancellationToken).ConfigureAwait(false);
+            var graphBuilder = await GraphBuilder.CreateForInputNodesAsync(
+                    solution,
+                    context.InputNodes,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             foreach (var node in context.InputNodes)
             {
                 var symbol = graphBuilder.GetSymbol(node);
                 if (symbol != null)
                 {
-                    foreach (var newSymbol in await GetCalledMethodSymbolsAsync(symbol, solution, cancellationToken).ConfigureAwait(false))
+                    foreach (
+                        var newSymbol in await GetCalledMethodSymbolsAsync(
+                                symbol,
+                                solution,
+                                cancellationToken
+                            )
+                            .ConfigureAwait(false)
+                    )
                     {
                         cancellationToken.ThrowIfCancellationRequested();
 
-                        var newNode = await graphBuilder.AddNodeAsync(newSymbol, relatedNode: node).ConfigureAwait(false);
+                        var newNode = await graphBuilder.AddNodeAsync(newSymbol, relatedNode: node)
+                            .ConfigureAwait(false);
                         graphBuilder.AddLink(node, CodeLinkCategories.Calls, newNode);
                     }
                 }
@@ -40,20 +57,36 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
         }
 
         private static async Task<ImmutableArray<ISymbol>> GetCalledMethodSymbolsAsync(
-            ISymbol symbol, Solution solution, CancellationToken cancellationToken)
+            ISymbol symbol,
+            Solution solution,
+            CancellationToken cancellationToken
+        )
         {
             using var _ = ArrayBuilder<ISymbol>.GetInstance(out var symbols);
 
             foreach (var reference in symbol.DeclaringSyntaxReferences)
             {
-                var semanticModel = await solution.GetDocument(reference.SyntaxTree).GetSemanticModelAsync(cancellationToken).ConfigureAwait(false);
-                foreach (var syntaxNode in (await reference.GetSyntaxAsync(cancellationToken).ConfigureAwait(false)).DescendantNodes())
+                var semanticModel = await solution.GetDocument(reference.SyntaxTree)
+                    .GetSemanticModelAsync(cancellationToken)
+                    .ConfigureAwait(false);
+                foreach (
+                    var syntaxNode in (
+                        await reference.GetSyntaxAsync(cancellationToken).ConfigureAwait(false)
+                    ).DescendantNodes()
+                )
                 {
                     cancellationToken.ThrowIfCancellationRequested();
 
-                    var newSymbol = semanticModel.GetSymbolInfo(syntaxNode, cancellationToken).Symbol;
-                    if (newSymbol != null && newSymbol is IMethodSymbol &&
-                        (newSymbol.CanBeReferencedByName || ((IMethodSymbol)newSymbol).MethodKind == MethodKind.Constructor))
+                    var newSymbol =
+                        semanticModel.GetSymbolInfo(syntaxNode, cancellationToken).Symbol;
+                    if (
+                        newSymbol != null
+                        && newSymbol is IMethodSymbol
+                        && (
+                            newSymbol.CanBeReferencedByName
+                            || ((IMethodSymbol)newSymbol).MethodKind == MethodKind.Constructor
+                        )
+                    )
                     {
                         symbols.Add(newSymbol);
                     }

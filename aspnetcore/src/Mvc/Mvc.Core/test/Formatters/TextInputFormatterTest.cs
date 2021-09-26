@@ -26,7 +26,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 "something",
                 new ModelStateDictionary(),
                 new EmptyModelMetadataProvider().GetMetadataForType(typeof(object)),
-                (stream, encoding) => new StreamReader(stream, encoding));
+                (stream, encoding) => new StreamReader(stream, encoding)
+            );
 
             context.HttpContext.Request.ContentType = "application/json;charset=utf-8";
             context.HttpContext.Request.ContentLength = 1;
@@ -54,18 +55,23 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 "something",
                 new ModelStateDictionary(),
                 new EmptyModelMetadataProvider().GetMetadataForType(typeof(object)),
-                (stream, encoding) => new StreamReader(stream, encoding));
+                (stream, encoding) => new StreamReader(stream, encoding)
+            );
 
             context.HttpContext.Request.ContentLength = 1;
 
             // Act & Assert
-            Assert.Throws<InvalidOperationException>(() => formatter.TestSelectCharacterEncoding(context));
+            Assert.Throws<InvalidOperationException>(
+                () => formatter.TestSelectCharacterEncoding(context)
+            );
         }
 
         [Theory]
         [InlineData("utf-8")]
         [InlineData("invalid")]
-        public void SelectCharacterEncoding_ReturnsNull_IfItCanNotUnderstandContentTypeEncoding(string charset)
+        public void SelectCharacterEncoding_ReturnsNull_IfItCanNotUnderstandContentTypeEncoding(
+            string charset
+        )
         {
             // Arrange
             var formatter = new TestFormatter();
@@ -76,7 +82,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 "something",
                 new ModelStateDictionary(),
                 new EmptyModelMetadataProvider().GetMetadataForType(typeof(object)),
-                (stream, encoding) => new StreamReader(stream, encoding));
+                (stream, encoding) => new StreamReader(stream, encoding)
+            );
 
             context.HttpContext.Request.ContentType = "application/json;charset=" + charset;
 
@@ -100,7 +107,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 "something",
                 new ModelStateDictionary(),
                 new EmptyModelMetadataProvider().GetMetadataForType(typeof(object)),
-                (stream, encoding) => new StreamReader(stream, encoding));
+                (stream, encoding) => new StreamReader(stream, encoding)
+            );
 
             context.HttpContext.Request.ContentType = "application/json;charset=utf-8";
 
@@ -114,7 +122,9 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         [Theory]
         [InlineData("unicode-1-1-utf-8")]
         [InlineData("unicode-2-0-utf-8")]
-        public void SelectCharacterEncoding_ReturnsUTF8Encoding_IfContentTypeIsAnAlias(string charset)
+        public void SelectCharacterEncoding_ReturnsUTF8Encoding_IfContentTypeIsAnAlias(
+            string charset
+        )
         {
             // Arrange
             var formatter = new TestFormatter();
@@ -126,7 +136,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 "something",
                 new ModelStateDictionary(),
                 new EmptyModelMetadataProvider().GetMetadataForType(typeof(object)),
-                (stream, encoding) => new StreamReader(stream, encoding));
+                (stream, encoding) => new StreamReader(stream, encoding)
+            );
 
             context.HttpContext.Request.ContentType = "application/json;charset=" + charset;
 
@@ -148,7 +159,9 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         [InlineData("ISO646-US")]
         [InlineData("ISO_646.irv:1991")]
         [InlineData("us")]
-        public void SelectCharacterEncoding_ReturnsAsciiEncoding_IfContentTypeIsAnAlias(string charset)
+        public void SelectCharacterEncoding_ReturnsAsciiEncoding_IfContentTypeIsAnAlias(
+            string charset
+        )
         {
             // Arrange
             var formatter = new TestFormatter();
@@ -160,9 +173,11 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 "something",
                 new ModelStateDictionary(),
                 new EmptyModelMetadataProvider().GetMetadataForType(typeof(object)),
-                (stream, encoding) => new StreamReader(stream, encoding));
+                (stream, encoding) => new StreamReader(stream, encoding)
+            );
 
-            context.HttpContext.Request.ContentType = "application/json;charset=\"" + charset + "\"";
+            context.HttpContext.Request.ContentType =
+                "application/json;charset=\"" + charset + "\"";
 
             // Act
             var result = formatter.TestSelectCharacterEncoding(context);
@@ -182,7 +197,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         [InlineData("application/json; charset=(garbage)")]
         [InlineData("application/json; version=(garbage); charset=utf-32")]
         public void SelectCharacterEncoding_ReturnsFirstEncoding_IfContentTypeIsMissingInvalidOrDoesNotHaveEncoding(
-            string contentType)
+            string contentType
+        )
         {
             // Arrange
             var formatter = new TestFormatter();
@@ -194,7 +210,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 "something",
                 new ModelStateDictionary(),
                 new EmptyModelMetadataProvider().GetMetadataForType(typeof(object)),
-                (stream, encoding) => new StreamReader(stream, encoding));
+                (stream, encoding) => new StreamReader(stream, encoding)
+            );
 
             context.HttpContext.Request.ContentType = contentType;
 
@@ -223,7 +240,10 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 return SupportedTypes.Count == 0 ? true : SupportedTypes.Contains(type);
             }
 
-            public override Task<InputFormatterResult> ReadRequestBodyAsync(InputFormatterContext context, Encoding encoding)
+            public override Task<InputFormatterResult> ReadRequestBodyAsync(
+                InputFormatterContext context,
+                Encoding encoding
+            )
             {
                 return InputFormatterResult.SuccessAsync(_object);
             }

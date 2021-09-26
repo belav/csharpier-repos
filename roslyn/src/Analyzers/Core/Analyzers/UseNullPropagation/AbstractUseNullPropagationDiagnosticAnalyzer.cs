@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.UseNullPropagation
         TInvocationExpression,
         TMemberAccessExpression,
         TConditionalAccessExpression,
-        TElementAccessExpression> : AbstractBuiltInCodeStyleDiagnosticAnalyzer
+        TElementAccessExpression
+    > : AbstractBuiltInCodeStyleDiagnosticAnalyzer
         where TSyntaxKind : struct
         where TExpressionSyntax : SyntaxNode
         where TConditionalExpressionSyntax : TExpressionSyntax
@@ -36,50 +37,76 @@ namespace Microsoft.CodeAnalysis.UseNullPropagation
         where TElementAccessExpression : TExpressionSyntax
     {
         protected AbstractUseNullPropagationDiagnosticAnalyzer()
-            : base(IDEDiagnosticIds.UseNullPropagationDiagnosticId,
-                   EnforceOnBuildValues.UseNullPropagation,
-                   CodeStyleOptions2.PreferNullPropagation,
-                   new LocalizableResourceString(nameof(AnalyzersResources.Use_null_propagation), AnalyzersResources.ResourceManager, typeof(AnalyzersResources)),
-                   new LocalizableResourceString(nameof(AnalyzersResources.Null_check_can_be_simplified), AnalyzersResources.ResourceManager, typeof(AnalyzersResources)))
-        {
-        }
+            : base(
+                IDEDiagnosticIds.UseNullPropagationDiagnosticId,
+                EnforceOnBuildValues.UseNullPropagation,
+                CodeStyleOptions2.PreferNullPropagation,
+                new LocalizableResourceString(
+                    nameof(AnalyzersResources.Use_null_propagation),
+                    AnalyzersResources.ResourceManager,
+                    typeof(AnalyzersResources)
+                ),
+                new LocalizableResourceString(
+                    nameof(AnalyzersResources.Null_check_can_be_simplified),
+                    AnalyzersResources.ResourceManager,
+                    typeof(AnalyzersResources)
+                )
+            ) { }
 
-        public override DiagnosticAnalyzerCategory GetAnalyzerCategory()
-            => DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
+        public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
+            DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
 
         protected abstract bool ShouldAnalyze(ParseOptions options);
 
         protected abstract ISyntaxFacts GetSyntaxFacts();
-        protected abstract bool IsInExpressionTree(SemanticModel semanticModel, SyntaxNode node, INamedTypeSymbol? expressionTypeOpt, CancellationToken cancellationToken);
+        protected abstract bool IsInExpressionTree(
+            SemanticModel semanticModel,
+            SyntaxNode node,
+            INamedTypeSymbol? expressionTypeOpt,
+            CancellationToken cancellationToken
+        );
 
         protected abstract bool TryAnalyzePatternCondition(
-            ISyntaxFacts syntaxFacts, SyntaxNode conditionNode,
-            [NotNullWhen(true)] out SyntaxNode? conditionPartToCheck, out bool isEquals);
+            ISyntaxFacts syntaxFacts,
+            SyntaxNode conditionNode,
+            [NotNullWhen(true)] out SyntaxNode? conditionPartToCheck,
+            out bool isEquals
+        );
 
         protected override void InitializeWorker(AnalysisContext context)
         {
-            context.RegisterCompilationStartAction(startContext =>
-            {
-                var expressionTypeOpt = startContext.Compilation.GetTypeByMetadataName("System.Linq.Expressions.Expression`1");
+            context.RegisterCompilationStartAction(
+                startContext =>
+                {
+                    var expressionTypeOpt = startContext.Compilation.GetTypeByMetadataName(
+                        "System.Linq.Expressions.Expression`1"
+                    );
 
-                var objectType = startContext.Compilation.GetSpecialType(SpecialType.System_Object);
-                var referenceEqualsMethodOpt = objectType?.GetMembers(nameof(ReferenceEquals))
-                                                          .OfType<IMethodSymbol>()
-                                                          .FirstOrDefault(m => m.DeclaredAccessibility == Accessibility.Public &&
-                                                                               m.Parameters.Length == 2);
+                    var objectType = startContext.Compilation.GetSpecialType(
+                        SpecialType.System_Object
+                    );
+                    var referenceEqualsMethodOpt = objectType?.GetMembers(nameof(ReferenceEquals))
+                        .OfType<IMethodSymbol>()
+                        .FirstOrDefault(
+                            m =>
+                                m.DeclaredAccessibility == Accessibility.Public
+                                && m.Parameters.Length == 2
+                        );
 
-                var syntaxKinds = GetSyntaxFacts().SyntaxKinds;
-                startContext.RegisterSyntaxNodeAction(
-                    c => AnalyzeSyntax(c, expressionTypeOpt, referenceEqualsMethodOpt),
-                    syntaxKinds.Convert<TSyntaxKind>(syntaxKinds.TernaryConditionalExpression));
-            });
-
+                    var syntaxKinds = GetSyntaxFacts().SyntaxKinds;
+                    startContext.RegisterSyntaxNodeAction(
+                        c => AnalyzeSyntax(c, expressionTypeOpt, referenceEqualsMethodOpt),
+                        syntaxKinds.Convert<TSyntaxKind>(syntaxKinds.TernaryConditionalExpression)
+                    );
+                }
+            );
         }
 
         private void AnalyzeSyntax(
             SyntaxNodeAnalysisContext context,
             INamedTypeSymbol? expressionTypeOpt,
-            IMethodSymbol? referenceEqualsMethodOpt)
+            IMethodSymbol? referenceEqualsMethodOpt
+        )
         {
             var conditionalExpression = (TConditionalExpressionSyntax)context.Node;
             if (!ShouldAnalyze(conditionalExpression.SyntaxTree.Options))
@@ -87,7 +114,10 @@ namespace Microsoft.CodeAnalysis.UseNullPropagation
                 return;
             }
 
-            var option = context.GetOption(CodeStyleOptions2.PreferNullPropagation, conditionalExpression.Language);
+            var option = context.GetOption(
+                CodeStyleOptions2.PreferNullPropagation,
+                conditionalExpression.Language
+            );
             if (!option.Value)
             {
                 return;
@@ -95,7 +125,11 @@ namespace Microsoft.CodeAnalysis.UseNullPropagation
 
             var syntaxFacts = GetSyntaxFacts();
             syntaxFacts.GetPartsOfConditionalExpression(
-                conditionalExpression, out var conditionNode, out var whenTrueNode, out var whenFalseNode);
+                conditionalExpression,
+                out var conditionNode,
+                out var whenTrueNode,
+                out var whenFalseNode
+            );
 
             conditionNode = syntaxFacts.WalkDownParentheses(conditionNode);
             whenTrueNode = syntaxFacts.WalkDownParentheses(whenTrueNode);
@@ -106,12 +140,20 @@ namespace Microsoft.CodeAnalysis.UseNullPropagation
             {
                 conditionIsNegated = true;
                 conditionNode = syntaxFacts.WalkDownParentheses(
-                    syntaxFacts.GetOperandOfPrefixUnaryExpression(conditionNode));
+                    syntaxFacts.GetOperandOfPrefixUnaryExpression(conditionNode)
+                );
             }
 
-            if (!TryAnalyzeCondition(
-                    context, syntaxFacts, referenceEqualsMethodOpt, conditionNode,
-                    out var conditionPartToCheck, out var isEquals))
+            if (
+                !TryAnalyzeCondition(
+                    context,
+                    syntaxFacts,
+                    referenceEqualsMethodOpt,
+                    conditionNode,
+                    out var conditionPartToCheck,
+                    out var isEquals
+                )
+            )
             {
                 return;
             }
@@ -137,7 +179,12 @@ namespace Microsoft.CodeAnalysis.UseNullPropagation
             var whenPartToCheck = isEquals ? whenFalseNode : whenTrueNode;
 
             var semanticModel = context.SemanticModel;
-            var whenPartMatch = GetWhenPartMatch(syntaxFacts, semanticModel, conditionPartToCheck, whenPartToCheck);
+            var whenPartMatch = GetWhenPartMatch(
+                syntaxFacts,
+                semanticModel,
+                conditionPartToCheck,
+                whenPartToCheck
+            );
             if (whenPartMatch == null)
             {
                 return;
@@ -148,7 +195,10 @@ namespace Microsoft.CodeAnalysis.UseNullPropagation
             var type = semanticModel.GetTypeInfo(conditionalExpression).Type;
             if (type?.IsValueType == true)
             {
-                if (!(type is INamedTypeSymbol namedType) || namedType.ConstructedFrom.SpecialType != SpecialType.System_Nullable_T)
+                if (
+                    !(type is INamedTypeSymbol namedType)
+                    || namedType.ConstructedFrom.SpecialType != SpecialType.System_Nullable_T
+                )
                 {
                     // User has something like:  If(str is nothing, nothing, str.Length)
                     // In this case, converting to str?.Length changes the type of this from
@@ -159,7 +209,14 @@ namespace Microsoft.CodeAnalysis.UseNullPropagation
                 // converting to c?.nullable doesn't affect the type
             }
 
-            if (IsInExpressionTree(semanticModel, conditionNode, expressionTypeOpt, context.CancellationToken))
+            if (
+                IsInExpressionTree(
+                    semanticModel,
+                    conditionNode,
+                    expressionTypeOpt,
+                    context.CancellationToken
+                )
+            )
             {
                 return;
             }
@@ -167,21 +224,27 @@ namespace Microsoft.CodeAnalysis.UseNullPropagation
             var locations = ImmutableArray.Create(
                 conditionalExpression.GetLocation(),
                 conditionPartToCheck.GetLocation(),
-                whenPartToCheck.GetLocation());
+                whenPartToCheck.GetLocation()
+            );
 
             var properties = ImmutableDictionary<string, string>.Empty;
-            var whenPartIsNullable = semanticModel.GetTypeInfo(whenPartMatch).Type?.OriginalDefinition.SpecialType == SpecialType.System_Nullable_T;
+            var whenPartIsNullable =
+                semanticModel.GetTypeInfo(whenPartMatch).Type?.OriginalDefinition.SpecialType
+                == SpecialType.System_Nullable_T;
             if (whenPartIsNullable)
             {
                 properties = properties.Add(UseNullPropagationConstants.WhenPartIsNullable, "");
             }
 
-            context.ReportDiagnostic(DiagnosticHelper.Create(
-                Descriptor,
-                conditionalExpression.GetLocation(),
-                option.Notification.Severity,
-                locations,
-                properties));
+            context.ReportDiagnostic(
+                DiagnosticHelper.Create(
+                    Descriptor,
+                    conditionalExpression.GetLocation(),
+                    option.Notification.Severity,
+                    locations,
+                    properties
+                )
+            );
         }
 
         private bool TryAnalyzeCondition(
@@ -190,28 +253,45 @@ namespace Microsoft.CodeAnalysis.UseNullPropagation
             IMethodSymbol? referenceEqualsMethodOpt,
             SyntaxNode conditionNode,
             [NotNullWhen(true)] out SyntaxNode? conditionPartToCheck,
-            out bool isEquals)
+            out bool isEquals
+        )
         {
             switch (conditionNode)
             {
                 case TBinaryExpressionSyntax binaryExpression:
                     return TryAnalyzeBinaryExpressionCondition(
-                        syntaxFacts, binaryExpression, out conditionPartToCheck, out isEquals);
+                        syntaxFacts,
+                        binaryExpression,
+                        out conditionPartToCheck,
+                        out isEquals
+                    );
 
                 case TInvocationExpression invocation:
                     return TryAnalyzeInvocationCondition(
-                        context, syntaxFacts, referenceEqualsMethodOpt, invocation,
-                        out conditionPartToCheck, out isEquals);
+                        context,
+                        syntaxFacts,
+                        referenceEqualsMethodOpt,
+                        invocation,
+                        out conditionPartToCheck,
+                        out isEquals
+                    );
 
                 default:
                     return TryAnalyzePatternCondition(
-                        syntaxFacts, conditionNode, out conditionPartToCheck, out isEquals);
+                        syntaxFacts,
+                        conditionNode,
+                        out conditionPartToCheck,
+                        out isEquals
+                    );
             }
         }
 
         private static bool TryAnalyzeBinaryExpressionCondition(
-            ISyntaxFacts syntaxFacts, TBinaryExpressionSyntax condition,
-            [NotNullWhen(true)] out SyntaxNode? conditionPartToCheck, out bool isEquals)
+            ISyntaxFacts syntaxFacts,
+            TBinaryExpressionSyntax condition,
+            [NotNullWhen(true)] out SyntaxNode? conditionPartToCheck,
+            out bool isEquals
+        )
         {
             var syntaxKinds = syntaxFacts.SyntaxKinds;
             isEquals = syntaxKinds.ReferenceEqualsExpression == condition.RawKind;
@@ -223,8 +303,16 @@ namespace Microsoft.CodeAnalysis.UseNullPropagation
             }
             else
             {
-                syntaxFacts.GetPartsOfBinaryExpression(condition, out var conditionLeft, out var conditionRight);
-                conditionPartToCheck = GetConditionPartToCheck(syntaxFacts, conditionLeft, conditionRight);
+                syntaxFacts.GetPartsOfBinaryExpression(
+                    condition,
+                    out var conditionLeft,
+                    out var conditionRight
+                );
+                conditionPartToCheck = GetConditionPartToCheck(
+                    syntaxFacts,
+                    conditionLeft,
+                    conditionRight
+                );
                 return conditionPartToCheck != null;
             }
         }
@@ -235,7 +323,8 @@ namespace Microsoft.CodeAnalysis.UseNullPropagation
             IMethodSymbol? referenceEqualsMethodOpt,
             TInvocationExpression invocation,
             [NotNullWhen(true)] out SyntaxNode? conditionPartToCheck,
-            out bool isEquals)
+            out bool isEquals
+        )
         {
             conditionPartToCheck = null;
             isEquals = true;
@@ -271,7 +360,11 @@ namespace Microsoft.CodeAnalysis.UseNullPropagation
                 return false;
             }
 
-            conditionPartToCheck = GetConditionPartToCheck(syntaxFacts, conditionLeft, conditionRight);
+            conditionPartToCheck = GetConditionPartToCheck(
+                syntaxFacts,
+                conditionLeft,
+                conditionRight
+            );
             if (conditionPartToCheck == null)
             {
                 return false;
@@ -283,7 +376,11 @@ namespace Microsoft.CodeAnalysis.UseNullPropagation
             return referenceEqualsMethodOpt != null && referenceEqualsMethodOpt.Equals(symbol);
         }
 
-        private static SyntaxNode? GetConditionPartToCheck(ISyntaxFacts syntaxFacts, SyntaxNode conditionLeft, SyntaxNode conditionRight)
+        private static SyntaxNode? GetConditionPartToCheck(
+            ISyntaxFacts syntaxFacts,
+            SyntaxNode conditionLeft,
+            SyntaxNode conditionRight
+        )
         {
             var conditionLeftIsNull = syntaxFacts.IsNullLiteralExpression(conditionLeft);
             var conditionRightIsNull = syntaxFacts.IsNullLiteralExpression(conditionRight);
@@ -303,9 +400,17 @@ namespace Microsoft.CodeAnalysis.UseNullPropagation
         }
 
         internal static SyntaxNode? GetWhenPartMatch(
-            ISyntaxFacts syntaxFacts, SemanticModel semanticModel, SyntaxNode expressionToMatch, SyntaxNode whenPart)
+            ISyntaxFacts syntaxFacts,
+            SemanticModel semanticModel,
+            SyntaxNode expressionToMatch,
+            SyntaxNode whenPart
+        )
         {
-            expressionToMatch = RemoveObjectCastIfAny(syntaxFacts, semanticModel, expressionToMatch);
+            expressionToMatch = RemoveObjectCastIfAny(
+                syntaxFacts,
+                semanticModel,
+                expressionToMatch
+            );
             var current = whenPart;
             while (true)
             {
@@ -315,8 +420,7 @@ namespace Microsoft.CodeAnalysis.UseNullPropagation
                     return null;
                 }
 
-                if (current is TMemberAccessExpression ||
-                    current is TElementAccessExpression)
+                if (current is TMemberAccessExpression || current is TElementAccessExpression)
                 {
                     if (syntaxFacts.AreEquivalent(unwrapped, expressionToMatch))
                     {
@@ -328,7 +432,11 @@ namespace Microsoft.CodeAnalysis.UseNullPropagation
             }
         }
 
-        private static SyntaxNode RemoveObjectCastIfAny(ISyntaxFacts syntaxFacts, SemanticModel semanticModel, SyntaxNode node)
+        private static SyntaxNode RemoveObjectCastIfAny(
+            ISyntaxFacts syntaxFacts,
+            SemanticModel semanticModel,
+            SyntaxNode node
+        )
         {
             if (syntaxFacts.IsCastExpression(node))
             {

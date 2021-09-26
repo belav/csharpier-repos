@@ -9,15 +9,25 @@ namespace System.Text.Json
     public static partial class JsonSerializer
     {
         // Pre-encoded metadata properties.
-        internal static readonly JsonEncodedText s_metadataId = JsonEncodedText.Encode("$id", encoder: null);
-        internal static readonly JsonEncodedText s_metadataRef = JsonEncodedText.Encode("$ref", encoder: null);
-        internal static readonly JsonEncodedText s_metadataValues = JsonEncodedText.Encode("$values", encoder: null);
+        internal static readonly JsonEncodedText s_metadataId = JsonEncodedText.Encode(
+            "$id",
+            encoder: null
+        );
+        internal static readonly JsonEncodedText s_metadataRef = JsonEncodedText.Encode(
+            "$ref",
+            encoder: null
+        );
+        internal static readonly JsonEncodedText s_metadataValues = JsonEncodedText.Encode(
+            "$values",
+            encoder: null
+        );
 
         internal static MetadataPropertyName WriteReferenceForObject(
             JsonConverter jsonConverter,
             object currentValue,
             ref WriteStack state,
-            Utf8JsonWriter writer)
+            Utf8JsonWriter writer
+        )
         {
             MetadataPropertyName writtenMetadataName;
 
@@ -28,7 +38,10 @@ namespace System.Text.Json
             }
             else
             {
-                string referenceId = state.ReferenceResolver.GetReference(currentValue, out bool alreadyExists);
+                string referenceId = state.ReferenceResolver.GetReference(
+                    currentValue,
+                    out bool alreadyExists
+                );
                 Debug.Assert(referenceId != null);
 
                 if (alreadyExists)
@@ -51,7 +64,8 @@ namespace System.Text.Json
             JsonConverter jsonConverter,
             object currentValue,
             ref WriteStack state,
-            Utf8JsonWriter writer)
+            Utf8JsonWriter writer
+        )
         {
             MetadataPropertyName writtenMetadataName;
 
@@ -63,7 +77,10 @@ namespace System.Text.Json
             }
             else
             {
-                string referenceId = state.ReferenceResolver.GetReference(currentValue, out bool alreadyExists);
+                string referenceId = state.ReferenceResolver.GetReference(
+                    currentValue,
+                    out bool alreadyExists
+                );
                 Debug.Assert(referenceId != null);
 
                 if (alreadyExists)

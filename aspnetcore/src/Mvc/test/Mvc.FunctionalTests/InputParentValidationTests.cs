@@ -25,8 +25,9 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         {
             protected BaseTests(MvcTestFixture<TStartup> fixture)
             {
-                var factory = fixture.Factories.FirstOrDefault() ?? fixture.WithWebHostBuilder(builder =>
-                    builder.UseStartup<TStartup>());
+                var factory =
+                    fixture.Factories.FirstOrDefault()
+                    ?? fixture.WithWebHostBuilder(builder => builder.UseStartup<TStartup>());
 
                 Client = factory.CreateDefaultClient();
             }
@@ -40,16 +41,24 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             {
                 // Arrange
                 var content = CreateInvalidModel(false);
-                var expectedErrors = this.GetExpectedErrors(this.ShouldParentBeValidatedWhenChildIsInvalid, true);
+                var expectedErrors = this.GetExpectedErrors(
+                    this.ShouldParentBeValidatedWhenChildIsInvalid,
+                    true
+                );
 
                 // Act
-                var response = await Client.PostAsync("http://localhost/Validation/CreateInvalidModel", content);
+                var response = await Client.PostAsync(
+                    "http://localhost/Validation/CreateInvalidModel",
+                    content
+                );
 
                 // Assert
                 Assert.Equal(StatusCodes.Status400BadRequest, (int)response.StatusCode);
 
                 var responseContent = await response.Content.ReadAsStringAsync();
-                var actualErrors = JsonConvert.DeserializeObject<Dictionary<string, string[]>>(responseContent);
+                var actualErrors = JsonConvert.DeserializeObject<Dictionary<string, string[]>>(
+                    responseContent
+                );
 
                 Assert.Equal(expectedErrors, actualErrors);
             }
@@ -62,28 +71,37 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
                 var expectedErrors = this.GetExpectedErrors(true, false);
 
                 // Act
-                var response = await Client.PostAsync("http://localhost/Validation/CreateInvalidModel", content);
+                var response = await Client.PostAsync(
+                    "http://localhost/Validation/CreateInvalidModel",
+                    content
+                );
 
                 // Assert
                 Assert.Equal(StatusCodes.Status400BadRequest, (int)response.StatusCode);
 
                 var responseContent = await response.Content.ReadAsStringAsync();
-                var actualErrors = JsonConvert.DeserializeObject<Dictionary<string, string[]>>(responseContent);
+                var actualErrors = JsonConvert.DeserializeObject<Dictionary<string, string[]>>(
+                    responseContent
+                );
 
                 Assert.Equal(expectedErrors, actualErrors);
             }
 
             private StringContent CreateInvalidModel(bool isChildValid)
             {
-                var model = new InvalidModel()
-                {
-                    Name = (isChildValid ? "Valid Name" : null)
-                };
+                var model = new InvalidModel() { Name = (isChildValid ? "Valid Name" : null) };
 
-                return new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
+                return new StringContent(
+                    JsonConvert.SerializeObject(model),
+                    Encoding.UTF8,
+                    "application/json"
+                );
             }
 
-            private IDictionary<string, string[]> GetExpectedErrors(bool parentInvalid, bool childInvalid)
+            private IDictionary<string, string[]> GetExpectedErrors(
+                bool parentInvalid,
+                bool childInvalid
+            )
             {
                 var result = new Dictionary<string, string[]>();
 
@@ -105,12 +123,12 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         /// Scenarios for verifying the impact of setting <see cref="MvcOptions.ValidateComplexTypesIfChildValidationFails"/>
         /// to <see langword="true"/>
         /// </summary>
-        public class ParentValidationScenarios : BaseTests<FormatterWebSite.StartupWithComplexParentValidation>
+        public class ParentValidationScenarios
+            : BaseTests<FormatterWebSite.StartupWithComplexParentValidation>
         {
-            public ParentValidationScenarios(MvcTestFixture<FormatterWebSite.StartupWithComplexParentValidation> fixture)
-                : base(fixture)
-            {
-            }
+            public ParentValidationScenarios(
+                MvcTestFixture<FormatterWebSite.StartupWithComplexParentValidation> fixture
+            ) : base(fixture) { }
 
             protected override bool ShouldParentBeValidatedWhenChildIsInvalid => true;
         }
@@ -122,9 +140,7 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public class ParentNonValidationScenarios : BaseTests<FormatterWebSite.Startup>
         {
             public ParentNonValidationScenarios(MvcTestFixture<FormatterWebSite.Startup> fixture)
-                : base(fixture)
-            {
-            }
+                : base(fixture) { }
 
             protected override bool ShouldParentBeValidatedWhenChildIsInvalid => false;
         }

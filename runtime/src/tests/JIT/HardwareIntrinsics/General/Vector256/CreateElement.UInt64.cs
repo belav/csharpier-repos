@@ -38,7 +38,8 @@ namespace JIT.HardwareIntrinsics.General
     {
         private static readonly int LargestVectorSize = 32;
 
-        private static readonly int ElementCount = Unsafe.SizeOf<Vector256<UInt64>>() / sizeof(UInt64);
+        private static readonly int ElementCount =
+            Unsafe.SizeOf<Vector256<UInt64>>() / sizeof(UInt64);
 
         public bool Succeeded { get; set; } = true;
 
@@ -71,21 +72,28 @@ namespace JIT.HardwareIntrinsics.General
                 values[i] = TestLibrary.Generator.GetUInt64();
             }
 
-            object result = typeof(Vector256)
-                                .GetMethod(nameof(Vector256.Create), operandTypes)
-                                .Invoke(null, new object[] { values[0], values[1], values[2], values[3] });
+            object result = typeof(Vector256).GetMethod(nameof(Vector256.Create), operandTypes)
+                .Invoke(null, new object[] { values[0], values[1], values[2], values[3] });
 
             ValidateResult((Vector256<UInt64>)(result), values);
         }
 
-        private void ValidateResult(Vector256<UInt64> result, UInt64[] expectedValues, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            Vector256<UInt64> result,
+            UInt64[] expectedValues,
+            [CallerMemberName] string method = ""
+        )
         {
             UInt64[] resultElements = new UInt64[ElementCount];
             Unsafe.WriteUnaligned(ref Unsafe.As<UInt64, byte>(ref resultElements[0]), result);
             ValidateResult(resultElements, expectedValues, method);
         }
 
-        private void ValidateResult(UInt64[] resultElements, UInt64[] expectedValues, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            UInt64[] resultElements,
+            UInt64[] expectedValues,
+            [CallerMemberName] string method = ""
+        )
         {
             bool succeeded = true;
 
@@ -100,9 +108,15 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"Vector256.Create(UInt64): {method} failed:");
-                TestLibrary.TestFramework.LogInformation($"   value: ({string.Join(", ", expectedValues)})");
-                TestLibrary.TestFramework.LogInformation($"  result: ({string.Join(", ", resultElements)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector256.Create(UInt64): {method} failed:"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"   value: ({string.Join(", ", expectedValues)})"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"  result: ({string.Join(", ", resultElements)})"
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

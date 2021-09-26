@@ -19,7 +19,10 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption
         /// call to 'Encrypt'.</param>
         /// <returns>The original plaintext data (if the authentication tag was validated and decryption succeeded).</returns>
         /// <remarks>All cryptography-related exceptions should be homogenized to CryptographicException.</remarks>
-        byte[] Decrypt(ArraySegment<byte> ciphertext, ArraySegment<byte> additionalAuthenticatedData);
+        byte[] Decrypt(
+            ArraySegment<byte> ciphertext,
+            ArraySegment<byte> additionalAuthenticatedData
+        );
 
         /// <summary>
         /// Encrypts and tamper-proofs a piece of data.
@@ -31,6 +34,9 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption
         /// call to Decrypt.</param>
         /// <returns>The ciphertext blob, including authentication tag.</returns>
         /// <remarks>All cryptography-related exceptions should be homogenized to CryptographicException.</remarks>
-        byte[] Encrypt(ArraySegment<byte> plaintext, ArraySegment<byte> additionalAuthenticatedData);
+        byte[] Encrypt(
+            ArraySegment<byte> plaintext,
+            ArraySegment<byte> additionalAuthenticatedData
+        );
     }
 }

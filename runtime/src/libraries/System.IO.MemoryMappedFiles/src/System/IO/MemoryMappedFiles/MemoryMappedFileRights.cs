@@ -11,7 +11,6 @@ namespace System.IO.MemoryMappedFiles
         Write = 0x000002,
         Read = 0x000004,
         Execute = 0x000008,
-
         Delete = 0x010000,
         ReadPermissions = 0x020000,
         ChangePermissions = 0x040000,
@@ -21,10 +20,15 @@ namespace System.IO.MemoryMappedFiles
         ReadWrite = Read | Write,
         ReadExecute = Read | Execute,
         ReadWriteExecute = Read | Write | Execute,
-
-        FullControl = CopyOnWrite | Read | Write | Execute | Delete |
-                                       ReadPermissions | ChangePermissions | TakeOwnership,
-
+        FullControl =
+            CopyOnWrite
+            | Read
+            | Write
+            | Execute
+            | Delete
+            | ReadPermissions
+            | ChangePermissions
+            | TakeOwnership,
         AccessSystemSecurity = 0x01000000, // Allow changes to SACL
     }
 }

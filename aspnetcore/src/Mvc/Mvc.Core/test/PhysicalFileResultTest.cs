@@ -1,4 +1,4 @@
-// Copyright (c) .NET Foundation. All rights reserved.
+﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System;
@@ -57,7 +57,12 @@ namespace Microsoft.AspNetCore.Mvc
         [InlineData(8, 13, "Result", 6)]
         [InlineData(null, 5, "ts�", 5)]
         [InlineData(8, null, "ResultTestFile contents�", 26)]
-        public async Task WriteFileAsync_WritesRangeRequested(long? start, long? end, string expectedString, long contentLength)
+        public async Task WriteFileAsync_WritesRangeRequested(
+            long? start,
+            long? end,
+            string expectedString,
+            long contentLength
+        )
         {
             // Arrange
             var path = Path.GetFullPath(Path.Combine("TestFiles", "FilePathResultTestFile.txt"));
@@ -70,7 +75,11 @@ namespace Microsoft.AspNetCore.Mvc
             requestHeaders.IfModifiedSince = DateTimeOffset.MinValue;
             requestHeaders.Range = new RangeHeaderValue(start, end);
             httpContext.Request.Method = HttpMethods.Get;
-            var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
+            var actionContext = new ActionContext(
+                httpContext,
+                new RouteData(),
+                new ActionDescriptor()
+            );
 
             // Act
             await result.ExecuteResultAsync(actionContext);
@@ -85,7 +94,10 @@ namespace Microsoft.AspNetCore.Mvc
             Assert.Equal(contentRange.ToString(), httpResponse.Headers[HeaderNames.ContentRange]);
             Assert.NotEmpty(httpResponse.Headers[HeaderNames.LastModified]);
             Assert.Equal(contentLength, httpResponse.ContentLength);
-            Assert.Equal(Path.GetFullPath(Path.Combine("TestFiles", "FilePathResultTestFile.txt")), sendFile.Name);
+            Assert.Equal(
+                Path.GetFullPath(Path.Combine("TestFiles", "FilePathResultTestFile.txt")),
+                sendFile.Name
+            );
             Assert.Equal(startResult, sendFile.Offset);
             Assert.Equal((long?)contentLength, sendFile.Length);
         }
@@ -104,9 +116,15 @@ namespace Microsoft.AspNetCore.Mvc
             var requestHeaders = httpContext.Request.GetTypedHeaders();
             requestHeaders.IfModifiedSince = DateTimeOffset.MinValue;
             requestHeaders.Range = new RangeHeaderValue(0, 3);
-            requestHeaders.IfRange = new RangeConditionHeaderValue(new EntityTagHeaderValue("\"Etag\""));
+            requestHeaders.IfRange = new RangeConditionHeaderValue(
+                new EntityTagHeaderValue("\"Etag\"")
+            );
             httpContext.Request.Method = HttpMethods.Get;
-            var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
+            var actionContext = new ActionContext(
+                httpContext,
+                new RouteData(),
+                new ActionDescriptor()
+            );
 
             // Act
             await result.ExecuteResultAsync(actionContext);
@@ -120,7 +138,10 @@ namespace Microsoft.AspNetCore.Mvc
             Assert.NotEmpty(httpResponse.Headers[HeaderNames.LastModified]);
             Assert.Equal(entityTag.ToString(), httpResponse.Headers[HeaderNames.ETag]);
             Assert.Equal(4, httpResponse.ContentLength);
-            Assert.Equal(Path.GetFullPath(Path.Combine("TestFiles", "FilePathResultTestFile.txt")), sendFile.Name);
+            Assert.Equal(
+                Path.GetFullPath(Path.Combine("TestFiles", "FilePathResultTestFile.txt")),
+                sendFile.Name
+            );
             Assert.Equal(0, sendFile.Offset);
             Assert.Equal(4, sendFile.Length);
         }
@@ -138,9 +159,15 @@ namespace Microsoft.AspNetCore.Mvc
             var requestHeaders = httpContext.Request.GetTypedHeaders();
             requestHeaders.IfModifiedSince = DateTimeOffset.MinValue;
             requestHeaders.Range = new RangeHeaderValue(0, 3);
-            requestHeaders.IfRange = new RangeConditionHeaderValue(new EntityTagHeaderValue("\"Etag\""));
+            requestHeaders.IfRange = new RangeConditionHeaderValue(
+                new EntityTagHeaderValue("\"Etag\"")
+            );
             httpContext.Request.Method = HttpMethods.Get;
-            var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
+            var actionContext = new ActionContext(
+                httpContext,
+                new RouteData(),
+                new ActionDescriptor()
+            );
 
             // Act
             await result.ExecuteResultAsync(actionContext);
@@ -149,7 +176,10 @@ namespace Microsoft.AspNetCore.Mvc
             var httpResponse = actionContext.HttpContext.Response;
             Assert.Equal(StatusCodes.Status200OK, httpResponse.StatusCode);
             Assert.NotEmpty(httpResponse.Headers[HeaderNames.LastModified]);
-            Assert.Equal(Path.GetFullPath(Path.Combine("TestFiles", "FilePathResultTestFile.txt")), sendFile.Name);
+            Assert.Equal(
+                Path.GetFullPath(Path.Combine("TestFiles", "FilePathResultTestFile.txt")),
+                sendFile.Name
+            );
             Assert.Equal(0, sendFile.Offset);
             Assert.Null(sendFile.Length);
         }
@@ -168,9 +198,15 @@ namespace Microsoft.AspNetCore.Mvc
             var requestHeaders = httpContext.Request.GetTypedHeaders();
             requestHeaders.IfModifiedSince = DateTimeOffset.MinValue;
             requestHeaders.Range = new RangeHeaderValue(0, 3);
-            requestHeaders.IfRange = new RangeConditionHeaderValue(new EntityTagHeaderValue("\"NotEtag\""));
+            requestHeaders.IfRange = new RangeConditionHeaderValue(
+                new EntityTagHeaderValue("\"NotEtag\"")
+            );
             httpContext.Request.Method = HttpMethods.Get;
-            var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
+            var actionContext = new ActionContext(
+                httpContext,
+                new RouteData(),
+                new ActionDescriptor()
+            );
 
             // Act
             await result.ExecuteResultAsync(actionContext);
@@ -179,7 +215,10 @@ namespace Microsoft.AspNetCore.Mvc
             var httpResponse = actionContext.HttpContext.Response;
             Assert.Equal(StatusCodes.Status200OK, httpResponse.StatusCode);
             Assert.NotEmpty(httpResponse.Headers[HeaderNames.LastModified]);
-            Assert.Equal(Path.GetFullPath(Path.Combine("TestFiles", "FilePathResultTestFile.txt")), sendFile.Name);
+            Assert.Equal(
+                Path.GetFullPath(Path.Combine("TestFiles", "FilePathResultTestFile.txt")),
+                sendFile.Name
+            );
             Assert.Equal(0, sendFile.Offset);
             Assert.Null(sendFile.Length);
         }
@@ -188,7 +227,9 @@ namespace Microsoft.AspNetCore.Mvc
         [InlineData("0-5")]
         [InlineData("bytes = ")]
         [InlineData("bytes = 1-4, 5-11")]
-        public async Task WriteFileAsync_RangeHeaderMalformed_RangeRequestIgnored(string rangeString)
+        public async Task WriteFileAsync_RangeHeaderMalformed_RangeRequestIgnored(
+            string rangeString
+        )
         {
             // Arrange
             var path = Path.GetFullPath(Path.Combine("TestFiles", "FilePathResultTestFile.txt"));
@@ -200,7 +241,11 @@ namespace Microsoft.AspNetCore.Mvc
             requestHeaders.IfModifiedSince = DateTimeOffset.MinValue;
             httpContext.Request.Headers[HeaderNames.Range] = rangeString;
             httpContext.Request.Method = HttpMethods.Get;
-            var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
+            var actionContext = new ActionContext(
+                httpContext,
+                new RouteData(),
+                new ActionDescriptor()
+            );
 
             // Act
             await result.ExecuteResultAsync(actionContext);
@@ -210,7 +255,10 @@ namespace Microsoft.AspNetCore.Mvc
             Assert.Equal(StatusCodes.Status200OK, httpResponse.StatusCode);
             Assert.Empty(httpResponse.Headers[HeaderNames.ContentRange]);
             Assert.NotEmpty(httpResponse.Headers[HeaderNames.LastModified]);
-            Assert.Equal(Path.GetFullPath(Path.Combine("TestFiles", "FilePathResultTestFile.txt")), sendFile.Name);
+            Assert.Equal(
+                Path.GetFullPath(Path.Combine("TestFiles", "FilePathResultTestFile.txt")),
+                sendFile.Name
+            );
             Assert.Equal(0, sendFile.Offset);
             Assert.Null(sendFile.Length);
         }
@@ -230,7 +278,11 @@ namespace Microsoft.AspNetCore.Mvc
             httpContext.Request.Headers[HeaderNames.Range] = rangeString;
             httpContext.Request.Method = HttpMethods.Get;
             httpContext.Response.Body = new MemoryStream();
-            var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
+            var actionContext = new ActionContext(
+                httpContext,
+                new RouteData(),
+                new ActionDescriptor()
+            );
 
             // Act
             await result.ExecuteResultAsync(actionContext);
@@ -262,7 +314,11 @@ namespace Microsoft.AspNetCore.Mvc
             httpContext.Request.Headers[HeaderNames.Range] = "bytes = 0-6";
             httpContext.Request.Method = HttpMethods.Get;
             httpContext.Response.Body = new MemoryStream();
-            var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
+            var actionContext = new ActionContext(
+                httpContext,
+                new RouteData(),
+                new ActionDescriptor()
+            );
 
             // Act
             await result.ExecuteResultAsync(actionContext);
@@ -292,7 +348,11 @@ namespace Microsoft.AspNetCore.Mvc
             httpContext.Request.Headers[HeaderNames.Range] = "bytes = 0-6";
             httpContext.Request.Method = HttpMethods.Get;
             httpContext.Response.Body = new MemoryStream();
-            var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
+            var actionContext = new ActionContext(
+                httpContext,
+                new RouteData(),
+                new ActionDescriptor()
+            );
 
             // Act
             await result.ExecuteResultAsync(actionContext);
@@ -317,8 +377,7 @@ namespace Microsoft.AspNetCore.Mvc
             var path = Path.GetFullPath(Path.Combine("TestFiles", "FilePathResultTestFile.txt"));
             var result = new TestPhysicalFileResult(path, "text/plain");
             var sendFileMock = new Mock<IHttpResponseBodyFeature>();
-            sendFileMock
-                .Setup(s => s.SendFileAsync(path, 0, null, CancellationToken.None))
+            sendFileMock.Setup(s => s.SendFileAsync(path, 0, null, CancellationToken.None))
                 .Returns(Task.FromResult<int>(0));
 
             var httpContext = GetHttpContext();
@@ -337,7 +396,11 @@ namespace Microsoft.AspNetCore.Mvc
         [InlineData(8, 13, 6)]
         [InlineData(null, 3, 3)]
         [InlineData(8, null, 26)]
-        public async Task ExecuteResultAsync_CallsSendFileAsyncWithRequestedRange_IfIHttpSendFilePresent(long? start, long? end, long contentLength)
+        public async Task ExecuteResultAsync_CallsSendFileAsyncWithRequestedRange_IfIHttpSendFilePresent(
+            long? start,
+            long? end,
+            long contentLength
+        )
         {
             // Arrange
             var path = Path.GetFullPath(Path.Combine("TestFiles", "FilePathResultTestFile.txt"));
@@ -351,7 +414,11 @@ namespace Microsoft.AspNetCore.Mvc
             requestHeaders.Range = new RangeHeaderValue(start, end);
             requestHeaders.IfUnmodifiedSince = DateTimeOffset.MinValue.AddDays(1);
             httpContext.Request.Method = HttpMethods.Get;
-            var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
+            var actionContext = new ActionContext(
+                httpContext,
+                new RouteData(),
+                new ActionDescriptor()
+            );
 
             // Act
             await result.ExecuteResultAsync(actionContext);
@@ -360,7 +427,10 @@ namespace Microsoft.AspNetCore.Mvc
             start = start ?? 34 - end;
             end = start + contentLength - 1;
             var httpResponse = actionContext.HttpContext.Response;
-            Assert.Equal(Path.GetFullPath(Path.Combine("TestFiles", "FilePathResultTestFile.txt")), sendFile.Name);
+            Assert.Equal(
+                Path.GetFullPath(Path.Combine("TestFiles", "FilePathResultTestFile.txt")),
+                sendFile.Name
+            );
             Assert.Equal(start, sendFile.Offset);
             Assert.Equal(contentLength, sendFile.Length);
             Assert.Equal(CancellationToken.None, sendFile.Token);
@@ -377,7 +447,9 @@ namespace Microsoft.AspNetCore.Mvc
         {
             // Arrange
             var expectedContentType = "text/foo; charset=us-ascii";
-            var path = Path.GetFullPath(Path.Combine(".", "TestFiles", "FilePathResultTestFile_ASCII.txt"));
+            var path = Path.GetFullPath(
+                Path.Combine(".", "TestFiles", "FilePathResultTestFile_ASCII.txt")
+            );
             var result = new TestPhysicalFileResult(path, expectedContentType);
             var sendFile = new TestSendFileFeature();
             var httpContext = GetHttpContext();
@@ -389,7 +461,10 @@ namespace Microsoft.AspNetCore.Mvc
 
             // Assert
             Assert.Equal(expectedContentType, httpContext.Response.ContentType);
-            Assert.Equal(Path.GetFullPath(Path.Combine("TestFiles", "FilePathResultTestFile_ASCII.txt")), sendFile.Name);
+            Assert.Equal(
+                Path.GetFullPath(Path.Combine("TestFiles", "FilePathResultTestFile_ASCII.txt")),
+                sendFile.Name
+            );
             Assert.Equal(0, sendFile.Offset);
             Assert.Null(sendFile.Length);
             Assert.Equal(CancellationToken.None, sendFile.Token);
@@ -399,7 +474,9 @@ namespace Microsoft.AspNetCore.Mvc
         public async Task ExecuteResultAsync_WorksWithAbsolutePaths()
         {
             // Arrange
-            var path = Path.GetFullPath(Path.Combine(".", "TestFiles", "FilePathResultTestFile.txt"));
+            var path = Path.GetFullPath(
+                Path.Combine(".", "TestFiles", "FilePathResultTestFile.txt")
+            );
             var result = new TestPhysicalFileResult(path, "text/plain");
 
             var sendFile = new TestSendFileFeature();
@@ -412,7 +489,10 @@ namespace Microsoft.AspNetCore.Mvc
             await result.ExecuteResultAsync(context);
 
             // Assert
-            Assert.Equal(Path.GetFullPath(Path.Combine(".", "TestFiles", "FilePathResultTestFile.txt")), sendFile.Name);
+            Assert.Equal(
+                Path.GetFullPath(Path.Combine(".", "TestFiles", "FilePathResultTestFile.txt")),
+                sendFile.Name
+            );
             Assert.Equal(0, sendFile.Offset);
             Assert.Null(sendFile.Length);
             Assert.Equal(CancellationToken.None, sendFile.Token);
@@ -435,11 +515,17 @@ namespace Microsoft.AspNetCore.Mvc
         {
             // Arrange
             var result = new TestPhysicalFileResult(path, "text/plain");
-            var context = new ActionContext(GetHttpContext(), new RouteData(), new ActionDescriptor());
+            var context = new ActionContext(
+                GetHttpContext(),
+                new RouteData(),
+                new ActionDescriptor()
+            );
             var expectedMessage = $"Path '{path}' was not rooted.";
 
             // Act
-            var ex = await Assert.ThrowsAsync<NotSupportedException>(() => result.ExecuteResultAsync(context));
+            var ex = await Assert.ThrowsAsync<NotSupportedException>(
+                () => result.ExecuteResultAsync(context)
+            );
 
             // Assert
             Assert.Equal(expectedMessage, ex.Message);
@@ -454,14 +540,22 @@ namespace Microsoft.AspNetCore.Mvc
         [InlineData(".\\SubFolder\\SubFolderTestFile.txt")]
         [InlineData("./SubFolder\\SubFolderTestFile.txt")]
         [InlineData(".\\SubFolder/SubFolderTestFile.txt")]
-        public void ExecuteAsync_ThrowsDirectoryNotFound_IfItCanNotFindTheDirectory_ForRootPaths(string path)
+        public void ExecuteAsync_ThrowsDirectoryNotFound_IfItCanNotFindTheDirectory_ForRootPaths(
+            string path
+        )
         {
             // Arrange
             var result = new TestPhysicalFileResult(path, "text/plain");
-            var context = new ActionContext(new DefaultHttpContext(), new RouteData(), new ActionDescriptor());
+            var context = new ActionContext(
+                new DefaultHttpContext(),
+                new RouteData(),
+                new ActionDescriptor()
+            );
 
             // Act & Assert
-            Assert.ThrowsAsync<DirectoryNotFoundException>(() => result.ExecuteResultAsync(context));
+            Assert.ThrowsAsync<DirectoryNotFoundException>(
+                () => result.ExecuteResultAsync(context)
+            );
         }
 
         [Theory]
@@ -471,7 +565,11 @@ namespace Microsoft.AspNetCore.Mvc
         {
             // Arrange
             var result = new TestPhysicalFileResult(path, "text/plain");
-            var context = new ActionContext(new DefaultHttpContext(), new RouteData(), new ActionDescriptor());
+            var context = new ActionContext(
+                new DefaultHttpContext(),
+                new RouteData(),
+                new ActionDescriptor()
+            );
 
             // Act & Assert
             Assert.ThrowsAsync<FileNotFoundException>(() => result.ExecuteResultAsync(context));
@@ -480,13 +578,12 @@ namespace Microsoft.AspNetCore.Mvc
         private class TestPhysicalFileResult : PhysicalFileResult
         {
             public TestPhysicalFileResult(string filePath, string contentType)
-                : base(filePath, contentType)
-            {
-            }
+                : base(filePath, contentType) { }
 
             public override Task ExecuteResultAsync(ActionContext context)
             {
-                var executor = context.HttpContext.RequestServices.GetRequiredService<TestPhysicalFileResultExecutor>();
+                var executor =
+                    context.HttpContext.RequestServices.GetRequiredService<TestPhysicalFileResultExecutor>();
                 return executor.ExecuteAsync(context, this);
             }
         }
@@ -494,9 +591,7 @@ namespace Microsoft.AspNetCore.Mvc
         private class TestPhysicalFileResultExecutor : PhysicalFileResultExecutor
         {
             public TestPhysicalFileResultExecutor(ILoggerFactory loggerFactory)
-                : base(loggerFactory)
-            {
-            }
+                : base(loggerFactory) { }
 
             protected override FileMetadata GetFileInfo(string path)
             {
@@ -505,7 +600,15 @@ namespace Microsoft.AspNetCore.Mvc
                 {
                     Exists = true,
                     Length = 34,
-                    LastModified = new DateTimeOffset(lastModified.Year, lastModified.Month, lastModified.Day, lastModified.Hour, lastModified.Minute, lastModified.Second, TimeSpan.FromSeconds(0))
+                    LastModified = new DateTimeOffset(
+                        lastModified.Year,
+                        lastModified.Month,
+                        lastModified.Day,
+                        lastModified.Hour,
+                        lastModified.Minute,
+                        lastModified.Second,
+                        TimeSpan.FromSeconds(0)
+                    )
                 };
             }
         }
@@ -531,7 +634,12 @@ namespace Microsoft.AspNetCore.Mvc
                 throw new NotImplementedException();
             }
 
-            public Task SendFileAsync(string path, long offset, long? length, CancellationToken cancellation)
+            public Task SendFileAsync(
+                string path,
+                long offset,
+                long? length,
+                CancellationToken cancellation
+            )
             {
                 Name = path;
                 Offset = offset;

@@ -10,7 +10,11 @@ namespace System.Reflection.Metadata
     {
         [DllImport(RuntimeHelpers.QCall)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        private static extern unsafe bool InternalTryGetRawMetadata(QCallAssembly assembly, ref byte* blob, ref int length);
+        private static extern unsafe bool InternalTryGetRawMetadata(
+            QCallAssembly assembly,
+            ref byte* blob,
+            ref int length
+        );
 
         // Retrieves the metadata section of the assembly, for use with System.Reflection.Metadata.MetadataReader.
         //   - Returns false upon failure. Metadata might not be available for some assemblies, such as AssemblyBuilder, .NET
@@ -20,7 +24,11 @@ namespace System.Reflection.Metadata
         //     associated, is alive. The caller is responsible for keeping the assembly object alive while accessing the
         //     metadata blob.
         [CLSCompliant(false)] // out byte* blob
-        public static unsafe bool TryGetRawMetadata(this Assembly assembly, out byte* blob, out int length)
+        public static unsafe bool TryGetRawMetadata(
+            this Assembly assembly,
+            out byte* blob,
+            out int length
+        )
         {
             if (assembly == null)
             {
@@ -42,7 +50,15 @@ namespace System.Reflection.Metadata
         }
 
         [DllImport(RuntimeHelpers.QCall)]
-        private static extern unsafe void ApplyUpdate(QCallAssembly assembly, byte* metadataDelta, int metadataDeltaLength, byte* ilDelta, int ilDeltaLength, byte* pdbDelta, int pdbDeltaLength);
+        private static extern unsafe void ApplyUpdate(
+            QCallAssembly assembly,
+            byte* metadataDelta,
+            int metadataDeltaLength,
+            byte* ilDelta,
+            int ilDeltaLength,
+            byte* pdbDelta,
+            int pdbDeltaLength
+        );
 
         /// <summary>
         /// Updates the specified assembly using the provided metadata, IL and PDB deltas.
@@ -59,7 +75,12 @@ namespace System.Reflection.Metadata
         /// <param name="pdbDelta">The PDB changes to be applied.</param>
         /// <exception cref="ArgumentNullException">The assembly argument is null.</exception>
         /// <exception cref="NotSupportedException">The update could not be applied.</exception>
-        public static void ApplyUpdate(Assembly assembly, ReadOnlySpan<byte> metadataDelta, ReadOnlySpan<byte> ilDelta, ReadOnlySpan<byte> pdbDelta)
+        public static void ApplyUpdate(
+            Assembly assembly,
+            ReadOnlySpan<byte> metadataDelta,
+            ReadOnlySpan<byte> ilDelta,
+            ReadOnlySpan<byte> pdbDelta
+        )
         {
             if (assembly == null)
             {
@@ -71,13 +92,24 @@ namespace System.Reflection.Metadata
             {
                 throw new ArgumentException(SR.Argument_MustBeRuntimeAssembly);
             }
-
             unsafe
             {
                 RuntimeAssembly rtAsm = runtimeAssembly;
-                fixed (byte* metadataDeltaPtr = metadataDelta, ilDeltaPtr = ilDelta, pdbDeltaPtr = pdbDelta)
+                fixed (
+                    byte* metadataDeltaPtr = metadataDelta,
+                        ilDeltaPtr = ilDelta,
+                        pdbDeltaPtr = pdbDelta
+                )
                 {
-                    ApplyUpdate(new QCallAssembly(ref rtAsm), metadataDeltaPtr, metadataDelta.Length, ilDeltaPtr, ilDelta.Length, pdbDeltaPtr, pdbDelta.Length);
+                    ApplyUpdate(
+                        new QCallAssembly(ref rtAsm),
+                        metadataDeltaPtr,
+                        metadataDelta.Length,
+                        ilDeltaPtr,
+                        ilDelta.Length,
+                        pdbDeltaPtr,
+                        pdbDelta.Length
+                    );
                 }
             }
         }

@@ -60,13 +60,15 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             var filePath = syntaxTree.Source.FilePath;
             if (FileName == null)
             {
-                var message = $"{nameof(AssertSyntaxTreeNodeMatchesBaseline)} should only be called from a parser test ({nameof(FileName)} is null).";
+                var message =
+                    $"{nameof(AssertSyntaxTreeNodeMatchesBaseline)} should only be called from a parser test ({nameof(FileName)} is null).";
                 throw new InvalidOperationException(message);
             }
 
             if (IsTheory)
             {
-                var message = $"{nameof(AssertSyntaxTreeNodeMatchesBaseline)} should not be called from a [Theory] test.";
+                var message =
+                    $"{nameof(AssertSyntaxTreeNodeMatchesBaseline)} should not be called from a [Theory] test.";
                 throw new InvalidOperationException(message);
             }
 
@@ -84,7 +86,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                 File.WriteAllText(baselineFullPath, SyntaxNodeSerializer.Serialize(root));
 
                 // Write diagnostics baseline
-                var baselineDiagnosticsFullPath = Path.Combine(TestProjectRoot, baselineDiagnosticsFileName);
+                var baselineDiagnosticsFullPath = Path.Combine(
+                    TestProjectRoot,
+                    baselineDiagnosticsFileName
+                );
                 var lines = diagnostics.Select(SerializeDiagnostic).ToArray();
                 if (lines.Any())
                 {
@@ -96,11 +101,20 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                 }
 
                 // Write classified spans baseline
-                var classifiedSpansBaselineFullPath = Path.Combine(TestProjectRoot, baselineClassifiedSpansFileName);
-                File.WriteAllText(classifiedSpansBaselineFullPath, ClassifiedSpanSerializer.Serialize(syntaxTree));
+                var classifiedSpansBaselineFullPath = Path.Combine(
+                    TestProjectRoot,
+                    baselineClassifiedSpansFileName
+                );
+                File.WriteAllText(
+                    classifiedSpansBaselineFullPath,
+                    ClassifiedSpanSerializer.Serialize(syntaxTree)
+                );
 
                 // Write tag helper spans baseline
-                var tagHelperSpansBaselineFullPath = Path.Combine(TestProjectRoot, baselineTagHelperSpansFileName);
+                var tagHelperSpansBaselineFullPath = Path.Combine(
+                    TestProjectRoot,
+                    baselineTagHelperSpansFileName
+                );
                 var serializedTagHelperSpans = TagHelperSpanSerializer.Serialize(syntaxTree);
                 if (!string.IsNullOrEmpty(serializedTagHelperSpans))
                 {
@@ -121,39 +135,55 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                 throw new XunitException($"The resource {baselineFileName} was not found.");
             }
 
-            var baseline = stFile.ReadAllText().Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+            var baseline = stFile.ReadAllText()
+                .Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
             SyntaxNodeVerifier.Verify(root, baseline);
 
             // Verify diagnostics
             var baselineDiagnostics = string.Empty;
-            var diagnosticsFile = TestFile.Create(baselineDiagnosticsFileName, GetType().GetTypeInfo().Assembly);
+            var diagnosticsFile = TestFile.Create(
+                baselineDiagnosticsFileName,
+                GetType().GetTypeInfo().Assembly
+            );
             if (diagnosticsFile.Exists())
             {
                 baselineDiagnostics = diagnosticsFile.ReadAllText();
             }
 
-            var actualDiagnostics = string.Concat(diagnostics.Select(d => SerializeDiagnostic(d) + "\r\n"));
+            var actualDiagnostics = string.Concat(
+                diagnostics.Select(d => SerializeDiagnostic(d) + "\r\n")
+            );
             Assert.Equal(baselineDiagnostics, actualDiagnostics);
 
             // Verify classified spans
-            var classifiedSpanFile = TestFile.Create(baselineClassifiedSpansFileName, GetType().GetTypeInfo().Assembly);
+            var classifiedSpanFile = TestFile.Create(
+                baselineClassifiedSpansFileName,
+                GetType().GetTypeInfo().Assembly
+            );
             if (!classifiedSpanFile.Exists())
             {
-                throw new XunitException($"The resource {baselineClassifiedSpansFileName} was not found.");
+                throw new XunitException(
+                    $"The resource {baselineClassifiedSpansFileName} was not found."
+                );
             }
             else
             {
                 var classifiedSpanBaseline = new string[0];
-                classifiedSpanBaseline = classifiedSpanFile.ReadAllText().Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+                classifiedSpanBaseline = classifiedSpanFile.ReadAllText()
+                    .Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
                 ClassifiedSpanVerifier.Verify(syntaxTree, classifiedSpanBaseline);
             }
 
             // Verify tag helper spans
-            var tagHelperSpanFile = TestFile.Create(baselineTagHelperSpansFileName, GetType().GetTypeInfo().Assembly);
+            var tagHelperSpanFile = TestFile.Create(
+                baselineTagHelperSpansFileName,
+                GetType().GetTypeInfo().Assembly
+            );
             var tagHelperSpanBaseline = new string[0];
             if (tagHelperSpanFile.Exists())
             {
-                tagHelperSpanBaseline = tagHelperSpanFile.ReadAllText().Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+                tagHelperSpanBaseline = tagHelperSpanFile.ReadAllText()
+                    .Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
                 TagHelperSpanVerifier.Verify(syntaxTree, tagHelperSpanBaseline);
             }
         }
@@ -168,10 +198,20 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
 
         private static string NormalizeNewLines(string content)
         {
-            return Regex.Replace(content, "(?<!\r)\n", "\r\n", RegexOptions.None, TimeSpan.FromSeconds(10));
+            return Regex.Replace(
+                content,
+                "(?<!\r)\n",
+                "\r\n",
+                RegexOptions.None,
+                TimeSpan.FromSeconds(10)
+            );
         }
 
-        internal virtual void BaselineTest(RazorSyntaxTree syntaxTree, bool verifySyntaxTree = true, bool ensureFullFidelity = true)
+        internal virtual void BaselineTest(
+            RazorSyntaxTree syntaxTree,
+            bool verifySyntaxTree = true,
+            bool ensureFullFidelity = true
+        )
         {
             if (verifySyntaxTree)
             {
@@ -181,18 +221,49 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             AssertSyntaxTreeNodeMatchesBaseline(syntaxTree);
         }
 
-        internal RazorSyntaxTree ParseDocument(string document, bool designTime = false, IEnumerable<DirectiveDescriptor> directives = null, RazorParserFeatureFlags featureFlags = null, string fileKind = null)
+        internal RazorSyntaxTree ParseDocument(
+            string document,
+            bool designTime = false,
+            IEnumerable<DirectiveDescriptor> directives = null,
+            RazorParserFeatureFlags featureFlags = null,
+            string fileKind = null
+        )
         {
-            return ParseDocument(RazorLanguageVersion.Latest, document, directives, designTime, featureFlags, fileKind);
+            return ParseDocument(
+                RazorLanguageVersion.Latest,
+                document,
+                directives,
+                designTime,
+                featureFlags,
+                fileKind
+            );
         }
 
-        internal virtual RazorSyntaxTree ParseDocument(RazorLanguageVersion version, string document, IEnumerable<DirectiveDescriptor> directives, bool designTime = false, RazorParserFeatureFlags featureFlags = null, string fileKind = null)
+        internal virtual RazorSyntaxTree ParseDocument(
+            RazorLanguageVersion version,
+            string document,
+            IEnumerable<DirectiveDescriptor> directives,
+            bool designTime = false,
+            RazorParserFeatureFlags featureFlags = null,
+            string fileKind = null
+        )
         {
             directives = directives ?? Array.Empty<DirectiveDescriptor>();
 
-            var source = TestRazorSourceDocument.Create(document, filePath: null, relativePath: null, normalizeNewLines: true);
+            var source = TestRazorSourceDocument.Create(
+                document,
+                filePath: null,
+                relativePath: null,
+                normalizeNewLines: true
+            );
 
-            var options = CreateParserOptions(version, directives, designTime, featureFlags, fileKind);
+            var options = CreateParserOptions(
+                version,
+                directives,
+                designTime,
+                featureFlags,
+                fileKind
+            );
             var context = new ParserContext(source, options);
 
             var codeParser = new CSharpCodeParser(directives, context);
@@ -226,7 +297,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             ParseDocumentTest(document, null, false, fileKind);
         }
 
-        internal virtual void ParseDocumentTest(string document, IEnumerable<DirectiveDescriptor> directives)
+        internal virtual void ParseDocumentTest(
+            string document,
+            IEnumerable<DirectiveDescriptor> directives
+        )
         {
             ParseDocumentTest(document, directives, false);
         }
@@ -236,24 +310,48 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             ParseDocumentTest(document, null, designTime);
         }
 
-        internal virtual void ParseDocumentTest(string document, IEnumerable<DirectiveDescriptor> directives, bool designTime, string fileKind = null)
+        internal virtual void ParseDocumentTest(
+            string document,
+            IEnumerable<DirectiveDescriptor> directives,
+            bool designTime,
+            string fileKind = null
+        )
         {
-            ParseDocumentTest(RazorLanguageVersion.Latest, document, directives, designTime, fileKind);
+            ParseDocumentTest(
+                RazorLanguageVersion.Latest,
+                document,
+                directives,
+                designTime,
+                fileKind
+            );
         }
 
-        internal virtual void ParseDocumentTest(RazorLanguageVersion version, string document, IEnumerable<DirectiveDescriptor> directives, bool designTime, string fileKind = null)
+        internal virtual void ParseDocumentTest(
+            RazorLanguageVersion version,
+            string document,
+            IEnumerable<DirectiveDescriptor> directives,
+            bool designTime,
+            string fileKind = null
+        )
         {
-            var result = ParseDocument(version, document, directives, designTime, fileKind: fileKind);
+            var result = ParseDocument(
+                version,
+                document,
+                directives,
+                designTime,
+                fileKind: fileKind
+            );
 
             BaselineTest(result);
         }
 
         internal static RazorParserOptions CreateParserOptions(
-            RazorLanguageVersion version, 
-            IEnumerable<DirectiveDescriptor> directives, 
+            RazorLanguageVersion version,
+            IEnumerable<DirectiveDescriptor> directives,
             bool designTime,
             RazorParserFeatureFlags featureFlags = null,
-            string fileKind = null)
+            string fileKind = null
+        )
         {
             return new TestRazorParserOptions(
                 directives.ToArray(),
@@ -261,12 +359,20 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                 parseLeadingDirectives: false,
                 version: version,
                 fileKind: fileKind ?? FileKinds.Legacy,
-                featureFlags: featureFlags);
+                featureFlags: featureFlags
+            );
         }
 
         private class TestRazorParserOptions : RazorParserOptions
         {
-            public TestRazorParserOptions(DirectiveDescriptor[] directives, bool designTime, bool parseLeadingDirectives, RazorLanguageVersion version, string fileKind, RazorParserFeatureFlags featureFlags = null)
+            public TestRazorParserOptions(
+                DirectiveDescriptor[] directives,
+                bool designTime,
+                bool parseLeadingDirectives,
+                RazorLanguageVersion version,
+                string fileKind,
+                RazorParserFeatureFlags featureFlags = null
+            )
             {
                 if (directives == null)
                 {

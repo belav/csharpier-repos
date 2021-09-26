@@ -13,16 +13,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     ///     CLR type hierarchy.
     /// </summary>
     [Obsolete]
-    public class DerivedTypeDiscoveryConvention : InheritanceDiscoveryConventionBase, IEntityTypeAddedConvention
+    public class DerivedTypeDiscoveryConvention
+        : InheritanceDiscoveryConventionBase,
+          IEntityTypeAddedConvention
     {
         /// <summary>
         ///     Creates a new instance of <see cref="DerivedTypeDiscoveryConvention" />.
         /// </summary>
         /// <param name="dependencies"> Parameter object containing dependencies for this convention. </param>
         public DerivedTypeDiscoveryConvention(ProviderConventionSetBuilderDependencies dependencies)
-            : base(dependencies)
-        {
-        }
+            : base(dependencies) { }
 
         /// <summary>
         ///     Called after an entity type is added to the model.
@@ -31,15 +31,18 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <param name="context"> Additional information associated with convention execution. </param>
         public virtual void ProcessEntityTypeAdded(
             IConventionEntityTypeBuilder entityTypeBuilder,
-            IConventionContext<IConventionEntityTypeBuilder> context)
+            IConventionContext<IConventionEntityTypeBuilder> context
+        )
         {
             var entityType = entityTypeBuilder.Metadata;
             var clrType = entityType.ClrType;
-            if (clrType == null
+            if (
+                clrType == null
                 || entityType.HasSharedClrType
                 || entityType.HasDefiningNavigation()
                 || entityType.Model.IsOwned(clrType)
-                || entityType.FindOwnership() != null)
+                || entityType.FindOwnership() != null
+            )
             {
                 return;
             }
@@ -47,13 +50,23 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             var model = entityType.Model;
             foreach (var directlyDerivedType in model.GetEntityTypes())
             {
-                if (directlyDerivedType != entityType
-                        && !directlyDerivedType.HasSharedClrType
-                        && !directlyDerivedType.HasDefiningNavigation()
-                        && !model.IsOwned(directlyDerivedType.ClrType)
-                        && directlyDerivedType.FindDeclaredOwnership() == null
-                        && ((directlyDerivedType.BaseType == null && clrType.IsAssignableFrom(directlyDerivedType.ClrType))
-                            || (directlyDerivedType.BaseType == entityType.BaseType && FindClosestBaseType(directlyDerivedType) == entityType)))
+                if (
+                    directlyDerivedType != entityType
+                    && !directlyDerivedType.HasSharedClrType
+                    && !directlyDerivedType.HasDefiningNavigation()
+                    && !model.IsOwned(directlyDerivedType.ClrType)
+                    && directlyDerivedType.FindDeclaredOwnership() == null
+                    && (
+                        (
+                            directlyDerivedType.BaseType == null
+                            && clrType.IsAssignableFrom(directlyDerivedType.ClrType)
+                        )
+                        || (
+                            directlyDerivedType.BaseType == entityType.BaseType
+                            && FindClosestBaseType(directlyDerivedType) == entityType
+                        )
+                    )
+                )
                 {
                     directlyDerivedType.Builder.HasBaseType(entityType);
                 }

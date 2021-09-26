@@ -16,31 +16,38 @@ namespace Microsoft.AspNetCore.WebSockets.Test
 {
     public class KestrelWebSocketHelpers
     {
-        public static IDisposable CreateServer(ILoggerFactory loggerFactory, out int port, Func<HttpContext, Task> app, Action<WebSocketOptions> configure = null)
+        public static IDisposable CreateServer(
+            ILoggerFactory loggerFactory,
+            out int port,
+            Func<HttpContext, Task> app,
+            Action<WebSocketOptions> configure = null
+        )
         {
             configure = configure ?? (o => { });
             Action<IApplicationBuilder> startup = builder =>
             {
-                builder.Use(async (ct, next) =>
-                {
-                    try
+                builder.Use(
+                    async (ct, next) =>
                     {
-                        // Kestrel does not return proper error responses:
-                        // https://github.com/aspnet/KestrelHttpServer/issues/43
-                        await next();
-                    }
-                    catch (Exception ex)
-                    {
-                        if (ct.Response.HasStarted)
+                        try
                         {
-                            throw;
+                            // Kestrel does not return proper error responses:
+                            // https://github.com/aspnet/KestrelHttpServer/issues/43
+                            await next();
                         }
+                        catch (Exception ex)
+                        {
+                            if (ct.Response.HasStarted)
+                            {
+                                throw;
+                            }
 
-                        ct.Response.StatusCode = 500;
-                        ct.Response.Headers.Clear();
-                        await ct.Response.WriteAsync(ex.ToString());
+                            ct.Response.StatusCode = 500;
+                            ct.Response.Headers.Clear();
+                            await ct.Response.WriteAsync(ex.ToString());
+                        }
                     }
-                });
+                );
                 builder.UseWebSockets();
                 builder.Run(c => app(c));
             };
@@ -49,22 +56,27 @@ namespace Microsoft.AspNetCore.WebSockets.Test
             configBuilder.AddInMemoryCollection();
             var config = configBuilder.Build();
 
-            var host = new HostBuilder()
-                .ConfigureWebHost(webHostBuilder =>
-                {
-                    webHostBuilder
-                    .ConfigureServices(s =>
+            var host = new HostBuilder().ConfigureWebHost(
+                    webHostBuilder =>
                     {
-                        s.AddWebSockets(configure);
-                        s.AddSingleton(loggerFactory);
-                    })
-                    .UseConfiguration(config)
-                    .UseKestrel(options =>
-                    {
-                        options.Listen(IPAddress.Loopback, 0);
-                    })
-                    .Configure(startup);
-                }).Build();
+                        webHostBuilder.ConfigureServices(
+                                s =>
+                                {
+                                    s.AddWebSockets(configure);
+                                    s.AddSingleton(loggerFactory);
+                                }
+                            )
+                            .UseConfiguration(config)
+                            .UseKestrel(
+                                options =>
+                                {
+                                    options.Listen(IPAddress.Loopback, 0);
+                                }
+                            )
+                            .Configure(startup);
+                    }
+                )
+                .Build();
 
             host.Start();
             port = host.GetPort();

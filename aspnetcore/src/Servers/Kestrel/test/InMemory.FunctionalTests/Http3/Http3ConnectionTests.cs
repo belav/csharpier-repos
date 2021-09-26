@@ -20,19 +20,26 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         [Fact]
         public async Task CreateRequestStream_RequestCompleted_Disposed()
         {
-            var appCompletedTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-            await InitializeConnectionAsync(async context =>
-            {
-                var buffer = new byte[16 * 1024];
-                var received = 0;
-
-                while ((received = await context.Request.Body.ReadAsync(buffer, 0, buffer.Length)) > 0)
+            var appCompletedTcs = new TaskCompletionSource(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
+            await InitializeConnectionAsync(
+                async context =>
                 {
-                    await context.Response.Body.WriteAsync(buffer, 0, received);
-                }
+                    var buffer = new byte[16 * 1024];
+                    var received = 0;
 
-                await appCompletedTcs.Task;
-            });
+                    while (
+                        (received = await context.Request.Body.ReadAsync(buffer, 0, buffer.Length))
+                        > 0
+                    )
+                    {
+                        await context.Response.Body.WriteAsync(buffer, 0, received);
+                    }
+
+                    await appCompletedTcs.Task;
+                }
+            );
 
             await CreateControlStream();
             await GetInboundControlStream();
@@ -48,7 +55,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             };
 
             await requestStream.SendHeadersAsync(headers);
-            await requestStream.SendDataAsync(Encoding.ASCII.GetBytes("Hello world"), endStream: true);
+            await requestStream.SendDataAsync(
+                Encoding.ASCII.GetBytes("Hello world"),
+                endStream: true
+            );
 
             Assert.False(requestStream.Disposed);
 
@@ -80,10 +90,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             await InitializeConnectionAsync(_echoApplication);
 
             var outboundcontrolStream = await CreateControlStream();
-            await outboundcontrolStream.SendSettingsAsync(new List<Http3PeerSetting>
-            {
-                new Http3PeerSetting((Internal.Http3.Http3SettingType) settingIdentifier, 0) // reserved value
-            });
+            await outboundcontrolStream.SendSettingsAsync(
+                new List<Http3PeerSetting>
+                {
+                    new Http3PeerSetting((Internal.Http3.Http3SettingType)settingIdentifier, 0) // reserved value
+                }
+            );
 
             await GetInboundControlStream();
 
@@ -91,7 +103,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                 ignoreNonGoAwayFrames: true,
                 expectedLastStreamId: 0,
                 expectedErrorCode: Http3ErrorCode.SettingsError,
-                expectedErrorMessage: CoreStrings.FormatHttp3ErrorControlStreamReservedSetting($"0x{settingIdentifier.ToString("X", CultureInfo.InvariantCulture)}"));
+                expectedErrorMessage: CoreStrings.FormatHttp3ErrorControlStreamReservedSetting(
+                    $"0x{settingIdentifier.ToString("X", CultureInfo.InvariantCulture)}"
+                )
+            );
         }
 
         [Theory]
@@ -109,7 +124,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                 ignoreNonGoAwayFrames: true,
                 expectedLastStreamId: 0,
                 expectedErrorCode: Http3ErrorCode.StreamCreationError,
-                expectedErrorMessage: CoreStrings.FormatHttp3ControlStreamErrorMultipleInboundStreams(name));
+                expectedErrorMessage: CoreStrings.FormatHttp3ControlStreamErrorMultipleInboundStreams(
+                    name
+                )
+            );
         }
 
         [Theory]
@@ -130,7 +148,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                 ignoreNonGoAwayFrames: true,
                 expectedLastStreamId: 0,
                 expectedErrorCode: Http3ErrorCode.UnexpectedFrame,
-                expectedErrorMessage: CoreStrings.FormatHttp3ErrorUnsupportedFrameOnControlStream(Http3Formatting.ToFormattedType(frame.Type)));
+                expectedErrorMessage: CoreStrings.FormatHttp3ErrorUnsupportedFrameOnControlStream(
+                    Http3Formatting.ToFormattedType(frame.Type)
+                )
+            );
         }
     }
 }

@@ -21,19 +21,23 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
     /// Microsoft.VisualStudio.Shell.TreeNavigation.HierarchyProvider.dll and
     /// Microsoft.VisualStudio.Shell.TreeNavigation.GraphProvider.dll.
     /// </summary>
-    internal abstract class BaseItem :
-        LocalizableProperties,
-        ITreeDisplayItem,
-        IInteractionPatternProvider,
-        IInvocationPattern,
-        IContextMenuPattern,
-        INotifyPropertyChanged,
-        IDragDropSourcePattern,
-        IBrowsablePattern,
-        ISupportDisposalNotification,
-        IPrioritizedComparable
+    internal abstract class BaseItem
+        : LocalizableProperties,
+          ITreeDisplayItem,
+          IInteractionPatternProvider,
+          IInvocationPattern,
+          IContextMenuPattern,
+          INotifyPropertyChanged,
+          IDragDropSourcePattern,
+          IBrowsablePattern,
+          ISupportDisposalNotification,
+          IPrioritizedComparable
     {
-        public virtual event PropertyChangedEventHandler PropertyChanged { add { } remove { } }
+        public virtual event PropertyChangedEventHandler PropertyChanged
+        {
+            add { }
+            remove { }
+        }
 
         private readonly string _name;
 

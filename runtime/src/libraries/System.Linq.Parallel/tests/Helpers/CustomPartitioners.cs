@@ -23,7 +23,13 @@ namespace System.Linq.Parallel.Tests
 
         public override IList<IEnumerator<T>> GetPartitions(int partitionCount)
         {
-            return _source.GetPartitions(partitionCount).Select((partition, index) => new StrictPartitionerEnumerator(partition, partitionCount, index, _count)).Cast<IEnumerator<T>>().ToList();
+            return _source.GetPartitions(partitionCount)
+                .Select(
+                    (partition, index) =>
+                        new StrictPartitionerEnumerator(partition, partitionCount, index, _count)
+                )
+                .Cast<IEnumerator<T>>()
+                .ToList();
         }
 
         private class StrictPartitionerEnumerator : IEnumerator<T>
@@ -31,10 +37,18 @@ namespace System.Linq.Parallel.Tests
             private IEnumerator<T> _partition;
             private int _elements;
 
-            public StrictPartitionerEnumerator(IEnumerator<T> partition, int partitionCount, int index, int count)
+            public StrictPartitionerEnumerator(
+                IEnumerator<T> partition,
+                int partitionCount,
+                int index,
+                int count
+            )
             {
                 _partition = partition;
-                _elements = Math.Min((count - 1) / partitionCount + 1, count - index * ((count - 1) / partitionCount + 1));
+                _elements = Math.Min(
+                    (count - 1) / partitionCount + 1,
+                    count - index * ((count - 1) / partitionCount + 1)
+                );
             }
 
             public T Current
@@ -51,10 +65,7 @@ namespace System.Linq.Parallel.Tests
 
             object IEnumerator.Current
             {
-                get
-                {
-                    return Current;
-                }
+                get { return Current; }
             }
 
             public void Dispose()
@@ -86,8 +97,12 @@ namespace System.Linq.Parallel.Tests
         private readonly bool _keysOrderedInEachPartition;
         private readonly bool _keysNormalized;
 
-        public RangeOrderablePartitioner(int start, int count, bool keysOrderedInEachPartition, bool keysNormalized)
-            : base(keysOrderedInEachPartition, false, keysNormalized)
+        public RangeOrderablePartitioner(
+            int start,
+            int count,
+            bool keysOrderedInEachPartition,
+            bool keysNormalized
+        ) : base(keysOrderedInEachPartition, false, keysNormalized)
         {
             _start = start;
             _count = count;
@@ -95,30 +110,43 @@ namespace System.Linq.Parallel.Tests
             _keysNormalized = keysNormalized;
         }
 
-        public override IList<IEnumerator<KeyValuePair<long, int>>> GetOrderablePartitions(int partitionCount)
+        public override IList<IEnumerator<KeyValuePair<long, int>>> GetOrderablePartitions(
+            int partitionCount
+        )
         {
-            IEnumerator<KeyValuePair<long, int>>[] partitions = new IEnumerator<KeyValuePair<long, int>>[partitionCount];
+            IEnumerator<KeyValuePair<long, int>>[] partitions = new IEnumerator<
+                KeyValuePair<long, int>
+            >[partitionCount];
             int partitionSize = Math.Max(1, (int)Math.Ceiling(_count / (double)partitionCount));
             for (int i = 0; i < partitionCount; i++)
             {
                 int start = partitionSize * i;
                 int count = Math.Max(0, Math.Min(_count - start, partitionSize));
-                partitions[i] = Enumerable.Range(start, count).Select(elemIndex =>
-                {
-                    if (!_keysOrderedInEachPartition)
-                    {
-                        elemIndex = _count - 1 - elemIndex;
-                    }
-                    long key = _keysNormalized ? elemIndex : (elemIndex * 2);
-                    return new KeyValuePair<long, int>(key, _start + elemIndex);
-                }).GetEnumerator();
+                partitions[i] = Enumerable.Range(start, count)
+                    .Select(
+                        elemIndex =>
+                        {
+                            if (!_keysOrderedInEachPartition)
+                            {
+                                elemIndex = _count - 1 - elemIndex;
+                            }
+                            long key = _keysNormalized ? elemIndex : (elemIndex * 2);
+                            return new KeyValuePair<long, int>(key, _start + elemIndex);
+                        }
+                    )
+                    .GetEnumerator();
             }
             return partitions;
         }
 
         public override IEnumerable<KeyValuePair<long, int>> GetOrderableDynamicPartitions()
         {
-            return new RangeDynamicPartitions(_start, _count, _keysOrderedInEachPartition, _keysNormalized);
+            return new RangeDynamicPartitions(
+                _start,
+                _count,
+                _keysOrderedInEachPartition,
+                _keysNormalized
+            );
         }
 
         private sealed class RangeDynamicPartitions : IEnumerable<KeyValuePair<long, int>>
@@ -129,7 +157,12 @@ namespace System.Linq.Parallel.Tests
             private readonly bool _keysNormalized;
             private int _pos = 0;
 
-            internal RangeDynamicPartitions(int start, int count, bool keysOrderedInEachPartition, bool keysNormalized)
+            internal RangeDynamicPartitions(
+                int start,
+                int count,
+                bool keysOrderedInEachPartition,
+                bool keysNormalized
+            )
             {
                 _start = start;
                 _count = count;

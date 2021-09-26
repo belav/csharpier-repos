@@ -20,9 +20,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.SmartIndent
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public SmartIndentProvider()
-        {
-        }
+        public SmartIndentProvider() { }
 
         public ISmartIndent CreateSmartIndent(ITextView textView)
         {
@@ -31,7 +29,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.SmartIndent
                 throw new ArgumentNullException(nameof(textView));
             }
 
-            if (!textView.TextBuffer.GetFeatureOnOffOption(InternalFeatureOnOffOptions.SmartIndenter))
+            if (
+                !textView.TextBuffer.GetFeatureOnOffOption(
+                    InternalFeatureOnOffOptions.SmartIndenter
+                )
+            )
             {
                 return null;
             }

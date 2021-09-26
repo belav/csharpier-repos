@@ -217,7 +217,14 @@ namespace System.Reflection
 
                 // Do not call GetPublicKeyToken() here - that latches the result into AssemblyName which isn't a side effect we want.
                 byte[]? pkt = _publicKeyToken ?? ComputePublicKeyToken();
-                return AssemblyNameFormatter.ComputeDisplayName(Name, Version, CultureName, pkt, Flags, ContentType);
+                return AssemblyNameFormatter.ComputeDisplayName(
+                    Name,
+                    Version,
+                    CultureName,
+                    pkt,
+                    Flags,
+                    ContentType
+                );
             }
         }
 
@@ -245,7 +252,10 @@ namespace System.Reflection
         /// match the intent of this api, this api has been broken this way since its debut and we cannot
         /// change its behavior now.
         /// </summary>
-        public static bool ReferenceMatchesDefinition(AssemblyName? reference, AssemblyName? definition)
+        public static bool ReferenceMatchesDefinition(
+            AssemblyName? reference,
+            AssemblyName? definition
+        )
         {
             if (object.ReferenceEquals(reference, definition))
                 return true;
@@ -267,7 +277,17 @@ namespace System.Reflection
                 return string.Empty;
 
             int position = 0;
-            char[]? dest = EscapeString(codebase, 0, codebase.Length, null, ref position, true, c_DummyChar, c_DummyChar, c_DummyChar);
+            char[]? dest = EscapeString(
+                codebase,
+                0,
+                codebase.Length,
+                null,
+                ref position,
+                true,
+                c_DummyChar,
+                c_DummyChar,
+                c_DummyChar
+            );
             if (dest == null)
                 return codebase;
 
@@ -286,12 +306,22 @@ namespace System.Reflection
         //
         // Returns null if nothing has to be escaped AND passed dest was null, otherwise the resulting array with the updated destPos
         //
-        internal static unsafe char[]? EscapeString(string input, int start, int end, char[]? dest, ref int destPos,
-            bool isUriString, char force1, char force2, char rsvd)
+        internal static unsafe char[]? EscapeString(
+            string input,
+            int start,
+            int end,
+            char[]? dest,
+            ref int destPos,
+            bool isUriString,
+            char force1,
+            char force2,
+            char rsvd
+        )
         {
             int i = start;
             int prevInputPos = start;
-            byte* bytes = stackalloc byte[c_MaxUnicodeCharsReallocate * c_MaxUTF_8BytesPerUnicodeChar];   // 40*4=160
+            byte* bytes =
+                stackalloc byte[c_MaxUnicodeCharsReallocate * c_MaxUTF_8BytesPerUnicodeChar]; // 40*4=160
 
             fixed (char* pStr = input)
             {
@@ -302,10 +332,14 @@ namespace System.Reflection
                     // a Unicode ?
                     if (ch > '\x7F')
                     {
-                        short maxSize = (short)Math.Min(end - i, (int)c_MaxUnicodeCharsReallocate - 1);
+                        short maxSize = (short)Math.Min(
+                            end - i,
+                            (int)c_MaxUnicodeCharsReallocate - 1
+                        );
 
                         short count = 1;
-                        for (; count < maxSize && pStr[i + count] > '\x7f'; ++count) ;
+                        for (; count < maxSize && pStr[i + count] > '\x7f'; ++count)
+                            ;
 
                         // Is the last a high surrogate?
                         if (pStr[i + count - 1] >= 0xD800 && pStr[i + count - 1] <= 0xDBFF)
@@ -317,13 +351,24 @@ namespace System.Reflection
                             ++count;
                         }
 
-                        dest = EnsureDestinationSize(pStr, dest, i,
+                        dest = EnsureDestinationSize(
+                            pStr,
+                            dest,
+                            i,
                             (short)(count * c_MaxUTF_8BytesPerUnicodeChar * c_EncodedCharsPerByte),
-                            c_MaxUnicodeCharsReallocate * c_MaxUTF_8BytesPerUnicodeChar * c_EncodedCharsPerByte,
-                            ref destPos, prevInputPos);
+                            c_MaxUnicodeCharsReallocate
+                                * c_MaxUTF_8BytesPerUnicodeChar
+                                * c_EncodedCharsPerByte,
+                            ref destPos,
+                            prevInputPos
+                        );
 
-                        short numberOfBytes = (short)Encoding.UTF8.GetBytes(pStr + i, count, bytes,
-                            c_MaxUnicodeCharsReallocate * c_MaxUTF_8BytesPerUnicodeChar);
+                        short numberOfBytes = (short)Encoding.UTF8.GetBytes(
+                            pStr + i,
+                            count,
+                            bytes,
+                            c_MaxUnicodeCharsReallocate * c_MaxUTF_8BytesPerUnicodeChar
+                        );
 
                         // This is the only exception that built in UriParser can throw after a Uri ctor.
                         // Should not happen unless the app tries to feed an invalid Unicode string
@@ -340,9 +385,20 @@ namespace System.Reflection
                     else if (ch == '%' && rsvd == '%')
                     {
                         // Means we don't reEncode '%' but check for the possible escaped sequence
-                        dest = EnsureDestinationSize(pStr, dest, i, c_EncodedCharsPerByte,
-                            c_MaxAsciiCharsReallocate * c_EncodedCharsPerByte, ref destPos, prevInputPos);
-                        if (i + 2 < end && HexConverter.IsHexChar(pStr[i + 1]) && HexConverter.IsHexChar(pStr[i + 2]))
+                        dest = EnsureDestinationSize(
+                            pStr,
+                            dest,
+                            i,
+                            c_EncodedCharsPerByte,
+                            c_MaxAsciiCharsReallocate * c_EncodedCharsPerByte,
+                            ref destPos,
+                            prevInputPos
+                        );
+                        if (
+                            i + 2 < end
+                            && HexConverter.IsHexChar(pStr[i + 1])
+                            && HexConverter.IsHexChar(pStr[i + 2])
+                        )
                         {
                             // leave it escaped
                             dest[destPos++] = '%';
@@ -356,10 +412,24 @@ namespace System.Reflection
                         }
                         prevInputPos = i + 1;
                     }
-                    else if (ch == force1 || ch == force2 || (ch != rsvd && (isUriString ? !IsReservedUnreservedOrHash(ch) : !IsUnreserved(ch))))
+                    else if (
+                        ch == force1
+                        || ch == force2
+                        || (
+                            ch != rsvd
+                            && (isUriString ? !IsReservedUnreservedOrHash(ch) : !IsUnreserved(ch))
+                        )
+                    )
                     {
-                        dest = EnsureDestinationSize(pStr, dest, i, c_EncodedCharsPerByte,
-                            c_MaxAsciiCharsReallocate * c_EncodedCharsPerByte, ref destPos, prevInputPos);
+                        dest = EnsureDestinationSize(
+                            pStr,
+                            dest,
+                            i,
+                            c_EncodedCharsPerByte,
+                            c_MaxAsciiCharsReallocate * c_EncodedCharsPerByte,
+                            ref destPos,
+                            prevInputPos
+                        );
                         EscapeAsciiChar(ch, dest, ref destPos);
                         prevInputPos = i + 1;
                     }
@@ -369,7 +439,15 @@ namespace System.Reflection
                 {
                     // need to fill up the dest array ?
                     if (prevInputPos != start || dest != null)
-                        dest = EnsureDestinationSize(pStr, dest, i, 0, 0, ref destPos, prevInputPos);
+                        dest = EnsureDestinationSize(
+                            pStr,
+                            dest,
+                            i,
+                            0,
+                            0,
+                            ref destPos,
+                            prevInputPos
+                        );
                 }
             }
 
@@ -379,13 +457,25 @@ namespace System.Reflection
         //
         // ensure destination array has enough space and contains all the needed input stuff
         //
-        private static unsafe char[] EnsureDestinationSize(char* pStr, char[]? dest, int currentInputPos,
-            short charsToAdd, short minReallocateChars, ref int destPos, int prevInputPos)
+        private static unsafe char[] EnsureDestinationSize(
+            char* pStr,
+            char[]? dest,
+            int currentInputPos,
+            short charsToAdd,
+            short minReallocateChars,
+            ref int destPos,
+            int prevInputPos
+        )
         {
-            if (dest is null || dest.Length < destPos + (currentInputPos - prevInputPos) + charsToAdd)
+            if (
+                dest is null
+                || dest.Length < destPos + (currentInputPos - prevInputPos) + charsToAdd
+            )
             {
                 // allocating or reallocating array by ensuring enough space based on maxCharsToAdd.
-                char[] newresult = new char[destPos + (currentInputPos - prevInputPos) + minReallocateChars];
+                char[] newresult = new char[
+                    destPos + (currentInputPos - prevInputPos) + minReallocateChars
+                ];
 
                 if (!(dest is null) && destPos != 0)
                     Buffer.BlockCopy(dest, 0, newresult, 0, destPos << 1);
@@ -426,8 +516,7 @@ namespace System.Reflection
         // Only consider ASCII characters
         internal static bool IsAsciiLetter(char character)
         {
-            return (character >= 'a' && character <= 'z') ||
-                   (character >= 'A' && character <= 'Z');
+            return (character >= 'a' && character <= 'z') || (character >= 'A' && character <= 'Z');
         }
 
         internal static bool IsAsciiLetterOrDigit(char character)
@@ -435,7 +524,7 @@ namespace System.Reflection
             return IsAsciiLetter(character) || (character >= '0' && character <= '9');
         }
 
-        internal const char c_DummyChar = (char)0xFFFF;     // An Invalid Unicode character used as a dummy char passed into the parameter
+        internal const char c_DummyChar = (char)0xFFFF; // An Invalid Unicode character used as a dummy char passed into the parameter
         private const short c_MaxAsciiCharsReallocate = 40;
         private const short c_MaxUnicodeCharsReallocate = 40;
         private const short c_MaxUTF_8BytesPerUnicodeChar = 4;

@@ -16,19 +16,18 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
         public TestCosmosExecutionStrategy()
             : base(
                 new DbContext(
-                    new DbContextOptionsBuilder()
-                        .EnableServiceProviderCaching(false)
+                    new DbContextOptionsBuilder().EnableServiceProviderCaching(false)
                         .UseCosmos(
                             TestEnvironment.DefaultConnection,
                             TestEnvironment.AuthToken,
-                            "NonExistent").Options),
-                DefaultMaxRetryCount, DefaultMaxDelay)
-        {
-        }
+                            "NonExistent"
+                        ).Options
+                ),
+                DefaultMaxRetryCount,
+                DefaultMaxDelay
+            ) { }
 
         public TestCosmosExecutionStrategy(ExecutionStrategyDependencies dependencies)
-            : base(dependencies, DefaultMaxRetryCount, DefaultMaxDelay)
-        {
-        }
+            : base(dependencies, DefaultMaxRetryCount, DefaultMaxDelay) { }
     }
 }

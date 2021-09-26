@@ -63,12 +63,20 @@ namespace System.Security.Cryptography.Encryption.TripleDes.Tests
         [Fact]
         public static void TripleDesCreate()
         {
-            byte[] inputBytes = Encoding.ASCII.GetBytes("This is a secret message and is a sentence that is longer than a block, it ensures that multi-block functions work.");
+            byte[] inputBytes = Encoding.ASCII.GetBytes(
+                "This is a secret message and is a sentence that is longer than a block, it ensures that multi-block functions work."
+            );
             TripleDES tripleDes = TripleDES.Create();
 
             byte[] encryptedBytes;
             using (MemoryStream input = new MemoryStream(inputBytes))
-            using (CryptoStream cryptoStream = new CryptoStream(input, tripleDes.CreateEncryptor(), CryptoStreamMode.Read))
+            using (
+                CryptoStream cryptoStream = new CryptoStream(
+                    input,
+                    tripleDes.CreateEncryptor(),
+                    CryptoStreamMode.Read
+                )
+            )
             using (MemoryStream output = new MemoryStream())
             {
                 cryptoStream.CopyTo(output);
@@ -79,7 +87,13 @@ namespace System.Security.Cryptography.Encryption.TripleDes.Tests
 
             byte[] decryptedBytes;
             using (MemoryStream input = new MemoryStream(encryptedBytes))
-            using (CryptoStream cryptoStream = new CryptoStream(input, tripleDes.CreateDecryptor(), CryptoStreamMode.Read))
+            using (
+                CryptoStream cryptoStream = new CryptoStream(
+                    input,
+                    tripleDes.CreateDecryptor(),
+                    CryptoStreamMode.Read
+                )
+            )
             using (MemoryStream output = new MemoryStream())
             {
                 cryptoStream.CopyTo(output);
@@ -101,9 +115,30 @@ namespace System.Security.Cryptography.Encryption.TripleDes.Tests
 
                 tripleDes.Key = new byte[]
                 {
-                    /* k1 */ 0, 1, 2, 3, 4, 5, 6, 7,
-                    /* k2 */ 0, 0, 0, 2, 4, 6, 0, 1,
-                    /* k3 */ 0, 1, 2, 3, 4, 5, 6, 7,
+                    /* k1 */0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    /* k2 */0,
+                    0,
+                    0,
+                    2,
+                    4,
+                    6,
+                    0,
+                    1,
+                    /* k3 */0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
                 };
             }
         }

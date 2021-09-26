@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
         TXmlEmptyElementSyntax,
         TXmlCrefAttributeSyntax,
         TXmlNameAttributeSyntax,
-        TXmlTextAttributeSyntax> : IDocumentationCommentService
+        TXmlTextAttributeSyntax
+    > : IDocumentationCommentService
         where TDocumentationCommentTriviaSyntax : SyntaxNode
         where TXmlNodeSyntax : SyntaxNode
         where TXmlAttributeSyntax : SyntaxNode
@@ -38,8 +39,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
 
         private readonly ISyntaxFacts _syntaxFacts;
 
-        protected AbstractDocumentationCommentService(ISyntaxFacts syntaxFacts)
-            => _syntaxFacts = syntaxFacts;
+        protected AbstractDocumentationCommentService(ISyntaxFacts syntaxFacts) =>
+            _syntaxFacts = syntaxFacts;
 
         private static void AddSpaceIfNotAlreadyThere(StringBuilder sb)
         {
@@ -49,24 +50,31 @@ namespace Microsoft.CodeAnalysis.LanguageServices
             }
         }
 
-        private string GetDocumentationCommentPrefix(TDocumentationCommentTriviaSyntax documentationComment)
+        private string GetDocumentationCommentPrefix(
+            TDocumentationCommentTriviaSyntax documentationComment
+        )
         {
             Contract.ThrowIfNull(documentationComment);
 
             var leadingTrivia = documentationComment.GetLeadingTrivia();
-            var exteriorTrivia = leadingTrivia.Where(t => _syntaxFacts.IsDocumentationCommentExteriorTrivia(t))
-                                              .FirstOrNull();
+            var exteriorTrivia = leadingTrivia.Where(
+                    t => _syntaxFacts.IsDocumentationCommentExteriorTrivia(t)
+                )
+                .FirstOrNull();
 
             return exteriorTrivia != null ? exteriorTrivia.Value.ToString() : string.Empty;
         }
 
         public string GetBannerText(
-            TDocumentationCommentTriviaSyntax documentationComment, int maxBannerLength, CancellationToken cancellationToken)
+            TDocumentationCommentTriviaSyntax documentationComment,
+            int maxBannerLength,
+            CancellationToken cancellationToken
+        )
         {
             // TODO: Consider unifying code to extract text from an Xml Documentation Comment (https://github.com/dotnet/roslyn/issues/2290)
-            var summaryElement =
-                documentationComment.ChildNodes().OfType<TXmlElementSyntax>()
-                                    .FirstOrDefault(e => GetName(e).ToString() == "summary");
+            var summaryElement = documentationComment.ChildNodes()
+                .OfType<TXmlElementSyntax>()
+                .FirstOrDefault(e => GetName(e).ToString() == "summary");
 
             var prefix = GetDocumentationCommentPrefix(documentationComment);
 
@@ -85,8 +93,14 @@ namespace Microsoft.CodeAnalysis.LanguageServices
                 // If a summary element isn't found, use the first line of the XML doc comment.
                 var syntaxTree = documentationComment.SyntaxTree;
                 var spanStart = documentationComment.SpanStart;
-                var line = syntaxTree.GetText(cancellationToken).Lines.GetLineFromPosition(spanStart);
-                text = prefix + " " + line.ToString().Substring(spanStart - line.Start).Trim() + " " + Ellipsis;
+                var line = syntaxTree.GetText(cancellationToken)
+                    .Lines.GetLineFromPosition(spanStart);
+                text =
+                    prefix
+                    + " "
+                    + line.ToString().Substring(spanStart - line.Start).Trim()
+                    + " "
+                    + Ellipsis;
             }
 
             if (text.Length > maxBannerLength)
@@ -156,7 +170,9 @@ namespace Microsoft.CodeAnalysis.LanguageServices
 
         protected abstract SyntaxToken GetIdentifier(TXmlNameAttributeSyntax xmlName);
         protected abstract TCrefSyntax GetCref(TXmlCrefAttributeSyntax xmlCref);
-        protected abstract SyntaxList<TXmlAttributeSyntax> GetAttributes(TXmlEmptyElementSyntax xmlEmpty);
+        protected abstract SyntaxList<TXmlAttributeSyntax> GetAttributes(
+            TXmlEmptyElementSyntax xmlEmpty
+        );
         protected abstract SyntaxTokenList GetTextTokens(TXmlTextSyntax xmlText);
         protected abstract SyntaxTokenList GetTextTokens(TXmlTextAttributeSyntax xmlTextAttribute);
         protected abstract SyntaxNode GetName(TXmlElementSyntax xmlElement);
@@ -183,13 +199,21 @@ namespace Microsoft.CodeAnalysis.LanguageServices
             }
         }
 
-        private static bool HasLeadingWhitespace(string tokenText)
-            => tokenText.Length > 0 && char.IsWhiteSpace(tokenText[0]);
+        private static bool HasLeadingWhitespace(string tokenText) =>
+            tokenText.Length > 0 && char.IsWhiteSpace(tokenText[0]);
 
-        private static bool HasTrailingWhitespace(string tokenText)
-            => tokenText.Length > 0 && char.IsWhiteSpace(tokenText[tokenText.Length - 1]);
+        private static bool HasTrailingWhitespace(string tokenText) =>
+            tokenText.Length > 0 && char.IsWhiteSpace(tokenText[tokenText.Length - 1]);
 
-        public string GetBannerText(SyntaxNode documentationCommentTriviaSyntax, int maxBannerLength, CancellationToken cancellationToken)
-            => GetBannerText((TDocumentationCommentTriviaSyntax)documentationCommentTriviaSyntax, maxBannerLength, cancellationToken);
+        public string GetBannerText(
+            SyntaxNode documentationCommentTriviaSyntax,
+            int maxBannerLength,
+            CancellationToken cancellationToken
+        ) =>
+            GetBannerText(
+                (TDocumentationCommentTriviaSyntax)documentationCommentTriviaSyntax,
+                maxBannerLength,
+                cancellationToken
+            );
     }
 }

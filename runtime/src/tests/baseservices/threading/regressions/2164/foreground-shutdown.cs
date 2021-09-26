@@ -21,11 +21,13 @@ public class Test
 {
     public static int Main()
     {
-        new Thread(() =>
-        {
-            Thread.Sleep(TimeSpan.FromSeconds(1));
-            Environment.Exit(100);
-        }).Start();
+        new Thread(
+            () =>
+            {
+                Thread.Sleep(TimeSpan.FromSeconds(1));
+                Environment.Exit(100);
+            }
+        ).Start();
 
         // foreground thread created above prevents
         // runtime shutdown and non-100 exit code propagation

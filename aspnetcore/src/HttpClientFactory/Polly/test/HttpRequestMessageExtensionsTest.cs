@@ -7,7 +7,7 @@ using System.Net.Http;
 using Xunit;
 
 namespace Polly
-{ 
+{
     public class HttpRequestMessageExtensionsTest
     {
         [Fact]
@@ -19,7 +19,12 @@ namespace Polly
 #if USE_OBSOLETED
             request.Properties[HttpRequestMessageExtensions.PolicyExecutionContextKey] = expected;
 #else
-            request.Options.Set(new HttpRequestOptionsKey<Context>(HttpRequestMessageExtensions.PolicyExecutionContextKey), expected);
+            request.Options.Set(
+                new HttpRequestOptionsKey<Context>(
+                    HttpRequestMessageExtensions.PolicyExecutionContextKey
+                ),
+                expected
+            );
 #endif
 
             // Act
@@ -50,7 +55,12 @@ namespace Polly
 #if USE_OBSOLETED
             request.Properties[HttpRequestMessageExtensions.PolicyExecutionContextKey] = null;
 #else
-            request.Options.Set(new HttpRequestOptionsKey<Context>(HttpRequestMessageExtensions.PolicyExecutionContextKey), null);
+            request.Options.Set(
+                new HttpRequestOptionsKey<Context>(
+                    HttpRequestMessageExtensions.PolicyExecutionContextKey
+                ),
+                null
+            );
 #endif
 
             // Act
@@ -75,8 +85,11 @@ namespace Polly
             var actual = request.Properties[HttpRequestMessageExtensions.PolicyExecutionContextKey];
 #else
             request.Options.TryGetValue(
-                new HttpRequestOptionsKey<Context>(HttpRequestMessageExtensions.PolicyExecutionContextKey), 
-                out Context actual);
+                new HttpRequestOptionsKey<Context>(
+                    HttpRequestMessageExtensions.PolicyExecutionContextKey
+                ),
+                out Context actual
+            );
 #endif
             Assert.Same(expected, actual);
         }
@@ -87,9 +100,15 @@ namespace Polly
             // Arrange
             var request = new HttpRequestMessage();
 #if USE_OBSOLETED
-            request.Properties[HttpRequestMessageExtensions.PolicyExecutionContextKey] = new Context(Guid.NewGuid().ToString());
+            request.Properties[HttpRequestMessageExtensions.PolicyExecutionContextKey] =
+                new Context(Guid.NewGuid().ToString());
 #else
-            request.Options.Set(new HttpRequestOptionsKey<Context>(HttpRequestMessageExtensions.PolicyExecutionContextKey), new Context(Guid.NewGuid().ToString()));
+            request.Options.Set(
+                new HttpRequestOptionsKey<Context>(
+                    HttpRequestMessageExtensions.PolicyExecutionContextKey
+                ),
+                new Context(Guid.NewGuid().ToString())
+            );
 #endif
 
             // Act
@@ -100,8 +119,11 @@ namespace Polly
             var actual = request.Properties[HttpRequestMessageExtensions.PolicyExecutionContextKey];
 #else
             request.Options.TryGetValue(
-                new HttpRequestOptionsKey<Context>(HttpRequestMessageExtensions.PolicyExecutionContextKey), 
-                out Context actual);
+                new HttpRequestOptionsKey<Context>(
+                    HttpRequestMessageExtensions.PolicyExecutionContextKey
+                ),
+                out Context actual
+            );
 #endif
             Assert.Null(actual);
         }

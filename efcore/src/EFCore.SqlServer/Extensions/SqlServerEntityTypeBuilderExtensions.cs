@@ -21,7 +21,8 @@ namespace Microsoft.EntityFrameworkCore
         /// <returns> The same builder instance so that multiple calls can be chained. </returns>
         public static EntityTypeBuilder IsMemoryOptimized(
             this EntityTypeBuilder entityTypeBuilder,
-            bool memoryOptimized = true)
+            bool memoryOptimized = true
+        )
         {
             Check.NotNull(entityTypeBuilder, nameof(entityTypeBuilder));
 
@@ -39,9 +40,12 @@ namespace Microsoft.EntityFrameworkCore
         /// <returns> The same builder instance so that multiple calls can be chained. </returns>
         public static EntityTypeBuilder<TEntity> IsMemoryOptimized<TEntity>(
             this EntityTypeBuilder<TEntity> entityTypeBuilder,
-            bool memoryOptimized = true)
-            where TEntity : class
-            => (EntityTypeBuilder<TEntity>)IsMemoryOptimized((EntityTypeBuilder)entityTypeBuilder, memoryOptimized);
+            bool memoryOptimized = true
+        ) where TEntity : class =>
+            (EntityTypeBuilder<TEntity>)IsMemoryOptimized(
+                (EntityTypeBuilder)entityTypeBuilder,
+                memoryOptimized
+            );
 
         /// <summary>
         ///     Configures the table that the entity maps to when targeting SQL Server as memory-optimized.
@@ -51,7 +55,8 @@ namespace Microsoft.EntityFrameworkCore
         /// <returns> The same builder instance so that multiple calls can be chained. </returns>
         public static OwnedNavigationBuilder IsMemoryOptimized(
             this OwnedNavigationBuilder collectionOwnershipBuilder,
-            bool memoryOptimized = true)
+            bool memoryOptimized = true
+        )
         {
             Check.NotNull(collectionOwnershipBuilder, nameof(collectionOwnershipBuilder));
 
@@ -68,13 +73,19 @@ namespace Microsoft.EntityFrameworkCore
         /// <param name="collectionOwnershipBuilder"> The builder for the entity type being configured. </param>
         /// <param name="memoryOptimized"> A value indicating whether the table is memory-optimized. </param>
         /// <returns> The same builder instance so that multiple calls can be chained. </returns>
-        public static OwnedNavigationBuilder<TEntity, TRelatedEntity> IsMemoryOptimized<TEntity, TRelatedEntity>(
+        public static OwnedNavigationBuilder<TEntity, TRelatedEntity> IsMemoryOptimized<
+            TEntity,
+            TRelatedEntity
+        >(
             this OwnedNavigationBuilder<TEntity, TRelatedEntity> collectionOwnershipBuilder,
-            bool memoryOptimized = true)
+            bool memoryOptimized = true
+        )
             where TEntity : class
-            where TRelatedEntity : class
-            => (OwnedNavigationBuilder<TEntity, TRelatedEntity>)IsMemoryOptimized(
-                (OwnedNavigationBuilder)collectionOwnershipBuilder, memoryOptimized);
+            where TRelatedEntity : class =>
+            (OwnedNavigationBuilder<TEntity, TRelatedEntity>)IsMemoryOptimized(
+                (OwnedNavigationBuilder)collectionOwnershipBuilder,
+                memoryOptimized
+            );
 
         /// <summary>
         ///     Configures the table that the entity maps to when targeting SQL Server as memory-optimized.
@@ -89,11 +100,15 @@ namespace Microsoft.EntityFrameworkCore
         public static IConventionEntityTypeBuilder? IsMemoryOptimized(
             this IConventionEntityTypeBuilder entityTypeBuilder,
             bool? memoryOptimized,
-            bool fromDataAnnotation = false)
+            bool fromDataAnnotation = false
+        )
         {
             if (entityTypeBuilder.CanSetIsMemoryOptimized(memoryOptimized, fromDataAnnotation))
             {
-                entityTypeBuilder.Metadata.SetIsMemoryOptimized(memoryOptimized, fromDataAnnotation);
+                entityTypeBuilder.Metadata.SetIsMemoryOptimized(
+                    memoryOptimized,
+                    fromDataAnnotation
+                );
                 return entityTypeBuilder;
             }
 
@@ -110,11 +125,16 @@ namespace Microsoft.EntityFrameworkCore
         public static bool CanSetIsMemoryOptimized(
             this IConventionEntityTypeBuilder entityTypeBuilder,
             bool? memoryOptimized,
-            bool fromDataAnnotation = false)
+            bool fromDataAnnotation = false
+        )
         {
             Check.NotNull(entityTypeBuilder, nameof(entityTypeBuilder));
 
-            return entityTypeBuilder.CanSetAnnotation(SqlServerAnnotationNames.MemoryOptimized, memoryOptimized, fromDataAnnotation);
+            return entityTypeBuilder.CanSetAnnotation(
+                SqlServerAnnotationNames.MemoryOptimized,
+                memoryOptimized,
+                fromDataAnnotation
+            );
         }
     }
 }

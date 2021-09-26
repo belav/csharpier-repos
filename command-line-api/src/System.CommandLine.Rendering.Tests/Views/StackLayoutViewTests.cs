@@ -25,11 +25,13 @@ namespace System.CommandLine.Rendering.Tests.Views
             var renderer = new ConsoleRenderer(terminal);
             stackLayout.Render(renderer, new Region(0, 0, 10, 2));
 
-            terminal.Events.Should().BeEquivalentSequenceTo(
-                new TestTerminal.CursorPositionChanged(new Point(0, 0)),
-                new TestTerminal.ContentWritten("The quick"),
-                new TestTerminal.CursorPositionChanged(new Point(0, 1)),
-                new TestTerminal.ContentWritten("brown fox"));
+            terminal.Events.Should()
+                .BeEquivalentSequenceTo(
+                    new TestTerminal.CursorPositionChanged(new Point(0, 0)),
+                    new TestTerminal.ContentWritten("The quick"),
+                    new TestTerminal.CursorPositionChanged(new Point(0, 1)),
+                    new TestTerminal.ContentWritten("brown fox")
+                );
         }
 
         [Fact]
@@ -46,9 +48,11 @@ namespace System.CommandLine.Rendering.Tests.Views
             var renderer = new ConsoleRenderer(terminal);
             stackLayout.Render(renderer, new Region(0, 0, 10, 1));
 
-            terminal.Events.Should().BeEquivalentSequenceTo(
-                new TestTerminal.CursorPositionChanged(new Point(0, 0)),
-                new TestTerminal.ContentWritten("The quick"));
+            terminal.Events.Should()
+                .BeEquivalentSequenceTo(
+                    new TestTerminal.CursorPositionChanged(new Point(0, 0)),
+                    new TestTerminal.ContentWritten("The quick")
+                );
         }
 
         [Fact]
@@ -65,15 +69,16 @@ namespace System.CommandLine.Rendering.Tests.Views
             var renderer = new ConsoleRenderer(terminal);
             stackLayout.Render(renderer, new Region(0, 0, 5, 4));
 
-            terminal.Events.Should().BeEquivalentSequenceTo(
-                new TestTerminal.CursorPositionChanged(new Point(0, 0)),
-                new TestTerminal.ContentWritten("The  "),
-                new TestTerminal.CursorPositionChanged(new Point(0, 1)),
-                new TestTerminal.ContentWritten("quick"),
-                new TestTerminal.CursorPositionChanged(new Point(0, 2)),
-                new TestTerminal.ContentWritten("brown"),
-                new TestTerminal.CursorPositionChanged(new Point(0, 3)),
-                new TestTerminal.ContentWritten("fox  ")
+            terminal.Events.Should()
+                .BeEquivalentSequenceTo(
+                    new TestTerminal.CursorPositionChanged(new Point(0, 0)),
+                    new TestTerminal.ContentWritten("The  "),
+                    new TestTerminal.CursorPositionChanged(new Point(0, 1)),
+                    new TestTerminal.ContentWritten("quick"),
+                    new TestTerminal.CursorPositionChanged(new Point(0, 2)),
+                    new TestTerminal.ContentWritten("brown"),
+                    new TestTerminal.CursorPositionChanged(new Point(0, 3)),
+                    new TestTerminal.ContentWritten("fox  ")
                 );
         }
 
@@ -91,11 +96,13 @@ namespace System.CommandLine.Rendering.Tests.Views
             var renderer = new ConsoleRenderer(terminal);
             stackLayout.Render(renderer, new Region(0, 0, 18, 1));
 
-            terminal.Events.Should().BeEquivalentSequenceTo(
-                new TestTerminal.CursorPositionChanged(new Point(0, 0)),
-                new TestTerminal.ContentWritten("The quick         "),
-                new TestTerminal.CursorPositionChanged(new Point(9, 0)),
-                new TestTerminal.ContentWritten("brown fox"));
+            terminal.Events.Should()
+                .BeEquivalentSequenceTo(
+                    new TestTerminal.CursorPositionChanged(new Point(0, 0)),
+                    new TestTerminal.ContentWritten("The quick         "),
+                    new TestTerminal.CursorPositionChanged(new Point(9, 0)),
+                    new TestTerminal.ContentWritten("brown fox")
+                );
         }
 
         [Fact]
@@ -112,11 +119,13 @@ namespace System.CommandLine.Rendering.Tests.Views
             var renderer = new ConsoleRenderer(terminal);
             stackLayout.Render(renderer, new Region(0, 0, 16, 1));
 
-            terminal.Events.Should().BeEquivalentSequenceTo(
-                new TestTerminal.CursorPositionChanged(new Point(0, 0)),
-                new TestTerminal.ContentWritten("The quick       "),
-                new TestTerminal.CursorPositionChanged(new Point(9, 0)),
-                new TestTerminal.ContentWritten("brown  "));
+            terminal.Events.Should()
+                .BeEquivalentSequenceTo(
+                    new TestTerminal.CursorPositionChanged(new Point(0, 0)),
+                    new TestTerminal.ContentWritten("The quick       "),
+                    new TestTerminal.CursorPositionChanged(new Point(9, 0)),
+                    new TestTerminal.ContentWritten("brown  ")
+                );
         }
 
         [Fact]
@@ -133,14 +142,15 @@ namespace System.CommandLine.Rendering.Tests.Views
             var renderer = new ConsoleRenderer(terminal);
             stackLayout.Render(renderer, new Region(0, 0, 14, 2));
 
-            terminal.Events.Should().BeEquivalentSequenceTo(
-                new TestTerminal.CursorPositionChanged(new Point(0, 0)),
-                new TestTerminal.ContentWritten("The quick     "),
-                new TestTerminal.CursorPositionChanged(new Point(9, 0)),
-                new TestTerminal.ContentWritten("brown"),
-                new TestTerminal.CursorPositionChanged(new Point(9, 1)),
-                new TestTerminal.ContentWritten("fox  ")
-            );
+            terminal.Events.Should()
+                .BeEquivalentSequenceTo(
+                    new TestTerminal.CursorPositionChanged(new Point(0, 0)),
+                    new TestTerminal.ContentWritten("The quick     "),
+                    new TestTerminal.CursorPositionChanged(new Point(9, 0)),
+                    new TestTerminal.ContentWritten("brown"),
+                    new TestTerminal.CursorPositionChanged(new Point(9, 1)),
+                    new TestTerminal.ContentWritten("fox  ")
+                );
         }
 
         [Fact]
@@ -155,7 +165,7 @@ namespace System.CommandLine.Rendering.Tests.Views
 
             var terminal = new TestTerminal();
             var renderer = new ConsoleRenderer(terminal);
-            
+
             var size = stackLayout.Measure(renderer, new Size(10, 10));
 
             size.Should().BeEquivalentTo(new Size(9, 2));
@@ -173,7 +183,7 @@ namespace System.CommandLine.Rendering.Tests.Views
 
             var terminal = new TestTerminal();
             var renderer = new ConsoleRenderer(terminal);
-            
+
             var size = stackLayout.Measure(renderer, new Size(7, 10));
 
             size.Should().BeEquivalentTo(new Size("brown ".Length, 4));
@@ -191,7 +201,7 @@ namespace System.CommandLine.Rendering.Tests.Views
 
             var terminal = new TestTerminal();
             var renderer = new ConsoleRenderer(terminal);
-            
+
             var size = stackLayout.Measure(renderer, new Size(7, 1));
 
             var firstViewTopRow = "The ".Length;
@@ -210,7 +220,7 @@ namespace System.CommandLine.Rendering.Tests.Views
 
             var terminal = new TestTerminal();
             var renderer = new ConsoleRenderer(terminal);
-            
+
             var size = stackLayout.Measure(renderer, new Size(20, 20));
 
             size.Should().BeEquivalentTo(new Size("The quickbrown fox".Length, 1));
@@ -228,9 +238,9 @@ namespace System.CommandLine.Rendering.Tests.Views
 
             var terminal = new TestTerminal();
             var renderer = new ConsoleRenderer(terminal);
-            
+
             var size = stackLayout.Measure(renderer, new Size(10, 10));
-            
+
             size.Should().BeEquivalentTo(new Size(10, 2));
         }
 
@@ -246,7 +256,7 @@ namespace System.CommandLine.Rendering.Tests.Views
 
             var terminal = new TestTerminal();
             var renderer = new ConsoleRenderer(terminal);
-            
+
             var size = stackLayout.Measure(renderer, new Size(7, 1));
 
             size.Should().BeEquivalentTo(new Size(7, 1));

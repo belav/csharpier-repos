@@ -8,7 +8,6 @@ internal static partial class Interop
 {
     internal static partial class Sys
     {
-
         [Flags]
         internal enum InterfaceFlags
         {
@@ -155,8 +154,14 @@ internal static partial class Interop
             public readonly ulong Flags;
         }
 
-        [DllImport(Libraries.SystemNative, EntryPoint = "SystemNative_GetNativeIPInterfaceStatistics")]
-        public static extern int GetNativeIPInterfaceStatistics(string name, out NativeIPInterfaceStatistics stats);
+        [DllImport(
+            Libraries.SystemNative,
+            EntryPoint = "SystemNative_GetNativeIPInterfaceStatistics"
+        )]
+        public static extern int GetNativeIPInterfaceStatistics(
+            string name,
+            out NativeIPInterfaceStatistics stats
+        );
 
         [DllImport(Libraries.SystemNative, EntryPoint = "SystemNative_GetNumRoutes")]
         public static extern int GetNumRoutes();

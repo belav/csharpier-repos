@@ -21,7 +21,10 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
     public class CookieTempDataProviderTest
     {
         private static readonly byte[] Bytes = Encoding.UTF8.GetBytes("test value");
-        private static readonly IDictionary<string, object> Dictionary = new Dictionary<string, object>
+        private static readonly IDictionary<string, object> Dictionary = new Dictionary<
+            string,
+            object
+        >
         {
             { "key", "value" },
         };
@@ -33,19 +36,18 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             var expectedCookieName = "TestCookieName";
 
             var expectedDataInCookie = WebEncoders.Base64UrlEncode(Bytes);
-            var tempDataProvider = GetProvider(dataProtector: null, options: new CookieTempDataProviderOptions()
-            {
-                Cookie = { Name = expectedCookieName }
-            });
+            var tempDataProvider = GetProvider(
+                dataProtector: null,
+                options: new CookieTempDataProviderOptions()
+                {
+                    Cookie = { Name = expectedCookieName }
+                }
+            );
 
             var responseCookies = new MockResponseCookieCollection();
             var httpContext = new Mock<HttpContext>();
-            httpContext
-                .SetupGet(hc => hc.Request.PathBase)
-                .Returns("/");
-            httpContext
-                .Setup(hc => hc.Response.Cookies)
-                .Returns(responseCookies);
+            httpContext.SetupGet(hc => hc.Request.PathBase).Returns("/");
+            httpContext.Setup(hc => hc.Response.Cookies).Returns(responseCookies);
 
             // Act
             tempDataProvider.SaveTempData(httpContext.Object, Dictionary);
@@ -76,17 +78,18 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         {
             // Arrange
             var dataProtector = new Mock<IDataProtector>(MockBehavior.Strict);
-            dataProtector
-                .Setup(d => d.Unprotect(It.IsAny<byte[]>()))
-                .Throws(new Exception());
+            dataProtector.Setup(d => d.Unprotect(It.IsAny<byte[]>())).Throws(new Exception());
 
             var tempDataProvider = GetProvider(dataProtector.Object);
 
             var expectedDataToUnprotect = Bytes;
-            var base64AndUrlEncodedDataInCookie = WebEncoders.Base64UrlEncode(expectedDataToUnprotect);
+            var base64AndUrlEncodedDataInCookie = WebEncoders.Base64UrlEncode(
+                expectedDataToUnprotect
+            );
 
             var context = new DefaultHttpContext();
-            context.Request.Headers[HeaderNames.Cookie] = $"{CookieTempDataProvider.CookieName}={base64AndUrlEncodedDataInCookie}";
+            context.Request.Headers[HeaderNames.Cookie] =
+                $"{CookieTempDataProvider.CookieName}={base64AndUrlEncodedDataInCookie}";
 
             // Act
             var tempDataDictionary = tempDataProvider.LoadTempData(context);
@@ -94,7 +97,9 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             // Assert
             Assert.Empty(tempDataDictionary);
 
-            var setCookieHeader = SetCookieHeaderValue.Parse(context.Response.Headers["Set-Cookie"].ToString());
+            var setCookieHeader = SetCookieHeaderValue.Parse(
+                context.Response.Headers["Set-Cookie"].ToString()
+            );
             Assert.Equal(CookieTempDataProvider.CookieName, setCookieHeader.Name.ToString());
             Assert.Equal(string.Empty, setCookieHeader.Value.ToString());
         }
@@ -104,11 +109,14 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         {
             // Arrange
             var expectedDataToUnprotect = Bytes;
-            var base64AndUrlEncodedDataInCookie = WebEncoders.Base64UrlEncode(expectedDataToUnprotect);
+            var base64AndUrlEncodedDataInCookie = WebEncoders.Base64UrlEncode(
+                expectedDataToUnprotect
+            );
             var dataProtector = new PassThroughDataProtector();
             var tempDataProvider = GetProvider(dataProtector);
             var httpContext = new DefaultHttpContext();
-            httpContext.Request.Headers[HeaderNames.Cookie] = $"{CookieTempDataProvider.CookieName}={base64AndUrlEncodedDataInCookie}";
+            httpContext.Request.Headers[HeaderNames.Cookie] =
+                $"{CookieTempDataProvider.CookieName}={base64AndUrlEncodedDataInCookie}";
 
             // Act
             var actualValues = tempDataProvider.LoadTempData(httpContext);
@@ -130,12 +138,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             var tempDataProvider = GetProvider(dataProtector);
             var responseCookies = new MockResponseCookieCollection();
             var httpContext = new Mock<HttpContext>();
-            httpContext
-                .SetupGet(hc => hc.Request.PathBase)
-                .Returns("/");
-            httpContext
-                .Setup(hc => hc.Response.Cookies)
-                .Returns(responseCookies);
+            httpContext.SetupGet(hc => hc.Request.PathBase).Returns("/");
+            httpContext.Setup(hc => hc.Response.Cookies).Returns(responseCookies);
 
             // Act
             tempDataProvider.SaveTempData(httpContext.Object, Dictionary);
@@ -158,7 +162,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         public void SaveTempData_HonorsCookieSecurePolicy_OnOptions(
             bool isRequestSecure,
             CookieSecurePolicy cookieSecurePolicy,
-            bool expectedSecureFlag)
+            bool expectedSecureFlag
+        )
         {
             // Arrange
             var expectedDataToProtect = Bytes;
@@ -169,15 +174,9 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             var tempDataProvider = GetProvider(dataProtector, options);
             var responseCookies = new MockResponseCookieCollection();
             var httpContext = new Mock<HttpContext>();
-            httpContext
-                .SetupGet(hc => hc.Request.PathBase)
-                .Returns("/");
-            httpContext
-                .SetupGet(hc => hc.Request.IsHttps)
-                .Returns(isRequestSecure);
-            httpContext
-                .Setup(hc => hc.Response.Cookies)
-                .Returns(responseCookies);
+            httpContext.SetupGet(hc => hc.Request.PathBase).Returns("/");
+            httpContext.SetupGet(hc => hc.Request.IsHttps).Returns(isRequestSecure);
+            httpContext.Setup(hc => hc.Response.Cookies).Returns(responseCookies);
 
             // Act
             tempDataProvider.SaveTempData(httpContext.Object, Dictionary);
@@ -202,7 +201,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         [InlineData("/vdir1", "/vdir1")]
         public void SaveTempData_DefaultProviderOptions_SetsCookie_WithAppropriateCookieOptions(
             string pathBase,
-            string expectedCookiePath)
+            string expectedCookiePath
+        )
         {
             // Arrange
             var expectedDataToProtect = Bytes;
@@ -211,15 +211,9 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             var tempDataProvider = GetProvider(dataProtector);
             var responseCookies = new MockResponseCookieCollection();
             var httpContext = new Mock<HttpContext>();
-            httpContext
-                .SetupGet(hc => hc.Request.PathBase)
-                .Returns(pathBase);
-            httpContext
-                .SetupGet(hc => hc.Request.IsHttps)
-                .Returns(false);
-            httpContext
-                .Setup(hc => hc.Response.Cookies)
-                .Returns(responseCookies);
+            httpContext.SetupGet(hc => hc.Request.PathBase).Returns(pathBase);
+            httpContext.SetupGet(hc => hc.Request.IsHttps).Returns(false);
+            httpContext.Setup(hc => hc.Response.Cookies).Returns(responseCookies);
 
             // Act
             tempDataProvider.SaveTempData(httpContext.Object, Dictionary);
@@ -249,7 +243,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             string optionsPath,
             string optionsDomain,
             string expectedCookiePath,
-            string expectedDomain)
+            string expectedDomain
+        )
         {
             // Arrange
             var expectedDataToProtect = Bytes;
@@ -259,23 +254,14 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 dataProtector,
                 new CookieTempDataProviderOptions
                 {
-                    Cookie =
-                    {
-                        Path = optionsPath,
-                        Domain = optionsDomain
-                    }
-                });
+                    Cookie = { Path = optionsPath, Domain = optionsDomain }
+                }
+            );
             var responseCookies = new MockResponseCookieCollection();
             var httpContext = new Mock<HttpContext>();
-            httpContext
-                .SetupGet(hc => hc.Request.IsHttps)
-                .Returns(false);
-            httpContext
-                .SetupGet(hc => hc.Request.PathBase)
-                .Returns(requestPathBase);
-            httpContext
-                .Setup(hc => hc.Response.Cookies)
-                .Returns(responseCookies);
+            httpContext.SetupGet(hc => hc.Request.IsHttps).Returns(false);
+            httpContext.SetupGet(hc => hc.Request.PathBase).Returns(requestPathBase);
+            httpContext.Setup(hc => hc.Response.Cookies).Returns(responseCookies);
 
             // Act
             tempDataProvider.SaveTempData(httpContext.Object, Dictionary);
@@ -326,10 +312,7 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         {
             // Arrange
             var testProvider = GetProvider();
-            var input = new Dictionary<string, object>
-            {
-                { "string", "value" }
-            };
+            var input = new Dictionary<string, object> { { "string", "value" } };
             var context = GetHttpContext();
 
             // Act
@@ -352,7 +335,6 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         {
             var responseCookies = httpContext.Response.GetTypedHeaders().SetCookie;
 
-
             if (responseCookies.Count > 0)
             {
                 var stringBuilder = new StringBuilder();
@@ -370,26 +352,20 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 
         private class MockResponseCookieCollection : IResponseCookies, IEnumerable<CookieInfo>
         {
-            private Dictionary<string, CookieInfo> _cookies = new Dictionary<string, CookieInfo>(StringComparer.OrdinalIgnoreCase);
+            private Dictionary<string, CookieInfo> _cookies = new Dictionary<string, CookieInfo>(
+                StringComparer.OrdinalIgnoreCase
+            );
 
             public int Count
             {
-                get
-                {
-                    return _cookies.Count;
-                }
+                get { return _cookies.Count; }
             }
 
             public CookieInfo this[string key] => _cookies[key];
 
             public void Append(string key, string value, CookieOptions options)
             {
-                _cookies[key] = new CookieInfo()
-                {
-                    Key = key,
-                    Value = value,
-                    Options = options
-                };
+                _cookies[key] = new CookieInfo() { Key = key, Value = value, Options = options };
             }
 
             public void Append(string key, string value)
@@ -418,7 +394,10 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             }
         }
 
-        private CookieTempDataProvider GetProvider(IDataProtector dataProtector = null, CookieTempDataProviderOptions options = null)
+        private CookieTempDataProvider GetProvider(
+            IDataProtector dataProtector = null,
+            CookieTempDataProviderOptions options = null
+        )
         {
             if (dataProtector == null)
             {
@@ -436,7 +415,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 new PassThroughDataProtectionProvider(dataProtector),
                 NullLoggerFactory.Instance,
                 testOptions.Object,
-                new TestTempDataSerializer());
+                new TestTempDataSerializer()
+            );
         }
 
         private class PassThroughDataProtectionProvider : IDataProtectionProvider

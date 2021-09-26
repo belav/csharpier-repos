@@ -22,8 +22,8 @@ namespace System.Xml.Xsl.Runtime
     [EditorBrowsable(EditorBrowsableState.Never)]
     public static class XsltFunctions
     {
-        private static readonly CompareInfo s_compareInfo = CultureInfo.InvariantCulture.CompareInfo;
-
+        private static readonly CompareInfo s_compareInfo =
+            CultureInfo.InvariantCulture.CompareInfo;
 
         //------------------------------------------------
         // Xslt/XPath functions
@@ -43,7 +43,10 @@ namespace System.Xml.Xsl.Runtime
 
         public static string SubstringBefore(string s1, string s2)
         {
-            if (s2.Length == 0) { return s2; }
+            if (s2.Length == 0)
+            {
+                return s2;
+            }
             //int idx = collation.IndexOf(s1, s2);
             int idx = s_compareInfo.IndexOf(s1, s2, CompareOptions.Ordinal);
             return (idx < 1) ? string.Empty : s1.Substring(0, idx);
@@ -51,7 +54,10 @@ namespace System.Xml.Xsl.Runtime
 
         public static string SubstringAfter(string s1, string s2)
         {
-            if (s2.Length == 0) { return s1; }
+            if (s2.Length == 0)
+            {
+                return s1;
+            }
             //int idx = collation.IndexOf(s1, s2);
             int idx = s_compareInfo.IndexOf(s1, s2, CompareOptions.Ordinal);
             return (idx < 0) ? string.Empty : s1.Substring(idx + s2.Length);
@@ -77,13 +83,13 @@ namespace System.Xml.Xsl.Runtime
 
         public static string Substring(string value, double startIndex, double length)
         {
-            startIndex = Round(startIndex) - 1;             // start index
+            startIndex = Round(startIndex) - 1; // start index
             if (startIndex >= value.Length)
             {
                 return string.Empty;
             }
 
-            double endIndex = startIndex + Round(length);   // end index
+            double endIndex = startIndex + Round(length); // end index
             startIndex = (startIndex <= 0) ? 0 : startIndex;
 
             if (startIndex < endIndex)
@@ -105,7 +111,9 @@ namespace System.Xml.Xsl.Runtime
         public static string NormalizeSpace(string value)
         {
             StringBuilder sb = null;
-            int idx, idxStart = 0, idxSpace = 0;
+            int idx,
+                idxStart = 0,
+                idxSpace = 0;
 
             for (idx = 0; idx < value.Length; idx++)
             {
@@ -143,10 +151,12 @@ namespace System.Xml.Xsl.Runtime
             if (sb == null)
             {
                 // Check for string that is entirely composed of whitespace
-                if (idxStart == idx) return string.Empty;
+                if (idxStart == idx)
+                    return string.Empty;
 
                 // If string does not end with a space, then it must already be normalized
-                if (idxStart == 0 && idxSpace != idx) return value;
+                if (idxStart == 0 && idxSpace != idx)
+                    return value;
 
                 sb = new StringBuilder(value.Length);
             }
@@ -221,20 +231,37 @@ namespace System.Xml.Xsl.Runtime
                 // "xsl:version" must return 1.0 as a number, see http://www.w3.org/TR/xslt20/#incompatility-without-schema
                 switch (name.Name)
                 {
-                    case "version": return new XmlAtomicValue(XmlSchemaType.GetBuiltInSimpleType(XmlTypeCode.Double), 1.0);
-                    case "vendor": return new XmlAtomicValue(XmlSchemaType.GetBuiltInSimpleType(XmlTypeCode.String), "Microsoft");
-                    case "vendor-url": return new XmlAtomicValue(XmlSchemaType.GetBuiltInSimpleType(XmlTypeCode.String), "http://www.microsoft.com");
+                    case "version":
+                        return new XmlAtomicValue(
+                            XmlSchemaType.GetBuiltInSimpleType(XmlTypeCode.Double),
+                            1.0
+                        );
+                    case "vendor":
+                        return new XmlAtomicValue(
+                            XmlSchemaType.GetBuiltInSimpleType(XmlTypeCode.String),
+                            "Microsoft"
+                        );
+                    case "vendor-url":
+                        return new XmlAtomicValue(
+                            XmlSchemaType.GetBuiltInSimpleType(XmlTypeCode.String),
+                            "http://www.microsoft.com"
+                        );
                 }
             }
             else if (name.Namespace == XmlReservedNs.NsMsxsl && name.Name == "version")
             {
                 // msxsl:version
-                return new XmlAtomicValue(XmlSchemaType.GetBuiltInSimpleType(XmlTypeCode.String), typeof(XsltLibrary).Assembly.ImageRuntimeVersion);
+                return new XmlAtomicValue(
+                    XmlSchemaType.GetBuiltInSimpleType(XmlTypeCode.String),
+                    typeof(XsltLibrary).Assembly.ImageRuntimeVersion
+                );
             }
             // If the property name is not recognized, return the empty string
-            return new XmlAtomicValue(XmlSchemaType.GetBuiltInSimpleType(XmlTypeCode.String), string.Empty);
+            return new XmlAtomicValue(
+                XmlSchemaType.GetBuiltInSimpleType(XmlTypeCode.String),
+                string.Empty
+            );
         }
-
 
         //------------------------------------------------
         // Navigator functions
@@ -262,7 +289,6 @@ namespace System.Xml.Xsl.Runtime
             xw.Close();
             return sb.ToString();
         }
-
 
         //------------------------------------------------
         // EXslt Functions
@@ -307,7 +333,6 @@ namespace System.Xml.Xsl.Runtime
             }
         }
 
-
         //------------------------------------------------
         // Msxml Extension Functions
         //------------------------------------------------
@@ -340,7 +365,10 @@ namespace System.Xml.Xsl.Runtime
                 }
                 else
                 {
-                    Debug.Assert(itemType == XsltConvert.BooleanType, "Unexpected type of atomic value " + itemType.ToString());
+                    Debug.Assert(
+                        itemType == XsltConvert.BooleanType,
+                        "Unexpected type of atomic value " + itemType.ToString()
+                    );
                     return item.ValueAsBoolean ? 1d : 0d;
                 }
             }
@@ -365,14 +393,27 @@ namespace System.Xml.Xsl.Runtime
         //   given culture is used.
         // * Language specifies a culture used for formatting. If language is the empty string or not
         //   passed, the current culture is used. If language is not recognized, a runtime error happens.
-        public static string MSFormatDateTime(string dateTime, string format, string lang, bool isDate)
+        public static string MSFormatDateTime(
+            string dateTime,
+            string format,
+            string lang,
+            bool isDate
+        )
         {
             try
             {
                 string locale = GetCultureInfo(lang).Name;
 
                 XsdDateTime xdt;
-                if (!XsdDateTime.TryParse(dateTime, XsdDateTimeFlags.AllXsd | XsdDateTimeFlags.XdrDateTime | XsdDateTimeFlags.XdrTimeNoTz, out xdt))
+                if (
+                    !XsdDateTime.TryParse(
+                        dateTime,
+                        XsdDateTimeFlags.AllXsd
+                            | XsdDateTimeFlags.XdrDateTime
+                            | XsdDateTimeFlags.XdrTimeNoTz,
+                        out xdt
+                    )
+                )
                 {
                     return string.Empty;
                 }
@@ -401,7 +442,10 @@ namespace System.Xml.Xsl.Runtime
                 switch (options[idx])
                 {
                     case 'i':
-                        opts = CompareOptions.IgnoreCase | CompareOptions.IgnoreKanaType | CompareOptions.IgnoreWidth;
+                        opts =
+                            CompareOptions.IgnoreCase
+                            | CompareOptions.IgnoreKanaType
+                            | CompareOptions.IgnoreWidth;
                         break;
                     case 'u':
                         upperFirst = true;
@@ -436,7 +480,15 @@ namespace System.Xml.Xsl.Runtime
             DateTime dt;
             try
             {
-                if (!XsdDateTime.TryParse(dateTime, XsdDateTimeFlags.AllXsd | XsdDateTimeFlags.XdrDateTime | XsdDateTimeFlags.XdrTimeNoTz, out xdt))
+                if (
+                    !XsdDateTime.TryParse(
+                        dateTime,
+                        XsdDateTimeFlags.AllXsd
+                            | XsdDateTimeFlags.XdrDateTime
+                            | XsdDateTimeFlags.XdrTimeNoTz,
+                        out xdt
+                    )
+                )
                 {
                     return string.Empty;
                 }
@@ -527,7 +579,6 @@ namespace System.Xml.Xsl.Runtime
             }
             return string.Empty;
         }
-
 
         //------------------------------------------------
         // Helper Functions

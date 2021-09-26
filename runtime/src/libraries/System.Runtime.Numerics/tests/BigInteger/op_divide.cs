@@ -58,10 +58,12 @@ namespace System.Numerics.Tests
                 tempByteArray2 = new byte[] { 0 };
                 VerifyDivideString(Print(tempByteArray1) + Print(tempByteArray2) + "b/");
 
-                Assert.Throws<DivideByZeroException>(() =>
-                {
-                    VerifyDivideString(Print(tempByteArray2) + Print(tempByteArray1) + "b/");
-                });
+                Assert.Throws<DivideByZeroException>(
+                    () =>
+                    {
+                        VerifyDivideString(Print(tempByteArray2) + Print(tempByteArray1) + "b/");
+                    }
+                );
             }
 
             // Divide Method - One small BigIntegers and zero
@@ -71,10 +73,12 @@ namespace System.Numerics.Tests
                 tempByteArray2 = new byte[] { 0 };
                 VerifyDivideString(Print(tempByteArray1) + Print(tempByteArray2) + "b/");
 
-                Assert.Throws<DivideByZeroException>(() =>
-                {
-                    VerifyDivideString(Print(tempByteArray2) + Print(tempByteArray1) + "b/");
-                });
+                Assert.Throws<DivideByZeroException>(
+                    () =>
+                    {
+                        VerifyDivideString(Print(tempByteArray2) + Print(tempByteArray1) + "b/");
+                    }
+                );
             }
         }
 
@@ -85,16 +89,24 @@ namespace System.Numerics.Tests
             byte[] tempByteArray2 = new byte[0];
 
             // Axiom: X/1 = X
-            VerifyIdentityString(BigInteger.One + " " + int.MaxValue + " b/", Int32.MaxValue.ToString());
-            VerifyIdentityString(BigInteger.One + " " + long.MaxValue + " b/", Int64.MaxValue.ToString());
+            VerifyIdentityString(
+                BigInteger.One + " " + int.MaxValue + " b/",
+                Int32.MaxValue.ToString()
+            );
+            VerifyIdentityString(
+                BigInteger.One + " " + long.MaxValue + " b/",
+                Int64.MaxValue.ToString()
+            );
 
             for (int i = 0; i < s_samples; i++)
             {
                 string randBigInt = Print(GetRandomByteArray(s_random));
-                VerifyIdentityString(BigInteger.One + " " + randBigInt + "b/", randBigInt.Substring(0, randBigInt.Length - 1));
+                VerifyIdentityString(
+                    BigInteger.One + " " + randBigInt + "b/",
+                    randBigInt.Substring(0, randBigInt.Length - 1)
+                );
             }
         }
-
 
         [Fact]
         public static void RunDivideAxiomX0()
@@ -103,13 +115,22 @@ namespace System.Numerics.Tests
             byte[] tempByteArray2 = new byte[0];
 
             // Axiom: 0/X = 0
-            VerifyIdentityString(int.MaxValue + " " + BigInteger.Zero + " b/", BigInteger.Zero.ToString());
-            VerifyIdentityString(long.MaxValue + " " + BigInteger.Zero + " b/", BigInteger.Zero.ToString());
+            VerifyIdentityString(
+                int.MaxValue + " " + BigInteger.Zero + " b/",
+                BigInteger.Zero.ToString()
+            );
+            VerifyIdentityString(
+                long.MaxValue + " " + BigInteger.Zero + " b/",
+                BigInteger.Zero.ToString()
+            );
 
             for (int i = 0; i < s_samples; i++)
             {
                 string randBigInt = Print(GetRandomByteArray(s_random));
-                VerifyIdentityString(randBigInt + BigInteger.Zero + " b/", BigInteger.Zero.ToString());
+                VerifyIdentityString(
+                    randBigInt + BigInteger.Zero + " b/",
+                    BigInteger.Zero.ToString()
+                );
             }
         }
 
@@ -133,9 +154,34 @@ namespace System.Numerics.Tests
         {
             // these values lead to an "overflow", if dividing digit by digit
             // we need to ensure that this case is being handled accordingly...
-            var x = new BigInteger(new byte[] { 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFE, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0 });
-            var y = new BigInteger(new byte[] { 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0 });
-            var z = new BigInteger(new byte[] { 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0 });
+            var x = new BigInteger(
+                new byte[]
+                {
+                    0x01,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0xFE,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0xFF,
+                    0
+                }
+            );
+            var y = new BigInteger(
+                new byte[] { 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0 }
+            );
+            var z = new BigInteger(
+                new byte[] { 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0 }
+            );
 
             Assert.Equal(z, x / y);
         }

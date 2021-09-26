@@ -20,19 +20,38 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
     {
         public readonly ImmutableDictionary<string, Lazy<IIncrementalAnalyzer>> Analyzers;
 
-        public AggregateIncrementalAnalyzer(Workspace workspace, IncrementalAnalyzerProviderBase owner, List<Lazy<IPerLanguageIncrementalAnalyzerProvider, PerLanguageIncrementalAnalyzerProviderMetadata>> providers)
+        public AggregateIncrementalAnalyzer(
+            Workspace workspace,
+            IncrementalAnalyzerProviderBase owner,
+            List<
+                Lazy<
+                    IPerLanguageIncrementalAnalyzerProvider,
+                    PerLanguageIncrementalAnalyzerProviderMetadata
+                >
+            > providers
+        )
         {
             Analyzers = providers.ToImmutableDictionary(
-                p => p.Metadata.Language, p => new Lazy<IIncrementalAnalyzer>(() => p.Value.CreatePerLanguageIncrementalAnalyzer(workspace, owner), isThreadSafe: true));
+                p => p.Metadata.Language,
+                p =>
+                    new Lazy<IIncrementalAnalyzer>(
+                        () => p.Value.CreatePerLanguageIncrementalAnalyzer(workspace, owner),
+                        isThreadSafe: true
+                    )
+            );
         }
 
-        public async Task NewSolutionSnapshotAsync(Solution solution, CancellationToken cancellationToken)
+        public async Task NewSolutionSnapshotAsync(
+            Solution solution,
+            CancellationToken cancellationToken
+        )
         {
             foreach (var (_, analyzer) in Analyzers)
             {
                 if (analyzer.IsValueCreated)
                 {
-                    await analyzer.Value.NewSolutionSnapshotAsync(solution, cancellationToken).ConfigureAwait(false);
+                    await analyzer.Value.NewSolutionSnapshotAsync(solution, cancellationToken)
+                        .ConfigureAwait(false);
                 }
             }
         }
@@ -49,7 +68,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
         {
             if (TryGetAnalyzer(document.Project, out var analyzer))
             {
-                await analyzer.DocumentResetAsync(document, cancellationToken).ConfigureAwait(false);
+                await analyzer.DocumentResetAsync(document, cancellationToken)
+                    .ConfigureAwait(false);
             }
         }
 
@@ -57,7 +77,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
         {
             if (TryGetAnalyzer(document.Project, out var analyzer))
             {
-                await analyzer.DocumentCloseAsync(document, cancellationToken).ConfigureAwait(false);
+                await analyzer.DocumentCloseAsync(document, cancellationToken)
+                    .ConfigureAwait(false);
             }
         }
 
@@ -67,31 +88,56 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
             return false;
         }
 
-        public async Task AnalyzeSyntaxAsync(Document document, InvocationReasons reasons, CancellationToken cancellationToken)
+        public async Task AnalyzeSyntaxAsync(
+            Document document,
+            InvocationReasons reasons,
+            CancellationToken cancellationToken
+        )
         {
             if (TryGetAnalyzer(document.Project, out var analyzer))
             {
-                await analyzer.AnalyzeSyntaxAsync(document, reasons, cancellationToken).ConfigureAwait(false);
+                await analyzer.AnalyzeSyntaxAsync(document, reasons, cancellationToken)
+                    .ConfigureAwait(false);
             }
         }
 
-        public async Task AnalyzeDocumentAsync(Document document, SyntaxNode bodyOpt, InvocationReasons reasons, CancellationToken cancellationToken)
+        public async Task AnalyzeDocumentAsync(
+            Document document,
+            SyntaxNode bodyOpt,
+            InvocationReasons reasons,
+            CancellationToken cancellationToken
+        )
         {
             if (TryGetAnalyzer(document.Project, out var analyzer))
             {
-                await analyzer.AnalyzeDocumentAsync(document, bodyOpt, reasons, cancellationToken).ConfigureAwait(false);
+                await analyzer.AnalyzeDocumentAsync(document, bodyOpt, reasons, cancellationToken)
+                    .ConfigureAwait(false);
             }
         }
 
-        public async Task AnalyzeProjectAsync(Project project, bool semanticsChanged, InvocationReasons reasons, CancellationToken cancellationToken)
+        public async Task AnalyzeProjectAsync(
+            Project project,
+            bool semanticsChanged,
+            InvocationReasons reasons,
+            CancellationToken cancellationToken
+        )
         {
             if (TryGetAnalyzer(project, out var analyzer))
             {
-                await analyzer.AnalyzeProjectAsync(project, semanticsChanged, reasons, cancellationToken).ConfigureAwait(false);
+                await analyzer.AnalyzeProjectAsync(
+                        project,
+                        semanticsChanged,
+                        reasons,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
             }
         }
 
-        private bool TryGetAnalyzer(Project project, [NotNullWhen(true)] out IIncrementalAnalyzer? analyzer)
+        private bool TryGetAnalyzer(
+            Project project,
+            [NotNullWhen(true)] out IIncrementalAnalyzer? analyzer
+        )
         {
             if (!Analyzers.TryGetValue(project.Language, out var lazyAnalyzer))
             {
@@ -103,61 +149,98 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
             return true;
         }
 
-        public async Task RemoveDocumentAsync(DocumentId documentId, CancellationToken cancellationToken)
+        public async Task RemoveDocumentAsync(
+            DocumentId documentId,
+            CancellationToken cancellationToken
+        )
         {
             foreach (var (_, analyzer) in Analyzers)
             {
                 if (analyzer.IsValueCreated)
                 {
-                    await analyzer.Value.RemoveDocumentAsync(documentId, cancellationToken).ConfigureAwait(false);
+                    await analyzer.Value.RemoveDocumentAsync(documentId, cancellationToken)
+                        .ConfigureAwait(false);
                 }
             }
         }
 
-        public async Task RemoveProjectAsync(ProjectId projectId, CancellationToken cancellationToken)
+        public async Task RemoveProjectAsync(
+            ProjectId projectId,
+            CancellationToken cancellationToken
+        )
         {
             foreach (var (_, analyzer) in Analyzers)
             {
                 if (analyzer.IsValueCreated)
                 {
-                    await analyzer.Value.RemoveProjectAsync(projectId, cancellationToken).ConfigureAwait(false);
+                    await analyzer.Value.RemoveProjectAsync(projectId, cancellationToken)
+                        .ConfigureAwait(false);
                 }
             }
         }
 
-        public async Task NonSourceDocumentOpenAsync(TextDocument textDocument, CancellationToken cancellationToken)
+        public async Task NonSourceDocumentOpenAsync(
+            TextDocument textDocument,
+            CancellationToken cancellationToken
+        )
         {
-            if (TryGetAnalyzer(textDocument.Project, out var analyzer) &&
-                analyzer is IIncrementalAnalyzer2 analyzer2)
+            if (
+                TryGetAnalyzer(textDocument.Project, out var analyzer)
+                && analyzer is IIncrementalAnalyzer2 analyzer2
+            )
             {
-                await analyzer2.NonSourceDocumentOpenAsync(textDocument, cancellationToken).ConfigureAwait(false);
+                await analyzer2.NonSourceDocumentOpenAsync(textDocument, cancellationToken)
+                    .ConfigureAwait(false);
             }
         }
 
-        public async Task NonSourceDocumentCloseAsync(TextDocument textDocument, CancellationToken cancellationToken)
+        public async Task NonSourceDocumentCloseAsync(
+            TextDocument textDocument,
+            CancellationToken cancellationToken
+        )
         {
-            if (TryGetAnalyzer(textDocument.Project, out var analyzer) &&
-                analyzer is IIncrementalAnalyzer2 analyzer2)
+            if (
+                TryGetAnalyzer(textDocument.Project, out var analyzer)
+                && analyzer is IIncrementalAnalyzer2 analyzer2
+            )
             {
-                await analyzer2.NonSourceDocumentCloseAsync(textDocument, cancellationToken).ConfigureAwait(false);
+                await analyzer2.NonSourceDocumentCloseAsync(textDocument, cancellationToken)
+                    .ConfigureAwait(false);
             }
         }
 
-        public async Task NonSourceDocumentResetAsync(TextDocument textDocument, CancellationToken cancellationToken)
+        public async Task NonSourceDocumentResetAsync(
+            TextDocument textDocument,
+            CancellationToken cancellationToken
+        )
         {
-            if (TryGetAnalyzer(textDocument.Project, out var analyzer) &&
-                analyzer is IIncrementalAnalyzer2 analyzer2)
+            if (
+                TryGetAnalyzer(textDocument.Project, out var analyzer)
+                && analyzer is IIncrementalAnalyzer2 analyzer2
+            )
             {
-                await analyzer2.NonSourceDocumentResetAsync(textDocument, cancellationToken).ConfigureAwait(false);
+                await analyzer2.NonSourceDocumentResetAsync(textDocument, cancellationToken)
+                    .ConfigureAwait(false);
             }
         }
 
-        public async Task AnalyzeNonSourceDocumentAsync(TextDocument textDocument, InvocationReasons reasons, CancellationToken cancellationToken)
+        public async Task AnalyzeNonSourceDocumentAsync(
+            TextDocument textDocument,
+            InvocationReasons reasons,
+            CancellationToken cancellationToken
+        )
         {
-            if (TryGetAnalyzer(textDocument.Project, out var analyzer) &&
-                analyzer is IIncrementalAnalyzer2 analyzer2)
+            if (
+                TryGetAnalyzer(textDocument.Project, out var analyzer)
+                && analyzer is IIncrementalAnalyzer2 analyzer2
+            )
             {
-                await analyzer2.AnalyzeNonSourceDocumentAsync(textDocument, reasons, cancellationToken).ConfigureAwait(false);
+                await analyzer2.AnalyzeNonSourceDocumentAsync(
+                        textDocument,
+                        reasons,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
             }
         }
     }

@@ -14,7 +14,13 @@ namespace Microsoft.AspNetCore.Cryptography.KeyDerivation.PBKDF2
     /// </summary>
     internal sealed class ManagedPbkdf2Provider : IPbkdf2Provider
     {
-        public byte[] DeriveKey(string password, byte[] salt, KeyDerivationPrf prf, int iterationCount, int numBytesRequested)
+        public byte[] DeriveKey(
+            string password,
+            byte[] salt,
+            KeyDerivationPrf prf,
+            int iterationCount,
+            int numBytesRequested
+        )
         {
             Debug.Assert(password != null);
             Debug.Assert(salt != null);
@@ -66,7 +72,10 @@ namespace Microsoft.AspNetCore.Cryptography.KeyDerivation.PBKDF2
             return retVal;
         }
 
-        private static KeyedHashAlgorithm PrfToManagedHmacAlgorithm(KeyDerivationPrf prf, string password)
+        private static KeyedHashAlgorithm PrfToManagedHmacAlgorithm(
+            KeyDerivationPrf prf,
+            string password
+        )
         {
             byte[] passwordBytes = Encoding.UTF8.GetBytes(password);
             try
@@ -83,6 +92,7 @@ namespace Microsoft.AspNetCore.Cryptography.KeyDerivation.PBKDF2
                         throw CryptoUtil.Fail("Unrecognized PRF.");
                 }
             }
+
             finally
             {
                 // The HMAC ctor makes a duplicate of this key; we clear original buffer to limit exposure to the GC.

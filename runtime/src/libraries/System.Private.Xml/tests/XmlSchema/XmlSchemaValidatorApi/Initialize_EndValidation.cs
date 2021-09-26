@@ -15,7 +15,7 @@ namespace System.Xml.Tests
         private ITestOutputHelper _output;
         private ExceptionVerifier _exVerifier;
 
-        public TCInitialize(ITestOutputHelper output): base(output)
+        public TCInitialize(ITestOutputHelper output) : base(output)
         {
             _output = output;
             _exVerifier = new ExceptionVerifier("System.Xml", _output);
@@ -104,10 +104,19 @@ namespace System.Xml.Tests
 
             val.Initialize();
 
-            val.AddSchema(XmlSchema.Read(XmlReader.Create(new StringReader("<?xml version=\"1.0\" ?>\n" +
-                                                                           "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\">\n" +
-                                                                           "    <xs:element name=\"root\" type=\"xs:string\" />\n" +
-                                                                           "</xs:schema>")), null));
+            val.AddSchema(
+                XmlSchema.Read(
+                    XmlReader.Create(
+                        new StringReader(
+                            "<?xml version=\"1.0\" ?>\n"
+                                + "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\">\n"
+                                + "    <xs:element name=\"root\" type=\"xs:string\" />\n"
+                                + "</xs:schema>"
+                        )
+                    ),
+                    null
+                )
+            );
 
             val.EndValidation();
             val.Initialize();
@@ -137,7 +146,15 @@ namespace System.Xml.Tests
             val.EndValidation();
 
             val.Initialize();
-            val.ValidateElement("foo", "", info, "type1", null, null, Path.Combine(TestData, XSDFILE_NO_TARGET_NAMESPACE));
+            val.ValidateElement(
+                "foo",
+                "",
+                info,
+                "type1",
+                null,
+                null,
+                Path.Combine(TestData, XSDFILE_NO_TARGET_NAMESPACE)
+            );
             val.ValidateEndOfAttributes(null);
             val.ValidateElement("bar", "", info);
             val.ValidateEndOfAttributes(null);
@@ -235,10 +252,18 @@ namespace System.Xml.Tests
                 switch (typeToValidate)
                 {
                     case "other":
-                        _exVerifier.IsExceptionOk(e, "Sch_SchemaElementNameMismatch", new string[] { "PartialElement2", "PartialElement" });
+                        _exVerifier.IsExceptionOk(
+                            e,
+                            "Sch_SchemaElementNameMismatch",
+                            new string[] { "PartialElement2", "PartialElement" }
+                        );
                         break;
                     case "type":
-                        _exVerifier.IsExceptionOk(e, "Sch_SchemaElementNameMismatch", new string[] { "foo", "PartialElement" });
+                        _exVerifier.IsExceptionOk(
+                            e,
+                            "Sch_SchemaElementNameMismatch",
+                            new string[] { "foo", "PartialElement" }
+                        );
                         break;
                     case "attribute":
                         _exVerifier.IsExceptionOk(e, "Sch_ValidateAttributeInvalidCall");
@@ -313,7 +338,11 @@ namespace System.Xml.Tests
                 switch (typeToValidate)
                 {
                     case "other":
-                        _exVerifier.IsExceptionOk(e, "Sch_XsiTypeBlockedEx", new string[] { "PartialType2", "foo" });
+                        _exVerifier.IsExceptionOk(
+                            e,
+                            "Sch_XsiTypeBlockedEx",
+                            new string[] { "PartialType2", "foo" }
+                        );
                         break;
                     case "attribute":
                         _exVerifier.IsExceptionOk(e, "Sch_ValidateAttributeInvalidCall");
@@ -378,7 +407,9 @@ namespace System.Xml.Tests
         [InlineData("other")]
         [InlineData("element")]
         [InlineData("type")]
-        public void InitializeWithAttributeValidate_OtherAttribute_Element_Type(string typeToValidate)
+        public void InitializeWithAttributeValidate_OtherAttribute_Element_Type(
+            string typeToValidate
+        )
         {
             XmlSchemaValidator val;
             XmlSchemaInfo info = new XmlSchemaInfo();
@@ -416,7 +447,11 @@ namespace System.Xml.Tests
                 switch (typeToValidate)
                 {
                     case "other":
-                        _exVerifier.IsExceptionOk(e, "Sch_SchemaAttributeNameMismatch", new string[] { "PartialAttribute2", "PartialAttribute" });
+                        _exVerifier.IsExceptionOk(
+                            e,
+                            "Sch_SchemaAttributeNameMismatch",
+                            new string[] { "PartialAttribute2", "PartialAttribute" }
+                        );
                         break;
                     case "element":
                         _exVerifier.IsExceptionOk(e, "Sch_ValidateElementInvalidCall");
@@ -504,7 +539,7 @@ namespace System.Xml.Tests
         private ITestOutputHelper _output;
         private ExceptionVerifier _exVerifier;
 
-        public TCEndValidation(ITestOutputHelper output): base(output)
+        public TCEndValidation(ITestOutputHelper output) : base(output)
         {
             _output = output;
             _exVerifier = new ExceptionVerifier("System.Xml", _output);
@@ -525,12 +560,14 @@ namespace System.Xml.Tests
         [InlineData("valid")]
         [InlineData("missing")]
         [InlineData("ignore")]
-        public void TestForRootLevelIdentityConstraints_Valid_IDREFMissingInvalid_IgnoreIdentityConstraintsIsSetInvalid(string validity)
+        public void TestForRootLevelIdentityConstraints_Valid_IDREFMissingInvalid_IgnoreIdentityConstraintsIsSetInvalid(
+            string validity
+        )
         {
             XmlSchemaValidator val;
             XmlSchemaInfo info = new XmlSchemaInfo();
-            string[] keys = new string[] { };
-            string[] keyrefs = new string[] { };
+            string[] keys = new string[] {  };
+            string[] keyrefs = new string[] {  };
 
             switch (validity)
             {
@@ -555,7 +592,13 @@ namespace System.Xml.Tests
             }
 
             if (validity == "ignore")
-                val = CreateValidator(XSDFILE_IDENTITY_CONSTRAINS, "", XmlSchemaValidationFlags.ReportValidationWarnings | XmlSchemaValidationFlags.ProcessSchemaLocation | XmlSchemaValidationFlags.ProcessInlineSchema);
+                val = CreateValidator(
+                    XSDFILE_IDENTITY_CONSTRAINS,
+                    "",
+                    XmlSchemaValidationFlags.ReportValidationWarnings
+                        | XmlSchemaValidationFlags.ProcessSchemaLocation
+                        | XmlSchemaValidationFlags.ProcessInlineSchema
+                );
             else
                 val = CreateValidator(XSDFILE_IDENTITY_CONSTRAINS);
 

@@ -27,24 +27,38 @@ namespace System.Net
             set => throw new NotSupportedException(SR.net_noseek);
         }
 
-        public override long Seek(long offset, SeekOrigin origin) => throw new NotSupportedException(SR.net_noseek);
+        public override long Seek(long offset, SeekOrigin origin) =>
+            throw new NotSupportedException(SR.net_noseek);
 
-        public override void SetLength(long value) => throw new NotSupportedException(SR.net_noseek);
+        public override void SetLength(long value) =>
+            throw new NotSupportedException(SR.net_noseek);
 
-        public override int Read(byte[] buffer, int offset, int size) => throw new InvalidOperationException(SR.net_writeonlystream);
+        public override int Read(byte[] buffer, int offset, int size) =>
+            throw new InvalidOperationException(SR.net_writeonlystream);
 
-        public override IAsyncResult BeginRead(byte[] buffer, int offset, int size, AsyncCallback? callback, object? state)
+        public override IAsyncResult BeginRead(
+            byte[] buffer,
+            int offset,
+            int size,
+            AsyncCallback? callback,
+            object? state
+        )
         {
             throw new InvalidOperationException(SR.net_writeonlystream);
         }
 
-        public override int EndRead(IAsyncResult asyncResult) => throw new InvalidOperationException(SR.net_writeonlystream);
+        public override int EndRead(IAsyncResult asyncResult) =>
+            throw new InvalidOperationException(SR.net_writeonlystream);
 
         public override void Write(byte[] buffer, int offset, int count)
         {
             ValidateBufferArguments(buffer, offset, count);
 
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, "buffer.Length:" + buffer.Length + " count:" + count + " offset:" + offset);
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(
+                    this,
+                    "buffer.Length:" + buffer.Length + " count:" + count + " offset:" + offset
+                );
 
             if (_closed)
             {
@@ -54,18 +68,29 @@ namespace System.Net
             WriteCore(buffer, offset, count);
         }
 
-        public override IAsyncResult BeginWrite(byte[] buffer, int offset, int count, AsyncCallback? callback, object? state)
+        public override IAsyncResult BeginWrite(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback? callback,
+            object? state
+        )
         {
             ValidateBufferArguments(buffer, offset, count);
 
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, "buffer.Length:" + buffer.Length + " count:" + count + " offset:" + offset);
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(
+                    this,
+                    "buffer.Length:" + buffer.Length + " count:" + count + " offset:" + offset
+                );
 
             return BeginWriteCore(buffer, offset, count, callback, state);
         }
 
         public override void EndWrite(IAsyncResult asyncResult)
         {
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"asyncResult:{asyncResult}");
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(this, $"asyncResult:{asyncResult}");
 
             if (asyncResult == null)
             {
@@ -81,7 +106,8 @@ namespace System.Net
             {
                 if (disposing)
                 {
-                    if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, "_closed:" + _closed);
+                    if (NetEventSource.Log.IsEnabled())
+                        NetEventSource.Info(this, "_closed:" + _closed);
                     if (_closed)
                     {
                         return;
@@ -90,6 +116,7 @@ namespace System.Net
                     DisposeCore();
                 }
             }
+
             finally
             {
                 base.Dispose(disposing);

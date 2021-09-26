@@ -29,16 +29,17 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets
     [Name("CSharp Snippets")]
     [Order(After = PredefinedCompletionNames.CompletionCommandHandler)]
     [Order(After = CodeAnalysis.Editor.PredefinedCommandHandlerNames.SignatureHelpAfterCompletion)]
-    internal sealed class SnippetCommandHandler :
-        AbstractSnippetCommandHandler,
-        ICommandHandler<SurroundWithCommandArgs>
+    internal sealed class SnippetCommandHandler
+        : AbstractSnippetCommandHandler,
+          ICommandHandler<SurroundWithCommandArgs>
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public SnippetCommandHandler(IThreadingContext threadingContext, IExpansionServiceProvider expansionServiceProvider, IExpansionManager expansionManager)
-            : base(threadingContext, expansionServiceProvider, expansionManager)
-        {
-        }
+        public SnippetCommandHandler(
+            IThreadingContext threadingContext,
+            IExpansionServiceProvider expansionServiceProvider,
+            IExpansionManager expansionManager
+        ) : base(threadingContext, expansionServiceProvider, expansionManager) { }
 
         public bool ExecuteCommand(SurroundWithCommandArgs args, CommandExecutionContext context)
         {
@@ -61,7 +62,12 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets
                 return CommandState.Unspecified;
             }
 
-            if (!CodeAnalysis.Workspace.TryGetWorkspace(args.SubjectBuffer.AsTextContainer(), out var workspace))
+            if (
+                !CodeAnalysis.Workspace.TryGetWorkspace(
+                    args.SubjectBuffer.AsTextContainer(),
+                    out var workspace
+                )
+            )
             {
                 return CommandState.Unspecified;
             }
@@ -74,38 +80,73 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets
             return CommandState.Available;
         }
 
-        protected override AbstractSnippetExpansionClient GetSnippetExpansionClient(ITextView textView, ITextBuffer subjectBuffer)
+        protected override AbstractSnippetExpansionClient GetSnippetExpansionClient(
+            ITextView textView,
+            ITextBuffer subjectBuffer
+        )
         {
-            if (!textView.Properties.TryGetProperty(typeof(AbstractSnippetExpansionClient), out AbstractSnippetExpansionClient expansionClient))
+            if (
+                !textView.Properties.TryGetProperty(
+                    typeof(AbstractSnippetExpansionClient),
+                    out AbstractSnippetExpansionClient expansionClient
+                )
+            )
             {
-                expansionClient = new SnippetExpansionClient(ThreadingContext, subjectBuffer.ContentType, textView, subjectBuffer, ExpansionServiceProvider);
-                textView.Properties.AddProperty(typeof(AbstractSnippetExpansionClient), expansionClient);
+                expansionClient = new SnippetExpansionClient(
+                    ThreadingContext,
+                    subjectBuffer.ContentType,
+                    textView,
+                    subjectBuffer,
+                    ExpansionServiceProvider
+                );
+                textView.Properties.AddProperty(
+                    typeof(AbstractSnippetExpansionClient),
+                    expansionClient
+                );
             }
 
             return expansionClient;
         }
 
-        protected override bool TryInvokeInsertionUI(ITextView textView, ITextBuffer subjectBuffer, bool surroundWith = false)
+        protected override bool TryInvokeInsertionUI(
+            ITextView textView,
+            ITextBuffer subjectBuffer,
+            bool surroundWith = false
+        )
         {
-            ExpansionServiceProvider.GetExpansionService(textView).InvokeInsertionUI(
-                GetSnippetExpansionClient(textView, subjectBuffer),
-                subjectBuffer.ContentType,
-                types: surroundWith ? new[] { "SurroundsWith" } : new[] { "Expansion", "SurroundsWith" },
-                includeNullType: true,
-                kinds: null,
-                includeNullKind: false,
-                prefixText: surroundWith ? GettextCatalog.GetString("Surround With") : GettextCatalog.GetString("Insert Snippet"),
-                completionChar: null);
+            ExpansionServiceProvider.GetExpansionService(textView)
+                .InvokeInsertionUI(
+                    GetSnippetExpansionClient(textView, subjectBuffer),
+                    subjectBuffer.ContentType,
+                    types: surroundWith
+                      ? new[] { "SurroundsWith" }
+                      : new[] { "Expansion", "SurroundsWith" },
+                    includeNullType: true,
+                    kinds: null,
+                    includeNullKind: false,
+                    prefixText: surroundWith
+                      ? GettextCatalog.GetString("Surround With")
+                      : GettextCatalog.GetString("Insert Snippet"),
+                    completionChar: null
+                );
 
             return true;
         }
 
-        protected override bool IsSnippetExpansionContext(Document document, int startPosition, CancellationToken cancellationToken)
+        protected override bool IsSnippetExpansionContext(
+            Document document,
+            int startPosition,
+            CancellationToken cancellationToken
+        )
         {
             var syntaxTree = document.GetRequiredSyntaxTreeSynchronously(cancellationToken);
             var token = syntaxTree.GetRoot(cancellationToken).FindToken(startPosition);
             var trivia = syntaxTree.GetRoot(cancellationToken).FindTrivia(startPosition);
-            return !(trivia.IsKind(SyntaxKind.MultiLineCommentTrivia) || trivia.IsKind(SyntaxKind.SingleLineCommentTrivia) || token.IsKind(SyntaxKind.StringLiteralToken));
+            return !(
+                trivia.IsKind(SyntaxKind.MultiLineCommentTrivia)
+                || trivia.IsKind(SyntaxKind.SingleLineCommentTrivia)
+                || token.IsKind(SyntaxKind.StringLiteralToken)
+            );
         }
     }
 }

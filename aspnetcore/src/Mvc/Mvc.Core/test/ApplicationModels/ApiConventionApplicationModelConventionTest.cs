@@ -65,7 +65,10 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         {
             // Arrange
             var expected = typeof(InvalidFilterCriteriaException);
-            var controller = new ControllerModel(typeof(object).GetTypeInfo(), Array.Empty<object>());
+            var controller = new ControllerModel(
+                typeof(object).GetTypeInfo(),
+                Array.Empty<object>()
+            );
             var action = new ActionModel(typeof(object).GetMethods()[0], Array.Empty<object>())
             {
                 Controller = controller,
@@ -103,7 +106,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             var expected = typeof(InvalidTimeZoneException);
             var action = GetActionModel(
                 nameof(TestController.Delete),
-                controllerAttributes: new[] { new ProducesErrorResponseTypeAttribute(expected) });
+                controllerAttributes: new[] { new ProducesErrorResponseTypeAttribute(expected) }
+            );
             var convention = GetConvention();
 
             // Act
@@ -122,7 +126,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             var action = GetActionModel(
                 nameof(TestController.Delete),
                 actionAttributes: new[] { new ProducesErrorResponseTypeAttribute(expected) },
-                controllerAttributes: new[] { new ProducesErrorResponseTypeAttribute(typeof(Guid)) });
+                controllerAttributes: new[] { new ProducesErrorResponseTypeAttribute(typeof(Guid)) }
+            );
             var convention = GetConvention();
 
             // Act
@@ -138,7 +143,10 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         {
             // Arrange
             var expected = typeof(void);
-            var action = GetActionModel(nameof(TestController.Delete), new[] { new ProducesErrorResponseTypeAttribute(expected) });
+            var action = GetActionModel(
+                nameof(TestController.Delete),
+                new[] { new ProducesErrorResponseTypeAttribute(expected) }
+            );
             var convention = GetConvention();
 
             // Act
@@ -152,7 +160,9 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         private ApiConventionApplicationModelConvention GetConvention(Type errorType = null)
         {
             errorType = errorType ?? typeof(ProblemDetails);
-            return new ApiConventionApplicationModelConvention(new ProducesErrorResponseTypeAttribute(errorType));
+            return new ApiConventionApplicationModelConvention(
+                new ProducesErrorResponseTypeAttribute(errorType)
+            );
         }
 
         private static TValue GetProperty<TValue>(ActionModel action)
@@ -163,14 +173,22 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         private static ActionModel GetActionModel(
             string actionName,
             object[] actionAttributes = null,
-            object[] controllerAttributes = null)
+            object[] controllerAttributes = null
+        )
         {
             actionAttributes = actionAttributes ?? Array.Empty<object>();
-            controllerAttributes = controllerAttributes ?? new[] { new ApiConventionTypeAttribute(typeof(DefaultApiConventions)) };
+            controllerAttributes =
+                controllerAttributes
+                ?? new[] { new ApiConventionTypeAttribute(typeof(DefaultApiConventions)) };
 
-            var controllerModel = new ControllerModel(typeof(TestController).GetTypeInfo(), controllerAttributes);
-            var actionModel = new ActionModel(typeof(TestController).GetMethod(actionName), actionAttributes)
-            {
+            var controllerModel = new ControllerModel(
+                typeof(TestController).GetTypeInfo(),
+                controllerAttributes
+            );
+            var actionModel = new ActionModel(
+                typeof(TestController).GetMethod(actionName),
+                actionAttributes
+            ) {
                 Controller = controllerModel,
             };
 

@@ -20,14 +20,13 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
         protected override string LanguageName => LanguageNames.CSharp;
 
         public CSharpTyping(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(CSharpTyping))
-        {
-        }
+            : base(instanceFactory, nameof(CSharpTyping)) { }
 
         [WpfFact, WorkItem(957250, "https://devdiv.visualstudio.com/DevDiv/_workitems/edit/957250")]
         public void TypingInPartialType()
         {
-            SetUpEditor(@"
+            SetUpEditor(
+                @"
 public partial class Test
 {
     private int f;
@@ -38,8 +37,10 @@ public partial class Test
         f = 1;$$
     }
 }
-");
-            var secondPartialDecl = @"
+"
+            );
+            var secondPartialDecl =
+                @"
 public partial class Test
 {
     int val1 = 1, val2 = 2;
@@ -49,7 +50,8 @@ public partial class Test
     }
 }
 ";
-            var thirdPartialDecl = @"
+            var thirdPartialDecl =
+                @"
 public partial class Test
 {
     public void TestB()
@@ -57,8 +59,18 @@ public partial class Test
         int val1x = this.val1, val2x = this.val2;
     }
 }";
-            VisualStudio.SolutionExplorer.AddFile(new ProjectUtils.Project(ProjectName), "PartialType2.cs", secondPartialDecl, open: false);
-            VisualStudio.SolutionExplorer.AddFile(new ProjectUtils.Project(ProjectName), "PartialType3.cs", thirdPartialDecl, open: false);
+            VisualStudio.SolutionExplorer.AddFile(
+                new ProjectUtils.Project(ProjectName),
+                "PartialType2.cs",
+                secondPartialDecl,
+                open: false
+            );
+            VisualStudio.SolutionExplorer.AddFile(
+                new ProjectUtils.Project(ProjectName),
+                "PartialType3.cs",
+                thirdPartialDecl,
+                open: false
+            );
 
             // Typing intermixed with explicit Wait operations to ensure that
             // we trigger multiple open file analyses along with cancellations.
@@ -83,7 +95,8 @@ public partial class Test
         f = 1;
         f = 2;
     }
-}");
+}"
+            );
         }
     }
 }

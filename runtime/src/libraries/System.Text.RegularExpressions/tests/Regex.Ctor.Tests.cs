@@ -20,12 +20,39 @@ namespace System.Text.RegularExpressions.Tests
         public static IEnumerable<object[]> Ctor_TestData()
         {
             yield return new object[] { "foo", RegexOptions.None, Regex.InfiniteMatchTimeout };
-            yield return new object[] { "foo", RegexOptions.RightToLeft, Regex.InfiniteMatchTimeout };
+            yield return new object[]
+            {
+                "foo",
+                RegexOptions.RightToLeft,
+                Regex.InfiniteMatchTimeout
+            };
             yield return new object[] { "foo", RegexOptions.Compiled, Regex.InfiniteMatchTimeout };
-            yield return new object[] { "foo", RegexOptions.ECMAScript | RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant, Regex.InfiniteMatchTimeout };
-            yield return new object[] { "foo", RegexOptions.ECMAScript | RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant | RegexOptions.Compiled, Regex.InfiniteMatchTimeout };
+            yield return new object[]
+            {
+                "foo",
+                RegexOptions.ECMAScript
+                    | RegexOptions.IgnoreCase
+                    | RegexOptions.Multiline
+                    | RegexOptions.CultureInvariant,
+                Regex.InfiniteMatchTimeout
+            };
+            yield return new object[]
+            {
+                "foo",
+                RegexOptions.ECMAScript
+                    | RegexOptions.IgnoreCase
+                    | RegexOptions.Multiline
+                    | RegexOptions.CultureInvariant
+                    | RegexOptions.Compiled,
+                Regex.InfiniteMatchTimeout
+            };
             yield return new object[] { "foo", RegexOptions.None, new TimeSpan(1) };
-            yield return new object[] { "foo", RegexOptions.None, TimeSpan.FromMilliseconds(int.MaxValue - 1) };
+            yield return new object[]
+            {
+                "foo",
+                RegexOptions.None,
+                TimeSpan.FromMilliseconds(int.MaxValue - 1)
+            };
         }
 
         [Theory]
@@ -62,17 +89,29 @@ namespace System.Text.RegularExpressions.Tests
         {
             Regex r;
 
-            r = new Regex("[abc]def(ghi|jkl)", options | (RegexOptions)0x80 /*RegexOptions.Debug*/);
+            r = new Regex(
+                "[abc]def(ghi|jkl)",
+                options | (RegexOptions)0x80 /*RegexOptions.Debug*/
+            );
             Assert.False(r.Match("a").Success);
             Assert.True(r.Match("adefghi").Success);
             Assert.Equal("123456789", r.Replace("123adefghi789", "456"));
 
-            r = new Regex("(ghi|jkl)*ghi", options | (RegexOptions)0x80 /*RegexOptions.Debug*/);
+            r = new Regex(
+                "(ghi|jkl)*ghi",
+                options | (RegexOptions)0x80 /*RegexOptions.Debug*/
+            );
             Assert.False(r.Match("jkl").Success);
             Assert.True(r.Match("ghi").Success);
             Assert.Equal("123456789", r.Replace("123ghi789", "456"));
 
-            r = new Regex("(ghi|jkl)*ghi", options | (RegexOptions)0x80 /*RegexOptions.Debug*/, TimeSpan.FromDays(1));
+            r = new Regex(
+                "(ghi|jkl)*ghi",
+                options
+                    | (RegexOptions)0x80 /*RegexOptions.Debug*/
+                ,
+                TimeSpan.FromDays(1)
+            );
             Assert.False(r.Match("jkl").Success);
             Assert.True(r.Match("ghi").Success);
             Assert.Equal("123456789", r.Replace("123ghi789", "456"));
@@ -83,45 +122,132 @@ namespace System.Text.RegularExpressions.Tests
         {
             // Pattern is null
             AssertExtensions.Throws<ArgumentNullException>("pattern", () => new Regex(null));
-            AssertExtensions.Throws<ArgumentNullException>("pattern", () => new Regex(null, RegexOptions.None));
-            AssertExtensions.Throws<ArgumentNullException>("pattern", () => new Regex(null, RegexOptions.None, new TimeSpan()));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "pattern",
+                () => new Regex(null, RegexOptions.None)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "pattern",
+                () => new Regex(null, RegexOptions.None, new TimeSpan())
+            );
 
             // Options are invalid
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("options", () => new Regex("foo", (RegexOptions)(-1)));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("options", () => new Regex("foo", (RegexOptions)(-1), new TimeSpan()));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "options",
+                () => new Regex("foo", (RegexOptions)(-1))
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "options",
+                () => new Regex("foo", (RegexOptions)(-1), new TimeSpan())
+            );
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("options", () => new Regex("foo", (RegexOptions)0x400));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("options", () => new Regex("foo", (RegexOptions)0x400, new TimeSpan()));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "options",
+                () => new Regex("foo", (RegexOptions)0x400)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "options",
+                () => new Regex("foo", (RegexOptions)0x400, new TimeSpan())
+            );
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("options", () => new Regex("foo", RegexOptions.ECMAScript | RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant | RegexOptions.RightToLeft));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("options", () => new Regex("foo", RegexOptions.ECMAScript | RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant | RegexOptions.ExplicitCapture));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("options", () => new Regex("foo", RegexOptions.ECMAScript | RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant | RegexOptions.Singleline));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("options", () => new Regex("foo", RegexOptions.ECMAScript | RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant | RegexOptions.IgnorePatternWhitespace));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "options",
+                () =>
+                    new Regex(
+                        "foo",
+                        RegexOptions.ECMAScript
+                            | RegexOptions.IgnoreCase
+                            | RegexOptions.Multiline
+                            | RegexOptions.CultureInvariant
+                            | RegexOptions.RightToLeft
+                    )
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "options",
+                () =>
+                    new Regex(
+                        "foo",
+                        RegexOptions.ECMAScript
+                            | RegexOptions.IgnoreCase
+                            | RegexOptions.Multiline
+                            | RegexOptions.CultureInvariant
+                            | RegexOptions.ExplicitCapture
+                    )
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "options",
+                () =>
+                    new Regex(
+                        "foo",
+                        RegexOptions.ECMAScript
+                            | RegexOptions.IgnoreCase
+                            | RegexOptions.Multiline
+                            | RegexOptions.CultureInvariant
+                            | RegexOptions.Singleline
+                    )
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "options",
+                () =>
+                    new Regex(
+                        "foo",
+                        RegexOptions.ECMAScript
+                            | RegexOptions.IgnoreCase
+                            | RegexOptions.Multiline
+                            | RegexOptions.CultureInvariant
+                            | RegexOptions.IgnorePatternWhitespace
+                    )
+            );
 
             // MatchTimeout is invalid
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("matchTimeout", () => new Regex("foo", RegexOptions.None, new TimeSpan(-1)));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("matchTimeout", () => new Regex("foo", RegexOptions.None, TimeSpan.Zero));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("matchTimeout", () => new Regex("foo", RegexOptions.None, TimeSpan.FromMilliseconds(int.MaxValue)));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "matchTimeout",
+                () => new Regex("foo", RegexOptions.None, new TimeSpan(-1))
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "matchTimeout",
+                () => new Regex("foo", RegexOptions.None, TimeSpan.Zero)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "matchTimeout",
+                () => new Regex("foo", RegexOptions.None, TimeSpan.FromMilliseconds(int.MaxValue))
+            );
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public static void StaticCtor_InvalidTimeoutObject_ExceptionThrown()
         {
-            RemoteExecutor.Invoke(() =>
-            {
-                AppDomain.CurrentDomain.SetData(RegexHelpers.DefaultMatchTimeout_ConfigKeyName, true);
-                Assert.Throws<TypeInitializationException>(() => Regex.InfiniteMatchTimeout);
-            }).Dispose();
+            RemoteExecutor.Invoke(
+                    () =>
+                    {
+                        AppDomain.CurrentDomain.SetData(
+                            RegexHelpers.DefaultMatchTimeout_ConfigKeyName,
+                            true
+                        );
+                        Assert.Throws<TypeInitializationException>(
+                            () => Regex.InfiniteMatchTimeout
+                        );
+                    }
+                )
+                .Dispose();
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public static void StaticCtor_InvalidTimeoutRange_ExceptionThrown()
         {
-            RemoteExecutor.Invoke(() =>
-            {
-                AppDomain.CurrentDomain.SetData(RegexHelpers.DefaultMatchTimeout_ConfigKeyName, TimeSpan.Zero);
-                Assert.Throws<TypeInitializationException>(() => Regex.InfiniteMatchTimeout);
-            }).Dispose();
+            RemoteExecutor.Invoke(
+                    () =>
+                    {
+                        AppDomain.CurrentDomain.SetData(
+                            RegexHelpers.DefaultMatchTimeout_ConfigKeyName,
+                            TimeSpan.Zero
+                        );
+                        Assert.Throws<TypeInitializationException>(
+                            () => Regex.InfiniteMatchTimeout
+                        );
+                    }
+                )
+                .Dispose();
         }
 
         [Fact]
@@ -169,8 +295,16 @@ namespace System.Text.RegularExpressions.Tests
 
             public new void InitializeReferences() => base.InitializeReferences();
 
-            public new IDictionary Caps { get => base.Caps; set => base.Caps = value; }
-            public new IDictionary CapNames { get => base.CapNames; set => base.CapNames = value; }
+            public new IDictionary Caps
+            {
+                get => base.Caps;
+                set => base.Caps = value;
+            }
+            public new IDictionary CapNames
+            {
+                get => base.CapNames;
+                set => base.CapNames = value;
+            }
         }
 
         [Fact]
@@ -178,35 +312,46 @@ namespace System.Text.RegularExpressions.Tests
         public void Serialization_ThrowsNotSupported()
         {
             var r = new SerializableDerivedRegex();
-            Assert.Throws<PlatformNotSupportedException>(() => new SerializableDerivedRegex(default, default));
-            Assert.Throws<PlatformNotSupportedException>(() => ((ISerializable)r).GetObjectData(default, default));
+            Assert.Throws<PlatformNotSupportedException>(
+                () => new SerializableDerivedRegex(default, default)
+            );
+            Assert.Throws<PlatformNotSupportedException>(
+                () => ((ISerializable)r).GetObjectData(default, default)
+            );
         }
 
         [Serializable]
         private sealed class SerializableDerivedRegex : Regex
         {
             public SerializableDerivedRegex() : base("") { }
-            public SerializableDerivedRegex(SerializationInfo info, StreamingContext context) : base(info, context) { }
+            public SerializableDerivedRegex(SerializationInfo info, StreamingContext context)
+                : base(info, context) { }
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         [SkipOnTargetFramework(TargetFrameworkMonikers.NetFramework)]
         public void Ctor_PatternInName()
         {
-            RemoteExecutor.Invoke(() =>
-            {
-                // Just make sure setting the environment variable doesn't cause problems.
-                Environment.SetEnvironmentVariable("DOTNET_SYSTEM_TEXT_REGULAREXPRESSIONS_PATTERNINNAME", "1");
+            RemoteExecutor.Invoke(
+                    () =>
+                    {
+                        // Just make sure setting the environment variable doesn't cause problems.
+                        Environment.SetEnvironmentVariable(
+                            "DOTNET_SYSTEM_TEXT_REGULAREXPRESSIONS_PATTERNINNAME",
+                            "1"
+                        );
 
-                // Short pattern
-                var r = new Regex("abc", RegexOptions.Compiled);
-                Assert.True(r.IsMatch("123abc456"));
+                        // Short pattern
+                        var r = new Regex("abc", RegexOptions.Compiled);
+                        Assert.True(r.IsMatch("123abc456"));
 
-                // Long pattern
-                string pattern = string.Concat(Enumerable.Repeat("1234567890", 20));
-                r = new Regex(pattern, RegexOptions.Compiled);
-                Assert.True(r.IsMatch("abc" + pattern + "abc"));
-            }).Dispose();
+                        // Long pattern
+                        string pattern = string.Concat(Enumerable.Repeat("1234567890", 20));
+                        r = new Regex(pattern, RegexOptions.Compiled);
+                        Assert.True(r.IsMatch("abc" + pattern + "abc"));
+                    }
+                )
+                .Dispose();
         }
     }
 }

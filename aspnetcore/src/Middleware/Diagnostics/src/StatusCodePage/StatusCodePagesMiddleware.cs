@@ -22,7 +22,10 @@ namespace Microsoft.AspNetCore.Diagnostics
         /// </summary>
         /// <param name="next">The <see cref="RequestDelegate"/> representing the next middleware in the pipeline.</param>
         /// <param name="options">The options for configuring the middleware.</param>
-        public StatusCodePagesMiddleware(RequestDelegate next, IOptions<StatusCodePagesOptions> options)
+        public StatusCodePagesMiddleware(
+            RequestDelegate next,
+            IOptions<StatusCodePagesOptions> options
+        )
         {
             _next = next;
             _options = options.Value;
@@ -52,11 +55,13 @@ namespace Microsoft.AspNetCore.Diagnostics
             }
 
             // Do nothing if a response body has already been provided.
-            if (context.Response.HasStarted
+            if (
+                context.Response.HasStarted
                 || context.Response.StatusCode < 400
                 || context.Response.StatusCode >= 600
                 || context.Response.ContentLength.HasValue
-                || !string.IsNullOrEmpty(context.Response.ContentType))
+                || !string.IsNullOrEmpty(context.Response.ContentType)
+            )
             {
                 return;
             }

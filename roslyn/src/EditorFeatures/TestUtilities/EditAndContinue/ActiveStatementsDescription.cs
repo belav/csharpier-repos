@@ -31,73 +31,98 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             OldTrackingSpans = null;
         }
 
-        private static readonly DocumentId s_dummyDocumentId = DocumentId.CreateNewId(ProjectId.CreateNewId());
+        private static readonly DocumentId s_dummyDocumentId = DocumentId.CreateNewId(
+            ProjectId.CreateNewId()
+        );
 
         public ActiveStatementsDescription(string oldSource, string newSource)
         {
             var oldText = SourceText.From(oldSource);
 
-            OldStatements = GetActiveSpans(oldSource).Aggregate(
-                new List<ActiveStatement>(),
-                (list, s) => SetListItem(list, s.Id, CreateActiveStatement(s.Span, s.Id, oldText, s_dummyDocumentId))).ToArray();
+            OldStatements = GetActiveSpans(oldSource)
+                .Aggregate(
+                    new List<ActiveStatement>(),
+                    (list, s) =>
+                        SetListItem(
+                            list,
+                            s.Id,
+                            CreateActiveStatement(s.Span, s.Id, oldText, s_dummyDocumentId)
+                        )
+                )
+                .ToArray();
 
-            NewSpans = GetActiveSpans(newSource).Aggregate(
-                new List<TextSpan>(),
-                (list, s) => SetListItem(list, s.Id, s.Span)).ToArray();
+            NewSpans = GetActiveSpans(newSource)
+                .Aggregate(new List<TextSpan>(), (list, s) => SetListItem(list, s.Id, s.Span))
+                .ToArray();
 
             OldRegions = GetExceptionRegions(oldSource, OldStatements.Length);
             NewRegions = GetExceptionRegions(newSource, NewSpans.Length);
 
-            // Tracking spans are marked in the new source since the editor moves them around as the user 
+            // Tracking spans are marked in the new source since the editor moves them around as the user
             // edits the source and we get their positions when analyzing the new source.
             // The EnC analyzer uses old trackign spans as hints to find matching nodes.
             OldTrackingSpans = GetTrackingSpans(newSource, OldStatements.Length);
         }
 
-        internal static readonly ActiveStatementsDescription Empty = new ActiveStatementsDescription();
+        internal static readonly ActiveStatementsDescription Empty =
+            new ActiveStatementsDescription();
 
-        internal static string ClearTags(string source)
-            => s_tags.Replace(source, m => new string(' ', m.Length));
+        internal static string ClearTags(string source) =>
+            s_tags.Replace(source, m => new string(' ', m.Length));
 
-        internal static string[] ClearTags(string[] sources)
-            => sources.Select(ClearTags).ToArray();
+        internal static string[] ClearTags(string[] sources) => sources.Select(ClearTags).ToArray();
 
         private static readonly Regex s_tags = new Regex(
             @"[<][/]?(AS|ER|N|TS)[:][.0-9,]+[>]",
-            RegexOptions.IgnorePatternWhitespace | RegexOptions.Singleline);
+            RegexOptions.IgnorePatternWhitespace | RegexOptions.Singleline
+        );
 
         private static readonly Regex s_activeStatementPattern = new Regex(
             @"[<]AS[:]    (?<Id>[0-9,]+) [>]
               (?<ActiveStatement>.*)
               [<][/]AS[:] (\k<Id>)      [>]",
-            RegexOptions.IgnorePatternWhitespace | RegexOptions.Singleline);
+            RegexOptions.IgnorePatternWhitespace | RegexOptions.Singleline
+        );
 
         public static readonly Regex ExceptionRegionPattern = new Regex(
             @"[<]ER[:]      (?<Id>(?:[0-9]+[.][0-9]+[,]?)+)   [>]
               (?<ExceptionRegion>.*)
               [<][/]ER[:]   (\k<Id>)                 [>]",
-            RegexOptions.IgnorePatternWhitespace | RegexOptions.Singleline);
+            RegexOptions.IgnorePatternWhitespace | RegexOptions.Singleline
+        );
 
         private static readonly Regex s_trackingStatementPattern = new Regex(
             @"[<]TS[:]    (?<Id>[0-9,]+) [>]
               (?<TrackingStatement>.*)
               [<][/]TS[:] (\k<Id>)      [>]",
-            RegexOptions.IgnorePatternWhitespace | RegexOptions.Singleline);
+            RegexOptions.IgnorePatternWhitespace | RegexOptions.Singleline
+        );
 
-        internal static IEnumerable<int> GetIds(Match match)
-            => match.Groups["Id"].Value.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse);
+        internal static IEnumerable<int> GetIds(Match match) =>
+            match.Groups["Id"].Value.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                .Select(int.Parse);
 
-        internal static int[] GetIds(string ids)
-            => ids.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray();
+        internal static int[] GetIds(string ids) =>
+            ids.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                .Select(int.Parse)
+                .ToArray();
 
         internal static IEnumerable<ValueTuple<int, int>> GetDottedIds(Match match)
         {
-            return from ids in match.Groups["Id"].Value.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
-                   let parts = ids.Split('.')
-                   select ValueTuple.Create(int.Parse(parts[0]), int.Parse(parts[1]));
+            return from ids in match.Groups["Id"].Value.Split(
+                new[] { ',' },
+                StringSplitOptions.RemoveEmptyEntries
+            )
+            let parts = ids.Split('.')
+            select ValueTuple.Create(int.Parse(parts[0]), int.Parse(parts[1]));
         }
 
-        private static IEnumerable<(TextSpan Span, int[] Ids)> GetSpansRecursive(Regex regex, string contentGroupName, string markedSource, int offset)
+        private static IEnumerable<(TextSpan Span, int[] Ids)> GetSpansRecursive(
+            Regex regex,
+            string contentGroupName,
+            string markedSource,
+            int offset
+        )
         {
             foreach (var match in regex.Matches(markedSource).ToEnumerable())
             {
@@ -105,10 +130,20 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                 var ids = GetIds(match.Groups["Id"].Value);
                 var absoluteOffset = offset + markedSyntax.Index;
 
-                var span = markedSyntax.Length != 0 ? new TextSpan(absoluteOffset, markedSyntax.Length) : new TextSpan();
+                var span =
+                    markedSyntax.Length != 0
+                        ? new TextSpan(absoluteOffset, markedSyntax.Length)
+                        : new TextSpan();
                 yield return (span, ids);
 
-                foreach (var nestedSpan in GetSpansRecursive(regex, contentGroupName, markedSyntax.Value, absoluteOffset))
+                foreach (
+                    var nestedSpan in GetSpansRecursive(
+                        regex,
+                        contentGroupName,
+                        markedSyntax.Value,
+                        absoluteOffset
+                    )
+                )
                 {
                     yield return nestedSpan;
                 }
@@ -117,7 +152,14 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
 
         internal static IEnumerable<(TextSpan Span, int Id)> GetActiveSpans(string markedSource)
         {
-            foreach (var (span, ids) in GetSpansRecursive(s_activeStatementPattern, "ActiveStatement", markedSource, offset: 0))
+            foreach (
+                var (span, ids) in GetSpansRecursive(
+                    s_activeStatementPattern,
+                    "ActiveStatement",
+                    markedSource,
+                    offset: 0
+                )
+            )
             {
                 foreach (var id in ids)
                 {
@@ -126,20 +168,31 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             }
         }
 
-        internal static ActiveStatement CreateActiveStatement(ActiveStatementFlags flags, LinePositionSpan span, DocumentId documentId)
-            => new ActiveStatement(
+        internal static ActiveStatement CreateActiveStatement(
+            ActiveStatementFlags flags,
+            LinePositionSpan span,
+            DocumentId documentId
+        ) =>
+            new ActiveStatement(
                 ordinal: 0,
                 primaryDocumentOrdinal: 0,
                 ImmutableArray.Create(documentId),
                 flags,
                 span,
-                instructionId: default);
+                instructionId: default
+            );
 
-        internal static ActiveStatement CreateActiveStatement(TextSpan span, int id, SourceText text, DocumentId documentId)
-            => CreateActiveStatement(
+        internal static ActiveStatement CreateActiveStatement(
+            TextSpan span,
+            int id,
+            SourceText text,
+            DocumentId documentId
+        ) =>
+            CreateActiveStatement(
                 (id == 0) ? ActiveStatementFlags.IsLeafFrame : ActiveStatementFlags.IsNonLeafFrame,
                 text.Lines.GetLinePositionSpan(span),
-                documentId);
+                documentId
+            );
 
         internal static TextSpan[]? GetTrackingSpans(string src, int count)
         {
@@ -165,7 +218,10 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             return result;
         }
 
-        internal static ImmutableArray<TextSpan>[] GetExceptionRegions(string src, int activeStatementCount)
+        internal static ImmutableArray<TextSpan>[] GetExceptionRegions(
+            string src,
+            int activeStatementCount
+        )
         {
             var matches = ExceptionRegionPattern.Matches(src);
             var result = new List<TextSpan>[activeStatementCount];
@@ -185,7 +241,10 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                     }
 
                     EnsureSlot(result[activeStatementId], exceptionRegionId);
-                    result[activeStatementId][exceptionRegionId] = new TextSpan(exceptionRegion.Index, exceptionRegion.Length);
+                    result[activeStatementId][exceptionRegionId] = new TextSpan(
+                        exceptionRegion.Index,
+                        exceptionRegion.Length
+                    );
                 }
             }
 

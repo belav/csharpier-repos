@@ -17,6 +17,7 @@ namespace Microsoft.AspNetCore.HeaderPropagation
         /// <see cref="HeaderPropagationMessageHandler"/>. This can cause an earlier entry to take precedence
         /// over a later entry if they have the same <see cref="HeaderPropagationMessageHandlerEntry.OutboundHeaderName"/>.
         /// </remarks>
-        public HeaderPropagationMessageHandlerEntryCollection Headers { get; set; } = new HeaderPropagationMessageHandlerEntryCollection();
+        public HeaderPropagationMessageHandlerEntryCollection Headers { get; set; } =
+            new HeaderPropagationMessageHandlerEntryCollection();
     }
 }

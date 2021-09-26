@@ -6,7 +6,10 @@ namespace Wasm.Authentication.Server.Controllers
 {
     public class OidcConfigurationController : Controller
     {
-        public OidcConfigurationController(IClientRequestParametersProvider clientRequestParametersProvider, ILogger<OidcConfigurationController> logger)
+        public OidcConfigurationController(
+            IClientRequestParametersProvider clientRequestParametersProvider,
+            ILogger<OidcConfigurationController> logger
+        )
         {
             ClientRequestParametersProvider = clientRequestParametersProvider;
         }
@@ -14,9 +17,12 @@ namespace Wasm.Authentication.Server.Controllers
         public IClientRequestParametersProvider ClientRequestParametersProvider { get; }
 
         [HttpGet("_configuration/{clientId}")]
-        public IActionResult GetClientRequestParameters([FromRoute]string clientId)
+        public IActionResult GetClientRequestParameters([FromRoute] string clientId)
         {
-            var parameters = ClientRequestParametersProvider.GetClientParameters(HttpContext, clientId);
+            var parameters = ClientRequestParametersProvider.GetClientParameters(
+                HttpContext,
+                clientId
+            );
             return Ok(parameters);
         }
     }

@@ -39,7 +39,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
         public virtual TypeScaffoldingInfo? FindMapping(
             string storeType,
             bool keyOrIndex,
-            bool rowVersion)
+            bool rowVersion
+        )
         {
             // This is because certain providers can have no type specified as a default type e.g. SQLite
             Check.NotNull(storeType, nameof(storeType));
@@ -69,10 +70,13 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                 rowVersion: rowVersion,
                 fixedLength: mapping.IsFixedLength,
                 precision: mapping.Precision,
-                scale: mapping.Scale);
+                scale: mapping.Scale
+            );
 
-            if (defaultTypeMapping != null
-                && string.Equals(defaultTypeMapping.StoreType, storeType, StringComparison.Ordinal))
+            if (
+                defaultTypeMapping != null
+                && string.Equals(defaultTypeMapping.StoreType, storeType, StringComparison.Ordinal)
+            )
             {
                 canInfer = true;
 
@@ -86,9 +90,13 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                     rowVersion: rowVersion,
                     fixedLength: mapping.IsFixedLength,
                     precision: mapping.Precision,
-                    scale: mapping.Scale)!;
+                    scale: mapping.Scale
+                )!;
 
-                scaffoldUnicode = unicodeMapping.IsUnicode != defaultTypeMapping.IsUnicode ? (bool?)defaultTypeMapping.IsUnicode : null;
+                scaffoldUnicode =
+                    unicodeMapping.IsUnicode != defaultTypeMapping.IsUnicode
+                        ? (bool?)defaultTypeMapping.IsUnicode
+                        : null;
 
                 // Check for fixed-length
                 var fixedLengthMapping = _typeMappingSource.FindMapping(
@@ -99,11 +107,13 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                     size: mapping.Size,
                     fixedLength: null,
                     precision: mapping.Precision,
-                    scale: mapping.Scale)!;
+                    scale: mapping.Scale
+                )!;
 
-                scaffoldFixedLength = fixedLengthMapping.IsFixedLength != defaultTypeMapping.IsFixedLength
-                    ? (bool?)defaultTypeMapping.IsFixedLength
-                    : null;
+                scaffoldFixedLength =
+                    fixedLengthMapping.IsFixedLength != defaultTypeMapping.IsFixedLength
+                        ? (bool?)defaultTypeMapping.IsFixedLength
+                        : null;
 
                 // Check for size (= max-length)
                 var sizedMapping = _typeMappingSource.FindMapping(
@@ -115,9 +125,11 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                     rowVersion: rowVersion,
                     fixedLength: false, // Fixed length with no size is not valid
                     precision: mapping.Precision,
-                    scale: mapping.Scale)!;
+                    scale: mapping.Scale
+                )!;
 
-                scaffoldMaxLength = sizedMapping.Size != defaultTypeMapping.Size ? defaultTypeMapping.Size : null;
+                scaffoldMaxLength =
+                    sizedMapping.Size != defaultTypeMapping.Size ? defaultTypeMapping.Size : null;
 
                 // Check for precision
                 var precisionMapping = _typeMappingSource.FindMapping(
@@ -129,9 +141,13 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                     rowVersion: rowVersion,
                     fixedLength: mapping.IsFixedLength,
                     precision: null,
-                    scale: mapping.Scale)!;
+                    scale: mapping.Scale
+                )!;
 
-                scaffoldPrecision = precisionMapping.Precision != defaultTypeMapping.Precision ? defaultTypeMapping.Precision : null;
+                scaffoldPrecision =
+                    precisionMapping.Precision != defaultTypeMapping.Precision
+                        ? defaultTypeMapping.Precision
+                        : null;
 
                 // Check for scale
                 var scaleMapping = _typeMappingSource.FindMapping(
@@ -143,9 +159,13 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                     rowVersion: rowVersion,
                     fixedLength: mapping.IsFixedLength,
                     precision: mapping.Precision,
-                    scale: null)!;
+                    scale: null
+                )!;
 
-                scaffoldScale = scaleMapping.Scale != defaultTypeMapping.Scale ? defaultTypeMapping.Scale : null;
+                scaffoldScale =
+                    scaleMapping.Scale != defaultTypeMapping.Scale
+                        ? defaultTypeMapping.Scale
+                        : null;
             }
 
             return new TypeScaffoldingInfo(
@@ -155,7 +175,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                 scaffoldMaxLength,
                 scaffoldFixedLength,
                 scaffoldPrecision,
-                scaffoldScale);
+                scaffoldScale
+            );
         }
     }
 }

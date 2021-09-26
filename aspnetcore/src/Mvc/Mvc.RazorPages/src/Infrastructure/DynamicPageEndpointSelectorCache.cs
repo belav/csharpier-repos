@@ -8,7 +8,10 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
     internal class DynamicPageEndpointSelectorCache
     {
         private readonly ConcurrentDictionary<int, EndpointDataSource> _dataSourceCache = new();
-        private readonly ConcurrentDictionary<int, DynamicPageEndpointSelector> _endpointSelectorCache = new();
+        private readonly ConcurrentDictionary<
+            int,
+            DynamicPageEndpointSelector
+        > _endpointSelectorCache = new();
 
         public void AddDataSource(PageActionEndpointDataSource dataSource)
         {
@@ -34,7 +37,9 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
         {
             if (!_dataSourceCache.TryGetValue(key, out var dataSource))
             {
-                throw new InvalidOperationException($"Data source with key '{key}' not registered.");
+                throw new InvalidOperationException(
+                    $"Data source with key '{key}' not registered."
+                );
             }
 
             return new DynamicPageEndpointSelector(dataSource);

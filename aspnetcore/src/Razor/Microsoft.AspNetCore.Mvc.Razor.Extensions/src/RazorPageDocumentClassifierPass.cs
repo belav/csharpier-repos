@@ -23,28 +23,37 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
             _useConsolidatedMvcViews = useConsolidatedMvcViews;
         }
 
-        private static readonly RazorProjectEngine LeadingDirectiveParsingEngine = RazorProjectEngine.Create(
-            RazorConfiguration.Create(RazorLanguageVersion.Version_3_0, "leading-directive-parser", Array.Empty<RazorExtension>()),
-            RazorProjectFileSystem.Create("/"),
-            builder =>
-            {
-                for (var i = builder.Phases.Count - 1; i >= 0; i--)
+        private static readonly RazorProjectEngine LeadingDirectiveParsingEngine =
+            RazorProjectEngine.Create(
+                RazorConfiguration.Create(
+                    RazorLanguageVersion.Version_3_0,
+                    "leading-directive-parser",
+                    Array.Empty<RazorExtension>()
+                ),
+                RazorProjectFileSystem.Create("/"),
+                builder =>
                 {
-                    var phase = builder.Phases[i];
-                    builder.Phases.RemoveAt(i);
-                    if (phase is IRazorDocumentClassifierPhase)
+                    for (var i = builder.Phases.Count - 1; i >= 0; i--)
                     {
-                        break;
+                        var phase = builder.Phases[i];
+                        builder.Phases.RemoveAt(i);
+                        if (phase is IRazorDocumentClassifierPhase)
+                        {
+                            break;
+                        }
                     }
-                }
 
-                RazorExtensions.Register(builder);
-                builder.Features.Add(new LeadingDirectiveParserOptionsFeature());
-            });
+                    RazorExtensions.Register(builder);
+                    builder.Features.Add(new LeadingDirectiveParserOptionsFeature());
+                }
+            );
 
         protected override string DocumentKind => RazorPageDocumentKind;
 
-        protected override bool IsMatch(RazorCodeDocument codeDocument, DocumentIntermediateNode documentNode)
+        protected override bool IsMatch(
+            RazorCodeDocument codeDocument,
+            DocumentIntermediateNode documentNode
+        )
         {
             return PageDirective.TryGetPageDirective(documentNode, out var pageDirective);
         }
@@ -53,13 +62,21 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
             RazorCodeDocument codeDocument,
             NamespaceDeclarationIntermediateNode @namespace,
             ClassDeclarationIntermediateNode @class,
-            MethodDeclarationIntermediateNode method)
+            MethodDeclarationIntermediateNode method
+        )
         {
             base.OnDocumentStructureCreated(codeDocument, @namespace, @class, method);
 
-            if (!codeDocument.TryComputeNamespace(fallbackToRootNamespace: false, out var namespaceName))
+            if (
+                !codeDocument.TryComputeNamespace(
+                    fallbackToRootNamespace: false,
+                    out var namespaceName
+                )
+            )
             {
-                @namespace.Content = _useConsolidatedMvcViews ? "AspNetCoreGeneratedDocument" : "AspNetCore";
+                @namespace.Content = _useConsolidatedMvcViews
+                    ? "AspNetCoreGeneratedDocument"
+                    : "AspNetCore";
             }
             else
             {
@@ -105,7 +122,11 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
             AddRouteTemplateMetadataAttribute(@namespace, @class, pageDirective);
         }
 
-        private static void AddRouteTemplateMetadataAttribute(NamespaceDeclarationIntermediateNode @namespace, ClassDeclarationIntermediateNode @class, PageDirective pageDirective)
+        private static void AddRouteTemplateMetadataAttribute(
+            NamespaceDeclarationIntermediateNode @namespace,
+            ClassDeclarationIntermediateNode @class,
+            PageDirective pageDirective
+        )
         {
             if (string.IsNullOrEmpty(pageDirective.RouteTemplate))
             {
@@ -127,14 +148,20 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
             @namespace.Children.Insert(classIndex, metadataAttributeNode);
         }
 
-        private void EnsureValidPageDirective(RazorCodeDocument codeDocument, PageDirective pageDirective)
+        private void EnsureValidPageDirective(
+            RazorCodeDocument codeDocument,
+            PageDirective pageDirective
+        )
         {
             Debug.Assert(pageDirective != null);
 
             if (pageDirective.DirectiveNode.IsImported())
             {
                 pageDirective.DirectiveNode.Diagnostics.Add(
-                    RazorExtensionsDiagnosticFactory.CreatePageDirective_CannotBeImported(pageDirective.DirectiveNode.Source.Value));
+                    RazorExtensionsDiagnosticFactory.CreatePageDirective_CannotBeImported(
+                        pageDirective.DirectiveNode.Source.Value
+                    )
+                );
             }
             else
             {
@@ -145,17 +172,23 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
                 var leadingDirectiveCodeDocument = RazorCodeDocument.Create(codeDocument.Source);
                 LeadingDirectiveParsingEngine.Engine.Process(leadingDirectiveCodeDocument);
 
-                var leadingDirectiveDocumentNode = leadingDirectiveCodeDocument.GetDocumentIntermediateNode();
+                var leadingDirectiveDocumentNode =
+                    leadingDirectiveCodeDocument.GetDocumentIntermediateNode();
                 if (!PageDirective.TryGetPageDirective(leadingDirectiveDocumentNode, out var _))
                 {
                     // The page directive is not the leading directive. Add an error.
                     pageDirective.DirectiveNode.Diagnostics.Add(
-                        RazorExtensionsDiagnosticFactory.CreatePageDirective_MustExistAtTheTopOfFile(pageDirective.DirectiveNode.Source.Value));
+                        RazorExtensionsDiagnosticFactory.CreatePageDirective_MustExistAtTheTopOfFile(
+                            pageDirective.DirectiveNode.Source.Value
+                        )
+                    );
                 }
             }
         }
 
-        private class LeadingDirectiveParserOptionsFeature : RazorEngineFeatureBase, IConfigureRazorParserOptionsFeature
+        private class LeadingDirectiveParserOptionsFeature
+            : RazorEngineFeatureBase,
+              IConfigureRazorParserOptionsFeature
         {
             public int Order { get; }
 

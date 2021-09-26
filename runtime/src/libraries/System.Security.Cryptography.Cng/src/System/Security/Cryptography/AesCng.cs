@@ -21,14 +21,10 @@ namespace System.Security.Cryptography
         }
 
         public AesCng(string keyName)
-            : this(keyName, CngProvider.MicrosoftSoftwareKeyStorageProvider)
-        {
-        }
+            : this(keyName, CngProvider.MicrosoftSoftwareKeyStorageProvider) { }
 
         public AesCng(string keyName, CngProvider provider)
-            : this(keyName, provider, CngKeyOpenOptions.None)
-        {
-        }
+            : this(keyName, provider, CngKeyOpenOptions.None) { }
 
         public AesCng(string keyName, CngProvider provider, CngKeyOpenOptions openOptions)
         {
@@ -37,27 +33,14 @@ namespace System.Security.Cryptography
 
         public override byte[] Key
         {
-            get
-            {
-                return _core.GetKeyIfExportable();
-            }
-            set
-            {
-                _core.SetKey(value);
-            }
+            get { return _core.GetKeyIfExportable(); }
+            set { _core.SetKey(value); }
         }
 
         public override int KeySize
         {
-            get
-            {
-                return base.KeySize;
-            }
-
-            set
-            {
-                _core.SetKeySize(value, this);
-            }
+            get { return base.KeySize; }
+            set { _core.SetKeySize(value, this); }
         }
 
         public override ICryptoTransform CreateDecryptor()
@@ -97,8 +80,16 @@ namespace System.Security.Cryptography
             base.Dispose(disposing);
         }
 
-        byte[] ICngSymmetricAlgorithm.BaseKey { get { return base.Key; } set { base.Key = value; } }
-        int ICngSymmetricAlgorithm.BaseKeySize { get { return base.KeySize; } set { base.KeySize = value; } }
+        byte[] ICngSymmetricAlgorithm.BaseKey
+        {
+            get { return base.Key; }
+            set { base.Key = value; }
+        }
+        int ICngSymmetricAlgorithm.BaseKeySize
+        {
+            get { return base.KeySize; }
+            set { base.KeySize = value; }
+        }
 
         bool ICngSymmetricAlgorithm.IsWeakKey(byte[] key)
         {

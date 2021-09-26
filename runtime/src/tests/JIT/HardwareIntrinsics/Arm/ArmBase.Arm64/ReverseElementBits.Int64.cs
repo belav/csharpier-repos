@@ -97,7 +97,6 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             Succeeded = true;
 
-            
             _fld = TestLibrary.Generator.GetInt64();
             _data = TestLibrary.Generator.GetInt64();
         }
@@ -121,10 +120,17 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            var result = typeof(ArmBase.Arm64).GetMethod(nameof(ArmBase.Arm64.ReverseElementBits), new Type[] { typeof(Int64) })
-                                     .Invoke(null, new object[] {
-                                        Unsafe.ReadUnaligned<Int64>(ref Unsafe.As<Int64, byte>(ref _data))
-                                     });
+            var result = typeof(ArmBase.Arm64).GetMethod(
+                    nameof(ArmBase.Arm64.ReverseElementBits),
+                    new Type[] { typeof(Int64) }
+                )
+                .Invoke(
+                    null,
+                    new object[]
+                    {
+                        Unsafe.ReadUnaligned<Int64>(ref Unsafe.As<Int64, byte>(ref _data))
+                    }
+                );
 
             ValidateResult(_data, (Int64)result);
         }
@@ -133,9 +139,7 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClsVarScenario));
 
-            var result = ArmBase.Arm64.ReverseElementBits(
-                _clsVar
-            );
+            var result = ArmBase.Arm64.ReverseElementBits(_clsVar);
 
             ValidateResult(_clsVar, result);
         }
@@ -215,7 +219,9 @@ namespace JIT.HardwareIntrinsics.Arm
 
             if (isUnexpectedResult)
             {
-                TestLibrary.TestFramework.LogInformation($"{nameof(ArmBase.Arm64)}.{nameof(ArmBase.Arm64.ReverseElementBits)}<Int64>(Int64): ReverseElementBits failed:");
+                TestLibrary.TestFramework.LogInformation(
+                    $"{nameof(ArmBase.Arm64)}.{nameof(ArmBase.Arm64.ReverseElementBits)}<Int64>(Int64): ReverseElementBits failed:"
+                );
                 TestLibrary.TestFramework.LogInformation($"    data: {data}");
                 TestLibrary.TestFramework.LogInformation($"  result: {result}");
                 TestLibrary.TestFramework.LogInformation(string.Empty);

@@ -1,4 +1,4 @@
-// Copyright (c) .NET Foundation. All rights reserved.
+﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
@@ -23,7 +23,8 @@ namespace Microsoft.AspNetCore.Routing
     public class RouteTest
     {
         private static readonly RequestDelegate NullHandler = (c) => Task.CompletedTask;
-        private static IInlineConstraintResolver _inlineConstraintResolver = GetInlineConstraintResolver();
+        private static IInlineConstraintResolver _inlineConstraintResolver =
+            GetInlineConstraintResolver();
 
         [Fact]
         public void CreateTemplate_InlineConstraint_Regex_Malformed()
@@ -33,22 +34,27 @@ namespace Microsoft.AspNetCore.Routing
             var mockTarget = new Mock<IRouter>(MockBehavior.Strict);
 
             var exception = Assert.Throws<RouteCreationException>(
-                () => new Route(
-                    mockTarget.Object,
-                    template,
-                    defaults: null,
-                    constraints: null,
-                    dataTokens: null,
-                    inlineConstraintResolver: _inlineConstraintResolver));
+                () =>
+                    new Route(
+                        mockTarget.Object,
+                        template,
+                        defaults: null,
+                        constraints: null,
+                        dataTokens: null,
+                        inlineConstraintResolver: _inlineConstraintResolver
+                    )
+            );
 
-            var expected = "An error occurred while creating the route with name '' and template" +
-                $" '{template}'.";
+            var expected =
+                "An error occurred while creating the route with name '' and template"
+                + $" '{template}'.";
             Assert.Equal(expected, exception.Message);
 
             Assert.NotNull(exception.InnerException);
-            expected = "The constraint entry 'p1' - 'regex(abc' on the route " +
-                "'{controller}/{action}/ {p1:regex(abc} ' could not be resolved by the constraint resolver of type " +
-                $"'{nameof(DefaultInlineConstraintResolver)}'.";
+            expected =
+                "The constraint entry 'p1' - 'regex(abc' on the route "
+                + "'{controller}/{action}/ {p1:regex(abc} ' could not be resolved by the constraint resolver of type "
+                + $"'{nameof(DefaultInlineConstraintResolver)}'.";
             Assert.Equal(expected, exception.InnerException.Message);
         }
 
@@ -68,13 +74,14 @@ namespace Microsoft.AspNetCore.Routing
 
             IDictionary<string, object> routeValues = null;
             var mockTarget = new Mock<IRouter>(MockBehavior.Strict);
-            mockTarget
-                .Setup(s => s.RouteAsync(It.IsAny<RouteContext>()))
-                .Callback<RouteContext>(ctx =>
-                {
-                    routeValues = ctx.RouteData.Values;
-                    ctx.Handler = NullHandler;
-                })
+            mockTarget.Setup(s => s.RouteAsync(It.IsAny<RouteContext>()))
+                .Callback<RouteContext>(
+                    ctx =>
+                    {
+                        routeValues = ctx.RouteData.Values;
+                        ctx.Handler = NullHandler;
+                    }
+                )
                 .Returns(Task.FromResult(true));
 
             var route = new Route(
@@ -83,7 +90,8 @@ namespace Microsoft.AspNetCore.Routing
                 defaults: null,
                 constraints: null,
                 dataTokens: new RouteValueDictionary(new { today = "Friday" }),
-                inlineConstraintResolver: _inlineConstraintResolver);
+                inlineConstraintResolver: _inlineConstraintResolver
+            );
 
             // Act
             await route.RouteAsync(context);
@@ -122,13 +130,14 @@ namespace Microsoft.AspNetCore.Routing
 
             IDictionary<string, object> routeValues = null;
             var mockTarget = new Mock<IRouter>(MockBehavior.Strict);
-            mockTarget
-                .Setup(s => s.RouteAsync(It.IsAny<RouteContext>()))
-                .Callback<RouteContext>(ctx =>
-                {
-                    routeValues = ctx.RouteData.Values;
-                    ctx.Handler = NullHandler;
-                })
+            mockTarget.Setup(s => s.RouteAsync(It.IsAny<RouteContext>()))
+                .Callback<RouteContext>(
+                    ctx =>
+                    {
+                        routeValues = ctx.RouteData.Values;
+                        ctx.Handler = NullHandler;
+                    }
+                )
                 .Returns(Task.FromResult(true));
 
             var constraint = new CapturingConstraint();
@@ -139,7 +148,8 @@ namespace Microsoft.AspNetCore.Routing
                 defaults: null,
                 constraints: new RouteValueDictionary(new { action = constraint }),
                 dataTokens: new RouteValueDictionary(new { today = "Friday" }),
-                inlineConstraintResolver: _inlineConstraintResolver);
+                inlineConstraintResolver: _inlineConstraintResolver
+            );
 
             // Act
             await route.RouteAsync(context);
@@ -176,13 +186,14 @@ namespace Microsoft.AspNetCore.Routing
 
             IDictionary<string, object> routeValues = null;
             var mockTarget = new Mock<IRouter>(MockBehavior.Strict);
-            mockTarget
-                .Setup(s => s.RouteAsync(It.IsAny<RouteContext>()))
-                .Callback<RouteContext>(ctx =>
-                {
-                    routeValues = ctx.RouteData.Values;
-                    ctx.Handler = NullHandler;
-                })
+            mockTarget.Setup(s => s.RouteAsync(It.IsAny<RouteContext>()))
+                .Callback<RouteContext>(
+                    ctx =>
+                    {
+                        routeValues = ctx.RouteData.Values;
+                        ctx.Handler = NullHandler;
+                    }
+                )
                 .Returns(Task.FromResult(true));
 
             var route = new Route(
@@ -191,7 +202,8 @@ namespace Microsoft.AspNetCore.Routing
                 defaults: null,
                 constraints: null,
                 dataTokens: null,
-                inlineConstraintResolver: _inlineConstraintResolver);
+                inlineConstraintResolver: _inlineConstraintResolver
+            );
 
             Assert.NotEmpty(route.Constraints);
             Assert.IsType<OptionalRouteConstraint>(route.Constraints["id"]);
@@ -218,13 +230,14 @@ namespace Microsoft.AspNetCore.Routing
 
             IDictionary<string, object> routeValues = null;
             var mockTarget = new Mock<IRouter>(MockBehavior.Strict);
-            mockTarget
-                .Setup(s => s.RouteAsync(It.IsAny<RouteContext>()))
-                .Callback<RouteContext>(ctx =>
-                {
-                    routeValues = ctx.RouteData.Values;
-                    ctx.Handler = NullHandler;
-                })
+            mockTarget.Setup(s => s.RouteAsync(It.IsAny<RouteContext>()))
+                .Callback<RouteContext>(
+                    ctx =>
+                    {
+                        routeValues = ctx.RouteData.Values;
+                        ctx.Handler = NullHandler;
+                    }
+                )
                 .Returns(Task.FromResult(true));
 
             var route = new Route(
@@ -233,7 +246,8 @@ namespace Microsoft.AspNetCore.Routing
                 defaults: null,
                 constraints: null,
                 dataTokens: null,
-                inlineConstraintResolver: _inlineConstraintResolver);
+                inlineConstraintResolver: _inlineConstraintResolver
+            );
 
             Assert.NotEmpty(route.Constraints);
             Assert.IsType<RegexInlineRouteConstraint>(route.Constraints["ssn"]);
@@ -260,13 +274,14 @@ namespace Microsoft.AspNetCore.Routing
 
             IDictionary<string, object> routeValues = null;
             var mockTarget = new Mock<IRouter>(MockBehavior.Strict);
-            mockTarget
-                .Setup(s => s.RouteAsync(It.IsAny<RouteContext>()))
-                .Callback<RouteContext>(ctx =>
-                {
-                    routeValues = ctx.RouteData.Values;
-                    ctx.Handler = NullHandler;
-                })
+            mockTarget.Setup(s => s.RouteAsync(It.IsAny<RouteContext>()))
+                .Callback<RouteContext>(
+                    ctx =>
+                    {
+                        routeValues = ctx.RouteData.Values;
+                        ctx.Handler = NullHandler;
+                    }
+                )
                 .Returns(Task.FromResult(true));
 
             var route = new Route(
@@ -275,7 +290,8 @@ namespace Microsoft.AspNetCore.Routing
                 defaults: null,
                 constraints: null,
                 dataTokens: null,
-                inlineConstraintResolver: _inlineConstraintResolver);
+                inlineConstraintResolver: _inlineConstraintResolver
+            );
 
             Assert.NotEmpty(route.Constraints);
             Assert.IsType<OptionalRouteConstraint>(route.Constraints["id"]);
@@ -300,13 +316,14 @@ namespace Microsoft.AspNetCore.Routing
 
             IDictionary<string, object> routeValues = null;
             var mockTarget = new Mock<IRouter>(MockBehavior.Strict);
-            mockTarget
-                .Setup(s => s.RouteAsync(It.IsAny<RouteContext>()))
-                .Callback<RouteContext>(ctx =>
-                {
-                    routeValues = ctx.RouteData.Values;
-                    ctx.Handler = NullHandler;
-                })
+            mockTarget.Setup(s => s.RouteAsync(It.IsAny<RouteContext>()))
+                .Callback<RouteContext>(
+                    ctx =>
+                    {
+                        routeValues = ctx.RouteData.Values;
+                        ctx.Handler = NullHandler;
+                    }
+                )
                 .Returns(Task.FromResult(true));
 
             var constraints = new Dictionary<string, object>();
@@ -318,11 +335,13 @@ namespace Microsoft.AspNetCore.Routing
                 defaults: null,
                 constraints: constraints,
                 dataTokens: null,
-                inlineConstraintResolver: _inlineConstraintResolver);
+                inlineConstraintResolver: _inlineConstraintResolver
+            );
 
             Assert.NotEmpty(route.Constraints);
             Assert.IsType<OptionalRouteConstraint>(route.Constraints["id"]);
-            var innerConstraint = ((OptionalRouteConstraint)route.Constraints["id"]).InnerConstraint;
+            var innerConstraint =
+                ((OptionalRouteConstraint)route.Constraints["id"]).InnerConstraint;
             Assert.IsType<CompositeRouteConstraint>(innerConstraint);
             var compositeConstraint = (CompositeRouteConstraint)innerConstraint;
             Assert.Equal(2, compositeConstraint.Constraints.Count<IRouteConstraint>());
@@ -352,13 +371,14 @@ namespace Microsoft.AspNetCore.Routing
 
             IDictionary<string, object> routeValues = null;
             var mockTarget = new Mock<IRouter>(MockBehavior.Strict);
-            mockTarget
-                .Setup(s => s.RouteAsync(It.IsAny<RouteContext>()))
-                .Callback<RouteContext>(ctx =>
-                {
-                    routeValues = ctx.RouteData.Values;
-                    ctx.Handler = NullHandler;
-                })
+            mockTarget.Setup(s => s.RouteAsync(It.IsAny<RouteContext>()))
+                .Callback<RouteContext>(
+                    ctx =>
+                    {
+                        routeValues = ctx.RouteData.Values;
+                        ctx.Handler = NullHandler;
+                    }
+                )
                 .Returns(Task.FromResult(true));
 
             var route = new Route(
@@ -367,7 +387,8 @@ namespace Microsoft.AspNetCore.Routing
                 defaults: null,
                 constraints: null,
                 dataTokens: null,
-                inlineConstraintResolver: _inlineConstraintResolver);
+                inlineConstraintResolver: _inlineConstraintResolver
+            );
 
             Assert.NotEmpty(route.Constraints);
             Assert.IsType<OptionalRouteConstraint>(route.Constraints["id"]);
@@ -436,7 +457,8 @@ namespace Microsoft.AspNetCore.Routing
             var route = CreateRoute(
                 "{controller}/{action}",
                 defaults: new { action = "Index" },
-                dataTokens: new { culture = "en-CA" });
+                dataTokens: new { culture = "en-CA" }
+            );
 
             var context = CreateRouteContext("/Home");
 
@@ -449,7 +471,10 @@ namespace Microsoft.AspNetCore.Routing
 
             // Assert
             Assert.Single(route.DataTokens);
-            Assert.Single(route.DataTokens, kvp => kvp.Key == "culture" && ((string)kvp.Value) == "en-CA");
+            Assert.Single(
+                route.DataTokens,
+                kvp => kvp.Key == "culture" && ((string)kvp.Value) == "en-CA"
+            );
         }
 
         [Fact]
@@ -554,7 +579,10 @@ namespace Microsoft.AspNetCore.Routing
         public async Task Match_Success_OptionalParameter_DefaultValue()
         {
             // Arrange
-            var route = CreateRoute("{controller}/{action}.{format?}", new { action = "Index", format = "xml" });
+            var route = CreateRoute(
+                "{controller}/{action}.{format?}",
+                new { action = "Index", format = "xml" }
+            );
             var context = CreateRouteContext("/Home/Create");
 
             // Act
@@ -582,7 +610,10 @@ namespace Microsoft.AspNetCore.Routing
             Assert.Null(context.Handler);
         }
 
-        private static RouteContext CreateRouteContext(string requestPath, ILoggerFactory factory = null)
+        private static RouteContext CreateRouteContext(
+            string requestPath,
+            ILoggerFactory factory = null
+        )
         {
             if (factory == null)
             {
@@ -637,13 +668,17 @@ namespace Microsoft.AspNetCore.Routing
             var route = CreateRoute("{controller}/{action}");
             var context = CreateVirtualPathContext(
                 new { name = "name with %special #characters" },
-                new { controller = "Home", action = "Index" });
+                new { controller = "Home", action = "Index" }
+            );
 
             // Act
             var pathData = route.GetVirtualPath(context);
 
             // Assert
-            Assert.Equal("/Home/Index?name=name%20with%20%25special%20%23characters", pathData.VirtualPath);
+            Assert.Equal(
+                "/Home/Index?name=name%20with%20%25special%20%23characters",
+                pathData.VirtualPath
+            );
             Assert.Same(route, pathData.Router);
             Assert.Empty(pathData.DataTokens);
         }
@@ -668,7 +703,10 @@ namespace Microsoft.AspNetCore.Routing
             var context = new VirtualPathContext(
                 httpContext,
                 values: new RouteValueDictionary(new { name = nameRouteValue }),
-                ambientValues: new RouteValueDictionary(new { controller = "Home", action = "Index" }));
+                ambientValues: new RouteValueDictionary(
+                    new { controller = "Home", action = "Index" }
+                )
+            );
 
             var route = CreateRoute("{controller}/{action}");
 
@@ -688,7 +726,8 @@ namespace Microsoft.AspNetCore.Routing
             var route = CreateRoute("{controller}/{action}");
             var context = CreateVirtualPathContext(
                 new { color = new List<string> { "red", "green", "blue" } },
-                new { controller = "Home", action = "Index" });
+                new { controller = "Home", action = "Index" }
+            );
 
             // Act
             var pathData = route.GetVirtualPath(context);
@@ -706,7 +745,8 @@ namespace Microsoft.AspNetCore.Routing
             var route = CreateRoute("{controller}/{action}");
             var context = CreateVirtualPathContext(
                 new { items = new List<int> { 10, 20, 30 } },
-                new { controller = "Home", action = "Index" });
+                new { controller = "Home", action = "Index" }
+            );
 
             // Act
             var pathData = route.GetVirtualPath(context);
@@ -723,8 +763,9 @@ namespace Microsoft.AspNetCore.Routing
             // Arrange
             var route = CreateRoute("{controller}/{action}");
             var context = CreateVirtualPathContext(
-                new { color = new List<string> { } },
-                new { controller = "Home", action = "Index" });
+                new { color = new List<string> {  } },
+                new { controller = "Home", action = "Index" }
+            );
 
             // Act
             var pathData = route.GetVirtualPath(context);
@@ -741,14 +782,23 @@ namespace Microsoft.AspNetCore.Routing
             // Arrange
             var route = CreateRoute("{controller}/{action}");
             var context = CreateVirtualPathContext(
-                new { page = 1, color = new List<string> { "red", "green", "blue" }, message = "textfortest" },
-                new { controller = "Home", action = "Index" });
+                new
+                {
+                    page = 1,
+                    color = new List<string> { "red", "green", "blue" },
+                    message = "textfortest"
+                },
+                new { controller = "Home", action = "Index" }
+            );
 
             // Act
             var pathData = route.GetVirtualPath(context);
 
             // Assert
-            Assert.Equal("/Home/Index?page=1&color=red&color=green&color=blue&message=textfortest", pathData.VirtualPath);
+            Assert.Equal(
+                "/Home/Index?page=1&color=red&color=green&color=blue&message=textfortest",
+                pathData.VirtualPath
+            );
             Assert.Same(route, pathData.Router);
             Assert.Empty(pathData.DataTokens);
         }
@@ -756,24 +806,24 @@ namespace Microsoft.AspNetCore.Routing
         [Theory]
         [MemberData(nameof(DataTokensTestData))]
         public void GetVirtualPath_ReturnsDataTokens_WhenTargetReturnsVirtualPathData(
-            RouteValueDictionary dataTokens)
+            RouteValueDictionary dataTokens
+        )
         {
             // Arrange
             var path = "/TestPath";
 
             var target = new Mock<IRouter>(MockBehavior.Strict);
-            target
-                .Setup(r => r.GetVirtualPath(It.IsAny<VirtualPathContext>()))
+            target.Setup(r => r.GetVirtualPath(It.IsAny<VirtualPathContext>()))
                 .Returns(() => new VirtualPathData(target.Object, path, dataTokens));
 
-            var routeDataTokens =
-                new RouteValueDictionary() { { "ThisShouldBeIgnored", "" } };
+            var routeDataTokens = new RouteValueDictionary() { { "ThisShouldBeIgnored", "" } };
 
             var route = CreateRoute(
                 target.Object,
                 "{controller}",
                 defaults: null,
-                dataTokens: routeDataTokens);
+                dataTokens: routeDataTokens
+            );
             var context = CreateVirtualPathContext(new { controller = path });
 
             var expectedDataTokens = dataTokens ?? new RouteValueDictionary();
@@ -800,21 +850,21 @@ namespace Microsoft.AspNetCore.Routing
         [Theory]
         [MemberData(nameof(DataTokensTestData))]
         public void GetVirtualPath_ReturnsDataTokens_WhenTargetReturnsNullVirtualPathData(
-            RouteValueDictionary dataTokens)
+            RouteValueDictionary dataTokens
+        )
         {
             // Arrange
             var path = "/TestPath";
 
             var target = new Mock<IRouter>(MockBehavior.Strict);
-            target
-                .Setup(r => r.GetVirtualPath(It.IsAny<VirtualPathContext>()))
-                .Returns(() => null);
+            target.Setup(r => r.GetVirtualPath(It.IsAny<VirtualPathContext>())).Returns(() => null);
 
             var route = CreateRoute(
                 target.Object,
                 "{controller}",
                 defaults: null,
-                dataTokens: dataTokens);
+                dataTokens: dataTokens
+            );
             var context = CreateVirtualPathContext(new { controller = path });
 
             var expectedDataTokens = dataTokens ?? new RouteValueDictionary();
@@ -857,7 +907,10 @@ namespace Microsoft.AspNetCore.Routing
         {
             // Arrange
             var route = CreateRoute("{controller}/{action}");
-            var context = CreateVirtualPathContext(new { action = "Index" }, new { controller = "Home" });
+            var context = CreateVirtualPathContext(
+                new { action = "Index" },
+                new { controller = "Home" }
+            );
 
             // Act
             var pathData = route.GetVirtualPath(context);
@@ -878,7 +931,8 @@ namespace Microsoft.AspNetCore.Routing
                 "{p1}/{p2}",
                 new { p2 = "catchall" },
                 true,
-                new RouteValueDictionary(new { p2 = "\\d{4}" }));
+                new RouteValueDictionary(new { p2 = "\\d{4}" })
+            );
 
             // Act
             var virtualPath = route.GetVirtualPath(context);
@@ -897,7 +951,8 @@ namespace Microsoft.AspNetCore.Routing
                 "{p1}/{p2}",
                 new { p2 = "catchall" },
                 true,
-                new RouteValueDictionary(new { p2 = "\\d{4}" }));
+                new RouteValueDictionary(new { p2 = "\\d{4}" })
+            );
 
             // Act
             var pathData = route.GetVirtualPath(context);
@@ -919,7 +974,8 @@ namespace Microsoft.AspNetCore.Routing
                 "{p1}/{*p2}",
                 new { p2 = "catchall" },
                 true,
-                new RouteValueDictionary(new { p2 = "\\d{4}" }));
+                new RouteValueDictionary(new { p2 = "\\d{4}" })
+            );
 
             // Act
             var virtualPath = route.GetVirtualPath(context);
@@ -938,7 +994,8 @@ namespace Microsoft.AspNetCore.Routing
                 "{p1}/{*p2}",
                 new { p2 = "catchall" },
                 true,
-                new RouteValueDictionary(new { p2 = "\\d{4}" }));
+                new RouteValueDictionary(new { p2 = "\\d{4}" })
+            );
 
             // Act
             var pathData = route.GetVirtualPath(context);
@@ -957,14 +1014,16 @@ namespace Microsoft.AspNetCore.Routing
             var context = CreateVirtualPathContext(new { p1 = "hello", p2 = "1234" });
 
             var target = new Mock<IRouteConstraint>();
-            target
-                .Setup(
-                    e => e.Match(
-                        It.IsAny<HttpContext>(),
-                        It.IsAny<IRouter>(),
-                        It.IsAny<string>(),
-                        It.IsAny<RouteValueDictionary>(),
-                        It.IsAny<RouteDirection>()))
+            target.Setup(
+                    e =>
+                        e.Match(
+                            It.IsAny<HttpContext>(),
+                            It.IsAny<IRouter>(),
+                            It.IsAny<string>(),
+                            It.IsAny<RouteValueDictionary>(),
+                            It.IsAny<RouteDirection>()
+                        )
+                )
                 .Returns(true)
                 .Verifiable();
 
@@ -972,7 +1031,8 @@ namespace Microsoft.AspNetCore.Routing
                 "{p1}/{p2}",
                 new { p2 = "catchall" },
                 true,
-                new RouteValueDictionary(new { p2 = target.Object }));
+                new RouteValueDictionary(new { p2 = target.Object })
+            );
 
             // Act
             var pathData = route.GetVirtualPath(context);
@@ -997,14 +1057,17 @@ namespace Microsoft.AspNetCore.Routing
                 template: "slug/{controller}/{action}",
                 defaults: null,
                 handleRequest: true,
-                constraints: new { c = constraint });
+                constraints: new { c = constraint }
+            );
 
             var context = CreateVirtualPathContext(
                 values: new { action = "Store" },
-                ambientValues: new { Controller = "Home", action = "Blog", extra = "42" });
+                ambientValues: new { Controller = "Home", action = "Blog", extra = "42" }
+            );
 
             var expectedValues = new RouteValueDictionary(
-                new { controller = "Home", action = "Store", extra = "42" });
+                new { controller = "Home", action = "Store", extra = "42" }
+            );
 
             // Act
             var pathData = route.GetVirtualPath(context);
@@ -1028,14 +1091,17 @@ namespace Microsoft.AspNetCore.Routing
                 template: "slug/{controller}/{action}",
                 defaults: new { otherthing = "17" },
                 handleRequest: true,
-                constraints: new { c = constraint });
+                constraints: new { c = constraint }
+            );
 
             var context = CreateVirtualPathContext(
                 values: new { action = "Store" },
-                ambientValues: new { Controller = "Home", action = "Blog" });
+                ambientValues: new { Controller = "Home", action = "Blog" }
+            );
 
             var expectedValues = new RouteValueDictionary(
-                new { controller = "Home", action = "Store" });
+                new { controller = "Home", action = "Store" }
+            );
 
             // Act
             var pathData = route.GetVirtualPath(context);
@@ -1058,14 +1124,17 @@ namespace Microsoft.AspNetCore.Routing
                 template: "slug/{controller}/{action}",
                 defaults: new { action = "Index" },
                 handleRequest: true,
-                constraints: new { c = constraint });
+                constraints: new { c = constraint }
+            );
 
             var context = CreateVirtualPathContext(
                 values: new { controller = "Shopping" },
-                ambientValues: new { Controller = "Home", action = "Blog" });
+                ambientValues: new { Controller = "Home", action = "Blog" }
+            );
 
             var expectedValues = new RouteValueDictionary(
-                new { controller = "Shopping", action = "Index" });
+                new { controller = "Shopping", action = "Index" }
+            );
 
             // Act
             var pathData = route.GetVirtualPath(context);
@@ -1089,14 +1158,17 @@ namespace Microsoft.AspNetCore.Routing
                 template: "slug/{controller}/{action}",
                 defaults: new { otherthing = "17", thirdthing = "13" },
                 handleRequest: true,
-                constraints: new { c = constraint });
+                constraints: new { c = constraint }
+            );
 
             var context = CreateVirtualPathContext(
                 values: new { action = "Store", thirdthing = "13" },
-                ambientValues: new { Controller = "Home", action = "Blog", otherthing = "17" });
+                ambientValues: new { Controller = "Home", action = "Blog", otherthing = "17" }
+            );
 
             var expectedValues = new RouteValueDictionary(
-                new { controller = "Home", action = "Store", otherthing = "17", thirdthing = "13" });
+                new { controller = "Home", action = "Store", otherthing = "17", thirdthing = "13" }
+            );
 
             // Act
             var pathData = route.GetVirtualPath(context);
@@ -1106,7 +1178,10 @@ namespace Microsoft.AspNetCore.Routing
             Assert.Same(route, pathData.Router);
             Assert.Empty(pathData.DataTokens);
 
-            Assert.Equal(expectedValues.OrderBy(kvp => kvp.Key), constraint.Values.OrderBy(kvp => kvp.Key));
+            Assert.Equal(
+                expectedValues.OrderBy(kvp => kvp.Key),
+                constraint.Values.OrderBy(kvp => kvp.Key)
+            );
         }
 
         [Fact]
@@ -1115,7 +1190,8 @@ namespace Microsoft.AspNetCore.Routing
             // Arrange
             var route = CreateRoute("{controller}/{action}/{id:int}");
             var context = CreateVirtualPathContext(
-                values: new { action = "Index", controller = "Home", id = 4 });
+                values: new { action = "Index", controller = "Home", id = 4 }
+            );
 
             // Act
             var pathData = route.GetVirtualPath(context);
@@ -1132,7 +1208,8 @@ namespace Microsoft.AspNetCore.Routing
             // Arrange
             var route = CreateRoute("{controller}/{action}/{id:int}");
             var context = CreateVirtualPathContext(
-                values: new { action = "Index", controller = "Home", id = "asf" });
+                values: new { action = "Index", controller = "Home", id = "asf" }
+            );
 
             // Act
             var path = route.GetVirtualPath(context);
@@ -1147,7 +1224,8 @@ namespace Microsoft.AspNetCore.Routing
             // Arrange
             var route = CreateRoute("{controller}/{action}/{id:int?}");
             var context = CreateVirtualPathContext(
-                values: new { action = "Index", controller = "Home", id = 98 });
+                values: new { action = "Index", controller = "Home", id = 98 }
+            );
 
             // Act
             var pathData = route.GetVirtualPath(context);
@@ -1164,7 +1242,8 @@ namespace Microsoft.AspNetCore.Routing
             // Arrange
             var route = CreateRoute("{controller}/{action}/{id:int?}");
             var context = CreateVirtualPathContext(
-                values: new { action = "Index", controller = "Home" });
+                values: new { action = "Index", controller = "Home" }
+            );
 
             // Act
             var pathData = route.GetVirtualPath(context);
@@ -1181,7 +1260,8 @@ namespace Microsoft.AspNetCore.Routing
             // Arrange
             var route = CreateRoute("{controller}/{action}/{id:int?}");
             var context = CreateVirtualPathContext(
-                values: new { action = "Index", controller = "Home", id = "sdfd" });
+                values: new { action = "Index", controller = "Home", id = "sdfd" }
+            );
 
             // Act
             var path = route.GetVirtualPath(context);
@@ -1196,7 +1276,8 @@ namespace Microsoft.AspNetCore.Routing
             // Arrange
             var route = CreateRoute("{controller}/{action}/{id:int:range(1,20)}");
             var context = CreateVirtualPathContext(
-                values: new { action = "Index", controller = "Home", id = 14 });
+                values: new { action = "Index", controller = "Home", id = 14 }
+            );
 
             // Act
             var pathData = route.GetVirtualPath(context);
@@ -1216,10 +1297,12 @@ namespace Microsoft.AspNetCore.Routing
                 template: "{controller}/{action}/{name:alpha}",
                 defaults: null,
                 handleRequest: true,
-                constraints: new { name = constraint });
+                constraints: new { name = constraint }
+            );
 
             var context = CreateVirtualPathContext(
-                values: new { action = "Index", controller = "Home", name = "products" });
+                values: new { action = "Index", controller = "Home", name = "products" }
+            );
 
             // Act
             var pathData = route.GetVirtualPath(context);
@@ -1238,10 +1321,18 @@ namespace Microsoft.AspNetCore.Routing
                 template: "{controller}/{action}/{name}.{format?}",
                 defaults: null,
                 handleRequest: true,
-                constraints: null);
+                constraints: null
+            );
 
             var context = CreateVirtualPathContext(
-                values: new { action = "Index", controller = "Home", name = "products", format = "xml" });
+                values: new
+                {
+                    action = "Index",
+                    controller = "Home",
+                    name = "products",
+                    format = "xml"
+                }
+            );
 
             // Act
             var pathData = route.GetVirtualPath(context);
@@ -1260,10 +1351,12 @@ namespace Microsoft.AspNetCore.Routing
                 template: "{controller}/{action}/{name}.{format?}",
                 defaults: null,
                 handleRequest: true,
-                constraints: null);
+                constraints: null
+            );
 
             var context = CreateVirtualPathContext(
-                values: new { action = "Index", controller = "Home", name = "products" });
+                values: new { action = "Index", controller = "Home", name = "products" }
+            );
 
             // Act
             var pathData = route.GetVirtualPath(context);
@@ -1282,10 +1375,18 @@ namespace Microsoft.AspNetCore.Routing
                 template: "{controller}/{action}/{name}.{format?}",
                 defaults: new { format = "json" },
                 handleRequest: true,
-                constraints: null);
+                constraints: null
+            );
 
             var context = CreateVirtualPathContext(
-                values: new { action = "Index", controller = "Home", name = "products", format = "xml" });
+                values: new
+                {
+                    action = "Index",
+                    controller = "Home",
+                    name = "products",
+                    format = "xml"
+                }
+            );
 
             // Act
             var pathData = route.GetVirtualPath(context);
@@ -1304,10 +1405,12 @@ namespace Microsoft.AspNetCore.Routing
                 template: "{controller}/{action}/{name}.{format?}",
                 defaults: new { format = "json" },
                 handleRequest: true,
-                constraints: null);
+                constraints: null
+            );
 
             var context = CreateVirtualPathContext(
-                values: new { action = "Index", controller = "Home", name = "products" });
+                values: new { action = "Index", controller = "Home", name = "products" }
+            );
 
             // Act
             var pathData = route.GetVirtualPath(context);
@@ -1326,10 +1429,18 @@ namespace Microsoft.AspNetCore.Routing
                 template: "{controller}/{action}/{name}",
                 defaults: null,
                 handleRequest: true,
-                constraints: null);
+                constraints: null
+            );
 
             var context = CreateVirtualPathContext(
-                values: new { action = "Index", controller = "Home", name = "products", format = "json" });
+                values: new
+                {
+                    action = "Index",
+                    controller = "Home",
+                    name = "products",
+                    format = "json"
+                }
+            );
 
             // Act
             var pathData = route.GetVirtualPath(context);
@@ -1348,10 +1459,12 @@ namespace Microsoft.AspNetCore.Routing
                 template: "{controller}/{action}/.{name?}",
                 defaults: null,
                 handleRequest: true,
-                constraints: null);
+                constraints: null
+            );
 
             var context = CreateVirtualPathContext(
-                values: new { action = "Index", controller = "Home", name = "products" });
+                values: new { action = "Index", controller = "Home", name = "products" }
+            );
 
             // Act
             var pathData = route.GetVirtualPath(context);
@@ -1370,10 +1483,12 @@ namespace Microsoft.AspNetCore.Routing
                 template: "{controller}/{action}/.{name?}",
                 defaults: null,
                 handleRequest: true,
-                constraints: null);
+                constraints: null
+            );
 
             var context = CreateVirtualPathContext(
-                values: new { action = "Index", controller = "Home" });
+                values: new { action = "Index", controller = "Home" }
+            );
 
             // Act
             var pathData = route.GetVirtualPath(context);
@@ -1392,10 +1507,12 @@ namespace Microsoft.AspNetCore.Routing
                 template: "{controller}/{action}/{name?}",
                 defaults: null,
                 handleRequest: true,
-                constraints: null);
+                constraints: null
+            );
 
             var context = CreateVirtualPathContext(
-                values: new { action = "Index", controller = "Home" });
+                values: new { action = "Index", controller = "Home" }
+            );
 
             // Act
             var pathData = route.GetVirtualPath(context);
@@ -1414,11 +1531,13 @@ namespace Microsoft.AspNetCore.Routing
                 template: "a/{b=15}/{c?}/{d?}",
                 defaults: null,
                 handleRequest: true,
-                constraints: null);
+                constraints: null
+            );
 
             var context = CreateVirtualPathContext(
-                values: new { },
-                ambientValues: new { c = "17" });
+                values: new {  },
+                ambientValues: new { c = "17" }
+            );
 
             // Act
             var pathData = route.GetVirtualPath(context);
@@ -1430,7 +1549,6 @@ namespace Microsoft.AspNetCore.Routing
             Assert.Empty(pathData.DataTokens);
         }
 
-
         [Fact]
         public void GetVirtualPath_OptionalParameterAfterDefault_OneValueFromAmbientValues()
         {
@@ -1439,11 +1557,13 @@ namespace Microsoft.AspNetCore.Routing
                 template: "a/{b=15}/{c?}",
                 defaults: null,
                 handleRequest: true,
-                constraints: null);
+                constraints: null
+            );
 
             var context = CreateVirtualPathContext(
-                values: new { },
-                ambientValues: new { c = "17" });
+                values: new {  },
+                ambientValues: new { c = "17" }
+            );
 
             // Act
             var pathData = route.GetVirtualPath(context);
@@ -1463,11 +1583,13 @@ namespace Microsoft.AspNetCore.Routing
                 template: "a/{b=15}/{c?}/{d?}",
                 defaults: null,
                 handleRequest: true,
-                constraints: null);
+                constraints: null
+            );
 
             var context = CreateVirtualPathContext(
-                values: new { },
-                ambientValues: new { c = "17" });
+                values: new {  },
+                ambientValues: new { c = "17" }
+            );
 
             // Act
             var pathData = route.GetVirtualPath(context);
@@ -1487,11 +1609,13 @@ namespace Microsoft.AspNetCore.Routing
                 template: "a/{b=15}/{c?}/{d?}",
                 defaults: null,
                 handleRequest: true,
-                constraints: null);
+                constraints: null
+            );
 
             var context = CreateVirtualPathContext(
-                values: new { },
-                ambientValues: new { d = "17" });
+                values: new {  },
+                ambientValues: new { d = "17" }
+            );
 
             // Act
             var pathData = route.GetVirtualPath(context);
@@ -1508,14 +1632,21 @@ namespace Microsoft.AspNetCore.Routing
             return CreateVirtualPathContext(new RouteValueDictionary(values), null);
         }
 
-        private static VirtualPathContext CreateVirtualPathContext(object values, object ambientValues)
+        private static VirtualPathContext CreateVirtualPathContext(
+            object values,
+            object ambientValues
+        )
         {
-            return CreateVirtualPathContext(new RouteValueDictionary(values), new RouteValueDictionary(ambientValues));
+            return CreateVirtualPathContext(
+                new RouteValueDictionary(values),
+                new RouteValueDictionary(ambientValues)
+            );
         }
 
         private static VirtualPathContext CreateVirtualPathContext(
             RouteValueDictionary values,
-            RouteValueDictionary ambientValues)
+            RouteValueDictionary ambientValues
+        )
         {
             var services = new ServiceCollection();
             services.AddSingleton<ILoggerFactory>(NullLoggerFactory.Instance);
@@ -1539,43 +1670,44 @@ namespace Microsoft.AspNetCore.Routing
         {
             get
             {
-                yield return new object[] {
-                                            new Dictionary<string, object> { { "key1", "data1" }, { "key2", 13 } },
-                                            new Dictionary<string, object> { { "key1", "data1" }, { "key2", 13 } },
-                                          };
-                yield return new object[] {
-                                            new RouteValueDictionary { { "key1", "data1" }, { "key2", 13 } },
-                                            new Dictionary<string, object> { { "key1", "data1" }, { "key2", 13 } },
-                                          };
-                yield return new object[] {
-                                            new object(),
-                                            new Dictionary<string,object>(),
-                                          };
-                yield return new object[] {
-                                            null,
-                                            new Dictionary<string, object>()
-                                          };
-                yield return new object[] {
-                                            new { key1 = "data1", key2 = 13 },
-                                            new Dictionary<string, object> { { "key1", "data1" }, { "key2", 13 } },
-                                          };
+                yield return new object[]
+                {
+                    new Dictionary<string, object> { { "key1", "data1" }, { "key2", 13 } },
+                    new Dictionary<string, object> { { "key1", "data1" }, { "key2", 13 } },
+                };
+                yield return new object[]
+                {
+                    new RouteValueDictionary { { "key1", "data1" }, { "key2", 13 } },
+                    new Dictionary<string, object> { { "key1", "data1" }, { "key2", 13 } },
+                };
+                yield return new object[] { new object(), new Dictionary<string, object>(), };
+                yield return new object[] { null, new Dictionary<string, object>() };
+                yield return new object[]
+                {
+                    new { key1 = "data1", key2 = 13 },
+                    new Dictionary<string, object> { { "key1", "data1" }, { "key2", 13 } },
+                };
             }
         }
 
         [Theory]
         [MemberData(nameof(DataTokens))]
-        public void RegisteringRoute_WithDataTokens_AbleToAddTheRoute(object dataToken,
-                                                                      IDictionary<string, object> expectedDictionary)
+        public void RegisteringRoute_WithDataTokens_AbleToAddTheRoute(
+            object dataToken,
+            IDictionary<string, object> expectedDictionary
+        )
         {
             // Arrange
             var routeBuilder = CreateRouteBuilder();
 
             // Act
-            routeBuilder.MapRoute("mockName",
-                                  "{controller}/{action}",
-                                  defaults: null,
-                                  constraints: null,
-                                  dataTokens: dataToken);
+            routeBuilder.MapRoute(
+                "mockName",
+                "{controller}/{action}",
+                defaults: null,
+                constraints: null,
+                dataTokens: dataToken
+            );
 
             // Assert
             var templateRoute = (Route)routeBuilder.Routes[0];
@@ -1584,7 +1716,10 @@ namespace Microsoft.AspNetCore.Routing
             foreach (var expectedKey in expectedDictionary.Keys)
             {
                 Assert.True(templateRoute.DataTokens.ContainsKey(expectedKey));
-                Assert.Equal(expectedDictionary[expectedKey], templateRoute.DataTokens[expectedKey]);
+                Assert.Equal(
+                    expectedDictionary[expectedKey],
+                    templateRoute.DataTokens[expectedKey]
+                );
             }
         }
 
@@ -1595,8 +1730,7 @@ namespace Microsoft.AspNetCore.Routing
             var routeBuilder = CreateRouteBuilder();
 
             // Act
-            routeBuilder.MapRoute("mockName",
-                                  "{controller:test-policy}/{action}");
+            routeBuilder.MapRoute("mockName", "{controller:test-policy}/{action}");
 
             // Assert
             var templateRoute = (Route)routeBuilder.Routes[0];
@@ -1611,19 +1745,26 @@ namespace Microsoft.AspNetCore.Routing
             var routeBuilder = CreateRouteBuilder();
 
             // Assert
-            var expectedMessage = "An error occurred while creating the route with name 'mockName' and template" +
-                " '{controller}/{action}'.";
+            var expectedMessage =
+                "An error occurred while creating the route with name 'mockName' and template"
+                + " '{controller}/{action}'.";
 
             var exception = ExceptionAssert.Throws<RouteCreationException>(
-                () => routeBuilder.MapRoute("mockName",
-                    "{controller}/{action}",
-                    defaults: null,
-                    constraints: new { controller = "a.*", action = 17 }),
-                    expectedMessage);
+                () =>
+                    routeBuilder.MapRoute(
+                        "mockName",
+                        "{controller}/{action}",
+                        defaults: null,
+                        constraints: new { controller = "a.*", action = 17 }
+                    ),
+                expectedMessage
+            );
 
-            expectedMessage = "The constraint entry 'action' - '17' on the route '{controller}/{action}' " +
-                "must have a string value or be of a type which implements '" +
-                typeof(IRouteConstraint) + "'.";
+            expectedMessage =
+                "The constraint entry 'action' - '17' on the route '{controller}/{action}' "
+                + "must have a string value or be of a type which implements '"
+                + typeof(IRouteConstraint)
+                + "'.";
             Assert.NotNull(exception.InnerException);
             Assert.Equal(expectedMessage, exception.InnerException.Message);
         }
@@ -1636,10 +1777,12 @@ namespace Microsoft.AspNetCore.Routing
 
             var mockConstraint = new Mock<IRouteConstraint>().Object;
 
-            routeBuilder.MapRoute("mockName",
+            routeBuilder.MapRoute(
+                "mockName",
                 "{controller}/{action}",
                 defaults: null,
-                constraints: new { controller = "a.*", action = mockConstraint });
+                constraints: new { controller = "a.*", action = mockConstraint }
+            );
 
             var constraints = ((Route)routeBuilder.Routes[0]).Constraints;
 
@@ -1656,10 +1799,12 @@ namespace Microsoft.AspNetCore.Routing
             var routeBuilder = CreateRouteBuilder();
 
             // Act
-            routeBuilder.MapRoute("mockName",
+            routeBuilder.MapRoute(
+                "mockName",
                 "{controller}/{action}/{id:int}",
                 defaults: null,
-                constraints: new { id = "1*" });
+                constraints: new { id = "1*" }
+            );
 
             // Assert
             var constraints = ((Route)routeBuilder.Routes[0]).Constraints;
@@ -1677,10 +1822,12 @@ namespace Microsoft.AspNetCore.Routing
             var routeBuilder = CreateRouteBuilder();
 
             // Act
-            routeBuilder.MapRoute("mockName",
+            routeBuilder.MapRoute(
+                "mockName",
                 "{controller}/{action}/{id:int}",
                 defaults: null,
-                constraints: null);
+                constraints: null
+            );
 
             // Assert
             var constraints = ((Route)routeBuilder.Routes[0]).Constraints;
@@ -1694,7 +1841,11 @@ namespace Microsoft.AspNetCore.Routing
             // Arrange
             var routeBuilder = CreateRouteBuilder();
 
-            routeBuilder.MapRoute(name: "RouteName", template: "{controller}/{action}", defaults: null);
+            routeBuilder.MapRoute(
+                name: "RouteName",
+                template: "{controller}/{action}",
+                defaults: null
+            );
 
             // Act
             var name = ((Route)routeBuilder.Routes[0]).Name;
@@ -1709,10 +1860,12 @@ namespace Microsoft.AspNetCore.Routing
             // Arrange
             var routeBuilder = CreateRouteBuilder();
 
-            routeBuilder.MapRoute(name: "RouteName",
-                                template: "{controller}/{action}",
-                                defaults: null,
-                                constraints: null);
+            routeBuilder.MapRoute(
+                name: "RouteName",
+                template: "{controller}/{action}",
+                defaults: null,
+                constraints: null
+            );
 
             // Act
             var name = ((Route)routeBuilder.Routes[0]).Name;
@@ -1728,15 +1881,19 @@ namespace Microsoft.AspNetCore.Routing
         [InlineData("//b//")]
         [InlineData("///c")]
         [InlineData("///c/")]
-        public async Task RouteAsync_MultipleOptionalParameters_WithEmptyIntermediateSegmentsDoesNotMatch(string url)
+        public async Task RouteAsync_MultipleOptionalParameters_WithEmptyIntermediateSegmentsDoesNotMatch(
+            string url
+        )
         {
             // Arrange
             var builder = CreateRouteBuilder();
 
-            builder.MapRoute(name: null,
-                    template: "{controller?}/{action?}/{id?}",
-                    defaults: null,
-                    constraints: null);
+            builder.MapRoute(
+                name: null,
+                template: "{controller?}/{action?}/{id?}",
+                defaults: null,
+                constraints: null
+            );
 
             var route = builder.Build();
 
@@ -1756,7 +1913,10 @@ namespace Microsoft.AspNetCore.Routing
             {
                 yield return new object[] { null };
                 yield return new object[] { new RouteValueDictionary() };
-                yield return new object[] { new RouteValueDictionary() { { "tokenKeyA", "tokenValueA" } } };
+                yield return new object[]
+                {
+                    new RouteValueDictionary() { { "tokenKeyA", "tokenValueA" } }
+                };
             }
         }
 
@@ -1776,7 +1936,11 @@ namespace Microsoft.AspNetCore.Routing
             return routeBuilder;
         }
 
-        private static Route CreateRoute(string routeName, string template, bool handleRequest = true)
+        private static Route CreateRoute(
+            string routeName,
+            string template,
+            bool handleRequest = true
+        )
         {
             return new Route(
                 CreateTarget(handleRequest),
@@ -1785,7 +1949,8 @@ namespace Microsoft.AspNetCore.Routing
                 defaults: null,
                 constraints: null,
                 dataTokens: null,
-                inlineConstraintResolver: _inlineConstraintResolver);
+                inlineConstraintResolver: _inlineConstraintResolver
+            );
         }
 
         private static Route CreateRoute(string template, bool handleRequest = true)
@@ -1798,7 +1963,8 @@ namespace Microsoft.AspNetCore.Routing
             object defaults,
             bool handleRequest = true,
             object constraints = null,
-            object dataTokens = null)
+            object dataTokens = null
+        )
         {
             return new Route(
                 CreateTarget(handleRequest),
@@ -1806,7 +1972,8 @@ namespace Microsoft.AspNetCore.Routing
                 new RouteValueDictionary(defaults),
                 new RouteValueDictionary(constraints),
                 new RouteValueDictionary(dataTokens),
-                _inlineConstraintResolver);
+                _inlineConstraintResolver
+            );
         }
 
         private static Route CreateRoute(IRouter target, string template)
@@ -1817,14 +1984,16 @@ namespace Microsoft.AspNetCore.Routing
                 new RouteValueDictionary(),
                 constraints: null,
                 dataTokens: null,
-                inlineConstraintResolver: _inlineConstraintResolver);
+                inlineConstraintResolver: _inlineConstraintResolver
+            );
         }
 
         private static Route CreateRoute(
             IRouter target,
             string template,
             object defaults,
-            RouteValueDictionary dataTokens = null)
+            RouteValueDictionary dataTokens = null
+        )
         {
             return new Route(
                 target,
@@ -1832,18 +2001,17 @@ namespace Microsoft.AspNetCore.Routing
                 new RouteValueDictionary(defaults),
                 constraints: null,
                 dataTokens: dataTokens,
-                inlineConstraintResolver: _inlineConstraintResolver);
+                inlineConstraintResolver: _inlineConstraintResolver
+            );
         }
 
         private static IRouter CreateTarget(bool handleRequest = true)
         {
             var target = new Mock<IRouter>(MockBehavior.Strict);
-            target
-                .Setup(e => e.GetVirtualPath(It.IsAny<VirtualPathContext>()))
+            target.Setup(e => e.GetVirtualPath(It.IsAny<VirtualPathContext>()))
                 .Returns<VirtualPathContext>(rc => null);
 
-            target
-                .Setup(e => e.RouteAsync(It.IsAny<RouteContext>()))
+            target.Setup(e => e.RouteAsync(It.IsAny<RouteContext>()))
                 .Callback<RouteContext>((c) => c.Handler = handleRequest ? NullHandler : null)
                 .Returns(Task.FromResult<object>(null));
 
@@ -1856,11 +2024,12 @@ namespace Microsoft.AspNetCore.Routing
             ConfigureRouteOptions(routeOptions);
 
             var routeOptionsMock = new Mock<IOptions<RouteOptions>>();
-            routeOptionsMock
-                .SetupGet(o => o.Value)
-                .Returns(routeOptions);
+            routeOptionsMock.SetupGet(o => o.Value).Returns(routeOptions);
 
-            return new DefaultInlineConstraintResolver(routeOptionsMock.Object, new TestServiceProvider());
+            return new DefaultInlineConstraintResolver(
+                routeOptionsMock.Object,
+                new TestServiceProvider()
+            );
         }
 
         private static void ConfigureRouteOptions(RouteOptions options)

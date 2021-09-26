@@ -73,7 +73,10 @@ namespace Tracing.Tests.Common
             }
             else
             {
-                return Path.Combine(Path.GetTempPath(), "DOTNET_TRACE_TESTS_" + Path.GetRandomFileName());
+                return Path.Combine(
+                    Path.GetTempPath(),
+                    "DOTNET_TRACE_TESTS_" + Path.GetRandomFileName()
+                );
             }
         }
 
@@ -96,7 +99,11 @@ namespace Tracing.Tests.Common
                     File.Delete(serverAddress);
                 var remoteEP = new UnixDomainSocketEndPoint(serverAddress);
 
-                var socket = new Socket(AddressFamily.Unix, SocketType.Stream, ProtocolType.Unspecified);
+                var socket = new Socket(
+                    AddressFamily.Unix,
+                    SocketType.Stream,
+                    ProtocolType.Unspecified
+                );
                 // socket(7) states that SO_RCVBUF has a minimum of 128 and SO_SNDBUF has minimum of 1024
                 socket.SendBufferSize = Math.Max(bufferSize, 1024);
                 socket.ReceiveBufferSize = Math.Max(bufferSize, 128);
@@ -141,7 +148,8 @@ namespace Tracing.Tests.Common
                     PipeTransmissionMode.Byte,
                     PipeOptions.None,
                     _bufferSize,
-                    _bufferSize);
+                    _bufferSize
+                );
             }
             else
             {
@@ -159,7 +167,7 @@ namespace Tracing.Tests.Common
                     {
                         serverStream.Disconnect();
                     }
-                    catch {}
+                    catch { }
                     finally
                     {
                         serverStream.Dispose();
@@ -180,7 +188,9 @@ namespace Tracing.Tests.Common
         }
 
         // Creates the server, listens, and closes the server
-        public static async Task<IpcAdvertise> CreateServerAndReceiveAdvertisement(string serverAddress)
+        public static async Task<IpcAdvertise> CreateServerAndReceiveAdvertisement(
+            string serverAddress
+        )
         {
             var server = new ReverseServer(serverAddress);
             Logger.logger.Log("Waiting for connection");

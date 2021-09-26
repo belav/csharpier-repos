@@ -16,8 +16,9 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Components.E2ETest.Tests
 {
-    public class HttpClientTest : ServerTestBase<DevHostServerFixture<BasicTestApp.Program>>,
-        IClassFixture<BasicTestAppServerSiteFixture<CorsStartup>>
+    public class HttpClientTest
+        : ServerTestBase<DevHostServerFixture<BasicTestApp.Program>>,
+          IClassFixture<BasicTestAppServerSiteFixture<CorsStartup>>
     {
         private readonly ServerFixture _apiServerFixture;
         IWebElement _appElement;
@@ -29,8 +30,8 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             BrowserFixture browserFixture,
             DevHostServerFixture<BasicTestApp.Program> devHostServerFixture,
             BasicTestAppServerSiteFixture<CorsStartup> apiServerFixture,
-            ITestOutputHelper output)
-            : base(browserFixture, devHostServerFixture, output)
+            ITestOutputHelper output
+        ) : base(browserFixture, devHostServerFixture, output)
         {
             _serverFixture.PathBase = "/subdir";
             _apiServerFixture = apiServerFixture;
@@ -103,7 +104,11 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             AddRequestHeader("Content-Type", "application/json");
             IssueRequest("PUT", "/subdir/api/person", "{\"Name\": \"Bert\", \"Id\": 123}");
             Assert.Equal("OK", _responseStatus.Text);
-            Assert.Contains("Content-Type: application/json", _responseHeaders.Text, StringComparison.OrdinalIgnoreCase);
+            Assert.Contains(
+                "Content-Type: application/json",
+                _responseHeaders.Text,
+                StringComparison.OrdinalIgnoreCase
+            );
             Assert.Equal("{\"id\":123,\"name\":\"Bert\"}", _responseBody.Text);
         }
 
@@ -138,13 +143,16 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             }
         }
 
-        private void IssueRequest(string requestMethod, string relativeUri, string requestBody = null)
+        private void IssueRequest(
+            string requestMethod,
+            string relativeUri,
+            string requestBody = null
+        )
         {
             var targetUri = new Uri(_apiServerFixture.RootUri, relativeUri);
             SetValue("request-uri", targetUri.AbsoluteUri);
             SetValue("request-body", requestBody ?? string.Empty);
-            new SelectElement(Browser.Exists(By.Id("request-method")))
-                .SelectByText(requestMethod);
+            new SelectElement(Browser.Exists(By.Id("request-method"))).SelectByText(requestMethod);
 
             _appElement.FindElement(By.Id("send-request")).Click();
 
@@ -157,7 +165,9 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
         {
             var addHeaderButton = _appElement.FindElement(By.Id("add-header"));
             addHeaderButton.Click();
-            var newHeaderEntry = _appElement.FindElement(By.CssSelector(".header-entry:last-of-type"));
+            var newHeaderEntry = _appElement.FindElement(
+                By.CssSelector(".header-entry:last-of-type")
+            );
             var textBoxes = newHeaderEntry.FindElements(By.TagName("input"));
             textBoxes[0].SendKeys(name);
             textBoxes[1].SendKeys(value);

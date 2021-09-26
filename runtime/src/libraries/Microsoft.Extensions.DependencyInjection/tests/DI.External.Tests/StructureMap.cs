@@ -6,21 +6,27 @@ using StructureMap;
 
 namespace Microsoft.Extensions.DependencyInjection.Specification
 {
-    public class StructureMapDependencyInjectionSpecificationTests: SkippableDependencyInjectionSpecificationTests
+    public class StructureMapDependencyInjectionSpecificationTests
+        : SkippableDependencyInjectionSpecificationTests
     {
-        public override string[] SkippedTests => new[]
-        {
-            "DisposesInReverseOrderOfCreation",
-            "ResolvesMixedOpenClosedGenericsAsEnumerable"
-        };
+        public override string[] SkippedTests =>
+            new[]
+            {
+                "DisposesInReverseOrderOfCreation",
+                "ResolvesMixedOpenClosedGenericsAsEnumerable"
+            };
 
-        protected override IServiceProvider CreateServiceProviderImpl(IServiceCollection serviceCollection)
+        protected override IServiceProvider CreateServiceProviderImpl(
+            IServiceCollection serviceCollection
+        )
         {
             var container = new Container();
-            container.Configure(config =>
-            {
-                config.Populate(serviceCollection);
-            });
+            container.Configure(
+                config =>
+                {
+                    config.Populate(serviceCollection);
+                }
+            );
 
             return container.GetInstance<IServiceProvider>();
         }

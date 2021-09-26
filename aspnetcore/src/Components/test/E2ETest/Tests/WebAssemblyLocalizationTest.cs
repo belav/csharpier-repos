@@ -11,15 +11,14 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Components.E2ETest.Tests
 {
-    public class WebAssemblyLocalizationTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>>
+    public class WebAssemblyLocalizationTest
+        : ServerTestBase<ToggleExecutionModeServerFixture<Program>>
     {
         public WebAssemblyLocalizationTest(
             BrowserFixture browserFixture,
             ToggleExecutionModeServerFixture<Program> serverFixture,
-            ITestOutputHelper output)
-            : base(browserFixture, serverFixture, output)
-        {
-        }
+            ITestOutputHelper output
+        ) : base(browserFixture, serverFixture, output) { }
 
         [Theory]
         [InlineData("en-US", "Hello!")]

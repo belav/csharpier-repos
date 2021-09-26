@@ -11,7 +11,6 @@ namespace Microsoft.AspNetCore.Identity.UI
     [AttributeUsage(AttributeTargets.Assembly, Inherited = false, AllowMultiple = false)]
     public sealed class UIFrameworkAttribute : Attribute
     {
-
         /// <summary>
         /// Initializes a new instance of <see cref="UIFrameworkAttribute"/>.
         /// </summary>

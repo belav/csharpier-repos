@@ -21,11 +21,10 @@ namespace Microsoft.AspNetCore.Authentication.Cookies
         public CookieSigningOutContext(
             HttpContext context,
             AuthenticationScheme scheme,
-            CookieAuthenticationOptions options, 
-            AuthenticationProperties? properties, 
-            CookieOptions cookieOptions)
-            : base(context, scheme, options, properties)
-            => CookieOptions = cookieOptions;
+            CookieAuthenticationOptions options,
+            AuthenticationProperties? properties,
+            CookieOptions cookieOptions
+        ) : base(context, scheme, options, properties) => CookieOptions = cookieOptions;
 
         /// <summary>
         /// The options for creating the outgoing cookie.

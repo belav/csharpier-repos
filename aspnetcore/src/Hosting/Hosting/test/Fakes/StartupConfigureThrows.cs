@@ -9,9 +9,7 @@ namespace Microsoft.AspNetCore.Hosting.Fakes
 {
     public class StartupConfigureThrows
     {
-        public void ConfigureServices(IServiceCollection services)
-        {
-        }
+        public void ConfigureServices(IServiceCollection services) { }
 
         public void Configure(IApplicationBuilder builder)
         {

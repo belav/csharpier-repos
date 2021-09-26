@@ -18,55 +18,146 @@ class MonEnterTests
     void NegTests()
     {
         Console.WriteLine("null object tests");
-        ExpectException<ArgumentNullException>(delegate { Monitor.Enter(null); });
-        ExpectException<ArgumentNullException>(delegate { Monitor.TryEnter(null); });
+        ExpectException<ArgumentNullException>(
+            delegate
+            {
+                Monitor.Enter(null);
+            }
+        );
+        ExpectException<ArgumentNullException>(
+            delegate
+            {
+                Monitor.TryEnter(null);
+            }
+        );
         bool tookLock = false;
-        ExpectException<ArgumentNullException>(delegate { Monitor.Enter(null, ref tookLock); });
+        ExpectException<ArgumentNullException>(
+            delegate
+            {
+                Monitor.Enter(null, ref tookLock);
+            }
+        );
         Assert(!tookLock);
         tookLock = false;
-        ExpectException<ArgumentNullException>(delegate { Monitor.TryEnter(null, 0, ref tookLock); });
+        ExpectException<ArgumentNullException>(
+            delegate
+            {
+                Monitor.TryEnter(null, 0, ref tookLock);
+            }
+        );
         Assert(!tookLock);
         tookLock = false;
-        ExpectException<ArgumentNullException>(delegate { Monitor.TryEnter(null, TimeSpan.Zero, ref tookLock); });
+        ExpectException<ArgumentNullException>(
+            delegate
+            {
+                Monitor.TryEnter(null, TimeSpan.Zero, ref tookLock);
+            }
+        );
         Assert(!tookLock);
-        ExpectException<ArgumentNullException>(delegate { Monitor.TryEnter(null, 0); });
-        ExpectException<ArgumentNullException>(delegate { Monitor.TryEnter(null, TimeSpan.Zero); });
+        ExpectException<ArgumentNullException>(
+            delegate
+            {
+                Monitor.TryEnter(null, 0);
+            }
+        );
+        ExpectException<ArgumentNullException>(
+            delegate
+            {
+                Monitor.TryEnter(null, TimeSpan.Zero);
+            }
+        );
 
         Console.WriteLine("tookLock == true tests");
         object obj = new object();
         tookLock = true;
-        ExpectException<ArgumentException>(delegate { Monitor.Enter(obj, ref tookLock); });
+        ExpectException<ArgumentException>(
+            delegate
+            {
+                Monitor.Enter(obj, ref tookLock);
+            }
+        );
         AssertTookLockAndRelease(LockIsHeld.No, obj, false);
         tookLock = true;
-        ExpectException<ArgumentException>(delegate { Monitor.TryEnter(obj, ref tookLock); });
+        ExpectException<ArgumentException>(
+            delegate
+            {
+                Monitor.TryEnter(obj, ref tookLock);
+            }
+        );
         AssertTookLockAndRelease(LockIsHeld.No, obj, false);
         tookLock = true;
-        ExpectException<ArgumentException>(delegate { Monitor.TryEnter(obj, 0, ref tookLock); });
+        ExpectException<ArgumentException>(
+            delegate
+            {
+                Monitor.TryEnter(obj, 0, ref tookLock);
+            }
+        );
         AssertTookLockAndRelease(LockIsHeld.No, obj, false);
         tookLock = true;
-        ExpectException<ArgumentException>(delegate { Monitor.TryEnter(obj, TimeSpan.Zero, ref tookLock); });
+        ExpectException<ArgumentException>(
+            delegate
+            {
+                Monitor.TryEnter(obj, TimeSpan.Zero, ref tookLock);
+            }
+        );
         AssertTookLockAndRelease(LockIsHeld.No, obj, false);
 
         Console.WriteLine("timeout < -1");
         tookLock = false;
-        ExpectException<ArgumentOutOfRangeException>(delegate { Monitor.TryEnter(obj, -2, ref tookLock); });
+        ExpectException<ArgumentOutOfRangeException>(
+            delegate
+            {
+                Monitor.TryEnter(obj, -2, ref tookLock);
+            }
+        );
         AssertTookLockAndRelease(LockIsHeld.No, obj, tookLock);
         tookLock = false;
-        ExpectException<ArgumentOutOfRangeException>(delegate { Monitor.TryEnter(obj, TimeSpan.FromMilliseconds(-2), ref tookLock); });
+        ExpectException<ArgumentOutOfRangeException>(
+            delegate
+            {
+                Monitor.TryEnter(obj, TimeSpan.FromMilliseconds(-2), ref tookLock);
+            }
+        );
         AssertTookLockAndRelease(LockIsHeld.No, obj, tookLock);
-        ExpectException<ArgumentOutOfRangeException>(delegate { tookLock = Monitor.TryEnter(obj, -2); });
+        ExpectException<ArgumentOutOfRangeException>(
+            delegate
+            {
+                tookLock = Monitor.TryEnter(obj, -2);
+            }
+        );
         AssertTookLockAndRelease(LockIsHeld.No, obj, tookLock);
-        ExpectException<ArgumentOutOfRangeException>(delegate { tookLock = Monitor.TryEnter(obj, TimeSpan.FromMilliseconds(-2)); });
+        ExpectException<ArgumentOutOfRangeException>(
+            delegate
+            {
+                tookLock = Monitor.TryEnter(obj, TimeSpan.FromMilliseconds(-2));
+            }
+        );
         AssertTookLockAndRelease(LockIsHeld.No, obj, tookLock);
 
         Console.WriteLine("timeout > int.Max");
         tookLock = false;
-        ExpectException<ArgumentOutOfRangeException>(delegate { Monitor.TryEnter(obj, TimeSpan.FromMilliseconds((double)int.MaxValue + 1), ref tookLock); });
+        ExpectException<ArgumentOutOfRangeException>(
+            delegate
+            {
+                Monitor.TryEnter(
+                    obj,
+                    TimeSpan.FromMilliseconds((double)int.MaxValue + 1),
+                    ref tookLock
+                );
+            }
+        );
         AssertTookLockAndRelease(LockIsHeld.No, obj, tookLock);
-        ExpectException<ArgumentOutOfRangeException>(delegate { tookLock = Monitor.TryEnter(obj, TimeSpan.FromMilliseconds((double)int.MaxValue + 1)); });
+        ExpectException<ArgumentOutOfRangeException>(
+            delegate
+            {
+                tookLock = Monitor.TryEnter(
+                    obj,
+                    TimeSpan.FromMilliseconds((double)int.MaxValue + 1)
+                );
+            }
+        );
         AssertTookLockAndRelease(LockIsHeld.No, obj, tookLock);
     }
-
 
     AutoResetEvent contentionStartEvent = new AutoResetEvent(false);
     volatile bool contentionStarted;
@@ -76,7 +167,7 @@ class MonEnterTests
     // for some reason I had to add these to get this to build in the test environment
     delegate void Action();
     delegate void Action<T>(T arg);
-    delegate void Action<T1,T2>(T1 arg1, T2 arg2);
+    delegate void Action<T1, T2>(T1 arg1, T2 arg2);
 
     /// <summary>
     /// Runs a lock acquisition scenario (passed in via <paramref name="run"/>) with contention
@@ -88,17 +179,19 @@ class MonEnterTests
     ///     <paramref name="obj"/> as the object to be locked)</param>
     void RunWithContention(object obj, int spins, Action<object> run)
     {
-        ThreadPool.QueueUserWorkItem(delegate
-        {
-            contentionStartEvent.WaitOne();
-            Monitor.Enter(obj);
-            inContention = true;
-            contentionStarted = true;
-            Thread.Sleep(0); // yield
-            inContention = false;
-            Monitor.Exit(obj);
-            contentionDoneEvent.Set();
-        });
+        ThreadPool.QueueUserWorkItem(
+            delegate
+            {
+                contentionStartEvent.WaitOne();
+                Monitor.Enter(obj);
+                inContention = true;
+                contentionStarted = true;
+                Thread.Sleep(0); // yield
+                inContention = false;
+                Monitor.Exit(obj);
+                contentionDoneEvent.Set();
+            }
+        );
         contentionStarted = false;
         inContention = false;
         Thread.Sleep(1);
@@ -110,7 +203,7 @@ class MonEnterTests
             if (waitCount > 30000)
             {
                 //Thread.Yield is internal in CoreClr, so change it to Thread.Sleep(0)
-                // Thread.Yield();                
+                // Thread.Yield();
                 Thread.Sleep(0);
                 waitCount = 0;
             }
@@ -125,13 +218,31 @@ class MonEnterTests
     void ContentionVariants()
     {
         Console.WriteLine("--- no contention ---");
-        SyncBlkVariants(LockIsHeld.No, delegate(object o, Action<object> ac) { ac(o); });
+        SyncBlkVariants(
+            LockIsHeld.No,
+            delegate(object o, Action<object> ac)
+            {
+                ac(o);
+            }
+        );
 
         Console.WriteLine("--- a little contention ---");
-        SyncBlkVariants(LockIsHeld.Maybe, delegate(object o, Action<object> ac) { RunWithContention(o, 10000, ac); });
+        SyncBlkVariants(
+            LockIsHeld.Maybe,
+            delegate(object o, Action<object> ac)
+            {
+                RunWithContention(o, 10000, ac);
+            }
+        );
 
         Console.WriteLine("--- lots of contention ---");
-        SyncBlkVariants(LockIsHeld.Maybe, delegate(object o, Action<object> ac) { RunWithContention(o, 1000000, ac); });
+        SyncBlkVariants(
+            LockIsHeld.Maybe,
+            delegate(object o, Action<object> ac)
+            {
+                RunWithContention(o, 1000000, ac);
+            }
+        );
     }
 
     /// <summary>
@@ -145,32 +256,64 @@ class MonEnterTests
     void SyncBlkVariants(LockIsHeld lockIsHeld, Action<object, Action<object>> scenario)
     {
         Console.WriteLine("Positive tests, no SyncBlk");
-        MethodVariants(lockIsHeld, delegate(Action<object> innerScenario)
-        {
-            object obj = new object();
-            scenario(obj, delegate(object o) { innerScenario(o); });
-        });
+        MethodVariants(
+            lockIsHeld,
+            delegate(Action<object> innerScenario)
+            {
+                object obj = new object();
+                scenario(
+                    obj,
+                    delegate(object o)
+                    {
+                        innerScenario(o);
+                    }
+                );
+            }
+        );
 
         Console.WriteLine("Positive tests, with HashCode");
-        MethodVariants(lockIsHeld, delegate(Action<object> innerScenario)
-        {
-            object obj = new object();
-            obj.GetHashCode();
-            scenario(obj, delegate(object o) { innerScenario(o); });
-        });
+        MethodVariants(
+            lockIsHeld,
+            delegate(Action<object> innerScenario)
+            {
+                object obj = new object();
+                obj.GetHashCode();
+                scenario(
+                    obj,
+                    delegate(object o)
+                    {
+                        innerScenario(o);
+                    }
+                );
+            }
+        );
 
         Console.WriteLine("Positive tests, with SyncBlk");
-        MethodVariants(lockIsHeld, delegate(Action<object> innerScenario)
-        {
-            object obj = new object();
-            obj.GetHashCode();
-            Monitor.Enter(obj);
-            Monitor.Exit(obj);
-            scenario(obj, delegate(object o) { innerScenario(o); });
-        });
+        MethodVariants(
+            lockIsHeld,
+            delegate(Action<object> innerScenario)
+            {
+                object obj = new object();
+                obj.GetHashCode();
+                Monitor.Enter(obj);
+                Monitor.Exit(obj);
+                scenario(
+                    obj,
+                    delegate(object o)
+                    {
+                        innerScenario(o);
+                    }
+                );
+            }
+        );
     }
 
-    enum LockIsHeld { Yes, No, Maybe }
+    enum LockIsHeld
+    {
+        Yes,
+        No,
+        Maybe
+    }
 
     LockIsHeld Reverse(LockIsHeld lockIsHeld)
     {
@@ -194,201 +337,252 @@ class MonEnterTests
     {
         bool tookLock;
 
-        scenario(delegate(object obj)
-        {
-            Monitor.Enter(obj);
-            AssertTookLockAndRelease(LockIsHeld.Yes, obj, true);
-        });
-
-        scenario(delegate(object obj)
-        {
-            tookLock = false;
-            Monitor.Enter(obj, ref tookLock);
-            AssertTookLockAndRelease(LockIsHeld.Yes, obj, tookLock);
-        });
-
-        scenario(delegate(object obj)
-        {
-            tookLock = Monitor.TryEnter(obj);
-            AssertTookLockAndRelease(Reverse(lockIsHeld), obj, tookLock);
-        });
-
-        scenario(delegate(object obj)
-        {
-            tookLock = Monitor.TryEnter(obj, 0);
-            AssertTookLockAndRelease(Reverse(lockIsHeld), obj, tookLock);
-        });
-
-        scenario(delegate(object obj)
-        {
-            DateTime start = DateTime.Now;
-            tookLock = Monitor.TryEnter(obj, 10000);
-            double elapsed = (DateTime.Now - start).TotalSeconds;
-            AssertTookLockAndRelease(elapsed < 5.0 ? LockIsHeld.Yes : LockIsHeld.Maybe, obj, tookLock);
-        });
-
-        scenario(delegate(object obj)
-        {
-            tookLock = Monitor.TryEnter(obj, Timeout.Infinite);
-            AssertTookLockAndRelease(LockIsHeld.Yes, obj, tookLock);
-        });
-
-        scenario(delegate(object obj)
-        {
-            tookLock = Monitor.TryEnter(obj, TimeSpan.FromMilliseconds(0));
-            AssertTookLockAndRelease(Reverse(lockIsHeld), obj, tookLock);
-        });
-
-        scenario(delegate(object obj)
-        {
-            tookLock = Monitor.TryEnter(obj, TimeSpan.FromMilliseconds(10000));
-            AssertTookLockAndRelease(LockIsHeld.Maybe, obj, tookLock);
-        });
-
-        scenario(delegate(object obj)
-        {
-            tookLock = Monitor.TryEnter(obj, TimeSpan.FromMilliseconds(Timeout.Infinite));
-            AssertTookLockAndRelease(LockIsHeld.Yes, obj, tookLock);
-        });
-
-        scenario(delegate(object obj)
-        {
-            tookLock = false;
-            Monitor.TryEnter(obj, ref tookLock);
-            AssertTookLockAndRelease(Reverse(lockIsHeld), obj, tookLock);
-        });
-
-        scenario(delegate(object obj)
-        {
-            tookLock = false;
-            Monitor.TryEnter(obj, 0, ref tookLock);
-            AssertTookLockAndRelease(Reverse(lockIsHeld), obj, tookLock);
-        });
-
-        scenario(delegate(object obj)
-        {
-            tookLock = false;
-            Monitor.TryEnter(obj, 10000, ref tookLock);
-            AssertTookLockAndRelease(LockIsHeld.Maybe, obj, tookLock);
-        });
-
-        scenario(delegate(object obj)
-        {
-            tookLock = false;
-            Monitor.TryEnter(obj, Timeout.Infinite, ref tookLock);
-            AssertTookLockAndRelease(LockIsHeld.Yes, obj, tookLock);
-        });
-
-        scenario(delegate(object obj)
-        {
-            tookLock = false;
-            Monitor.TryEnter(obj, TimeSpan.FromMilliseconds(0), ref tookLock);
-            AssertTookLockAndRelease(Reverse(lockIsHeld), obj, tookLock);
-        });
-
-        scenario(delegate(object obj)
-        {
-            tookLock = false;
-            Monitor.TryEnter(obj, TimeSpan.FromMilliseconds(10000), ref tookLock);
-            AssertTookLockAndRelease(LockIsHeld.Maybe, obj, tookLock);
-        });
-
-        scenario(delegate(object obj)
-        {
-            tookLock = false;
-            Monitor.TryEnter(obj, TimeSpan.FromMilliseconds(Timeout.Infinite), ref tookLock);
-            AssertTookLockAndRelease(LockIsHeld.Yes, obj, tookLock);
-        });
-
-        if (lockIsHeld == LockIsHeld.No)
-        {
-            scenario(delegate(object obj)
+        scenario(
+            delegate(object obj)
             {
                 Monitor.Enter(obj);
-                Monitor.Enter(obj);
                 AssertTookLockAndRelease(LockIsHeld.Yes, obj, true);
-                AssertTookLockAndRelease(LockIsHeld.Yes, obj, true);
-                AssertTookLockAndRelease(LockIsHeld.No, obj, false);
-            });
+            }
+        );
 
-            scenario(delegate(object obj)
+        scenario(
+            delegate(object obj)
             {
-                Monitor.Enter(obj);
                 tookLock = false;
                 Monitor.Enter(obj, ref tookLock);
                 AssertTookLockAndRelease(LockIsHeld.Yes, obj, tookLock);
-                AssertTookLockAndRelease(LockIsHeld.Yes, obj, true);
-                AssertTookLockAndRelease(LockIsHeld.No, obj, false);
-            });
+            }
+        );
 
-            scenario(delegate(object obj)
+        scenario(
+            delegate(object obj)
             {
-                Monitor.Enter(obj);
+                tookLock = Monitor.TryEnter(obj);
+                AssertTookLockAndRelease(Reverse(lockIsHeld), obj, tookLock);
+            }
+        );
+
+        scenario(
+            delegate(object obj)
+            {
+                tookLock = Monitor.TryEnter(obj, 0);
+                AssertTookLockAndRelease(Reverse(lockIsHeld), obj, tookLock);
+            }
+        );
+
+        scenario(
+            delegate(object obj)
+            {
+                DateTime start = DateTime.Now;
+                tookLock = Monitor.TryEnter(obj, 10000);
+                double elapsed = (DateTime.Now - start).TotalSeconds;
+                AssertTookLockAndRelease(
+                    elapsed < 5.0 ? LockIsHeld.Yes : LockIsHeld.Maybe,
+                    obj,
+                    tookLock
+                );
+            }
+        );
+
+        scenario(
+            delegate(object obj)
+            {
+                tookLock = Monitor.TryEnter(obj, Timeout.Infinite);
+                AssertTookLockAndRelease(LockIsHeld.Yes, obj, tookLock);
+            }
+        );
+
+        scenario(
+            delegate(object obj)
+            {
+                tookLock = Monitor.TryEnter(obj, TimeSpan.FromMilliseconds(0));
+                AssertTookLockAndRelease(Reverse(lockIsHeld), obj, tookLock);
+            }
+        );
+
+        scenario(
+            delegate(object obj)
+            {
+                tookLock = Monitor.TryEnter(obj, TimeSpan.FromMilliseconds(10000));
+                AssertTookLockAndRelease(LockIsHeld.Maybe, obj, tookLock);
+            }
+        );
+
+        scenario(
+            delegate(object obj)
+            {
+                tookLock = Monitor.TryEnter(obj, TimeSpan.FromMilliseconds(Timeout.Infinite));
+                AssertTookLockAndRelease(LockIsHeld.Yes, obj, tookLock);
+            }
+        );
+
+        scenario(
+            delegate(object obj)
+            {
                 tookLock = false;
                 Monitor.TryEnter(obj, ref tookLock);
-                AssertTookLockAndRelease(LockIsHeld.Yes, obj, tookLock);
-                AssertTookLockAndRelease(LockIsHeld.Yes, obj, true);
-                AssertTookLockAndRelease(LockIsHeld.No, obj, false);
-            });
+                AssertTookLockAndRelease(Reverse(lockIsHeld), obj, tookLock);
+            }
+        );
 
-            scenario(delegate(object obj)
+        scenario(
+            delegate(object obj)
             {
-                Monitor.Enter(obj);
-                for (int i = 0; i < 70; i++)
+                tookLock = false;
+                Monitor.TryEnter(obj, 0, ref tookLock);
+                AssertTookLockAndRelease(Reverse(lockIsHeld), obj, tookLock);
+            }
+        );
+
+        scenario(
+            delegate(object obj)
+            {
+                tookLock = false;
+                Monitor.TryEnter(obj, 10000, ref tookLock);
+                AssertTookLockAndRelease(LockIsHeld.Maybe, obj, tookLock);
+            }
+        );
+
+        scenario(
+            delegate(object obj)
+            {
+                tookLock = false;
+                Monitor.TryEnter(obj, Timeout.Infinite, ref tookLock);
+                AssertTookLockAndRelease(LockIsHeld.Yes, obj, tookLock);
+            }
+        );
+
+        scenario(
+            delegate(object obj)
+            {
+                tookLock = false;
+                Monitor.TryEnter(obj, TimeSpan.FromMilliseconds(0), ref tookLock);
+                AssertTookLockAndRelease(Reverse(lockIsHeld), obj, tookLock);
+            }
+        );
+
+        scenario(
+            delegate(object obj)
+            {
+                tookLock = false;
+                Monitor.TryEnter(obj, TimeSpan.FromMilliseconds(10000), ref tookLock);
+                AssertTookLockAndRelease(LockIsHeld.Maybe, obj, tookLock);
+            }
+        );
+
+        scenario(
+            delegate(object obj)
+            {
+                tookLock = false;
+                Monitor.TryEnter(obj, TimeSpan.FromMilliseconds(Timeout.Infinite), ref tookLock);
+                AssertTookLockAndRelease(LockIsHeld.Yes, obj, tookLock);
+            }
+        );
+
+        if (lockIsHeld == LockIsHeld.No)
+        {
+            scenario(
+                delegate(object obj)
                 {
                     Monitor.Enter(obj);
-                }
-                for (int i = 0; i < 70; i++)
-                {
+                    Monitor.Enter(obj);
                     AssertTookLockAndRelease(LockIsHeld.Yes, obj, true);
+                    AssertTookLockAndRelease(LockIsHeld.Yes, obj, true);
+                    AssertTookLockAndRelease(LockIsHeld.No, obj, false);
                 }
-                AssertTookLockAndRelease(LockIsHeld.Yes, obj, true);
-                AssertTookLockAndRelease(LockIsHeld.No, obj, false);
-            });
+            );
 
-            scenario(delegate(object obj)
-            {
-                Monitor.Enter(obj);
-                for (int i = 0; i < 70; i++)
+            scenario(
+                delegate(object obj)
                 {
+                    Monitor.Enter(obj);
                     tookLock = false;
                     Monitor.Enter(obj, ref tookLock);
-                    Assert(tookLock);
-                }
-                for (int i = 0; i < 70; i++)
-                {
+                    AssertTookLockAndRelease(LockIsHeld.Yes, obj, tookLock);
                     AssertTookLockAndRelease(LockIsHeld.Yes, obj, true);
+                    AssertTookLockAndRelease(LockIsHeld.No, obj, false);
                 }
-                AssertTookLockAndRelease(LockIsHeld.Yes, obj, true);
-                AssertTookLockAndRelease(LockIsHeld.No, obj, false);
-            });
+            );
 
-            scenario(delegate(object obj)
-            {
-                Monitor.Enter(obj);
-                for (int i = 0; i < 70; i++)
+            scenario(
+                delegate(object obj)
                 {
+                    Monitor.Enter(obj);
                     tookLock = false;
                     Monitor.TryEnter(obj, ref tookLock);
-                    Assert(tookLock);
-                }
-                for (int i = 0; i < 70; i++)
-                {
+                    AssertTookLockAndRelease(LockIsHeld.Yes, obj, tookLock);
                     AssertTookLockAndRelease(LockIsHeld.Yes, obj, true);
+                    AssertTookLockAndRelease(LockIsHeld.No, obj, false);
                 }
-                AssertTookLockAndRelease(LockIsHeld.Yes, obj, true);
-                AssertTookLockAndRelease(LockIsHeld.No, obj, false);
-            });
+            );
+
+            scenario(
+                delegate(object obj)
+                {
+                    Monitor.Enter(obj);
+                    for (int i = 0; i < 70; i++)
+                    {
+                        Monitor.Enter(obj);
+                    }
+                    for (int i = 0; i < 70; i++)
+                    {
+                        AssertTookLockAndRelease(LockIsHeld.Yes, obj, true);
+                    }
+                    AssertTookLockAndRelease(LockIsHeld.Yes, obj, true);
+                    AssertTookLockAndRelease(LockIsHeld.No, obj, false);
+                }
+            );
+
+            scenario(
+                delegate(object obj)
+                {
+                    Monitor.Enter(obj);
+                    for (int i = 0; i < 70; i++)
+                    {
+                        tookLock = false;
+                        Monitor.Enter(obj, ref tookLock);
+                        Assert(tookLock);
+                    }
+                    for (int i = 0; i < 70; i++)
+                    {
+                        AssertTookLockAndRelease(LockIsHeld.Yes, obj, true);
+                    }
+                    AssertTookLockAndRelease(LockIsHeld.Yes, obj, true);
+                    AssertTookLockAndRelease(LockIsHeld.No, obj, false);
+                }
+            );
+
+            scenario(
+                delegate(object obj)
+                {
+                    Monitor.Enter(obj);
+                    for (int i = 0; i < 70; i++)
+                    {
+                        tookLock = false;
+                        Monitor.TryEnter(obj, ref tookLock);
+                        Assert(tookLock);
+                    }
+                    for (int i = 0; i < 70; i++)
+                    {
+                        AssertTookLockAndRelease(LockIsHeld.Yes, obj, true);
+                    }
+                    AssertTookLockAndRelease(LockIsHeld.Yes, obj, true);
+                    AssertTookLockAndRelease(LockIsHeld.No, obj, false);
+                }
+            );
         }
     }
 
     void AssertTookLockAndRelease(LockIsHeld expected, object obj, bool tookLock)
     {
-        Assert((expected == LockIsHeld.Yes && tookLock) ||
-               (expected == LockIsHeld.No && !tookLock) ||
-               expected == LockIsHeld.Maybe);
+        Assert(
+            (expected == LockIsHeld.Yes && tookLock)
+                || (expected == LockIsHeld.No && !tookLock)
+                || expected == LockIsHeld.Maybe
+        );
 
-        if (tookLock) Assert(!inContention);
+        if (tookLock)
+            Assert(!inContention);
 
         bool exitFailed = false;
         try
@@ -452,7 +646,6 @@ class MonEnterTests
         Fail(string.Format(format, args), false);
     }
 
-
     void ThreadIdPosTests()
     {
         Console.WriteLine("*** High thread ID tests ***");
@@ -463,13 +656,22 @@ class MonEnterTests
         List<Thread> threads = new List<Thread>(1024);
         for (int i = 0; i < 1024; i++)
         {
-            threads.Add(new Thread(delegate() { Assert(false, "this thread should never run"); }));
+            threads.Add(
+                new Thread(
+                    delegate()
+                    {
+                        Assert(false, "this thread should never run");
+                    }
+                )
+            );
         }
-        Thread highThread = new Thread(delegate()
+        Thread highThread = new Thread(
+            delegate()
             {
                 Assert(Thread.CurrentThread.ManagedThreadId > 1024);
                 ContentionVariants();
-            });
+            }
+        );
         highThread.Start();
         highThread.Join();
     }

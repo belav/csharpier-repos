@@ -28,7 +28,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
         public AttributeRoute(
             IActionDescriptorCollectionProvider actionDescriptorCollectionProvider,
             IServiceProvider services,
-            Func<ActionDescriptor[], IRouter> handlerFactory)
+            Func<ActionDescriptor[], IRouter> handlerFactory
+        )
         {
             if (actionDescriptorCollectionProvider == null)
             {
@@ -109,14 +110,16 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                         routeInfo.RouteTemplate,
                         defaults,
                         routeInfo.RouteName,
-                        routeInfo.Order);
+                        routeInfo.Order
+                    );
                 }
                 catch (RouteCreationException routeCreationException)
                 {
                     throw new RouteCreationException(
-                        "An error occurred while adding a route to the route builder. " +
-                        $"Route name '{routeInfo.RouteName}' and template '{routeInfo.RouteTemplate!.TemplateText}'.",
-                        routeCreationException);
+                        "An error occurred while adding a route to the route builder. "
+                            + $"Route name '{routeInfo.RouteName}' and template '{routeInfo.RouteTemplate!.TemplateText}'.",
+                        routeCreationException
+                    );
                 }
             }
 
@@ -137,14 +140,16 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                     handler,
                     group.Key.RouteTemplate,
                     group.Key.RouteName,
-                    group.Key.Order);
+                    group.Key.Order
+                );
             }
         }
 
-        private static IEnumerable<IGrouping<RouteInfo, ActionDescriptor>> GetInboundRouteGroups(List<RouteInfo> routeInfos)
+        private static IEnumerable<IGrouping<RouteInfo, ActionDescriptor>> GetInboundRouteGroups(
+            List<RouteInfo> routeInfos
+        )
         {
-            return routeInfos
-                .Where(routeInfo => !routeInfo.SuppressPathMatching)
+            return routeInfos.Where(routeInfo => !routeInfo.SuppressPathMatching)
                 .GroupBy(r => r, r => r.ActionDescriptor, RouteInfoEqualityComparer.Instance);
         }
 
@@ -158,7 +163,9 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             //
             // For a relatively simple route template, the `Template` object will hold about 500 bytes
             // of memory, so sharing is worthwhile.
-            var templateCache = new Dictionary<string, RouteTemplate>(StringComparer.OrdinalIgnoreCase);
+            var templateCache = new Dictionary<string, RouteTemplate>(
+                StringComparer.OrdinalIgnoreCase
+            );
 
             var attributeRoutedActions = actions.Where(a => a.AttributeRouteInfo?.Template != null);
             foreach (var action in attributeRoutedActions)
@@ -179,12 +186,19 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                 var allErrors = string.Join(
                     Environment.NewLine + Environment.NewLine,
                     errors.Select(
-                        e => Resources.FormatAttributeRoute_IndividualErrorMessage(
-                            e.ActionDescriptor.DisplayName,
-                            Environment.NewLine,
-                            e.ErrorMessage)));
+                        e =>
+                            Resources.FormatAttributeRoute_IndividualErrorMessage(
+                                e.ActionDescriptor.DisplayName,
+                                Environment.NewLine,
+                                e.ErrorMessage
+                            )
+                    )
+                );
 
-                var message = Resources.FormatAttributeRoute_AggregateErrorMessage(Environment.NewLine, allErrors);
+                var message = Resources.FormatAttributeRoute_AggregateErrorMessage(
+                    Environment.NewLine,
+                    allErrors
+                );
                 throw new RouteCreationException(message);
             }
 
@@ -193,12 +207,10 @@ namespace Microsoft.AspNetCore.Mvc.Routing
 
         private static RouteInfo GetRouteInfo(
             Dictionary<string, RouteTemplate> templateCache,
-            ActionDescriptor action)
+            ActionDescriptor action
+        )
         {
-            var routeInfo = new RouteInfo()
-            {
-                ActionDescriptor = action,
-            };
+            var routeInfo = new RouteInfo() { ActionDescriptor = action, };
 
             try
             {
@@ -226,10 +238,12 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                 {
                     if (string.Equals(kvp.Key, parameter.Name, StringComparison.OrdinalIgnoreCase))
                     {
-                        routeInfo.ErrorMessage = Resources.FormatAttributeRoute_CannotContainParameter(
-                            routeInfo.RouteTemplate.TemplateText,
-                            kvp.Key,
-                            kvp.Value);
+                        routeInfo.ErrorMessage =
+                            Resources.FormatAttributeRoute_CannotContainParameter(
+                                routeInfo.RouteTemplate.TemplateText,
+                                kvp.Key,
+                                kvp.Value
+                            );
 
                         return routeInfo;
                     }
@@ -282,7 +296,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                     return string.Equals(
                         x.RouteTemplate!.TemplateText,
                         y.RouteTemplate!.TemplateText,
-                        StringComparison.OrdinalIgnoreCase);
+                        StringComparison.OrdinalIgnoreCase
+                    );
                 }
             }
 

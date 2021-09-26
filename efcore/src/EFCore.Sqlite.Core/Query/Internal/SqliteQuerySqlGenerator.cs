@@ -23,9 +23,7 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         public SqliteQuerySqlGenerator(QuerySqlGeneratorDependencies dependencies)
-            : base(dependencies)
-        {
-        }
+            : base(dependencies) { }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -37,10 +35,11 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
         {
             Check.NotNull(binaryExpression, nameof(binaryExpression));
 
-            return binaryExpression.OperatorType == ExpressionType.Add
+            return
+                binaryExpression.OperatorType == ExpressionType.Add
                 && binaryExpression.Type == typeof(string)
-                    ? " || "
-                    : base.GetOperator(binaryExpression);
+              ? " || "
+              : base.GetOperator(binaryExpression);
         }
 
         /// <summary>
@@ -53,15 +52,17 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
         {
             Check.NotNull(selectExpression, nameof(selectExpression));
 
-            if (selectExpression.Limit != null
-                || selectExpression.Offset != null)
+            if (selectExpression.Limit != null || selectExpression.Offset != null)
             {
-                Sql.AppendLine()
-                    .Append("LIMIT ");
+                Sql.AppendLine().Append("LIMIT ");
 
                 Visit(
                     selectExpression.Limit
-                    ?? new SqlConstantExpression(Expression.Constant(-1), selectExpression.Offset!.TypeMapping));
+                        ?? new SqlConstantExpression(
+                            Expression.Constant(-1),
+                            selectExpression.Offset!.TypeMapping
+                        )
+                );
 
                 if (selectExpression.Offset != null)
                 {
@@ -78,7 +79,10 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        protected override void GenerateSetOperationOperand(SetOperationBase setOperation, SelectExpression operand)
+        protected override void GenerateSetOperationOperand(
+            SetOperationBase setOperation,
+            SelectExpression operand
+        )
         {
             Check.NotNull(setOperation, nameof(setOperation));
             Check.NotNull(operand, nameof(operand));

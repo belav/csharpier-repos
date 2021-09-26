@@ -49,13 +49,18 @@ namespace Microsoft.AspNetCore.TestHost
             responseInformation.HasStarted = true;
 
             // Act & Assert
-            Assert.Throws<InvalidOperationException>(() =>
-            {
-                responseInformation.OnStarting((status) =>
+            Assert.Throws<InvalidOperationException>(
+                () =>
                 {
-                    return Task.FromResult(string.Empty);
-                }, state: "string");
-            });
+                    responseInformation.OnStarting(
+                        (status) =>
+                        {
+                            return Task.FromResult(string.Empty);
+                        },
+                        state: "string"
+                    );
+                }
+            );
         }
 
         [Fact]
@@ -65,7 +70,9 @@ namespace Microsoft.AspNetCore.TestHost
             responseInformation.HasStarted = true;
 
             Assert.Throws<InvalidOperationException>(() => responseInformation.StatusCode = 400);
-            Assert.Throws<InvalidOperationException>(() => responseInformation.ReasonPhrase = "Hello World");
+            Assert.Throws<InvalidOperationException>(
+                () => responseInformation.ReasonPhrase = "Hello World"
+            );
         }
 
         [Fact]

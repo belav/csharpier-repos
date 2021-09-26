@@ -18,7 +18,10 @@ namespace Microsoft.AspNetCore.Builder
         /// <param name="builder">The <see cref="IApplicationBuilder"/> to add the middleware to.</param>
         /// <param name="router">The <see cref="IRouter"/> to use for routing requests.</param>
         /// <returns>A reference to this instance after the operation has completed.</returns>
-        public static IApplicationBuilder UseRouter(this IApplicationBuilder builder, IRouter router)
+        public static IApplicationBuilder UseRouter(
+            this IApplicationBuilder builder,
+            IRouter router
+        )
         {
             if (builder == null)
             {
@@ -32,10 +35,13 @@ namespace Microsoft.AspNetCore.Builder
 
             if (builder.ApplicationServices.GetService(typeof(RoutingMarkerService)) == null)
             {
-                throw new InvalidOperationException(Resources.FormatUnableToFindServices(
-                    nameof(IServiceCollection),
-                    nameof(RoutingServiceCollectionExtensions.AddRouting),
-                    "ConfigureServices(...)"));
+                throw new InvalidOperationException(
+                    Resources.FormatUnableToFindServices(
+                        nameof(IServiceCollection),
+                        nameof(RoutingServiceCollectionExtensions.AddRouting),
+                        "ConfigureServices(...)"
+                    )
+                );
             }
 
             return builder.UseMiddleware<RouterMiddleware>(router);
@@ -48,7 +54,10 @@ namespace Microsoft.AspNetCore.Builder
         /// <param name="builder">The <see cref="IApplicationBuilder"/> to add the middleware to.</param>
         /// <param name="action">An <see cref="Action{IRouteBuilder}"/> to configure the provided <see cref="IRouteBuilder"/>.</param>
         /// <returns>A reference to this instance after the operation has completed.</returns>
-        public static IApplicationBuilder UseRouter(this IApplicationBuilder builder, Action<IRouteBuilder> action)
+        public static IApplicationBuilder UseRouter(
+            this IApplicationBuilder builder,
+            Action<IRouteBuilder> action
+        )
         {
             if (builder == null)
             {
@@ -62,10 +71,13 @@ namespace Microsoft.AspNetCore.Builder
 
             if (builder.ApplicationServices.GetService(typeof(RoutingMarkerService)) == null)
             {
-                throw new InvalidOperationException(Resources.FormatUnableToFindServices(
-                    nameof(IServiceCollection),
-                    nameof(RoutingServiceCollectionExtensions.AddRouting),
-                    "ConfigureServices(...)"));
+                throw new InvalidOperationException(
+                    Resources.FormatUnableToFindServices(
+                        nameof(IServiceCollection),
+                        nameof(RoutingServiceCollectionExtensions.AddRouting),
+                        "ConfigureServices(...)"
+                    )
+                );
             }
 
             var routeBuilder = new RouteBuilder(builder);

@@ -22,9 +22,12 @@ namespace System.Runtime.InteropServices.Tests
         [InlineData("abc\0def")]
         public void SecureStringToGlobalAllocAnsi_InvokePtrToStringAnsi_Roundtrips(string s)
         {
-            string expectedFullString = new string(s.ToCharArray().Select(c => c > 0xFF ? '?' : c).ToArray());
+            string expectedFullString = new string(
+                s.ToCharArray().Select(c => c > 0xFF ? '?' : c).ToArray()
+            );
             int nullIndex = expectedFullString.IndexOf('\0');
-            string expectedParameterlessString = nullIndex == -1 ? expectedFullString : expectedFullString.Substring(0, nullIndex);
+            string expectedParameterlessString =
+                nullIndex == -1 ? expectedFullString : expectedFullString.Substring(0, nullIndex);
 
             using (SecureString secureString = ToSecureString(s))
             {
@@ -40,7 +43,10 @@ namespace System.Runtime.InteropServices.Tests
                         // Make sure the native memory is correctly laid out.
                         for (int i = 0; i < s.Length; i++)
                         {
-                            Assert.Equal(expectedFullString[i], (char)Marshal.ReadByte(IntPtr.Add(ptr, i)));
+                            Assert.Equal(
+                                expectedFullString[i],
+                                (char)Marshal.ReadByte(IntPtr.Add(ptr, i))
+                            );
                         }
 
                         // Make sure the native memory roundtrips.
@@ -48,6 +54,7 @@ namespace System.Runtime.InteropServices.Tests
                         Assert.Equal(expectedFullString, Marshal.PtrToStringAnsi(ptr, s.Length));
                     }
                 }
+
                 finally
                 {
                     Marshal.ZeroFreeGlobalAllocAnsi(ptr);
@@ -58,7 +65,10 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void SecureStringToGlobalAllocAnsi_NullString_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("s", () => Marshal.SecureStringToGlobalAllocAnsi(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "s",
+                () => Marshal.SecureStringToGlobalAllocAnsi(null)
+            );
         }
 
         [Fact]
@@ -67,7 +77,9 @@ namespace System.Runtime.InteropServices.Tests
             var secureString = new SecureString();
             secureString.Dispose();
 
-            Assert.Throws<ObjectDisposedException>(() => Marshal.SecureStringToGlobalAllocAnsi(secureString));
+            Assert.Throws<ObjectDisposedException>(
+                () => Marshal.SecureStringToGlobalAllocAnsi(secureString)
+            );
         }
 
         private static SecureString ToSecureString(string data)

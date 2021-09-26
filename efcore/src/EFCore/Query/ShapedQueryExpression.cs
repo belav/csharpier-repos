@@ -29,14 +29,14 @@ namespace Microsoft.EntityFrameworkCore.Query
             : this(
                 Check.NotNull(queryExpression, nameof(queryExpression)),
                 Check.NotNull(shaperExpression, nameof(shaperExpression)),
-                ResultCardinality.Enumerable)
-        {
-        }
+                ResultCardinality.Enumerable
+            ) { }
 
         private ShapedQueryExpression(
             Expression queryExpression,
             Expression shaperExpression,
-            ResultCardinality resultCardinality)
+            ResultCardinality resultCardinality
+        )
         {
             QueryExpression = queryExpression;
             ShaperExpression = shaperExpression;
@@ -59,19 +59,21 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual Expression ShaperExpression { get; }
 
         /// <inheritdoc />
-        public override Type Type
-            => ResultCardinality == ResultCardinality.Enumerable
+        public override Type Type =>
+            ResultCardinality == ResultCardinality.Enumerable
                 ? typeof(IQueryable<>).MakeGenericType(ShaperExpression.Type)
                 : ShaperExpression.Type;
 
         /// <inheritdoc />
-        public sealed override ExpressionType NodeType
-            => ExpressionType.Extension;
+        public sealed override ExpressionType NodeType => ExpressionType.Extension;
 
         /// <inheritdoc />
-        protected override Expression VisitChildren(ExpressionVisitor visitor)
-            => throw new InvalidOperationException(
-                CoreStrings.VisitIsNotAllowed($"{nameof(ShapedQueryExpression)}.{nameof(VisitChildren)}"));
+        protected override Expression VisitChildren(ExpressionVisitor visitor) =>
+            throw new InvalidOperationException(
+                CoreStrings.VisitIsNotAllowed(
+                    $"{nameof(ShapedQueryExpression)}.{nameof(VisitChildren)}"
+                )
+            );
 
         /// <summary>
         ///     Creates a new expression that is like this one, but using the supplied children. If all of the children are the same, it will
@@ -80,14 +82,17 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <param name="queryExpression"> The <see cref="QueryExpression" /> property of the result. </param>
         /// <param name="shaperExpression"> The <see cref="ShaperExpression" /> property of the result. </param>
         /// <returns> This expression if no children changed, or an expression with the updated children. </returns>
-        public virtual ShapedQueryExpression Update(Expression queryExpression, Expression shaperExpression)
+        public virtual ShapedQueryExpression Update(
+            Expression queryExpression,
+            Expression shaperExpression
+        )
         {
             Check.NotNull(queryExpression, nameof(queryExpression));
             Check.NotNull(shaperExpression, nameof(shaperExpression));
 
             return queryExpression != QueryExpression || shaperExpression != ShaperExpression
-                ? new ShapedQueryExpression(queryExpression, shaperExpression, ResultCardinality)
-                : this;
+              ? new ShapedQueryExpression(queryExpression, shaperExpression, ResultCardinality)
+              : this;
         }
 
         /// <summary>
@@ -101,8 +106,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             Check.NotNull(shaperExpression, nameof(shaperExpression));
 
             return shaperExpression != ShaperExpression
-                ? new ShapedQueryExpression(QueryExpression, shaperExpression, ResultCardinality)
-                : this;
+              ? new ShapedQueryExpression(QueryExpression, shaperExpression, ResultCardinality)
+              : this;
         }
 
         /// <summary>
@@ -110,8 +115,9 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// </summary>
         /// <param name="resultCardinality"> The <see cref="ResultCardinality" /> property of the result. </param>
         /// <returns> An expression with the updated result cardinality. </returns>
-        public virtual ShapedQueryExpression UpdateResultCardinality(ResultCardinality resultCardinality)
-            => new(QueryExpression, ShaperExpression, resultCardinality);
+        public virtual ShapedQueryExpression UpdateResultCardinality(
+            ResultCardinality resultCardinality
+        ) => new(QueryExpression, ShaperExpression, resultCardinality);
 
         /// <inheritdoc />
         void IPrintableExpression.Print(ExpressionPrinter expressionPrinter)

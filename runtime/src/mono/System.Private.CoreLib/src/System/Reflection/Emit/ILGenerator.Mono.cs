@@ -41,7 +41,6 @@ using System.Runtime.InteropServices;
 
 namespace System.Reflection.Emit
 {
-
     internal struct ILExceptionBlock
     {
         public const int CATCH = 0;
@@ -183,9 +182,9 @@ namespace System.Reflection.Emit
     {
         private struct LabelFixup
         {
-            public int offset;    // The number of bytes between pos and the
-                                  // offset of the jump
-            public int pos;       // Where offset of the label is placed
+            public int offset; // The number of bytes between pos and the
+            // offset of the jump
+            public int pos; // Where offset of the label is placed
             public int label_idx; // The label to jump to
         };
 
@@ -228,7 +227,7 @@ namespace System.Reflection.Emit
         private List<SequencePointList>? sequencePointLists;
         private SequencePointList? currentSequence;
 
-        [DynamicDependency(nameof(token_fixups))]  // Automatically keeps all previous fields too due to StructLayout
+        [DynamicDependency(nameof(token_fixups))] // Automatically keeps all previous fields too due to StructLayout
         internal ILGenerator(Module m, ITokenGenerator token_gen, int size)
         {
             if (size < 0)
@@ -351,11 +350,15 @@ namespace System.Reflection.Emit
             if (open_blocks.Count <= 0)
                 throw new NotSupportedException("Not in an exception block");
             if (exceptionType != null && exceptionType.IsUserType)
-                throw new NotSupportedException("User defined subclasses of System.Type are not yet supported.");
+                throw new NotSupportedException(
+                    "User defined subclasses of System.Type are not yet supported."
+                );
             if (ex_handlers![cur_block].LastClauseType() == ILExceptionBlock.FILTER_START)
             {
                 if (exceptionType != null)
-                    throw new ArgumentException("Do not supply an exception type for filter clause");
+                    throw new ArgumentException(
+                        "Do not supply an exception type for filter clause"
+                    );
                 Emit(OpCodes.Endfilter);
                 ex_handlers[cur_block].PatchFilterClause(code_len);
             }
@@ -368,7 +371,6 @@ namespace System.Reflection.Emit
             cur_stack = 1; // the exception object is on the stack by default
             if (max_stack < cur_stack)
                 max_stack = cur_stack;
-
             //System.Console.WriteLine ("Begin catch Block: {0} {1}",exceptionType.ToString(), max_stack);
         }
 
@@ -446,21 +448,21 @@ namespace System.Reflection.Emit
             ex_handlers[cur_block].AddFinally(code_len);
         }
 
-        public virtual void BeginScope()
-        { }
+        public virtual void BeginScope() { }
 
         public virtual LocalBuilder DeclareLocal(Type localType)
         {
             return DeclareLocal(localType, false);
         }
 
-
         public virtual LocalBuilder DeclareLocal(Type localType, bool pinned)
         {
             if (localType == null)
                 throw new ArgumentNullException(nameof(localType));
             if (localType.IsUserType)
-                throw new NotSupportedException("User defined subclasses of System.Type are not yet supported.");
+                throw new NotSupportedException(
+                    "User defined subclasses of System.Type are not yet supported."
+                );
             LocalBuilder res = new LocalBuilder(localType, this);
             res.is_pinned = pinned;
 
@@ -602,7 +604,6 @@ namespace System.Reflection.Emit
             fixups[num_fixups].label_idx = label.m_label;
             num_fixups++;
             code_len += tlen;
-
         }
 
         public virtual void Emit(OpCode opcode, Label[] labels)
@@ -661,8 +662,17 @@ namespace System.Reflection.Emit
                 throw new ArgumentException(SR.Argument_UnmatchedMethodForLocal, nameof(local));
 
             uint pos = local.position;
-            if ((opcode == OpCodes.Ldloca_S || opcode == OpCodes.Ldloc_S || opcode == OpCodes.Stloc_S) && pos > 255)
-                throw new InvalidOperationException(SR.InvalidOperation_BadInstructionOrIndexOutOfBound);
+            if (
+                (
+                    opcode == OpCodes.Ldloca_S
+                    || opcode == OpCodes.Ldloc_S
+                    || opcode == OpCodes.Stloc_S
+                )
+                && pos > 255
+            )
+                throw new InvalidOperationException(
+                    SR.InvalidOperation_BadInstructionOrIndexOutOfBound
+                );
 
             bool load_addr = false;
             bool is_store = false;
@@ -675,7 +685,10 @@ namespace System.Reflection.Emit
                 cur_stack--;
                 is_store = true;
             }
-            else if (opcode.StackBehaviourPush == StackBehaviour.Push1 || opcode.StackBehaviourPush == StackBehaviour.Pushi)
+            else if (
+                opcode.StackBehaviourPush == StackBehaviour.Push1
+                || opcode.StackBehaviourPush == StackBehaviour.Pushi
+            )
             {
                 cur_stack++;
                 is_load = true;
@@ -751,8 +764,17 @@ namespace System.Reflection.Emit
                 throw new ArgumentNullException(nameof(meth));
 
             // For compatibility with MS
-            if ((meth is DynamicMethod) && ((opcode == OpCodes.Ldftn) || (opcode == OpCodes.Ldvirtftn) || (opcode == OpCodes.Ldtoken)))
-                throw new ArgumentException("Ldtoken, Ldftn and Ldvirtftn OpCodes cannot target DynamicMethods.");
+            if (
+                (meth is DynamicMethod)
+                && (
+                    (opcode == OpCodes.Ldftn)
+                    || (opcode == OpCodes.Ldvirtftn)
+                    || (opcode == OpCodes.Ldtoken)
+                )
+            )
+                throw new ArgumentException(
+                    "Ldtoken, Ldftn and Ldvirtftn OpCodes cannot target DynamicMethods."
+                );
 
             int token = token_gen.GetToken(meth, true);
             make_room(6);
@@ -833,7 +855,11 @@ namespace System.Reflection.Emit
         }
 
         // FIXME: vararg methods are not supported
-        public virtual void EmitCall(OpCode opcode, MethodInfo methodInfo, Type[]? optionalParameterTypes)
+        public virtual void EmitCall(
+            OpCode opcode,
+            MethodInfo methodInfo,
+            Type[]? optionalParameterTypes
+        )
         {
             if (methodInfo == null)
                 throw new ArgumentNullException(nameof(methodInfo));
@@ -846,7 +872,9 @@ namespace System.Reflection.Emit
             {
                 if ((methodInfo.CallingConvention & CallingConventions.VarArgs) == 0)
                 {
-                    throw new InvalidOperationException("Method is not VarArgs method and optional types were passed");
+                    throw new InvalidOperationException(
+                        "Method is not VarArgs method and optional types were passed"
+                    );
                 }
 
                 int token = token_gen.GetToken(methodInfo, optionalParameterTypes);
@@ -856,20 +884,43 @@ namespace System.Reflection.Emit
             Emit(opcode, methodInfo);
         }
 
-        public virtual void EmitCalli(OpCode opcode, CallingConvention unmanagedCallConv, Type? returnType, Type[]? parameterTypes)
+        public virtual void EmitCalli(
+            OpCode opcode,
+            CallingConvention unmanagedCallConv,
+            Type? returnType,
+            Type[]? parameterTypes
+        )
         {
             // GetMethodSigHelper expects a ModuleBuilder or null, and module might be
             // a normal module when using dynamic methods.
-            SignatureHelper helper = SignatureHelper.GetMethodSigHelper(module as ModuleBuilder, 0, unmanagedCallConv, returnType, parameterTypes);
+            SignatureHelper helper = SignatureHelper.GetMethodSigHelper(
+                module as ModuleBuilder,
+                0,
+                unmanagedCallConv,
+                returnType,
+                parameterTypes
+            );
             Emit(opcode, helper);
         }
 
-        public virtual void EmitCalli(OpCode opcode, CallingConventions callingConvention, Type returnType, Type[]? parameterTypes, Type[]? optionalParameterTypes)
+        public virtual void EmitCalli(
+            OpCode opcode,
+            CallingConventions callingConvention,
+            Type returnType,
+            Type[]? parameterTypes,
+            Type[]? optionalParameterTypes
+        )
         {
             if (optionalParameterTypes != null)
                 throw new NotImplementedException();
 
-            SignatureHelper helper = SignatureHelper.GetMethodSigHelper(module as ModuleBuilder, callingConvention, 0, returnType, parameterTypes);
+            SignatureHelper helper = SignatureHelper.GetMethodSigHelper(
+                module as ModuleBuilder,
+                callingConvention,
+                0,
+                returnType,
+                parameterTypes
+            );
             Emit(opcode, helper);
         }
 
@@ -904,7 +955,10 @@ namespace System.Reflection.Emit
             // should.
             Emit(OpCodes.Ldloc, localBuilder);
             Type consoleType = Type.GetType(ConsoleTypeFullName, throwOnError: true)!;
-            Emit(OpCodes.Call, consoleType.GetMethod("WriteLine", new Type[1] { localBuilder.LocalType })!);
+            Emit(
+                OpCodes.Call,
+                consoleType.GetMethod("WriteLine", new Type[1] { localBuilder.LocalType })!
+            );
         }
 
         public virtual void EmitWriteLine(string value)
@@ -923,7 +977,9 @@ namespace System.Reflection.Emit
                 throw new NotSupportedException("Not in an exception block");
 
             if (ex_handlers![cur_block].LastClauseType() == ILExceptionBlock.FILTER_START)
-                throw new InvalidOperationException("Incorrect code generation for exception block.");
+                throw new InvalidOperationException(
+                    "Incorrect code generation for exception block."
+                );
 
             InternalEndClause();
             MarkLabel(ex_handlers[cur_block].end);
@@ -933,8 +989,7 @@ namespace System.Reflection.Emit
                 cur_block = (int)open_blocks.Peek()!;
         }
 
-        public virtual void EndScope()
-        { }
+        public virtual void EndScope() { }
 
         public virtual void MarkLabel(Label loc)
         {
@@ -947,8 +1002,13 @@ namespace System.Reflection.Emit
                 cur_stack = labels[loc.m_label].maxStack;
         }
 
-        public virtual void MarkSequencePoint(ISymbolDocumentWriter document, int startLine,
-                               int startColumn, int endLine, int endColumn)
+        public virtual void MarkSequencePoint(
+            ISymbolDocumentWriter document,
+            int startLine,
+            int startColumn,
+            int endLine,
+            int endColumn
+        )
         {
             if (currentSequence == null || currentSequence.Document != document)
             {
@@ -992,16 +1052,23 @@ namespace System.Reflection.Emit
             get { return sequencePointLists != null; }
         }
 
-        public virtual void ThrowException([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type excType)
+        public virtual void ThrowException(
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+            )]
+                Type excType
+        )
         {
             if (excType == null)
                 throw new ArgumentNullException(nameof(excType));
-            if (!((excType == typeof(Exception)) ||
-                   excType.IsSubclassOf(typeof(Exception))))
+            if (!((excType == typeof(Exception)) || excType.IsSubclassOf(typeof(Exception))))
                 throw new ArgumentException("Type should be an exception type", nameof(excType));
             ConstructorInfo? ctor = excType.GetConstructor(Type.EmptyTypes);
             if (ctor == null)
-                throw new ArgumentException("Type should have a default constructor", nameof(excType));
+                throw new ArgumentException(
+                    "Type should have a default constructor",
+                    nameof(excType)
+                );
             Emit(OpCodes.Newobj, ctor);
             Emit(OpCodes.Throw);
         }
@@ -1017,7 +1084,13 @@ namespace System.Reflection.Emit
             for (int i = 0; i < num_fixups; ++i)
             {
                 if (labels![fixups![i].label_idx].addr < 0)
-                    throw new ArgumentException(string.Format("Label #{0} is not marked in method `{1}'", fixups[i].label_idx + 1, mb.Name));
+                    throw new ArgumentException(
+                        string.Format(
+                            "Label #{0} is not marked in method `{1}'",
+                            fixups[i].label_idx + 1,
+                            mb.Name
+                        )
+                    );
                 // Diff is the offset from the end of the jump instruction to the address of the label
                 int diff = labels[fixups[i].label_idx].addr - (fixups[i].pos + fixups[i].offset);
                 if (fixups[i].offset == 1)
@@ -1057,10 +1130,7 @@ namespace System.Reflection.Emit
 
         internal ITokenGenerator TokenGenerator
         {
-            get
-            {
-                return token_gen;
-            }
+            get { return token_gen; }
         }
 
         public virtual int ILOffset
@@ -1089,31 +1159,36 @@ namespace System.Reflection.Emit
         public int[] GetOffsets()
         {
             int[] data = new int[count];
-            for (int n = 0; n < count; n++) data[n] = points![n].Offset;
+            for (int n = 0; n < count; n++)
+                data[n] = points![n].Offset;
             return data;
         }
         public int[] GetLines()
         {
             int[] data = new int[count];
-            for (int n = 0; n < count; n++) data[n] = points![n].Line;
+            for (int n = 0; n < count; n++)
+                data[n] = points![n].Line;
             return data;
         }
         public int[] GetColumns()
         {
             int[] data = new int[count];
-            for (int n = 0; n < count; n++) data[n] = points![n].Col;
+            for (int n = 0; n < count; n++)
+                data[n] = points![n].Col;
             return data;
         }
         public int[] GetEndLines()
         {
             int[] data = new int[count];
-            for (int n = 0; n < count; n++) data[n] = points![n].EndLine;
+            for (int n = 0; n < count; n++)
+                data[n] = points![n].EndLine;
             return data;
         }
         public int[] GetEndColumns()
         {
             int[] data = new int[count];
-            for (int n = 0; n < count; n++) data[n] = points![n].EndCol;
+            for (int n = 0; n < count; n++)
+                data[n] = points![n].EndCol;
             return data;
         }
         public int StartLine
@@ -1185,7 +1260,10 @@ namespace System.Reflection.Emit
         public Stack(int initialCapacity)
         {
             if (initialCapacity < 0)
-                throw new ArgumentOutOfRangeException(nameof(initialCapacity), SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(initialCapacity),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
 
             if (initialCapacity < _defaultCapacity)
                 initialCapacity = _defaultCapacity;
@@ -1196,10 +1274,7 @@ namespace System.Reflection.Emit
 
         public int Count
         {
-            get
-            {
-                return _size;
-            }
+            get { return _size; }
         }
 
         public object? Peek()

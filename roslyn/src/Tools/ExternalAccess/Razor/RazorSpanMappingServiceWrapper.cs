@@ -18,7 +18,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
 
         public RazorSpanMappingServiceWrapper(IRazorSpanMappingService razorSpanMappingService)
         {
-            _razorSpanMappingService = razorSpanMappingService ?? throw new ArgumentNullException(nameof(razorSpanMappingService));
+            _razorSpanMappingService =
+                razorSpanMappingService
+                ?? throw new ArgumentNullException(nameof(razorSpanMappingService));
         }
 
         /// <summary>
@@ -27,9 +29,18 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
         /// </summary>
         public bool SupportsMappingImportDirectives => true;
 
-        public async Task<ImmutableArray<MappedSpanResult>> MapSpansAsync(Document document, IEnumerable<TextSpan> spans, CancellationToken cancellationToken)
+        public async Task<ImmutableArray<MappedSpanResult>> MapSpansAsync(
+            Document document,
+            IEnumerable<TextSpan> spans,
+            CancellationToken cancellationToken
+        )
         {
-            var razorSpans = await _razorSpanMappingService.MapSpansAsync(document, spans, cancellationToken).ConfigureAwait(false);
+            var razorSpans = await _razorSpanMappingService.MapSpansAsync(
+                    document,
+                    spans,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             var roslynSpans = new MappedSpanResult[razorSpans.Length];
             for (var i = 0; i < razorSpans.Length; i++)
             {
@@ -41,7 +52,11 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
                 }
                 else
                 {
-                    roslynSpans[i] = new MappedSpanResult(razorSpan.FilePath, razorSpan.LinePositionSpan, razorSpan.Span);
+                    roslynSpans[i] = new MappedSpanResult(
+                        razorSpan.FilePath,
+                        razorSpan.LinePositionSpan,
+                        razorSpan.Span
+                    );
                 }
             }
 

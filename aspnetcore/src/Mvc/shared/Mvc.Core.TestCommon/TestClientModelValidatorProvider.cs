@@ -18,15 +18,15 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
                 new DataAnnotationsClientModelValidatorProvider(
                     new ValidationAttributeAdapterProvider(),
                     Options.Create(new MvcDataAnnotationsLocalizationOptions()),
-                    stringLocalizerFactory: null),
+                    stringLocalizerFactory: null
+                ),
             };
 
             return new TestClientModelValidatorProvider(providers);
         }
 
-        public TestClientModelValidatorProvider(IEnumerable<IClientModelValidatorProvider> providers)
-            : base(providers)
-        {
-        }
+        public TestClientModelValidatorProvider(
+            IEnumerable<IClientModelValidatorProvider> providers
+        ) : base(providers) { }
     }
 }

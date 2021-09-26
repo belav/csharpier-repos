@@ -31,11 +31,21 @@ namespace System.Net
                 }
                 else
                 {
-                    _stream = new WebFileStream(request, uri.LocalPath, FileMode.Open, FileAccess.Read, FileShare.Read, DefaultFileStreamBufferSize, useAsync);
+                    _stream = new WebFileStream(
+                        request,
+                        uri.LocalPath,
+                        FileMode.Open,
+                        FileAccess.Read,
+                        FileShare.Read,
+                        DefaultFileStreamBufferSize,
+                        useAsync
+                    );
                     _contentLength = _stream.Length;
                 }
                 _headers = new WebHeaderCollection();
-                _headers[HttpKnownHeaderNames.ContentLength] = _contentLength.ToString(NumberFormatInfo.InvariantInfo);
+                _headers[HttpKnownHeaderNames.ContentLength] = _contentLength.ToString(
+                    NumberFormatInfo.InvariantInfo
+                );
                 _headers[HttpKnownHeaderNames.ContentType] = DefaultFileContentType;
                 _uri = uri;
             }
@@ -45,18 +55,29 @@ namespace System.Net
             }
         }
 
-        [Obsolete("Serialization is obsoleted for this type. https://go.microsoft.com/fwlink/?linkid=14202")]
-        protected FileWebResponse(SerializationInfo serializationInfo, StreamingContext streamingContext) : base(serializationInfo, streamingContext)
+        [Obsolete(
+            "Serialization is obsoleted for this type. https://go.microsoft.com/fwlink/?linkid=14202"
+        )]
+        protected FileWebResponse(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        ) : base(serializationInfo, streamingContext)
         {
             throw new PlatformNotSupportedException();
         }
 
-        void ISerializable.GetObjectData(SerializationInfo serializationInfo, StreamingContext streamingContext)
+        void ISerializable.GetObjectData(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        )
         {
             throw new PlatformNotSupportedException();
         }
 
-        protected override void GetObjectData(SerializationInfo serializationInfo, StreamingContext streamingContext)
+        protected override void GetObjectData(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        )
         {
             throw new PlatformNotSupportedException();
         }

@@ -39,6 +39,7 @@ namespace System.IO.Tests
                 Assert.Equal(4, bs.Position);
                 Assert.Equal(0, ms.Position);
             }
+
             finally
             {
                 await bw.DisposeAsync();
@@ -56,6 +57,7 @@ namespace System.IO.Tests
             {
                 bw.Write(42);
             }
+
             finally
             {
                 await bw.DisposeAsync();
@@ -72,6 +74,7 @@ namespace System.IO.Tests
             {
                 bw.Write(42);
             }
+
             finally
             {
                 Assert.False(bw.DisposeInvoked);
@@ -89,6 +92,7 @@ namespace System.IO.Tests
             {
                 bw.Write(42);
             }
+
             finally
             {
                 Assert.False(bw.DisposeInvoked);
@@ -108,10 +112,15 @@ namespace System.IO.Tests
 
         private sealed class OverrideDisposeAndDisposeAsyncBinaryWriter : BinaryWriter
         {
-            public bool DisposeInvoked, DisposeAsyncInvoked;
+            public bool DisposeInvoked,
+                DisposeAsyncInvoked;
             public OverrideDisposeAndDisposeAsyncBinaryWriter(Stream output) : base(output) { }
             protected override void Dispose(bool disposing) => DisposeInvoked = true;
-            public override ValueTask DisposeAsync() { DisposeAsyncInvoked = true; return default; }
+            public override ValueTask DisposeAsync()
+            {
+                DisposeAsyncInvoked = true;
+                return default;
+            }
         }
     }
 }

@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
         public IdleProcessor(
             IAsynchronousOperationListener listener,
             int backOffTimeSpanInMS,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             Listener = listener;
             CancellationToken = cancellationToken;
@@ -42,11 +43,14 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
         protected void Start()
         {
             Contract.ThrowIfFalse(_processorTask == null);
-            _processorTask = Task.Factory.SafeStartNewFromAsync(ProcessAsync, CancellationToken, TaskScheduler.Default);
+            _processorTask = Task.Factory.SafeStartNewFromAsync(
+                ProcessAsync,
+                CancellationToken,
+                TaskScheduler.Default
+            );
         }
 
-        protected void UpdateLastAccessTime()
-            => _lastAccessTimeInMS = Environment.TickCount;
+        protected void UpdateLastAccessTime() => _lastAccessTimeInMS = Environment.TickCount;
 
         protected async Task WaitForIdleAsync(IExpeditableDelaySource expeditableDelaySource)
         {
@@ -65,14 +69,21 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
 
                 // TODO: will safestart/unwarp capture cancellation exception?
                 var timeLeft = BackOffTimeSpanInMS - diffInMS;
-                if (!await expeditableDelaySource.Delay(TimeSpan.FromMilliseconds(Math.Max(MinimumDelayInMS, timeLeft)), CancellationToken).ConfigureAwait(false))
+                if (
+                    !await expeditableDelaySource.Delay(
+                            TimeSpan.FromMilliseconds(Math.Max(MinimumDelayInMS, timeLeft)),
+                            CancellationToken
+                        )
+                        .ConfigureAwait(false)
+                )
                 {
                     // The delay terminated early to accommodate a blocking operation. Make sure to delay long
                     // enough that low priority (on idle) operations get a chance to be triggered.
                     //
                     // 📝 At the time this was discovered, it was not clear exactly why the delay was needed in order
                     // to avoid live-lock scenarios.
-                    await Task.Delay(TimeSpan.FromMilliseconds(10), CancellationToken).ConfigureAwait(false);
+                    await Task.Delay(TimeSpan.FromMilliseconds(10), CancellationToken)
+                        .ConfigureAwait(false);
                     return;
                 }
             }
@@ -102,7 +113,6 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
             }
         }
 
-        public virtual Task AsyncProcessorTask
-            => _processorTask ?? Task.CompletedTask;
+        public virtual Task AsyncProcessorTask => _processorTask ?? Task.CompletedTask;
     }
 }

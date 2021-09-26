@@ -23,13 +23,11 @@ namespace Activator
                 () =>
                 {
                     var notIClassFactory = new Guid("ED53F949-63E4-43B5-A13D-5655478AADD5");
-                    var cxt = new ComActivationContext()
-                    {
-                        InterfaceId = notIClassFactory
-                    };
+                    var cxt = new ComActivationContext() { InterfaceId = notIClassFactory };
                     ComActivator.GetClassFactoryForType(cxt);
                 },
-                "Non-IClassFactory request should fail");
+                "Non-IClassFactory request should fail"
+            );
         }
 
         static void NonrootedAssemblyPath()
@@ -46,7 +44,8 @@ namespace Activator
                     };
                     ComActivator.GetClassFactoryForType(cxt);
                 },
-                "Non-root assembly path should not be valid");
+                "Non-root assembly path should not be valid"
+            );
         }
 
         static void ClassNotRegistered()
@@ -65,7 +64,8 @@ namespace Activator
                     };
                     ComActivator.GetClassFactoryForType(cxt);
                 },
-                "Class should not be found");
+                "Class should not be found"
+            );
 
             const int CLASS_E_CLASSNOTAVAILABLE = unchecked((int)0x80040111);
             Assert.AreEqual(CLASS_E_CLASSNOTAVAILABLE, e.HResult, "Unexpected HRESULT");
@@ -79,7 +79,8 @@ namespace Activator
             string assemblyAPath = Path.Combine(assemblySubPath, "AssemblyA.dll");
             string assemblyBPath = Path.Combine(assemblySubPath, "AssemblyB.dll");
             string assemblyCPath = Path.Combine(assemblySubPath, "AssemblyC.dll");
-            string assemblyPaths = $"{assemblyAPath}{Path.PathSeparator}{assemblyBPath}{Path.PathSeparator}{assemblyCPath}";
+            string assemblyPaths =
+                $"{assemblyAPath}{Path.PathSeparator}{assemblyBPath}{Path.PathSeparator}{assemblyCPath}";
 
             HostPolicyMock.Initialize(Environment.CurrentDirectory, null);
 
@@ -88,11 +89,14 @@ namespace Activator
             Type typeCFromAssemblyA;
             Type typeCFromAssemblyB;
 
-            using (HostPolicyMock.Mock_corehost_resolve_component_dependencies(
-                0,
-                assemblyPaths,
-                string.Empty,
-                string.Empty))
+            using (
+                HostPolicyMock.Mock_corehost_resolve_component_dependencies(
+                    0,
+                    assemblyPaths,
+                    string.Empty,
+                    string.Empty
+                )
+            )
             {
                 var cxt = new ComActivationContext()
                 {
@@ -112,11 +116,14 @@ namespace Activator
                 typeCFromAssemblyA = (Type)svr.GetTypeFromC();
             }
 
-            using (HostPolicyMock.Mock_corehost_resolve_component_dependencies(
-                0,
-                assemblyPaths,
-                string.Empty,
-                string.Empty))
+            using (
+                HostPolicyMock.Mock_corehost_resolve_component_dependencies(
+                    0,
+                    assemblyPaths,
+                    string.Empty,
+                    string.Empty
+                )
+            )
             {
                 var cxt = new ComActivationContext()
                 {
@@ -136,7 +143,11 @@ namespace Activator
                 typeCFromAssemblyB = (Type)svr.GetTypeFromC();
             }
 
-            Assert.AreNotEqual(typeCFromAssemblyA, typeCFromAssemblyB, "Types should be from different AssemblyLoadContexts");
+            Assert.AreNotEqual(
+                typeCFromAssemblyA,
+                typeCFromAssemblyB,
+                "Types should be from different AssemblyLoadContexts"
+            );
         }
 
         static void ValidateUserDefinedRegistrationCallbacks()
@@ -147,20 +158,25 @@ namespace Activator
             string assemblyAPath = Path.Combine(assemblySubPath, "AssemblyA.dll");
             string assemblyBPath = Path.Combine(assemblySubPath, "AssemblyB.dll");
             string assemblyCPath = Path.Combine(assemblySubPath, "AssemblyC.dll");
-            string assemblyPaths = $"{assemblyAPath}{Path.PathSeparator}{assemblyBPath}{Path.PathSeparator}{assemblyCPath}";
+            string assemblyPaths =
+                $"{assemblyAPath}{Path.PathSeparator}{assemblyBPath}{Path.PathSeparator}{assemblyCPath}";
 
             HostPolicyMock.Initialize(Environment.CurrentDirectory, null);
 
             var CLSID_NotUsed = Guid.Empty; // During this phase of activation the GUID is not used.
             Guid iid = typeof(IValidateRegistrationCallbacks).GUID;
 
-            using (HostPolicyMock.Mock_corehost_resolve_component_dependencies(
-                0,
-                assemblyPaths,
-                string.Empty,
-                string.Empty))
+            using (
+                HostPolicyMock.Mock_corehost_resolve_component_dependencies(
+                    0,
+                    assemblyPaths,
+                    string.Empty,
+                    string.Empty
+                )
+            )
             {
-                string[] typeNamesToValidate = {
+                string[] typeNamesToValidate =
+                {
                     "ValidRegistrationTypeCallbacks",
                     "ValidRegistrationStringCallbacks",
                     "InheritedRegistrationTypeCallbacks",
@@ -195,18 +211,35 @@ namespace Activator
                     ComActivator.ClassRegistrationScenarioForType(cxt, register: true);
                     ComActivator.ClassRegistrationScenarioForType(cxt, register: false);
 
-                    Assert.IsTrue(inst.DidRegister(), $"User-defined register function should have been called.");
-                    Assert.IsTrue(inst.DidUnregister(), $"User-defined unregister function should have been called.");
+                    Assert.IsTrue(
+                        inst.DidRegister(),
+                        $"User-defined register function should have been called."
+                    );
+                    Assert.IsTrue(
+                        inst.DidUnregister(),
+                        $"User-defined unregister function should have been called."
+                    );
                 }
             }
 
-            using (HostPolicyMock.Mock_corehost_resolve_component_dependencies(
-                0,
-                assemblyPaths,
-                string.Empty,
-                string.Empty))
+            using (
+                HostPolicyMock.Mock_corehost_resolve_component_dependencies(
+                    0,
+                    assemblyPaths,
+                    string.Empty,
+                    string.Empty
+                )
+            )
             {
-                foreach (string typename in new[] { "NoRegistrationCallbacks",  "InvalidArgRegistrationCallbacks", "InvalidInstanceRegistrationCallbacks", "MultipleRegistrationCallbacks" })
+                foreach (
+                    string typename in new[]
+                    {
+                        "NoRegistrationCallbacks",
+                        "InvalidArgRegistrationCallbacks",
+                        "InvalidInstanceRegistrationCallbacks",
+                        "MultipleRegistrationCallbacks"
+                    }
+                )
                 {
                     Console.WriteLine($"Validating {typename}...");
 

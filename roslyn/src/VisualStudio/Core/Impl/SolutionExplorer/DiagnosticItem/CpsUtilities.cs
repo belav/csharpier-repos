@@ -31,7 +31,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
         /// 
         /// Note that the path to the project directory is optional.
         /// </remarks>
-        public static string? ExtractAnalyzerFilePath(string projectDirectoryPath, string analyzerNodeCanonicalName)
+        public static string? ExtractAnalyzerFilePath(
+            string projectDirectoryPath,
+            string analyzerNodeCanonicalName
+        )
         {
             // The canonical name may or may not start with the path to the project's directory.
             if (!projectDirectoryPath.EndsWith("\\"))
@@ -39,10 +42,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
                 projectDirectoryPath += '\\';
             }
 
-            if (analyzerNodeCanonicalName.StartsWith(projectDirectoryPath, StringComparison.OrdinalIgnoreCase))
+            if (
+                analyzerNodeCanonicalName.StartsWith(
+                    projectDirectoryPath,
+                    StringComparison.OrdinalIgnoreCase
+                )
+            )
             {
                 // Extract the rest of the string
-                analyzerNodeCanonicalName = analyzerNodeCanonicalName.Substring(projectDirectoryPath.Length);
+                analyzerNodeCanonicalName = analyzerNodeCanonicalName.Substring(
+                    projectDirectoryPath.Length
+                );
             }
 
             // Find the slash after the target framework
@@ -59,7 +69,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
             // defined under "c:\analyzerdependency\..." as data in the old format, however this is very
             // unlikely. The side effect of such a problem is that analyzer's diagnostics would not
             // populate in the tree.
-            if (analyzerNodeCanonicalName.IndexOf(@"analyzerdependency\", backslashIndex + 1, @"analyzerdependency\".Length, StringComparison.OrdinalIgnoreCase) != backslashIndex + 1)
+            if (
+                analyzerNodeCanonicalName.IndexOf(
+                    @"analyzerdependency\",
+                    backslashIndex + 1,
+                    @"analyzerdependency\".Length,
+                    StringComparison.OrdinalIgnoreCase
+                )
+                != backslashIndex + 1
+            )
             {
                 return analyzerNodeCanonicalName;
             }

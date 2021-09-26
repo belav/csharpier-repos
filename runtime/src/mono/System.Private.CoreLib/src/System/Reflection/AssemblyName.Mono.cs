@@ -22,7 +22,14 @@ namespace System.Reflection
             using (SafeStringMarshal name = RuntimeMarshal.MarshalString(assemblyName))
             {
                 // TODO: Should use CoreRT AssemblyNameParser
-                if (!ParseAssemblyName(name.Value, out MonoAssemblyName nativeName, out bool isVersionDefined, out bool isTokenDefined))
+                if (
+                    !ParseAssemblyName(
+                        name.Value,
+                        out MonoAssemblyName nativeName,
+                        out bool isVersionDefined,
+                        out bool isTokenDefined
+                    )
+                )
                     throw new FileLoadException("The assembly name is invalid.");
 
                 try
@@ -32,6 +39,7 @@ namespace System.Reflection
                         FillName(&nativeName, null, isVersionDefined, false, isTokenDefined);
                     }
                 }
+
                 finally
                 {
                     RuntimeMarshal.FreeAssemblyName(ref nativeName, false);
@@ -64,7 +72,13 @@ namespace System.Reflection
             return aname;
         }
 
-        internal unsafe void FillName(MonoAssemblyName* native, string? codeBase, bool addVersion, bool addPublickey, bool defaultToken)
+        internal unsafe void FillName(
+            MonoAssemblyName* native,
+            string? codeBase,
+            bool addVersion,
+            bool addPublickey,
+            bool defaultToken
+        )
         {
             _name = RuntimeMarshal.PtrToUtf8String(native->name);
 
@@ -90,7 +104,9 @@ namespace System.Reflection
             _codeBase = codeBase;
 
             if (native->culture != IntPtr.Zero)
-                _cultureInfo = CultureInfo.GetCultureInfo(RuntimeMarshal.PtrToUtf8String(native->culture));
+                _cultureInfo = CultureInfo.GetCultureInfo(
+                    RuntimeMarshal.PtrToUtf8String(native->culture)
+                );
 
             if (native->public_key != IntPtr.Zero)
             {
@@ -109,7 +125,10 @@ namespace System.Reflection
                 var keyToken = new byte[8];
                 for (int i = 0, j = 0; i < 8; ++i)
                 {
-                    keyToken[i] = (byte)(HexConverter.FromChar(native->public_key_token[j++]) << 4 | HexConverter.FromChar(native->public_key_token[j++]));
+                    keyToken[i] = (byte)(
+                        HexConverter.FromChar(native->public_key_token[j++]) << 4
+                        | HexConverter.FromChar(native->public_key_token[j++])
+                    );
                 }
                 _publicKeyToken = keyToken;
             }
@@ -123,7 +142,11 @@ namespace System.Reflection
         {
             unsafe
             {
-                Assembly.InternalGetAssemblyName(Path.GetFullPath(assemblyFile), out MonoAssemblyName nativeName, out string? codebase);
+                Assembly.InternalGetAssemblyName(
+                    Path.GetFullPath(assemblyFile),
+                    out MonoAssemblyName nativeName,
+                    out string? codebase
+                );
 
                 var aname = new AssemblyName();
                 try
@@ -131,6 +154,7 @@ namespace System.Reflection
                     aname.FillName(&nativeName, codebase, true, false, true);
                     return aname;
                 }
+
                 finally
                 {
                     RuntimeMarshal.FreeAssemblyName(ref nativeName, false);
@@ -145,6 +169,11 @@ namespace System.Reflection
         private static extern unsafe MonoAssemblyName* GetNativeName(IntPtr assemblyPtr);
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        private static extern bool ParseAssemblyName(IntPtr name, out MonoAssemblyName aname, out bool is_version_definited, out bool is_token_defined);
+        private static extern bool ParseAssemblyName(
+            IntPtr name,
+            out MonoAssemblyName aname,
+            out bool is_version_definited,
+            out bool is_token_defined
+        );
     }
 }

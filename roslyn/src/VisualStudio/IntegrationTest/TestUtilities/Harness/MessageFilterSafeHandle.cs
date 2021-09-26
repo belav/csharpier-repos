@@ -15,8 +15,7 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.Harness
     {
         private readonly IntPtr _oldFilter;
 
-        private MessageFilterSafeHandle(IntPtr handle)
-            : base(true)
+        private MessageFilterSafeHandle(IntPtr handle) : base(true)
         {
             SetHandle(handle);
 
@@ -35,10 +34,12 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.Harness
         }
 
         [DllImport("ole32", SetLastError = true)]
-        private static extern int CoRegisterMessageFilter(IntPtr messageFilter, out IntPtr oldMessageFilter);
+        private static extern int CoRegisterMessageFilter(
+            IntPtr messageFilter,
+            out IntPtr oldMessageFilter
+        );
 
-        public static MessageFilterSafeHandle Register<T>(T messageFilter)
-            where T : IMessageFilter
+        public static MessageFilterSafeHandle Register<T>(T messageFilter) where T : IMessageFilter
         {
             var handle = Marshal.GetComInterfaceForObject<T, IMessageFilter>(messageFilter);
             return new MessageFilterSafeHandle(handle);

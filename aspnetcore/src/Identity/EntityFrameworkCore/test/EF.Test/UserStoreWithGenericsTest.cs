@@ -15,7 +15,9 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
 {
-    public class UserStoreWithGenericsTest : IdentitySpecificationTestBase<IdentityUserWithGenerics, MyIdentityRole, string>, IClassFixture<ScratchDatabaseFixture>
+    public class UserStoreWithGenericsTest
+        : IdentitySpecificationTestBase<IdentityUserWithGenerics, MyIdentityRole, string>,
+          IClassFixture<ScratchDatabaseFixture>
     {
         private readonly ScratchDatabaseFixture _fixture;
 
@@ -38,20 +40,37 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
 
         protected override void AddUserStore(IServiceCollection services, object context = null)
         {
-            services.AddSingleton<IUserStore<IdentityUserWithGenerics>>(new UserStoreWithGenerics((ContextWithGenerics)context, "TestContext"));
+            services.AddSingleton<IUserStore<IdentityUserWithGenerics>>(
+                new UserStoreWithGenerics((ContextWithGenerics)context, "TestContext")
+            );
         }
 
         protected override void AddRoleStore(IServiceCollection services, object context = null)
         {
-            services.AddSingleton<IRoleStore<MyIdentityRole>>(new RoleStoreWithGenerics((ContextWithGenerics)context, "TestContext"));
+            services.AddSingleton<IRoleStore<MyIdentityRole>>(
+                new RoleStoreWithGenerics((ContextWithGenerics)context, "TestContext")
+            );
         }
 
-        protected override IdentityUserWithGenerics CreateTestUser(string namePrefix = "", string email = "", string phoneNumber = "",
-            bool lockoutEnabled = false, DateTimeOffset? lockoutEnd = default(DateTimeOffset?), bool useNamePrefixAsUserName = false)
+        protected override IdentityUserWithGenerics CreateTestUser(
+            string namePrefix = "",
+            string email = "",
+            string phoneNumber = "",
+            bool lockoutEnabled = false,
+            DateTimeOffset? lockoutEnd = default(DateTimeOffset?),
+            bool useNamePrefixAsUserName = false
+        )
         {
             return new IdentityUserWithGenerics
             {
-                UserName = useNamePrefixAsUserName ? namePrefix : string.Format(CultureInfo.InvariantCulture, "{0}{1}", namePrefix, Guid.NewGuid()),
+                UserName = useNamePrefixAsUserName
+                    ? namePrefix
+                    : string.Format(
+                          CultureInfo.InvariantCulture,
+                          "{0}{1}",
+                          namePrefix,
+                          Guid.NewGuid()
+                      ),
                 Email = email,
                 PhoneNumber = phoneNumber,
                 LockoutEnabled = lockoutEnabled,
@@ -59,25 +78,46 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
             };
         }
 
-        protected override MyIdentityRole CreateTestRole(string roleNamePrefix = "", bool useRoleNamePrefixAsRoleName = false)
+        protected override MyIdentityRole CreateTestRole(
+            string roleNamePrefix = "",
+            bool useRoleNamePrefixAsRoleName = false
+        )
         {
-            var roleName = useRoleNamePrefixAsRoleName ? roleNamePrefix : string.Format(CultureInfo.InvariantCulture, "{0}{1}", roleNamePrefix, Guid.NewGuid());
+            var roleName = useRoleNamePrefixAsRoleName
+                ? roleNamePrefix
+                : string.Format(
+                      CultureInfo.InvariantCulture,
+                      "{0}{1}",
+                      roleNamePrefix,
+                      Guid.NewGuid()
+                  );
             return new MyIdentityRole(roleName);
         }
 
-        protected override void SetUserPasswordHash(IdentityUserWithGenerics user, string hashedPassword)
+        protected override void SetUserPasswordHash(
+            IdentityUserWithGenerics user,
+            string hashedPassword
+        )
         {
             user.PasswordHash = hashedPassword;
         }
 
-        protected override Expression<Func<IdentityUserWithGenerics, bool>> UserNameEqualsPredicate(string userName) => u => u.UserName == userName;
+        protected override Expression<Func<IdentityUserWithGenerics, bool>> UserNameEqualsPredicate(
+            string userName
+        ) => u => u.UserName == userName;
 
-        protected override Expression<Func<MyIdentityRole, bool>> RoleNameEqualsPredicate(string roleName) => r => r.Name == roleName;
+        protected override Expression<Func<MyIdentityRole, bool>> RoleNameEqualsPredicate(
+            string roleName
+        ) => r => r.Name == roleName;
 
 #pragma warning disable CA1310 // Specify StringComparison for correctness
-        protected override Expression<Func<IdentityUserWithGenerics, bool>> UserNameStartsWithPredicate(string userName) => u => u.UserName.StartsWith(userName);
+        protected override Expression<
+            Func<IdentityUserWithGenerics, bool>
+        > UserNameStartsWithPredicate(string userName) => u => u.UserName.StartsWith(userName);
 
-        protected override Expression<Func<MyIdentityRole, bool>> RoleNameStartsWithPredicate(string roleName) => r => r.Name.StartsWith(roleName);
+        protected override Expression<Func<MyIdentityRole, bool>> RoleNameStartsWithPredicate(
+            string roleName
+        ) => r => r.Name.StartsWith(roleName);
 #pragma warning restore CA1310 // Specify StringComparison for correctness
 
         [Fact]
@@ -85,7 +125,9 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
         {
             var services = new ServiceCollection();
             var builder = services.AddIdentity<object, IdentityRole>();
-            var e = Assert.Throws<InvalidOperationException>(() => builder.AddEntityFrameworkStores<ContextWithGenerics>());
+            var e = Assert.Throws<InvalidOperationException>(
+                () => builder.AddEntityFrameworkStores<ContextWithGenerics>()
+            );
             Assert.Contains("AddEntityFrameworkStores", e.Message);
         }
 
@@ -94,7 +136,9 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
         {
             var services = new ServiceCollection();
             var builder = services.AddIdentity<IdentityUser, object>();
-            var e = Assert.Throws<InvalidOperationException>(() => builder.AddEntityFrameworkStores<ContextWithGenerics>());
+            var e = Assert.Throws<InvalidOperationException>(
+                () => builder.AddEntityFrameworkStores<ContextWithGenerics>()
+            );
             Assert.Contains("AddEntityFrameworkStores", e.Message);
         }
 
@@ -104,7 +148,12 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
             var manager = CreateManager();
             var user = CreateTestUser();
             IdentityResultAssert.IsSuccess(await manager.CreateAsync(user));
-            Claim[] claims = { new Claim("c1", "v1", null, "i1"), new Claim("c2", "v2", null, "i2"), new Claim("c2", "v3", null, "i3") };
+            Claim[] claims =
+            {
+                new Claim("c1", "v1", null, "i1"),
+                new Claim("c2", "v2", null, "i2"),
+                new Claim("c2", "v3", null, "i3")
+            };
             foreach (Claim c in claims)
             {
                 IdentityResultAssert.IsSuccess(await manager.AddClaimAsync(user, c));
@@ -134,7 +183,12 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
             var user2 = CreateTestUser();
             IdentityResultAssert.IsSuccess(await manager.CreateAsync(user));
             IdentityResultAssert.IsSuccess(await manager.CreateAsync(user2));
-            Claim[] claims = { new Claim("c", "v", null, "i1"), new Claim("c2", "v2", null, "i2"), new Claim("c2", "v3", null, "i3") };
+            Claim[] claims =
+            {
+                new Claim("c", "v", null, "i1"),
+                new Claim("c2", "v2", null, "i2"),
+                new Claim("c2", "v3", null, "i3")
+            };
             foreach (Claim c in claims)
             {
                 IdentityResultAssert.IsSuccess(await manager.AddClaimAsync(user, c));
@@ -161,7 +215,9 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
             var manager = CreateManager();
             var user = CreateTestUser();
             IdentityResultAssert.IsSuccess(await manager.CreateAsync(user));
-            IdentityResultAssert.IsSuccess(await manager.AddClaimAsync(user, new Claim("c", "a", "i")));
+            IdentityResultAssert.IsSuccess(
+                await manager.AddClaimAsync(user, new Claim("c", "a", "i"))
+            );
             var userClaims = await manager.GetClaimsAsync(user);
             Assert.Equal(1, userClaims.Count);
             Claim claim = new Claim("c", "b", "i");
@@ -191,7 +247,6 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
         }
     }
 
-
     #region Generic Type defintions
 
     public class IdentityUserWithGenerics : IdentityUser<string>
@@ -202,16 +257,31 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
         }
     }
 
-    public class UserStoreWithGenerics : UserStore<IdentityUserWithGenerics, MyIdentityRole, ContextWithGenerics, string, IdentityUserClaimWithIssuer, IdentityUserRoleWithDate, IdentityUserLoginWithContext, IdentityUserTokenWithStuff, IdentityRoleClaimWithIssuer>
+    public class UserStoreWithGenerics
+        : UserStore<
+              IdentityUserWithGenerics,
+              MyIdentityRole,
+              ContextWithGenerics,
+              string,
+              IdentityUserClaimWithIssuer,
+              IdentityUserRoleWithDate,
+              IdentityUserLoginWithContext,
+              IdentityUserTokenWithStuff,
+              IdentityRoleClaimWithIssuer
+          >
     {
         public string LoginContext { get; set; }
 
-        public UserStoreWithGenerics(ContextWithGenerics context, string loginContext) : base(context)
+        public UserStoreWithGenerics(ContextWithGenerics context, string loginContext)
+            : base(context)
         {
             LoginContext = loginContext;
         }
 
-        protected override IdentityUserRoleWithDate CreateUserRole(IdentityUserWithGenerics user, MyIdentityRole role)
+        protected override IdentityUserRoleWithDate CreateUserRole(
+            IdentityUserWithGenerics user,
+            MyIdentityRole role
+        )
         {
             return new IdentityUserRoleWithDate()
             {
@@ -221,12 +291,24 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
             };
         }
 
-        protected override IdentityUserClaimWithIssuer CreateUserClaim(IdentityUserWithGenerics user, Claim claim)
+        protected override IdentityUserClaimWithIssuer CreateUserClaim(
+            IdentityUserWithGenerics user,
+            Claim claim
+        )
         {
-            return new IdentityUserClaimWithIssuer { UserId = user.Id, ClaimType = claim.Type, ClaimValue = claim.Value, Issuer = claim.Issuer };
+            return new IdentityUserClaimWithIssuer
+            {
+                UserId = user.Id,
+                ClaimType = claim.Type,
+                ClaimValue = claim.Value,
+                Issuer = claim.Issuer
+            };
         }
 
-        protected override IdentityUserLoginWithContext CreateUserLogin(IdentityUserWithGenerics user, UserLoginInfo login)
+        protected override IdentityUserLoginWithContext CreateUserLogin(
+            IdentityUserWithGenerics user,
+            UserLoginInfo login
+        )
         {
             return new IdentityUserLoginWithContext
             {
@@ -238,7 +320,12 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
             };
         }
 
-        protected override IdentityUserTokenWithStuff CreateUserToken(IdentityUserWithGenerics user, string loginProvider, string name, string value)
+        protected override IdentityUserTokenWithStuff CreateUserToken(
+            IdentityUserWithGenerics user,
+            string loginProvider,
+            string name,
+            string value
+        )
         {
             return new IdentityUserTokenWithStuff
             {
@@ -251,17 +338,34 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
         }
     }
 
-    public class RoleStoreWithGenerics : RoleStore<MyIdentityRole, ContextWithGenerics, string, IdentityUserRoleWithDate, IdentityRoleClaimWithIssuer>
+    public class RoleStoreWithGenerics
+        : RoleStore<
+              MyIdentityRole,
+              ContextWithGenerics,
+              string,
+              IdentityUserRoleWithDate,
+              IdentityRoleClaimWithIssuer
+          >
     {
         private string _loginContext;
-        public RoleStoreWithGenerics(ContextWithGenerics context, string loginContext) : base(context)
+        public RoleStoreWithGenerics(ContextWithGenerics context, string loginContext)
+            : base(context)
         {
             _loginContext = loginContext;
         }
 
-        protected override IdentityRoleClaimWithIssuer CreateRoleClaim(MyIdentityRole role, Claim claim)
+        protected override IdentityRoleClaimWithIssuer CreateRoleClaim(
+            MyIdentityRole role,
+            Claim claim
+        )
         {
-            return new IdentityRoleClaimWithIssuer { RoleId = role.Id, ClaimType = claim.Type, ClaimValue = claim.Value, Issuer = claim.Issuer };
+            return new IdentityRoleClaimWithIssuer
+            {
+                RoleId = role.Id,
+                ClaimType = claim.Type,
+                ClaimValue = claim.Value,
+                Issuer = claim.Issuer
+            };
         }
     }
 
@@ -327,10 +431,19 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
         public string Context { get; set; }
     }
 
-    public class ContextWithGenerics : IdentityDbContext<IdentityUserWithGenerics, MyIdentityRole, string, IdentityUserClaimWithIssuer, IdentityUserRoleWithDate, IdentityUserLoginWithContext, IdentityRoleClaimWithIssuer, IdentityUserTokenWithStuff>
+    public class ContextWithGenerics
+        : IdentityDbContext<
+              IdentityUserWithGenerics,
+              MyIdentityRole,
+              string,
+              IdentityUserClaimWithIssuer,
+              IdentityUserRoleWithDate,
+              IdentityUserLoginWithContext,
+              IdentityRoleClaimWithIssuer,
+              IdentityUserTokenWithStuff
+          >
     {
         public ContextWithGenerics(DbContextOptions options) : base(options) { }
     }
-
     #endregion
 }

@@ -50,7 +50,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         public static string ReadUntil(
             this TextReader reader,
             bool inclusive,
-            params char[] terminators)
+            params char[] terminators
+        )
         {
             if (reader == null)
             {
@@ -83,7 +84,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         public static string ReadUntil(
             this TextReader reader,
             Predicate<char> condition,
-            bool inclusive)
+            bool inclusive
+        )
         {
             if (reader == null)
             {
@@ -129,7 +131,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         public static string ReadWhile(
             this TextReader reader,
             Predicate<char> condition,
-            bool inclusive)
+            bool inclusive
+        )
         {
             if (reader == null)
             {

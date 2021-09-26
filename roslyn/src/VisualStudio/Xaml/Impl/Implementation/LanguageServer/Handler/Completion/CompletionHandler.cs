@@ -24,7 +24,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
     /// </summary>
     [ExportLspRequestHandlerProvider(StringConstants.XamlLanguageName), Shared]
     [ProvidesMethod(Methods.TextDocumentCompletionName)]
-    internal class CompletionHandler : AbstractStatelessRequestHandler<CompletionParams, CompletionList?>
+    internal class CompletionHandler
+        : AbstractStatelessRequestHandler<CompletionParams, CompletionList?>
     {
         public override string Method => Methods.TextDocumentCompletionName;
         private const string CreateEventHandlerCommandTitle = "Create Event Handler";
@@ -34,13 +35,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CompletionHandler()
-        {
-        }
+        public CompletionHandler() { }
 
-        public override TextDocumentIdentifier GetTextDocumentIdentifier(CompletionParams request) => request.TextDocument;
+        public override TextDocumentIdentifier GetTextDocumentIdentifier(
+            CompletionParams request
+        ) => request.TextDocument;
 
-        public override async Task<CompletionList?> HandleRequestAsync(CompletionParams request, RequestContext context, CancellationToken cancellationToken)
+        public override async Task<CompletionList?> HandleRequestAsync(
+            CompletionParams request,
+            RequestContext context,
+            CancellationToken cancellationToken
+        )
         {
             var document = context.Document;
             if (document == null)
@@ -48,10 +53,21 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
                 return null;
             }
 
-            var completionService = document.Project.LanguageServices.GetRequiredService<IXamlCompletionService>();
+            var completionService =
+                document.Project.LanguageServices.GetRequiredService<IXamlCompletionService>();
             var text = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
-            var offset = text.Lines.GetPosition(ProtocolConversions.PositionToLinePosition(request.Position));
-            var completionResult = await completionService.GetCompletionsAsync(new XamlCompletionContext(document, offset, request.Context?.TriggerCharacter?.FirstOrDefault() ?? '\0'), cancellationToken: cancellationToken).ConfigureAwait(false);
+            var offset = text.Lines.GetPosition(
+                ProtocolConversions.PositionToLinePosition(request.Position)
+            );
+            var completionResult = await completionService.GetCompletionsAsync(
+                    new XamlCompletionContext(
+                        document,
+                        offset,
+                        request.Context?.TriggerCharacter?.FirstOrDefault() ?? '\0'
+                    ),
+                    cancellationToken: cancellationToken
+                )
+                .ConfigureAwait(false);
             if (completionResult?.Completions == null)
             {
                 return null;
@@ -59,12 +75,28 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
 
             return new VSCompletionList
             {
-                Items = completionResult.Completions.Select(c => CreateCompletionItem(c, document.Id, text, request.Position, request.TextDocument)).ToArray(),
+                Items = completionResult.Completions.Select(
+                        c =>
+                            CreateCompletionItem(
+                                c,
+                                document.Id,
+                                text,
+                                request.Position,
+                                request.TextDocument
+                            )
+                    )
+                    .ToArray(),
                 SuggestionMode = false,
             };
         }
 
-        private static CompletionItem CreateCompletionItem(XamlCompletionItem xamlCompletion, DocumentId documentId, SourceText text, Position position, TextDocumentIdentifier textDocument)
+        private static CompletionItem CreateCompletionItem(
+            XamlCompletionItem xamlCompletion,
+            DocumentId documentId,
+            SourceText text,
+            Position position,
+            TextDocumentIdentifier textDocument
+        )
         {
             var item = new VSCompletionItem
             {
@@ -78,7 +110,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
                 Kind = GetItemKind(xamlCompletion.Kind),
                 Description = xamlCompletion.Description,
                 Icon = xamlCompletion.Icon,
-                Data = new CompletionResolveData { ProjectGuid = documentId.ProjectId.Id, DocumentGuid = documentId.Id, Position = position, DisplayText = xamlCompletion.DisplayText }
+                Data = new CompletionResolveData
+                {
+                    ProjectGuid = documentId.ProjectId.Id,
+                    DocumentGuid = documentId.Id,
+                    Position = position,
+                    DisplayText = xamlCompletion.DisplayText
+                }
             };
 
             if (xamlCompletion.Span.HasValue)
@@ -86,7 +124,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
                 item.TextEdit = new TextEdit
                 {
                     NewText = xamlCompletion.InsertText,
-                    Range = ProtocolConversions.LinePositionToRange(text.Lines.GetLinePositionSpan(xamlCompletion.Span.Value))
+                    Range = ProtocolConversions.LinePositionToRange(
+                        text.Lines.GetLinePositionSpan(xamlCompletion.Span.Value)
+                    )
                 };
             }
 
@@ -148,7 +188,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
                 case XamlCompletionKind.Snippet:
                     return CompletionItemKind.Snippet;
                 default:
-                    Debug.Fail($"Unhandled {nameof(XamlCompletionKind)}: {Enum.GetName(typeof(XamlCompletionKind), kind)}");
+                    Debug.Fail(
+                        $"Unhandled {nameof(XamlCompletionKind)}: {Enum.GetName(typeof(XamlCompletionKind), kind)}"
+                    );
                     return CompletionItemKind.Text;
             }
         }

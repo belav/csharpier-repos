@@ -143,7 +143,7 @@ namespace Microsoft.AspNetCore.Components.RenderTree
 
             // Assert
             Assert.Equal(3, builder.Count);
-            Assert.Equal(new[]{ 7, 2, 9}, builder.Buffer.Take(3));
+            Assert.Equal(new[] { 7, 2, 9 }, builder.Buffer.Take(3));
         }
 
         [Fact]
@@ -315,7 +315,8 @@ namespace Microsoft.AspNetCore.Components.RenderTree
                 ArrayPool.ReturnedBuffers,
                 buffer => Assert.Equal(2, buffer.Length),
                 buffer => Assert.Equal(4, buffer.Length),
-                buffer => Assert.Equal(8, buffer.Length));
+                buffer => Assert.Equal(8, buffer.Length)
+            );
 
             // Clear this because this is no longer interesting.
             ArrayPool.ReturnedBuffers.Clear();

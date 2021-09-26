@@ -20,25 +20,33 @@ namespace Microsoft.AspNetCore.Razor.Language
         public void Execute_CanHandleSingleLengthAddTagHelperDirective()
         {
             // Arrange
-            var projectEngine = RazorProjectEngine.Create(builder =>
-            {
-                builder.AddTagHelpers(new TagHelperDescriptor[0]);
-            });
+            var projectEngine = RazorProjectEngine.Create(
+                builder =>
+                {
+                    builder.AddTagHelpers(new TagHelperDescriptor[0]);
+                }
+            );
 
-            var phase = new DefaultRazorTagHelperBinderPhase()
-            {
-                Engine = projectEngine.Engine,
-            };
+            var phase = new DefaultRazorTagHelperBinderPhase() { Engine = projectEngine.Engine, };
             var expectedDiagnostics = new[]
             {
                 RazorDiagnosticFactory.CreateParsing_UnterminatedStringLiteral(
-                    new SourceSpan(new SourceLocation(14 + Environment.NewLine.Length, 1, 14), contentLength: 1)),
+                    new SourceSpan(
+                        new SourceLocation(14 + Environment.NewLine.Length, 1, 14),
+                        contentLength: 1
+                    )
+                ),
                 RazorDiagnosticFactory.CreateParsing_InvalidTagHelperLookupText(
-                    new SourceSpan(new SourceLocation(14 + Environment.NewLine.Length, 1, 14), contentLength: 1), "\"")
+                    new SourceSpan(
+                        new SourceLocation(14 + Environment.NewLine.Length, 1, 14),
+                        contentLength: 1
+                    ),
+                    "\""
+                )
             };
 
             var content =
-            @"
+                @"
 @addTagHelper """;
             var sourceDocument = TestRazorSourceDocument.Create(content, filePath: null);
             var codeDocument = RazorCodeDocument.Create(sourceDocument);
@@ -50,8 +58,11 @@ namespace Microsoft.AspNetCore.Razor.Language
 
             // Assert
             var rewrittenTree = codeDocument.GetSyntaxTree();
-            var erroredNode = rewrittenTree.Root.DescendantNodes().First(n => n.GetSpanContext()?.ChunkGenerator is AddTagHelperChunkGenerator);
-            var chunkGenerator = Assert.IsType<AddTagHelperChunkGenerator>(erroredNode.GetSpanContext().ChunkGenerator);
+            var erroredNode = rewrittenTree.Root.DescendantNodes()
+                .First(n => n.GetSpanContext()?.ChunkGenerator is AddTagHelperChunkGenerator);
+            var chunkGenerator = Assert.IsType<AddTagHelperChunkGenerator>(
+                erroredNode.GetSpanContext().ChunkGenerator
+            );
             Assert.Equal(expectedDiagnostics, chunkGenerator.Diagnostics);
         }
 
@@ -59,25 +70,33 @@ namespace Microsoft.AspNetCore.Razor.Language
         public void Execute_CanHandleSingleLengthRemoveTagHelperDirective()
         {
             // Arrange
-            var projectEngine = RazorProjectEngine.Create(builder =>
-            {
-                builder.AddTagHelpers(new TagHelperDescriptor[0]);
-            });
+            var projectEngine = RazorProjectEngine.Create(
+                builder =>
+                {
+                    builder.AddTagHelpers(new TagHelperDescriptor[0]);
+                }
+            );
 
-            var phase = new DefaultRazorTagHelperBinderPhase()
-            {
-                Engine = projectEngine.Engine,
-            };
+            var phase = new DefaultRazorTagHelperBinderPhase() { Engine = projectEngine.Engine, };
             var expectedDiagnostics = new[]
             {
                 RazorDiagnosticFactory.CreateParsing_UnterminatedStringLiteral(
-                    new SourceSpan(new SourceLocation(17 + Environment.NewLine.Length, 1, 17), contentLength: 1)),
+                    new SourceSpan(
+                        new SourceLocation(17 + Environment.NewLine.Length, 1, 17),
+                        contentLength: 1
+                    )
+                ),
                 RazorDiagnosticFactory.CreateParsing_InvalidTagHelperLookupText(
-                    new SourceSpan(new SourceLocation(17 + Environment.NewLine.Length, 1, 17), contentLength: 1), "\"")
+                    new SourceSpan(
+                        new SourceLocation(17 + Environment.NewLine.Length, 1, 17),
+                        contentLength: 1
+                    ),
+                    "\""
+                )
             };
 
             var content =
-            @"
+                @"
 @removeTagHelper """;
             var sourceDocument = TestRazorSourceDocument.Create(content, filePath: null);
             var codeDocument = RazorCodeDocument.Create(sourceDocument);
@@ -89,8 +108,11 @@ namespace Microsoft.AspNetCore.Razor.Language
 
             // Assert
             var rewrittenTree = codeDocument.GetSyntaxTree();
-            var erroredNode = rewrittenTree.Root.DescendantNodes().First(n => n.GetSpanContext()?.ChunkGenerator is RemoveTagHelperChunkGenerator);
-            var chunkGenerator = Assert.IsType<RemoveTagHelperChunkGenerator>(erroredNode.GetSpanContext().ChunkGenerator);
+            var erroredNode = rewrittenTree.Root.DescendantNodes()
+                .First(n => n.GetSpanContext()?.ChunkGenerator is RemoveTagHelperChunkGenerator);
+            var chunkGenerator = Assert.IsType<RemoveTagHelperChunkGenerator>(
+                erroredNode.GetSpanContext().ChunkGenerator
+            );
             Assert.Equal(expectedDiagnostics, chunkGenerator.Diagnostics);
         }
 
@@ -98,25 +120,35 @@ namespace Microsoft.AspNetCore.Razor.Language
         public void Execute_CanHandleSingleLengthTagHelperPrefix()
         {
             // Arrange
-            var projectEngine = RazorProjectEngine.Create(builder =>
-            {
-                builder.AddTagHelpers(new TagHelperDescriptor[0]);
-            });
+            var projectEngine = RazorProjectEngine.Create(
+                builder =>
+                {
+                    builder.AddTagHelpers(new TagHelperDescriptor[0]);
+                }
+            );
 
-            var phase = new DefaultRazorTagHelperBinderPhase()
-            {
-                Engine = projectEngine.Engine,
-            };
+            var phase = new DefaultRazorTagHelperBinderPhase() { Engine = projectEngine.Engine, };
             var expectedDiagnostics = new[]
             {
                 RazorDiagnosticFactory.CreateParsing_UnterminatedStringLiteral(
-                    new SourceSpan(new SourceLocation(17 + Environment.NewLine.Length, 1, 17), contentLength: 1)),
+                    new SourceSpan(
+                        new SourceLocation(17 + Environment.NewLine.Length, 1, 17),
+                        contentLength: 1
+                    )
+                ),
                 RazorDiagnosticFactory.CreateParsing_InvalidTagHelperPrefixValue(
-                    new SourceSpan(new SourceLocation(17 + Environment.NewLine.Length, 1, 17), contentLength: 1), "tagHelperPrefix", '\"', "\""),
+                    new SourceSpan(
+                        new SourceLocation(17 + Environment.NewLine.Length, 1, 17),
+                        contentLength: 1
+                    ),
+                    "tagHelperPrefix",
+                    '\"',
+                    "\""
+                ),
             };
 
             var content =
-            @"
+                @"
 @tagHelperPrefix """;
             var sourceDocument = TestRazorSourceDocument.Create(content, filePath: null);
             var codeDocument = RazorCodeDocument.Create(sourceDocument);
@@ -128,8 +160,14 @@ namespace Microsoft.AspNetCore.Razor.Language
 
             // Assert
             var rewrittenTree = codeDocument.GetSyntaxTree();
-            var erroredNode = rewrittenTree.Root.DescendantNodes().First(n => n.GetSpanContext()?.ChunkGenerator is TagHelperPrefixDirectiveChunkGenerator);
-            var chunkGenerator = Assert.IsType<TagHelperPrefixDirectiveChunkGenerator>(erroredNode.GetSpanContext().ChunkGenerator);
+            var erroredNode = rewrittenTree.Root.DescendantNodes()
+                .First(
+                    n =>
+                        n.GetSpanContext()?.ChunkGenerator is TagHelperPrefixDirectiveChunkGenerator
+                );
+            var chunkGenerator = Assert.IsType<TagHelperPrefixDirectiveChunkGenerator>(
+                erroredNode.GetSpanContext().ChunkGenerator
+            );
             Assert.Equal(expectedDiagnostics, chunkGenerator.Diagnostics);
         }
 
@@ -137,25 +175,28 @@ namespace Microsoft.AspNetCore.Razor.Language
         public void Execute_RewritesTagHelpers()
         {
             // Arrange
-            var projectEngine = RazorProjectEngine.Create(builder =>
-            {
-                builder.AddTagHelpers(new[]
+            var projectEngine = RazorProjectEngine.Create(
+                builder =>
                 {
-                    CreateTagHelperDescriptor(
-                        tagName: "form",
-                        typeName: "TestFormTagHelper",
-                        assemblyName: "TestAssembly"),
-                    CreateTagHelperDescriptor(
-                        tagName: "input",
-                        typeName: "TestInputTagHelper",
-                        assemblyName: "TestAssembly"),
-                });
-            });
+                    builder.AddTagHelpers(
+                        new[]
+                        {
+                            CreateTagHelperDescriptor(
+                                tagName: "form",
+                                typeName: "TestFormTagHelper",
+                                assemblyName: "TestAssembly"
+                            ),
+                            CreateTagHelperDescriptor(
+                                tagName: "input",
+                                typeName: "TestInputTagHelper",
+                                assemblyName: "TestAssembly"
+                            ),
+                        }
+                    );
+                }
+            );
 
-            var phase = new DefaultRazorTagHelperBinderPhase()
-            {
-                Engine = projectEngine.Engine,
-            };
+            var phase = new DefaultRazorTagHelperBinderPhase() { Engine = projectEngine.Engine, };
 
             var sourceDocument = CreateTestSourceDocument();
             var codeDocument = RazorCodeDocument.Create(sourceDocument);
@@ -169,7 +210,11 @@ namespace Microsoft.AspNetCore.Razor.Language
             var rewrittenTree = codeDocument.GetSyntaxTree();
             var descendantNodes = rewrittenTree.Root.DescendantNodes();
             Assert.Empty(rewrittenTree.Diagnostics);
-            var tagHelperNodes = descendantNodes.Where(n => n is MarkupTagHelperElementSyntax tagHelper).Cast<MarkupTagHelperElementSyntax>().ToArray();
+            var tagHelperNodes = descendantNodes.Where(
+                    n => n is MarkupTagHelperElementSyntax tagHelper
+                )
+                .Cast<MarkupTagHelperElementSyntax>()
+                .ToArray();
             Assert.Equal("form", tagHelperNodes[0].TagHelperInfo.TagName);
             Assert.Equal("input", tagHelperNodes[1].TagHelperInfo.TagName);
         }
@@ -184,17 +229,16 @@ namespace Microsoft.AspNetCore.Razor.Language
                 CreateTagHelperDescriptor(
                     tagName: "form",
                     typeName: "TestFormTagHelper",
-                    assemblyName: "TestAssembly"),
+                    assemblyName: "TestAssembly"
+                ),
                 CreateTagHelperDescriptor(
                     tagName: "input",
                     typeName: "TestInputTagHelper",
-                    assemblyName: "TestAssembly"),
+                    assemblyName: "TestAssembly"
+                ),
             };
 
-            var phase = new DefaultRazorTagHelperBinderPhase()
-            {
-                Engine = projectEngine.Engine,
-            };
+            var phase = new DefaultRazorTagHelperBinderPhase() { Engine = projectEngine.Engine, };
 
             var sourceDocument = CreateTestSourceDocument();
             var codeDocument = RazorCodeDocument.Create(sourceDocument);
@@ -209,7 +253,11 @@ namespace Microsoft.AspNetCore.Razor.Language
             var rewrittenTree = codeDocument.GetSyntaxTree();
             var descendantNodes = rewrittenTree.Root.DescendantNodes();
             Assert.Empty(rewrittenTree.Diagnostics);
-            var tagHelperNodes = descendantNodes.Where(n => n is MarkupTagHelperElementSyntax tagHelper).Cast<MarkupTagHelperElementSyntax>().ToArray();
+            var tagHelperNodes = descendantNodes.Where(
+                    n => n is MarkupTagHelperElementSyntax tagHelper
+                )
+                .Cast<MarkupTagHelperElementSyntax>()
+                .ToArray();
             Assert.Equal("form", tagHelperNodes[0].TagHelperInfo.TagName);
             Assert.Equal("input", tagHelperNodes[1].TagHelperInfo.TagName);
         }
@@ -223,18 +271,19 @@ namespace Microsoft.AspNetCore.Razor.Language
                 CreateTagHelperDescriptor(
                     tagName: "form",
                     typeName: "TestFormTagHelper",
-                    assemblyName: "TestAssembly"),
+                    assemblyName: "TestAssembly"
+                ),
                 CreateTagHelperDescriptor(
                     tagName: "input",
                     typeName: "TestInputTagHelper",
-                    assemblyName: "TestAssembly"),
+                    assemblyName: "TestAssembly"
+                ),
             };
-            var projectEngine = RazorProjectEngine.Create(builder => builder.AddTagHelpers(tagHelpers));
+            var projectEngine = RazorProjectEngine.Create(
+                builder => builder.AddTagHelpers(tagHelpers)
+            );
 
-            var phase = new DefaultRazorTagHelperBinderPhase()
-            {
-                Engine = projectEngine.Engine,
-            };
+            var phase = new DefaultRazorTagHelperBinderPhase() { Engine = projectEngine.Engine, };
 
             var sourceDocument = CreateTestSourceDocument();
             var codeDocument = RazorCodeDocument.Create(sourceDocument);
@@ -249,7 +298,11 @@ namespace Microsoft.AspNetCore.Razor.Language
             var rewrittenTree = codeDocument.GetSyntaxTree();
             var descendantNodes = rewrittenTree.Root.DescendantNodes();
             Assert.Empty(rewrittenTree.Diagnostics);
-            var tagHelperNodes = descendantNodes.Where(n => n is MarkupTagHelperElementSyntax tagHelper).Cast<MarkupTagHelperElementSyntax>().ToArray();
+            var tagHelperNodes = descendantNodes.Where(
+                    n => n is MarkupTagHelperElementSyntax tagHelper
+                )
+                .Cast<MarkupTagHelperElementSyntax>()
+                .ToArray();
             Assert.Equal("form", tagHelperNodes[0].TagHelperInfo.TagName);
             Assert.Equal("input", tagHelperNodes[1].TagHelperInfo.TagName);
         }
@@ -263,18 +316,19 @@ namespace Microsoft.AspNetCore.Razor.Language
                 CreateTagHelperDescriptor(
                     tagName: "form",
                     typeName: "TestFormTagHelper",
-                    assemblyName: "TestAssembly"),
+                    assemblyName: "TestAssembly"
+                ),
                 CreateTagHelperDescriptor(
                     tagName: "input",
                     typeName: "TestInputTagHelper",
-                    assemblyName: "TestAssembly"),
+                    assemblyName: "TestAssembly"
+                ),
             };
-            var projectEngine = RazorProjectEngine.Create(builder => builder.AddTagHelpers(tagHelpers));
+            var projectEngine = RazorProjectEngine.Create(
+                builder => builder.AddTagHelpers(tagHelpers)
+            );
 
-            var phase = new DefaultRazorTagHelperBinderPhase()
-            {
-                Engine = projectEngine.Engine,
-            };
+            var phase = new DefaultRazorTagHelperBinderPhase() { Engine = projectEngine.Engine, };
 
             var sourceDocument = CreateTestSourceDocument();
             var codeDocument = RazorCodeDocument.Create(sourceDocument);
@@ -289,7 +343,11 @@ namespace Microsoft.AspNetCore.Razor.Language
             var rewrittenTree = codeDocument.GetSyntaxTree();
             var descendantNodes = rewrittenTree.Root.DescendantNodes();
             Assert.Empty(rewrittenTree.Diagnostics);
-            var tagHelperNodes = descendantNodes.Where(n => n is MarkupTagHelperElementSyntax tagHelper).Cast<MarkupTagHelperElementSyntax>().ToArray();
+            var tagHelperNodes = descendantNodes.Where(
+                    n => n is MarkupTagHelperElementSyntax tagHelper
+                )
+                .Cast<MarkupTagHelperElementSyntax>()
+                .ToArray();
             Assert.Empty(tagHelperNodes);
         }
 
@@ -303,27 +361,36 @@ namespace Microsoft.AspNetCore.Razor.Language
                 assemblyName: "TestAssembly",
                 ruleBuilders: new Action<TagMatchingRuleDescriptorBuilder>[]
                 {
-                    ruleBuilder => ruleBuilder
-                        .RequireAttributeDescriptor(attribute => attribute
-                            .Name("a")
-                            .NameComparisonMode(RequiredAttributeDescriptor.NameComparisonMode.FullMatch)),
-                    ruleBuilder => ruleBuilder
-                        .RequireAttributeDescriptor(attribute => attribute
-                            .Name("b")
-                            .NameComparisonMode(RequiredAttributeDescriptor.NameComparisonMode.FullMatch)),
-                });
+                    ruleBuilder =>
+                        ruleBuilder.RequireAttributeDescriptor(
+                            attribute =>
+                                attribute.Name("a")
+                                    .NameComparisonMode(
+                                        RequiredAttributeDescriptor.NameComparisonMode.FullMatch
+                                    )
+                        ),
+                    ruleBuilder =>
+                        ruleBuilder.RequireAttributeDescriptor(
+                            attribute =>
+                                attribute.Name("b")
+                                    .NameComparisonMode(
+                                        RequiredAttributeDescriptor.NameComparisonMode.FullMatch
+                                    )
+                        ),
+                }
+            );
 
-            var projectEngine = RazorProjectEngine.Create(builder =>
-            {
-                builder.AddTagHelpers(new[] { descriptor });
-            });
+            var projectEngine = RazorProjectEngine.Create(
+                builder =>
+                {
+                    builder.AddTagHelpers(new[] { descriptor });
+                }
+            );
 
-            var phase = new DefaultRazorTagHelperBinderPhase()
-            {
-                Engine = projectEngine.Engine,
-            };
+            var phase = new DefaultRazorTagHelperBinderPhase() { Engine = projectEngine.Engine, };
 
-            var content = @"
+            var content =
+                @"
 @addTagHelper *, TestAssembly
 <form a=""hi"" b=""there"">
 </form>";
@@ -340,7 +407,11 @@ namespace Microsoft.AspNetCore.Razor.Language
             var rewrittenTree = codeDocument.GetSyntaxTree();
             var descendantNodes = rewrittenTree.Root.DescendantNodes();
             Assert.Empty(rewrittenTree.Diagnostics);
-            var tagHelperNodes = descendantNodes.Where(n => n is MarkupTagHelperElementSyntax tagHelper).Cast<MarkupTagHelperElementSyntax>().ToArray();
+            var tagHelperNodes = descendantNodes.Where(
+                    n => n is MarkupTagHelperElementSyntax tagHelper
+                )
+                .Cast<MarkupTagHelperElementSyntax>()
+                .ToArray();
 
             var formTagHelper = Assert.Single(tagHelperNodes);
             Assert.Equal("form", formTagHelper.TagHelperInfo.TagName);
@@ -357,27 +428,36 @@ namespace Microsoft.AspNetCore.Razor.Language
                 assemblyName: "TestAssembly",
                 ruleBuilders: new Action<TagMatchingRuleDescriptorBuilder>[]
                 {
-                    ruleBuilder => ruleBuilder
-                        .RequireAttributeDescriptor(attribute => attribute
-                            .Name("a")
-                            .NameComparisonMode(RequiredAttributeDescriptor.NameComparisonMode.FullMatch)),
-                    ruleBuilder => ruleBuilder
-                        .RequireAttributeDescriptor(attribute => attribute
-                            .Name("b")
-                            .NameComparisonMode(RequiredAttributeDescriptor.NameComparisonMode.FullMatch)),
-                });
+                    ruleBuilder =>
+                        ruleBuilder.RequireAttributeDescriptor(
+                            attribute =>
+                                attribute.Name("a")
+                                    .NameComparisonMode(
+                                        RequiredAttributeDescriptor.NameComparisonMode.FullMatch
+                                    )
+                        ),
+                    ruleBuilder =>
+                        ruleBuilder.RequireAttributeDescriptor(
+                            attribute =>
+                                attribute.Name("b")
+                                    .NameComparisonMode(
+                                        RequiredAttributeDescriptor.NameComparisonMode.FullMatch
+                                    )
+                        ),
+                }
+            );
 
-            var projectEngine = RazorProjectEngine.Create(builder =>
-            {
-                builder.AddTagHelpers(new[] { descriptor });
-            });
+            var projectEngine = RazorProjectEngine.Create(
+                builder =>
+                {
+                    builder.AddTagHelpers(new[] { descriptor });
+                }
+            );
 
-            var phase = new DefaultRazorTagHelperBinderPhase()
-            {
-                Engine = projectEngine.Engine,
-            };
+            var phase = new DefaultRazorTagHelperBinderPhase() { Engine = projectEngine.Engine, };
 
-            var content = @"
+            var content =
+                @"
 @addTagHelper ""*, TestAssembly""
 <form a=""hi"" b=""there"">
 </form>";
@@ -394,7 +474,11 @@ namespace Microsoft.AspNetCore.Razor.Language
             var rewrittenTree = codeDocument.GetSyntaxTree();
             var descendantNodes = rewrittenTree.Root.DescendantNodes();
             Assert.Empty(rewrittenTree.Diagnostics);
-            var tagHelperNodes = descendantNodes.Where(n => n is MarkupTagHelperElementSyntax tagHelper).Cast<MarkupTagHelperElementSyntax>().ToArray();
+            var tagHelperNodes = descendantNodes.Where(
+                    n => n is MarkupTagHelperElementSyntax tagHelper
+                )
+                .Cast<MarkupTagHelperElementSyntax>()
+                .ToArray();
 
             var formTagHelper = Assert.Single(tagHelperNodes);
             Assert.Equal("form", formTagHelper.TagHelperInfo.TagName);
@@ -410,14 +494,14 @@ namespace Microsoft.AspNetCore.Razor.Language
                 CreateTagHelperDescriptor(
                     tagName: "input",
                     typeName: "TestInputTagHelper",
-                    assemblyName: "TestAssembly"),
+                    assemblyName: "TestAssembly"
+                ),
             };
-            var projectEngine = RazorProjectEngine.Create(builder => builder.AddTagHelpers(featureTagHelpers));
+            var projectEngine = RazorProjectEngine.Create(
+                builder => builder.AddTagHelpers(featureTagHelpers)
+            );
 
-            var phase = new DefaultRazorTagHelperBinderPhase()
-            {
-                Engine = projectEngine.Engine,
-            };
+            var phase = new DefaultRazorTagHelperBinderPhase() { Engine = projectEngine.Engine, };
 
             var sourceDocument = CreateTestSourceDocument();
             var codeDocument = RazorCodeDocument.Create(sourceDocument);
@@ -429,7 +513,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                 CreateTagHelperDescriptor(
                     tagName: "form",
                     typeName: "TestFormTagHelper",
-                    assemblyName: "TestAssembly"),
+                    assemblyName: "TestAssembly"
+                ),
             };
             codeDocument.SetTagHelpers(codeDocumentTagHelpers);
 
@@ -440,7 +525,11 @@ namespace Microsoft.AspNetCore.Razor.Language
             var rewrittenTree = codeDocument.GetSyntaxTree();
             var descendantNodes = rewrittenTree.Root.DescendantNodes();
             Assert.Empty(rewrittenTree.Diagnostics);
-            var tagHelperNodes = descendantNodes.Where(n => n is MarkupTagHelperElementSyntax tagHelper).Cast<MarkupTagHelperElementSyntax>().ToArray();
+            var tagHelperNodes = descendantNodes.Where(
+                    n => n is MarkupTagHelperElementSyntax tagHelper
+                )
+                .Cast<MarkupTagHelperElementSyntax>()
+                .ToArray();
 
             var formTagHelper = Assert.Single(tagHelperNodes);
             Assert.Equal("form", formTagHelper.TagHelperInfo.TagName);
@@ -451,10 +540,7 @@ namespace Microsoft.AspNetCore.Razor.Language
         {
             // Arrange
             var projectEngine = CreateProjectEngine();
-            var phase = new DefaultRazorTagHelperBinderPhase()
-            {
-                Engine = projectEngine.Engine,
-            };
+            var phase = new DefaultRazorTagHelperBinderPhase() { Engine = projectEngine.Engine, };
             var sourceDocument = CreateTestSourceDocument();
             var codeDocument = RazorCodeDocument.Create(sourceDocument);
             var originalTree = RazorSyntaxTree.Parse(sourceDocument);
@@ -473,15 +559,14 @@ namespace Microsoft.AspNetCore.Razor.Language
         public void Execute_NoopsWhenNoTagHelperDescriptorsAreResolved()
         {
             // Arrange
-            var projectEngine = RazorProjectEngine.Create(builder =>
-            {
-                builder.Features.Add(new TestTagHelperFeature());
-            });
+            var projectEngine = RazorProjectEngine.Create(
+                builder =>
+                {
+                    builder.Features.Add(new TestTagHelperFeature());
+                }
+            );
 
-            var phase = new DefaultRazorTagHelperBinderPhase()
-            {
-                Engine = projectEngine.Engine,
-            };
+            var phase = new DefaultRazorTagHelperBinderPhase() { Engine = projectEngine.Engine, };
 
             // No taghelper directives here so nothing is resolved.
             var sourceDocument = TestRazorSourceDocument.Create("Hello, world");
@@ -502,15 +587,14 @@ namespace Microsoft.AspNetCore.Razor.Language
         public void Execute_SetsTagHelperDocumentContext()
         {
             // Arrange
-            var projectEngine = RazorProjectEngine.Create(builder =>
-            {
-                builder.Features.Add(new TestTagHelperFeature());
-            });
+            var projectEngine = RazorProjectEngine.Create(
+                builder =>
+                {
+                    builder.Features.Add(new TestTagHelperFeature());
+                }
+            );
 
-            var phase = new DefaultRazorTagHelperBinderPhase()
-            {
-                Engine = projectEngine.Engine,
-            };
+            var phase = new DefaultRazorTagHelperBinderPhase() { Engine = projectEngine.Engine, };
 
             // No taghelper directives here so nothing is resolved.
             var sourceDocument = TestRazorSourceDocument.Create("Hello, world");
@@ -531,28 +615,31 @@ namespace Microsoft.AspNetCore.Razor.Language
         public void Execute_CombinesErrorsOnRewritingErrors()
         {
             // Arrange
-            var projectEngine = RazorProjectEngine.Create(builder =>
-            {
-                builder.AddTagHelpers(new[]
+            var projectEngine = RazorProjectEngine.Create(
+                builder =>
                 {
-                    CreateTagHelperDescriptor(
-                        tagName: "form",
-                        typeName: "TestFormTagHelper",
-                        assemblyName: "TestAssembly"),
-                    CreateTagHelperDescriptor(
-                        tagName: "input",
-                        typeName: "TestInputTagHelper",
-                        assemblyName: "TestAssembly"),
-                });
-            });
+                    builder.AddTagHelpers(
+                        new[]
+                        {
+                            CreateTagHelperDescriptor(
+                                tagName: "form",
+                                typeName: "TestFormTagHelper",
+                                assemblyName: "TestAssembly"
+                            ),
+                            CreateTagHelperDescriptor(
+                                tagName: "input",
+                                typeName: "TestInputTagHelper",
+                                assemblyName: "TestAssembly"
+                            ),
+                        }
+                    );
+                }
+            );
 
-            var phase = new DefaultRazorTagHelperBinderPhase()
-            {
-                Engine = projectEngine.Engine,
-            };
+            var phase = new DefaultRazorTagHelperBinderPhase() { Engine = projectEngine.Engine, };
 
             var content =
-            @"
+                @"
 @addTagHelper *, TestAssembly
 <form>
     <input value='Hello' type='text' />";
@@ -562,12 +649,28 @@ namespace Microsoft.AspNetCore.Razor.Language
             var originalTree = RazorSyntaxTree.Parse(sourceDocument);
 
             var initialError = RazorDiagnostic.Create(
-                new RazorDiagnosticDescriptor("RZ9999", () => "Initial test error", RazorDiagnosticSeverity.Error),
-                new SourceSpan(SourceLocation.Zero, contentLength: 1));
-            var expectedRewritingError = RazorDiagnosticFactory.CreateParsing_TagHelperFoundMalformedTagHelper(
-                new SourceSpan(new SourceLocation(Environment.NewLine.Length * 2 + 30, 2, 1), contentLength: 4), "form");
+                new RazorDiagnosticDescriptor(
+                    "RZ9999",
+                    () => "Initial test error",
+                    RazorDiagnosticSeverity.Error
+                ),
+                new SourceSpan(SourceLocation.Zero, contentLength: 1)
+            );
+            var expectedRewritingError =
+                RazorDiagnosticFactory.CreateParsing_TagHelperFoundMalformedTagHelper(
+                    new SourceSpan(
+                        new SourceLocation(Environment.NewLine.Length * 2 + 30, 2, 1),
+                        contentLength: 4
+                    ),
+                    "form"
+                );
 
-            var erroredOriginalTree = RazorSyntaxTree.Create(originalTree.Root, originalTree.Source, new[] { initialError }, originalTree.Options);
+            var erroredOriginalTree = RazorSyntaxTree.Create(
+                originalTree.Root,
+                originalTree.Source,
+                new[] { initialError },
+                originalTree.Options
+            );
             codeDocument.SetSyntaxTree(erroredOriginalTree);
 
             // Act
@@ -591,7 +694,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                 return CreateTagHelperDescriptor(
                     tagName: "valid_plain",
                     typeName: "Microsoft.AspNetCore.Razor.TagHelpers.ValidPlainTagHelper",
-                    assemblyName: AssemblyA);
+                    assemblyName: AssemblyA
+                );
             }
         }
 
@@ -602,7 +706,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                 return CreateTagHelperDescriptor(
                     tagName: "valid_inherited",
                     typeName: "Microsoft.AspNetCore.Razor.TagHelpers.ValidInheritedTagHelper",
-                    assemblyName: AssemblyA);
+                    assemblyName: AssemblyA
+                );
             }
         }
 
@@ -615,7 +720,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                 return CreateTagHelperDescriptor(
                     tagName: "string",
                     typeName: "System.String",
-                    assemblyName: AssemblyB);
+                    assemblyName: AssemblyB
+                );
             }
         }
 
@@ -680,13 +786,16 @@ namespace Microsoft.AspNetCore.Razor.Language
         [MemberData(nameof(ProcessTagHelperPrefixData))]
         public void DirectiveVisitor_ExtractsPrefixFromSyntaxTree(
             string source,
-            string expectedPrefix)
+            string expectedPrefix
+        )
         {
             // Arrange
             var sourceDocument = TestRazorSourceDocument.Create(source, filePath: "TestFile");
             var parser = new RazorParser();
             var syntaxTree = parser.Parse(sourceDocument);
-            var visitor = new DefaultRazorTagHelperBinderPhase.TagHelperDirectiveVisitor(tagHelpers: new List<TagHelperDescriptor>());
+            var visitor = new DefaultRazorTagHelperBinderPhase.TagHelperDirectiveVisitor(
+                tagHelpers: new List<TagHelperDescriptor>()
+            );
 
             // Act
             visitor.Visit(syntaxTree.Root);
@@ -705,108 +814,146 @@ namespace Microsoft.AspNetCore.Razor.Language
                     {
                         $@"
 @addTagHelper *, {AssemblyA}",
-                        new [] { Valid_PlainTagHelperDescriptor, },
-                        new [] { Valid_PlainTagHelperDescriptor }
+                        new[] { Valid_PlainTagHelperDescriptor, },
+                        new[] { Valid_PlainTagHelperDescriptor }
                     },
                     {
                         $@"
 @addTagHelper *, {AssemblyA}
 @addTagHelper *, {AssemblyB}",
-                        new [] { Valid_PlainTagHelperDescriptor, String_TagHelperDescriptor },
-                        new [] { Valid_PlainTagHelperDescriptor, String_TagHelperDescriptor }
+                        new[] { Valid_PlainTagHelperDescriptor, String_TagHelperDescriptor },
+                        new[] { Valid_PlainTagHelperDescriptor, String_TagHelperDescriptor }
                     },
                     {
                         $@"
 @addTagHelper *, {AssemblyA}
 @removeTagHelper *, {AssemblyB}",
-                        new [] { Valid_PlainTagHelperDescriptor, String_TagHelperDescriptor },
-                        new [] { Valid_PlainTagHelperDescriptor }
+                        new[] { Valid_PlainTagHelperDescriptor, String_TagHelperDescriptor },
+                        new[] { Valid_PlainTagHelperDescriptor }
                     },
                     {
                         $@"
 @addTagHelper *, {AssemblyA}
 @addTagHelper *, {AssemblyB}
 @removeTagHelper *, {AssemblyA}",
-                        new [] { Valid_PlainTagHelperDescriptor, Valid_InheritedTagHelperDescriptor, String_TagHelperDescriptor },
-                        new [] { String_TagHelperDescriptor }
+                        new[]
+                        {
+                            Valid_PlainTagHelperDescriptor,
+                            Valid_InheritedTagHelperDescriptor,
+                            String_TagHelperDescriptor
+                        },
+                        new[] { String_TagHelperDescriptor }
                     },
                     {
                         $@"
 @addTagHelper {Valid_PlainTagHelperDescriptor.Name}, {AssemblyA}
 @addTagHelper *, {AssemblyA}",
-                        new [] { Valid_PlainTagHelperDescriptor, Valid_InheritedTagHelperDescriptor, },
-                        new [] { Valid_PlainTagHelperDescriptor, Valid_InheritedTagHelperDescriptor }
+                        new[]
+                        {
+                            Valid_PlainTagHelperDescriptor,
+                            Valid_InheritedTagHelperDescriptor,
+                        },
+                        new[] { Valid_PlainTagHelperDescriptor, Valid_InheritedTagHelperDescriptor }
                     },
                     {
                         $@"
 @addTagHelper *, {AssemblyA}
 @removeTagHelper {Valid_PlainTagHelperDescriptor.Name}, {AssemblyA}",
-                        new [] { Valid_PlainTagHelperDescriptor, Valid_InheritedTagHelperDescriptor, },
-                        new [] { Valid_InheritedTagHelperDescriptor }
+                        new[]
+                        {
+                            Valid_PlainTagHelperDescriptor,
+                            Valid_InheritedTagHelperDescriptor,
+                        },
+                        new[] { Valid_InheritedTagHelperDescriptor }
                     },
                     {
                         $@"
 @addTagHelper *, {AssemblyA}
 @removeTagHelper *, {AssemblyA}
 @addTagHelper *, {AssemblyA}",
-                        new [] { Valid_PlainTagHelperDescriptor, Valid_InheritedTagHelperDescriptor, },
-                        new [] { Valid_InheritedTagHelperDescriptor, Valid_PlainTagHelperDescriptor }
+                        new[]
+                        {
+                            Valid_PlainTagHelperDescriptor,
+                            Valid_InheritedTagHelperDescriptor,
+                        },
+                        new[] { Valid_InheritedTagHelperDescriptor, Valid_PlainTagHelperDescriptor }
                     },
                     {
                         $@"
 @addTagHelper *, {AssemblyA}
 @addTagHelper *, {AssemblyA}",
-                        new [] { Valid_PlainTagHelperDescriptor, Valid_InheritedTagHelperDescriptor, },
-                        new [] { Valid_InheritedTagHelperDescriptor, Valid_PlainTagHelperDescriptor }
+                        new[]
+                        {
+                            Valid_PlainTagHelperDescriptor,
+                            Valid_InheritedTagHelperDescriptor,
+                        },
+                        new[] { Valid_InheritedTagHelperDescriptor, Valid_PlainTagHelperDescriptor }
                     },
                     {
                         $@"
 @addTagHelper Microsoft.AspNetCore.Razor.TagHelpers.ValidPlain*, {AssemblyA}",
-                        new [] { Valid_PlainTagHelperDescriptor, Valid_InheritedTagHelperDescriptor, },
-                        new [] { Valid_PlainTagHelperDescriptor }
+                        new[]
+                        {
+                            Valid_PlainTagHelperDescriptor,
+                            Valid_InheritedTagHelperDescriptor,
+                        },
+                        new[] { Valid_PlainTagHelperDescriptor }
                     },
                     {
                         $@"
 @addTagHelper Microsoft.AspNetCore.Razor.TagHelpers.*, {AssemblyA}",
-                        new [] { Valid_PlainTagHelperDescriptor, Valid_InheritedTagHelperDescriptor, },
-                        new [] { Valid_PlainTagHelperDescriptor, Valid_PlainTagHelperDescriptor }
+                        new[]
+                        {
+                            Valid_PlainTagHelperDescriptor,
+                            Valid_InheritedTagHelperDescriptor,
+                        },
+                        new[] { Valid_PlainTagHelperDescriptor, Valid_PlainTagHelperDescriptor }
                     },
                     {
                         $@"
 @addTagHelper *, {AssemblyA}
 @removeTagHelper Microsoft.AspNetCore.Razor.TagHelpers.ValidP*, {AssemblyA}
 @addTagHelper *, {AssemblyA}",
-                        new [] { Valid_PlainTagHelperDescriptor, Valid_InheritedTagHelperDescriptor, },
-                        new [] { Valid_InheritedTagHelperDescriptor, Valid_PlainTagHelperDescriptor }
+                        new[]
+                        {
+                            Valid_PlainTagHelperDescriptor,
+                            Valid_InheritedTagHelperDescriptor,
+                        },
+                        new[] { Valid_InheritedTagHelperDescriptor, Valid_PlainTagHelperDescriptor }
                     },
                     {
                         $@"
 @addTagHelper *, {AssemblyA}
 @removeTagHelper Str*, {AssemblyB}",
-                        new [] { Valid_PlainTagHelperDescriptor, String_TagHelperDescriptor, },
-                        new [] { Valid_PlainTagHelperDescriptor }
+                        new[] { Valid_PlainTagHelperDescriptor, String_TagHelperDescriptor, },
+                        new[] { Valid_PlainTagHelperDescriptor }
                     },
                     {
                         $@"
 @addTagHelper *, {AssemblyA}
 @removeTagHelper *, {AssemblyB}",
-                        new [] { Valid_PlainTagHelperDescriptor, String_TagHelperDescriptor, },
-                        new [] { Valid_PlainTagHelperDescriptor }
+                        new[] { Valid_PlainTagHelperDescriptor, String_TagHelperDescriptor, },
+                        new[] { Valid_PlainTagHelperDescriptor }
                     },
                     {
                         $@"
 @addTagHelper *, {AssemblyA}
 @addTagHelper System.{String_TagHelperDescriptor.Name}, {AssemblyB}",
-                        new [] { Valid_PlainTagHelperDescriptor, String_TagHelperDescriptor, },
-                        new [] { Valid_PlainTagHelperDescriptor }
+                        new[] { Valid_PlainTagHelperDescriptor, String_TagHelperDescriptor, },
+                        new[] { Valid_PlainTagHelperDescriptor }
                     },
                     {
                         $@"
 @addTagHelper *, {AssemblyA}
 @addTagHelper *, {AssemblyB}
 @removeTagHelper Microsoft.*, {AssemblyA}",
-                        new [] { Valid_PlainTagHelperDescriptor, Valid_InheritedTagHelperDescriptor, String_TagHelperDescriptor },
-                        new [] { String_TagHelperDescriptor }
+                        new[]
+                        {
+                            Valid_PlainTagHelperDescriptor,
+                            Valid_InheritedTagHelperDescriptor,
+                            String_TagHelperDescriptor
+                        },
+                        new[] { String_TagHelperDescriptor }
                     },
                     {
                         $@"
@@ -814,8 +961,13 @@ namespace Microsoft.AspNetCore.Razor.Language
 @addTagHelper *, {AssemblyB}
 @removeTagHelper ?Microsoft*, {AssemblyA}
 @removeTagHelper System.{String_TagHelperDescriptor.Name}, {AssemblyB}",
-                        new [] { Valid_PlainTagHelperDescriptor, Valid_InheritedTagHelperDescriptor, String_TagHelperDescriptor },
-                        new []
+                        new[]
+                        {
+                            Valid_PlainTagHelperDescriptor,
+                            Valid_InheritedTagHelperDescriptor,
+                            String_TagHelperDescriptor
+                        },
+                        new[]
                         {
                             Valid_InheritedTagHelperDescriptor,
                             Valid_PlainTagHelperDescriptor,
@@ -828,8 +980,13 @@ namespace Microsoft.AspNetCore.Razor.Language
 @addTagHelper *, {AssemblyB}
 @removeTagHelper TagHelper*, {AssemblyA}
 @removeTagHelper System.{String_TagHelperDescriptor.Name}, {AssemblyB}",
-                        new [] { Valid_PlainTagHelperDescriptor, Valid_InheritedTagHelperDescriptor, String_TagHelperDescriptor },
-                        new []
+                        new[]
+                        {
+                            Valid_PlainTagHelperDescriptor,
+                            Valid_InheritedTagHelperDescriptor,
+                            String_TagHelperDescriptor
+                        },
+                        new[]
                         {
                             Valid_InheritedTagHelperDescriptor,
                             Valid_PlainTagHelperDescriptor,
@@ -845,14 +1002,17 @@ namespace Microsoft.AspNetCore.Razor.Language
         public void DirectiveVisitor_FiltersTagHelpersByDirectives(
             string source,
             object tagHelpers,
-            object expectedDescriptors)
+            object expectedDescriptors
+        )
         {
             // Arrange
             var expected = (TagHelperDescriptor[])expectedDescriptors;
             var sourceDocument = TestRazorSourceDocument.Create(source, filePath: "TestFile");
             var parser = new RazorParser();
             var syntaxTree = parser.Parse(sourceDocument);
-            var visitor = new DefaultRazorTagHelperBinderPhase.TagHelperDirectiveVisitor((TagHelperDescriptor[])tagHelpers);
+            var visitor = new DefaultRazorTagHelperBinderPhase.TagHelperDirectiveVisitor(
+                (TagHelperDescriptor[])tagHelpers
+            );
 
             // Act
             visitor.Visit(syntaxTree.Root);
@@ -862,7 +1022,11 @@ namespace Microsoft.AspNetCore.Razor.Language
 
             foreach (var expectedDescriptor in expected)
             {
-                Assert.Contains(expectedDescriptor, visitor.Matches, TagHelperDescriptorComparer.Default);
+                Assert.Contains(
+                    expectedDescriptor,
+                    visitor.Matches,
+                    TagHelperDescriptorComparer.Default
+                );
             }
         }
 
@@ -877,10 +1041,7 @@ namespace Microsoft.AspNetCore.Razor.Language
                         $@"
 @addTagHelper *, {AssemblyA}
 @removeTagHelper *, {AssemblyA}",
-                        new TagHelperDescriptor[]
-                        {
-                            Valid_PlainTagHelperDescriptor,
-                        }
+                        new TagHelperDescriptor[] { Valid_PlainTagHelperDescriptor, }
                     },
                     {
                         $@"
@@ -930,10 +1091,7 @@ namespace Microsoft.AspNetCore.Razor.Language
                         $@"
 @addTagHelper *, {AssemblyA}
 @removeTagHelper Mic*, {AssemblyA}",
-                        new TagHelperDescriptor[]
-                        {
-                            Valid_PlainTagHelperDescriptor,
-                        }
+                        new TagHelperDescriptor[] { Valid_PlainTagHelperDescriptor, }
                     },
                     {
                         $@"
@@ -942,7 +1100,8 @@ namespace Microsoft.AspNetCore.Razor.Language
 @removeTagHelper {Valid_InheritedTagHelperDescriptor.Name}, {AssemblyA}",
                         new TagHelperDescriptor[]
                         {
-                            Valid_PlainTagHelperDescriptor, Valid_InheritedTagHelperDescriptor
+                            Valid_PlainTagHelperDescriptor,
+                            Valid_InheritedTagHelperDescriptor
                         }
                     },
                     {
@@ -990,13 +1149,16 @@ namespace Microsoft.AspNetCore.Razor.Language
         [MemberData(nameof(ProcessTagHelperMatches_EmptyResultData))]
         public void ProcessDirectives_CanReturnEmptyDescriptorsBasedOnDirectiveDescriptors(
             string source,
-            object tagHelpers)
+            object tagHelpers
+        )
         {
             // Arrange
             var sourceDocument = TestRazorSourceDocument.Create(source, filePath: "TestFile");
             var parser = new RazorParser();
             var syntaxTree = parser.Parse(sourceDocument);
-            var visitor = new DefaultRazorTagHelperBinderPhase.TagHelperDirectiveVisitor((TagHelperDescriptor[])tagHelpers);
+            var visitor = new DefaultRazorTagHelperBinderPhase.TagHelperDirectiveVisitor(
+                (TagHelperDescriptor[])tagHelpers
+            );
 
             // Act
             visitor.Visit(syntaxTree.Root);
@@ -1009,14 +1171,16 @@ namespace Microsoft.AspNetCore.Razor.Language
         public void TagHelperDirectiveVisitor_DoesNotMatch_Components()
         {
             // Arrange
-            var componentDescriptor = CreateComponentDescriptor("counter", "SomeProject.Counter", AssemblyA);
+            var componentDescriptor = CreateComponentDescriptor(
+                "counter",
+                "SomeProject.Counter",
+                AssemblyA
+            );
             var legacyDescriptor = Valid_PlainTagHelperDescriptor;
-            var descriptors = new[]
-            {
-                legacyDescriptor,
-                componentDescriptor,
-            };
-            var visitor = new DefaultRazorTagHelperBinderPhase.TagHelperDirectiveVisitor(descriptors);
+            var descriptors = new[] { legacyDescriptor, componentDescriptor, };
+            var visitor = new DefaultRazorTagHelperBinderPhase.TagHelperDirectiveVisitor(
+                descriptors
+            );
             var sourceDocument = CreateTestSourceDocument();
             var tree = RazorSyntaxTree.Parse(sourceDocument);
 
@@ -1046,7 +1210,7 @@ namespace Microsoft.AspNetCore.Razor.Language
         private static RazorSourceDocument CreateTestSourceDocument()
         {
             var content =
-            @"
+                @"
 @addTagHelper *, TestAssembly
 <form>
     <input value='Hello' type='text' />
@@ -1060,9 +1224,17 @@ namespace Microsoft.AspNetCore.Razor.Language
             string typeName,
             string assemblyName,
             IEnumerable<Action<BoundAttributeDescriptorBuilder>> attributes = null,
-            IEnumerable<Action<TagMatchingRuleDescriptorBuilder>> ruleBuilders = null)
+            IEnumerable<Action<TagMatchingRuleDescriptorBuilder>> ruleBuilders = null
+        )
         {
-            return CreateDescriptor(TagHelperConventions.DefaultKind, tagName, typeName, assemblyName, attributes, ruleBuilders);
+            return CreateDescriptor(
+                TagHelperConventions.DefaultKind,
+                tagName,
+                typeName,
+                assemblyName,
+                attributes,
+                ruleBuilders
+            );
         }
 #endregion
 
@@ -1072,16 +1244,23 @@ namespace Microsoft.AspNetCore.Razor.Language
         {
             // Arrange
             var currentNamespace = "SomeProject";
-            var componentDescriptor = CreateComponentDescriptor("counter", "SomeProject.Counter", AssemblyA);
+            var componentDescriptor = CreateComponentDescriptor(
+                "counter",
+                "SomeProject.Counter",
+                AssemblyA
+            );
             var legacyDescriptor = Valid_PlainTagHelperDescriptor;
-            var descriptors = new[]
-            {
-                legacyDescriptor,
-                componentDescriptor,
-            };
-            var sourceDocument = CreateComponentTestSourceDocument(@"<Counter />", "C:\\SomeFolder\\SomeProject\\Counter.cshtml");
+            var descriptors = new[] { legacyDescriptor, componentDescriptor, };
+            var sourceDocument = CreateComponentTestSourceDocument(
+                @"<Counter />",
+                "C:\\SomeFolder\\SomeProject\\Counter.cshtml"
+            );
             var tree = RazorSyntaxTree.Parse(sourceDocument);
-            var visitor = new DefaultRazorTagHelperBinderPhase.ComponentDirectiveVisitor(sourceDocument.FilePath, descriptors, currentNamespace);
+            var visitor = new DefaultRazorTagHelperBinderPhase.ComponentDirectiveVisitor(
+                sourceDocument.FilePath,
+                descriptors,
+                currentNamespace
+            );
 
             // Act
             visitor.Visit(tree);
@@ -1097,22 +1276,27 @@ namespace Microsoft.AspNetCore.Razor.Language
         {
             // Arrange
             var currentNamespace = "SomeProject";
-            var componentDescriptor = CreateComponentDescriptor("counter", "SomeProject.Counter", AssemblyA);
+            var componentDescriptor = CreateComponentDescriptor(
+                "counter",
+                "SomeProject.Counter",
+                AssemblyA
+            );
             var legacyDescriptor = Valid_PlainTagHelperDescriptor;
-            var descriptors = new[]
-            {
-                legacyDescriptor,
-                componentDescriptor,
-            };
+            var descriptors = new[] { legacyDescriptor, componentDescriptor, };
             var filePath = "C:\\SomeFolder\\SomeProject\\Counter.cshtml";
-            var content = @"
+            var content =
+                @"
 @tagHelperPrefix th:
 
 <Counter />
 ";
             var sourceDocument = CreateComponentTestSourceDocument(content, filePath);
             var tree = RazorSyntaxTree.Parse(sourceDocument);
-            var visitor = new DefaultRazorTagHelperBinderPhase.ComponentDirectiveVisitor(sourceDocument.FilePath, descriptors, currentNamespace);
+            var visitor = new DefaultRazorTagHelperBinderPhase.ComponentDirectiveVisitor(
+                sourceDocument.FilePath,
+                descriptors,
+                currentNamespace
+            );
 
             // Act
             visitor.Visit(tree);
@@ -1121,7 +1305,10 @@ namespace Microsoft.AspNetCore.Razor.Language
             Assert.Null(visitor.TagHelperPrefix);
             var match = Assert.Single(visitor.Matches);
             Assert.Same(componentDescriptor, match);
-            var directiveChunkGenerator = (TagHelperPrefixDirectiveChunkGenerator)tree.Root.DescendantNodes().First(n => n is CSharpStatementLiteralSyntax).GetSpanContext().ChunkGenerator;
+            var directiveChunkGenerator =
+                (TagHelperPrefixDirectiveChunkGenerator)tree.Root.DescendantNodes()
+                    .First(n => n is CSharpStatementLiteralSyntax)
+                    .GetSpanContext().ChunkGenerator;
             var diagnostic = Assert.Single(directiveChunkGenerator.Diagnostics);
             Assert.Equal("RZ9978", diagnostic.Id);
         }
@@ -1135,17 +1322,20 @@ namespace Microsoft.AspNetCore.Razor.Language
                 "SomeProject.SomeOtherFolder.Counter",
                 "SomeProject.SomeOtherFolder.Counter",
                 AssemblyA,
-                fullyQualified: true);
-            var descriptors = new[]
-            {
-                componentDescriptor,
-            };
+                fullyQualified: true
+            );
+            var descriptors = new[] { componentDescriptor, };
             var filePath = "C:\\SomeFolder\\SomeProject\\Counter.cshtml";
-            var content = @"
+            var content =
+                @"
 ";
             var sourceDocument = CreateComponentTestSourceDocument(content, filePath);
             var tree = RazorSyntaxTree.Parse(sourceDocument);
-            var visitor = new DefaultRazorTagHelperBinderPhase.ComponentDirectiveVisitor(sourceDocument.FilePath, descriptors, currentNamespace);
+            var visitor = new DefaultRazorTagHelperBinderPhase.ComponentDirectiveVisitor(
+                sourceDocument.FilePath,
+                descriptors,
+                currentNamespace
+            );
 
             // Act
             visitor.Visit(tree);
@@ -1163,23 +1353,26 @@ namespace Microsoft.AspNetCore.Razor.Language
             var componentDescriptor = CreateComponentDescriptor(
                 "Counter",
                 "SomeProject.Counter",
-                AssemblyA);
+                AssemblyA
+            );
             var childContentDescriptor = CreateComponentDescriptor(
                 "ChildContent",
                 "SomeProject.Counter.ChildContent",
                 AssemblyA,
-                childContent: true);
-            var descriptors = new[]
-            {
-                componentDescriptor,
-                childContentDescriptor,
-            };
+                childContent: true
+            );
+            var descriptors = new[] { componentDescriptor, childContentDescriptor, };
             var filePath = "C:\\SomeFolder\\SomeProject\\Counter.cshtml";
-            var content = @"
+            var content =
+                @"
 ";
             var sourceDocument = CreateComponentTestSourceDocument(content, filePath);
             var tree = RazorSyntaxTree.Parse(sourceDocument);
-            var visitor = new DefaultRazorTagHelperBinderPhase.ComponentDirectiveVisitor(sourceDocument.FilePath, descriptors, currentNamespace);
+            var visitor = new DefaultRazorTagHelperBinderPhase.ComponentDirectiveVisitor(
+                sourceDocument.FilePath,
+                descriptors,
+                currentNamespace
+            );
 
             // Act
             visitor.Visit(tree);
@@ -1196,23 +1389,26 @@ namespace Microsoft.AspNetCore.Razor.Language
             var componentDescriptor = CreateComponentDescriptor(
                 "Counter",
                 "SomeProject.Counter",
-                AssemblyA);
+                AssemblyA
+            );
             var fullyQualifiedComponent = CreateComponentDescriptor(
-               "SomeProject.SomeOtherFolder.Counter",
-               "SomeProject.SomeOtherFolder.Counter",
-               AssemblyA,
-               fullyQualified: true);
-            var descriptors = new[]
-            {
-                componentDescriptor,
-                fullyQualifiedComponent,
-            };
+                "SomeProject.SomeOtherFolder.Counter",
+                "SomeProject.SomeOtherFolder.Counter",
+                AssemblyA,
+                fullyQualified: true
+            );
+            var descriptors = new[] { componentDescriptor, fullyQualifiedComponent, };
             var filePath = "C:\\SomeFolder\\SomeProject\\Counter.cshtml";
-            var content = @"
+            var content =
+                @"
 ";
             var sourceDocument = CreateComponentTestSourceDocument(content, filePath);
             var tree = RazorSyntaxTree.Parse(sourceDocument);
-            var visitor = new DefaultRazorTagHelperBinderPhase.ComponentDirectiveVisitor(sourceDocument.FilePath, descriptors, currentNamespace);
+            var visitor = new DefaultRazorTagHelperBinderPhase.ComponentDirectiveVisitor(
+                sourceDocument.FilePath,
+                descriptors,
+                currentNamespace
+            );
 
             // Act
             visitor.Visit(tree);
@@ -1230,23 +1426,26 @@ namespace Microsoft.AspNetCore.Razor.Language
             var componentDescriptor = CreateComponentDescriptor(
                 "Counter",
                 "SomeProject.Counter",
-                AssemblyA);
+                AssemblyA
+            );
             var anotherComponentDescriptor = CreateComponentDescriptor(
-               "Foo",
-               "SomeProject.SomeOtherFolder.Foo",
-               AssemblyA);
-            var descriptors = new[]
-            {
-                componentDescriptor,
-                anotherComponentDescriptor,
-            };
+                "Foo",
+                "SomeProject.SomeOtherFolder.Foo",
+                AssemblyA
+            );
+            var descriptors = new[] { componentDescriptor, anotherComponentDescriptor, };
             var filePath = "C:\\SomeFolder\\SomeProject\\Counter.cshtml";
-            var content = @"
+            var content =
+                @"
 @using SomeProject.SomeOtherFolder
 ";
             var sourceDocument = CreateComponentTestSourceDocument(content, filePath);
             var tree = RazorSyntaxTree.Parse(sourceDocument);
-            var visitor = new DefaultRazorTagHelperBinderPhase.ComponentDirectiveVisitor(sourceDocument.FilePath, descriptors, currentNamespace);
+            var visitor = new DefaultRazorTagHelperBinderPhase.ComponentDirectiveVisitor(
+                sourceDocument.FilePath,
+                descriptors,
+                currentNamespace
+            );
 
             // Act
             visitor.Visit(tree);
@@ -1263,24 +1462,27 @@ namespace Microsoft.AspNetCore.Razor.Language
             var componentDescriptor = CreateComponentDescriptor(
                 "Counter",
                 "SomeProject.Counter",
-                AssemblyA);
+                AssemblyA
+            );
             var anotherComponentDescriptor = CreateComponentDescriptor(
-               "Foo",
-               "SomeProject.SomeOtherFolder.Foo",
-               AssemblyA);
-            var descriptors = new[]
-            {
-                componentDescriptor,
-                anotherComponentDescriptor,
-            };
+                "Foo",
+                "SomeProject.SomeOtherFolder.Foo",
+                AssemblyA
+            );
+            var descriptors = new[] { componentDescriptor, anotherComponentDescriptor, };
             var filePath = "C:\\SomeFolder\\SomeProject\\Counter.cshtml";
-            var content = @"
+            var content =
+                @"
 @using Bar = SomeProject.SomeOtherFolder
 @using static SomeProject.SomeOtherFolder.Foo
 ";
             var sourceDocument = CreateComponentTestSourceDocument(content, filePath);
             var tree = RazorSyntaxTree.Parse(sourceDocument);
-            var visitor = new DefaultRazorTagHelperBinderPhase.ComponentDirectiveVisitor(sourceDocument.FilePath, descriptors, currentNamespace);
+            var visitor = new DefaultRazorTagHelperBinderPhase.ComponentDirectiveVisitor(
+                sourceDocument.FilePath,
+                descriptors,
+                currentNamespace
+            );
 
             // Act
             visitor.Visit(tree);
@@ -1298,10 +1500,18 @@ namespace Microsoft.AspNetCore.Razor.Language
         [InlineData("Project.Foo", "Project.Bar", false)]
         [InlineData("Project.Bar.Foo", "Project", false)]
         [InlineData("Bar.Foo", "Project", false)]
-        public void IsTypeInNamespace_WorksAsExpected(string typeName, string @namespace, bool expected)
+        public void IsTypeInNamespace_WorksAsExpected(
+            string typeName,
+            string @namespace,
+            bool expected
+        )
         {
             // Arrange & Act
-            var result = DefaultRazorTagHelperBinderPhase.ComponentDirectiveVisitor.IsTypeInNamespace(typeName, @namespace);
+            var result =
+                DefaultRazorTagHelperBinderPhase.ComponentDirectiveVisitor.IsTypeInNamespace(
+                    typeName,
+                    @namespace
+                );
 
             // Assert
             Assert.Equal(expected, result);
@@ -1315,10 +1525,17 @@ namespace Microsoft.AspNetCore.Razor.Language
         [InlineData("Project.Foo", "Project.Bar", true)]
         [InlineData("Project.Bar.Foo", "Project", false)]
         [InlineData("Bar.Foo", "Project", false)]
-        public void IsTypeInScope_WorksAsExpected(string typeName, string currentNamespace, bool expected)
+        public void IsTypeInScope_WorksAsExpected(
+            string typeName,
+            string currentNamespace,
+            bool expected
+        )
         {
             // Arrange & Act
-            var result = DefaultRazorTagHelperBinderPhase.ComponentDirectiveVisitor.IsTypeInScope(typeName, currentNamespace);
+            var result = DefaultRazorTagHelperBinderPhase.ComponentDirectiveVisitor.IsTypeInScope(
+                typeName,
+                currentNamespace
+            );
 
             // Assert
             Assert.Equal(expected, result);
@@ -1329,14 +1546,19 @@ namespace Microsoft.AspNetCore.Razor.Language
         {
             // Arrange
             var className = "Counter";
-            var typeName = $"SomeProject.SomeNamespace.{ComponentMetadata.MangleClassName(className)}";
+            var typeName =
+                $"SomeProject.SomeNamespace.{ComponentMetadata.MangleClassName(className)}";
             var descriptor = CreateComponentDescriptor(
                 tagName: "Counter",
                 typeName: typeName,
-                assemblyName: AssemblyA);
+                assemblyName: AssemblyA
+            );
 
             // Act
-            var result = DefaultRazorTagHelperBinderPhase.ComponentDirectiveVisitor.IsTagHelperFromMangledClass(descriptor);
+            var result =
+                DefaultRazorTagHelperBinderPhase.ComponentDirectiveVisitor.IsTagHelperFromMangledClass(
+                    descriptor
+                );
 
             // Assert
             Assert.True(result);
@@ -1351,19 +1573,43 @@ namespace Microsoft.AspNetCore.Razor.Language
         [InlineData("SomeProject.Foo<Bar.Baz>", true, "SomeProject", "Foo<Bar.Baz>")]
         [InlineData("SomeProject.Foo<Bar.Baz>>", true, "", "SomeProject.Foo<Bar.Baz>>")]
         [InlineData("SomeProject..Foo<Bar>", true, "SomeProject.", "Foo<Bar>")]
-        public void TrySplitNamespaceAndType_WorksAsExpected(string fullTypeName, bool expectedResult, string expectedNamespace, string expectedTypeName)
+        public void TrySplitNamespaceAndType_WorksAsExpected(
+            string fullTypeName,
+            bool expectedResult,
+            string expectedNamespace,
+            string expectedTypeName
+        )
         {
             // Arrange & Act
-            var result = DefaultRazorTagHelperBinderPhase.ComponentDirectiveVisitor.TrySplitNamespaceAndType(
-                fullTypeName, out var @namespace, out var typeName);
+            var result =
+                DefaultRazorTagHelperBinderPhase.ComponentDirectiveVisitor.TrySplitNamespaceAndType(
+                    fullTypeName,
+                    out var @namespace,
+                    out var typeName
+                );
 
             // Assert
             Assert.Equal(expectedResult, result);
-            Assert.Equal(expectedNamespace, DefaultRazorTagHelperBinderPhase.ComponentDirectiveVisitor.GetTextSpanContent(@namespace, fullTypeName));
-            Assert.Equal(expectedTypeName, DefaultRazorTagHelperBinderPhase.ComponentDirectiveVisitor.GetTextSpanContent(typeName, fullTypeName));
+            Assert.Equal(
+                expectedNamespace,
+                DefaultRazorTagHelperBinderPhase.ComponentDirectiveVisitor.GetTextSpanContent(
+                    @namespace,
+                    fullTypeName
+                )
+            );
+            Assert.Equal(
+                expectedTypeName,
+                DefaultRazorTagHelperBinderPhase.ComponentDirectiveVisitor.GetTextSpanContent(
+                    typeName,
+                    fullTypeName
+                )
+            );
         }
 
-        private static RazorSourceDocument CreateComponentTestSourceDocument(string content, string filePath = null)
+        private static RazorSourceDocument CreateComponentTestSourceDocument(
+            string content,
+            string filePath = null
+        )
         {
             var sourceDocument = TestRazorSourceDocument.Create(content, filePath: filePath);
             return sourceDocument;
@@ -1377,10 +1623,20 @@ namespace Microsoft.AspNetCore.Razor.Language
             IEnumerable<Action<TagMatchingRuleDescriptorBuilder>> ruleBuilders = null,
             string kind = null,
             bool fullyQualified = false,
-            bool childContent = false)
+            bool childContent = false
+        )
         {
             kind = kind ?? ComponentMetadata.Component.TagHelperKind;
-            return CreateDescriptor(kind, tagName, typeName, assemblyName, attributes, ruleBuilders, fullyQualified, childContent);
+            return CreateDescriptor(
+                kind,
+                tagName,
+                typeName,
+                assemblyName,
+                attributes,
+                ruleBuilders,
+                fullyQualified,
+                childContent
+            );
         }
 #endregion
 
@@ -1392,7 +1648,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             IEnumerable<Action<BoundAttributeDescriptorBuilder>> attributes = null,
             IEnumerable<Action<TagMatchingRuleDescriptorBuilder>> ruleBuilders = null,
             bool componentFullyQualified = false,
-            bool componentChildContent = false)
+            bool componentChildContent = false
+        )
         {
             var builder = TagHelperDescriptorBuilder.Create(kind, typeName, assemblyName);
             builder.TypeName(typeName);
@@ -1409,26 +1666,32 @@ namespace Microsoft.AspNetCore.Razor.Language
             {
                 foreach (var ruleBuilder in ruleBuilders)
                 {
-                    builder.TagMatchingRuleDescriptor(innerRuleBuilder =>
-                    {
-                        innerRuleBuilder.RequireTagName(tagName);
-                        ruleBuilder(innerRuleBuilder);
-                    });
+                    builder.TagMatchingRuleDescriptor(
+                        innerRuleBuilder =>
+                        {
+                            innerRuleBuilder.RequireTagName(tagName);
+                            ruleBuilder(innerRuleBuilder);
+                        }
+                    );
                 }
             }
             else
             {
-                builder.TagMatchingRuleDescriptor(ruleBuilder => ruleBuilder.RequireTagName(tagName));
+                builder.TagMatchingRuleDescriptor(
+                    ruleBuilder => ruleBuilder.RequireTagName(tagName)
+                );
             }
 
             if (componentFullyQualified)
             {
-                builder.Metadata[ComponentMetadata.Component.NameMatchKey] = ComponentMetadata.Component.FullyQualifiedNameMatch;
+                builder.Metadata[ComponentMetadata.Component.NameMatchKey] =
+                    ComponentMetadata.Component.FullyQualifiedNameMatch;
             }
 
             if (componentChildContent)
             {
-                builder.Metadata[ComponentMetadata.SpecialKindKey] = ComponentMetadata.ChildContent.TagHelperKind;
+                builder.Metadata[ComponentMetadata.SpecialKindKey] =
+                    ComponentMetadata.ChildContent.TagHelperKind;
             }
 
             var descriptor = builder.Build();

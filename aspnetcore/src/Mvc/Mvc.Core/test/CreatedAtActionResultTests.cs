@@ -37,7 +37,8 @@ namespace Microsoft.AspNetCore.Mvc
                 actionName: expectedUrl,
                 controllerName: null,
                 routeValues: null,
-                value: null);
+                value: null
+            );
 
             result.UrlHelper = urlHelper;
             await result.ExecuteResultAsync(actionContext);
@@ -59,14 +60,16 @@ namespace Microsoft.AspNetCore.Mvc
                 actionName: null,
                 controllerName: null,
                 routeValues: null,
-                value: null);
+                value: null
+            );
 
             result.UrlHelper = urlHelper;
 
             // Act & Assert
             await ExceptionAssert.ThrowsAsync<InvalidOperationException>(
                 async () => await result.ExecuteResultAsync(actionContext),
-            "No route matches the supplied values.");
+                "No route matches the supplied values."
+            );
         }
 
         private static ActionContext GetActionContext(HttpContext httpContext)
@@ -74,9 +77,7 @@ namespace Microsoft.AspNetCore.Mvc
             var routeData = new RouteData();
             routeData.Routers.Add(Mock.Of<IRouter>());
 
-            return new ActionContext(httpContext,
-                                    routeData,
-                                    new ActionDescriptor());
+            return new ActionContext(httpContext, routeData, new ActionDescriptor());
         }
         private static HttpContext GetHttpContext()
         {
@@ -91,14 +92,19 @@ namespace Microsoft.AspNetCore.Mvc
         {
             var options = Options.Create(new MvcOptions());
             options.Value.OutputFormatters.Add(new StringOutputFormatter());
-            options.Value.OutputFormatters.Add(SystemTextJsonOutputFormatter.CreateFormatter(new JsonOptions()));
+            options.Value.OutputFormatters.Add(
+                SystemTextJsonOutputFormatter.CreateFormatter(new JsonOptions())
+            );
 
             var services = new ServiceCollection();
-            services.AddSingleton<IActionResultExecutor<ObjectResult>>(new ObjectResultExecutor(
-                new DefaultOutputFormatterSelector(options, NullLoggerFactory.Instance),
-                new TestHttpResponseStreamWriterFactory(),
-                NullLoggerFactory.Instance,
-                options));
+            services.AddSingleton<IActionResultExecutor<ObjectResult>>(
+                new ObjectResultExecutor(
+                    new DefaultOutputFormatterSelector(options, NullLoggerFactory.Instance),
+                    new TestHttpResponseStreamWriterFactory(),
+                    NullLoggerFactory.Instance,
+                    options
+                )
+            );
 
             return services.BuildServiceProvider();
         }

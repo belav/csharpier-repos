@@ -6,10 +6,10 @@
 
 namespace Microsoft.CodeAnalysis.Internal.Log
 {
-    internal sealed class StatisticLogAggregator : AbstractLogAggregator<StatisticLogAggregator.StatisticCounter>
+    internal sealed class StatisticLogAggregator
+        : AbstractLogAggregator<StatisticLogAggregator.StatisticCounter>
     {
-        protected override StatisticCounter CreateCounter()
-            => new();
+        protected override StatisticCounter CreateCounter() => new();
 
         public void AddDataPoint(object key, int value)
         {
@@ -63,7 +63,15 @@ namespace Microsoft.CodeAnalysis.Internal.Log
                 }
                 else
                 {
-                    return new StatisticResult(_maximum, _mininum, median: null, mean: _total / _count, range: _maximum - _mininum, mode: null, count: _count);
+                    return new StatisticResult(
+                        _maximum,
+                        _mininum,
+                        median: null,
+                        mean: _total / _count,
+                        range: _maximum - _mininum,
+                        mode: null,
+                        count: _count
+                    );
                 }
             }
         }

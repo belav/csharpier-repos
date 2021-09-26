@@ -4,8 +4,8 @@
 using System;
 using System.Runtime.CompilerServices;
 
-[assembly:TypeForwardedToAttribute(typeof(MyDep3.Enclosing1))]
-[assembly:TypeForwardedToAttribute(typeof(MyDep3.Enclosing2))]
+[assembly: TypeForwardedToAttribute(typeof(MyDep3.Enclosing1))]
+[assembly: TypeForwardedToAttribute(typeof(MyDep3.Enclosing2))]
 
 namespace MyDep2
 {

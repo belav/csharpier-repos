@@ -24,20 +24,39 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public VisualStudioReferenceCleanupService(IProjectSystemReferenceCleanupService projectSystemReferenceUpdateService)
+        public VisualStudioReferenceCleanupService(
+            IProjectSystemReferenceCleanupService projectSystemReferenceUpdateService
+        )
         {
             _projectSystemReferenceUpdateService = projectSystemReferenceUpdateService;
         }
 
-        public async Task<ImmutableArray<ReferenceInfo>> GetProjectReferencesAsync(string projectPath, CancellationToken cancellationToken)
+        public async Task<ImmutableArray<ReferenceInfo>> GetProjectReferencesAsync(
+            string projectPath,
+            CancellationToken cancellationToken
+        )
         {
-            var projectSystemReferences = await _projectSystemReferenceUpdateService.GetProjectReferencesAsync(projectPath, cancellationToken).ConfigureAwait(false);
-            return projectSystemReferences.Select(reference => reference.ToReferenceInfo()).ToImmutableArray();
+            var projectSystemReferences =
+                await _projectSystemReferenceUpdateService.GetProjectReferencesAsync(
+                        projectPath,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
+            return projectSystemReferences.Select(reference => reference.ToReferenceInfo())
+                .ToImmutableArray();
         }
 
-        public Task<bool> TryUpdateReferenceAsync(string projectPath, ReferenceUpdate referenceUpdate, CancellationToken cancellationToken)
+        public Task<bool> TryUpdateReferenceAsync(
+            string projectPath,
+            ReferenceUpdate referenceUpdate,
+            CancellationToken cancellationToken
+        )
         {
-            return _projectSystemReferenceUpdateService.TryUpdateReferenceAsync(projectPath, referenceUpdate.ToProjectSystemReferenceUpdate(), cancellationToken);
+            return _projectSystemReferenceUpdateService.TryUpdateReferenceAsync(
+                projectPath,
+                referenceUpdate.ToProjectSystemReferenceUpdate(),
+                cancellationToken
+            );
         }
     }
 }

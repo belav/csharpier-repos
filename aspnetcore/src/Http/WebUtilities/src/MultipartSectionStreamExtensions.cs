@@ -28,7 +28,10 @@ namespace Microsoft.AspNetCore.WebUtilities
 
             if (section.Body is null)
             {
-                throw new ArgumentException($"Multipart section must have a body to be read.", nameof(section));
+                throw new ArgumentException(
+                    $"Multipart section must have a body to be read.",
+                    nameof(section)
+                );
             }
 
             MediaTypeHeaderValue.TryParse(section.ContentType, out var sectionMediaType);
@@ -40,12 +43,15 @@ namespace Microsoft.AspNetCore.WebUtilities
                 streamEncoding = Encoding.UTF8;
             }
 
-            using (var reader = new StreamReader(
-                section.Body,
-                streamEncoding,
-                detectEncodingFromByteOrderMarks: true,
-                bufferSize: 1024,
-                leaveOpen: true))
+            using (
+                var reader = new StreamReader(
+                    section.Body,
+                    streamEncoding,
+                    detectEncodingFromByteOrderMarks: true,
+                    bufferSize: 1024,
+                    leaveOpen: true
+                )
+            )
             {
                 return await reader.ReadToEndAsync();
             }

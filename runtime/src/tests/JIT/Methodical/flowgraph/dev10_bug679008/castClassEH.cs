@@ -18,7 +18,10 @@ internal static class Repro
 {
     private class Helper<T>
     {
-        public Helper(T s) { t = s; }
+        public Helper(T s)
+        {
+            t = s;
+        }
         public T t;
     }
     [MethodImpl(MethodImplOptions.NoInlining)]
@@ -31,9 +34,7 @@ internal static class Repro
             Helper<SrcType> hs = new Helper<SrcType>(s);
             d = (Helper<DestType>)(object)hs;
         }
-        catch (InvalidCastException)
-        {
-        }
+        catch (InvalidCastException) { }
         try
         {
             DestType r = d.t;

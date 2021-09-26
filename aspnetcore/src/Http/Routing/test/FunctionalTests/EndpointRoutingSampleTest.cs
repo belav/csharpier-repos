@@ -169,11 +169,18 @@ namespace Microsoft.AspNetCore.Routing.FunctionalTests
         }
 
         [Theory]
-        [InlineData("/WithSingleAsteriskCatchAll/a/b/c", "Link: /WithSingleAsteriskCatchAll/a%2Fb%2Fc")]
-        [InlineData("/WithSingleAsteriskCatchAll/a/b b1/c c1", "Link: /WithSingleAsteriskCatchAll/a%2Fb%20b1%2Fc%20c1")]
+        [InlineData(
+            "/WithSingleAsteriskCatchAll/a/b/c",
+            "Link: /WithSingleAsteriskCatchAll/a%2Fb%2Fc"
+        )]
+        [InlineData(
+            "/WithSingleAsteriskCatchAll/a/b b1/c c1",
+            "Link: /WithSingleAsteriskCatchAll/a%2Fb%20b1%2Fc%20c1"
+        )]
         public async Task GeneratesLink_ToEndpointWithSingleAsteriskCatchAllParameter_EncodesValue(
             string url,
-            string expected)
+            string expected
+        )
         {
             // Arrange & Act
             var response = await _client.GetAsync(url);
@@ -187,11 +194,18 @@ namespace Microsoft.AspNetCore.Routing.FunctionalTests
 
         [Theory]
         [InlineData("/WithDoubleAsteriskCatchAll/a/b/c", "Link: /WithDoubleAsteriskCatchAll/a/b/c")]
-        [InlineData("/WithDoubleAsteriskCatchAll/a/b/c/", "Link: /WithDoubleAsteriskCatchAll/a/b/c/")]
-        [InlineData("/WithDoubleAsteriskCatchAll/a//b/c", "Link: /WithDoubleAsteriskCatchAll/a//b/c")]
+        [InlineData(
+            "/WithDoubleAsteriskCatchAll/a/b/c/",
+            "Link: /WithDoubleAsteriskCatchAll/a/b/c/"
+        )]
+        [InlineData(
+            "/WithDoubleAsteriskCatchAll/a//b/c",
+            "Link: /WithDoubleAsteriskCatchAll/a//b/c"
+        )]
         public async Task GeneratesLink_ToEndpointWithDoubleAsteriskCatchAllParameter_DoesNotEncodeSlashes(
             string url,
-            string expected)
+            string expected
+        )
         {
             // Arrange & Act
             var response = await _client.GetAsync(url);

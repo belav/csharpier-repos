@@ -5,11 +5,16 @@ using System.ComponentModel;
 
 namespace Moq.Language.Flow
 {
-	/// <summary>
+    /// <summary>
 	/// Implements the fluent API.
 	/// </summary>
-	[EditorBrowsable(EditorBrowsableState.Never)]
-	public interface ICallbackResult : ICallBase, ICallBaseResult, IThrows, IThrowsResult, IFluentInterface
-	{
-	}
+    [EditorBrowsable(EditorBrowsableState.Never)]
+    public interface ICallbackResult
+        : ICallBase,
+          ICallBaseResult,
+          IThrows,
+          IThrowsResult,
+          IFluentInterface
+    {
+    }
 }

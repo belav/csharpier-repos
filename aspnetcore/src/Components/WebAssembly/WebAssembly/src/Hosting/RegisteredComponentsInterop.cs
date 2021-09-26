@@ -7,7 +7,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting
     {
         private static readonly string Prefix = "Blazor._internal.registeredComponents.";
 
-        public static readonly string GetRegisteredComponentsCount = Prefix + "getRegisteredComponentsCount";
+        public static readonly string GetRegisteredComponentsCount =
+            Prefix + "getRegisteredComponentsCount";
 
         public static readonly string GetId = Prefix + "getId";
 

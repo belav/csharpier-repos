@@ -38,15 +38,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public override Accessibility DeclaredAccessibility
         {
-            get { return ContainingType.IsAbstract ? Accessibility.Protected : Accessibility.Public; }
+            get
+            {
+                return ContainingType.IsAbstract ? Accessibility.Protected : Accessibility.Public;
+            }
         }
 
         internal override bool IsMetadataFinal
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         #region Sealed
@@ -58,10 +58,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public sealed override NamedTypeSymbol ContainingType
         {
-            get
-            {
-                return _containingType;
-            }
+            get { return _containingType; }
         }
 
         public sealed override string Name
@@ -81,7 +78,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 if (_containingType.IsComImport)
                 {
                     Debug.Assert(_containingType.TypeKind == TypeKind.Class);
-                    return System.Reflection.MethodImplAttributes.Runtime | System.Reflection.MethodImplAttributes.InternalCall;
+                    return System.Reflection.MethodImplAttributes.Runtime
+                        | System.Reflection.MethodImplAttributes.InternalCall;
                 }
 
                 if (_containingType.TypeKind == TypeKind.Delegate)
@@ -152,12 +150,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public sealed override TypeWithAnnotations ReturnTypeWithAnnotations
         {
-            get { return TypeWithAnnotations.Create(ContainingAssembly.GetSpecialType(SpecialType.System_Void)); }
+            get
+            {
+                return TypeWithAnnotations.Create(
+                    ContainingAssembly.GetSpecialType(SpecialType.System_Void)
+                );
+            }
         }
 
-        public sealed override FlowAnalysisAnnotations ReturnTypeFlowAnalysisAnnotations => FlowAnalysisAnnotations.None;
+        public sealed override FlowAnalysisAnnotations ReturnTypeFlowAnalysisAnnotations =>
+            FlowAnalysisAnnotations.None;
 
-        public sealed override ImmutableHashSet<string> ReturnNotNullIfParameterNotNull => ImmutableHashSet<string>.Empty;
+        public sealed override ImmutableHashSet<string> ReturnNotNullIfParameterNotNull =>
+            ImmutableHashSet<string>.Empty;
 
         public override ImmutableArray<CustomModifier> RefCustomModifiers
         {
@@ -234,12 +239,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get { return false; }
         }
 
-        internal sealed override bool IsMetadataNewSlot(bool ignoreInterfaceImplementationChanges = false)
+        internal sealed override bool IsMetadataNewSlot(
+            bool ignoreInterfaceImplementationChanges = false
+        )
         {
             return false;
         }
 
-        internal sealed override bool IsMetadataVirtual(bool ignoreInterfaceImplementationChanges = false)
+        internal sealed override bool IsMetadataVirtual(
+            bool ignoreInterfaceImplementationChanges = false
+        )
         {
             return false;
         }
@@ -264,10 +273,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get { return ImmutableArray<MethodSymbol>.Empty; }
         }
 
-        internal sealed override int CalculateLocalSyntaxOffset(int localPosition, SyntaxTree localTree)
+        internal sealed override int CalculateLocalSyntaxOffset(
+            int localPosition,
+            SyntaxTree localTree
+        )
         {
             var containingType = (SourceMemberContainerTypeSymbol)this.ContainingType;
-            return containingType.CalculateSyntaxOffsetInSynthesizedConstructor(localPosition, localTree, isStatic: false);
+            return containingType.CalculateSyntaxOffsetInSynthesizedConstructor(
+                localPosition,
+                localTree,
+                isStatic: false
+            );
         }
 
         internal sealed override UseSiteInfo<AssemblySymbol> GetUseSiteInfo()
@@ -278,13 +294,23 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         internal sealed override bool IsNullableAnalysisEnabled() =>
-            (ContainingType as SourceMemberContainerTypeSymbol)?.IsNullableEnabledForConstructorsAndInitializers(useStatic: false) ?? false;
+            (
+                ContainingType as SourceMemberContainerTypeSymbol
+            )?.IsNullableEnabledForConstructorsAndInitializers(useStatic: false) ?? false;
 
         #endregion
 
-        protected void GenerateMethodBodyCore(TypeCompilationState compilationState, BindingDiagnosticBag diagnostics)
+        protected void GenerateMethodBodyCore(
+            TypeCompilationState compilationState,
+            BindingDiagnosticBag diagnostics
+        )
         {
-            var factory = new SyntheticBoundNodeFactory(this, this.GetNonNullSyntaxNode(), compilationState, diagnostics);
+            var factory = new SyntheticBoundNodeFactory(
+                this,
+                this.GetNonNullSyntaxNode(),
+                compilationState,
+                diagnostics
+            );
             factory.CurrentFunction = this;
             if (ContainingType.BaseTypeNoUseSiteDiagnostics is MissingMetadataTypeSymbol)
             {
@@ -293,7 +319,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return;
             }
 
-            var baseConstructorCall = MethodCompiler.GenerateBaseParameterlessConstructorInitializer(this, diagnostics);
+            var baseConstructorCall =
+                MethodCompiler.GenerateBaseParameterlessConstructorInitializer(this, diagnostics);
             if (baseConstructorCall == null)
             {
                 // Attribute..ctor was not found or was inaccessible
@@ -311,10 +338,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             factory.CloseMethod(block);
         }
 
-        internal virtual void GenerateMethodBodyStatements(SyntheticBoundNodeFactory factory, ArrayBuilder<BoundStatement> statements, BindingDiagnosticBag diagnostics)
+        internal virtual void GenerateMethodBodyStatements(
+            SyntheticBoundNodeFactory factory,
+            ArrayBuilder<BoundStatement> statements,
+            BindingDiagnosticBag diagnostics
+        )
         {
             // overridden in a derived class to add extra statements to the body of the generated constructor
         }
-
     }
 }

@@ -31,14 +31,18 @@ namespace Microsoft.Extensions.DependencyInjection
         ///     The same service collection so that multiple calls can be chained.
         /// </returns>
         public static IServiceCollection AddEntityFrameworkProxies(
-            this IServiceCollection serviceCollection)
+            this IServiceCollection serviceCollection
+        )
         {
             Check.NotNull(serviceCollection, nameof(serviceCollection));
 
-            new EntityFrameworkServicesBuilder(serviceCollection)
-                .TryAdd<IConventionSetPlugin, ProxiesConventionSetPlugin>()
+            new EntityFrameworkServicesBuilder(serviceCollection).TryAdd<
+                IConventionSetPlugin,
+                ProxiesConventionSetPlugin
+            >()
                 .TryAddProviderSpecificServices(
-                    b => b.TryAddSingleton<IProxyFactory, ProxyFactory>());
+                    b => b.TryAddSingleton<IProxyFactory, ProxyFactory>()
+                );
 
             return serviceCollection;
         }

@@ -49,10 +49,7 @@ namespace Microsoft.AspNetCore.Mvc
 
             var actionContext = new ActionContext()
             {
-                HttpContext = new DefaultHttpContext()
-                {
-                    RequestServices = CreateServices(),
-                }
+                HttpContext = new DefaultHttpContext() { RequestServices = CreateServices(), }
             };
 
             // Act
@@ -81,10 +78,7 @@ namespace Microsoft.AspNetCore.Mvc
 
             var actionContext = new ActionContext()
             {
-                HttpContext = new DefaultHttpContext()
-                {
-                    RequestServices = CreateServices(),
-                }
+                HttpContext = new DefaultHttpContext() { RequestServices = CreateServices(), }
             };
 
             // Act
@@ -98,7 +92,10 @@ namespace Microsoft.AspNetCore.Mvc
         public async Task ObjectResult_ExecuteResultAsync_GetsStatusCodeFromProblemDetails()
         {
             // Arrange
-            var details = new ProblemDetails { Status = StatusCodes.Status413RequestEntityTooLarge, };
+            var details = new ProblemDetails
+            {
+                Status = StatusCodes.Status413RequestEntityTooLarge,
+            };
 
             var result = new ObjectResult(details)
             {
@@ -110,10 +107,7 @@ namespace Microsoft.AspNetCore.Mvc
 
             var actionContext = new ActionContext()
             {
-                HttpContext = new DefaultHttpContext()
-                {
-                    RequestServices = CreateServices(),
-                }
+                HttpContext = new DefaultHttpContext() { RequestServices = CreateServices(), }
             };
 
             // Act
@@ -122,7 +116,10 @@ namespace Microsoft.AspNetCore.Mvc
             // Assert
             Assert.Equal(StatusCodes.Status413RequestEntityTooLarge, details.Status.Value);
             Assert.Equal(StatusCodes.Status413RequestEntityTooLarge, result.StatusCode.Value);
-            Assert.Equal(StatusCodes.Status413RequestEntityTooLarge, actionContext.HttpContext.Response.StatusCode);
+            Assert.Equal(
+                StatusCodes.Status413RequestEntityTooLarge,
+                actionContext.HttpContext.Response.StatusCode
+            );
         }
 
         [Fact]
@@ -141,10 +138,7 @@ namespace Microsoft.AspNetCore.Mvc
 
             var actionContext = new ActionContext()
             {
-                HttpContext = new DefaultHttpContext()
-                {
-                    RequestServices = CreateServices(),
-                }
+                HttpContext = new DefaultHttpContext() { RequestServices = CreateServices(), }
             };
 
             // Act
@@ -153,18 +147,24 @@ namespace Microsoft.AspNetCore.Mvc
             // Assert
             Assert.Equal(StatusCodes.Status422UnprocessableEntity, details.Status.Value);
             Assert.Equal(StatusCodes.Status400BadRequest, result.StatusCode.Value);
-            Assert.Equal(StatusCodes.Status400BadRequest, actionContext.HttpContext.Response.StatusCode);
+            Assert.Equal(
+                StatusCodes.Status400BadRequest,
+                actionContext.HttpContext.Response.StatusCode
+            );
         }
 
         private static IServiceProvider CreateServices()
         {
             var services = new ServiceCollection();
             var options = Options.Create(new MvcOptions());
-            services.AddSingleton<IActionResultExecutor<ObjectResult>>(new ObjectResultExecutor(
-                new DefaultOutputFormatterSelector(options, NullLoggerFactory.Instance),
-                new TestHttpResponseStreamWriterFactory(),
-                NullLoggerFactory.Instance,
-                options));
+            services.AddSingleton<IActionResultExecutor<ObjectResult>>(
+                new ObjectResultExecutor(
+                    new DefaultOutputFormatterSelector(options, NullLoggerFactory.Instance),
+                    new TestHttpResponseStreamWriterFactory(),
+                    NullLoggerFactory.Instance,
+                    options
+                )
+            );
             services.AddSingleton<ILoggerFactory>(NullLoggerFactory.Instance);
 
             return services.BuildServiceProvider();

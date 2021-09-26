@@ -33,51 +33,93 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             {
                 return new TheoryData<object, Func<DisplayMetadata, object>, object>
                 {
-                    { new DataTypeAttribute(DataType.Duration), d => d.DataTypeName, DataType.Duration.ToString() },
-
+                    {
+                        new DataTypeAttribute(DataType.Duration),
+                        d => d.DataTypeName,
+                        DataType.Duration.ToString()
+                    },
                     { new DisplayAttribute() { Description = "d" }, d => d.Description(), "d" },
                     { new DisplayAttribute() { Name = "DN" }, d => d.DisplayName(), "DN" },
                     { new DisplayAttribute() { Order = 3 }, d => d.Order, 3 },
-                    { new DisplayAttribute() { Prompt = "Enter Value" }, d => d.Placeholder(), "Enter Value" },
-
-                    { new DisplayColumnAttribute("Property"), d => d.SimpleDisplayProperty, "Property" },
-
-                    { new DisplayFormatAttribute() { ConvertEmptyStringToNull = true }, d => d.ConvertEmptyStringToNull, true },
-                    { new DisplayFormatAttribute() { DataFormatString = "{0:G}" }, d => d.DisplayFormatString, "{0:G}" },
+                    {
+                        new DisplayAttribute() { Prompt = "Enter Value" },
+                        d => d.Placeholder(),
+                        "Enter Value"
+                    },
+                    {
+                        new DisplayColumnAttribute("Property"),
+                        d => d.SimpleDisplayProperty,
+                        "Property"
+                    },
+                    {
+                        new DisplayFormatAttribute() { ConvertEmptyStringToNull = true },
+                        d => d.ConvertEmptyStringToNull,
+                        true
+                    },
+                    {
+                        new DisplayFormatAttribute() { DataFormatString = "{0:G}" },
+                        d => d.DisplayFormatString,
+                        "{0:G}"
+                    },
                     {
                         new DisplayFormatAttribute() { DataFormatString = "{0:G}" },
                         d => d.DisplayFormatStringProvider(),
                         "{0:G}"
                     },
                     {
-                        new DisplayFormatAttribute() { DataFormatString = "{0:G}", ApplyFormatInEditMode = true },
+                        new DisplayFormatAttribute()
+                        {
+                            DataFormatString = "{0:G}",
+                            ApplyFormatInEditMode = true
+                        },
                         d => d.EditFormatString,
                         "{0:G}"
                     },
                     {
-                        new DisplayFormatAttribute() { DataFormatString = "{0:G}", ApplyFormatInEditMode = true },
+                        new DisplayFormatAttribute()
+                        {
+                            DataFormatString = "{0:G}",
+                            ApplyFormatInEditMode = true
+                        },
                         d => d.EditFormatStringProvider(),
                         "{0:G}"
                     },
                     {
-                        new DisplayFormatAttribute() { DataFormatString = "{0:G}", ApplyFormatInEditMode = true },
+                        new DisplayFormatAttribute()
+                        {
+                            DataFormatString = "{0:G}",
+                            ApplyFormatInEditMode = true
+                        },
                         d => d.HasNonDefaultEditFormat,
                         true
                     },
-                    { new DisplayFormatAttribute() { HtmlEncode = false }, d => d.HtmlEncode, false },
-                    { new DisplayFormatAttribute() { NullDisplayText = "(null)" }, d => d.NullDisplayText, "(null)" },
+                    {
+                        new DisplayFormatAttribute() { HtmlEncode = false },
+                        d => d.HtmlEncode,
+                        false
+                    },
+                    {
+                        new DisplayFormatAttribute() { NullDisplayText = "(null)" },
+                        d => d.NullDisplayText,
+                        "(null)"
+                    },
                     {
                         new DisplayFormatAttribute() { NullDisplayText = "(null)" },
                         d => d.NullDisplayTextProvider(),
                         "(null)"
                     },
-
-                    { new DisplayNameAttribute("DisplayNameValue"), d => d.DisplayName(), "DisplayNameValue"},
-                    { new HiddenInputAttribute() { DisplayValue = false }, d => d.HideSurroundingHtml, true },
-
+                    {
+                        new DisplayNameAttribute("DisplayNameValue"),
+                        d => d.DisplayName(),
+                        "DisplayNameValue"
+                    },
+                    {
+                        new HiddenInputAttribute() { DisplayValue = false },
+                        d => d.HideSurroundingHtml,
+                        true
+                    },
                     { new ScaffoldColumnAttribute(scaffold: false), d => d.ShowForDisplay, false },
                     { new ScaffoldColumnAttribute(scaffold: false), d => d.ShowForEdit, false },
-
                     { new UIHintAttribute("hintHint"), d => d.TemplateHint, "hintHint" },
                 };
             }
@@ -88,13 +130,17 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
         public void CreateDisplayMetadata_SimpleAttributes(
             object attribute,
             Func<DisplayMetadata, object> accessor,
-            object expected)
+            object expected
+        )
         {
             // Arrange
             var provider = CreateProvider();
 
             var key = ModelMetadataIdentity.ForType(typeof(string));
-            var context = new DisplayMetadataProviderContext(key, GetModelAttributes(new object[] { attribute }));
+            var context = new DisplayMetadataProviderContext(
+                key,
+                GetModelAttributes(new object[] { attribute })
+            );
 
             // Act
             provider.CreateDisplayMetadata(context);
@@ -121,7 +167,10 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             provider.CreateDisplayMetadata(context);
 
             // Assert
-            Assert.Same(displayFormat.DataFormatString, context.DisplayMetadata.DisplayFormatString);
+            Assert.Same(
+                displayFormat.DataFormatString,
+                context.DisplayMetadata.DisplayFormatString
+            );
         }
 
         [Fact]
@@ -131,10 +180,11 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             var provider = CreateProvider();
 
             var dataType = new DataTypeAttribute(DataType.Time); // Has a non-null DisplayFormat.
-            var displayFormat = new DisplayFormatAttribute() // But these values override the values from DataType
-            {
-                DataFormatString = "Cool {0}",
-            };
+            var displayFormat =
+                new DisplayFormatAttribute() // But these values override the values from DataType
+                {
+                    DataFormatString = "Cool {0}",
+                };
 
             var attributes = new Attribute[] { dataType, displayFormat, };
             var key = ModelMetadataIdentity.ForType(typeof(string));
@@ -144,7 +194,10 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             provider.CreateDisplayMetadata(context);
 
             // Assert
-            Assert.Same(displayFormat.DataFormatString, context.DisplayMetadata.DisplayFormatString);
+            Assert.Same(
+                displayFormat.DataFormatString,
+                context.DisplayMetadata.DisplayFormatString
+            );
         }
 
         [Fact]
@@ -192,10 +245,7 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             var provider = CreateProvider();
 
             var displayName = new DisplayNameAttribute("DisplayNameAttributeValue");
-            var display = new DisplayAttribute()
-            {
-                Name = "DisplayAttributeValue"
-            };
+            var display = new DisplayAttribute() { Name = "DisplayAttributeValue" };
 
             var attributes = new Attribute[] { display, displayName };
             var key = ModelMetadataIdentity.ForType(typeof(string));
@@ -215,10 +265,7 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             var provider = CreateProvider();
 
             var displayName = new DisplayNameAttribute("DisplayNameAttributeValue");
-            var display = new DisplayAttribute()
-            {
-                Name = string.Empty
-            };
+            var display = new DisplayAttribute() { Name = string.Empty };
 
             var attributes = new Attribute[] { display, displayName };
             var key = ModelMetadataIdentity.ForType(typeof(string));
@@ -238,10 +285,7 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             var provider = CreateProvider();
 
             var displayName = new DisplayNameAttribute("DisplayNameAttributeValue");
-            var display = new DisplayAttribute()
-            {
-                Description = "This is a description"
-            };
+            var display = new DisplayAttribute() { Description = "This is a description" };
 
             var attributes = new Attribute[] { display, displayName };
             var key = ModelMetadataIdentity.ForType(typeof(string));
@@ -259,13 +303,11 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
         {
             // Arrange
             var sharedLocalizer = new Mock<IStringLocalizer>(MockBehavior.Strict);
-            sharedLocalizer
-                .Setup(s => s["DisplayNameValue"])
+            sharedLocalizer.Setup(s => s["DisplayNameValue"])
                 .Returns(new LocalizedString("DisplayNameValue", "Name from DisplayNameAttribute"));
 
             var stringLocalizerFactoryMock = new Mock<IStringLocalizerFactory>(MockBehavior.Strict);
-            stringLocalizerFactoryMock
-                .Setup(s => s.Create(typeof(EmptyClass)))
+            stringLocalizerFactoryMock.Setup(s => s.Create(typeof(EmptyClass)))
                 .Returns(() => sharedLocalizer.Object);
 
             var localizationOptions = new MvcDataAnnotationsLocalizationOptions();
@@ -274,7 +316,11 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
                 return stringLocalizerFactory.Create(typeof(EmptyClass));
             };
 
-            var provider = CreateProvider(options: null, localizationOptions, stringLocalizerFactoryMock.Object);
+            var provider = CreateProvider(
+                options: null,
+                localizationOptions,
+                stringLocalizerFactoryMock.Object
+            );
 
             var displayName = new DisplayNameAttribute("DisplayNameValue");
 
@@ -286,10 +332,13 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             provider.CreateDisplayMetadata(context);
 
             // Assert
-            Assert.Collection(context.DisplayMetadata.EnumGroupedDisplayNamesAndValues, (e) =>
-            {
-                Assert.Equal("Name from DisplayNameAttribute", e.Key.Name);
-            });
+            Assert.Collection(
+                context.DisplayMetadata.EnumGroupedDisplayNamesAndValues,
+                (e) =>
+                {
+                    Assert.Equal("Name from DisplayNameAttribute", e.Key.Name);
+                }
+            );
         }
 
         [Fact]
@@ -297,13 +346,11 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
         {
             // Arrange
             var sharedLocalizer = new Mock<IStringLocalizer>(MockBehavior.Strict);
-            sharedLocalizer
-                .Setup(s => s["DisplayNameValue"])
+            sharedLocalizer.Setup(s => s["DisplayNameValue"])
                 .Returns(new LocalizedString("DisplayNameValue", "Name from DisplayNameAttribute"));
 
             var stringLocalizerFactoryMock = new Mock<IStringLocalizerFactory>(MockBehavior.Strict);
-            stringLocalizerFactoryMock
-                .Setup(s => s.Create(typeof(EmptyClass)))
+            stringLocalizerFactoryMock.Setup(s => s.Create(typeof(EmptyClass)))
                 .Returns(() => sharedLocalizer.Object);
 
             var localizationOptions = new MvcDataAnnotationsLocalizationOptions();
@@ -312,7 +359,11 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
                 return stringLocalizerFactory.Create(typeof(EmptyClass));
             };
 
-            var provider = CreateProvider(options: null, localizationOptions, stringLocalizerFactoryMock.Object);
+            var provider = CreateProvider(
+                options: null,
+                localizationOptions,
+                stringLocalizerFactoryMock.Object
+            );
 
             var displayName = new DisplayNameAttribute("DisplayNameValue");
 
@@ -334,8 +385,7 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             var sharedLocalizer = new Mock<IStringLocalizer>(MockBehavior.Loose);
 
             var stringLocalizerFactoryMock = new Mock<IStringLocalizerFactory>(MockBehavior.Strict);
-            stringLocalizerFactoryMock
-                .Setup(s => s.Create(typeof(EmptyClass)))
+            stringLocalizerFactoryMock.Setup(s => s.Create(typeof(EmptyClass)))
                 .Returns(() => sharedLocalizer.Object);
 
             var localizationOptions = new MvcDataAnnotationsLocalizationOptions();
@@ -346,12 +396,13 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
                 return stringLocalizerFactory.Create(typeof(EmptyClass));
             };
 
-            var provider = CreateProvider(options: null, localizationOptions, stringLocalizerFactoryMock.Object);
+            var provider = CreateProvider(
+                options: null,
+                localizationOptions,
+                stringLocalizerFactoryMock.Object
+            );
 
-            var display = new DisplayAttribute()
-            {
-                Name = "DisplayName"
-            };
+            var display = new DisplayAttribute() { Name = "DisplayName" };
 
             var attributes = new Attribute[] { display };
             var key = ModelMetadataIdentity.ForType(typeof(string));
@@ -362,7 +413,10 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             context.DisplayMetadata.DisplayName();
 
             // Assert
-            Assert.True(dataAnnotationLocalizerProviderWasUsed, "DataAnnotationLocalizerProvider wasn't used by DisplayMetadata");
+            Assert.True(
+                dataAnnotationLocalizerProviderWasUsed,
+                "DataAnnotationLocalizerProvider wasn't used by DisplayMetadata"
+            );
         }
 
         // This is IMPORTANT. Product code needs to use GetName() instead of .Name. It's easy to regress.
@@ -402,8 +456,7 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             // Nothing on stringLocalizer should be called
             var stringLocalizer = new Mock<IStringLocalizer>(MockBehavior.Strict);
             var stringLocalizerFactory = new Mock<IStringLocalizerFactory>();
-            stringLocalizerFactory
-                .Setup(s => s.Create(It.IsAny<Type>()))
+            stringLocalizerFactory.Setup(s => s.Create(It.IsAny<Type>()))
                 .Returns(() => stringLocalizer.Object);
             var provider = CreateProvider(stringLocalizerFactory: stringLocalizerFactory.Object);
 
@@ -437,8 +490,7 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             // Nothing on stringLocalizer should be called
             var stringLocalizer = new Mock<IStringLocalizer>(MockBehavior.Strict);
             var stringLocalizerFactory = new Mock<IStringLocalizerFactory>();
-            stringLocalizerFactory
-                .Setup(s => s.Create(It.IsAny<Type>()))
+            stringLocalizerFactory.Setup(s => s.Create(It.IsAny<Type>()))
                 .Returns(() => stringLocalizer.Object);
             var provider = CreateProvider(stringLocalizerFactory: stringLocalizerFactory.Object);
 
@@ -501,8 +553,7 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             // Nothing on stringLocalizer should be called
             var stringLocalizer = new Mock<IStringLocalizer>(MockBehavior.Strict);
             var stringLocalizerFactory = new Mock<IStringLocalizerFactory>();
-            stringLocalizerFactory
-                .Setup(s => s.Create(It.IsAny<Type>()))
+            stringLocalizerFactory.Setup(s => s.Create(It.IsAny<Type>()))
                 .Returns(() => stringLocalizer.Object);
             var provider = CreateProvider(stringLocalizerFactory: stringLocalizerFactory.Object);
 
@@ -562,19 +613,33 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
         {
             // Arrange
             var stringLocalizer = new Mock<IStringLocalizer>(MockBehavior.Strict);
-            stringLocalizer
-                .Setup(s => s["Model_Name"])
-                .Returns(() => new LocalizedString("Model_Name", "name from localizer " + CultureInfo.CurrentCulture));
-            stringLocalizer
-                .Setup(s => s["Model_Description"])
-                .Returns(() => new LocalizedString("Model_Description", "description from localizer " + CultureInfo.CurrentCulture));
-            stringLocalizer
-                .Setup(s => s["Model_Prompt"])
-                .Returns(() => new LocalizedString("Model_Prompt", "prompt from localizer " + CultureInfo.CurrentCulture));
+            stringLocalizer.Setup(s => s["Model_Name"])
+                .Returns(
+                    () =>
+                        new LocalizedString(
+                            "Model_Name",
+                            "name from localizer " + CultureInfo.CurrentCulture
+                        )
+                );
+            stringLocalizer.Setup(s => s["Model_Description"])
+                .Returns(
+                    () =>
+                        new LocalizedString(
+                            "Model_Description",
+                            "description from localizer " + CultureInfo.CurrentCulture
+                        )
+                );
+            stringLocalizer.Setup(s => s["Model_Prompt"])
+                .Returns(
+                    () =>
+                        new LocalizedString(
+                            "Model_Prompt",
+                            "prompt from localizer " + CultureInfo.CurrentCulture
+                        )
+                );
 
             var stringLocalizerFactoryMock = new Mock<IStringLocalizerFactory>(MockBehavior.Strict);
-            stringLocalizerFactoryMock
-                .Setup(f => f.Create(It.IsAny<Type>()))
+            stringLocalizerFactoryMock.Setup(f => f.Create(It.IsAny<Type>()))
                 .Returns(stringLocalizer.Object);
             var localizationOptions = new MvcDataAnnotationsLocalizationOptions();
             localizationOptions.DataAnnotationLocalizerProvider = (type, stringLocalizerFactory) =>
@@ -582,7 +647,11 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
                 return stringLocalizerFactory.Create(type);
             };
 
-            var provider = CreateProvider(options: null, localizationOptions, stringLocalizerFactoryMock.Object);
+            var provider = CreateProvider(
+                options: null,
+                localizationOptions,
+                stringLocalizerFactoryMock.Object
+            );
 
             var display = new DisplayAttribute()
             {
@@ -602,13 +671,19 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             using (new CultureReplacer("en-US", "en-US"))
             {
                 Assert.Equal("name from localizer en-US", context.DisplayMetadata.DisplayName());
-                Assert.Equal("description from localizer en-US", context.DisplayMetadata.Description());
+                Assert.Equal(
+                    "description from localizer en-US",
+                    context.DisplayMetadata.Description()
+                );
                 Assert.Equal("prompt from localizer en-US", context.DisplayMetadata.Placeholder());
             }
             using (new CultureReplacer("fr-FR", "fr-FR"))
             {
                 Assert.Equal("name from localizer fr-FR", context.DisplayMetadata.DisplayName());
-                Assert.Equal("description from localizer fr-FR", context.DisplayMetadata.Description());
+                Assert.Equal(
+                    "description from localizer fr-FR",
+                    context.DisplayMetadata.Description()
+                );
                 Assert.Equal("prompt from localizer fr-FR", context.DisplayMetadata.Placeholder());
             }
         }
@@ -665,7 +740,10 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
         [InlineData(typeof(StructWithFields), false)]
         [InlineData(typeof(StructWithFields?), false)]
         [InlineData(typeof(StructWithProperties), false)]
-        public void CreateDisplayMetadata_IsFlagsEnum_ReflectsModelType(Type type, bool expectedIsFlagsEnum)
+        public void CreateDisplayMetadata_IsFlagsEnum_ReflectsModelType(
+            Type type,
+            bool expectedIsFlagsEnum
+        )
         {
             // Arrange
             var provider = CreateProvider();
@@ -797,7 +875,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
         [MemberData(nameof(EnumNamesData))]
         public void CreateDisplayMetadata_EnumNamesAndValues_ReflectsModelType(
             Type type,
-            IReadOnlyDictionary<string, string> expectedDictionary)
+            IReadOnlyDictionary<string, string> expectedDictionary
+        )
         {
             // Arrange
             var provider = CreateProvider();
@@ -820,12 +899,30 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             // Arrange
             var expectedKeyValuePairs = new List<KeyValuePair<EnumGroupAndName, string>>
             {
-                new KeyValuePair<EnumGroupAndName, string>(new EnumGroupAndName("Zero", string.Empty), "0"),
-                new KeyValuePair<EnumGroupAndName, string>(new EnumGroupAndName(string.Empty, nameof(EnumWithDisplayNames.One)), "1"),
-                new KeyValuePair<EnumGroupAndName, string>(new EnumGroupAndName(string.Empty, "dos value"), "2"),
-                new KeyValuePair<EnumGroupAndName, string>(new EnumGroupAndName(string.Empty, "tres value"), "3"),
-                new KeyValuePair<EnumGroupAndName, string>(new EnumGroupAndName(string.Empty, "name from resources"), "-2"),
-                new KeyValuePair<EnumGroupAndName, string>(new EnumGroupAndName("Negatives", "menos uno value"), "-1"),
+                new KeyValuePair<EnumGroupAndName, string>(
+                    new EnumGroupAndName("Zero", string.Empty),
+                    "0"
+                ),
+                new KeyValuePair<EnumGroupAndName, string>(
+                    new EnumGroupAndName(string.Empty, nameof(EnumWithDisplayNames.One)),
+                    "1"
+                ),
+                new KeyValuePair<EnumGroupAndName, string>(
+                    new EnumGroupAndName(string.Empty, "dos value"),
+                    "2"
+                ),
+                new KeyValuePair<EnumGroupAndName, string>(
+                    new EnumGroupAndName(string.Empty, "tres value"),
+                    "3"
+                ),
+                new KeyValuePair<EnumGroupAndName, string>(
+                    new EnumGroupAndName(string.Empty, "name from resources"),
+                    "-2"
+                ),
+                new KeyValuePair<EnumGroupAndName, string>(
+                    new EnumGroupAndName("Negatives", "menos uno value"),
+                    "-1"
+                ),
             };
 
             var type = typeof(EnumWithDisplayNames);
@@ -835,18 +932,23 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             var context = new DisplayMetadataProviderContext(key, GetModelAttributes(attributes));
 
             var stringLocalizer = new Mock<IStringLocalizer>(MockBehavior.Strict);
-            stringLocalizer
-                .Setup(s => s[It.IsAny<string>()])
+            stringLocalizer.Setup(s => s[It.IsAny<string>()])
                 .Returns<string>((index) => new LocalizedString(index, index + " value"));
 
             var stringLocalizerFactoryMock = new Mock<IStringLocalizerFactory>(MockBehavior.Strict);
-            stringLocalizerFactoryMock
-                .Setup(f => f.Create(It.IsAny<Type>()))
+            stringLocalizerFactoryMock.Setup(f => f.Create(It.IsAny<Type>()))
                 .Returns(stringLocalizer.Object);
 
             var localizationOptions = new MvcDataAnnotationsLocalizationOptions();
-            localizationOptions.DataAnnotationLocalizerProvider = (modelType, stringLocalizerFactory) => stringLocalizerFactory.Create(modelType);
-            var provider = CreateProvider(options: null, localizationOptions, stringLocalizerFactoryMock.Object);
+            localizationOptions.DataAnnotationLocalizerProvider = (
+                modelType,
+                stringLocalizerFactory
+            ) => stringLocalizerFactory.Create(modelType);
+            var provider = CreateProvider(
+                options: null,
+                localizationOptions,
+                stringLocalizerFactoryMock.Object
+            );
 
             // Act
             provider.CreateDisplayMetadata(context);
@@ -855,11 +957,15 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             Assert.Equal(
                 expectedKeyValuePairs,
                 context.DisplayMetadata.EnumGroupedDisplayNamesAndValues,
-                KVPEnumGroupAndNameComparer.Instance);
+                KVPEnumGroupAndNameComparer.Instance
+            );
         }
 
         // Type -> expected EnumDisplayNamesAndValues
-        public static TheoryData<Type, IEnumerable<KeyValuePair<EnumGroupAndName, string>>> EnumDisplayNamesData
+        public static TheoryData<
+            Type,
+            IEnumerable<KeyValuePair<EnumGroupAndName, string>>
+        > EnumDisplayNamesData
         {
             get
             {
@@ -873,24 +979,66 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
                         typeof(EnumWithDisplayNames),
                         new List<KeyValuePair<EnumGroupAndName, string>>
                         {
-                            new KeyValuePair<EnumGroupAndName, string>(new EnumGroupAndName("Zero", string.Empty), "0"),
-                            new KeyValuePair<EnumGroupAndName, string>(new EnumGroupAndName(string.Empty, nameof(EnumWithDisplayNames.One)), "1"),
-                            new KeyValuePair<EnumGroupAndName, string>(new EnumGroupAndName(string.Empty, "dos"), "2"),
-                            new KeyValuePair<EnumGroupAndName, string>(new EnumGroupAndName(string.Empty, "tres"), "3"),
-                            new KeyValuePair<EnumGroupAndName, string>(new EnumGroupAndName(string.Empty, "name from resources"), "-2"),
-                            new KeyValuePair<EnumGroupAndName, string>(new EnumGroupAndName("Negatives", "menos uno"), "-1"),
+                            new KeyValuePair<EnumGroupAndName, string>(
+                                new EnumGroupAndName("Zero", string.Empty),
+                                "0"
+                            ),
+                            new KeyValuePair<EnumGroupAndName, string>(
+                                new EnumGroupAndName(
+                                    string.Empty,
+                                    nameof(EnumWithDisplayNames.One)
+                                ),
+                                "1"
+                            ),
+                            new KeyValuePair<EnumGroupAndName, string>(
+                                new EnumGroupAndName(string.Empty, "dos"),
+                                "2"
+                            ),
+                            new KeyValuePair<EnumGroupAndName, string>(
+                                new EnumGroupAndName(string.Empty, "tres"),
+                                "3"
+                            ),
+                            new KeyValuePair<EnumGroupAndName, string>(
+                                new EnumGroupAndName(string.Empty, "name from resources"),
+                                "-2"
+                            ),
+                            new KeyValuePair<EnumGroupAndName, string>(
+                                new EnumGroupAndName("Negatives", "menos uno"),
+                                "-1"
+                            ),
                         }
                     },
                     {
                         typeof(EnumWithDisplayNames?),
                         new List<KeyValuePair<EnumGroupAndName, string>>
                         {
-                            new KeyValuePair<EnumGroupAndName, string>(new EnumGroupAndName("Zero", string.Empty), "0"),
-                            new KeyValuePair<EnumGroupAndName, string>(new EnumGroupAndName(string.Empty, nameof(EnumWithDisplayNames.One)), "1"),
-                            new KeyValuePair<EnumGroupAndName, string>(new EnumGroupAndName(string.Empty, "dos"), "2"),
-                            new KeyValuePair<EnumGroupAndName, string>(new EnumGroupAndName(string.Empty, "tres"), "3"),
-                            new KeyValuePair<EnumGroupAndName, string>(new EnumGroupAndName(string.Empty, "name from resources"), "-2"),
-                            new KeyValuePair<EnumGroupAndName, string>(new EnumGroupAndName("Negatives", "menos uno"), "-1"),
+                            new KeyValuePair<EnumGroupAndName, string>(
+                                new EnumGroupAndName("Zero", string.Empty),
+                                "0"
+                            ),
+                            new KeyValuePair<EnumGroupAndName, string>(
+                                new EnumGroupAndName(
+                                    string.Empty,
+                                    nameof(EnumWithDisplayNames.One)
+                                ),
+                                "1"
+                            ),
+                            new KeyValuePair<EnumGroupAndName, string>(
+                                new EnumGroupAndName(string.Empty, "dos"),
+                                "2"
+                            ),
+                            new KeyValuePair<EnumGroupAndName, string>(
+                                new EnumGroupAndName(string.Empty, "tres"),
+                                "3"
+                            ),
+                            new KeyValuePair<EnumGroupAndName, string>(
+                                new EnumGroupAndName(string.Empty, "name from resources"),
+                                "-2"
+                            ),
+                            new KeyValuePair<EnumGroupAndName, string>(
+                                new EnumGroupAndName("Negatives", "menos uno"),
+                                "-1"
+                            ),
                         }
                     },
                     {
@@ -899,72 +1047,198 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
                         typeof(EnumWithDuplicates),
                         new List<KeyValuePair<EnumGroupAndName, string>>
                         {
-                            new KeyValuePair<EnumGroupAndName, string>(new EnumGroupAndName(string.Empty, nameof(EnumWithDuplicates.Zero)), "0"),
-                            new KeyValuePair<EnumGroupAndName, string>(new EnumGroupAndName(string.Empty, nameof(EnumWithDuplicates.None)), "0"),
-                            new KeyValuePair<EnumGroupAndName, string>(new EnumGroupAndName(string.Empty, nameof(EnumWithDuplicates.One)), "1"),
-                            new KeyValuePair<EnumGroupAndName, string>(new EnumGroupAndName(string.Empty, nameof(EnumWithDuplicates.Duece)), "2"),
-                            new KeyValuePair<EnumGroupAndName, string>(new EnumGroupAndName(string.Empty, nameof(EnumWithDuplicates.Two)), "2"),
-                            new KeyValuePair<EnumGroupAndName, string>(new EnumGroupAndName(string.Empty, nameof(EnumWithDuplicates.MoreThanTwo)), "3"),
-                            new KeyValuePair<EnumGroupAndName, string>(new EnumGroupAndName(string.Empty, nameof(EnumWithDuplicates.Three)), "3"),
+                            new KeyValuePair<EnumGroupAndName, string>(
+                                new EnumGroupAndName(string.Empty, nameof(EnumWithDuplicates.Zero)),
+                                "0"
+                            ),
+                            new KeyValuePair<EnumGroupAndName, string>(
+                                new EnumGroupAndName(string.Empty, nameof(EnumWithDuplicates.None)),
+                                "0"
+                            ),
+                            new KeyValuePair<EnumGroupAndName, string>(
+                                new EnumGroupAndName(string.Empty, nameof(EnumWithDuplicates.One)),
+                                "1"
+                            ),
+                            new KeyValuePair<EnumGroupAndName, string>(
+                                new EnumGroupAndName(
+                                    string.Empty,
+                                    nameof(EnumWithDuplicates.Duece)
+                                ),
+                                "2"
+                            ),
+                            new KeyValuePair<EnumGroupAndName, string>(
+                                new EnumGroupAndName(string.Empty, nameof(EnumWithDuplicates.Two)),
+                                "2"
+                            ),
+                            new KeyValuePair<EnumGroupAndName, string>(
+                                new EnumGroupAndName(
+                                    string.Empty,
+                                    nameof(EnumWithDuplicates.MoreThanTwo)
+                                ),
+                                "3"
+                            ),
+                            new KeyValuePair<EnumGroupAndName, string>(
+                                new EnumGroupAndName(
+                                    string.Empty,
+                                    nameof(EnumWithDuplicates.Three)
+                                ),
+                                "3"
+                            ),
                         }
                     },
                     {
                         typeof(EnumWithDuplicates?),
                         new List<KeyValuePair<EnumGroupAndName, string>>
                         {
-                            new KeyValuePair<EnumGroupAndName, string>(new EnumGroupAndName(string.Empty, nameof(EnumWithDuplicates.Zero)), "0"),
-                            new KeyValuePair<EnumGroupAndName, string>(new EnumGroupAndName(string.Empty, nameof(EnumWithDuplicates.None)), "0"),
-                            new KeyValuePair<EnumGroupAndName, string>(new EnumGroupAndName(string.Empty, nameof(EnumWithDuplicates.One)), "1"),
-                            new KeyValuePair<EnumGroupAndName, string>(new EnumGroupAndName(string.Empty, nameof(EnumWithDuplicates.Duece)), "2"),
-                            new KeyValuePair<EnumGroupAndName, string>(new EnumGroupAndName(string.Empty, nameof(EnumWithDuplicates.Two)), "2"),
-                            new KeyValuePair<EnumGroupAndName, string>(new EnumGroupAndName(string.Empty, nameof(EnumWithDuplicates.MoreThanTwo)), "3"),
-                            new KeyValuePair<EnumGroupAndName, string>(new EnumGroupAndName(string.Empty, nameof(EnumWithDuplicates.Three)), "3"),
+                            new KeyValuePair<EnumGroupAndName, string>(
+                                new EnumGroupAndName(string.Empty, nameof(EnumWithDuplicates.Zero)),
+                                "0"
+                            ),
+                            new KeyValuePair<EnumGroupAndName, string>(
+                                new EnumGroupAndName(string.Empty, nameof(EnumWithDuplicates.None)),
+                                "0"
+                            ),
+                            new KeyValuePair<EnumGroupAndName, string>(
+                                new EnumGroupAndName(string.Empty, nameof(EnumWithDuplicates.One)),
+                                "1"
+                            ),
+                            new KeyValuePair<EnumGroupAndName, string>(
+                                new EnumGroupAndName(
+                                    string.Empty,
+                                    nameof(EnumWithDuplicates.Duece)
+                                ),
+                                "2"
+                            ),
+                            new KeyValuePair<EnumGroupAndName, string>(
+                                new EnumGroupAndName(string.Empty, nameof(EnumWithDuplicates.Two)),
+                                "2"
+                            ),
+                            new KeyValuePair<EnumGroupAndName, string>(
+                                new EnumGroupAndName(
+                                    string.Empty,
+                                    nameof(EnumWithDuplicates.MoreThanTwo)
+                                ),
+                                "3"
+                            ),
+                            new KeyValuePair<EnumGroupAndName, string>(
+                                new EnumGroupAndName(
+                                    string.Empty,
+                                    nameof(EnumWithDuplicates.Three)
+                                ),
+                                "3"
+                            ),
                         }
                     },
                     {
                         typeof(EnumWithFlags),
                         new List<KeyValuePair<EnumGroupAndName, string>>
                         {
-                            new KeyValuePair<EnumGroupAndName, string>(new EnumGroupAndName(string.Empty, nameof(EnumWithFlags.Zero)), "0"),
-                            new KeyValuePair<EnumGroupAndName, string>(new EnumGroupAndName(string.Empty, nameof(EnumWithFlags.One)), "1"),
-                            new KeyValuePair<EnumGroupAndName, string>(new EnumGroupAndName(string.Empty, nameof(EnumWithFlags.Two)), "2"),
-                            new KeyValuePair<EnumGroupAndName, string>(new EnumGroupAndName(string.Empty, nameof(EnumWithFlags.Four)), "4"),
-                            new KeyValuePair<EnumGroupAndName, string>(new EnumGroupAndName(string.Empty, nameof(EnumWithFlags.All)), "-1"),
+                            new KeyValuePair<EnumGroupAndName, string>(
+                                new EnumGroupAndName(string.Empty, nameof(EnumWithFlags.Zero)),
+                                "0"
+                            ),
+                            new KeyValuePair<EnumGroupAndName, string>(
+                                new EnumGroupAndName(string.Empty, nameof(EnumWithFlags.One)),
+                                "1"
+                            ),
+                            new KeyValuePair<EnumGroupAndName, string>(
+                                new EnumGroupAndName(string.Empty, nameof(EnumWithFlags.Two)),
+                                "2"
+                            ),
+                            new KeyValuePair<EnumGroupAndName, string>(
+                                new EnumGroupAndName(string.Empty, nameof(EnumWithFlags.Four)),
+                                "4"
+                            ),
+                            new KeyValuePair<EnumGroupAndName, string>(
+                                new EnumGroupAndName(string.Empty, nameof(EnumWithFlags.All)),
+                                "-1"
+                            ),
                         }
                     },
                     {
                         typeof(EnumWithFlags?),
                         new List<KeyValuePair<EnumGroupAndName, string>>
                         {
-                            new KeyValuePair<EnumGroupAndName, string>(new EnumGroupAndName(string.Empty, nameof(EnumWithFlags.Zero)), "0"),
-                            new KeyValuePair<EnumGroupAndName, string>(new EnumGroupAndName(string.Empty, nameof(EnumWithFlags.One)), "1"),
-                            new KeyValuePair<EnumGroupAndName, string>(new EnumGroupAndName(string.Empty, nameof(EnumWithFlags.Two)), "2"),
-                            new KeyValuePair<EnumGroupAndName, string>(new EnumGroupAndName(string.Empty, nameof(EnumWithFlags.Four)), "4"),
-                            new KeyValuePair<EnumGroupAndName, string>(new EnumGroupAndName(string.Empty, nameof(EnumWithFlags.All)), "-1"),
+                            new KeyValuePair<EnumGroupAndName, string>(
+                                new EnumGroupAndName(string.Empty, nameof(EnumWithFlags.Zero)),
+                                "0"
+                            ),
+                            new KeyValuePair<EnumGroupAndName, string>(
+                                new EnumGroupAndName(string.Empty, nameof(EnumWithFlags.One)),
+                                "1"
+                            ),
+                            new KeyValuePair<EnumGroupAndName, string>(
+                                new EnumGroupAndName(string.Empty, nameof(EnumWithFlags.Two)),
+                                "2"
+                            ),
+                            new KeyValuePair<EnumGroupAndName, string>(
+                                new EnumGroupAndName(string.Empty, nameof(EnumWithFlags.Four)),
+                                "4"
+                            ),
+                            new KeyValuePair<EnumGroupAndName, string>(
+                                new EnumGroupAndName(string.Empty, nameof(EnumWithFlags.All)),
+                                "-1"
+                            ),
                         }
                     },
                     {
                         typeof(EnumWithFields),
                         new List<KeyValuePair<EnumGroupAndName, string>>
                         {
-                            new KeyValuePair<EnumGroupAndName, string>(new EnumGroupAndName(string.Empty, nameof(EnumWithFields.Zero)), "0"),
-                            new KeyValuePair<EnumGroupAndName, string>(new EnumGroupAndName(string.Empty, nameof(EnumWithFields.One)), "1"),
-                            new KeyValuePair<EnumGroupAndName, string>(new EnumGroupAndName(string.Empty, nameof(EnumWithFields.Two)), "2"),
-                            new KeyValuePair<EnumGroupAndName, string>(new EnumGroupAndName(string.Empty, nameof(EnumWithFields.Three)), "3"),
-                            new KeyValuePair<EnumGroupAndName, string>(new EnumGroupAndName(string.Empty, nameof(EnumWithFields.MinusTwo)), "-2"),
-                            new KeyValuePair<EnumGroupAndName, string>(new EnumGroupAndName(string.Empty, nameof(EnumWithFields.MinusOne)), "-1"),
+                            new KeyValuePair<EnumGroupAndName, string>(
+                                new EnumGroupAndName(string.Empty, nameof(EnumWithFields.Zero)),
+                                "0"
+                            ),
+                            new KeyValuePair<EnumGroupAndName, string>(
+                                new EnumGroupAndName(string.Empty, nameof(EnumWithFields.One)),
+                                "1"
+                            ),
+                            new KeyValuePair<EnumGroupAndName, string>(
+                                new EnumGroupAndName(string.Empty, nameof(EnumWithFields.Two)),
+                                "2"
+                            ),
+                            new KeyValuePair<EnumGroupAndName, string>(
+                                new EnumGroupAndName(string.Empty, nameof(EnumWithFields.Three)),
+                                "3"
+                            ),
+                            new KeyValuePair<EnumGroupAndName, string>(
+                                new EnumGroupAndName(string.Empty, nameof(EnumWithFields.MinusTwo)),
+                                "-2"
+                            ),
+                            new KeyValuePair<EnumGroupAndName, string>(
+                                new EnumGroupAndName(string.Empty, nameof(EnumWithFields.MinusOne)),
+                                "-1"
+                            ),
                         }
                     },
                     {
                         typeof(EnumWithFields?),
                         new List<KeyValuePair<EnumGroupAndName, string>>
                         {
-                            new KeyValuePair<EnumGroupAndName, string>(new EnumGroupAndName(string.Empty, nameof(EnumWithFields.Zero)), "0"),
-                            new KeyValuePair<EnumGroupAndName, string>(new EnumGroupAndName(string.Empty, nameof(EnumWithFields.One)), "1"),
-                            new KeyValuePair<EnumGroupAndName, string>(new EnumGroupAndName(string.Empty, nameof(EnumWithFields.Two)), "2"),
-                            new KeyValuePair<EnumGroupAndName, string>(new EnumGroupAndName(string.Empty, nameof(EnumWithFields.Three)), "3"),
-                            new KeyValuePair<EnumGroupAndName, string>(new EnumGroupAndName(string.Empty, nameof(EnumWithFields.MinusTwo)), "-2"),
-                            new KeyValuePair<EnumGroupAndName, string>(new EnumGroupAndName(string.Empty, nameof(EnumWithFields.MinusOne)), "-1"),
+                            new KeyValuePair<EnumGroupAndName, string>(
+                                new EnumGroupAndName(string.Empty, nameof(EnumWithFields.Zero)),
+                                "0"
+                            ),
+                            new KeyValuePair<EnumGroupAndName, string>(
+                                new EnumGroupAndName(string.Empty, nameof(EnumWithFields.One)),
+                                "1"
+                            ),
+                            new KeyValuePair<EnumGroupAndName, string>(
+                                new EnumGroupAndName(string.Empty, nameof(EnumWithFields.Two)),
+                                "2"
+                            ),
+                            new KeyValuePair<EnumGroupAndName, string>(
+                                new EnumGroupAndName(string.Empty, nameof(EnumWithFields.Three)),
+                                "3"
+                            ),
+                            new KeyValuePair<EnumGroupAndName, string>(
+                                new EnumGroupAndName(string.Empty, nameof(EnumWithFields.MinusTwo)),
+                                "-2"
+                            ),
+                            new KeyValuePair<EnumGroupAndName, string>(
+                                new EnumGroupAndName(string.Empty, nameof(EnumWithFields.MinusOne)),
+                                "-1"
+                            ),
                         }
                     },
                 };
@@ -975,7 +1249,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
         [MemberData(nameof(EnumDisplayNamesData))]
         public void CreateDisplayMetadata_EnumGroupedDisplayNamesAndValues_ReflectsModelType(
             Type type,
-            IEnumerable<KeyValuePair<EnumGroupAndName, string>> expectedKeyValuePairs)
+            IEnumerable<KeyValuePair<EnumGroupAndName, string>> expectedKeyValuePairs
+        )
         {
             // Arrange
             var provider = CreateProvider();
@@ -991,7 +1266,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             Assert.Equal(
                 expectedKeyValuePairs,
                 context.DisplayMetadata.EnumGroupedDisplayNamesAndValues,
-                KVPEnumGroupAndNameComparer.Instance);
+                KVPEnumGroupAndNameComparer.Instance
+            );
         }
 
         [Fact]
@@ -1000,10 +1276,22 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             // Arrange
             var expectedKeyValuePairs = new List<KeyValuePair<EnumGroupAndName, string>>
             {
-                new KeyValuePair<EnumGroupAndName, string>(new EnumGroupAndName(string.Empty, nameof(EnumWithDisplayOrder.Three)), "2"),
-                new KeyValuePair<EnumGroupAndName, string>(new EnumGroupAndName(string.Empty, nameof(EnumWithDisplayOrder.Two)), "1"),
-                new KeyValuePair<EnumGroupAndName, string>(new EnumGroupAndName(string.Empty, nameof(EnumWithDisplayOrder.One)), "0"),
-                new KeyValuePair<EnumGroupAndName, string>(new EnumGroupAndName(string.Empty, nameof(EnumWithDisplayOrder.Null)), "3"),
+                new KeyValuePair<EnumGroupAndName, string>(
+                    new EnumGroupAndName(string.Empty, nameof(EnumWithDisplayOrder.Three)),
+                    "2"
+                ),
+                new KeyValuePair<EnumGroupAndName, string>(
+                    new EnumGroupAndName(string.Empty, nameof(EnumWithDisplayOrder.Two)),
+                    "1"
+                ),
+                new KeyValuePair<EnumGroupAndName, string>(
+                    new EnumGroupAndName(string.Empty, nameof(EnumWithDisplayOrder.One)),
+                    "0"
+                ),
+                new KeyValuePair<EnumGroupAndName, string>(
+                    new EnumGroupAndName(string.Empty, nameof(EnumWithDisplayOrder.Null)),
+                    "3"
+                ),
             };
 
             var provider = CreateProvider();
@@ -1019,17 +1307,23 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             Assert.Equal(
                 expectedKeyValuePairs,
                 context.DisplayMetadata.EnumGroupedDisplayNamesAndValues,
-                KVPEnumGroupAndNameComparer.Instance);
+                KVPEnumGroupAndNameComparer.Instance
+            );
         }
 
         [Fact]
         public void CreateDisplayMetadata_EnumGroupedDisplayNamesAndValues_NameWithNoIStringLocalizerAndNoResourceType()
         {
             // Arrange & Act
-            var enumNameAndGroup = GetLocalizedEnumGroupedDisplayNamesAndValues(useStringLocalizer: false);
+            var enumNameAndGroup = GetLocalizedEnumGroupedDisplayNamesAndValues(
+                useStringLocalizer: false
+            );
 
             // Assert
-            var groupTwo = Assert.Single(enumNameAndGroup, e => e.Value.Equals("2", StringComparison.Ordinal));
+            var groupTwo = Assert.Single(
+                enumNameAndGroup,
+                e => e.Value.Equals("2", StringComparison.Ordinal)
+            );
 
             using (new CultureReplacer("en-US", "en-US"))
             {
@@ -1046,10 +1340,15 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
         public void CreateDisplayMetadata_EnumGroupedDisplayNamesAndValues_NameWithIStringLocalizerAndNoResourceType()
         {
             // Arrange & Act
-            var enumNameAndGroup = GetLocalizedEnumGroupedDisplayNamesAndValues(useStringLocalizer: true);
+            var enumNameAndGroup = GetLocalizedEnumGroupedDisplayNamesAndValues(
+                useStringLocalizer: true
+            );
 
             // Assert
-            var groupTwo = Assert.Single(enumNameAndGroup, e => e.Value.Equals("2", StringComparison.Ordinal));
+            var groupTwo = Assert.Single(
+                enumNameAndGroup,
+                e => e.Value.Equals("2", StringComparison.Ordinal)
+            );
 
             using (new CultureReplacer("en-US", "en-US"))
             {
@@ -1066,10 +1365,15 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
         public void CreateDisplayMetadata_EnumGroupedDisplayNamesAndValues_NameWithNoIStringLocalizerAndResourceType()
         {
             // Arrange & Act
-            var enumNameAndGroup = GetLocalizedEnumGroupedDisplayNamesAndValues(useStringLocalizer: false);
+            var enumNameAndGroup = GetLocalizedEnumGroupedDisplayNamesAndValues(
+                useStringLocalizer: false
+            );
 
             // Assert
-            var groupThree = Assert.Single(enumNameAndGroup, e => e.Value.Equals("3", StringComparison.Ordinal));
+            var groupThree = Assert.Single(
+                enumNameAndGroup,
+                e => e.Value.Equals("3", StringComparison.Ordinal)
+            );
 
             using (new CultureReplacer("en-US", "en-US"))
             {
@@ -1086,9 +1390,14 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
         public void CreateDisplayMetadata_EnumGroupedDisplayNamesAndValues_NameWithIStringLocalizerAndResourceType()
         {
             // Arrange & Act
-            var enumNameAndGroup = GetLocalizedEnumGroupedDisplayNamesAndValues(useStringLocalizer: true);
+            var enumNameAndGroup = GetLocalizedEnumGroupedDisplayNamesAndValues(
+                useStringLocalizer: true
+            );
 
-            var groupThree = Assert.Single(enumNameAndGroup, e => e.Value.Equals("3", StringComparison.Ordinal));
+            var groupThree = Assert.Single(
+                enumNameAndGroup,
+                e => e.Value.Equals("3", StringComparison.Ordinal)
+            );
 
             // Assert
             using (new CultureReplacer("en-US", "en-US"))
@@ -1113,7 +1422,10 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             var attributes = new Attribute[] { required };
             var property = typeof(string).GetProperty(nameof(string.Length));
             var key = ModelMetadataIdentity.ForProperty(property, typeof(int), typeof(string));
-            var context = new ValidationMetadataProviderContext(key, GetModelAttributes(new object[0], attributes));
+            var context = new ValidationMetadataProviderContext(
+                key,
+                GetModelAttributes(new object[0], attributes)
+            );
 
             // Act
             provider.CreateValidationMetadata(context);
@@ -1126,15 +1438,20 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
         [InlineData(true)]
         [InlineData(false)]
         [InlineData(null)]
-        public void CreateValidationMetadata_NoRequiredAttribute_IsRequiredLeftAlone(bool? initialValue)
+        public void CreateValidationMetadata_NoRequiredAttribute_IsRequiredLeftAlone(
+            bool? initialValue
+        )
         {
             // Arrange
             var provider = CreateProvider();
 
-            var attributes = new Attribute[] { };
+            var attributes = new Attribute[] {  };
             var property = typeof(string).GetProperty(nameof(string.Length));
             var key = ModelMetadataIdentity.ForProperty(property, typeof(int), typeof(string));
-            var context = new ValidationMetadataProviderContext(key, GetModelAttributes(new object[0], attributes));
+            var context = new ValidationMetadataProviderContext(
+                key,
+                GetModelAttributes(new object[0], attributes)
+            );
             context.ValidationMetadata.IsRequired = initialValue;
 
             // Act
@@ -1152,11 +1469,17 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
 
             var attributes = ModelAttributes.GetAttributesForProperty(
                 typeof(NullableReferenceTypes),
-                typeof(NullableReferenceTypes).GetProperty(nameof(NullableReferenceTypes.NonNullableReferenceType)));
+                typeof(NullableReferenceTypes).GetProperty(
+                    nameof(NullableReferenceTypes.NonNullableReferenceType)
+                )
+            );
             var key = ModelMetadataIdentity.ForProperty(
-                typeof(NullableReferenceTypes).GetProperty(nameof(NullableReferenceTypes.NonNullableReferenceType)),
+                typeof(NullableReferenceTypes).GetProperty(
+                    nameof(NullableReferenceTypes.NonNullableReferenceType)
+                ),
                 typeof(string),
-                typeof(NullableReferenceTypes));
+                typeof(NullableReferenceTypes)
+            );
             var context = new ValidationMetadataProviderContext(key, attributes);
 
             // Act
@@ -1164,7 +1487,10 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
 
             // Assert
             Assert.True(context.ValidationMetadata.IsRequired);
-            var attribute = Assert.Single(context.ValidationMetadata.ValidatorMetadata, m => m is RequiredAttribute);
+            var attribute = Assert.Single(
+                context.ValidationMetadata.ValidatorMetadata,
+                m => m is RequiredAttribute
+            );
             Assert.True(((RequiredAttribute)attribute).AllowEmptyStrings); // non-Default for [Required]
         }
 
@@ -1176,12 +1502,18 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
 
             var attributes = ModelAttributes.GetAttributesForProperty(
                 typeof(NullableReferenceTypes),
-                typeof(NullableReferenceTypes).GetProperty(nameof(NullableReferenceTypes.NonNullableReferenceTypeWithRequired)));
+                typeof(NullableReferenceTypes).GetProperty(
+                    nameof(NullableReferenceTypes.NonNullableReferenceTypeWithRequired)
+                )
+            );
 
             var key = ModelMetadataIdentity.ForProperty(
-                typeof(NullableReferenceTypes).GetProperty(nameof(NullableReferenceTypes.NonNullableReferenceTypeWithRequired)),
+                typeof(NullableReferenceTypes).GetProperty(
+                    nameof(NullableReferenceTypes.NonNullableReferenceTypeWithRequired)
+                ),
                 typeof(string),
-                typeof(NullableReferenceTypes));
+                typeof(NullableReferenceTypes)
+            );
             var context = new ValidationMetadataProviderContext(key, attributes);
 
             // Act
@@ -1189,7 +1521,10 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
 
             // Assert
             Assert.True(context.ValidationMetadata.IsRequired);
-            var attribute = Assert.Single(context.ValidationMetadata.ValidatorMetadata, m => m is RequiredAttribute a);
+            var attribute = Assert.Single(
+                context.ValidationMetadata.ValidatorMetadata,
+                m => m is RequiredAttribute a
+            );
             Assert.Equal("Test", ((RequiredAttribute)attribute).ErrorMessage);
             Assert.False(((RequiredAttribute)attribute).AllowEmptyStrings); // Default for [Required]
         }
@@ -1198,19 +1533,27 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
         public void CreateValidationMetadata_SuppressRequiredInference_Noops()
         {
             // Arrange
-            var provider = CreateProvider(options: new MvcOptions()
-            {
-                SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true,
-            });
+            var provider = CreateProvider(
+                options: new MvcOptions()
+                {
+                    SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true,
+                }
+            );
 
             var attributes = ModelAttributes.GetAttributesForProperty(
                 typeof(NullableReferenceTypes),
-                typeof(NullableReferenceTypes).GetProperty(nameof(NullableReferenceTypes.NonNullableReferenceType)));
+                typeof(NullableReferenceTypes).GetProperty(
+                    nameof(NullableReferenceTypes.NonNullableReferenceType)
+                )
+            );
 
             var key = ModelMetadataIdentity.ForProperty(
-                typeof(NullableReferenceTypes).GetProperty(nameof(NullableReferenceTypes.NonNullableReferenceType)),
+                typeof(NullableReferenceTypes).GetProperty(
+                    nameof(NullableReferenceTypes.NonNullableReferenceType)
+                ),
                 typeof(string),
-                typeof(NullableReferenceTypes));
+                typeof(NullableReferenceTypes)
+            );
 
             var context = new ValidationMetadataProviderContext(key, attributes);
 
@@ -1219,13 +1562,18 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
 
             // Assert
             Assert.Null(context.ValidationMetadata.IsRequired);
-            Assert.DoesNotContain(context.ValidationMetadata.ValidatorMetadata, m => m is RequiredAttribute);
+            Assert.DoesNotContain(
+                context.ValidationMetadata.ValidatorMetadata,
+                m => m is RequiredAttribute
+            );
         }
 
         [Theory]
         [InlineData(nameof(DerivedTypeWithAllNonNullProperties.Property1))]
         [InlineData(nameof(DerivedTypeWithAllNonNullProperties.Property2))]
-        public void CreateValidationMetadata_InfersRequiredAttributeOnDerivedType_BaseAnDerivedTypHaveAllNonNullProperties(string propertyName)
+        public void CreateValidationMetadata_InfersRequiredAttributeOnDerivedType_BaseAnDerivedTypHaveAllNonNullProperties(
+            string propertyName
+        )
         {
             // Arrange
             var provider = CreateProvider();
@@ -1233,19 +1581,31 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             var modelType = typeof(DerivedTypeWithAllNonNullProperties);
             var property = modelType.GetProperty(propertyName);
             var key = ModelMetadataIdentity.ForProperty(property, property.PropertyType, modelType);
-            var context = new ValidationMetadataProviderContext(key, ModelAttributes.GetAttributesForProperty(modelType, property));
+            var context = new ValidationMetadataProviderContext(
+                key,
+                ModelAttributes.GetAttributesForProperty(modelType, property)
+            );
 
             // This test verifies how MVC reads the NullableContextOptions. We expect the property to not have a Nullable attribute on, and for
             // the types to have NullableContext. We'll encode our expectations as assertions so that we can catch if or when the compiler changes
             // this behavior and the test needs to be tweaked.
-            Assert.False(DataAnnotationsMetadataProvider.HasNullableAttribute(context.PropertyAttributes, out _), "We do not expect NullableAttribute to be defined on the property");
+            Assert.False(
+                DataAnnotationsMetadataProvider.HasNullableAttribute(
+                    context.PropertyAttributes,
+                    out _
+                ),
+                "We do not expect NullableAttribute to be defined on the property"
+            );
 
             // Act
             provider.CreateValidationMetadata(context);
 
             // Assert
             Assert.True(context.ValidationMetadata.IsRequired);
-            Assert.Contains(context.ValidationMetadata.ValidatorMetadata, m => m is RequiredAttribute);
+            Assert.Contains(
+                context.ValidationMetadata.ValidatorMetadata,
+                m => m is RequiredAttribute
+            );
         }
 
         [Fact]
@@ -1255,16 +1615,24 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             var provider = CreateProvider();
 
             var modelType = typeof(DerivedTypeWithAllNonNullProperties_WithNullableProperties);
-            var property = modelType.GetProperty(nameof(DerivedTypeWithAllNonNullProperties_WithNullableProperties.Property1));
+            var property = modelType.GetProperty(
+                nameof(DerivedTypeWithAllNonNullProperties_WithNullableProperties.Property1)
+            );
             var key = ModelMetadataIdentity.ForProperty(property, property.PropertyType, modelType);
-            var context = new ValidationMetadataProviderContext(key, ModelAttributes.GetAttributesForProperty(modelType, property));
+            var context = new ValidationMetadataProviderContext(
+                key,
+                ModelAttributes.GetAttributesForProperty(modelType, property)
+            );
 
             // Act
             provider.CreateValidationMetadata(context);
 
             // Assert
             Assert.True(context.ValidationMetadata.IsRequired);
-            Assert.Contains(context.ValidationMetadata.ValidatorMetadata, m => m is RequiredAttribute);
+            Assert.Contains(
+                context.ValidationMetadata.ValidatorMetadata,
+                m => m is RequiredAttribute
+            );
         }
 
         [Fact]
@@ -1274,22 +1642,32 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             var provider = CreateProvider();
 
             var modelType = typeof(DerivedTypeWithAllNonNullProperties_WithNullableProperties);
-            var property = modelType.GetProperty(nameof(DerivedTypeWithAllNonNullProperties_WithNullableProperties.Property2));
+            var property = modelType.GetProperty(
+                nameof(DerivedTypeWithAllNonNullProperties_WithNullableProperties.Property2)
+            );
             var key = ModelMetadataIdentity.ForProperty(property, property.PropertyType, modelType);
-            var context = new ValidationMetadataProviderContext(key, ModelAttributes.GetAttributesForProperty(modelType, property));
+            var context = new ValidationMetadataProviderContext(
+                key,
+                ModelAttributes.GetAttributesForProperty(modelType, property)
+            );
 
             // Act
             provider.CreateValidationMetadata(context);
 
             // Assert
             Assert.Null(context.ValidationMetadata.IsRequired);
-            Assert.DoesNotContain(context.ValidationMetadata.ValidatorMetadata, m => m is RequiredAttribute);
+            Assert.DoesNotContain(
+                context.ValidationMetadata.ValidatorMetadata,
+                m => m is RequiredAttribute
+            );
         }
 
         [Theory]
         [InlineData(nameof(DerivedTypeWithNullableProperties.Property1))]
         [InlineData(nameof(DerivedTypeWithNullableProperties.Property2))]
-        public void CreateValidationMetadata_BaseAnDerivedTypHaveAllNullableProperties_DoesNotInferRequiredAttribute(string propertyName)
+        public void CreateValidationMetadata_BaseAnDerivedTypHaveAllNullableProperties_DoesNotInferRequiredAttribute(
+            string propertyName
+        )
         {
             // Arrange
             var provider = CreateProvider();
@@ -1297,14 +1675,20 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             var modelType = typeof(DerivedTypeWithNullableProperties);
             var property = modelType.GetProperty(propertyName);
             var key = ModelMetadataIdentity.ForProperty(property, property.PropertyType, modelType);
-            var context = new ValidationMetadataProviderContext(key, ModelAttributes.GetAttributesForProperty(modelType, property));
+            var context = new ValidationMetadataProviderContext(
+                key,
+                ModelAttributes.GetAttributesForProperty(modelType, property)
+            );
 
             // Act
             provider.CreateValidationMetadata(context);
 
             // Assert
             Assert.Null(context.ValidationMetadata.IsRequired);
-            Assert.DoesNotContain(context.ValidationMetadata.ValidatorMetadata, m => m is RequiredAttribute);
+            Assert.DoesNotContain(
+                context.ValidationMetadata.ValidatorMetadata,
+                m => m is RequiredAttribute
+            );
         }
 
         [Fact]
@@ -1315,16 +1699,24 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             var provider = CreateProvider();
 
             var modelType = typeof(DerivedTypeWithNullableProperties_WithNonNullProperties);
-            var property = modelType.GetProperty(nameof(DerivedTypeWithNullableProperties_WithNonNullProperties.Property2));
+            var property = modelType.GetProperty(
+                nameof(DerivedTypeWithNullableProperties_WithNonNullProperties.Property2)
+            );
             var key = ModelMetadataIdentity.ForProperty(property, property.PropertyType, modelType);
-            var context = new ValidationMetadataProviderContext(key, ModelAttributes.GetAttributesForProperty(modelType, property));
+            var context = new ValidationMetadataProviderContext(
+                key,
+                ModelAttributes.GetAttributesForProperty(modelType, property)
+            );
 
             // Act
             provider.CreateValidationMetadata(context);
 
             // Assert
             Assert.True(context.ValidationMetadata.IsRequired);
-            Assert.Contains(context.ValidationMetadata.ValidatorMetadata, m => m is RequiredAttribute);
+            Assert.Contains(
+                context.ValidationMetadata.ValidatorMetadata,
+                m => m is RequiredAttribute
+            );
         }
 
         [Fact]
@@ -1334,16 +1726,24 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             var provider = CreateProvider();
 
             var modelType = typeof(DerivedTypeWithNullableProperties_ShadowedProperty);
-            var property = modelType.GetProperty(nameof(DerivedTypeWithNullableProperties_ShadowedProperty.Property1));
+            var property = modelType.GetProperty(
+                nameof(DerivedTypeWithNullableProperties_ShadowedProperty.Property1)
+            );
             var key = ModelMetadataIdentity.ForProperty(property, property.PropertyType, modelType);
-            var context = new ValidationMetadataProviderContext(key, ModelAttributes.GetAttributesForProperty(modelType, property));
+            var context = new ValidationMetadataProviderContext(
+                key,
+                ModelAttributes.GetAttributesForProperty(modelType, property)
+            );
 
             // Act
             provider.CreateValidationMetadata(context);
 
             // Assert
             Assert.True(context.ValidationMetadata.IsRequired);
-            Assert.Contains(context.ValidationMetadata.ValidatorMetadata, m => m is RequiredAttribute);
+            Assert.Contains(
+                context.ValidationMetadata.ValidatorMetadata,
+                m => m is RequiredAttribute
+            );
         }
 
         [Fact]
@@ -1353,16 +1753,24 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             var provider = CreateProvider();
 
             var modelType = typeof(TypeImplementIInterfaceWithNonNullProperty);
-            var property = modelType.GetProperty(nameof(TypeImplementIInterfaceWithNonNullProperty.Property));
+            var property = modelType.GetProperty(
+                nameof(TypeImplementIInterfaceWithNonNullProperty.Property)
+            );
             var key = ModelMetadataIdentity.ForProperty(property, property.PropertyType, modelType);
-            var context = new ValidationMetadataProviderContext(key, ModelAttributes.GetAttributesForProperty(modelType, property));
+            var context = new ValidationMetadataProviderContext(
+                key,
+                ModelAttributes.GetAttributesForProperty(modelType, property)
+            );
 
             // Act
             provider.CreateValidationMetadata(context);
 
             // Assert
             Assert.True(context.ValidationMetadata.IsRequired);
-            Assert.Contains(context.ValidationMetadata.ValidatorMetadata, m => m is RequiredAttribute);
+            Assert.Contains(
+                context.ValidationMetadata.ValidatorMetadata,
+                m => m is RequiredAttribute
+            );
         }
 
         [Fact]
@@ -1372,16 +1780,24 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             var provider = CreateProvider();
 
             var modelType = typeof(TypeImplementIInterfaceWithNonNullProperty_AsNullable);
-            var property = modelType.GetProperty(nameof(TypeImplementIInterfaceWithNonNullProperty_AsNullable.Property));
+            var property = modelType.GetProperty(
+                nameof(TypeImplementIInterfaceWithNonNullProperty_AsNullable.Property)
+            );
             var key = ModelMetadataIdentity.ForProperty(property, property.PropertyType, modelType);
-            var context = new ValidationMetadataProviderContext(key, ModelAttributes.GetAttributesForProperty(modelType, property));
+            var context = new ValidationMetadataProviderContext(
+                key,
+                ModelAttributes.GetAttributesForProperty(modelType, property)
+            );
 
             // Act
             provider.CreateValidationMetadata(context);
 
             // Assert
             Assert.Null(context.ValidationMetadata.IsRequired);
-            Assert.DoesNotContain(context.ValidationMetadata.ValidatorMetadata, m => m is RequiredAttribute);
+            Assert.DoesNotContain(
+                context.ValidationMetadata.ValidatorMetadata,
+                m => m is RequiredAttribute
+            );
         }
 
         [Fact]
@@ -1393,16 +1809,26 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             var modelType = typeof(TypeWithAllNonNullProperties);
             var property = modelType.GetProperty(nameof(TypeWithAllNonNullProperties.Property1));
 #pragma warning disable CS0618 // Type or member is obsolete
-            var key = ModelMetadataIdentity.ForProperty(property.PropertyType, property.Name, modelType);
+            var key = ModelMetadataIdentity.ForProperty(
+                property.PropertyType,
+                property.Name,
+                modelType
+            );
 #pragma warning restore CS0618 // Type or member is obsolete
-            var context = new ValidationMetadataProviderContext(key, ModelAttributes.GetAttributesForProperty(modelType, property));
+            var context = new ValidationMetadataProviderContext(
+                key,
+                ModelAttributes.GetAttributesForProperty(modelType, property)
+            );
 
             // Act
             provider.CreateValidationMetadata(context);
 
             // Assert
             Assert.Null(context.ValidationMetadata.IsRequired);
-            Assert.DoesNotContain(context.ValidationMetadata.ValidatorMetadata, m => m is RequiredAttribute);
+            Assert.DoesNotContain(
+                context.ValidationMetadata.ValidatorMetadata,
+                m => m is RequiredAttribute
+            );
         }
 
         [Fact]
@@ -1415,12 +1841,20 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
                 {
                     new RequiredAttribute(),
                     new StringLengthAttribute(5)
-                });
+                }
+            );
 
-            var attributes = new Attribute[] { new EmailAddressAttribute(), validationProviderAttribute };
+            var attributes = new Attribute[]
+            {
+                new EmailAddressAttribute(),
+                validationProviderAttribute
+            };
             var property = typeof(string).GetProperty(nameof(string.Length));
             var key = ModelMetadataIdentity.ForProperty(property, typeof(int), typeof(string));
-            var context = new ValidationMetadataProviderContext(key, GetModelAttributes(new object[0], attributes));
+            var context = new ValidationMetadataProviderContext(
+                key,
+                GetModelAttributes(new object[0], attributes)
+            );
 
             // Act
             provider.CreateValidationMetadata(context);
@@ -1440,7 +1874,9 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
         [Theory]
         [InlineData(true)]
         [InlineData(false)]
-        public void CreateBindingMetadata_RequiredAttribute_IsBindingRequiredLeftAlone(bool initialValue)
+        public void CreateBindingMetadata_RequiredAttribute_IsBindingRequiredLeftAlone(
+            bool initialValue
+        )
         {
             // Arrange
             var provider = CreateProvider();
@@ -1448,7 +1884,10 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             var attributes = new Attribute[] { new RequiredAttribute() };
             var property = typeof(string).GetProperty(nameof(string.Length));
             var key = ModelMetadataIdentity.ForProperty(property, typeof(int), typeof(string));
-            var context = new BindingMetadataProviderContext(key, GetModelAttributes(new object[0], attributes));
+            var context = new BindingMetadataProviderContext(
+                key,
+                GetModelAttributes(new object[0], attributes)
+            );
             context.BindingMetadata.IsBindingRequired = initialValue;
 
             // Act
@@ -1467,10 +1906,13 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             // Arrange
             var provider = CreateProvider();
 
-            var attributes = new Attribute[] { };
+            var attributes = new Attribute[] {  };
             var property = typeof(string).GetProperty(nameof(string.Length));
             var key = ModelMetadataIdentity.ForProperty(property, typeof(int), typeof(string));
-            var context = new BindingMetadataProviderContext(key, GetModelAttributes(new object[0], attributes));
+            var context = new BindingMetadataProviderContext(
+                key,
+                GetModelAttributes(new object[0], attributes)
+            );
             context.BindingMetadata.IsReadOnly = initialValue;
 
             // Act
@@ -1490,7 +1932,10 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             var attributes = new Attribute[] { attribute };
             var property = typeof(string).GetProperty(nameof(string.Length));
             var key = ModelMetadataIdentity.ForProperty(property, typeof(int), typeof(string));
-            var context = new ValidationMetadataProviderContext(key, GetModelAttributes(new object[0], attributes));
+            var context = new ValidationMetadataProviderContext(
+                key,
+                GetModelAttributes(new object[0], attributes)
+            );
 
             // Act
             provider.CreateValidationMetadata(context);
@@ -1510,7 +1955,10 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             var attributes = new Attribute[] { attribute };
             var property = typeof(string).GetProperty(nameof(string.Length));
             var key = ModelMetadataIdentity.ForProperty(property, typeof(int), typeof(string));
-            var context = new ValidationMetadataProviderContext(key, GetModelAttributes(new object[0], attributes));
+            var context = new ValidationMetadataProviderContext(
+                key,
+                GetModelAttributes(new object[0], attributes)
+            );
             context.ValidationMetadata.ValidatorMetadata.Add(attribute);
 
             // Act
@@ -1531,7 +1979,10 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             var attributes = new Attribute[] { attribute };
             var property = typeof(string).GetProperty(nameof(string.Length));
             var key = ModelMetadataIdentity.ForProperty(property, typeof(int), typeof(string));
-            var context = new ValidationMetadataProviderContext(key, GetModelAttributes(new object[0], attributes));
+            var context = new ValidationMetadataProviderContext(
+                key,
+                GetModelAttributes(new object[0], attributes)
+            );
             context.ValidationMetadata.ValidatorMetadata.Add(attribute);
 
             // Act
@@ -1547,10 +1998,16 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
         {
             // Arrange
             var type = typeof(NullableReferenceTypes);
-            var property = type.GetProperty(nameof(NullableReferenceTypes.NonNullableReferenceType));
+            var property = type.GetProperty(
+                nameof(NullableReferenceTypes.NonNullableReferenceType)
+            );
 
             // Act
-            var result = DataAnnotationsMetadataProvider.IsNullableReferenceType(type, member: null, property.GetCustomAttributes(inherit: true));
+            var result = DataAnnotationsMetadataProvider.IsNullableReferenceType(
+                type,
+                member: null,
+                property.GetCustomAttributes(inherit: true)
+            );
 
             // Assert
             Assert.True(result);
@@ -1564,7 +2021,11 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             var property = type.GetProperty(nameof(KeyValuePair<string, object>.Key));
 
             // Act
-            var result = DataAnnotationsMetadataProvider.IsNullableReferenceType(type, member: null, property.GetCustomAttributes(inherit: true));
+            var result = DataAnnotationsMetadataProvider.IsNullableReferenceType(
+                type,
+                member: null,
+                property.GetCustomAttributes(inherit: true)
+            );
 
             // Assert
             Assert.False(result);
@@ -1579,7 +2040,11 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             var property = type.GetProperty(nameof(KeyValuePair<string, object>.Key))!;
 
             // Act
-            var result = DataAnnotationsMetadataProvider.IsNullableReferenceType(type, member: null, property.GetCustomAttributes(inherit: true));
+            var result = DataAnnotationsMetadataProvider.IsNullableReferenceType(
+                type,
+                member: null,
+                property.GetCustomAttributes(inherit: true)
+            );
 
             // Assert
             // While we'd like for result to be 'true', we don't have a very good way of actually calculating it correctly.
@@ -1596,7 +2061,11 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             var property = type.GetProperty(nameof(NullableReferenceTypes.NullableReferenceType));
 
             // Act
-            var result = DataAnnotationsMetadataProvider.IsNullableReferenceType(type, member: null, property.GetCustomAttributes(inherit: true));
+            var result = DataAnnotationsMetadataProvider.IsNullableReferenceType(
+                type,
+                member: null,
+                property.GetCustomAttributes(inherit: true)
+            );
 
             // Assert
             Assert.False(result);
@@ -1608,10 +2077,16 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             // Arrange
             var type = typeof(NullableReferenceTypes);
             var method = type.GetMethod(nameof(NullableReferenceTypes.Method));
-            var parameter = method.GetParameters().Where(p => p.Name == "nonNullableParameter").Single();
+            var parameter = method.GetParameters()
+                .Where(p => p.Name == "nonNullableParameter")
+                .Single();
 
             // Act
-            var result = DataAnnotationsMetadataProvider.IsNullableReferenceType(type, method, parameter.GetCustomAttributes(inherit: true));
+            var result = DataAnnotationsMetadataProvider.IsNullableReferenceType(
+                type,
+                method,
+                parameter.GetCustomAttributes(inherit: true)
+            );
 
             // Assert
             Assert.True(result);
@@ -1623,17 +2098,24 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             // Arrange
             var type = typeof(NullableReferenceTypes);
             var method = type.GetMethod(nameof(NullableReferenceTypes.Method));
-            var parameter = method.GetParameters().Where(p => p.Name == "nullableParameter").Single();
+            var parameter = method.GetParameters()
+                .Where(p => p.Name == "nullableParameter")
+                .Single();
 
             // Act
-            var result = DataAnnotationsMetadataProvider.IsNullableReferenceType(type, method, parameter.GetCustomAttributes(inherit: true));
+            var result = DataAnnotationsMetadataProvider.IsNullableReferenceType(
+                type,
+                method,
+                parameter.GetCustomAttributes(inherit: true)
+            );
 
             // Assert
             Assert.False(result);
         }
 
-        private IEnumerable<KeyValuePair<EnumGroupAndName, string>> GetLocalizedEnumGroupedDisplayNamesAndValues(
-            bool useStringLocalizer)
+        private IEnumerable<
+            KeyValuePair<EnumGroupAndName, string>
+        > GetLocalizedEnumGroupedDisplayNamesAndValues(bool useStringLocalizer)
         {
             var provider = CreateIStringLocalizerProvider(useStringLocalizer);
 
@@ -1649,52 +2131,69 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
         private DataAnnotationsMetadataProvider CreateProvider(
             MvcOptions options = null,
             MvcDataAnnotationsLocalizationOptions localizationOptions = null,
-            IStringLocalizerFactory stringLocalizerFactory = null)
+            IStringLocalizerFactory stringLocalizerFactory = null
+        )
         {
             return new DataAnnotationsMetadataProvider(
                 options ?? new MvcOptions(),
                 Options.Create(localizationOptions ?? new MvcDataAnnotationsLocalizationOptions()),
-                stringLocalizerFactory);
+                stringLocalizerFactory
+            );
         }
 
-        private DataAnnotationsMetadataProvider CreateIStringLocalizerProvider(bool useStringLocalizer)
+        private DataAnnotationsMetadataProvider CreateIStringLocalizerProvider(
+            bool useStringLocalizer
+        )
         {
             var stringLocalizer = new Mock<IStringLocalizer>(MockBehavior.Strict);
-            stringLocalizer
-                .Setup(loc => loc[It.IsAny<string>()])
-                .Returns<string>((k =>
-                {
-                    return new LocalizedString(k, $"{k} {CultureInfo.CurrentCulture}");
-                }));
+            stringLocalizer.Setup(loc => loc[It.IsAny<string>()])
+                .Returns<string>(
+                    (
+                        k =>
+                        {
+                            return new LocalizedString(k, $"{k} {CultureInfo.CurrentCulture}");
+                        }
+                    )
+                );
 
             var stringLocalizerFactory = new Mock<IStringLocalizerFactory>(MockBehavior.Strict);
-            stringLocalizerFactory
-                .Setup(factory => factory.Create(typeof(EnumWithLocalizedDisplayNames)))
+            stringLocalizerFactory.Setup(
+                    factory => factory.Create(typeof(EnumWithLocalizedDisplayNames))
+                )
                 .Returns(stringLocalizer.Object);
 
             var localizationOptions = new MvcDataAnnotationsLocalizationOptions();
-            localizationOptions.DataAnnotationLocalizerProvider = (modelType, localizerFactory) => localizerFactory.Create(modelType);
+            localizationOptions.DataAnnotationLocalizerProvider = (modelType, localizerFactory) =>
+                localizerFactory.Create(modelType);
 
-            return CreateProvider(options: null, localizationOptions, useStringLocalizer ? stringLocalizerFactory.Object : null);
+            return CreateProvider(
+                options: null,
+                localizationOptions,
+                useStringLocalizer ? stringLocalizerFactory.Object : null
+            );
         }
 
-        private ModelAttributes GetModelAttributes(IEnumerable<object> typeAttributes)
-            => new ModelAttributes(typeAttributes, Array.Empty<object>(), Array.Empty<object>());
+        private ModelAttributes GetModelAttributes(IEnumerable<object> typeAttributes) =>
+            new ModelAttributes(typeAttributes, Array.Empty<object>(), Array.Empty<object>());
 
         private ModelAttributes GetModelAttributes(
             IEnumerable<object> typeAttributes,
-            IEnumerable<object> propertyAttributes)
-            => new ModelAttributes(typeAttributes, propertyAttributes, Array.Empty<object>());
+            IEnumerable<object> propertyAttributes
+        ) => new ModelAttributes(typeAttributes, propertyAttributes, Array.Empty<object>());
 
-        private class KVPEnumGroupAndNameComparer : IEqualityComparer<KeyValuePair<EnumGroupAndName, string>>
+        private class KVPEnumGroupAndNameComparer
+            : IEqualityComparer<KeyValuePair<EnumGroupAndName, string>>
         {
-            public static readonly IEqualityComparer<KeyValuePair<EnumGroupAndName, string>> Instance = new KVPEnumGroupAndNameComparer();
+            public static readonly IEqualityComparer<
+                KeyValuePair<EnumGroupAndName, string>
+            > Instance = new KVPEnumGroupAndNameComparer();
 
-            private KVPEnumGroupAndNameComparer()
-            {
-            }
+            private KVPEnumGroupAndNameComparer() { }
 
-            public bool Equals(KeyValuePair<EnumGroupAndName, string> x, KeyValuePair<EnumGroupAndName, string> y)
+            public bool Equals(
+                KeyValuePair<EnumGroupAndName, string> x,
+                KeyValuePair<EnumGroupAndName, string> y
+            )
             {
                 using (new CultureReplacer(string.Empty, string.Empty))
                 {
@@ -1742,7 +2241,10 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
         {
             [Display(Name = "Loc_Two_Name")]
             Two = 2,
-            [Display(Name = nameof(TestResources.Type_Three_Name), ResourceType = typeof(TestResources))]
+            [Display(
+                Name = nameof(TestResources.Type_Three_Name),
+                ResourceType = typeof(TestResources)
+            )]
             Three = 3
         }
 
@@ -1754,24 +2256,25 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
         {
             [Display(Name = "tres")]
             Three = 3,
-
             [Display(Name = "dos")]
             Two = 2,
-
             // Display attribute exists but does not set Name.
             [Display(ShortName = "uno")]
             One = 1,
-
             [Display(Name = "", GroupName = "Zero")]
             Zero = 0,
-
             [Display(Name = "menos uno", GroupName = "Negatives")]
             MinusOne = -1,
-
 #if USE_REAL_RESOURCES
-            [Display(Name = nameof(Test.Resources.DisplayAttribute_Name), ResourceType = typeof(Test.Resources))]
+            [Display(
+                Name = nameof(Test.Resources.DisplayAttribute_Name),
+                ResourceType = typeof(Test.Resources)
+            )]
 #else
-            [Display(Name = nameof(TestResources.DisplayAttribute_Name), ResourceType = typeof(TestResources))]
+            [Display(
+                Name = nameof(TestResources.DisplayAttribute_Name),
+                ResourceType = typeof(TestResources)
+            )]
 #endif
             MinusTwo = -2,
         }
@@ -1780,13 +2283,10 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
         {
             [Display(Order = 3)]
             One,
-
             [Display(Order = 2)]
             Two,
-
             [Display(Order = 1)]
             Three,
-
             Null,
         }
 
@@ -1870,9 +2370,7 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
 
             public string? NullableReferenceType { get; set; } = default!;
 
-            public void Method(string nonNullableParameter, string? nullableParameter)
-            {
-            }
+            public void Method(string nonNullableParameter, string? nullableParameter) { }
         }
 
         private class TypeWithAllNonNullProperties
@@ -1885,7 +2383,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             public string Property2 { get; set; } = string.Empty;
         }
 
-        private class DerivedTypeWithAllNonNullProperties_WithNullableProperties : TypeWithAllNonNullProperties
+        private class DerivedTypeWithAllNonNullProperties_WithNullableProperties
+            : TypeWithAllNonNullProperties
         {
             public string? Property2 { get; set; } = string.Empty;
         }
@@ -1900,12 +2399,14 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             public string? Property2 { get; set; }
         }
 
-        private class DerivedTypeWithNullableProperties_WithNonNullProperties : TypeWithNullableProperties
+        private class DerivedTypeWithNullableProperties_WithNonNullProperties
+            : TypeWithNullableProperties
         {
             public string Property2 { get; set; } = string.Empty;
         }
 
-        private class DerivedTypeWithNullableProperties_ShadowedProperty : TypeWithNullableProperties
+        private class DerivedTypeWithNullableProperties_ShadowedProperty
+            : TypeWithNullableProperties
         {
             public new string Property1 { get; set; } = string.Empty;
         }
@@ -1921,7 +2422,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
         }
 #nullable restore
 
-        public class TypeImplementIInterfaceWithNonNullProperty_AsNullable : AbstraceTypehNonNullProperty
+        public class TypeImplementIInterfaceWithNonNullProperty_AsNullable
+            : AbstraceTypehNonNullProperty
         {
             public override string Property { get; set; }
         }

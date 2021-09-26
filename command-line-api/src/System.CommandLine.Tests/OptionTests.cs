@@ -122,11 +122,9 @@ namespace System.CommandLine.Tests
             Action create = () => new Option(Array.Empty<string>());
 
             create.Should()
-                  .Throw<ArgumentException>()
-                  .Which
-                  .Message
-                  .Should()
-                  .Contain("An option must have at least one alias");
+                .Throw<ArgumentException>()
+                .Which.Message.Should()
+                .Contain("An option must have at least one alias");
         }
 
         [Fact]
@@ -135,11 +133,9 @@ namespace System.CommandLine.Tests
             Action create = () => new Option(new[] { "" });
 
             create.Should()
-                  .Throw<ArgumentException>()
-                  .Which
-                  .Message
-                  .Should()
-                  .Be("An alias cannot be null, empty, or consist entirely of whitespace.");
+                .Throw<ArgumentException>()
+                .Which.Message.Should()
+                .Be("An alias cannot be null, empty, or consist entirely of whitespace.");
         }
 
         [Fact]
@@ -148,11 +144,9 @@ namespace System.CommandLine.Tests
             Action create = () => new Option(new[] { "  \t" });
 
             create.Should()
-                  .Throw<ArgumentException>()
-                  .Which
-                  .Message
-                  .Should()
-                  .Be("An alias cannot be null, empty, or consist entirely of whitespace.");
+                .Throw<ArgumentException>()
+                .Which.Message.Should()
+                .Be("An alias cannot be null, empty, or consist entirely of whitespace.");
         }
 
         [Fact]
@@ -160,9 +154,7 @@ namespace System.CommandLine.Tests
         {
             var option = new Option(new[] { "-h", "--help", "/?" });
 
-            option.Aliases
-                  .Should()
-                  .BeEquivalentTo("-h", "--help", "/?");
+            option.Aliases.Should().BeEquivalentTo("-h", "--help", "/?");
         }
 
         [Theory]
@@ -170,16 +162,15 @@ namespace System.CommandLine.Tests
         [InlineData(" -x")]
         [InlineData("--aa aa")]
         public void When_an_option_is_created_with_an_alias_that_contains_whitespace_then_an_informative_error_is_returned(
-            string alias)
+            string alias
+        )
         {
             Action create = () => new Option(alias);
 
             create.Should()
-                  .Throw<ArgumentException>()
-                  .Which
-                  .Message
-                  .Should()
-                  .Contain($"Option alias cannot contain whitespace: \"{alias}\"");
+                .Throw<ArgumentException>()
+                .Which.Message.Should()
+                .Contain($"Option alias cannot contain whitespace: \"{alias}\"");
         }
 
         [Theory]
@@ -187,18 +178,17 @@ namespace System.CommandLine.Tests
         [InlineData(" -x")]
         [InlineData("--aa aa")]
         public void When_an_option_alias_is_added_and_contains_whitespace_then_an_informative_error_is_returned(
-            string alias)
+            string alias
+        )
         {
             var option = new Option("-x");
 
             Action addAlias = () => option.AddAlias(alias);
 
             addAlias.Should()
-                    .Throw<ArgumentException>()
-                    .Which
-                    .Message
-                    .Should()
-                    .Contain($"Option alias cannot contain whitespace: \"{alias}\"");
+                .Throw<ArgumentException>()
+                .Which.Message.Should()
+                .Contain($"Option alias cannot contain whitespace: \"{alias}\"");
         }
 
         [Theory]
@@ -208,11 +198,11 @@ namespace System.CommandLine.Tests
         public void When_options_use_different_prefixes_they_still_work(string prefix)
         {
             var rootCommand = new RootCommand
-                              {
-                                  new Option<string>(prefix + "a"),
-                                  new Option(prefix + "b"),
-                                  new Option<string>(prefix + "c")
-                              };
+            {
+                new Option<string>(prefix + "a"),
+                new Option(prefix + "b"),
+                new Option<string>(prefix + "c")
+            };
             var result = rootCommand.Parse(prefix + "c value-for-c " + prefix + "a value-for-a");
 
             result.ValueForOption(prefix + "a").Should().Be("value-for-a");
@@ -229,7 +219,7 @@ namespace System.CommandLine.Tests
             option.Description.Should().Be("desc");
             option.IsHidden.Should().BeFalse();
         }
-        
+
         [Fact]
         public void Argument_takes_option_alias_as_its_name_when_it_is_not_provided()
         {
@@ -252,35 +242,29 @@ namespace System.CommandLine.Tests
         [Fact]
         public void Option_T_default_value_can_be_set()
         {
-            var option = new Option<int>(
-                "-x",
-                parseArgument: parsed => 123,
-                isDefault: true);
+            var option = new Option<int>("-x", parseArgument: parsed => 123, isDefault: true);
 
-            var result = option
-                         .Parse("")
-                         .FindResultFor(option)
-                         .GetValueOrDefault()
-                         .Should()
-                         .Be(123);
+            var result = option.Parse("")
+                .FindResultFor(option)
+                .GetValueOrDefault()
+                .Should()
+                .Be(123);
         }
 
         [Fact]
         public void Option_T_default_value_is_validated()
         {
             var option = new Option<int>("-x", () => 123);
-            option.AddValidator( symbol =>
-                    symbol.Tokens
-                    .Select(t => t.Value)
-                    .Where(v => v == "123")
-                    .Select(x => "ERR")
-                    .FirstOrDefault());
+            option.AddValidator(
+                symbol =>
+                    symbol.Tokens.Select(t => t.Value)
+                        .Where(v => v == "123")
+                        .Select(x => "ERR")
+                        .FirstOrDefault()
+            );
 
-
-            option
-                .Parse("-x 123")
-                .Errors
-                .Select(e => e.Message)
+            option.Parse("-x 123")
+                .Errors.Select(e => e.Message)
                 .Should()
                 .BeEquivalentTo(new[] { "ERR" });
         }
@@ -291,12 +275,8 @@ namespace System.CommandLine.Tests
             var option = new Option<string>("-x");
 
             var result = option.Parse("");
-            result.HasOption(option)
-                .Should()
-                .BeFalse();
-            result.ValueForOption(option)
-                .Should()
-                .BeEmpty();
+            result.HasOption(option).Should().BeFalse();
+            result.ValueForOption(option).Should().BeEmpty();
         }
 
         [Fact]
@@ -305,12 +285,8 @@ namespace System.CommandLine.Tests
             var option = new Option<IEnumerable<string>>("-x");
 
             var result = option.Parse("");
-            result.HasOption(option)
-                .Should()
-                .BeFalse(); 
-            result.ValueForOption(option)
-                .Should()
-                .BeEmpty();
+            result.HasOption(option).Should().BeFalse();
+            result.ValueForOption(option).Should().BeEmpty();
         }
 
         [Fact]
@@ -319,12 +295,8 @@ namespace System.CommandLine.Tests
             var option = new Option<string[]>("-x");
 
             var result = option.Parse("");
-            result.HasOption(option)
-                .Should()
-                .BeFalse();
-            result.ValueForOption(option)
-                .Should()
-                .BeEmpty();
+            result.HasOption(option).Should().BeFalse();
+            result.ValueForOption(option).Should().BeEmpty();
         }
 
         [Fact]
@@ -333,12 +305,8 @@ namespace System.CommandLine.Tests
             var option = new Option<List<string>>("-x");
 
             var result = option.Parse("");
-            result.HasOption(option)
-                .Should()
-                .BeFalse();
-            result.ValueForOption(option)
-                .Should()
-                .BeEmpty();
+            result.HasOption(option).Should().BeFalse();
+            result.ValueForOption(option).Should().BeEmpty();
         }
 
         [Fact]
@@ -347,12 +315,8 @@ namespace System.CommandLine.Tests
             var option = new Option<IList<string>>("-x");
 
             var result = option.Parse("");
-            result.HasOption(option)
-                .Should()
-                .BeFalse();
-            result.ValueForOption(option)
-                .Should()
-                .BeEmpty();
+            result.HasOption(option).Should().BeFalse();
+            result.ValueForOption(option).Should().BeEmpty();
         }
 
         [Fact]
@@ -360,12 +324,8 @@ namespace System.CommandLine.Tests
         {
             var option = new Option<System.Collections.IList>("-x");
             var result = option.Parse("");
-            result.HasOption(option)
-                .Should()
-                .BeFalse();
-            result.ValueForOption(option)
-                .Should()
-                .BeEmpty();
+            result.HasOption(option).Should().BeFalse();
+            result.ValueForOption(option).Should().BeEmpty();
         }
 
         [Fact]
@@ -373,12 +333,8 @@ namespace System.CommandLine.Tests
         {
             var option = new Option<System.Collections.ICollection>("-x");
             var result = option.Parse("");
-            result.HasOption(option)
-                .Should()
-                .BeFalse();
-            result.ValueForOption(option)
-                .Should()
-                .BeEmpty();
+            result.HasOption(option).Should().BeFalse();
+            result.ValueForOption(option).Should().BeEmpty();
         }
 
         [Fact]
@@ -386,12 +342,8 @@ namespace System.CommandLine.Tests
         {
             var option = new Option<System.Collections.IEnumerable>("-x");
             var result = option.Parse("");
-            result.HasOption(option)
-                .Should()
-                .BeFalse();
-            result.ValueForOption(option)
-                .Should()
-                .BeEmpty();
+            result.HasOption(option).Should().BeFalse();
+            result.ValueForOption(option).Should().BeEmpty();
         }
 
         [Fact]
@@ -400,18 +352,17 @@ namespace System.CommandLine.Tests
             var option = new Option<ICollection<string>>("-x");
 
             var result = option.Parse("");
-            result.HasOption(option)
-                .Should()
-                .BeFalse();
-            result.ValueForOption(option)
-                .Should()
-                .BeEmpty();
+            result.HasOption(option).Should().BeFalse();
+            result.ValueForOption(option).Should().BeEmpty();
         }
 
         [Fact]
         public void Single_option_arg_is_matched_when_disallowing_multiple_args_per_option_token()
         {
-            var option = new Option<string[]>("--option") { AllowMultipleArgumentsPerToken = false };
+            var option = new Option<string[]>("--option")
+            {
+                AllowMultipleArgumentsPerToken = false
+            };
             var command = new Command("the-command") { option };
 
             var result = command.Parse("--option 1 2");
@@ -425,7 +376,10 @@ namespace System.CommandLine.Tests
         [Fact]
         public void Multiple_option_args_are_matched_with_multiple_option_tokens_when_disallowing_multiple_args_per_option_token()
         {
-            var option = new Option<string[]>("--option") { AllowMultipleArgumentsPerToken = false };
+            var option = new Option<string[]>("--option")
+            {
+                AllowMultipleArgumentsPerToken = false
+            };
             var command = new Command("the-command") { option };
 
             var result = command.Parse("--option 1 --option 2");
@@ -467,12 +421,8 @@ namespace System.CommandLine.Tests
 
             var result = option.Parse("");
 
-            result.HasOption(option)
-                  .Should()
-                  .BeFalse();
-            result.ValueForOption(option)
-                  .Should()
-                  .BeFalse();
+            result.HasOption(option).Should().BeFalse();
+            result.ValueForOption(option).Should().BeFalse();
         }
 
         protected override Symbol CreateSymbol(string name) => new Option(name);

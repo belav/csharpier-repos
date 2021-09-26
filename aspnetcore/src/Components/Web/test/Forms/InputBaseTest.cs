@@ -23,8 +23,12 @@ namespace Microsoft.AspNetCore.Components.Forms
 
             // Act/Assert
             var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-                () => testRenderer.RenderRootComponentAsync(componentId));
-            Assert.StartsWith($"{typeof(TestInputComponent<string>)} requires a cascading parameter of type {nameof(EditContext)}", ex.Message);
+                () => testRenderer.RenderRootComponentAsync(componentId)
+            );
+            Assert.StartsWith(
+                $"{typeof(TestInputComponent<string>)} requires a cascading parameter of type {nameof(EditContext)}",
+                ex.Message
+            );
         }
 
         [Fact]
@@ -32,13 +36,20 @@ namespace Microsoft.AspNetCore.Components.Forms
         {
             // Arrange
             var model = new TestModel();
-            var rootComponent = new TestInputHostComponent<string, TestInputComponent<string>> { EditContext = new EditContext(model), ValueExpression = () => model.StringProperty };
+            var rootComponent = new TestInputHostComponent<string, TestInputComponent<string>>
+            {
+                EditContext = new EditContext(model),
+                ValueExpression = () => model.StringProperty
+            };
             await InputRenderer.RenderAndGetComponent(rootComponent);
 
             // Act/Assert
             rootComponent.EditContext = new EditContext(model);
             var ex = Assert.Throws<InvalidOperationException>(() => rootComponent.TriggerRender());
-            Assert.StartsWith($"{typeof(TestInputComponent<string>)} does not support changing the EditContext dynamically", ex.Message);
+            Assert.StartsWith(
+                $"{typeof(TestInputComponent<string>)} does not support changing the EditContext dynamically",
+                ex.Message
+            );
         }
 
         [Fact]
@@ -46,11 +57,19 @@ namespace Microsoft.AspNetCore.Components.Forms
         {
             // Arrange
             var model = new TestModel();
-            var rootComponent = new TestInputHostComponent<string, TestInputComponent<string>> { EditContext = new EditContext(model) };
+            var rootComponent = new TestInputHostComponent<string, TestInputComponent<string>>
+            {
+                EditContext = new EditContext(model)
+            };
 
             // Act/Assert
-            var ex = await Assert.ThrowsAsync<InvalidOperationException>(() => InputRenderer.RenderAndGetComponent(rootComponent));
-            Assert.Contains($"{typeof(TestInputComponent<string>)} requires a value for the 'ValueExpression' parameter. Normally this is provided automatically when using 'bind-Value'.", ex.Message);
+            var ex = await Assert.ThrowsAsync<InvalidOperationException>(
+                () => InputRenderer.RenderAndGetComponent(rootComponent)
+            );
+            Assert.Contains(
+                $"{typeof(TestInputComponent<string>)} requires a value for the 'ValueExpression' parameter. Normally this is provided automatically when using 'bind-Value'.",
+                ex.Message
+            );
         }
 
         [Fact]
@@ -107,7 +126,10 @@ namespace Microsoft.AspNetCore.Components.Forms
             var inputComponent = await InputRenderer.RenderAndGetComponent(rootComponent);
 
             // Assert
-            Assert.Equal(FieldIdentifier.Create(() => model.StringProperty), inputComponent.FieldIdentifier);
+            Assert.Equal(
+                FieldIdentifier.Create(() => model.StringProperty),
+                inputComponent.FieldIdentifier
+            );
         }
 
         [Fact]
@@ -289,7 +311,10 @@ namespace Microsoft.AspNetCore.Components.Forms
             var fieldIdentifier = FieldIdentifier.Create(() => model.DateProperty);
             var inputComponent = await InputRenderer.RenderAndGetComponent(rootComponent);
             var numValidationStateChanges = 0;
-            rootComponent.EditContext.OnValidationStateChanged += (sender, eventArgs) => { numValidationStateChanges++; };
+            rootComponent.EditContext.OnValidationStateChanged += (sender, eventArgs) =>
+            {
+                numValidationStateChanges++;
+            };
 
             // Act
             await inputComponent.SetCurrentValueAsStringAsync("1991/11/20");
@@ -319,13 +344,19 @@ namespace Microsoft.AspNetCore.Components.Forms
             var fieldIdentifier = FieldIdentifier.Create(() => model.DateProperty);
             var inputComponent = await InputRenderer.RenderAndGetComponent(rootComponent);
             var numValidationStateChanges = 0;
-            rootComponent.EditContext.OnValidationStateChanged += (sender, eventArgs) => { numValidationStateChanges++; };
+            rootComponent.EditContext.OnValidationStateChanged += (sender, eventArgs) =>
+            {
+                numValidationStateChanges++;
+            };
 
             // Act/Assert 1: Transition to invalid
             await inputComponent.SetCurrentValueAsStringAsync("1991/11/40");
             Assert.Empty(valueChangedArgs);
             Assert.True(rootComponent.EditContext.IsModified(fieldIdentifier));
-            Assert.Equal(new[] { "Bad date value" }, rootComponent.EditContext.GetValidationMessages(fieldIdentifier));
+            Assert.Equal(
+                new[] { "Bad date value" },
+                rootComponent.EditContext.GetValidationMessages(fieldIdentifier)
+            );
             Assert.Equal(1, numValidationStateChanges);
 
             // Act/Assert 2: Transition to valid
@@ -365,7 +396,9 @@ namespace Microsoft.AspNetCore.Components.Forms
             // Act: update the field state in the EditContext and notify
             var messageStore = new ValidationMessageStore(rootComponent.EditContext);
             messageStore.Add(fieldIdentifier, "Some message");
-            await renderer.Dispatcher.InvokeAsync(rootComponent.EditContext.NotifyValidationStateChanged);
+            await renderer.Dispatcher.InvokeAsync(
+                rootComponent.EditContext.NotifyValidationStateChanged
+            );
 
             // Assert: The input component rendered itself again and now has the new class
             var batch2 = renderer.Batches.Skip(1).Single();
@@ -389,13 +422,18 @@ namespace Microsoft.AspNetCore.Components.Forms
             var renderer = new TestRenderer();
             var rootComponentId = renderer.AssignRootComponentId(rootComponent);
             await renderer.RenderRootComponentAsync(rootComponentId);
-            var component = renderer.Batches.Single().GetComponentFrames<TestInputComponent<string>>().Single().Component;
+            var component =
+                renderer.Batches.Single()
+                    .GetComponentFrames<TestInputComponent<string>>()
+                    .Single().Component;
 
             // Act: dispose, then update the field state in the EditContext and notify
             ((IDisposable)component).Dispose();
             var messageStore = new ValidationMessageStore(rootComponent.EditContext);
             messageStore.Add(fieldIdentifier, "Some message");
-            await renderer.Dispatcher.InvokeAsync(rootComponent.EditContext.NotifyValidationStateChanged);
+            await renderer.Dispatcher.InvokeAsync(
+                rootComponent.EditContext.NotifyValidationStateChanged
+            );
 
             // Assert: No additional render
             Assert.Empty(renderer.Batches.Skip(1));
@@ -421,7 +459,6 @@ namespace Microsoft.AspNetCore.Components.Forms
             var renderer = new TestRenderer();
             var rootComponentId = renderer.AssignRootComponentId(rootComponent);
             await renderer.RenderRootComponentAsync(rootComponentId);
-
 
             // Initally, it rendered one batch and is valid
             var batch1 = renderer.Batches.Single();
@@ -496,7 +533,9 @@ namespace Microsoft.AspNetCore.Components.Forms
 
             // Act: update the field state in the EditContext and notify
             messageStore.Clear(fieldIdentifier);
-            await renderer.Dispatcher.InvokeAsync(rootComponent.EditContext.NotifyValidationStateChanged);
+            await renderer.Dispatcher.InvokeAsync(
+                rootComponent.EditContext.NotifyValidationStateChanged
+            );
 
             // Assert: The input component rendered itself again and now has the new class
             var batch2 = renderer.Batches.Skip(1).Single();
@@ -527,7 +566,8 @@ namespace Microsoft.AspNetCore.Components.Forms
                 get => base.CurrentValueAsString;
             }
 
-            public new IReadOnlyDictionary<string, object> AdditionalAttributes => base.AdditionalAttributes;
+            public new IReadOnlyDictionary<string, object> AdditionalAttributes =>
+                base.AdditionalAttributes;
 
             public new string CssClass => base.CssClass;
 
@@ -535,7 +575,11 @@ namespace Microsoft.AspNetCore.Components.Forms
 
             public new FieldIdentifier FieldIdentifier => base.FieldIdentifier;
 
-            protected override bool TryParseValueFromString(string value, out T result, out string validationErrorMessage)
+            protected override bool TryParseValueFromString(
+                string value,
+                out T result,
+                out string validationErrorMessage
+            )
             {
                 throw new NotImplementedException();
             }
@@ -546,16 +590,25 @@ namespace Microsoft.AspNetCore.Components.Forms
                 // (e.g., from @bind), except to simplify the test code there's an InvokeAsync
                 // here. In production code it wouldn't normally be required because @bind
                 // calls run on the sync context anyway.
-                await InvokeAsync(() => { base.CurrentValueAsString = value; });
+                await InvokeAsync(
+                    () =>
+                    {
+                        base.CurrentValueAsString = value;
+                    }
+                );
             }
         }
 
         private class TestDateInputComponent : TestInputComponent<DateTime>
         {
-            protected override string FormatValueAsString(DateTime value)
-                => value.ToString("yyyy/MM/dd", CultureInfo.InvariantCulture);
+            protected override string FormatValueAsString(DateTime value) =>
+                value.ToString("yyyy/MM/dd", CultureInfo.InvariantCulture);
 
-            protected override bool TryParseValueFromString(string value, out DateTime result, out string validationErrorMessage)
+            protected override bool TryParseValueFromString(
+                string value,
+                out DateTime result,
+                out string validationErrorMessage
+            )
             {
                 if (DateTime.TryParse(value, out result))
                 {

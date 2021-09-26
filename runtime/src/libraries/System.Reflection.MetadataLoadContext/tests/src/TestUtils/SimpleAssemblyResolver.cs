@@ -23,10 +23,19 @@ namespace System.Reflection.Tests
             foreach (Assembly assembly in context.GetAssemblies())
             {
                 AssemblyName assemblyNameFromContext = assembly.GetName();
-                if (assemblyName.Name.Equals(assemblyNameFromContext.Name, StringComparison.OrdinalIgnoreCase) &&
-                    NormalizeVersion(assemblyName.Version).Equals(assemblyNameFromContext.Version) &&
-                    pktFromAssemblyName.SequenceEqual(assemblyNameFromContext.GetPublicKeyToken()) &&
-                    NormalizeCultureName(assemblyName.CultureName).Equals(NormalizeCultureName(assemblyNameFromContext.CultureName)))
+                if (
+                    assemblyName.Name.Equals(
+                        assemblyNameFromContext.Name,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                    && NormalizeVersion(assemblyName.Version)
+                        .Equals(assemblyNameFromContext.Version)
+                    && pktFromAssemblyName.SequenceEqual(
+                        assemblyNameFromContext.GetPublicKeyToken()
+                    )
+                    && NormalizeCultureName(assemblyName.CultureName)
+                        .Equals(NormalizeCultureName(assemblyNameFromContext.CultureName))
+                )
                     return assembly;
             }
 

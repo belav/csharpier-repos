@@ -8,13 +8,13 @@ using Moq.Language.Flow;
 
 namespace Moq.Language
 {
-	/// <summary>
+    /// <summary>
 	/// Defines the <c>Callback</c> verb and overloads.
 	/// </summary>
-	[EditorBrowsable(EditorBrowsableState.Never)]
-	public partial interface ICallback : IFluentInterface
-	{
-		/// <summary>
+    [EditorBrowsable(EditorBrowsableState.Never)]
+    public partial interface ICallback : IFluentInterface
+    {
+        /// <summary>
 		///   Specifies a callback to invoke when the method is called that receives the original <see cref="IInvocation"/>.
 		///   <para>
 		///     This overload is intended to be used in scenarios involving generic type argument matchers
@@ -38,9 +38,9 @@ namespace Moq.Language
 		///     mock.Object.DoSomethingWith&lt;Something&gt;();
 		///   </code>
 		/// </example>
-		ICallbackResult Callback(InvocationAction action);
+        ICallbackResult Callback(InvocationAction action);
 
-		/// <summary>
+        /// <summary>
 		/// Specifies a callback of any delegate type to invoke when the method is called.
 		/// This overload specifically allows you to define callbacks for methods with by-ref parameters.
 		/// By-ref parameters can be assigned to.
@@ -57,9 +57,9 @@ namespace Moq.Language
 		///     .Callback(new ExecuteAction((ref Command command) => Console.WriteLine("Executing command...")));
 		/// </code>
 		/// </example>
-		ICallbackResult Callback(Delegate callback);
+        ICallbackResult Callback(Delegate callback);
 
-		/// <summary>
+        /// <summary>
 		/// Specifies a callback to invoke when the method is called.
 		/// </summary>
 		/// <param name="action">The callback method to invoke.</param>
@@ -72,9 +72,9 @@ namespace Moq.Language
 		///     .Callback(() => called = true);
 		/// </code>
 		/// </example>
-		ICallbackResult Callback(Action action);
+        ICallbackResult Callback(Action action);
 
-		/// <summary>
+        /// <summary>
 		/// Specifies a callback to invoke when the method is called that receives the original arguments.
 		/// </summary>
 		/// <typeparam name="T">The argument type of the invoked method.</typeparam>
@@ -90,20 +90,19 @@ namespace Moq.Language
 		///     .Callback((string command) => Console.WriteLine(command));
 		/// </code>
 		/// </example>
-		ICallbackResult Callback<T>(Action<T> action);
-	}
+        ICallbackResult Callback<T>(Action<T> action);
+    }
 
-	/// <summary>
+    /// <summary>
 	/// Defines the <c>Callback</c> verb and overloads for callbacks on
 	/// setups that return a value.
 	/// </summary>
 	/// <typeparam name="TMock">Mocked type.</typeparam>
 	/// <typeparam name="TResult">Type of the return value of the setup.</typeparam>
-	[EditorBrowsable(EditorBrowsableState.Never)]
-	public partial interface ICallback<TMock, TResult> : IFluentInterface
-		where TMock : class
-	{
-		/// <summary>
+    [EditorBrowsable(EditorBrowsableState.Never)]
+    public partial interface ICallback<TMock, TResult> : IFluentInterface where TMock : class
+    {
+        /// <summary>
 		///   Specifies a callback to invoke when the method is called that receives the original <see cref="IInvocation"/>.
 		///   <para>
 		///     This overload is intended to be used in scenarios involving generic type argument matchers
@@ -127,9 +126,9 @@ namespace Moq.Language
 		///     mock.Object.DoSomethingWith&lt;Something&gt;();
 		///   </code>
 		/// </example>
-		IReturnsThrows<TMock, TResult> Callback(InvocationAction action);
+        IReturnsThrows<TMock, TResult> Callback(InvocationAction action);
 
-		/// <summary>
+        /// <summary>
 		/// Specifies a callback of any delegate type to invoke when the method is called.
 		/// This overload specifically allows you to define callbacks for methods with by-ref parameters.
 		/// By-ref parameters can be assigned to.
@@ -146,9 +145,9 @@ namespace Moq.Language
 		///     .Callback(new ExecuteAction((ref Command command) => Console.WriteLine("Executing command...")));
 		/// </code>
 		/// </example>
-		IReturnsThrows<TMock, TResult> Callback(Delegate callback);
+        IReturnsThrows<TMock, TResult> Callback(Delegate callback);
 
-		/// <summary>
+        /// <summary>
 		/// Specifies a callback to invoke when the method is called.
 		/// </summary>
 		/// <param name="action">The callback method to invoke.</param>
@@ -163,9 +162,9 @@ namespace Moq.Language
 		/// Note that in the case of value-returning methods, after the <c>Callback</c>
 		/// call you can still specify the return value.
 		/// </example>
-		IReturnsThrows<TMock, TResult> Callback(Action action);
+        IReturnsThrows<TMock, TResult> Callback(Action action);
 
-		/// <summary>
+        /// <summary>
 		/// Specifies a callback to invoke when the method is called that receives the original arguments.
 		/// </summary>
 		/// <typeparam name="T">The type of the argument of the invoked method.</typeparam>
@@ -182,6 +181,6 @@ namespace Moq.Language
 		///     .Returns(true);
 		/// </code>
 		/// </example>
-		IReturnsThrows<TMock, TResult> Callback<T>(Action<T> action);
-	}
+        IReturnsThrows<TMock, TResult> Callback<T>(Action<T> action);
+    }
 }

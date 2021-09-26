@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Text;
 
-
 internal class baseclass
 {
     public virtual int virtualmethod(int a, int b)
@@ -33,8 +32,6 @@ internal class Test : baseclass
         return a / b;
     }
 }
-
-
 
 internal class Program
 {
@@ -83,7 +80,6 @@ internal class Program
             }
             Console.WriteLine("passed");
         }
-
 
         return 100;
     }

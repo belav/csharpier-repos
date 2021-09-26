@@ -47,10 +47,7 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         public async Task ProcessAsync_WithoutSpecifyingRenderMode_ThrowsError()
         {
             // Arrange
-            var tagHelper = new ComponentTagHelper
-            {
-                ViewContext = GetViewContext(),
-            };
+            var tagHelper = new ComponentTagHelper { ViewContext = GetViewContext(), };
             var context = GetTagHelperContext();
             var output = GetTagHelperOutput();
 
@@ -58,7 +55,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             await ExceptionAssert.ThrowsArgumentAsync(
                 () => tagHelper.ProcessAsync(context, output),
                 nameof(RenderMode),
-                "A value for the 'render-mode' attribute must be supplied to the 'component' tag helper.");
+                "A value for the 'render-mode' attribute must be supplied to the 'component' tag helper."
+            );
         }
 
         private static TagHelperContext GetTagHelperContext()
@@ -67,7 +65,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 "component",
                 new TagHelperAttributeList(),
                 new Dictionary<object, object>(),
-                Guid.NewGuid().ToString("N"));
+                Guid.NewGuid().ToString("N")
+            );
         }
 
         private static TagHelperOutput GetTagHelperOutput()
@@ -75,29 +74,33 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             return new TagHelperOutput(
                 "component",
                 new TagHelperAttributeList(),
-                (_, __) => Task.FromResult<TagHelperContent>(new DefaultTagHelperContent()));
+                (_, __) => Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+            );
         }
 
         private ViewContext GetViewContext()
         {
             var htmlContent = new HtmlContentBuilder().AppendHtml("Hello world");
-            var renderer = Mock.Of<IComponentRenderer>(c =>
-                c.RenderComponentAsync(It.IsAny<ViewContext>(), It.IsAny<Type>(), It.IsAny<RenderMode>(), It.IsAny<object>()) == Task.FromResult<IHtmlContent>(htmlContent));
+            var renderer = Mock.Of<IComponentRenderer>(
+                c =>
+                    c.RenderComponentAsync(
+                        It.IsAny<ViewContext>(),
+                        It.IsAny<Type>(),
+                        It.IsAny<RenderMode>(),
+                        It.IsAny<object>()
+                    ) == Task.FromResult<IHtmlContent>(htmlContent)
+            );
 
             var httpContext = new DefaultHttpContext
             {
-                RequestServices = new ServiceCollection()
-                    .AddSingleton<IComponentRenderer>(renderer)
+                RequestServices = new ServiceCollection().AddSingleton<IComponentRenderer>(renderer)
                     .AddSingleton<HtmlRenderer>()
                     .AddSingleton<ILoggerFactory>(NullLoggerFactory.Instance)
                     .AddSingleton<HtmlEncoder>(HtmlEncoder.Default)
                     .BuildServiceProvider(),
             };
 
-            return new ViewContext
-            {
-                HttpContext = httpContext,
-            };
+            return new ViewContext { HttpContext = httpContext, };
         }
     }
 }

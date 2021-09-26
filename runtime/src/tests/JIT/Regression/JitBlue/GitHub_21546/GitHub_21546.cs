@@ -15,7 +15,7 @@ namespace GitHub_21546
         static Point checkA;
         static Point checkB;
         static Point checkC;
-        static int   returnVal;
+        static int returnVal;
 
         [MethodImpl(MethodImplOptions.NoInlining)]
         static void check(Point a, Point b, Point c)
@@ -50,15 +50,12 @@ namespace GitHub_21546
 
         static Point NextPoint(Random random)
         {
-            return new Point(
-                (float)random.NextDouble(),
-                (float)random.NextDouble()
-            );
+            return new Point((float)random.NextDouble(), (float)random.NextDouble());
         }
 
         static int Main()
         {
-            returnVal     = 100;
+            returnVal = 100;
             Random random = new Random(13);
             List<Point> p = new List<Point>();
 

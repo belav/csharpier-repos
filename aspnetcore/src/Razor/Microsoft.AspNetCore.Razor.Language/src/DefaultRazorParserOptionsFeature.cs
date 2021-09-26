@@ -6,7 +6,9 @@ using System.Linq;
 namespace Microsoft.AspNetCore.Razor.Language
 {
 #pragma warning disable CS0618 // Type or member is obsolete
-    internal class DefaultRazorParserOptionsFeature : RazorEngineFeatureBase, IRazorParserOptionsFeature
+    internal class DefaultRazorParserOptionsFeature
+        : RazorEngineFeatureBase,
+          IRazorParserOptionsFeature
 #pragma warning restore CS0618 // Type or member is obsolete
     {
         private readonly bool _designTime;
@@ -14,7 +16,11 @@ namespace Microsoft.AspNetCore.Razor.Language
         private readonly string _fileKind;
         private IConfigureRazorParserOptionsFeature[] _configureOptions;
 
-        public DefaultRazorParserOptionsFeature(bool designTime, RazorLanguageVersion version, string fileKind)
+        public DefaultRazorParserOptionsFeature(
+            bool designTime,
+            RazorLanguageVersion version,
+            string fileKind
+        )
         {
             _designTime = designTime;
             _version = version;
@@ -23,7 +29,8 @@ namespace Microsoft.AspNetCore.Razor.Language
 
         protected override void OnInitialized()
         {
-            _configureOptions = Engine.Features.OfType<IConfigureRazorParserOptionsFeature>().ToArray();
+            _configureOptions = Engine.Features.OfType<IConfigureRazorParserOptionsFeature>()
+                .ToArray();
         }
 
         public RazorParserOptions GetOptions()

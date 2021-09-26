@@ -24,7 +24,11 @@ namespace System.Net.Quic.Implementations.Mock
         private ConnectionState? _state;
 
         // Constructor for outbound connections
-        internal MockConnection(EndPoint? remoteEndPoint, SslClientAuthenticationOptions? sslClientAuthenticationOptions, IPEndPoint? localEndPoint = null)
+        internal MockConnection(
+            EndPoint? remoteEndPoint,
+            SslClientAuthenticationOptions? sslClientAuthenticationOptions,
+            IPEndPoint? localEndPoint = null
+        )
         {
             if (remoteEndPoint is null)
             {
@@ -43,7 +47,6 @@ namespace System.Net.Quic.Implementations.Mock
             _sslClientAuthenticationOptions = sslClientAuthenticationOptions;
             _nextOutboundBidirectionalStream = 0;
             _nextOutboundUnidirectionalStream = 2;
-
             // _state is not initialized until ConnectAsync
         }
 
@@ -170,8 +173,13 @@ namespace System.Net.Quic.Implementations.Mock
                 throw new InvalidOperationException("Not connected");
             }
 
-            MockStream.StreamState streamState = new MockStream.StreamState(streamId, bidirectional);
-            Channel<MockStream.StreamState> streamChannel = _isClient ? state._clientInitiatedStreamChannel : state._serverInitiatedStreamChannel;
+            MockStream.StreamState streamState = new MockStream.StreamState(
+                streamId,
+                bidirectional
+            );
+            Channel<MockStream.StreamState> streamChannel = _isClient
+                ? state._clientInitiatedStreamChannel
+                : state._serverInitiatedStreamChannel;
             streamChannel.Writer.TryWrite(streamState);
 
             return new MockStream(streamState, true);
@@ -181,7 +189,9 @@ namespace System.Net.Quic.Implementations.Mock
 
         internal override long GetRemoteAvailableBidirectionalStreamCount() => long.MaxValue;
 
-        internal override async ValueTask<QuicStreamProvider> AcceptStreamAsync(CancellationToken cancellationToken = default)
+        internal override async ValueTask<QuicStreamProvider> AcceptStreamAsync(
+            CancellationToken cancellationToken = default
+        )
         {
             CheckDisposed();
 
@@ -191,11 +201,16 @@ namespace System.Net.Quic.Implementations.Mock
                 throw new InvalidOperationException("Not connected");
             }
 
-            Channel<MockStream.StreamState> streamChannel = _isClient ? state._serverInitiatedStreamChannel : state._clientInitiatedStreamChannel;
+            Channel<MockStream.StreamState> streamChannel = _isClient
+                ? state._serverInitiatedStreamChannel
+                : state._clientInitiatedStreamChannel;
 
             try
             {
-                MockStream.StreamState streamState = await streamChannel.Reader.ReadAsync(cancellationToken).ConfigureAwait(false);
+                MockStream.StreamState streamState = await streamChannel.Reader.ReadAsync(
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 return new MockStream(streamState, false);
             }
             catch (ChannelClosedException)
@@ -205,7 +220,10 @@ namespace System.Net.Quic.Implementations.Mock
             }
         }
 
-        internal override ValueTask CloseAsync(long errorCode, CancellationToken cancellationToken = default)
+        internal override ValueTask CloseAsync(
+            long errorCode,
+            CancellationToken cancellationToken = default
+        )
         {
             ConnectionState? state = _state;
             if (state is not null)
@@ -242,7 +260,9 @@ namespace System.Net.Quic.Implementations.Mock
                     ConnectionState? state = _state;
                     if (state is not null)
                     {
-                        Channel<MockStream.StreamState> streamChannel = _isClient ? state._clientInitiatedStreamChannel : state._serverInitiatedStreamChannel;
+                        Channel<MockStream.StreamState> streamChannel = _isClient
+                            ? state._clientInitiatedStreamChannel
+                            : state._serverInitiatedStreamChannel;
                         streamChannel.Writer.Complete();
                     }
                 }

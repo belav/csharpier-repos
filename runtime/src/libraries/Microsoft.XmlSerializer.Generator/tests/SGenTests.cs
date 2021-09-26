@@ -18,7 +18,9 @@ namespace Microsoft.XmlSerializer.Generator.Tests
             const string CodeFile = "SerializableAssembly.XmlSerializers.cs";
             const string LKGCodeFile = "LKG." + CodeFile;
 
-            var type = Type.GetType("Microsoft.XmlSerializer.Generator.Sgen, dotnet-Microsoft.XmlSerializer.Generator");
+            var type = Type.GetType(
+                "Microsoft.XmlSerializer.Generator.Sgen, dotnet-Microsoft.XmlSerializer.Generator"
+            );
             MethodInfo md = type.GetMethod("Main", BindingFlags.Static | BindingFlags.Public);
             string[] args = new string[] { "SerializableAssembly.dll", "--force", "--quiet" };
             int n = (int)md.Invoke(null, new object[] { args });
@@ -27,7 +29,10 @@ namespace Microsoft.XmlSerializer.Generator.Tests
             Assert.True(File.Exists(CodeFile), string.Format("Fail to generate {0}.", CodeFile));
             // Compare the generated CodeFiles from the LKG with the live built shared framework one.
             // Not comparing byte per byte as the generated output isn't deterministic.
-            Assert.Equal(new System.IO.FileInfo(LKGCodeFile).Length, new System.IO.FileInfo(CodeFile).Length);
+            Assert.Equal(
+                new System.IO.FileInfo(LKGCodeFile).Length,
+                new System.IO.FileInfo(CodeFile).Length
+            );
         }
     }
 }

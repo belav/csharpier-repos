@@ -30,7 +30,9 @@ namespace Microsoft.NETCore.Platforms.BuildTasks
         private static Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
         {
             // apply any existing policy
-            AssemblyName referenceName = new AssemblyName(AppDomain.CurrentDomain.ApplyPolicy(args.Name));
+            AssemblyName referenceName = new AssemblyName(
+                AppDomain.CurrentDomain.ApplyPolicy(args.Name)
+            );
 
             string fileName = referenceName.Name + ".dll";
             string assemblyPath = null;

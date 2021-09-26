@@ -22,13 +22,13 @@ namespace Microsoft.AspNetCore.Diagnostics.FunctionalTests
             // (DefaultRequestCulture) is consistent regardless of system configuration or personal preferences.
             using (new CultureReplacer())
             {
-                _host = new HostBuilder()
-                .ConfigureWebHost(webHostBuilder =>
-                {
-                    webHostBuilder
-                    .UseTestServer()
-                    .UseStartup(typeof(TStartup));
-                }).Build();
+                _host = new HostBuilder().ConfigureWebHost(
+                        webHostBuilder =>
+                        {
+                            webHostBuilder.UseTestServer().UseStartup(typeof(TStartup));
+                        }
+                    )
+                    .Build();
 
                 _host.Start();
                 _server = _host.GetTestServer();

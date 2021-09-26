@@ -30,54 +30,81 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Highlighting
     [ContentType(ContentTypeNames.CSharpContentType)]
     [ContentType(ContentTypeNames.VisualBasicContentType)]
     [TextViewRole(PredefinedTextViewRoles.Interactive)]
-    internal class HighlighterViewTaggerProvider : AsynchronousViewTaggerProvider<KeywordHighlightTag>
+    internal class HighlighterViewTaggerProvider
+        : AsynchronousViewTaggerProvider<KeywordHighlightTag>
     {
         private readonly IHighlightingService _highlightingService;
-        private static readonly PooledObjects.ObjectPool<List<TextSpan>> s_listPool = new(() => new List<TextSpan>());
+        private static readonly PooledObjects.ObjectPool<List<TextSpan>> s_listPool =
+            new(() => new List<TextSpan>());
 
-        // Whenever an edit happens, clear all highlights.  When moving the caret, preserve 
+        // Whenever an edit happens, clear all highlights.  When moving the caret, preserve
         // highlights if the caret stays within an existing tag.
-        protected override TaggerCaretChangeBehavior CaretChangeBehavior => TaggerCaretChangeBehavior.RemoveAllTagsOnCaretMoveOutsideOfTag;
-        protected override TaggerTextChangeBehavior TextChangeBehavior => TaggerTextChangeBehavior.RemoveAllTags;
-        protected override IEnumerable<PerLanguageOption2<bool>> PerLanguageOptions => SpecializedCollections.SingletonEnumerable(FeatureOnOffOptions.KeywordHighlighting);
+        protected override TaggerCaretChangeBehavior CaretChangeBehavior =>
+            TaggerCaretChangeBehavior.RemoveAllTagsOnCaretMoveOutsideOfTag;
+        protected override TaggerTextChangeBehavior TextChangeBehavior =>
+            TaggerTextChangeBehavior.RemoveAllTags;
+        protected override IEnumerable<PerLanguageOption2<bool>> PerLanguageOptions =>
+            SpecializedCollections.SingletonEnumerable(FeatureOnOffOptions.KeywordHighlighting);
 
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
         public HighlighterViewTaggerProvider(
             IThreadingContext threadingContext,
             IHighlightingService highlightingService,
             IForegroundNotificationService notificationService,
-            IAsynchronousOperationListenerProvider listenerProvider)
-            : base(threadingContext, listenerProvider.GetListener(FeatureAttribute.KeywordHighlighting), notificationService)
+            IAsynchronousOperationListenerProvider listenerProvider
+        )
+            : base(
+                threadingContext,
+                listenerProvider.GetListener(FeatureAttribute.KeywordHighlighting),
+                notificationService
+            )
         {
             _highlightingService = highlightingService;
         }
 
-        protected override ITaggerEventSource CreateEventSource(ITextView textView, ITextBuffer subjectBuffer)
+        protected override ITaggerEventSource CreateEventSource(
+            ITextView textView,
+            ITextBuffer subjectBuffer
+        )
         {
             return TaggerEventSources.Compose(
                 TaggerEventSources.OnTextChanged(subjectBuffer, TaggerDelay.OnIdle),
-                TaggerEventSources.OnCaretPositionChanged(textView, subjectBuffer, TaggerDelay.NearImmediate),
-                TaggerEventSources.OnParseOptionChanged(subjectBuffer, TaggerDelay.NearImmediate));
+                TaggerEventSources.OnCaretPositionChanged(
+                    textView,
+                    subjectBuffer,
+                    TaggerDelay.NearImmediate
+                ),
+                TaggerEventSources.OnParseOptionChanged(subjectBuffer, TaggerDelay.NearImmediate)
+            );
         }
 
-        protected override async Task ProduceTagsAsync(TaggerContext<KeywordHighlightTag> context, DocumentSnapshotSpan documentSnapshotSpan, int? caretPosition)
+        protected override async Task ProduceTagsAsync(
+            TaggerContext<KeywordHighlightTag> context,
+            DocumentSnapshotSpan documentSnapshotSpan,
+            int? caretPosition
+        )
         {
             var cancellationToken = context.CancellationToken;
             var document = documentSnapshotSpan.Document;
 
             // https://devdiv.visualstudio.com/DevDiv/_workitems/edit/763988
-            // It turns out a document might be associated with a project of wrong language, e.g. C# document in a Xaml project. 
-            // Even though we couldn't repro the crash above, a fix is made in one of possibly multiple code paths that could cause 
-            // us to end up in this situation. 
-            // Regardless of the effective of the fix, we want to enhance the guard against such scenario here until an audit in 
+            // It turns out a document might be associated with a project of wrong language, e.g. C# document in a Xaml project.
+            // Even though we couldn't repro the crash above, a fix is made in one of possibly multiple code paths that could cause
+            // us to end up in this situation.
+            // Regardless of the effective of the fix, we want to enhance the guard against such scenario here until an audit in
             // workspace is completed to eliminate the root cause.
             if (document?.SupportsSyntaxTree != true)
             {
                 return;
             }
 
-            var documentOptions = await document.GetOptionsAsync(cancellationToken).ConfigureAwait(false);
+            var documentOptions = await document.GetOptionsAsync(cancellationToken)
+                .ConfigureAwait(false);
             if (!documentOptions.GetOption(FeatureOnOffOptions.KeywordHighlighting))
             {
                 return;
@@ -96,23 +123,38 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Highlighting
             // want to actually go recompute things.  Note: this only works for containment.  If the
             // user moves their caret to the end of a highlighted reference, we do want to recompute
             // as they may now be at the start of some other reference that should be highlighted instead.
-            var existingTags = context.GetExistingContainingTags(new SnapshotPoint(snapshot, position));
+            var existingTags = context.GetExistingContainingTags(
+                new SnapshotPoint(snapshot, position)
+            );
             if (!existingTags.IsEmpty())
             {
-                context.SetSpansTagged(SpecializedCollections.EmptyEnumerable<DocumentSnapshotSpan>());
+                context.SetSpansTagged(
+                    SpecializedCollections.EmptyEnumerable<DocumentSnapshotSpan>()
+                );
                 return;
             }
 
-            using (Logger.LogBlock(FunctionId.Tagger_Highlighter_TagProducer_ProduceTags, cancellationToken))
+            using (
+                Logger.LogBlock(
+                    FunctionId.Tagger_Highlighter_TagProducer_ProduceTags,
+                    cancellationToken
+                )
+            )
             using (s_listPool.GetPooledObject(out var highlights))
             {
-                var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+                var root = await document.GetSyntaxRootAsync(cancellationToken)
+                    .ConfigureAwait(false);
 
                 _highlightingService.AddHighlights(root, position, highlights, cancellationToken);
 
                 foreach (var span in highlights)
                 {
-                    context.AddTag(new TagSpan<KeywordHighlightTag>(span.ToSnapshotSpan(snapshot), KeywordHighlightTag.Instance));
+                    context.AddTag(
+                        new TagSpan<KeywordHighlightTag>(
+                            span.ToSnapshotSpan(snapshot),
+                            KeywordHighlightTag.Instance
+                        )
+                    );
                 }
             }
         }

@@ -24,8 +24,10 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             }
 
             var modelType = context.Metadata.ModelType;
-            if (modelType.IsGenericType &&
-                modelType.GetGenericTypeDefinition() == typeof(KeyValuePair<,>))
+            if (
+                modelType.IsGenericType
+                && modelType.GetGenericTypeDefinition() == typeof(KeyValuePair<, >)
+            )
             {
                 var typeArguments = modelType.GenericTypeArguments;
 
@@ -35,9 +37,14 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
                 var valueMetadata = context.MetadataProvider.GetMetadataForType(typeArguments[1]);
                 var valueBinder = context.CreateBinder(valueMetadata);
 
-                var binderType = typeof(KeyValuePairModelBinder<,>).MakeGenericType(typeArguments);
+                var binderType = typeof(KeyValuePairModelBinder<, >).MakeGenericType(typeArguments);
                 var loggerFactory = context.Services.GetRequiredService<ILoggerFactory>();
-                return (IModelBinder)Activator.CreateInstance(binderType, keyBinder, valueBinder, loggerFactory)!;
+                return (IModelBinder)Activator.CreateInstance(
+                    binderType,
+                    keyBinder,
+                    valueBinder,
+                    loggerFactory
+                )!;
             }
 
             return null;

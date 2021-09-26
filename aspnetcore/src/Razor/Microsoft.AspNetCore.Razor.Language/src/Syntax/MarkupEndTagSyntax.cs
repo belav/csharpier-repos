@@ -9,10 +9,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
     {
         public bool IsMarkupTransition
         {
-            get
-            {
-                return ((InternalSyntax.MarkupEndTagSyntax)Green).IsMarkupTransition;
-            }
+            get { return ((InternalSyntax.MarkupEndTagSyntax)Green).IsMarkupTransition; }
         }
 
         public SyntaxList<RazorSyntaxNode> Children => GetLegacyChildren();
@@ -40,14 +37,26 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
             if (Bang != null)
             {
                 // The prefix of an end tag(E.g '|</|!foo>') will have 'Any' accepted characters if a bang exists.
-                var acceptsAnyContext = new SpanContext(context.ChunkGenerator, SpanEditHandler.CreateDefault());
+                var acceptsAnyContext = new SpanContext(
+                    context.ChunkGenerator,
+                    SpanEditHandler.CreateDefault()
+                );
                 acceptsAnyContext.EditHandler.AcceptedCharacters = AcceptedCharactersInternal.Any;
-                builder.Add(SyntaxFactory.MarkupTextLiteral(tokens.Consume()).WithSpanContext(acceptsAnyContext));
-                
+                builder.Add(
+                    SyntaxFactory.MarkupTextLiteral(tokens.Consume())
+                        .WithSpanContext(acceptsAnyContext)
+                );
+
                 tokens.Add(Bang);
-                var acceptsNoneContext = new SpanContext(context.ChunkGenerator, SpanEditHandler.CreateDefault());
+                var acceptsNoneContext = new SpanContext(
+                    context.ChunkGenerator,
+                    SpanEditHandler.CreateDefault()
+                );
                 acceptsNoneContext.EditHandler.AcceptedCharacters = AcceptedCharactersInternal.None;
-                builder.Add(SyntaxFactory.RazorMetaCode(tokens.Consume()).WithSpanContext(acceptsNoneContext));
+                builder.Add(
+                    SyntaxFactory.RazorMetaCode(tokens.Consume())
+                        .WithSpanContext(acceptsNoneContext)
+                );
             }
             if (!Name.IsMissing)
             {

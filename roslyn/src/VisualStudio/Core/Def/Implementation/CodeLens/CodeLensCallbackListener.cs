@@ -51,14 +51,18 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
         public CodeLensCallbackListener(
             IThreadingContext threadingContext,
             SVsServiceProvider serviceProvider,
-            VisualStudioWorkspaceImpl workspace)
+            VisualStudioWorkspaceImpl workspace
+        )
         {
             _threadingContext = threadingContext;
             _serviceProvider = serviceProvider;
             _workspace = workspace;
         }
 
-        public async Task<ImmutableDictionary<Guid, string>> GetProjectVersionsAsync(ImmutableArray<Guid> projectGuids, CancellationToken cancellationToken)
+        public async Task<ImmutableDictionary<Guid, string>> GetProjectVersionsAsync(
+            ImmutableArray<Guid> projectGuids,
+            CancellationToken cancellationToken
+        )
         {
             var service = _workspace.Services.GetRequiredService<ICodeLensReferencesService>();
 
@@ -70,7 +74,12 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
                 if (!projectGuids.Contains(projectGuid))
                     continue;
 
-                var projectVersion = await service.GetProjectCodeLensVersionAsync(solution, project.Id, cancellationToken).ConfigureAwait(false);
+                var projectVersion = await service.GetProjectCodeLensVersionAsync(
+                        solution,
+                        project.Id,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 builder[projectGuid] = projectVersion.ToString();
             }
 
@@ -78,11 +87,20 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
         }
 
         public async Task<ReferenceCount?> GetReferenceCountAsync(
-            CodeLensDescriptor descriptor, CodeLensDescriptorContext descriptorContext, ReferenceCount? previousCount, CancellationToken cancellationToken)
+            CodeLensDescriptor descriptor,
+            CodeLensDescriptorContext descriptorContext,
+            ReferenceCount? previousCount,
+            CancellationToken cancellationToken
+        )
         {
             var solution = _workspace.CurrentSolution;
             var (documentId, node) = await GetDocumentIdAndNodeAsync(
-                solution, descriptor, descriptorContext.ApplicableSpan, cancellationToken).ConfigureAwait(false);
+                    solution,
+                    descriptor,
+                    descriptorContext.ApplicableSpan,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             if (documentId == null)
             {
                 return null;
@@ -92,68 +110,126 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
             if (previousCount is not null)
             {
                 // Avoid calculating results if we already have a result for the current project version
-                var currentProjectVersion = await service.GetProjectCodeLensVersionAsync(solution, documentId.ProjectId, cancellationToken).ConfigureAwait(false);
+                var currentProjectVersion = await service.GetProjectCodeLensVersionAsync(
+                        solution,
+                        documentId.ProjectId,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 if (previousCount.Value.Version == currentProjectVersion.ToString())
                 {
                     return previousCount;
                 }
             }
 
-            var maxSearchResults = await GetMaxResultCapAsync(cancellationToken).ConfigureAwait(false);
-            return await service.GetReferenceCountAsync(solution, documentId, node, maxSearchResults, cancellationToken).ConfigureAwait(false);
+            var maxSearchResults = await GetMaxResultCapAsync(cancellationToken)
+                .ConfigureAwait(false);
+            return await service.GetReferenceCountAsync(
+                    solution,
+                    documentId,
+                    node,
+                    maxSearchResults,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
         }
 
         public async Task<(string projectVersion, ImmutableArray<ReferenceLocationDescriptor> references)?> FindReferenceLocationsAsync(
-            CodeLensDescriptor descriptor, CodeLensDescriptorContext descriptorContext, CancellationToken cancellationToken)
+            CodeLensDescriptor descriptor,
+            CodeLensDescriptorContext descriptorContext,
+            CancellationToken cancellationToken
+        )
         {
             var solution = _workspace.CurrentSolution;
             var (documentId, node) = await GetDocumentIdAndNodeAsync(
-                solution, descriptor, descriptorContext.ApplicableSpan, cancellationToken).ConfigureAwait(false);
+                    solution,
+                    descriptor,
+                    descriptorContext.ApplicableSpan,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             if (documentId == null)
             {
                 return null;
             }
 
             var service = _workspace.Services.GetRequiredService<ICodeLensReferencesService>();
-            var references = await service.FindReferenceLocationsAsync(solution, documentId, node, cancellationToken).ConfigureAwait(false);
+            var references = await service.FindReferenceLocationsAsync(
+                    solution,
+                    documentId,
+                    node,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             if (!references.HasValue)
             {
                 return null;
             }
 
-            var projectVersion = await service.GetProjectCodeLensVersionAsync(solution, documentId.ProjectId, cancellationToken).ConfigureAwait(false);
+            var projectVersion = await service.GetProjectCodeLensVersionAsync(
+                    solution,
+                    documentId.ProjectId,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             return (projectVersion.ToString(), references.Value);
         }
 
         public async Task<ImmutableArray<ReferenceMethodDescriptor>?> FindReferenceMethodsAsync(
-            CodeLensDescriptor descriptor, CodeLensDescriptorContext descriptorContext, CancellationToken cancellationToken)
+            CodeLensDescriptor descriptor,
+            CodeLensDescriptorContext descriptorContext,
+            CancellationToken cancellationToken
+        )
         {
             var solution = _workspace.CurrentSolution;
             var (documentId, node) = await GetDocumentIdAndNodeAsync(
-                solution, descriptor, descriptorContext.ApplicableSpan, cancellationToken).ConfigureAwait(false);
+                    solution,
+                    descriptor,
+                    descriptorContext.ApplicableSpan,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             if (documentId == null)
             {
                 return null;
             }
 
             var service = _workspace.Services.GetRequiredService<ICodeLensReferencesService>();
-            return await service.FindReferenceMethodsAsync(solution, documentId, node, cancellationToken).ConfigureAwait(false);
+            return await service.FindReferenceMethodsAsync(
+                    solution,
+                    documentId,
+                    node,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
         }
 
         private async Task<(DocumentId?, SyntaxNode?)> GetDocumentIdAndNodeAsync(
-            Solution solution, CodeLensDescriptor descriptor, Span? span, CancellationToken cancellationToken)
+            Solution solution,
+            CodeLensDescriptor descriptor,
+            Span? span,
+            CancellationToken cancellationToken
+        )
         {
             if (span is null)
             {
                 return default;
             }
 
-            if (!TryGetDocument(solution, descriptor.ProjectGuid, descriptor.FilePath, out var document))
+            if (
+                !TryGetDocument(
+                    solution,
+                    descriptor.ProjectGuid,
+                    descriptor.FilePath,
+                    out var document
+                )
+            )
             {
                 return default;
             }
 
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
             var textSpan = span.Value.ToTextSpan();
 
             // TODO: This check avoids ArgumentOutOfRangeException but it's not clear if this is the right solution
@@ -183,7 +259,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
             await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
             var settingsManager = new ShellSettingsManager(_serviceProvider);
-            var settingsStore = settingsManager.GetReadOnlySettingsStore(Settings.SettingsScope.UserSettings);
+            var settingsStore = settingsManager.GetReadOnlySettingsStore(
+                Settings.SettingsScope.UserSettings
+            );
 
             try
             {
@@ -195,7 +273,11 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
                 //           as Int32 with value > 0 - enable the feature, cap at given `value`.
                 //     does not exist
                 //           - feature is on by default, cap at 99
-                _maxSearchResults = settingsStore.GetInt32(CodeLensUserSettingsConfigPath, CodeLensMaxSearchResults, defaultValue: DefaultMaxSearchResultsValue);
+                _maxSearchResults = settingsStore.GetInt32(
+                    CodeLensUserSettingsConfigPath,
+                    CodeLensMaxSearchResults,
+                    defaultValue: DefaultMaxSearchResultsValue
+                );
             }
             catch (ArgumentException)
             {
@@ -204,7 +286,12 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
             }
         }
 
-        private bool TryGetDocument(Solution solution, Guid projectGuid, string filePath, [NotNullWhen(true)] out Document? document)
+        private bool TryGetDocument(
+            Solution solution,
+            Guid projectGuid,
+            string filePath,
+            [NotNullWhen(true)] out Document? document
+        )
         {
             document = null;
 

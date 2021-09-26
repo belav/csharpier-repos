@@ -30,12 +30,30 @@ namespace Microsoft.AspNetCore.SignalR.Microbenchmarks
         [GlobalSetup]
         public void GlobalSetup()
         {
-            var resolver = new DefaultHubProtocolResolver(new List<IHubProtocol> { new DummyProtocol("protocol1"),
-                new DummyProtocol("protocol2") }, NullLogger<DefaultHubProtocolResolver>.Instance);
+            var resolver = new DefaultHubProtocolResolver(
+                new List<IHubProtocol>
+                {
+                    new DummyProtocol("protocol1"),
+                    new DummyProtocol("protocol2")
+                },
+                NullLogger<DefaultHubProtocolResolver>.Instance
+            );
 
-            _protocol = new RedisProtocol(new DefaultHubMessageSerializer(resolver, new List<string>() { "protocol1", "protocol2" }, hubSupportedProtocols: null));
+            _protocol = new RedisProtocol(
+                new DefaultHubMessageSerializer(
+                    resolver,
+                    new List<string>() { "protocol1", "protocol2" },
+                    hubSupportedProtocols: null
+                )
+            );
 
-            _groupCommand = new RedisGroupCommand(id: 42, serverName: "Server", GroupAction.Add, groupName: "group", connectionId: "connection");
+            _groupCommand = new RedisGroupCommand(
+                id: 42,
+                serverName: "Server",
+                GroupAction.Add,
+                groupName: "group",
+                connectionId: "connection"
+            );
 
             // Because of the DummyProtocol, the args don't really matter
             _args = Array.Empty<object>();
@@ -47,8 +65,16 @@ namespace Microsoft.AspNetCore.SignalR.Microbenchmarks
             _writtenAck = _protocol.WriteAck(42);
             _writtenGroupCommand = _protocol.WriteGroupCommand(_groupCommand);
             _writtenInvocationNoExclusions = _protocol.WriteInvocation(_methodName, _args, null);
-            _writtenInvocationSmallExclusions = _protocol.WriteInvocation(_methodName, _args, _excludedConnectionIdsSmall);
-            _writtenInvocationLargeExclusions = _protocol.WriteInvocation(_methodName, _args, _excludedConnectionIdsLarge);
+            _writtenInvocationSmallExclusions = _protocol.WriteInvocation(
+                _methodName,
+                _args,
+                _excludedConnectionIdsSmall
+            );
+            _writtenInvocationLargeExclusions = _protocol.WriteInvocation(
+                _methodName,
+                _args,
+                _excludedConnectionIdsLarge
+            );
         }
 
         [Benchmark]
@@ -114,7 +140,7 @@ namespace Microsoft.AspNetCore.SignalR.Microbenchmarks
         private static IReadOnlyList<string> GenerateIds(int count)
         {
             var ids = new string[count];
-            for(var i = 0; i < count; i++)
+            for (var i = 0; i < count; i++)
             {
                 ids[i] = Guid.NewGuid().ToString("N");
             }
@@ -123,7 +149,14 @@ namespace Microsoft.AspNetCore.SignalR.Microbenchmarks
 
         private class DummyProtocol : IHubProtocol
         {
-            private static readonly byte[] _fixedOutput = new byte[] { 0x68, 0x68, 0x6C, 0x6C, 0x6F };
+            private static readonly byte[] _fixedOutput = new byte[]
+            {
+                0x68,
+                0x68,
+                0x6C,
+                0x6C,
+                0x6F
+            };
 
             public string Name { get; }
 
@@ -139,7 +172,11 @@ namespace Microsoft.AspNetCore.SignalR.Microbenchmarks
 
             public bool IsVersionSupported(int version) => true;
 
-            public bool TryParseMessage(ref ReadOnlySequence<byte> input, IInvocationBinder binder, out HubMessage message)
+            public bool TryParseMessage(
+                ref ReadOnlySequence<byte> input,
+                IInvocationBinder binder,
+                out HubMessage message
+            )
             {
                 throw new NotSupportedException();
             }

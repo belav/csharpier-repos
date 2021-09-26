@@ -34,10 +34,16 @@ namespace Microsoft.CodeAnalysis.AddFileBanner
                 return;
             }
 
-            var tree = await document.GetRequiredSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
+            var tree = await document.GetRequiredSyntaxTreeAsync(cancellationToken)
+                .ConfigureAwait(false);
 
-            if (document.Project.AnalyzerOptions.TryGetEditorConfigOption<string>(CodeStyleOptions2.FileHeaderTemplate, tree, out var fileHeaderTemplate)
-                && !string.IsNullOrEmpty(fileHeaderTemplate))
+            if (
+                document.Project.AnalyzerOptions.TryGetEditorConfigOption<string>(
+                    CodeStyleOptions2.FileHeaderTemplate,
+                    tree,
+                    out var fileHeaderTemplate
+                ) && !string.IsNullOrEmpty(fileHeaderTemplate)
+            )
             {
                 // If we have a defined file header template, allow the analyzer and code fix to handle it
                 return;
@@ -64,34 +70,48 @@ namespace Microsoft.CodeAnalysis.AddFileBanner
             // Process the other documents in this document's project.  Look at the
             // ones that we can get a root from (without having to parse).  Then
             // look at the ones we'd need to parse.
-            var siblingDocumentsAndRoots =
-                document.Project.Documents
-                        .Where(d => d != document)
-                        .Select(d =>
-                        {
-                            d.TryGetSyntaxRoot(out var siblingRoot);
-                            return (document: d, root: siblingRoot);
-                        })
-                        .OrderBy((t1, t2) => (t1.root != null) == (t2.root != null) ? 0 : t1.root != null ? -1 : 1);
+            var siblingDocumentsAndRoots = document.Project.Documents.Where(d => d != document)
+                .Select(
+                    d =>
+                    {
+                        d.TryGetSyntaxRoot(out var siblingRoot);
+                        return (document: d, root: siblingRoot);
+                    }
+                )
+                .OrderBy(
+                    (t1, t2) =>
+                        (t1.root != null) == (t2.root != null) ? 0 : t1.root != null ? -1 : 1
+                );
 
             foreach (var (siblingDocument, siblingRoot) in siblingDocumentsAndRoots)
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
-                var siblingBanner = await TryGetBannerAsync(siblingDocument, siblingRoot, cancellationToken).ConfigureAwait(false);
+                var siblingBanner = await TryGetBannerAsync(
+                        siblingDocument,
+                        siblingRoot,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 if (siblingBanner.Length > 0 && !siblingDocument.IsGeneratedCode(cancellationToken))
                 {
                     context.RegisterRefactoring(
-                        new MyCodeAction(_ => AddBannerAsync(document, root, siblingDocument, siblingBanner)),
-                        new Text.TextSpan(position, length: 0));
+                        new MyCodeAction(
+                            _ => AddBannerAsync(document, root, siblingDocument, siblingBanner)
+                        ),
+                        new Text.TextSpan(position, length: 0)
+                    );
                     return;
                 }
             }
         }
 
         private Task<Document> AddBannerAsync(
-            Document document, SyntaxNode root,
-            Document siblingDocument, ImmutableArray<SyntaxTrivia> banner)
+            Document document,
+            SyntaxNode root,
+            Document siblingDocument,
+            ImmutableArray<SyntaxTrivia> banner
+        )
         {
             banner = UpdateEmbeddedFileNames(siblingDocument, document, banner);
 
@@ -104,10 +124,15 @@ namespace Microsoft.CodeAnalysis.AddFileBanner
         /// in it.  If so, those names will be replaced with <paramref name="destinationDocument"/>'s name.
         /// </summary>
         private ImmutableArray<SyntaxTrivia> UpdateEmbeddedFileNames(
-            Document sourceDocument, Document destinationDocument, ImmutableArray<SyntaxTrivia> banner)
+            Document sourceDocument,
+            Document destinationDocument,
+            ImmutableArray<SyntaxTrivia> banner
+        )
         {
             var sourceName = IOUtilities.PerformIO(() => Path.GetFileName(sourceDocument.FilePath));
-            var destinationName = IOUtilities.PerformIO(() => Path.GetFileName(destinationDocument.FilePath));
+            var destinationName = IOUtilities.PerformIO(
+                () => Path.GetFileName(destinationDocument.FilePath)
+            );
             if (string.IsNullOrEmpty(sourceName) || string.IsNullOrEmpty(destinationName))
             {
                 return banner;
@@ -116,7 +141,10 @@ namespace Microsoft.CodeAnalysis.AddFileBanner
             using var _ = ArrayBuilder<SyntaxTrivia>.GetInstance(out var result);
             foreach (var trivia in banner)
             {
-                var updated = CreateTrivia(trivia, trivia.ToFullString().Replace(sourceName, destinationName));
+                var updated = CreateTrivia(
+                    trivia,
+                    trivia.ToFullString().Replace(sourceName, destinationName)
+                );
                 result.Add(updated);
             }
 
@@ -124,7 +152,10 @@ namespace Microsoft.CodeAnalysis.AddFileBanner
         }
 
         private async Task<ImmutableArray<SyntaxTrivia>> TryGetBannerAsync(
-            Document document, SyntaxNode root, CancellationToken cancellationToken)
+            Document document,
+            SyntaxNode root,
+            CancellationToken cancellationToken
+        )
         {
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
 
@@ -139,7 +170,7 @@ namespace Microsoft.CodeAnalysis.AddFileBanner
             var text = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
             if (text.Length == 0 || !IsCommentStartCharacter(text[0]))
             {
-                // Didn't start with a comment character, don't bother looking at 
+                // Didn't start with a comment character, don't bother looking at
                 // this file.
                 return ImmutableArray<SyntaxTrivia>.Empty;
             }
@@ -151,9 +182,7 @@ namespace Microsoft.CodeAnalysis.AddFileBanner
         private class MyCodeAction : CodeAction.DocumentChangeAction
         {
             public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
-                : base(CodeFixesResources.Add_file_header, createChangedDocument)
-            {
-            }
+                : base(CodeFixesResources.Add_file_header, createChangedDocument) { }
         }
     }
 }

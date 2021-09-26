@@ -25,27 +25,46 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             var node1 = SyntaxFactory.ReturnStatement();
             var node2 = SyntaxFactory.ReturnStatement();
 
-            EqualityTesting.AssertEqual(default(SyntaxList<CSharpSyntaxNode>), default(SyntaxList<CSharpSyntaxNode>));
-            EqualityTesting.AssertEqual(new SyntaxList<CSharpSyntaxNode>(node1), new SyntaxList<CSharpSyntaxNode>(node1));
+            EqualityTesting.AssertEqual(
+                default(SyntaxList<CSharpSyntaxNode>),
+                default(SyntaxList<CSharpSyntaxNode>)
+            );
+            EqualityTesting.AssertEqual(
+                new SyntaxList<CSharpSyntaxNode>(node1),
+                new SyntaxList<CSharpSyntaxNode>(node1)
+            );
 
-            EqualityTesting.AssertNotEqual(new SyntaxList<CSharpSyntaxNode>(node1), new SyntaxList<CSharpSyntaxNode>(node2));
+            EqualityTesting.AssertNotEqual(
+                new SyntaxList<CSharpSyntaxNode>(node1),
+                new SyntaxList<CSharpSyntaxNode>(node2)
+            );
         }
 
         [Fact]
         public void EnumeratorEquality()
         {
-            Assert.Throws<NotSupportedException>(() => default(SyntaxList<CSharpSyntaxNode>.Enumerator).GetHashCode());
-            Assert.Throws<NotSupportedException>(() => default(SyntaxList<CSharpSyntaxNode>.Enumerator).Equals(default(SyntaxList<CSharpSyntaxNode>.Enumerator)));
+            Assert.Throws<NotSupportedException>(
+                () => default(SyntaxList<CSharpSyntaxNode>.Enumerator).GetHashCode()
+            );
+            Assert.Throws<NotSupportedException>(
+                () =>
+                    default(SyntaxList<CSharpSyntaxNode>.Enumerator).Equals(
+                        default(SyntaxList<CSharpSyntaxNode>.Enumerator)
+                    )
+            );
         }
 
         [Fact]
         public void TestAddInsertRemoveReplace()
         {
             var list = SyntaxFactory.List<SyntaxNode>(
-                new[] {
+                new[]
+                {
                     SyntaxFactory.ParseExpression("A "),
                     SyntaxFactory.ParseExpression("B "),
-                    SyntaxFactory.ParseExpression("C ") });
+                    SyntaxFactory.ParseExpression("C ")
+                }
+            );
 
             Assert.Equal(3, list.Count);
             Assert.Equal("A", list[0].ToString());
@@ -148,15 +167,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.Equal(4, newList.Count);
             Assert.Equal("A B D E ", newList.ToFullString());
 
-            newList = list.ReplaceRange(elementA, new SyntaxNode[] { });
+            newList = list.ReplaceRange(elementA, new SyntaxNode[] {  });
             Assert.Equal(2, newList.Count);
             Assert.Equal("B C ", newList.ToFullString());
 
-            newList = list.ReplaceRange(elementB, new SyntaxNode[] { });
+            newList = list.ReplaceRange(elementB, new SyntaxNode[] {  });
             Assert.Equal(2, newList.Count);
             Assert.Equal("A C ", newList.ToFullString());
 
-            newList = list.ReplaceRange(elementC, new SyntaxNode[] { });
+            newList = list.ReplaceRange(elementC, new SyntaxNode[] {  });
             Assert.Equal(2, newList.Count);
             Assert.Equal("A B ", newList.ToFullString());
 
@@ -164,14 +183,22 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.Throws<ArgumentOutOfRangeException>(() => list.Insert(-1, nodeD));
             Assert.Throws<ArgumentOutOfRangeException>(() => list.Insert(list.Count + 1, nodeD));
             Assert.Throws<ArgumentOutOfRangeException>(() => list.InsertRange(-1, new[] { nodeD }));
-            Assert.Throws<ArgumentOutOfRangeException>(() => list.InsertRange(list.Count + 1, new[] { nodeD }));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => list.InsertRange(list.Count + 1, new[] { nodeD })
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() => list.RemoveAt(-1));
             Assert.Throws<ArgumentOutOfRangeException>(() => list.RemoveAt(list.Count));
             Assert.Throws<ArgumentException>(() => list.Replace(nodeD, nodeE));
             Assert.Throws<ArgumentException>(() => list.ReplaceRange(nodeD, new[] { nodeE }));
-            Assert.Throws<ArgumentNullException>(() => list.AddRange((IEnumerable<SyntaxNode>)null));
-            Assert.Throws<ArgumentNullException>(() => list.InsertRange(0, (IEnumerable<SyntaxNode>)null));
-            Assert.Throws<ArgumentNullException>(() => list.ReplaceRange(elementA, (IEnumerable<SyntaxNode>)null));
+            Assert.Throws<ArgumentNullException>(
+                () => list.AddRange((IEnumerable<SyntaxNode>)null)
+            );
+            Assert.Throws<ArgumentNullException>(
+                () => list.InsertRange(0, (IEnumerable<SyntaxNode>)null)
+            );
+            Assert.Throws<ArgumentNullException>(
+                () => list.ReplaceRange(elementA, (IEnumerable<SyntaxNode>)null)
+            );
         }
 
         [Fact]
@@ -216,16 +243,23 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.Throws<ArgumentException>(() => list.Replace(nodeD, nodeE));
             Assert.Throws<ArgumentException>(() => list.ReplaceRange(nodeD, new[] { nodeE }));
             Assert.Throws<ArgumentNullException>(() => list.Add(null));
-            Assert.Throws<ArgumentNullException>(() => list.AddRange((IEnumerable<SyntaxNode>)null));
+            Assert.Throws<ArgumentNullException>(
+                () => list.AddRange((IEnumerable<SyntaxNode>)null)
+            );
             Assert.Throws<ArgumentNullException>(() => list.Insert(0, null));
-            Assert.Throws<ArgumentNullException>(() => list.InsertRange(0, (IEnumerable<SyntaxNode>)null));
+            Assert.Throws<ArgumentNullException>(
+                () => list.InsertRange(0, (IEnumerable<SyntaxNode>)null)
+            );
         }
 
         [Fact, WorkItem(127, "https://github.com/dotnet/roslyn/issues/127")]
         public void AddEmptySyntaxList()
         {
             var attributes = new AttributeListSyntax[0];
-            var newMethodDeclaration = SyntaxFactory.MethodDeclaration(SyntaxFactory.ParseTypeName("void"), "M");
+            var newMethodDeclaration = SyntaxFactory.MethodDeclaration(
+                SyntaxFactory.ParseTypeName("void"),
+                "M"
+            );
             newMethodDeclaration.AddAttributeLists(attributes);
         }
 
@@ -237,11 +271,16 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.True(declaration.AttributeLists.Count == 0);
             Assert.True(declaration.Modifiers.Count == 0);
 
-            declaration = declaration.AddAttributeLists(new[]
-            {
-                SyntaxFactory.AttributeList(SyntaxFactory.SingletonSeparatedList(
-                    SyntaxFactory.Attribute(SyntaxFactory.ParseName("Attr")))),
-            });
+            declaration = declaration.AddAttributeLists(
+                new[]
+                {
+                    SyntaxFactory.AttributeList(
+                        SyntaxFactory.SingletonSeparatedList(
+                            SyntaxFactory.Attribute(SyntaxFactory.ParseName("Attr"))
+                        )
+                    ),
+                }
+            );
 
             Assert.True(declaration.AttributeLists.Count == 1);
             Assert.True(declaration.Modifiers.Count == 0);
@@ -256,10 +295,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void Extensions()
         {
             var list = SyntaxFactory.List<SyntaxNode>(
-                new[] {
+                new[]
+                {
                     SyntaxFactory.ParseExpression("A+B"),
                     SyntaxFactory.IdentifierName("B"),
-                    SyntaxFactory.ParseExpression("1") });
+                    SyntaxFactory.ParseExpression("1")
+                }
+            );
 
             Assert.Equal(0, list.IndexOf(SyntaxKind.AddExpression));
             Assert.True(list.Any(SyntaxKind.AddExpression));

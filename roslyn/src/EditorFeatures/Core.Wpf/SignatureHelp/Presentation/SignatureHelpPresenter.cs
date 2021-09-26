@@ -19,7 +19,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
     [Export(typeof(IIntelliSensePresenter<ISignatureHelpPresenterSession, ISignatureHelpSession>))]
     [Name(PredefinedSignatureHelpPresenterNames.RoslynSignatureHelpPresenter)]
     [ContentType(ContentTypeNames.RoslynContentType)]
-    internal partial class SignatureHelpPresenter : ForegroundThreadAffinitizedObject, IIntelliSensePresenter<ISignatureHelpPresenterSession, ISignatureHelpSession>, ISignatureHelpSourceProvider
+    internal partial class SignatureHelpPresenter
+        : ForegroundThreadAffinitizedObject,
+          IIntelliSensePresenter<ISignatureHelpPresenterSession, ISignatureHelpSession>,
+          ISignatureHelpSourceProvider
     {
         private static readonly object s_augmentSessionKey = new();
 
@@ -27,19 +30,30 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public SignatureHelpPresenter(IThreadingContext threadingContext, ISignatureHelpBroker sigHelpBroker)
-            : base(threadingContext)
+        public SignatureHelpPresenter(
+            IThreadingContext threadingContext,
+            ISignatureHelpBroker sigHelpBroker
+        ) : base(threadingContext)
         {
             _sigHelpBroker = sigHelpBroker;
         }
 
-        ISignatureHelpPresenterSession IIntelliSensePresenter<ISignatureHelpPresenterSession, ISignatureHelpSession>.CreateSession(ITextView textView, ITextBuffer subjectBuffer, ISignatureHelpSession sessionOpt)
+        ISignatureHelpPresenterSession IIntelliSensePresenter<
+            ISignatureHelpPresenterSession,
+            ISignatureHelpSession
+        >.CreateSession(
+            ITextView textView,
+            ITextBuffer subjectBuffer,
+            ISignatureHelpSession sessionOpt
+        )
         {
             AssertIsForeground();
             return new SignatureHelpPresenterSession(ThreadingContext, _sigHelpBroker, textView);
         }
 
-        ISignatureHelpSource ISignatureHelpSourceProvider.TryCreateSignatureHelpSource(ITextBuffer textBuffer)
+        ISignatureHelpSource ISignatureHelpSourceProvider.TryCreateSignatureHelpSource(
+            ITextBuffer textBuffer
+        )
         {
             AssertIsForeground();
             return new SignatureHelpSource(ThreadingContext);

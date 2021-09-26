@@ -18,17 +18,21 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 {
-    public class HtmlGenerationTest :
-        IClassFixture<MvcTestFixture<HtmlGenerationWebSite.Startup>>,
-        IClassFixture<MvcEncodedTestFixture<HtmlGenerationWebSite.Startup>>
+    public class HtmlGenerationTest
+        : IClassFixture<MvcTestFixture<HtmlGenerationWebSite.Startup>>,
+          IClassFixture<MvcEncodedTestFixture<HtmlGenerationWebSite.Startup>>
     {
-        private static readonly Assembly _resourcesAssembly = typeof(HtmlGenerationTest).GetTypeInfo().Assembly;
+        private static readonly Assembly _resourcesAssembly =
+            typeof(HtmlGenerationTest).GetTypeInfo().Assembly;
 
         public HtmlGenerationTest(
             MvcTestFixture<HtmlGenerationWebSite.Startup> fixture,
-            MvcEncodedTestFixture<HtmlGenerationWebSite.Startup> encodedFixture)
+            MvcEncodedTestFixture<HtmlGenerationWebSite.Startup> encodedFixture
+        )
         {
-            Factory = fixture.Factories.FirstOrDefault() ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
+            Factory =
+                fixture.Factories.FirstOrDefault()
+                ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
 
             Client = fixture.CreateDefaultClient();
             EncodedClient = encodedFixture.CreateDefaultClient();
@@ -89,18 +93,29 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             var response = await Client.GetStringAsync("http://localhost/HtmlGeneration_Home/Enum");
 
             // Assert
-            Assert.Equal($"Vrijdag{Environment.NewLine}Month: FirstOne", response, ignoreLineEndingDifferences: true);
+            Assert.Equal(
+                $"Vrijdag{Environment.NewLine}Month: FirstOne",
+                response,
+                ignoreLineEndingDifferences: true
+            );
         }
 
         [Theory]
         [MemberData(nameof(WebPagesData))]
-        public async Task HtmlGenerationWebSite_GeneratesExpectedResults(string action, string antiforgeryPath)
+        public async Task HtmlGenerationWebSite_GeneratesExpectedResults(
+            string action,
+            string antiforgeryPath
+        )
         {
             // Arrange
             var expectedMediaType = MediaTypeHeaderValue.Parse("text/html; charset=utf-8");
-            var outputFile = "compiler/resources/HtmlGenerationWebSite.HtmlGeneration_Home." + action + ".html";
-            var expectedContent =
-                await ResourceFile.ReadResourceAsync(_resourcesAssembly, outputFile, sourceFile: false);
+            var outputFile =
+                "compiler/resources/HtmlGenerationWebSite.HtmlGeneration_Home." + action + ".html";
+            var expectedContent = await ResourceFile.ReadResourceAsync(
+                _resourcesAssembly,
+                outputFile,
+                sourceFile: false
+            );
 
             // Act
             // The host is not important as everything runs in memory and tests are isolated from each other.
@@ -114,23 +129,48 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             responseContent = responseContent.Trim();
             if (antiforgeryPath == null)
             {
-                ResourceFile.UpdateFile(_resourcesAssembly, outputFile, expectedContent, responseContent);
-                Assert.Equal(expectedContent.Trim(), responseContent, ignoreLineEndingDifferences: true);
+                ResourceFile.UpdateFile(
+                    _resourcesAssembly,
+                    outputFile,
+                    expectedContent,
+                    responseContent
+                );
+                Assert.Equal(
+                    expectedContent.Trim(),
+                    responseContent,
+                    ignoreLineEndingDifferences: true
+                );
             }
             else
             {
-                var forgeryToken = AntiforgeryTestHelper.RetrieveAntiforgeryToken(responseContent, antiforgeryPath);
+                var forgeryToken = AntiforgeryTestHelper.RetrieveAntiforgeryToken(
+                    responseContent,
+                    antiforgeryPath
+                );
 
                 if (ResourceFile.GenerateBaselines)
                 {
                     // Reverse usual substitution and insert a format item into the new file content.
                     responseContent = responseContent.Replace(forgeryToken, "{0}");
-                    ResourceFile.UpdateFile(_resourcesAssembly, outputFile, expectedContent, responseContent);
+                    ResourceFile.UpdateFile(
+                        _resourcesAssembly,
+                        outputFile,
+                        expectedContent,
+                        responseContent
+                    );
                 }
                 else
                 {
-                    expectedContent = string.Format(CultureInfo.InvariantCulture, expectedContent, forgeryToken);
-                    Assert.Equal(expectedContent.Trim(), responseContent, ignoreLineEndingDifferences: true);
+                    expectedContent = string.Format(
+                        CultureInfo.InvariantCulture,
+                        expectedContent,
+                        forgeryToken
+                    );
+                    Assert.Equal(
+                        expectedContent.Trim(),
+                        responseContent,
+                        ignoreLineEndingDifferences: true
+                    );
                 }
             }
         }
@@ -139,8 +179,10 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         [InlineData("Link", null)]
         [InlineData("Script", null)]
         [SkipOnHelix("https://github.com/dotnet/aspnetcore/issues/10423")]
-        public Task HtmlGenerationWebSite_GeneratesExpectedResultsNotReadyForHelix(string action, string antiforgeryPath)
-            => HtmlGenerationWebSite_GeneratesExpectedResults(action, antiforgeryPath);
+        public Task HtmlGenerationWebSite_GeneratesExpectedResultsNotReadyForHelix(
+            string action,
+            string antiforgeryPath
+        ) => HtmlGenerationWebSite_GeneratesExpectedResults(action, antiforgeryPath);
 
         [Fact]
         public async Task HtmlGenerationWebSite_GeneratesExpectedResults_WithImageData()
@@ -152,13 +194,19 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public async Task HtmlGenerationWebSite_LinkGeneration_With21CompatibilityBehavior()
         {
             // Arrange
-            var client = Factory
-                 .WithWebHostBuilder(builder => builder.UseStartup<HtmlGenerationWebSite.StartupWithoutEndpointRouting>())
-                 .CreateDefaultClient();
+            var client = Factory.WithWebHostBuilder(
+                    builder =>
+                        builder.UseStartup<HtmlGenerationWebSite.StartupWithoutEndpointRouting>()
+                )
+                .CreateDefaultClient();
             var expectedMediaType = MediaTypeHeaderValue.Parse("text/html; charset=utf-8");
-            var outputFile = "compiler/resources/HtmlGenerationWebSite.HtmlGeneration_Home.Index21Compat.html";
-            var expectedContent =
-                await ResourceFile.ReadResourceAsync(_resourcesAssembly, outputFile, sourceFile: false);
+            var outputFile =
+                "compiler/resources/HtmlGenerationWebSite.HtmlGeneration_Home.Index21Compat.html";
+            var expectedContent = await ResourceFile.ReadResourceAsync(
+                _resourcesAssembly,
+                outputFile,
+                sourceFile: false
+            );
 
             // Act
             // The host is not important as everything runs in memory and tests are isolated from each other.
@@ -171,7 +219,12 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 
             responseContent = responseContent.Trim();
 
-            ResourceFile.UpdateOrVerify(_resourcesAssembly, outputFile, expectedContent, responseContent);
+            ResourceFile.UpdateOrVerify(
+                _resourcesAssembly,
+                outputFile,
+                expectedContent,
+                responseContent
+            );
         }
 
         public static TheoryData<string, string> EncodedPagesData
@@ -192,17 +245,28 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 
         [Theory]
         [MemberData(nameof(EncodedPagesData))]
-        public async Task HtmlGenerationWebSite_GenerateEncodedResults(string action, string antiforgeryPath)
+        public async Task HtmlGenerationWebSite_GenerateEncodedResults(
+            string action,
+            string antiforgeryPath
+        )
         {
             // Arrange
             var expectedMediaType = MediaTypeHeaderValue.Parse("text/html; charset=utf-8");
-            var outputFile = "compiler/resources/HtmlGenerationWebSite.HtmlGeneration_Home." + action + ".Encoded.html";
-            var expectedContent =
-                await ResourceFile.ReadResourceAsync(_resourcesAssembly, outputFile, sourceFile: false);
+            var outputFile =
+                "compiler/resources/HtmlGenerationWebSite.HtmlGeneration_Home."
+                + action
+                + ".Encoded.html";
+            var expectedContent = await ResourceFile.ReadResourceAsync(
+                _resourcesAssembly,
+                outputFile,
+                sourceFile: false
+            );
 
             // Act
             // The host is not important as everything runs in memory and tests are isolated from each other.
-            var response = await EncodedClient.GetAsync("http://localhost/HtmlGeneration_Home/" + action);
+            var response = await EncodedClient.GetAsync(
+                "http://localhost/HtmlGeneration_Home/" + action
+            );
             var responseContent = await response.Content.ReadAsStringAsync();
 
             // Assert
@@ -212,21 +276,36 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             responseContent = responseContent.Trim();
             if (antiforgeryPath == null)
             {
-                ResourceFile.UpdateOrVerify(_resourcesAssembly, outputFile, expectedContent, responseContent);
+                ResourceFile.UpdateOrVerify(
+                    _resourcesAssembly,
+                    outputFile,
+                    expectedContent,
+                    responseContent
+                );
             }
             else
             {
-                ResourceFile.UpdateOrVerify(_resourcesAssembly, outputFile, expectedContent, responseContent, token: AntiforgeryTestHelper.RetrieveAntiforgeryToken(responseContent, antiforgeryPath));
+                ResourceFile.UpdateOrVerify(
+                    _resourcesAssembly,
+                    outputFile,
+                    expectedContent,
+                    responseContent,
+                    token: AntiforgeryTestHelper.RetrieveAntiforgeryToken(
+                        responseContent,
+                        antiforgeryPath
+                    )
+                );
             }
         }
-
 
         [ConditionalTheory]
         [InlineData("Link", null)]
         [InlineData("Script", null)]
         [SkipOnHelix("https://github.com/dotnet/aspnetcore/issues/10423")]
-        public Task HtmlGenerationWebSite_GenerateEncodedResultsNotReadyForHelix(string action, string antiforgeryPath)
-            => HtmlGenerationWebSite_GenerateEncodedResults(action, antiforgeryPath);
+        public Task HtmlGenerationWebSite_GenerateEncodedResultsNotReadyForHelix(
+            string action,
+            string antiforgeryPath
+        ) => HtmlGenerationWebSite_GenerateEncodedResults(action, antiforgeryPath);
 
         // Testing how ModelMetadata is handled as ViewDataDictionary instances are created.
         [Theory]
@@ -237,9 +316,13 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         {
             // Arrange
             var expectedMediaType = MediaTypeHeaderValue.Parse("text/html; charset=utf-8");
-            var outputFile = "compiler/resources/HtmlGenerationWebSite.CheckViewData." + action + ".html";
-            var expectedContent =
-                await ResourceFile.ReadResourceAsync(_resourcesAssembly, outputFile, sourceFile: false);
+            var outputFile =
+                "compiler/resources/HtmlGenerationWebSite.CheckViewData." + action + ".html";
+            var expectedContent = await ResourceFile.ReadResourceAsync(
+                _resourcesAssembly,
+                outputFile,
+                sourceFile: false
+            );
 
             // Act
             var response = await Client.GetAsync("http://localhost/CheckViewData/" + action);
@@ -250,25 +333,37 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             Assert.Equal(expectedMediaType, response.Content.Headers.ContentType);
 
             responseContent = responseContent.Trim();
-            ResourceFile.UpdateOrVerify(_resourcesAssembly, outputFile, expectedContent, responseContent);
+            ResourceFile.UpdateOrVerify(
+                _resourcesAssembly,
+                outputFile,
+                expectedContent,
+                responseContent
+            );
         }
 
         [Fact]
         public async Task ValidationTagHelpers_GeneratesExpectedSpansAndDivs()
         {
             // Arrange
-            var outputFile = "compiler/resources/HtmlGenerationWebSite.HtmlGeneration_Customer.Index.html";
-            var expectedContent =
-                await ResourceFile.ReadResourceAsync(_resourcesAssembly, outputFile, sourceFile: false);
+            var outputFile =
+                "compiler/resources/HtmlGenerationWebSite.HtmlGeneration_Customer.Index.html";
+            var expectedContent = await ResourceFile.ReadResourceAsync(
+                _resourcesAssembly,
+                outputFile,
+                sourceFile: false
+            );
 
-            var request = new HttpRequestMessage(HttpMethod.Post, "http://localhost/Customer/HtmlGeneration_Customer");
+            var request = new HttpRequestMessage(
+                HttpMethod.Post,
+                "http://localhost/Customer/HtmlGeneration_Customer"
+            );
             var nameValueCollection = new List<KeyValuePair<string, string>>
             {
-                new KeyValuePair<string,string>("Number", string.Empty),
-                new KeyValuePair<string,string>("Name", string.Empty),
-                new KeyValuePair<string,string>("Email", string.Empty),
-                new KeyValuePair<string,string>("PhoneNumber", string.Empty),
-                new KeyValuePair<string,string>("Password", string.Empty)
+                new KeyValuePair<string, string>("Number", string.Empty),
+                new KeyValuePair<string, string>("Name", string.Empty),
+                new KeyValuePair<string, string>("Email", string.Empty),
+                new KeyValuePair<string, string>("PhoneNumber", string.Empty),
+                new KeyValuePair<string, string>("Password", string.Empty)
             };
             request.Content = new FormUrlEncodedContent(nameValueCollection);
 
@@ -280,14 +375,26 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
             responseContent = responseContent.Trim();
-            ResourceFile.UpdateOrVerify(_resourcesAssembly, outputFile, expectedContent, responseContent, token: AntiforgeryTestHelper.RetrieveAntiforgeryToken(responseContent, "Customer/HtmlGeneration_Customer"));
+            ResourceFile.UpdateOrVerify(
+                _resourcesAssembly,
+                outputFile,
+                expectedContent,
+                responseContent,
+                token: AntiforgeryTestHelper.RetrieveAntiforgeryToken(
+                    responseContent,
+                    "Customer/HtmlGeneration_Customer"
+                )
+            );
         }
 
         [Fact]
         public async Task ClientValidators_AreGeneratedDuringInitialRender()
         {
             // Arrange
-            var request = new HttpRequestMessage(HttpMethod.Get, "http://localhost/Customer/HtmlGeneration_Customer/CustomerWithRecords");
+            var request = new HttpRequestMessage(
+                HttpMethod.Get,
+                "http://localhost/Customer/HtmlGeneration_Customer/CustomerWithRecords"
+            );
 
             // Act
             var response = await Client.SendAsync(request);
@@ -297,31 +404,46 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 
             var numberInput = document.RequiredQuerySelector("input[id=Number]");
             Assert.Equal("true", numberInput.GetAttribute("data-val"));
-            Assert.Equal("The field Number must be between 1 and 100.", numberInput.GetAttribute("data-val-range"));
-            Assert.Equal("The Number field is required.", numberInput.GetAttribute("data-val-required"));
+            Assert.Equal(
+                "The field Number must be between 1 and 100.",
+                numberInput.GetAttribute("data-val-range")
+            );
+            Assert.Equal(
+                "The Number field is required.",
+                numberInput.GetAttribute("data-val-required")
+            );
 
             var passwordInput = document.RequiredQuerySelector("input[id=Password]");
             Assert.Equal("true", passwordInput.GetAttribute("data-val"));
-            Assert.Equal("The Password field is required.", passwordInput.GetAttribute("data-val-required"));
+            Assert.Equal(
+                "The Password field is required.",
+                passwordInput.GetAttribute("data-val-required")
+            );
 
             var addressInput = document.RequiredQuerySelector("input[id=Address]");
             Assert.Equal("true", addressInput.GetAttribute("data-val"));
-            Assert.Equal("The Address field is required.", addressInput.GetAttribute("data-val-required"));
+            Assert.Equal(
+                "The Address field is required.",
+                addressInput.GetAttribute("data-val-required")
+            );
         }
 
         [Fact]
         public async Task ValidationTagHelpers_UsingRecords()
         {
             // Arrange
-            var request = new HttpRequestMessage(HttpMethod.Post, "http://localhost/Customer/HtmlGeneration_Customer/CustomerWithRecords");
+            var request = new HttpRequestMessage(
+                HttpMethod.Post,
+                "http://localhost/Customer/HtmlGeneration_Customer/CustomerWithRecords"
+            );
             var nameValueCollection = new List<KeyValuePair<string, string>>
             {
-                new KeyValuePair<string,string>("Number", string.Empty),
-                new KeyValuePair<string,string>("Name", string.Empty),
-                new KeyValuePair<string,string>("Email", string.Empty),
-                new KeyValuePair<string,string>("PhoneNumber", string.Empty),
-                new KeyValuePair<string,string>("Password", string.Empty),
-                new KeyValuePair<string,string>("Address", string.Empty),
+                new KeyValuePair<string, string>("Number", string.Empty),
+                new KeyValuePair<string, string>("Name", string.Empty),
+                new KeyValuePair<string, string>("Email", string.Empty),
+                new KeyValuePair<string, string>("PhoneNumber", string.Empty),
+                new KeyValuePair<string, string>("Password", string.Empty),
+                new KeyValuePair<string, string>("Address", string.Empty),
             };
             request.Content = new FormUrlEncodedContent(nameValueCollection);
 
@@ -355,14 +477,23 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
                 "compiler/resources/CacheTagHelper_CanCachePortionsOfViewsPartialViewsAndViewComponents.Assert";
 
             var outputFile1 = assertFile + "1.txt";
-            var expected1 =
-                await ResourceFile.ReadResourceAsync(_resourcesAssembly, outputFile1, sourceFile: false);
+            var expected1 = await ResourceFile.ReadResourceAsync(
+                _resourcesAssembly,
+                outputFile1,
+                sourceFile: false
+            );
             var outputFile2 = assertFile + "2.txt";
-            var expected2 =
-                await ResourceFile.ReadResourceAsync(_resourcesAssembly, outputFile2, sourceFile: false);
+            var expected2 = await ResourceFile.ReadResourceAsync(
+                _resourcesAssembly,
+                outputFile2,
+                sourceFile: false
+            );
             var outputFile3 = assertFile + "3.txt";
-            var expected3 =
-                await ResourceFile.ReadResourceAsync(_resourcesAssembly, outputFile3, sourceFile: false);
+            var expected3 = await ResourceFile.ReadResourceAsync(
+                _resourcesAssembly,
+                outputFile3,
+                sourceFile: false
+            );
 
             // Act - 1
             // Verify that content gets cached based on vary-by-params
@@ -373,7 +504,12 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             var response2 = await (await Client.SendAsync(request)).Content.ReadAsStringAsync();
 
             // Assert - 1
-            ResourceFile.UpdateOrVerify(_resourcesAssembly, outputFile1, expected1, response1.Trim());
+            ResourceFile.UpdateOrVerify(
+                _resourcesAssembly,
+                outputFile1,
+                expected1,
+                response1.Trim()
+            );
 
             if (!ResourceFile.GenerateBaselines)
             {
@@ -389,7 +525,12 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             var response4 = await (await Client.SendAsync(request)).Content.ReadAsStringAsync();
 
             // Assert - 2
-            ResourceFile.UpdateOrVerify(_resourcesAssembly, outputFile2, expected2, response3.Trim());
+            ResourceFile.UpdateOrVerify(
+                _resourcesAssembly,
+                outputFile2,
+                expected2,
+                response3.Trim()
+            );
             if (!ResourceFile.GenerateBaselines)
             {
                 Assert.Equal(expected2, response4.Trim(), ignoreLineEndingDifferences: true);
@@ -404,7 +545,12 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             var response6 = await (await Client.SendAsync(request)).Content.ReadAsStringAsync();
 
             // Assert - 3
-            ResourceFile.UpdateOrVerify(_resourcesAssembly, outputFile3, expected3, response5.Trim());
+            ResourceFile.UpdateOrVerify(
+                _resourcesAssembly,
+                outputFile3,
+                expected3,
+                response5.Trim()
+            );
             if (!ResourceFile.GenerateBaselines)
             {
                 Assert.Equal(expected3, response6.Trim(), ignoreLineEndingDifferences: true);
@@ -462,7 +608,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         {
             // Arrange & Act - 1
             var response1 = await Client.GetStringAsync(
-                "/catalog/north-west/confirm-payment?confirmationId=1");
+                "/catalog/north-west/confirm-payment?confirmationId=1"
+            );
 
             // Assert - 1
             var expected1 = "Welcome Guest. Your confirmation id is 1. (Region north-west)";
@@ -470,7 +617,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 
             // Act - 2
             var response2 = await Client.GetStringAsync(
-                "/catalog/south-central/confirm-payment?confirmationId=2");
+                "/catalog/south-central/confirm-payment?confirmationId=2"
+            );
 
             // Assert - 2
             var expected2 = "Welcome Guest. Your confirmation id is 2. (Region south-central)";
@@ -478,14 +626,16 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 
             // Act 3
             var response3 = await Client.GetStringAsync(
-                "/catalog/north-west/Silver/confirm-payment?confirmationId=4");
+                "/catalog/north-west/Silver/confirm-payment?confirmationId=4"
+            );
 
             var expected3 = "Welcome Silver member. Your confirmation id is 4. (Region north-west)";
             Assert.Equal(expected3, response3.Trim());
 
             // Act 4
             var response4 = await Client.GetStringAsync(
-                "/catalog/north-west/Gold/confirm-payment?confirmationId=5");
+                "/catalog/north-west/Gold/confirm-payment?confirmationId=5"
+            );
 
             var expected4 = "Welcome Gold member. Your confirmation id is 5. (Region north-west)";
             Assert.Equal(expected4, response4.Trim());
@@ -493,13 +643,17 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             // Act - 4
             // Resend the responses and expect cached results.
             response1 = await Client.GetStringAsync(
-                "/catalog/north-west/confirm-payment?confirmationId=301");
+                "/catalog/north-west/confirm-payment?confirmationId=301"
+            );
             response2 = await Client.GetStringAsync(
-                "/catalog/south-central/confirm-payment?confirmationId=402");
+                "/catalog/south-central/confirm-payment?confirmationId=402"
+            );
             response3 = await Client.GetStringAsync(
-                "/catalog/north-west/Silver/confirm-payment?confirmationId=503");
+                "/catalog/north-west/Silver/confirm-payment?confirmationId=503"
+            );
             response4 = await Client.GetStringAsync(
-                "/catalog/north-west/Gold/confirm-payment?confirmationId=608");
+                "/catalog/north-west/Gold/confirm-payment?confirmationId=608"
+            );
 
             // Assert - 4
             Assert.Equal(expected1, response1.Trim());
@@ -512,8 +666,12 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public async Task CacheTagHelper_VariesByUserId()
         {
             // Arrange & Act - 1
-            var response1 = await Client.GetStringAsync("/catalog/past-purchases/test1?correlationid=1");
-            var response2 = await Client.GetStringAsync("/catalog/past-purchases/test1?correlationid=2");
+            var response1 = await Client.GetStringAsync(
+                "/catalog/past-purchases/test1?correlationid=1"
+            );
+            var response2 = await Client.GetStringAsync(
+                "/catalog/past-purchases/test1?correlationid=2"
+            );
 
             // Assert - 1
             var expected1 = "Past purchases for user test1 (1)";
@@ -521,8 +679,12 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             Assert.Equal(expected1, response2.Trim());
 
             // Act - 2
-            var response3 = await Client.GetStringAsync("/catalog/past-purchases/test2?correlationid=3");
-            var response4 = await Client.GetStringAsync("/catalog/past-purchases/test2?correlationid=4");
+            var response3 = await Client.GetStringAsync(
+                "/catalog/past-purchases/test2?correlationid=3"
+            );
+            var response4 = await Client.GetStringAsync(
+                "/catalog/past-purchases/test2?correlationid=4"
+            );
 
             // Assert - 2
             var expected2 = "Past purchases for user test2 (3)";
@@ -538,7 +700,7 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 
             // Assert - 1
             var expected1 =
-@"Category: Books
+                @"Category: Books
 Products: Book1, Book2 (1)";
             Assert.Equal(expected1, response1.Trim(), ignoreLineEndingDifferences: true);
 
@@ -547,13 +709,14 @@ Products: Book1, Book2 (1)";
 
             // Assert - 2
             var expected2 =
-@"Category: Electronics
+                @"Category: Electronics
 Products: Book1, Book2 (1)";
             Assert.Equal(expected2, response2.Trim(), ignoreLineEndingDifferences: true);
 
             // Act - 3
             // Trigger an expiration of the nested content.
-            var content = @"[{ ""productName"": ""Music Systems"" },{ ""productName"": ""Televisions"" }]";
+            var content =
+                @"[{ ""productName"": ""Music Systems"" },{ ""productName"": ""Televisions"" }]";
             var requestMessage = new HttpRequestMessage(HttpMethod.Post, "/categories/Electronics");
             requestMessage.Content = new StringContent(content, Encoding.UTF8, "application/json");
             (await Client.SendAsync(requestMessage)).EnsureSuccessStatusCode();
@@ -562,7 +725,7 @@ Products: Book1, Book2 (1)";
 
             // Assert - 3
             var expected3 =
-@"Category: Electronics
+                @"Category: Electronics
 Products: Music Systems, Televisions (3)";
             Assert.Equal(expected3, response3.Trim(), ignoreLineEndingDifferences: true);
         }
@@ -571,9 +734,15 @@ Products: Music Systems, Televisions (3)";
         public async Task CacheTagHelper_DoesNotCacheIfDisabled()
         {
             // Arrange & Act
-            var response1 = await Client.GetStringAsync("/catalog/GetDealPercentage/20?isEnabled=true");
-            var response2 = await Client.GetStringAsync("/catalog/GetDealPercentage/40?isEnabled=true");
-            var response3 = await Client.GetStringAsync("/catalog/GetDealPercentage/30?isEnabled=false");
+            var response1 = await Client.GetStringAsync(
+                "/catalog/GetDealPercentage/20?isEnabled=true"
+            );
+            var response2 = await Client.GetStringAsync(
+                "/catalog/GetDealPercentage/40?isEnabled=true"
+            );
+            var response3 = await Client.GetStringAsync(
+                "/catalog/GetDealPercentage/30?isEnabled=false"
+            );
 
             // Assert
             Assert.Equal("Deal percentage is 20", response1.Trim());
@@ -586,14 +755,21 @@ Products: Music Systems, Televisions (3)";
         {
             // Arrange
             var expected =
-                "<label class=\"control-label col-md-2\" for=\"Name\">ItemName</label>" + Environment.NewLine +
-                "<input id=\"Name\" name=\"Name\" type=\"text\" value=\"\" />" + Environment.NewLine + Environment.NewLine +
-                "<label class=\"control-label col-md-2\" for=\"Id\">ItemNo</label>" + Environment.NewLine +
-                "<input data-val=\"true\" data-val-required=\"The ItemNo field is required.\" id=\"Id\" name=\"Id\" type=\"text\" value=\"\" />" +
-                Environment.NewLine + Environment.NewLine;
+                "<label class=\"control-label col-md-2\" for=\"Name\">ItemName</label>"
+                + Environment.NewLine
+                + "<input id=\"Name\" name=\"Name\" type=\"text\" value=\"\" />"
+                + Environment.NewLine
+                + Environment.NewLine
+                + "<label class=\"control-label col-md-2\" for=\"Id\">ItemNo</label>"
+                + Environment.NewLine
+                + "<input data-val=\"true\" data-val-required=\"The ItemNo field is required.\" id=\"Id\" name=\"Id\" type=\"text\" value=\"\" />"
+                + Environment.NewLine
+                + Environment.NewLine;
 
             // Act
-            var response = await Client.GetStringAsync("http://localhost/HtmlGeneration_Home/ItemUsingSharedEditorTemplate");
+            var response = await Client.GetStringAsync(
+                "http://localhost/HtmlGeneration_Home/ItemUsingSharedEditorTemplate"
+            );
 
             // Assert
             Assert.Equal(expected, response, ignoreLineEndingDifferences: true);
@@ -603,11 +779,17 @@ Products: Music Systems, Televisions (3)";
         public async Task EditorTemplateWithSpecificModel_RendersWithCorrectMetadata()
         {
             // Arrange
-            var expected = "<label for=\"Description\">ItemDesc</label>" + Environment.NewLine +
-                "<input id=\"Description\" name=\"Description\" type=\"text\" value=\"\" />" + Environment.NewLine + Environment.NewLine;
+            var expected =
+                "<label for=\"Description\">ItemDesc</label>"
+                + Environment.NewLine
+                + "<input id=\"Description\" name=\"Description\" type=\"text\" value=\"\" />"
+                + Environment.NewLine
+                + Environment.NewLine;
 
             // Act
-            var response = await Client.GetStringAsync("http://localhost/HtmlGeneration_Home/ItemUsingModelSpecificEditorTemplate");
+            var response = await Client.GetStringAsync(
+                "http://localhost/HtmlGeneration_Home/ItemUsingModelSpecificEditorTemplate"
+            );
 
             // Assert
             Assert.Equal(expected, response, ignoreLineEndingDifferences: true);
@@ -700,21 +882,38 @@ Products: Music Systems, Televisions (3)";
         public async Task ValidationProviderAttribute_ValidationTagHelpers_GeneratesExpectedDataAttributes()
         {
             // Act
-            var document = await Client.GetHtmlDocumentAsync("HtmlGeneration_Home/ValidationProviderAttribute");
+            var document = await Client.GetHtmlDocumentAsync(
+                "HtmlGeneration_Home/ValidationProviderAttribute"
+            );
 
             // Assert
             var firstName = document.RequiredQuerySelector("#FirstName");
             Assert.Equal("true", firstName.GetAttribute("data-val"));
-            Assert.Equal("The FirstName field is required.", firstName.GetAttribute("data-val-required"));
-            Assert.Equal("The field FirstName must be a string with a maximum length of 5.", firstName.GetAttribute("data-val-length"));
+            Assert.Equal(
+                "The FirstName field is required.",
+                firstName.GetAttribute("data-val-required")
+            );
+            Assert.Equal(
+                "The field FirstName must be a string with a maximum length of 5.",
+                firstName.GetAttribute("data-val-length")
+            );
             Assert.Equal("5", firstName.GetAttribute("data-val-length-max"));
-            Assert.Equal("The field FirstName must match the regular expression '[A-Za-z]*'.", firstName.GetAttribute("data-val-regex"));
+            Assert.Equal(
+                "The field FirstName must match the regular expression '[A-Za-z]*'.",
+                firstName.GetAttribute("data-val-regex")
+            );
             Assert.Equal("[A-Za-z]*", firstName.GetAttribute("data-val-regex-pattern"));
 
             var lastName = document.RequiredQuerySelector("#LastName");
             Assert.Equal("true", lastName.GetAttribute("data-val"));
-            Assert.Equal("The LastName field is required.", lastName.GetAttribute("data-val-required"));
-            Assert.Equal("The field LastName must be a string with a maximum length of 6.", lastName.GetAttribute("data-val-length"));
+            Assert.Equal(
+                "The LastName field is required.",
+                lastName.GetAttribute("data-val-required")
+            );
+            Assert.Equal(
+                "The field LastName must be a string with a maximum length of 6.",
+                lastName.GetAttribute("data-val-length")
+            );
             Assert.Equal("6", lastName.GetAttribute("data-val-length-max"));
             Assert.False(lastName.HasAttribute("data-val-regex"));
         }
@@ -723,11 +922,13 @@ Products: Music Systems, Televisions (3)";
         public async Task ValidationProviderAttribute_ValidationTagHelpers_GeneratesExpectedSpansAndDivsOnValidationError()
         {
             // Arrange
-            var request = new HttpRequestMessage(HttpMethod.Post, "HtmlGeneration_Home/ValidationProviderAttribute");
-            request.Content = new FormUrlEncodedContent(new Dictionary<string, string>
-            {
-                { "FirstName", "TestFirstName" },
-            });
+            var request = new HttpRequestMessage(
+                HttpMethod.Post,
+                "HtmlGeneration_Home/ValidationProviderAttribute"
+            );
+            request.Content = new FormUrlEncodedContent(
+                new Dictionary<string, string> { { "FirstName", "TestFirstName" }, }
+            );
 
             // Act
             var response = await Client.SendAsync(request);
@@ -737,8 +938,13 @@ Products: Music Systems, Televisions (3)";
             var document = await response.GetHtmlDocumentAsync();
             Assert.Collection(
                 document.QuerySelectorAll("div.validation-summary-errors ul li"),
-                item => Assert.Equal("The field FirstName must be a string with a maximum length of 5.", item.TextContent),
-                item => Assert.Equal("The LastName field is required.", item.TextContent));
+                item =>
+                    Assert.Equal(
+                        "The field FirstName must be a string with a maximum length of 5.",
+                        item.TextContent
+                    ),
+                item => Assert.Equal("The LastName field is required.", item.TextContent)
+            );
         }
 
         private static HttpRequestMessage RequestWithLocale(string url, string locale)

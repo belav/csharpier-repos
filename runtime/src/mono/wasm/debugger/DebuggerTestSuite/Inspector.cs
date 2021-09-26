@@ -23,8 +23,14 @@ namespace DebuggerTests
 
         private const int DefaultTestTimeoutMs = 1 * 60 * 1000;
 
-        Dictionary<string, TaskCompletionSource<JObject>> notifications = new Dictionary<string, TaskCompletionSource<JObject>>();
-        Dictionary<string, Func<JObject, CancellationToken, Task>> eventListeners = new Dictionary<string, Func<JObject, CancellationToken, Task>>();
+        Dictionary<string, TaskCompletionSource<JObject>> notifications = new Dictionary<
+            string,
+            TaskCompletionSource<JObject>
+        >();
+        Dictionary<string, Func<JObject, CancellationToken, Task>> eventListeners = new Dictionary<
+            string,
+            Func<JObject, CancellationToken, Task>
+        >();
 
         public const string PAUSE = "pause";
         public const string READY = "ready";
@@ -41,9 +47,11 @@ namespace DebuggerTests
             _cancellationTokenSource = new CancellationTokenSource();
             Token = _cancellationTokenSource.Token;
 
-            _loggerFactory = LoggerFactory.Create(builder =>
+            _loggerFactory = LoggerFactory.Create(
+                builder =>
                     builder.AddSimpleConsole(options => options.SingleLine = true)
-                           .AddFilter(null, LogLevel.Trace));
+                        .AddFilter(null, LogLevel.Trace)
+            );
 
             Client = new InspectorClient(_loggerFactory.CreateLogger<InspectorClient>());
             _logger = _loggerFactory.CreateLogger<Inspector>();
@@ -59,7 +67,9 @@ namespace DebuggerTests
                     return tcs.Task;
                 }
 
-                throw new Exception($"Invalid internal state, waiting for {what} while another wait is already setup");
+                throw new Exception(
+                    $"Invalid internal state, waiting for {what} while another wait is already setup"
+                );
             }
             else
             {
@@ -74,7 +84,9 @@ namespace DebuggerTests
             if (notifications.TryGetValue(what, out TaskCompletionSource<JObject>? tcs))
             {
                 if (tcs.Task.IsCompleted)
-                    throw new Exception($"Invalid internal state. Notifying for {what} again, but the previous one hasn't been read.");
+                    throw new Exception(
+                        $"Invalid internal state. Notifying for {what} again, but the previous one hasn't been read."
+                    );
 
                 notifications[what].SetResult(args);
                 notifications.Remove(what);
@@ -170,14 +182,19 @@ namespace DebuggerTests
             }
         }
 
-        public async Task OpenSessionAsync(Func<InspectorClient, CancellationToken, List<(string, Task<Result>)>> getInitCmds, TimeSpan? span = null)
+        public async Task OpenSessionAsync(
+            Func<InspectorClient, CancellationToken, List<(string, Task<Result>)>> getInitCmds,
+            TimeSpan? span = null
+        )
         {
             var start = DateTime.Now;
             try
             {
                 _cancellationTokenSource.CancelAfter(span?.Milliseconds ?? DefaultTestTimeoutMs);
 
-                var uri = new Uri($"ws://{TestHarnessProxy.Endpoint.Authority}/launch-chrome-and-connect");
+                var uri = new Uri(
+                    $"ws://{TestHarnessProxy.Endpoint.Authority}/launch-chrome-and-connect"
+                );
 
                 await Client.Connect(uri, OnMessage, _cancellationTokenSource.Token);
                 Client.RunLoopStopped += (_, args) =>
@@ -189,18 +206,25 @@ namespace DebuggerTests
                             break;
 
                         case RunLoopStopReason.Cancelled when Token.IsCancellationRequested:
-                            FailAllWaiters(new TaskCanceledException($"Test timed out (elapsed time: {(DateTime.Now - start).TotalSeconds}"));
+                            FailAllWaiters(
+                                new TaskCanceledException(
+                                    $"Test timed out (elapsed time: {(DateTime.Now - start).TotalSeconds}"
+                                )
+                            );
                             break;
 
                         default:
                             FailAllWaiters();
                             break;
-                    };
+                    }
+                    ;
                 };
 
                 var init_cmds = getInitCmds(Client, _cancellationTokenSource.Token);
 
-                Task<Result> readyTask = Task.Run(async () => Result.FromJson(await WaitFor(READY)));
+                Task<Result> readyTask = Task.Run(
+                    async () => Result.FromJson(await WaitFor(READY))
+                );
                 init_cmds.Add((READY, readyTask));
 
                 _logger.LogInformation("waiting for the runtime to be ready");
@@ -215,20 +239,25 @@ namespace DebuggerTests
                     if (t.IsCanceled)
                     {
                         throw new TaskCanceledException(
-                                    $"Command {cmd_name} timed out during init for the test." +
-                                    $"Remaining commands: {RemainingCommandsToString(cmd_name, init_cmds)}." +
-                                    $"Total time: {(DateTime.Now - start).TotalSeconds}");
+                            $"Command {cmd_name} timed out during init for the test."
+                                + $"Remaining commands: {RemainingCommandsToString(cmd_name, init_cmds)}."
+                                + $"Total time: {(DateTime.Now - start).TotalSeconds}"
+                        );
                     }
 
                     if (t.IsFaulted)
                     {
-                        _logger.LogError($"Command {cmd_name} failed with {t.Exception}. Remaining commands: {RemainingCommandsToString(cmd_name, init_cmds)}.");
+                        _logger.LogError(
+                            $"Command {cmd_name} failed with {t.Exception}. Remaining commands: {RemainingCommandsToString(cmd_name, init_cmds)}."
+                        );
                         throw t.Exception!;
                     }
 
                     Result res = t.Result;
                     if (res.IsErr)
-                        throw new ArgumentException($"Command {cmd_name} failed with: {res.Error}. Remaining commands: {RemainingCommandsToString(cmd_name, init_cmds)}");
+                        throw new ArgumentException(
+                            $"Command {cmd_name} failed with: {res.Error}. Remaining commands: {RemainingCommandsToString(cmd_name, init_cmds)}"
+                        );
 
                     init_cmds.RemoveAt(cmdIdx);
                 }
@@ -241,7 +270,10 @@ namespace DebuggerTests
                 throw;
             }
 
-            static string RemainingCommandsToString(string cmd_name, IList<(string, Task<Result>)> cmds)
+            static string RemainingCommandsToString(
+                string cmd_name,
+                IList<(string, Task<Result>)> cmds
+            )
             {
                 var sb = new StringBuilder();
                 for (int i = 0; i < cmds.Count; i++)
@@ -264,7 +296,9 @@ namespace DebuggerTests
         public async Task ShutdownAsync()
         {
             if (Client == null)
-                throw new InvalidOperationException($"InspectorClient is null. Duplicate Shutdown?");
+                throw new InvalidOperationException(
+                    $"InspectorClient is null. Duplicate Shutdown?"
+                );
 
             try
             {

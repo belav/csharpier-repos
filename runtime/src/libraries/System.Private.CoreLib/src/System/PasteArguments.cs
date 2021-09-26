@@ -58,7 +58,6 @@ namespace System
                             // Backslash will not be followed by a quote, so emit as normal characters.
                             stringBuilder.Append(Backslash, numBackSlash);
                         }
-
                         continue;
                     }
 

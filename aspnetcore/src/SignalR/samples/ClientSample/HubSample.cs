@@ -15,14 +15,20 @@ namespace ClientSample
     {
         internal static void Register(CommandLineApplication app)
         {
-            app.Command("hub", cmd =>
-            {
-                cmd.Description = "Tests a connection to a hub";
+            app.Command(
+                "hub",
+                cmd =>
+                {
+                    cmd.Description = "Tests a connection to a hub";
 
-                var baseUrlArgument = cmd.Argument("<BASEURL>", "The URL to the Chat Hub to test");
+                    var baseUrlArgument = cmd.Argument(
+                        "<BASEURL>",
+                        "The URL to the Chat Hub to test"
+                    );
 
-                cmd.OnExecute(() => ExecuteAsync(baseUrlArgument.Value));
-            });
+                    cmd.OnExecute(() => ExecuteAsync(baseUrlArgument.Value));
+                }
+            );
         }
 
         public static async Task<int> ExecuteAsync(string baseUrl)
@@ -31,16 +37,19 @@ namespace ClientSample
 
             Console.WriteLine("Connecting to {0}", uri);
 
-            var connectionBuilder = new HubConnectionBuilder()
-                .ConfigureLogging(logging =>
+            var connectionBuilder = new HubConnectionBuilder().ConfigureLogging(
+                logging =>
                 {
                     logging.AddConsole();
-                });
+                }
+            );
 
-            connectionBuilder.Services.Configure<LoggerFilterOptions>(options =>
-            {
-                options.MinLevel = LogLevel.Trace;
-            });
+            connectionBuilder.Services.Configure<LoggerFilterOptions>(
+                options =>
+                {
+                    options.MinLevel = LogLevel.Trace;
+                }
+            );
 
             if (uri.Scheme == "net.tcp")
             {
@@ -77,7 +86,10 @@ namespace ClientSample
 
                 if (!await ConnectAsync(connection, closedTokenSource.Token))
                 {
-                    Console.WriteLine("Failed to establish a connection to '{0}' because the CancelKeyPress event fired first. Exiting...", uri);
+                    Console.WriteLine(
+                        "Failed to establish a connection to '{0}' because the CancelKeyPress event fired first. Exiting...",
+                        uri
+                    );
                     return 0;
                 }
 
@@ -104,7 +116,10 @@ namespace ClientSample
                     catch when (closedTokenSource.IsCancellationRequested)
                     {
                         // We're shutting down the client
-                        Console.WriteLine("Failed to send '{0}' because the CancelKeyPress event fired first. Exiting...", line);
+                        Console.WriteLine(
+                            "Failed to send '{0}' because the CancelKeyPress event fired first. Exiting...",
+                            line
+                        );
                         break;
                     }
                     catch (Exception ex)
@@ -115,6 +130,7 @@ namespace ClientSample
                     }
                 }
             }
+
             finally
             {
                 await connection.StopAsync();
@@ -123,7 +139,10 @@ namespace ClientSample
             return 0;
         }
 
-        private static async Task<bool> ConnectAsync(HubConnection connection, CancellationToken token)
+        private static async Task<bool> ConnectAsync(
+            HubConnection connection,
+            CancellationToken token
+        )
         {
             // Keep trying to until we can start
             while (true)

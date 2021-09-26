@@ -37,7 +37,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Schema
         public void Example()
         {
             #region Usage
-            JsonSchema schema = JsonSchema.Parse(@"{
+            JsonSchema schema = JsonSchema.Parse(
+                @"{
               'type': 'object',
               'properties': {
                 'name': {'type':'string'},
@@ -46,12 +47,15 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Schema
                   'items': {'type':'string'}
                 }
               }
-            }");
+            }"
+            );
 
-            JObject person = JObject.Parse(@"{
+            JObject person = JObject.Parse(
+                @"{
               'name': 'James',
               'hobbies': ['.NET', 'Blogging', 'Reading', 'Xbox', 'LOLCATS']
-            }");
+            }"
+            );
 
             IList<string> errorMessages;
             bool valid = person.IsValid(schema, out errorMessages);

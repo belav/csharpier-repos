@@ -28,14 +28,19 @@ namespace System.Net.Http.Formatting
             this MediaTypeFormatter formatter,
             string queryStringParameterName,
             string queryStringParameterValue,
-            MediaTypeHeaderValue mediaType)
+            MediaTypeHeaderValue mediaType
+        )
         {
             if (formatter == null)
             {
                 throw Error.ArgumentNull("formatter");
             }
 
-            QueryStringMapping mapping = new QueryStringMapping(queryStringParameterName, queryStringParameterValue, mediaType);
+            QueryStringMapping mapping = new QueryStringMapping(
+                queryStringParameterName,
+                queryStringParameterValue,
+                mediaType
+            );
             formatter.MediaTypeMappings.Add(mapping);
         }
 
@@ -54,14 +59,19 @@ namespace System.Net.Http.Formatting
             this MediaTypeFormatter formatter,
             string queryStringParameterName,
             string queryStringParameterValue,
-            string mediaType)
+            string mediaType
+        )
         {
             if (formatter == null)
             {
                 throw Error.ArgumentNull("formatter");
             }
 
-            QueryStringMapping mapping = new QueryStringMapping(queryStringParameterName, queryStringParameterValue, mediaType);
+            QueryStringMapping mapping = new QueryStringMapping(
+                queryStringParameterName,
+                queryStringParameterValue,
+                mediaType
+            );
             formatter.MediaTypeMappings.Add(mapping);
         }
 
@@ -87,14 +97,21 @@ namespace System.Net.Http.Formatting
             string headerValue,
             StringComparison valueComparison,
             bool isValueSubstring,
-            MediaTypeHeaderValue mediaType)
+            MediaTypeHeaderValue mediaType
+        )
         {
             if (formatter == null)
             {
                 throw Error.ArgumentNull("formatter");
             }
 
-            RequestHeaderMapping mapping = new RequestHeaderMapping(headerName, headerValue, valueComparison, isValueSubstring, mediaType);
+            RequestHeaderMapping mapping = new RequestHeaderMapping(
+                headerName,
+                headerValue,
+                valueComparison,
+                isValueSubstring,
+                mediaType
+            );
             formatter.MediaTypeMappings.Add(mapping);
         }
 
@@ -120,14 +137,21 @@ namespace System.Net.Http.Formatting
             string headerValue,
             StringComparison valueComparison,
             bool isValueSubstring,
-            string mediaType)
+            string mediaType
+        )
         {
             if (formatter == null)
             {
                 throw Error.ArgumentNull("formatter");
             }
 
-            RequestHeaderMapping mapping = new RequestHeaderMapping(headerName, headerValue, valueComparison, isValueSubstring, mediaType);
+            RequestHeaderMapping mapping = new RequestHeaderMapping(
+                headerName,
+                headerValue,
+                valueComparison,
+                isValueSubstring,
+                mediaType
+            );
             formatter.MediaTypeMappings.Add(mapping);
         }
     }

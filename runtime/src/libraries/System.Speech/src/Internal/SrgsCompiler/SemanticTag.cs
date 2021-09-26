@@ -9,10 +9,7 @@ namespace System.Speech.Internal.SrgsCompiler
     {
         #region Constructors
 
-        internal SemanticTag(ParseElement parent, Backend backend)
-            : base(parent._rule)
-        {
-        }
+        internal SemanticTag(ParseElement parent, Backend backend) : base(parent._rule) { }
 
         #endregion
 
@@ -44,7 +41,6 @@ namespace System.Speech.Internal.SrgsCompiler
         #region Private Fields
 
         private CfgGrammar.CfgProperty _propInfo = new();
-
         #endregion
     }
 }

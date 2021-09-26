@@ -32,9 +32,27 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Services
         {
             var badAnalyzers = GetBadAnalyzers(@"TestFiles\analyzer_input.csv", to: 200);
 
-            VerifyBadAnalyzer(badAnalyzers[0], "CSharpRemoveUnnecessaryCastDiagnosticAnalyzer", 101.244432561581, 54.48, 21.8163001442628);
-            VerifyBadAnalyzer(badAnalyzers[1], "CSharpInlineDeclarationDiagnosticAnalyzer", 49.9389715502954, 26.6686092715232, 9.2987133054884);
-            VerifyBadAnalyzer(badAnalyzers[2], "VisualBasicRemoveUnnecessaryCastDiagnosticAnalyzer", 42.0967360557792, 23.277619047619, 7.25464266261805);
+            VerifyBadAnalyzer(
+                badAnalyzers[0],
+                "CSharpRemoveUnnecessaryCastDiagnosticAnalyzer",
+                101.244432561581,
+                54.48,
+                21.8163001442628
+            );
+            VerifyBadAnalyzer(
+                badAnalyzers[1],
+                "CSharpInlineDeclarationDiagnosticAnalyzer",
+                49.9389715502954,
+                26.6686092715232,
+                9.2987133054884
+            );
+            VerifyBadAnalyzer(
+                badAnalyzers[2],
+                "VisualBasicRemoveUnnecessaryCastDiagnosticAnalyzer",
+                42.0967360557792,
+                23.277619047619,
+                7.25464266261805
+            );
         }
 
         [Fact]
@@ -42,9 +60,27 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Services
         {
             var badAnalyzers = GetBadAnalyzers(@"TestFiles\analyzer_input.csv", to: 300);
 
-            VerifyBadAnalyzer(badAnalyzers[0], "CSharpRemoveUnnecessaryCastDiagnosticAnalyzer", 85.6039521236341, 58.4542358078603, 18.4245217226717);
-            VerifyBadAnalyzer(badAnalyzers[1], "VisualBasic.UseAutoProperty.UseAutoPropertyAnalyzer", 45.0918385052674, 29.0622535211268, 9.13728667060397);
-            VerifyBadAnalyzer(badAnalyzers[2], "CSharpInlineDeclarationDiagnosticAnalyzer", 42.2014208750466, 28.7935371179039, 7.99261581900397);
+            VerifyBadAnalyzer(
+                badAnalyzers[0],
+                "CSharpRemoveUnnecessaryCastDiagnosticAnalyzer",
+                85.6039521236341,
+                58.4542358078603,
+                18.4245217226717
+            );
+            VerifyBadAnalyzer(
+                badAnalyzers[1],
+                "VisualBasic.UseAutoProperty.UseAutoPropertyAnalyzer",
+                45.0918385052674,
+                29.0622535211268,
+                9.13728667060397
+            );
+            VerifyBadAnalyzer(
+                badAnalyzers[2],
+                "CSharpInlineDeclarationDiagnosticAnalyzer",
+                42.2014208750466,
+                28.7935371179039,
+                7.99261581900397
+            );
         }
 
         [Fact]
@@ -53,9 +89,27 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Services
             // data starting to rolling at 300 data points
             var badAnalyzers = GetBadAnalyzers(@"TestFiles\analyzer_input.csv", to: 400);
 
-            VerifyBadAnalyzer(badAnalyzers[0], "CSharpRemoveUnnecessaryCastDiagnosticAnalyzer", 76.2748443491852, 51.1698695652174, 17.3819563479479);
-            VerifyBadAnalyzer(badAnalyzers[1], "VisualBasic.UseAutoProperty.UseAutoPropertyAnalyzer", 43.5700167914005, 29.2597857142857, 9.21213873850298);
-            VerifyBadAnalyzer(badAnalyzers[2], "InlineDeclaration.CSharpInlineDeclarationDiagnosticAnalyzer", 36.4336594793033, 23.9764782608696, 7.43956680199015);
+            VerifyBadAnalyzer(
+                badAnalyzers[0],
+                "CSharpRemoveUnnecessaryCastDiagnosticAnalyzer",
+                76.2748443491852,
+                51.1698695652174,
+                17.3819563479479
+            );
+            VerifyBadAnalyzer(
+                badAnalyzers[1],
+                "VisualBasic.UseAutoProperty.UseAutoPropertyAnalyzer",
+                43.5700167914005,
+                29.2597857142857,
+                9.21213873850298
+            );
+            VerifyBadAnalyzer(
+                badAnalyzers[2],
+                "InlineDeclaration.CSharpInlineDeclarationDiagnosticAnalyzer",
+                36.4336594793033,
+                23.9764782608696,
+                7.43956680199015
+            );
         }
 
         [Fact]
@@ -70,9 +124,18 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Services
             Assert.True(badAnalyzer2.PIISafeAnalyzerId == "test".GetHashCode().ToString());
         }
 
-        private void VerifyBadAnalyzer(ExpensiveAnalyzerInfo analyzer, string analyzerId, double lof, double mean, double stddev)
+        private void VerifyBadAnalyzer(
+            ExpensiveAnalyzerInfo analyzer,
+            string analyzerId,
+            double lof,
+            double mean,
+            double stddev
+        )
         {
-            Assert.True(analyzer.PIISafeAnalyzerId.IndexOf(analyzerId, StringComparison.OrdinalIgnoreCase) >= 0);
+            Assert.True(
+                analyzer.PIISafeAnalyzerId.IndexOf(analyzerId, StringComparison.OrdinalIgnoreCase)
+                    >= 0
+            );
             Assert.Equal(lof, analyzer.LocalOutlierFactor, precision: 4);
             Assert.Equal(mean, analyzer.Average, precision: 4);
             Assert.Equal(stddev, analyzer.AdjustedStandardDeviation, precision: 4);
@@ -86,7 +149,11 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Services
 
             to = Math.Min(to, dataCount);
 
-            var service = new PerformanceTrackerService(minLOFValue: 0, averageThreshold: 0, stddevThreshold: 0);
+            var service = new PerformanceTrackerService(
+                minLOFValue: 0,
+                averageThreshold: 0,
+                stddevThreshold: 0
+            );
 
             for (var i = 0; i < to; i++)
             {
@@ -99,7 +166,10 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Services
             return badAnalyzerInfo;
         }
 
-        private IEnumerable<AnalyzerPerformanceInfo> CreateSnapshots(Dictionary<string, double[]> matrix, int index)
+        private IEnumerable<AnalyzerPerformanceInfo> CreateSnapshots(
+            Dictionary<string, double[]> matrix,
+            int index
+        )
         {
             foreach (var kv in matrix)
             {
@@ -109,7 +179,11 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Services
                     continue;
                 }
 
-                yield return new AnalyzerPerformanceInfo(kv.Key, true, TimeSpan.FromMilliseconds(timeSpan));
+                yield return new AnalyzerPerformanceInfo(
+                    kv.Key,
+                    true,
+                    TimeSpan.FromMilliseconds(timeSpan)
+                );
             }
         }
 
@@ -136,7 +210,14 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Services
                 for (var j = 0; j < data.Length; j++)
                 {
                     double result;
-                    if (!double.TryParse(data[j], NumberStyles.Float | NumberStyles.AllowThousands, CultureInfo.InvariantCulture, out result))
+                    if (
+                        !double.TryParse(
+                            data[j],
+                            NumberStyles.Float | NumberStyles.AllowThousands,
+                            CultureInfo.InvariantCulture,
+                            out result
+                        )
+                    )
                     {
                         // no data for this analyzer for this particular run
                         result = double.NaN;
@@ -176,7 +257,9 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Services
             {
                 if (stream == null)
                 {
-                    throw new InvalidOperationException($"Resource '{resourceName}' not found in {assembly.FullName}.");
+                    throw new InvalidOperationException(
+                        $"Resource '{resourceName}' not found in {assembly.FullName}."
+                    );
                 }
 
                 using (var reader = new StreamReader(stream))
@@ -190,7 +273,9 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Services
         {
             var convert = name.Replace(@"\", ".");
 
-            return assembly.GetManifestResourceNames().Where(n => n.EndsWith(convert, StringComparison.OrdinalIgnoreCase)).First();
+            return assembly.GetManifestResourceNames()
+                .Where(n => n.EndsWith(convert, StringComparison.OrdinalIgnoreCase))
+                .First();
         }
     }
 }

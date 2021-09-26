@@ -14,17 +14,14 @@ namespace Microsoft.AspNetCore.Testing
         private readonly RequestDelegate _requestDelegate;
         private readonly IHttpContextFactory _httpContextFactory;
 
-        public DummyApplication()
-            : this(_ => Task.CompletedTask)
-        {
-        }
+        public DummyApplication() : this(_ => Task.CompletedTask) { }
 
-        public DummyApplication(RequestDelegate requestDelegate)
-            : this(requestDelegate, null)
-        {
-        }
+        public DummyApplication(RequestDelegate requestDelegate) : this(requestDelegate, null) { }
 
-        public DummyApplication(RequestDelegate requestDelegate, IHttpContextFactory httpContextFactory)
+        public DummyApplication(
+            RequestDelegate requestDelegate,
+            IHttpContextFactory httpContextFactory
+        )
         {
             _requestDelegate = requestDelegate;
             _httpContextFactory = httpContextFactory;
@@ -32,7 +29,8 @@ namespace Microsoft.AspNetCore.Testing
 
         public HttpContext CreateContext(IFeatureCollection contextFeatures)
         {
-            return _httpContextFactory?.Create(contextFeatures) ?? new DefaultHttpContext(contextFeatures);
+            return _httpContextFactory?.Create(contextFeatures)
+                ?? new DefaultHttpContext(contextFeatures);
         }
 
         public void DisposeContext(HttpContext context, Exception exception)

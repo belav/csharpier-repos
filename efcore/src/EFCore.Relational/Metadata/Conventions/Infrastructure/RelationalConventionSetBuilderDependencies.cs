@@ -59,7 +59,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Infrastructure
         ///     </para>
         /// </summary>
         [EntityFrameworkInternal]
-        public RelationalConventionSetBuilderDependencies(IRelationalAnnotationProvider relationalAnnotationProvider)
+        public RelationalConventionSetBuilderDependencies(
+            IRelationalAnnotationProvider relationalAnnotationProvider
+        )
         {
             Check.NotNull(relationalAnnotationProvider, nameof(relationalAnnotationProvider));
 

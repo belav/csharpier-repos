@@ -24,10 +24,7 @@ namespace Microsoft.Extensions.Configuration.Xml
         /// Initializes a XmlDocumentDecryptor.
         /// </summary>
         // don't create an instance of this directly
-        protected XmlDocumentDecryptor()
-            : this(DefaultEncryptedXmlFactory)
-        {
-        }
+        protected XmlDocumentDecryptor() : this(DefaultEncryptedXmlFactory) { }
 
         // for testing only
         internal XmlDocumentDecryptor(Func<XmlDocument, EncryptedXml> encryptedXmlFactory)
@@ -94,7 +91,7 @@ namespace Microsoft.Extensions.Configuration.Xml
             return document.CreateNavigator().ReadSubtree();
         }
 
-        private static EncryptedXml DefaultEncryptedXmlFactory(XmlDocument document)
-            => new EncryptedXml(document);
+        private static EncryptedXml DefaultEncryptedXmlFactory(XmlDocument document) =>
+            new EncryptedXml(document);
     }
 }

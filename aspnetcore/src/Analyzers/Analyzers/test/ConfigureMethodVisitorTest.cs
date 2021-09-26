@@ -28,11 +28,18 @@ namespace Microsoft.AspNetCore.Analyzers
             var symbols = new StartupSymbols(compilation);
 
             // Act
-            var results = ConfigureMethodVisitor.FindConfigureMethods(symbols, compilation.Assembly);
+            var results = ConfigureMethodVisitor.FindConfigureMethods(
+                symbols,
+                compilation.Assembly
+            );
 
             // Assert
-            var actual = results
-                .Select(m => m.ContainingType.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat) + "." + m.Name)
+            var actual = results.Select(
+                    m =>
+                        m.ContainingType.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)
+                        + "."
+                        + m.Name
+                )
                 .OrderBy(s => s)
                 .ToArray();
             Assert.Equal(expected, actual);

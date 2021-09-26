@@ -26,7 +26,8 @@ namespace BenchmarksGame
         public static int Main(String[] args)
         {
             int n = 100;
-            if (args.Length > 0) n = Int32.Parse(args[0]);
+            if (args.Length > 0)
+                n = Int32.Parse(args[0]);
 
             double norm = new SpectralNorm_1().Bench(n);
             Console.WriteLine("{0:f9}", norm);
@@ -41,7 +42,12 @@ namespace BenchmarksGame
         {
             var obj = new SpectralNorm_1();
             double norm = 0.0;
-            Benchmark.Iterate(() => { norm = obj.Bench(100); });
+            Benchmark.Iterate(
+                () =>
+                {
+                    norm = obj.Bench(100);
+                }
+            );
 
             double expected = 1.274219991;
             Assert.True(Math.Abs(norm - expected) < 1e-4);
@@ -52,11 +58,13 @@ namespace BenchmarksGame
         {
             // create unit vector
             double[] u = new double[n];
-            for (int i = 0; i < n; i++) u[i] = 1;
+            for (int i = 0; i < n; i++)
+                u[i] = 1;
 
             // 20 steps of the power method
             double[] v = new double[n];
-            for (int i = 0; i < n; i++) v[i] = 0;
+            for (int i = 0; i < n; i++)
+                v[i] = 0;
 
             for (int i = 0; i < 10; i++)
             {
@@ -65,8 +73,9 @@ namespace BenchmarksGame
             }
 
             // B=AtA         A multiplied by A transposed
-            // v.Bv /(v.v)   eigenvalue of v 
-            double vBv = 0, vv = 0;
+            // v.Bv /(v.v)   eigenvalue of v
+            double vBv = 0,
+                vv = 0;
             for (int i = 0; i < n; i++)
             {
                 vBv += u[i] * v[i];
@@ -75,7 +84,6 @@ namespace BenchmarksGame
 
             return Math.Sqrt(vBv / vv);
         }
-
 
         /* return element i,j of infinite matrix A */
         double A(int i, int j)
@@ -89,7 +97,8 @@ namespace BenchmarksGame
             for (int i = 0; i < n; i++)
             {
                 Av[i] = 0;
-                for (int j = 0; j < n; j++) Av[i] += A(i, j) * v[j];
+                for (int j = 0; j < n; j++)
+                    Av[i] += A(i, j) * v[j];
             }
         }
 
@@ -99,7 +108,8 @@ namespace BenchmarksGame
             for (int i = 0; i < n; i++)
             {
                 Atv[i] = 0;
-                for (int j = 0; j < n; j++) Atv[i] += A(j, i) * v[j];
+                for (int j = 0; j < n; j++)
+                    Atv[i] += A(j, i) * v[j];
             }
         }
 

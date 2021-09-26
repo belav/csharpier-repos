@@ -47,6 +47,7 @@ namespace System.ComponentModel.EventBasedAsync.Tests
                         Assert.Equal(expectedResult, (int)e.Result);
                         Assert.False(worker.IsBusy);
                     }
+
                     finally
                     {
                         workerCompletedEvent.Set();
@@ -64,6 +65,7 @@ namespace System.ComponentModel.EventBasedAsync.Tests
                 Assert.False(worker.IsBusy);
                 Assert.Equal(expectedReportCallsCount, actualReportCallsCount);
             }
+
             finally
             {
                 SynchronizationContext.SetSynchronizationContext(orignal);
@@ -179,10 +181,13 @@ namespace System.ComponentModel.EventBasedAsync.Tests
                 {
                     try
                     {
-                        TargetInvocationException ex = Assert.Throws<TargetInvocationException>(() => e.Result);
+                        TargetInvocationException ex = Assert.Throws<TargetInvocationException>(
+                            () => e.Result
+                        );
                         Assert.True(ex.InnerException is TestException);
                         Assert.Equal(expectedExceptionMsg, ex.InnerException.Message);
                     }
+
                     finally
                     {
                         workerCompletedEvent.Set();
@@ -192,6 +197,7 @@ namespace System.ComponentModel.EventBasedAsync.Tests
                 bw.RunWorkerAsync(expectedArgument);
                 Assert.True(workerCompletedEvent.Wait(TimeoutLong), "Background work timeout");
             }
+
             finally
             {
                 SynchronizationContext.SetSynchronizationContext(original);
@@ -227,6 +233,7 @@ namespace System.ComponentModel.EventBasedAsync.Tests
                 Assert.True(bw.IsBusy);
                 Assert.Throws<InvalidOperationException>(() => bw.RunWorkerAsync());
             }
+
             finally
             {
                 barrier.SignalAndWait();
@@ -267,6 +274,7 @@ namespace System.ComponentModel.EventBasedAsync.Tests
                 barrier.SignalAndWait();
                 Assert.True(barrier.SignalAndWait(TimeoutLong), "Background work timeout");
             }
+
             finally
             {
                 SynchronizationContext.SetSynchronizationContext(original);

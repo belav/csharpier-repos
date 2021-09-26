@@ -17,9 +17,7 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
         /// <summary>
         /// Initializes a <see cref="NullHtmlEncoder"/> instance.
         /// </summary>
-        private NullHtmlEncoder()
-        {
-        }
+        private NullHtmlEncoder() { }
 
         /// <summary>
         /// A <see cref="HtmlEncoder"/> instance that does not encode. Should not be used when writing directly to a
@@ -42,7 +40,12 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
         }
 
         /// <inheritdoc />
-        public override void Encode(TextWriter output, char[] value, int startIndex, int characterCount)
+        public override void Encode(
+            TextWriter output,
+            char[] value,
+            int startIndex,
+            int characterCount
+        )
         {
             if (output == null)
             {
@@ -62,7 +65,12 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
             output.Write(value, startIndex, characterCount);
         }
 
-        public override void Encode(TextWriter output, string value, int startIndex, int characterCount)
+        public override void Encode(
+            TextWriter output,
+            string value,
+            int startIndex,
+            int characterCount
+        )
         {
             if (output == null)
             {
@@ -80,7 +88,7 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
             }
 
             var span = value.AsSpan(startIndex, characterCount);
-            
+
             output.Write(span);
         }
 
@@ -96,7 +104,8 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
             int unicodeScalar,
             char* buffer,
             int bufferLength,
-            out int numberOfCharactersWritten)
+            out int numberOfCharactersWritten
+        )
         {
             if (buffer == null)
             {

@@ -12,7 +12,6 @@ namespace Microsoft.JSInterop
         /// Indicates that the returned value is not treated in a special way.
         /// </summary>
         Default = 0,
-
         /// <summary>
         /// Indicates that the returned value is to be treated as a JS object reference.
         /// </summary>

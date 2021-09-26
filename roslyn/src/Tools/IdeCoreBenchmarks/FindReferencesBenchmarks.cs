@@ -29,7 +29,9 @@ namespace IdeCoreBenchmarks
 
         public FindReferencesBenchmarks()
         {
-            var roslynRoot = Environment.GetEnvironmentVariable(Program.RoslynRootPathEnvVariableName);
+            var roslynRoot = Environment.GetEnvironmentVariable(
+                Program.RoslynRootPathEnvVariableName
+            );
             _solutionPath = Path.Combine(roslynRoot, @"C:\github\roslyn\Roslyn.sln");
 
             if (!File.Exists(_solutionPath))
@@ -45,13 +47,24 @@ namespace IdeCoreBenchmarks
             if (_workspace == null)
                 throw new ArgumentException("Couldn't create workspace");
 
-            _workspace.TryApplyChanges(_workspace.CurrentSolution.WithOptions(_workspace.Options
-                .WithChangedOption(StorageOptions.Database, StorageDatabase.SQLite)));
+            _workspace.TryApplyChanges(
+                _workspace.CurrentSolution.WithOptions(
+                    _workspace.Options.WithChangedOption(
+                        StorageOptions.Database,
+                        StorageDatabase.SQLite
+                    )
+                )
+            );
 
             Console.WriteLine("Opening roslyn.  Attach to: " + Process.GetCurrentProcess().Id);
 
             var start = DateTime.Now;
-            _ = _workspace.OpenSolutionAsync(_solutionPath, progress: null, CancellationToken.None).Result;
+            _ =
+                _workspace.OpenSolutionAsync(
+                    _solutionPath,
+                    progress: null,
+                    CancellationToken.None
+                ).Result;
             Console.WriteLine("Finished opening roslyn: " + (DateTime.Now - start));
 
             // Force a storage instance to be created.  This makes it simple to go examine it prior to any operations we
@@ -60,7 +73,13 @@ namespace IdeCoreBenchmarks
             if (storageService == null)
                 throw new ArgumentException("Couldn't get storage service");
 
-            using var storage = storageService.GetStorageAsync(_workspace.CurrentSolution, CancellationToken.None).AsTask().GetAwaiter().GetResult();
+            using var storage = storageService.GetStorageAsync(
+                    _workspace.CurrentSolution,
+                    CancellationToken.None
+                )
+                .AsTask()
+                .GetAwaiter()
+                .GetResult();
         }
 
         [GlobalCleanup]
@@ -78,12 +97,16 @@ namespace IdeCoreBenchmarks
             // There might be multiple projects with this name.  That's ok.  FAR goes and finds all the linked-projects
             // anyways  to perform the search on all the equivalent symbols from them.  So the end perf cost is the
             // same.
-            var project = solution.Projects.First(p => p.AssemblyName == "Microsoft.CodeAnalysis.CSharp");
+            var project = solution.Projects.First(
+                p => p.AssemblyName == "Microsoft.CodeAnalysis.CSharp"
+            );
 
             var start = DateTime.Now;
             var compilation = await project.GetCompilationAsync();
             Console.WriteLine("Time to get first compilation: " + (DateTime.Now - start));
-            var type = compilation.GetTypeByMetadataName("Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax.LanguageParser");
+            var type = compilation.GetTypeByMetadataName(
+                "Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax.LanguageParser"
+            );
             if (type == null)
                 throw new Exception("Couldn't find type");
 

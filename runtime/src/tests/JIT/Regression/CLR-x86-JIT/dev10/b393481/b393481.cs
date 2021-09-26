@@ -17,7 +17,12 @@ namespace TestAnonymousTypes
     {
         private static int Main(string[] args)
         {
-            Customer c = new Customer { Name = "Sree", Address = "something somethwere", Zip = 98007 };
+            Customer c = new Customer
+            {
+                Name = "Sree",
+                Address = "something somethwere",
+                Zip = 98007
+            };
 
             var q = new
             {

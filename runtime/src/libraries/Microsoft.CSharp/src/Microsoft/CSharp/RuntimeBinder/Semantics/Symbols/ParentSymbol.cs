@@ -13,7 +13,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
     internal abstract class ParentSymbol : Symbol
     {
-        public Symbol firstChild;       // List of all children of this symbol
+        public Symbol firstChild; // List of all children of this symbol
         private Symbol _lastChild;
 
         // This adds the sym to the child list but doesn't associate it
@@ -21,7 +21,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
         public void AddToChildList(Symbol sym)
         {
-            Debug.Assert(sym != null /*&& this != null */);
+            Debug.Assert(
+                sym != null /*&& this != null */
+            );
 
             // If parent is set it should be set to us!
             Debug.Assert(sym.parent == null || sym.parent == this);
@@ -38,7 +40,6 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 _lastChild.nextChild = sym;
                 _lastChild = sym;
                 sym.nextChild = null;
-
 #if DEBUG
                 // Validate our chain.
                 Symbol psym;

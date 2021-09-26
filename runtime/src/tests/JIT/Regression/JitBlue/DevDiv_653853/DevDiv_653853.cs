@@ -8,7 +8,7 @@ using System.Runtime.CompilerServices;
 public static class Test
 {
     public static int Main()
-    {        
+    {
         if (RunTest(0) == 5)
         {
             Console.WriteLine("SUCCESS");
@@ -32,7 +32,7 @@ public static class Test
         // assumption that constant nodes have known constant value numbers.
         if (arg != (sbyte)f)
         {
-            return 2*arg;
+            return 2 * arg;
         }
         else
         {

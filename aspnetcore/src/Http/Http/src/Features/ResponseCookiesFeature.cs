@@ -13,7 +13,10 @@ namespace Microsoft.AspNetCore.Http.Features
     public class ResponseCookiesFeature : IResponseCookiesFeature
     {
         // Lambda hoisted to static readonly field to improve inlining https://github.com/dotnet/roslyn/issues/13624
-        private readonly static Func<IFeatureCollection, IHttpResponseFeature?> _nullResponseFeature = f => null;
+        private readonly static Func<
+            IFeatureCollection,
+            IHttpResponseFeature?
+        > _nullResponseFeature = f => null;
 
         private readonly IFeatureCollection _features;
         private IResponseCookies? _cookiesCollection;
@@ -39,7 +42,10 @@ namespace Microsoft.AspNetCore.Http.Features
         /// </param>
         /// <param name="builderPool">The <see cref="ObjectPool{T}"/>, if available.</param>
         [Obsolete("This constructor is obsolete and will be removed in a future version.")]
-        public ResponseCookiesFeature(IFeatureCollection features, ObjectPool<StringBuilder>? builderPool)
+        public ResponseCookiesFeature(
+            IFeatureCollection features,
+            ObjectPool<StringBuilder>? builderPool
+        )
         {
             _features = features ?? throw new ArgumentNullException(nameof(features));
         }

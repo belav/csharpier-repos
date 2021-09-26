@@ -11,20 +11,25 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
 {
     internal class UsingsAndExternAliasesDirectiveComparer : IComparer<SyntaxNode?>
     {
-        public static readonly IComparer<SyntaxNode> NormalInstance = new UsingsAndExternAliasesDirectiveComparer(
-            NameSyntaxComparer.Create(TokenComparer.NormalInstance),
-            TokenComparer.NormalInstance);
+        public static readonly IComparer<SyntaxNode> NormalInstance =
+            new UsingsAndExternAliasesDirectiveComparer(
+                NameSyntaxComparer.Create(TokenComparer.NormalInstance),
+                TokenComparer.NormalInstance
+            );
 
-        public static readonly IComparer<SyntaxNode> SystemFirstInstance = new UsingsAndExternAliasesDirectiveComparer(
-            NameSyntaxComparer.Create(TokenComparer.SystemFirstInstance),
-            TokenComparer.SystemFirstInstance);
+        public static readonly IComparer<SyntaxNode> SystemFirstInstance =
+            new UsingsAndExternAliasesDirectiveComparer(
+                NameSyntaxComparer.Create(TokenComparer.SystemFirstInstance),
+                TokenComparer.SystemFirstInstance
+            );
 
         private readonly IComparer<NameSyntax> _nameComparer;
         private readonly IComparer<SyntaxToken> _tokenComparer;
 
         private UsingsAndExternAliasesDirectiveComparer(
             IComparer<NameSyntax> nameComparer,
-            IComparer<SyntaxToken> tokenComparer)
+            IComparer<SyntaxToken> tokenComparer
+        )
         {
             RoslynDebug.AssertNotNull(nameComparer);
             RoslynDebug.AssertNotNull(tokenComparer);
@@ -40,7 +45,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             Alias
         }
 
-        private static UsingKind GetUsingKind(UsingDirectiveSyntax? usingDirective, ExternAliasDirectiveSyntax? externDirective)
+        private static UsingKind GetUsingKind(
+            UsingDirectiveSyntax? usingDirective,
+            ExternAliasDirectiveSyntax? externDirective
+        )
         {
             if (externDirective != null)
             {
@@ -102,7 +110,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
                     return _tokenComparer.Compare(extern1!.Identifier, extern2!.Identifier);
 
                 case UsingKind.Alias:
-                    var aliasComparisonResult = _tokenComparer.Compare(using1!.Alias!.Name.Identifier, using2!.Alias!.Name.Identifier);
+                    var aliasComparisonResult = _tokenComparer.Compare(
+                        using1!.Alias!.Name.Identifier,
+                        using2!.Alias!.Name.Identifier
+                    );
 
                     if (aliasComparisonResult == 0)
                     {

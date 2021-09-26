@@ -39,10 +39,7 @@ namespace Microsoft.Extensions.DependencyInjection
             // Arrange
             var options = CreateDefaultMvcJsonOptions().UseCamelCasing(processDictionaryKeys: true);
 
-            var annotatedFoo = new AnnotatedFoo()
-            {
-                HelloWorld = "Hello"
-            };
+            var annotatedFoo = new AnnotatedFoo() { HelloWorld = "Hello" };
             var expected = "{\"HELLO-WORLD\":\"Hello\"}";
 
             // Act
@@ -87,11 +84,7 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             // Arrange
             var options = CreateDefaultMvcJsonOptions().UseCamelCasing(processDictionaryKeys: true);
-            var dictionary = new Dictionary<string, int>
-            {
-                ["HelloWorld"] = 1,
-                ["HELLOWORLD"] = 2
-            };
+            var dictionary = new Dictionary<string, int> { ["HelloWorld"] = 1, ["HELLOWORLD"] = 2 };
             var expected = "{\"helloWorld\":1,\"helloworld\":2}";
 
             // Act
@@ -106,10 +99,7 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             // Arrange
             var options = CreateDefaultMvcJsonOptions().UseCamelCasing(processDictionaryKeys: true);
-            var dictionary = new Dictionary<string, int>()
-            {
-                ["HelloWorld_HelloWorld"] = 1
-            };
+            var dictionary = new Dictionary<string, int>() { ["HelloWorld_HelloWorld"] = 1 };
 
             var expected = "{\"helloWorld_HelloWorld\":1}";
 
@@ -124,7 +114,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public void UseCamelCasing_ProcessDictionaryKeys_WillNotChangeDictionaryKeys_IfFalse()
         {
             // Arrange
-            var options = CreateDefaultMvcJsonOptions().UseCamelCasing(processDictionaryKeys: false);
+            var options = CreateDefaultMvcJsonOptions()
+                .UseCamelCasing(processDictionaryKeys: false);
             var dictionary = new Dictionary<string, int>
             {
                 ["HelloWorld"] = 1,
@@ -144,10 +135,7 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             // Arrange
             var options = CreateDefaultMvcJsonOptions().UseMemberCasing();
-            var annotatedFoo = new AnnotatedFoo()
-            {
-                HelloWorld = "Hello"
-            };
+            var annotatedFoo = new AnnotatedFoo() { HelloWorld = "Hello" };
             var expected = "{\"HELLO-WORLD\":\"Hello\"}";
 
             // Act
@@ -218,11 +206,15 @@ namespace Microsoft.Extensions.DependencyInjection
             // Arrange
             var options = new MvcNewtonsoftJsonOptions();
             options.SerializerSettings.ContractResolver = new FooContractResolver();
-            var expectedMessage = Resources.FormatInvalidContractResolverForJsonCasingConfiguration(nameof(FooContractResolver), nameof(DefaultContractResolver));
+            var expectedMessage = Resources.FormatInvalidContractResolverForJsonCasingConfiguration(
+                nameof(FooContractResolver),
+                nameof(DefaultContractResolver)
+            );
 
             // Act & Assert
             var exception = Assert.Throws<InvalidOperationException>(
-                () => options.UseCamelCasing(processDictionaryKeys: false));
+                () => options.UseCamelCasing(processDictionaryKeys: false)
+            );
             Assert.Equal(expectedMessage, actual: exception.Message);
         }
 
@@ -232,11 +224,15 @@ namespace Microsoft.Extensions.DependencyInjection
             // Arrange
             var options = new MvcNewtonsoftJsonOptions();
             options.SerializerSettings.ContractResolver = new FooContractResolver();
-            var expectedMessage = Resources.FormatInvalidContractResolverForJsonCasingConfiguration(nameof(FooContractResolver), nameof(DefaultContractResolver));
+            var expectedMessage = Resources.FormatInvalidContractResolverForJsonCasingConfiguration(
+                nameof(FooContractResolver),
+                nameof(DefaultContractResolver)
+            );
 
             // Act & Assert
             var exception = Assert.Throws<InvalidOperationException>(
-                () => options.UseMemberCasing());
+                () => options.UseMemberCasing()
+            );
             Assert.Equal(expectedMessage, actual: exception.Message);
         }
 
@@ -245,7 +241,8 @@ namespace Microsoft.Extensions.DependencyInjection
         private MvcNewtonsoftJsonOptions CreateDefaultMvcJsonOptions()
         {
             var options = new MvcNewtonsoftJsonOptions();
-            options.SerializerSettings.ContractResolver = JsonSerializerSettingsProvider.CreateContractResolver();
+            options.SerializerSettings.ContractResolver =
+                JsonSerializerSettingsProvider.CreateContractResolver();
             return options;
         }
 
@@ -254,7 +251,8 @@ namespace Microsoft.Extensions.DependencyInjection
             return JsonConvert.SerializeObject(
                 value: value,
                 formatting: Formatting.None,
-                settings: options.SerializerSettings);
+                settings: options.SerializerSettings
+            );
         }
 
         private class AnnotatedFoo

@@ -131,10 +131,15 @@ namespace JIT.HardwareIntrinsics.Arm
                 this.inHandle1 = GCHandle.Alloc(this.inArray1, GCHandleType.Pinned);
                 this.alignment = (ulong)alignment;
 
-                Unsafe.CopyBlockUnaligned(ref Unsafe.AsRef<byte>(inArray1Ptr), ref Unsafe.As<Double, byte>(ref inArray1[0]), (uint)sizeOfinArray1);
+                Unsafe.CopyBlockUnaligned(
+                    ref Unsafe.AsRef<byte>(inArray1Ptr),
+                    ref Unsafe.As<Double, byte>(ref inArray1[0]),
+                    (uint)sizeOfinArray1
+                );
             }
 
-            public void* inArray1Ptr => Align((byte*)(inHandle1.AddrOfPinnedObject().ToPointer()), alignment);
+            public void* inArray1Ptr =>
+                Align((byte*)(inHandle1.AddrOfPinnedObject().ToPointer()), alignment);
 
             public void Dispose()
             {
@@ -155,8 +160,15 @@ namespace JIT.HardwareIntrinsics.Arm
             {
                 var testStruct = new TestStruct();
 
-                for (var i = 0; i < Op1ElementCount; i++) { _data1[i] = TestLibrary.Generator.GetDouble(); }
-                Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector128<Double>, byte>(ref testStruct._fld1), ref Unsafe.As<Double, byte>(ref _data1[0]), (uint)Unsafe.SizeOf<Vector128<Double>>());
+                for (var i = 0; i < Op1ElementCount; i++)
+                {
+                    _data1[i] = TestLibrary.Generator.GetDouble();
+                }
+                Unsafe.CopyBlockUnaligned(
+                    ref Unsafe.As<Vector128<Double>, byte>(ref testStruct._fld1),
+                    ref Unsafe.As<Double, byte>(ref _data1[0]),
+                    (uint)Unsafe.SizeOf<Vector128<Double>>()
+                );
 
                 return testStruct;
             }
@@ -172,7 +184,10 @@ namespace JIT.HardwareIntrinsics.Arm
             {
                 fixed (Vector128<Double>* pFld1 = &_fld1)
                 {
-                    var result = AdvSimd.Extract(AdvSimd.LoadVector128((Double*)pFld1), ElementIndex);
+                    var result = AdvSimd.Extract(
+                        AdvSimd.LoadVector128((Double*)pFld1),
+                        ElementIndex
+                    );
 
                     testClass.ValidateResult(_fld1, result);
                 }
@@ -181,7 +196,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
         private static readonly int LargestVectorSize = 16;
 
-        private static readonly int Op1ElementCount = Unsafe.SizeOf<Vector128<Double>>() / sizeof(Double);
+        private static readonly int Op1ElementCount =
+            Unsafe.SizeOf<Vector128<Double>>() / sizeof(Double);
 
         private static readonly byte ElementIndex = 1;
 
@@ -195,18 +211,35 @@ namespace JIT.HardwareIntrinsics.Arm
 
         static ExtractTest__Extract_Vector128_Double_1()
         {
-            for (var i = 0; i < Op1ElementCount; i++) { _data1[i] = TestLibrary.Generator.GetDouble(); }
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector128<Double>, byte>(ref _clsVar1), ref Unsafe.As<Double, byte>(ref _data1[0]), (uint)Unsafe.SizeOf<Vector128<Double>>());
+            for (var i = 0; i < Op1ElementCount; i++)
+            {
+                _data1[i] = TestLibrary.Generator.GetDouble();
+            }
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Vector128<Double>, byte>(ref _clsVar1),
+                ref Unsafe.As<Double, byte>(ref _data1[0]),
+                (uint)Unsafe.SizeOf<Vector128<Double>>()
+            );
         }
 
         public ExtractTest__Extract_Vector128_Double_1()
         {
             Succeeded = true;
 
-            for (var i = 0; i < Op1ElementCount; i++) { _data1[i] = TestLibrary.Generator.GetDouble(); }
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector128<Double>, byte>(ref _fld1), ref Unsafe.As<Double, byte>(ref _data1[0]), (uint)Unsafe.SizeOf<Vector128<Double>>());
+            for (var i = 0; i < Op1ElementCount; i++)
+            {
+                _data1[i] = TestLibrary.Generator.GetDouble();
+            }
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Vector128<Double>, byte>(ref _fld1),
+                ref Unsafe.As<Double, byte>(ref _data1[0]),
+                (uint)Unsafe.SizeOf<Vector128<Double>>()
+            );
 
-            for (var i = 0; i < Op1ElementCount; i++) { _data1[i] = TestLibrary.Generator.GetDouble(); }
+            for (var i = 0; i < Op1ElementCount; i++)
+            {
+                _data1[i] = TestLibrary.Generator.GetDouble();
+            }
             _dataTable = new DataTable(_data1, LargestVectorSize);
         }
 
@@ -242,11 +275,18 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            var result = typeof(AdvSimd).GetMethod(nameof(AdvSimd.Extract), new Type[] { typeof(Vector128<Double>), typeof(byte) })
-                                     .Invoke(null, new object[] {
-                                        Unsafe.Read<Vector128<Double>>(_dataTable.inArray1Ptr),
-                                        ElementIndex
-                                     });
+            var result = typeof(AdvSimd).GetMethod(
+                    nameof(AdvSimd.Extract),
+                    new Type[] { typeof(Vector128<Double>), typeof(byte) }
+                )
+                .Invoke(
+                    null,
+                    new object[]
+                    {
+                        Unsafe.Read<Vector128<Double>>(_dataTable.inArray1Ptr),
+                        ElementIndex
+                    }
+                );
 
             ValidateResult(_dataTable.inArray1Ptr, (Double)result);
         }
@@ -255,11 +295,18 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_Load));
 
-            var result = typeof(AdvSimd).GetMethod(nameof(AdvSimd.Extract), new Type[] { typeof(Vector128<Double>), typeof(byte) })
-                                     .Invoke(null, new object[] {
-                                        AdvSimd.LoadVector128((Double*)(_dataTable.inArray1Ptr)),
-                                        ElementIndex
-                                     });
+            var result = typeof(AdvSimd).GetMethod(
+                    nameof(AdvSimd.Extract),
+                    new Type[] { typeof(Vector128<Double>), typeof(byte) }
+                )
+                .Invoke(
+                    null,
+                    new object[]
+                    {
+                        AdvSimd.LoadVector128((Double*)(_dataTable.inArray1Ptr)),
+                        ElementIndex
+                    }
+                );
 
             ValidateResult(_dataTable.inArray1Ptr, (Double)result);
         }
@@ -279,7 +326,10 @@ namespace JIT.HardwareIntrinsics.Arm
 
             fixed (Vector128<Double>* pClsVar1 = &_clsVar1)
             {
-                var result = AdvSimd.Extract(AdvSimd.LoadVector128((Double*)pClsVar1), ElementIndex);
+                var result = AdvSimd.Extract(
+                    AdvSimd.LoadVector128((Double*)pClsVar1),
+                    ElementIndex
+                );
 
                 ValidateResult(_clsVar1, result);
             }
@@ -365,10 +415,7 @@ namespace JIT.HardwareIntrinsics.Arm
             TestLibrary.TestFramework.BeginScenario(nameof(RunStructLclFldScenario_Load));
 
             var test = TestStruct.Create();
-            var result = AdvSimd.Extract(
-                AdvSimd.LoadVector128((Double*)&test._fld1),
-                ElementIndex
-            );
+            var result = AdvSimd.Extract(AdvSimd.LoadVector128((Double*)&test._fld1), ElementIndex);
 
             ValidateResult(test._fld1, result);
         }
@@ -410,7 +457,11 @@ namespace JIT.HardwareIntrinsics.Arm
             }
         }
 
-        private void ValidateResult(Vector128<Double> op1, Double result, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            Vector128<Double> op1,
+            Double result,
+            [CallerMemberName] string method = ""
+        )
         {
             Double[] inArray1 = new Double[Op1ElementCount];
 
@@ -423,24 +474,39 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             Double[] inArray1 = new Double[Op1ElementCount];
 
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Double, byte>(ref inArray1[0]), ref Unsafe.AsRef<byte>(op1), (uint)Unsafe.SizeOf<Vector128<Double>>());
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Double, byte>(ref inArray1[0]),
+                ref Unsafe.AsRef<byte>(op1),
+                (uint)Unsafe.SizeOf<Vector128<Double>>()
+            );
 
             ValidateResult(inArray1, result, method);
         }
 
-        private void ValidateResult(Double[] firstOp, Double result, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            Double[] firstOp,
+            Double result,
+            [CallerMemberName] string method = ""
+        )
         {
             bool succeeded = true;
 
-            if (BitConverter.DoubleToInt64Bits(firstOp[ElementIndex]) != BitConverter.DoubleToInt64Bits(result))
+            if (
+                BitConverter.DoubleToInt64Bits(firstOp[ElementIndex])
+                != BitConverter.DoubleToInt64Bits(result)
+            )
             {
                 succeeded = false;
             }
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"{nameof(AdvSimd)}.{nameof(AdvSimd.Extract)}(Vector128<Double>, 1): {method} failed:");
-                TestLibrary.TestFramework.LogInformation($" firstOp: ({string.Join(", ", firstOp)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"{nameof(AdvSimd)}.{nameof(AdvSimd.Extract)}(Vector128<Double>, 1): {method} failed:"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $" firstOp: ({string.Join(", ", firstOp)})"
+                );
                 TestLibrary.TestFramework.LogInformation($"  result: {result}");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 

@@ -18,15 +18,20 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// </summary>
         public Task SynchronizeWithBuildAsync(
             Workspace workspace,
-            ImmutableDictionary<ProjectId,
-            ImmutableArray<DiagnosticData>> diagnostics,
+            ImmutableDictionary<ProjectId, ImmutableArray<DiagnosticData>> diagnostics,
             TaskQueue postBuildAndErrorListRefreshTaskQueue,
             bool onBuildCompleted,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             if (_map.TryGetValue(workspace, out var analyzer))
             {
-                return analyzer.SynchronizeWithBuildAsync(diagnostics, postBuildAndErrorListRefreshTaskQueue, onBuildCompleted, cancellationToken);
+                return analyzer.SynchronizeWithBuildAsync(
+                    diagnostics,
+                    postBuildAndErrorListRefreshTaskQueue,
+                    onBuildCompleted,
+                    cancellationToken
+                );
             }
 
             return Task.CompletedTask;

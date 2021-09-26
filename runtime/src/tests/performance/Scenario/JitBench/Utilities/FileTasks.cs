@@ -13,9 +13,17 @@ namespace JitBench
 {
     public static class FileTasks
     {
-        public async static Task DownloadAndUnzip(string remotePath, string localExpandedDirPath, ITestOutputHelper output, bool deleteTempFiles=true)
+        public async static Task DownloadAndUnzip(
+            string remotePath,
+            string localExpandedDirPath,
+            ITestOutputHelper output,
+            bool deleteTempFiles = true
+        )
         {
-            string tempDownloadPath = Path.Combine(Path.GetTempPath(), Path.GetFileName(remotePath));
+            string tempDownloadPath = Path.Combine(
+                Path.GetTempPath(),
+                Path.GetFileName(remotePath)
+            );
             Download(remotePath, tempDownloadPath, output);
             await Unzip(tempDownloadPath, localExpandedDirPath, output, true);
         }
@@ -35,7 +43,13 @@ namespace JitBench
             }
         }
 
-        public static async Task Unzip(string zipPath, string expandedDirPath, ITestOutputHelper output, bool deleteZippedFiles=true, string tempTarPath=null)
+        public static async Task Unzip(
+            string zipPath,
+            string expandedDirPath,
+            ITestOutputHelper output,
+            bool deleteZippedFiles = true,
+            string tempTarPath = null
+        )
         {
             if (zipPath.EndsWith(".zip"))
             {
@@ -48,18 +62,21 @@ namespace JitBench
             else if (zipPath.EndsWith(".tar.gz"))
             {
                 bool deleteTar = deleteZippedFiles;
-                if(tempTarPath == null)
+                if (tempTarPath == null)
                 {
-                    tempTarPath = Path.Combine(Path.GetTempPath(), zipPath.Substring(0, zipPath.Length - ".gz".Length));
+                    tempTarPath = Path.Combine(
+                        Path.GetTempPath(),
+                        zipPath.Substring(0, zipPath.Length - ".gz".Length)
+                    );
                     deleteTar = true;
                 }
                 await UnGZip(zipPath, tempTarPath, output);
                 await UnTar(tempTarPath, expandedDirPath, output);
-                if(deleteZippedFiles)
+                if (deleteZippedFiles)
                 {
                     File.Delete(zipPath);
                 }
-                if(deleteTar)
+                if (deleteTar)
                 {
                     File.Delete(tempTarPath);
                 }
@@ -71,7 +88,11 @@ namespace JitBench
             }
         }
 
-        public static async Task UnWinZip(string zipPath, string expandedDirPath, ITestOutputHelper output)
+        public static async Task UnWinZip(
+            string zipPath,
+            string expandedDirPath,
+            ITestOutputHelper output
+        )
         {
             output.WriteLine("Unziping: " + zipPath + " -> " + expandedDirPath);
             using (FileStream zipStream = File.OpenRead(zipPath))
@@ -79,7 +100,7 @@ namespace JitBench
                 ZipArchive zip = new ZipArchive(zipStream);
                 foreach (ZipArchiveEntry entry in zip.Entries)
                 {
-                    if(entry.CompressedLength == 0)
+                    if (entry.CompressedLength == 0)
                     {
                         continue;
                     }
@@ -96,12 +117,21 @@ namespace JitBench
             }
         }
 
-        public async static Task UnGZip(string gzipPath, string expandedFilePath, ITestOutputHelper output)
+        public async static Task UnGZip(
+            string gzipPath,
+            string expandedFilePath,
+            ITestOutputHelper output
+        )
         {
             output.WriteLine("Unziping: " + gzipPath + " -> " + expandedFilePath);
             using (FileStream gzipStream = File.OpenRead(gzipPath))
             {
-                using (GZipStream expandedStream = new GZipStream(gzipStream, CompressionMode.Decompress))
+                using (
+                    GZipStream expandedStream = new GZipStream(
+                        gzipStream,
+                        CompressionMode.Decompress
+                    )
+                )
                 {
                     using (FileStream targetFileStream = File.OpenWrite(expandedFilePath))
                     {
@@ -111,7 +141,11 @@ namespace JitBench
             }
         }
 
-        public async static Task UnTar(string tarPath, string expandedDirPath, ITestOutputHelper output)
+        public async static Task UnTar(
+            string tarPath,
+            string expandedDirPath,
+            ITestOutputHelper output
+        )
         {
             Directory.CreateDirectory(expandedDirPath);
             string tarToolPath = null;
@@ -128,20 +162,26 @@ namespace JitBench
                 throw new NotSupportedException("Unknown where this OS stores the tar executable");
             }
 
-            await new ProcessRunner(tarToolPath, "-xf " + tarPath).
-                   WithWorkingDirectory(expandedDirPath).
-                   WithLog(output).
-                   WithExpectedExitCode(0).
-                   Run();
+            await new ProcessRunner(tarToolPath, "-xf " + tarPath).WithWorkingDirectory(
+                    expandedDirPath
+                )
+                .WithLog(output)
+                .WithExpectedExitCode(0)
+                .Run();
         }
 
-        public static void DirectoryCopy(string sourceDir, string destDir, ITestOutputHelper output = null, bool overwrite = true)
+        public static void DirectoryCopy(
+            string sourceDir,
+            string destDir,
+            ITestOutputHelper output = null,
+            bool overwrite = true
+        )
         {
-            if(output != null)
+            if (output != null)
             {
                 output.WriteLine("Copying " + sourceDir + " -> " + destDir);
             }
-            
+
             DirectoryInfo dir = new DirectoryInfo(sourceDir);
 
             DirectoryInfo[] dirs = dir.GetDirectories();
@@ -168,9 +208,9 @@ namespace JitBench
         {
             output.WriteLine("Deleting " + path);
             int retries = 10;
-            for(int i = 0; i < retries; i++)
+            for (int i = 0; i < retries; i++)
             {
-                if(!Directory.Exists(path))
+                if (!Directory.Exists(path))
                 {
                     return;
                 }
@@ -182,16 +222,16 @@ namespace JitBench
                     Directory.Delete(path, true);
                     return;
                 }
-                catch(IOException e) when (i < retries-1)
+                catch (IOException e) when (i < retries - 1)
                 {
-                    output.WriteLine($"    Attempt #{i+1} failed: {e.Message}");
+                    output.WriteLine($"    Attempt #{i + 1} failed: {e.Message}");
                 }
-                catch(UnauthorizedAccessException e) when (i < retries - 1)
+                catch (UnauthorizedAccessException e) when (i < retries - 1)
                 {
                     output.WriteLine($"    Attempt #{i + 1} failed: {e.Message}");
                 }
                 // if something has a transient lock on the file waiting may resolve the issue
-                Thread.Sleep((i+1) * 10);
+                Thread.Sleep((i + 1) * 10);
             }
         }
 
@@ -207,7 +247,11 @@ namespace JitBench
             }
         }
 
-        public static void MoveDirectory(string sourceDirName, string destDirName, ITestOutputHelper output)
+        public static void MoveDirectory(
+            string sourceDirName,
+            string destDirName,
+            ITestOutputHelper output
+        )
         {
             if (output != null)
             {
@@ -238,7 +282,11 @@ namespace JitBench
             }
         }
 
-        public static void MoveFile(string sourceFileName, string destFileName, ITestOutputHelper output)
+        public static void MoveFile(
+            string sourceFileName,
+            string destFileName,
+            ITestOutputHelper output
+        )
         {
             if (output != null)
             {

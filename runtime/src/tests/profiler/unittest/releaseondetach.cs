@@ -13,13 +13,15 @@ namespace Profiler.Tests
 
     class ReleaseOnShutdown
     {
-        private static readonly Guid ReleaseOnShutdownGuid = new Guid("B8C47A29-9C1D-4EEA-ABA0-8E8B3E3B792E");
+        private static readonly Guid ReleaseOnShutdownGuid = new Guid(
+            "B8C47A29-9C1D-4EEA-ABA0-8E8B3E3B792E"
+        );
 
-        private static ManualResetEvent _profilerDone; 
+        private static ManualResetEvent _profilerDone;
 
         [DllImport("Profiler")]
         private static extern void PassCallbackToProfiler(ProfilerCallback callback);
-        
+
         public unsafe static int RunTest(string[] args)
         {
             string profilerName;
@@ -36,7 +38,9 @@ namespace Profiler.Tests
                 profilerName = "libProfiler.dylib";
             }
 
-            string rootPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            string rootPath = Path.GetDirectoryName(
+                System.Reflection.Assembly.GetExecutingAssembly().Location
+            );
             string profilerPath = Path.Combine(rootPath, profilerName);
 
             _profilerDone = new ManualResetEvent(false);
@@ -59,10 +63,12 @@ namespace Profiler.Tests
                 return RunTest(args);
             }
 
-            return ProfilerTestRunner.Run(profileePath: System.Reflection.Assembly.GetExecutingAssembly().Location,
-                                          testName: "UnitTestReleaseOnShutdown",
-                                          profilerClsid: ReleaseOnShutdownGuid,
-                                          profileeOptions: ProfileeOptions.NoStartupAttach);
+            return ProfilerTestRunner.Run(
+                profileePath: System.Reflection.Assembly.GetExecutingAssembly().Location,
+                testName: "UnitTestReleaseOnShutdown",
+                profilerClsid: ReleaseOnShutdownGuid,
+                profileeOptions: ProfileeOptions.NoStartupAttach
+            );
         }
     }
 }

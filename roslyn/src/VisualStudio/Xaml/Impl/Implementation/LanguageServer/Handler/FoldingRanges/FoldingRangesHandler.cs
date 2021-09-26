@@ -17,22 +17,27 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
 {
     [ExportLspRequestHandlerProvider(StringConstants.XamlLanguageName), Shared]
     [ProvidesMethod(Methods.TextDocumentFoldingRangeName)]
-    internal class FoldingRangesHandler : AbstractStatelessRequestHandler<FoldingRangeParams, FoldingRange[]>
+    internal class FoldingRangesHandler
+        : AbstractStatelessRequestHandler<FoldingRangeParams, FoldingRange[]>
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public FoldingRangesHandler()
-        {
-        }
+        public FoldingRangesHandler() { }
 
         public override string Method => Methods.TextDocumentFoldingRangeName;
 
         public override bool MutatesSolutionState => false;
         public override bool RequiresLSPSolution => true;
 
-        public override TextDocumentIdentifier? GetTextDocumentIdentifier(FoldingRangeParams request) => request.TextDocument;
+        public override TextDocumentIdentifier? GetTextDocumentIdentifier(
+            FoldingRangeParams request
+        ) => request.TextDocument;
 
-        public override async Task<FoldingRange[]> HandleRequestAsync(FoldingRangeParams request, RequestContext context, CancellationToken cancellationToken)
+        public override async Task<FoldingRange[]> HandleRequestAsync(
+            FoldingRangeParams request,
+            RequestContext context,
+            CancellationToken cancellationToken
+        )
         {
             var foldingRanges = ArrayBuilder<FoldingRange>.GetInstance();
 
@@ -42,13 +47,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
                 return foldingRanges.ToArrayAndFree();
             }
 
-            var xamlStructureService = document.Project.LanguageServices.GetService<IXamlStructureService>();
+            var xamlStructureService =
+                document.Project.LanguageServices.GetService<IXamlStructureService>();
             if (xamlStructureService == null)
             {
                 return foldingRanges.ToArrayAndFree();
             }
 
-            var structureTags = await xamlStructureService.GetStructureTagsAsync(document, cancellationToken).ConfigureAwait(false);
+            var structureTags = await xamlStructureService.GetStructureTagsAsync(
+                    document,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             if (structureTags == null)
             {
                 return foldingRanges.ToArrayAndFree();
@@ -68,14 +78,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
                     _ => null,
                 };
 
-                foldingRanges.Add(new FoldingRange()
-                {
-                    StartLine = linePositionSpan.Start.Line,
-                    StartCharacter = linePositionSpan.Start.Character,
-                    EndLine = linePositionSpan.End.Line,
-                    EndCharacter = linePositionSpan.End.Character,
-                    Kind = foldingRangeKind
-                });
+                foldingRanges.Add(
+                    new FoldingRange()
+                    {
+                        StartLine = linePositionSpan.Start.Line,
+                        StartCharacter = linePositionSpan.Start.Character,
+                        EndLine = linePositionSpan.End.Line,
+                        EndCharacter = linePositionSpan.End.Character,
+                        Kind = foldingRangeKind
+                    }
+                );
             }
 
             return foldingRanges.ToArrayAndFree();

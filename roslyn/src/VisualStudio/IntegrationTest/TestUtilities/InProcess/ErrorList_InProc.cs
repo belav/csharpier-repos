@@ -19,14 +19,11 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 {
     internal class ErrorList_InProc : InProcComponent
     {
-        public static ErrorList_InProc Create()
-            => new ErrorList_InProc();
+        public static ErrorList_InProc Create() => new ErrorList_InProc();
 
-        public void ShowErrorList()
-            => ExecuteCommand("View.ErrorList");
+        public void ShowErrorList() => ExecuteCommand("View.ErrorList");
 
-        public int ErrorListErrorCount
-            => GetErrorCount();
+        public int ErrorListErrorCount => GetErrorCount();
 
         public void WaitForNoErrorsInErrorList(TimeSpan timeout)
         {
@@ -49,7 +46,10 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             }
         }
 
-        public ErrorListItem NavigateToErrorListItem(int itemIndex, __VSERRORCATEGORY minimumSeverity = __VSERRORCATEGORY.EC_WARNING)
+        public ErrorListItem NavigateToErrorListItem(
+            int itemIndex,
+            __VSERRORCATEGORY minimumSeverity = __VSERRORCATEGORY.EC_WARNING
+        )
         {
             var errorItems = GetErrorItems()
                 .AsEnumerable()
@@ -57,12 +57,21 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                 .ToArray();
             if (itemIndex > errorItems.Count())
             {
-                throw new ArgumentException($"Cannot Navigate to Item '{itemIndex}', Total Items found '{errorItems.Count()}'.");
+                throw new ArgumentException(
+                    $"Cannot Navigate to Item '{itemIndex}', Total Items found '{errorItems.Count()}'."
+                );
             }
 
             var item = errorItems.ElementAt(itemIndex);
             ErrorHandler.ThrowOnFailure(item.NavigateTo());
-            return new ErrorListItem(item.GetSeverity(), item.GetDescription(), item.GetProject(), item.GetFileName(), item.GetLine(), item.GetColumn());
+            return new ErrorListItem(
+                item.GetSeverity(),
+                item.GetDescription(),
+                item.GetProject(),
+                item.GetFileName(),
+                item.GetLine(),
+                item.GetColumn()
+            );
         }
 
         public int GetErrorCount(__VSERRORCATEGORY minimumSeverity = __VSERRORCATEGORY.EC_WARNING)
@@ -70,8 +79,7 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             var errorItems = GetErrorItems();
             try
             {
-                return errorItems
-                    .AsEnumerable()
+                return errorItems.AsEnumerable()
                     .Where(e => ((IVsErrorItem)e).GetCategory() <= minimumSeverity)
                     .Count();
             }
@@ -83,15 +91,26 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             }
         }
 
-        public ErrorListItem[] GetErrorListContents(__VSERRORCATEGORY minimumSeverity = __VSERRORCATEGORY.EC_WARNING)
+        public ErrorListItem[] GetErrorListContents(
+            __VSERRORCATEGORY minimumSeverity = __VSERRORCATEGORY.EC_WARNING
+        )
         {
             var errorItems = GetErrorItems();
             try
             {
-                return errorItems
-                    .AsEnumerable()
+                return errorItems.AsEnumerable()
                     .Where(e => ((IVsErrorItem)e).GetCategory() <= minimumSeverity)
-                    .Select(e => new ErrorListItem(e.GetSeverity(), e.GetDescription(), e.GetProject(), e.GetFileName(), e.GetLine(), e.GetColumn()))
+                    .Select(
+                        e =>
+                            new ErrorListItem(
+                                e.GetSeverity(),
+                                e.GetDescription(),
+                                e.GetProject(),
+                                e.GetFileName(),
+                                e.GetLine(),
+                                e.GetColumn()
+                            )
+                    )
                     .ToArray();
             }
             catch (IndexOutOfRangeException)
@@ -104,12 +123,14 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 
         private IVsEnumTaskItems GetErrorItems()
         {
-            return InvokeOnUIThread(cancellationToken =>
-            {
-                var errorList = GetGlobalService<SVsErrorList, IVsTaskList>();
-                ErrorHandler.ThrowOnFailure(errorList.EnumTaskItems(out var items));
-                return items;
-            });
+            return InvokeOnUIThread(
+                cancellationToken =>
+                {
+                    var errorList = GetGlobalService<SVsErrorList, IVsTaskList>();
+                    ErrorHandler.ThrowOnFailure(errorList.EnumTaskItems(out var items));
+                    return items;
+                }
+            );
         }
     }
 
@@ -152,7 +173,13 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
         {
             var errorItem = item as IVsErrorItem;
             ErrorHandler.ThrowOnFailure(errorItem.GetHierarchy(out var hierarchy));
-            ErrorHandler.ThrowOnFailure(hierarchy.GetProperty((uint)VSConstants.VSITEMID.Root, (int)__VSHPROPID.VSHPROPID_Name, out var name));
+            ErrorHandler.ThrowOnFailure(
+                hierarchy.GetProperty(
+                    (uint)VSConstants.VSITEMID.Root,
+                    (int)__VSHPROPID.VSHPROPID_Name,
+                    out var name
+                )
+            );
             return (string)name;
         }
 

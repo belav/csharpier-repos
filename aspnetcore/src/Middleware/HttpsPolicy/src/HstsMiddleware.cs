@@ -34,7 +34,11 @@ namespace Microsoft.AspNetCore.HttpsPolicy
         /// <param name="next"></param>
         /// <param name="options"></param>
         /// <param name="loggerFactory"></param>
-        public HstsMiddleware(RequestDelegate next, IOptions<HstsOptions> options, ILoggerFactory loggerFactory)
+        public HstsMiddleware(
+            RequestDelegate next,
+            IOptions<HstsOptions> options,
+            ILoggerFactory loggerFactory
+        )
         {
             if (options == null)
             {
@@ -45,10 +49,14 @@ namespace Microsoft.AspNetCore.HttpsPolicy
 
             var hstsOptions = options.Value;
             var maxAge = Convert.ToInt64(Math.Floor(hstsOptions.MaxAge.TotalSeconds))
-                            .ToString(CultureInfo.InvariantCulture);
-            var includeSubdomains = hstsOptions.IncludeSubDomains ? IncludeSubDomains : StringSegment.Empty;
+                .ToString(CultureInfo.InvariantCulture);
+            var includeSubdomains = hstsOptions.IncludeSubDomains
+                ? IncludeSubDomains
+                : StringSegment.Empty;
             var preload = hstsOptions.Preload ? Preload : StringSegment.Empty;
-            _strictTransportSecurityValue = new StringValues($"max-age={maxAge}{includeSubdomains}{preload}");
+            _strictTransportSecurityValue = new StringValues(
+                $"max-age={maxAge}{includeSubdomains}{preload}"
+            );
             _excludedHosts = hstsOptions.ExcludedHosts;
             _logger = loggerFactory.CreateLogger<HstsMiddleware>();
         }
@@ -80,7 +88,8 @@ namespace Microsoft.AspNetCore.HttpsPolicy
                 return _next(context);
             }
 
-            context.Response.Headers[HeaderNames.StrictTransportSecurity] = _strictTransportSecurityValue;
+            context.Response.Headers[HeaderNames.StrictTransportSecurity] =
+                _strictTransportSecurityValue;
             _logger.AddingHstsHeader();
 
             return _next(context);

@@ -17,23 +17,32 @@ internal static partial class Interop
         internal static extern SafeCFDictionaryHandle CFNetworkCopySystemProxySettings();
 
         [DllImport(Libraries.CFNetworkLibrary)]
-        internal static extern SafeCFArrayHandle CFNetworkCopyProxiesForURL(SafeCreateHandle url, SafeCFDictionaryHandle proxySettings);
+        internal static extern SafeCFArrayHandle CFNetworkCopyProxiesForURL(
+            SafeCreateHandle url,
+            SafeCFDictionaryHandle proxySettings
+        );
 
-        internal delegate void CFProxyAutoConfigurationResultCallback(IntPtr client, IntPtr proxyList, IntPtr error);
+        internal delegate void CFProxyAutoConfigurationResultCallback(
+            IntPtr client,
+            IntPtr proxyList,
+            IntPtr error
+        );
 
         [DllImport(Libraries.CFNetworkLibrary)]
         internal static extern CFRunLoopSourceRef CFNetworkExecuteProxyAutoConfigurationURL(
             IntPtr proxyAutoConfigURL,
             SafeCreateHandle targetURL,
             CFProxyAutoConfigurationResultCallback cb,
-            ref CFStreamClientContext clientContext);
+            ref CFStreamClientContext clientContext
+        );
 
         [DllImport(Libraries.CFNetworkLibrary)]
         internal static extern CFRunLoopSourceRef CFNetworkExecuteProxyAutoConfigurationScript(
             IntPtr proxyAutoConfigurationScript,
             SafeCreateHandle targetURL,
             CFProxyAutoConfigurationResultCallback cb,
-            ref CFStreamClientContext clientContext);
+            ref CFStreamClientContext clientContext
+        );
 
         [StructLayout(LayoutKind.Sequential)]
         internal struct CFStreamClientContext
@@ -70,15 +79,27 @@ internal static partial class Interop
                 IntPtr lib = NativeLibrary.Load(Interop.Libraries.CFNetworkLibrary);
                 if (lib != IntPtr.Zero)
                 {
-                    kCFProxyTypeAutoConfigurationURL = LoadCFStringSymbol(lib, "kCFProxyTypeAutoConfigurationURL");
-                    kCFProxyTypeAutoConfigurationJavaScript = LoadCFStringSymbol(lib, "kCFProxyTypeAutoConfigurationJavaScript");
+                    kCFProxyTypeAutoConfigurationURL = LoadCFStringSymbol(
+                        lib,
+                        "kCFProxyTypeAutoConfigurationURL"
+                    );
+                    kCFProxyTypeAutoConfigurationJavaScript = LoadCFStringSymbol(
+                        lib,
+                        "kCFProxyTypeAutoConfigurationJavaScript"
+                    );
                     kCFProxyTypeFTP = LoadCFStringSymbol(lib, "kCFProxyTypeFTP");
                     kCFProxyTypeHTTP = LoadCFStringSymbol(lib, "kCFProxyTypeHTTP");
                     kCFProxyTypeHTTPS = LoadCFStringSymbol(lib, "kCFProxyTypeHTTPS");
                     kCFProxyTypeSOCKS = LoadCFStringSymbol(lib, "kCFProxyTypeSOCKS");
 
-                    kCFProxyAutoConfigurationJavaScriptKey = LoadSymbol(lib, "kCFProxyAutoConfigurationJavaScriptKey");
-                    kCFProxyAutoConfigurationURLKey = LoadSymbol(lib, "kCFProxyAutoConfigurationURLKey");
+                    kCFProxyAutoConfigurationJavaScriptKey = LoadSymbol(
+                        lib,
+                        "kCFProxyAutoConfigurationJavaScriptKey"
+                    );
+                    kCFProxyAutoConfigurationURLKey = LoadSymbol(
+                        lib,
+                        "kCFProxyAutoConfigurationURLKey"
+                    );
                     kCFProxyHostNameKey = LoadSymbol(lib, "kCFProxyHostNameKey");
                     kCFProxyPasswordKey = LoadSymbol(lib, "kCFProxyPasswordKey");
                     kCFProxyPortNumberKey = LoadSymbol(lib, "kCFProxyPortNumberKey");
@@ -101,7 +122,12 @@ internal static partial class Interop
 
             private static string LoadCFStringSymbol(IntPtr lib, string name)
             {
-                using (SafeCFStringHandle cfString = new SafeCFStringHandle(LoadSymbol(lib, name), false))
+                using (
+                    SafeCFStringHandle cfString = new SafeCFStringHandle(
+                        LoadSymbol(lib, name),
+                        false
+                    )
+                )
                 {
                     Debug.Assert(!cfString.IsInvalid);
                     return Interop.CoreFoundation.CFStringToString(cfString);
@@ -131,7 +157,11 @@ internal static partial class Interop
                 get
                 {
                     IntPtr dictValue = CFDictionaryGetValue(_dictionary, kCFProxyPortNumberKey);
-                    if (dictValue != IntPtr.Zero && CFNumberGetValue(dictValue, CFNumberType.kCFNumberIntType, out int value) > 0)
+                    if (
+                        dictValue != IntPtr.Zero
+                        && CFNumberGetValue(dictValue, CFNumberType.kCFNumberIntType, out int value)
+                            > 0
+                    )
                     {
                         return value;
                     }
@@ -139,8 +169,10 @@ internal static partial class Interop
                 }
             }
 
-            public IntPtr AutoConfigurationURL => CFDictionaryGetValue(_dictionary, kCFProxyAutoConfigurationURLKey);
-            public IntPtr AutoConfigurationJavaScript => CFDictionaryGetValue(_dictionary, kCFProxyAutoConfigurationJavaScriptKey);
+            public IntPtr AutoConfigurationURL =>
+                CFDictionaryGetValue(_dictionary, kCFProxyAutoConfigurationURLKey);
+            public IntPtr AutoConfigurationJavaScript =>
+                CFDictionaryGetValue(_dictionary, kCFProxyAutoConfigurationJavaScriptKey);
         }
     }
 }

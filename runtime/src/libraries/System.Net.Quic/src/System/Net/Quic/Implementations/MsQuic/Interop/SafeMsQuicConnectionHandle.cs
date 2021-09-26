@@ -9,12 +9,9 @@ namespace System.Net.Quic.Implementations.MsQuic.Internal
     {
         public override bool IsInvalid => handle == IntPtr.Zero;
 
-        private SafeMsQuicConnectionHandle()
-            : base(IntPtr.Zero, ownsHandle: true)
-        { }
+        private SafeMsQuicConnectionHandle() : base(IntPtr.Zero, ownsHandle: true) { }
 
-        public SafeMsQuicConnectionHandle(IntPtr connectionHandle)
-            : this()
+        public SafeMsQuicConnectionHandle(IntPtr connectionHandle) : this()
         {
             SetHandle(connectionHandle);
         }

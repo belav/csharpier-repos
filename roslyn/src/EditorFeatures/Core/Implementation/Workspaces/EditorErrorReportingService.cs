@@ -12,14 +12,14 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Workspaces
     {
         public string HostDisplayName => "host";
 
-        public void ShowDetailedErrorInfo(Exception exception)
-            => Logger.Log(FunctionId.Extension_Exception, exception.StackTrace);
+        public void ShowDetailedErrorInfo(Exception exception) =>
+            Logger.Log(FunctionId.Extension_Exception, exception.StackTrace);
 
-        public void ShowGlobalErrorInfo(string message, params InfoBarUI[] items)
-            => Logger.Log(FunctionId.Extension_Exception, message);
+        public void ShowGlobalErrorInfo(string message, params InfoBarUI[] items) =>
+            Logger.Log(FunctionId.Extension_Exception, message);
 
-        public void ShowRemoteHostCrashedErrorInfo(Exception? exception)
-            => Logger.Log(FunctionId.Extension_Exception, exception?.Message);
+        public void ShowRemoteHostCrashedErrorInfo(Exception? exception) =>
+            Logger.Log(FunctionId.Extension_Exception, exception?.Message);
 
         public void ShowFeatureNotAvailableErrorInfo(string message, Exception? exception)
         {

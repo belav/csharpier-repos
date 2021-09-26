@@ -55,7 +55,11 @@ namespace System.Web.Http.SelfHost.ServiceModel.Channels
             _innerChannel.Close(timeout);
         }
 
-        protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return _innerChannel.BeginClose(timeout, callback, state);
         }
@@ -70,7 +74,11 @@ namespace System.Web.Http.SelfHost.ServiceModel.Channels
             _innerChannel.Open(timeout);
         }
 
-        protected override IAsyncResult OnBeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return _innerChannel.BeginOpen(timeout, callback, state);
         }

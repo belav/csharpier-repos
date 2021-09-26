@@ -29,8 +29,13 @@ namespace System.Web.Mvc.Test
             Encoding contentEncoding = Encoding.UTF8;
 
             // Arrange expectations
-            Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>(MockBehavior.Strict);
-            mockControllerContext.SetupSet(c => c.HttpContext.Response.ContentEncoding = contentEncoding).Verifiable();
+            Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>(
+                MockBehavior.Strict
+            );
+            mockControllerContext.SetupSet(
+                    c => c.HttpContext.Response.ContentEncoding = contentEncoding
+                )
+                .Verifiable();
             mockControllerContext.Setup(c => c.HttpContext.Response.Write(content)).Verifiable();
 
             ContentResult result = new ContentResult
@@ -56,9 +61,15 @@ namespace System.Web.Mvc.Test
             Encoding contentEncoding = Encoding.UTF8;
 
             // Arrange expectations
-            Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>(MockBehavior.Strict);
-            mockControllerContext.SetupSet(c => c.HttpContext.Response.ContentType = contentType).Verifiable();
-            mockControllerContext.SetupSet(c => c.HttpContext.Response.ContentEncoding = contentEncoding).Verifiable();
+            Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>(
+                MockBehavior.Strict
+            );
+            mockControllerContext.SetupSet(c => c.HttpContext.Response.ContentType = contentType)
+                .Verifiable();
+            mockControllerContext.SetupSet(
+                    c => c.HttpContext.Response.ContentEncoding = contentEncoding
+                )
+                .Verifiable();
             mockControllerContext.Setup(c => c.HttpContext.Response.Write(content)).Verifiable();
 
             ContentResult result = new ContentResult
@@ -79,7 +90,14 @@ namespace System.Web.Mvc.Test
         public void ExecuteResultWithNullContextThrows()
         {
             Assert.ThrowsArgumentNull(
-                delegate { new ContentResult().ExecuteResult(null /* context */); }, "context");
+                delegate
+                {
+                    new ContentResult().ExecuteResult(
+                        null /* context */
+                    );
+                },
+                "context"
+            );
         }
 
         [Fact]
@@ -91,8 +109,12 @@ namespace System.Web.Mvc.Test
 
             // Arrange expectations
             Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>();
-            mockControllerContext.SetupSet(c => c.HttpContext.Response.ContentType = contentType).Verifiable();
-            mockControllerContext.SetupSet(c => c.HttpContext.Response.ContentEncoding = contentEncoding).Verifiable();
+            mockControllerContext.SetupSet(c => c.HttpContext.Response.ContentType = contentType)
+                .Verifiable();
+            mockControllerContext.SetupSet(
+                    c => c.HttpContext.Response.ContentEncoding = contentEncoding
+                )
+                .Verifiable();
 
             ContentResult result = new ContentResult
             {
@@ -115,8 +137,11 @@ namespace System.Web.Mvc.Test
             string contentType = "Some content type.";
 
             // Arrange expectations
-            Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>(MockBehavior.Strict);
-            mockControllerContext.SetupSet(c => c.HttpContext.Response.ContentType = contentType).Verifiable();
+            Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>(
+                MockBehavior.Strict
+            );
+            mockControllerContext.SetupSet(c => c.HttpContext.Response.ContentType = contentType)
+                .Verifiable();
             mockControllerContext.Setup(c => c.HttpContext.Response.Write(content)).Verifiable();
 
             ContentResult result = new ContentResult
@@ -140,8 +165,13 @@ namespace System.Web.Mvc.Test
             Encoding contentEncoding = Encoding.UTF8;
 
             // Arrange expectations
-            Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>(MockBehavior.Strict);
-            mockControllerContext.SetupSet(c => c.HttpContext.Response.ContentEncoding = contentEncoding).Verifiable();
+            Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>(
+                MockBehavior.Strict
+            );
+            mockControllerContext.SetupSet(
+                    c => c.HttpContext.Response.ContentEncoding = contentEncoding
+                )
+                .Verifiable();
             mockControllerContext.Setup(c => c.HttpContext.Response.Write(content)).Verifiable();
 
             ContentResult result = new ContentResult

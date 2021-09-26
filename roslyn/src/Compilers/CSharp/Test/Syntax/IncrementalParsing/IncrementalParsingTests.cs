@@ -18,7 +18,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
     {
         private CSharpParseOptions GetOptions(string[] defines)
         {
-            return new CSharpParseOptions(languageVersion: LanguageVersion.CSharp3, preprocessorSymbols: defines);
+            return new CSharpParseOptions(
+                languageVersion: LanguageVersion.CSharp3,
+                preprocessorSymbols: defines
+            );
         }
 
         private SyntaxTree Parse(string text, params string[] defines)
@@ -45,10 +48,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.Equal(0, newTree.GetCompilationUnitRoot().Errors().Length);
 
             var diffs = SyntaxDifferences.GetRebuiltNodes(oldTree, newTree);
-            TestDiffsInOrder(diffs,
-                            SyntaxKind.CompilationUnit,
-                            SyntaxKind.ClassDeclaration,
-                            SyntaxKind.IdentifierToken);
+            TestDiffsInOrder(
+                diffs,
+                SyntaxKind.CompilationUnit,
+                SyntaxKind.ClassDeclaration,
+                SyntaxKind.IdentifierToken
+            );
         }
 
         [Fact]
@@ -61,16 +66,21 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.Equal(0, newTree.GetCompilationUnitRoot().Errors().Length);
 
             var diffs = SyntaxDifferences.GetRebuiltNodes(oldTree, newTree);
-            TestDiffsInOrder(diffs,
-                            SyntaxKind.CompilationUnit,
-                            SyntaxKind.ClassDeclaration,
-                            SyntaxKind.IdentifierToken,
-                            SyntaxKind.MethodDeclaration,
-                            SyntaxKind.PredefinedType,
-                            SyntaxKind.VoidKeyword);
+            TestDiffsInOrder(
+                diffs,
+                SyntaxKind.CompilationUnit,
+                SyntaxKind.ClassDeclaration,
+                SyntaxKind.IdentifierToken,
+                SyntaxKind.MethodDeclaration,
+                SyntaxKind.PredefinedType,
+                SyntaxKind.VoidKeyword
+            );
         }
 
-        private static void TestDiffsInOrder(ImmutableArray<SyntaxNodeOrToken> diffs, params SyntaxKind[] kinds)
+        private static void TestDiffsInOrder(
+            ImmutableArray<SyntaxNodeOrToken> diffs,
+            params SyntaxKind[] kinds
+        )
         {
             Assert.InRange(diffs.Length, 0, kinds.Length);
 
@@ -97,11 +107,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.Equal(0, newTree.GetCompilationUnitRoot().Errors().Length);
 
             var diffs = SyntaxDifferences.GetRebuiltNodes(oldTree, newTree);
-            TestDiffsInOrder(diffs,
-                            SyntaxKind.CompilationUnit,
-                            SyntaxKind.ClassDeclaration,
-                            SyntaxKind.IdentifierToken,
-                            SyntaxKind.ConstructorDeclaration);
+            TestDiffsInOrder(
+                diffs,
+                SyntaxKind.CompilationUnit,
+                SyntaxKind.ClassDeclaration,
+                SyntaxKind.IdentifierToken,
+                SyntaxKind.ConstructorDeclaration
+            );
         }
 
         [Fact]
@@ -114,10 +126,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.Equal(0, newTree.GetCompilationUnitRoot().Errors().Length);
 
             var diffs = SyntaxDifferences.GetRebuiltNodes(oldTree, newTree);
-            TestDiffsInOrder(diffs,
-                            SyntaxKind.CompilationUnit,
-                            SyntaxKind.ClassDeclaration,
-                            SyntaxKind.IdentifierToken);
+            TestDiffsInOrder(
+                diffs,
+                SyntaxKind.CompilationUnit,
+                SyntaxKind.ClassDeclaration,
+                SyntaxKind.IdentifierToken
+            );
         }
 
         [Fact]
@@ -130,10 +144,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.Equal(0, newTree.GetCompilationUnitRoot().Errors().Length);
 
             var diffs = SyntaxDifferences.GetRebuiltNodes(oldTree, newTree);
-            TestDiffsInOrder(diffs,
-                            SyntaxKind.CompilationUnit,
-                            SyntaxKind.ClassDeclaration,
-                            SyntaxKind.IdentifierToken);
+            TestDiffsInOrder(
+                diffs,
+                SyntaxKind.CompilationUnit,
+                SyntaxKind.ClassDeclaration,
+                SyntaxKind.IdentifierToken
+            );
         }
 
         [Fact]
@@ -148,10 +164,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.Equal(0, newTree.GetCompilationUnitRoot().Errors().Length);
 
             var diffs = SyntaxDifferences.GetRebuiltNodes(oldTree, newTree);
-            TestDiffsInOrder(diffs,
-                            SyntaxKind.CompilationUnit,
-                            SyntaxKind.InterfaceDeclaration,
-                            SyntaxKind.InterfaceKeyword);
+            TestDiffsInOrder(
+                diffs,
+                SyntaxKind.CompilationUnit,
+                SyntaxKind.InterfaceDeclaration,
+                SyntaxKind.InterfaceKeyword
+            );
         }
 
         [Fact]
@@ -166,10 +184,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.Equal(0, newTree.GetCompilationUnitRoot().Errors().Length);
 
             var diffs = SyntaxDifferences.GetRebuiltNodes(oldTree, newTree);
-            TestDiffsInOrder(diffs,
-                            SyntaxKind.CompilationUnit,
-                            SyntaxKind.StructDeclaration,
-                            SyntaxKind.StructKeyword);
+            TestDiffsInOrder(
+                diffs,
+                SyntaxKind.CompilationUnit,
+                SyntaxKind.StructDeclaration,
+                SyntaxKind.StructKeyword
+            );
         }
 
         [Fact]
@@ -182,18 +202,21 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.Equal(0, newTree.GetCompilationUnitRoot().Errors().Length);
 
             var diffs = SyntaxDifferences.GetRebuiltNodes(oldTree, newTree);
-            TestDiffsInOrder(diffs,
-                            SyntaxKind.CompilationUnit,
-                            SyntaxKind.ClassDeclaration,
-                            SyntaxKind.MethodDeclaration,
-                            SyntaxKind.PredefinedType,
-                            SyntaxKind.IdentifierToken);
+            TestDiffsInOrder(
+                diffs,
+                SyntaxKind.CompilationUnit,
+                SyntaxKind.ClassDeclaration,
+                SyntaxKind.MethodDeclaration,
+                SyntaxKind.PredefinedType,
+                SyntaxKind.IdentifierToken
+            );
         }
 
         [Fact]
         public void TestChangeIfCondition()
         {
-            var text = @"
+            var text =
+                @"
 #if GOO
 class goo { void M() { } }
 #endif
@@ -204,17 +227,20 @@ class goo { void M() { } }
             Assert.Equal(0, newTree.GetCompilationUnitRoot().Errors().Length);
 
             var diffs = SyntaxDifferences.GetRebuiltNodes(oldTree, newTree);
-            TestDiffsInOrder(diffs,
-                            SyntaxKind.CompilationUnit,
-                            SyntaxKind.ClassDeclaration,
-                            SyntaxKind.ClassKeyword,
-                            SyntaxKind.EndOfFileToken);
+            TestDiffsInOrder(
+                diffs,
+                SyntaxKind.CompilationUnit,
+                SyntaxKind.ClassDeclaration,
+                SyntaxKind.ClassKeyword,
+                SyntaxKind.EndOfFileToken
+            );
         }
 
         [Fact]
         public void TestChangeDefine()
         {
-            var text = @"
+            var text =
+                @"
 #define GOO
 #if GOO||BAR
 class goo { void M() { } }
@@ -226,17 +252,20 @@ class goo { void M() { } }
             Assert.Equal(0, newTree.GetCompilationUnitRoot().Errors().Length);
 
             var diffs = SyntaxDifferences.GetRebuiltNodes(oldTree, newTree);
-            TestDiffsInOrder(diffs,
-                            SyntaxKind.CompilationUnit,
-                            SyntaxKind.ClassDeclaration,
-                            SyntaxKind.ClassKeyword,
-                            SyntaxKind.EndOfFileToken);
+            TestDiffsInOrder(
+                diffs,
+                SyntaxKind.CompilationUnit,
+                SyntaxKind.ClassDeclaration,
+                SyntaxKind.ClassKeyword,
+                SyntaxKind.EndOfFileToken
+            );
         }
 
         [Fact]
         public void TestChangeDefineAndIfElse()
         {
-            var text = @"
+            var text =
+                @"
 #define GOO
 #if GOO
 class C { void M() { } }
@@ -250,23 +279,26 @@ class C { void N() { } }
             Assert.Equal(0, newTree.GetCompilationUnitRoot().Errors().Length);
 
             var diffs = SyntaxDifferences.GetRebuiltNodes(oldTree, newTree);
-            TestDiffsInOrder(diffs,
-                            SyntaxKind.CompilationUnit,
-                            SyntaxKind.ClassDeclaration,
-                            SyntaxKind.ClassKeyword,
-                            SyntaxKind.IdentifierToken,
-                            SyntaxKind.MethodDeclaration,
-                            SyntaxKind.PredefinedType,
-                            SyntaxKind.IdentifierToken,
-                            SyntaxKind.ParameterList,
-                            SyntaxKind.Block,
-                            SyntaxKind.EndOfFileToken);
+            TestDiffsInOrder(
+                diffs,
+                SyntaxKind.CompilationUnit,
+                SyntaxKind.ClassDeclaration,
+                SyntaxKind.ClassKeyword,
+                SyntaxKind.IdentifierToken,
+                SyntaxKind.MethodDeclaration,
+                SyntaxKind.PredefinedType,
+                SyntaxKind.IdentifierToken,
+                SyntaxKind.ParameterList,
+                SyntaxKind.Block,
+                SyntaxKind.EndOfFileToken
+            );
         }
 
         [Fact]
         public void TestAddLineDirective()
         {
-            var text = @"
+            var text =
+                @"
 class C { void M() { } }
 ";
             var oldTree = this.Parse(text);
@@ -275,16 +307,19 @@ class C { void M() { } }
             Assert.Equal(0, newTree.GetCompilationUnitRoot().Errors().Length);
 
             var diffs = SyntaxDifferences.GetRebuiltNodes(oldTree, newTree);
-            TestDiffsInOrder(diffs,
-                            SyntaxKind.CompilationUnit,
-                            SyntaxKind.ClassDeclaration,
-                            SyntaxKind.ClassKeyword);
+            TestDiffsInOrder(
+                diffs,
+                SyntaxKind.CompilationUnit,
+                SyntaxKind.ClassDeclaration,
+                SyntaxKind.ClassKeyword
+            );
         }
 
         [Fact]
         public void TestRemoveLineDirective()
         {
-            var text = @"
+            var text =
+                @"
 #line 10
 class C { void M() { } }
 ";
@@ -294,16 +329,19 @@ class C { void M() { } }
             Assert.Equal(0, newTree.GetCompilationUnitRoot().Errors().Length);
 
             var diffs = SyntaxDifferences.GetRebuiltNodes(oldTree, newTree);
-            TestDiffsInOrder(diffs,
-                            SyntaxKind.CompilationUnit,
-                            SyntaxKind.ClassDeclaration,
-                            SyntaxKind.ClassKeyword);
+            TestDiffsInOrder(
+                diffs,
+                SyntaxKind.CompilationUnit,
+                SyntaxKind.ClassDeclaration,
+                SyntaxKind.ClassKeyword
+            );
         }
 
         [Fact]
         public void TestRemoveEndRegionDirective()
         {
-            var text = @"
+            var text =
+                @"
 #if true
 class A { void a() { } }
 #region
@@ -333,21 +371,24 @@ class C { void c() { } }
             Assert.Equal(SyntaxKind.BadDirectiveTrivia, newDirectives[2].Kind());
 
             var diffs = SyntaxDifferences.GetRebuiltNodes(oldTree, newTree);
-            TestDiffsInOrder(diffs,
-                            SyntaxKind.CompilationUnit,
-                            SyntaxKind.ClassDeclaration,  // class declaration on edge before change
-                            SyntaxKind.MethodDeclaration,
-                            SyntaxKind.PredefinedType,
-                            SyntaxKind.Block,
-                            SyntaxKind.ClassDeclaration,  // class declaration on edge after change
-                            SyntaxKind.ClassKeyword,      // edge of change and directives different
-                            SyntaxKind.EndOfFileToken);    // directives different (endif becomes bad-directive)
+            TestDiffsInOrder(
+                diffs,
+                SyntaxKind.CompilationUnit,
+                SyntaxKind.ClassDeclaration, // class declaration on edge before change
+                SyntaxKind.MethodDeclaration,
+                SyntaxKind.PredefinedType,
+                SyntaxKind.Block,
+                SyntaxKind.ClassDeclaration, // class declaration on edge after change
+                SyntaxKind.ClassKeyword, // edge of change and directives different
+                SyntaxKind.EndOfFileToken
+            ); // directives different (endif becomes bad-directive)
         }
 
         [Fact]
         public void TestAddEndRegionDirective()
         {
-            var text = @"
+            var text =
+                @"
 #if true
 class A { void a() { } }
 #region
@@ -377,15 +418,17 @@ class C { void c() { } }
             Assert.Equal(SyntaxKind.EndIfDirectiveTrivia, newDirectives[3].Kind());
 
             var diffs = SyntaxDifferences.GetRebuiltNodes(oldTree, newTree);
-            TestDiffsInOrder(diffs,
-                            SyntaxKind.CompilationUnit,
-                            SyntaxKind.ClassDeclaration,  // class declaration on edge before change
-                            SyntaxKind.MethodDeclaration,
-                            SyntaxKind.PredefinedType,
-                            SyntaxKind.Block,
-                            SyntaxKind.ClassDeclaration,  // class declaration on edge after change
-                            SyntaxKind.ClassKeyword,      // edge of change and directives different
-                            SyntaxKind.EndOfFileToken);    // directives different (endif becomes bad-directive)
+            TestDiffsInOrder(
+                diffs,
+                SyntaxKind.CompilationUnit,
+                SyntaxKind.ClassDeclaration, // class declaration on edge before change
+                SyntaxKind.MethodDeclaration,
+                SyntaxKind.PredefinedType,
+                SyntaxKind.Block,
+                SyntaxKind.ClassDeclaration, // class declaration on edge after change
+                SyntaxKind.ClassKeyword, // edge of change and directives different
+                SyntaxKind.EndOfFileToken
+            ); // directives different (endif becomes bad-directive)
         }
 
         [Fact]
@@ -397,19 +440,21 @@ class C { void c() { } }
             var newTree = oldTree.WithInsertAt(0, "{ ");
 
             var diffs = SyntaxDifferences.GetRebuiltNodes(oldTree, newTree);
-            TestDiffsInOrder(diffs,
-                            SyntaxKind.CompilationUnit,
-                            SyntaxKind.GlobalStatement,
-                            SyntaxKind.Block,
-                            SyntaxKind.OpenBraceToken,
-                            SyntaxKind.EmptyStatement,
-                            SyntaxKind.LocalDeclarationStatement,
-                            SyntaxKind.VariableDeclaration,
-                            SyntaxKind.PointerType,
-                            SyntaxKind.IdentifierName,
-                            SyntaxKind.VariableDeclarator,
-                            SyntaxKind.SemicolonToken,       // missing
-                            SyntaxKind.CloseBraceToken);      // missing
+            TestDiffsInOrder(
+                diffs,
+                SyntaxKind.CompilationUnit,
+                SyntaxKind.GlobalStatement,
+                SyntaxKind.Block,
+                SyntaxKind.OpenBraceToken,
+                SyntaxKind.EmptyStatement,
+                SyntaxKind.LocalDeclarationStatement,
+                SyntaxKind.VariableDeclaration,
+                SyntaxKind.PointerType,
+                SyntaxKind.IdentifierName,
+                SyntaxKind.VariableDeclarator,
+                SyntaxKind.SemicolonToken, // missing
+                SyntaxKind.CloseBraceToken
+            ); // missing
         }
 
         [Fact]
@@ -421,16 +466,18 @@ class C { void c() { } }
             var newTree = oldTree.WithRemoveAt(0, 1);
 
             var diffs = SyntaxDifferences.GetRebuiltNodes(oldTree, newTree);
-            TestDiffsInOrder(diffs,
-                            SyntaxKind.CompilationUnit,
-                            SyntaxKind.GlobalStatement,
-                            SyntaxKind.EmptyStatement,
-                            SyntaxKind.GlobalStatement,
-                            SyntaxKind.ExpressionStatement,
-                            SyntaxKind.MultiplyExpression,
-                            SyntaxKind.IdentifierName,
-                            SyntaxKind.IdentifierName,
-                            SyntaxKind.SemicolonToken);
+            TestDiffsInOrder(
+                diffs,
+                SyntaxKind.CompilationUnit,
+                SyntaxKind.GlobalStatement,
+                SyntaxKind.EmptyStatement,
+                SyntaxKind.GlobalStatement,
+                SyntaxKind.ExpressionStatement,
+                SyntaxKind.MultiplyExpression,
+                SyntaxKind.IdentifierName,
+                SyntaxKind.IdentifierName,
+                SyntaxKind.SemicolonToken
+            );
         }
 
         #region "Regression"
@@ -573,12 +620,15 @@ class C { void c() { } }
         [Fact]
         public void AddTopLevelMemberErrorDifference()
         {
-            SourceText oldText = SourceText.From(@"
+            SourceText oldText = SourceText.From(
+                @"
 using System;
 
-public d");
+public d"
+            );
 
-            SyntaxTree incrementalTree, parsedTree;
+            SyntaxTree incrementalTree,
+                parsedTree;
             CharByCharIncrementalParse(oldText, 'e', out incrementalTree, out parsedTree);
 
             // The bug is that the errors are currently different
@@ -589,14 +639,17 @@ public d");
         [Fact]
         public void AddIncompleteStatementErrorDifference()
         {
-            SourceText oldText = SourceText.From(@"
+            SourceText oldText = SourceText.From(
+                @"
 public class Test
 {
     static int Main()
     {
-        ");
+        "
+            );
 
-            SyntaxTree incrementalTree, parsedTree;
+            SyntaxTree incrementalTree,
+                parsedTree;
             CharByCharIncrementalParse(oldText, 'r', out incrementalTree, out parsedTree);
             CompareIncToFullParseErrors(incrementalTree, parsedTree);
         }
@@ -605,15 +658,18 @@ public class Test
         [Fact]
         public void DifferentNumberOfErrorsForNonCompletedBlock()
         {
-            SourceText oldText = SourceText.From(@"
+            SourceText oldText = SourceText.From(
+                @"
 public class Test
 {
     static int Main()
     {
         return 1;
- ");
+ "
+            );
 
-            SyntaxTree incrementalTree, parsedTree;
+            SyntaxTree incrementalTree,
+                parsedTree;
             CharByCharIncrementalParse(oldText, '}', out incrementalTree, out parsedTree);
             CompareIncToFullParseErrors(incrementalTree, parsedTree);
         }
@@ -622,14 +678,17 @@ public class Test
         [Fact]
         public void AddingCharacterOnErrorWithExtern()
         {
-            SourceText oldText = SourceText.From(@"
+            SourceText oldText = SourceText.From(
+                @"
 class C
 {   
 	public extern C();
 	static int Main ()
-	");
+	"
+            );
             char newCharacter = '{';
-            SyntaxTree incrementalTree, parsedTree;
+            SyntaxTree incrementalTree,
+                parsedTree;
             CharByCharIncrementalParse(oldText, newCharacter, out incrementalTree, out parsedTree);
             CompareIncToFullParseErrors(incrementalTree, parsedTree);
         }
@@ -638,11 +697,14 @@ class C
         [Fact]
         public void ErrorWithExtraModifiers()
         {
-            SourceText oldText = SourceText.From(@"
+            SourceText oldText = SourceText.From(
+                @"
 class MyClass {
-	internal internal const in");
+	internal internal const in"
+            );
             char newCharacter = 't';
-            SyntaxTree incrementalTree, parsedTree;
+            SyntaxTree incrementalTree,
+                parsedTree;
             CharByCharIncrementalParse(oldText, newCharacter, out incrementalTree, out parsedTree);
             CompareIncToFullParseErrors(incrementalTree, parsedTree);
         }
@@ -651,14 +713,17 @@ class MyClass {
         [Fact]
         public void CommentsCauseDifferentErrorStrings()
         {
-            SourceText oldText = SourceText.From(@"
+            SourceText oldText = SourceText.From(
+                @"
 class A
 {
    static public int Main ()
    {
-      double d = new double(1);   /");
+      double d = new double(1);   /"
+            );
             char newCharacter = '/';
-            SyntaxTree incrementalTree, parsedTree;
+            SyntaxTree incrementalTree,
+                parsedTree;
             CharByCharIncrementalParse(oldText, newCharacter, out incrementalTree, out parsedTree);
             CompareIncToFullParseErrors(incrementalTree, parsedTree);
         }
@@ -667,10 +732,13 @@ class A
         [Fact]
         public void ErrorModifierOnClass()
         {
-            SourceText oldText = SourceText.From(@"
-protected class My");
+            SourceText oldText = SourceText.From(
+                @"
+protected class My"
+            );
             char newCharacter = 'C';
-            SyntaxTree incrementalTree, parsedTree;
+            SyntaxTree incrementalTree,
+                parsedTree;
             CharByCharIncrementalParse(oldText, newCharacter, out incrementalTree, out parsedTree);
             CompareIncToFullParseErrors(incrementalTree, parsedTree);
         }
@@ -679,10 +747,13 @@ protected class My");
         [Fact]
         public void ErrorPartialClassWithNoBody()
         {
-            SourceText oldText = SourceText.From(@"
-public partial clas");
+            SourceText oldText = SourceText.From(
+                @"
+public partial clas"
+            );
             char newCharacter = 's';
-            SyntaxTree incrementalTree, parsedTree;
+            SyntaxTree incrementalTree,
+                parsedTree;
             CharByCharIncrementalParse(oldText, newCharacter, out incrementalTree, out parsedTree);
             CompareIncToFullParseErrors(incrementalTree, parsedTree);
         }
@@ -691,14 +762,17 @@ public partial clas");
         [Fact]
         public void ErrorConstKeywordInMethodName()
         {
-            SourceText oldText = SourceText.From(@"	class A
+            SourceText oldText = SourceText.From(
+                @"	class A
 	{
 		protected virtual void Finalize const () { }
 	}
 
-	class B");
+	class B"
+            );
             char newCharacter = ' ';
-            SyntaxTree incrementalTree, parsedTree;
+            SyntaxTree incrementalTree,
+                parsedTree;
             CharByCharIncrementalParse(oldText, newCharacter, out incrementalTree, out parsedTree);
             CompareIncToFullParseErrors(incrementalTree, parsedTree);
         }
@@ -707,11 +781,14 @@ public partial clas");
         [Fact]
         public void ErrorWithOperatorDeclaration()
         {
-            SourceText oldText = SourceText.From(@"public class TestClass
+            SourceText oldText = SourceText.From(
+                @"public class TestClass
 {
-    public static TestClass operator ++");
+    public static TestClass operator ++"
+            );
             char newCharacter = '(';
-            SyntaxTree incrementalTree, parsedTree;
+            SyntaxTree incrementalTree,
+                parsedTree;
             CharByCharIncrementalParse(oldText, newCharacter, out incrementalTree, out parsedTree);
             CompareIncToFullParseErrors(incrementalTree, parsedTree);
         }
@@ -720,13 +797,16 @@ public partial clas");
         [Fact]
         public void ErrorWithNestedTypeInNew()
         {
-            SourceText oldText = SourceText.From(@"using System;
+            SourceText oldText = SourceText.From(
+                @"using System;
 
 class Test {
 	static public int Main(String[] args) {
-		AbstractBase b = new AbstractBase.");
+		AbstractBase b = new AbstractBase."
+            );
             char newCharacter = 'I';
-            SyntaxTree incrementalTree, parsedTree;
+            SyntaxTree incrementalTree,
+                parsedTree;
             CharByCharIncrementalParse(oldText, newCharacter, out incrementalTree, out parsedTree);
             CompareIncToFullParseErrors(incrementalTree, parsedTree);
         }
@@ -735,10 +815,13 @@ class Test {
         [Fact]
         public void ErrorWithInvalidMethodName()
         {
-            SourceText oldText = SourceText.From(@"public class MyClass {	
-	int -goo(");
+            SourceText oldText = SourceText.From(
+                @"public class MyClass {	
+	int -goo("
+            );
             char newCharacter = ')';
-            SyntaxTree incrementalTree, parsedTree;
+            SyntaxTree incrementalTree,
+                parsedTree;
             CharByCharIncrementalParse(oldText, newCharacter, out incrementalTree, out parsedTree);
             CompareIncToFullParseErrors(incrementalTree, parsedTree);
         }
@@ -747,12 +830,15 @@ class Test {
         [Fact]
         public void AddingAFieldInIncompleteClass()
         {
-            SourceText oldText = SourceText.From(@"
+            SourceText oldText = SourceText.From(
+                @"
 public class Test
 {
-    ");
+    "
+            );
 
-            SyntaxTree incrementalTree, parsedTree;
+            SyntaxTree incrementalTree,
+                parsedTree;
             CharByCharIncrementalParse(oldText, 'C', out incrementalTree, out parsedTree);
             CompareIncToFullParseErrors(incrementalTree, parsedTree);
         }
@@ -761,11 +847,13 @@ public class Test
         [Fact]
         public void AddingTryBlockToMethodOneCharAtTime()
         {
-            SourceText startingText = SourceText.From(@"
+            SourceText startingText = SourceText.From(
+                @"
 public class Test
 {
     void Goo() {} // Point
-}");
+}"
+            );
 
             SyntaxTree syntaxTree = SyntaxFactory.ParseSyntaxTree(startingText);
 
@@ -782,11 +870,13 @@ public class Test
         [Fact]
         public void AddingIfBlockToMethodOneCharAtTime()
         {
-            SourceText startingText = SourceText.From(@"
+            SourceText startingText = SourceText.From(
+                @"
 public class Test
 {
     void Goo() {} // Point
-}");
+}"
+            );
 
             SyntaxTree syntaxTree = SyntaxFactory.ParseSyntaxTree(startingText);
 
@@ -801,11 +891,13 @@ public class Test
         [Fact]
         public void AddingWhileBlockToMethodOneCharAtTime()
         {
-            SourceText startingText = SourceText.From(@"
+            SourceText startingText = SourceText.From(
+                @"
 public class Test
 {
     void Goo() {} // Point
-}");
+}"
+            );
 
             SyntaxTree syntaxTree = SyntaxFactory.ParseSyntaxTree(startingText);
 
@@ -821,7 +913,8 @@ public class Test
         [Fact]
         public void CommentOutClassKeyword()
         {
-            SourceText oldText = SourceText.From(@"class MyClass 
+            SourceText oldText = SourceText.From(
+                @"class MyClass 
 {
 	private enum E {zero, one, two, three};
 	public const E test = E.two;
@@ -829,11 +922,19 @@ public class Test
 	{
 		return 1;
 	}
-}");
-            int locationOfChange = 0, widthOfChange = 5;
+}"
+            );
+            int locationOfChange = 0,
+                widthOfChange = 5;
             SyntaxTree incrementalTree;
             SyntaxTree parsedTree;
-            CommentOutText(oldText, locationOfChange, widthOfChange, out incrementalTree, out parsedTree);
+            CommentOutText(
+                oldText,
+                locationOfChange,
+                widthOfChange,
+                out incrementalTree,
+                out parsedTree
+            );
             CompareIncToFullParseErrors(incrementalTree, parsedTree);
         }
 
@@ -841,7 +942,8 @@ public class Test
         [Fact]
         public void CommentOutOpeningCurlyOnPrivateDeclaration()
         {
-            SourceText oldText = SourceText.From(@"
+            SourceText oldText = SourceText.From(
+                @"
 private class B{ public class MyClass 
 {
 
@@ -852,11 +954,19 @@ private class B{ public class MyClass
 	{
 		return 1;
 	}
-}}");
-            int locationOfChange = 42, widthOfChange = 1;
+}}"
+            );
+            int locationOfChange = 42,
+                widthOfChange = 1;
             SyntaxTree incrementalTree;
             SyntaxTree parsedTree;
-            CommentOutText(oldText, locationOfChange, widthOfChange, out incrementalTree, out parsedTree);
+            CommentOutText(
+                oldText,
+                locationOfChange,
+                widthOfChange,
+                out incrementalTree,
+                out parsedTree
+            );
 
             CompareIncToFullParseErrors(incrementalTree, parsedTree);
         }
@@ -865,7 +975,8 @@ private class B{ public class MyClass
         [Fact]
         public void CommentOutBracesOnMethodDeclaration()
         {
-            SourceText oldText = SourceText.From(@"
+            SourceText oldText = SourceText.From(
+                @"
 private class B{ private class MyClass 
 {
 
@@ -876,11 +987,19 @@ private class B{ private class MyClass
 	{
 		return 1;
 	}
-}}");
-            int locationOfChange = 139, widthOfChange = 2;
+}}"
+            );
+            int locationOfChange = 139,
+                widthOfChange = 2;
             SyntaxTree incrementalTree;
             SyntaxTree parsedTree;
-            CommentOutText(oldText, locationOfChange, widthOfChange, out incrementalTree, out parsedTree);
+            CommentOutText(
+                oldText,
+                locationOfChange,
+                widthOfChange,
+                out incrementalTree,
+                out parsedTree
+            );
 
             CompareIncToFullParseErrors(incrementalTree, parsedTree);
         }
@@ -889,7 +1008,8 @@ private class B{ private class MyClass
         [Fact]
         public void CommentOutEventKeyword()
         {
-            SourceText oldText = SourceText.From(@"interface IGoo
+            SourceText oldText = SourceText.From(
+                @"interface IGoo
 {
 	event EventHandler E { add { } remove { } }
 }
@@ -900,11 +1020,19 @@ class Test
 	{
 		return 1;
 	}
-}");
-            int locationOfChange = 20, widthOfChange = 6;
+}"
+            );
+            int locationOfChange = 20,
+                widthOfChange = 6;
             SyntaxTree incrementalTree;
             SyntaxTree parsedTree;
-            CommentOutText(oldText, locationOfChange, widthOfChange, out incrementalTree, out parsedTree);
+            CommentOutText(
+                oldText,
+                locationOfChange,
+                widthOfChange,
+                out incrementalTree,
+                out parsedTree
+            );
 
             CompareIncToFullParseErrors(incrementalTree, parsedTree);
         }
@@ -913,7 +1041,8 @@ class Test
         [Fact]
         public void CommentOutEventAccessor()
         {
-            SourceText oldText = SourceText.From(@"interface IGoo
+            SourceText oldText = SourceText.From(
+                @"interface IGoo
 {
 	event EventHandler E { add { } remove { } }
 }
@@ -924,11 +1053,19 @@ class Test
 	{
 		return 1;
 	}
-}");
-            int locationOfChange = 43, widthOfChange = 3;
+}"
+            );
+            int locationOfChange = 43,
+                widthOfChange = 3;
             SyntaxTree incrementalTree;
             SyntaxTree parsedTree;
-            CommentOutText(oldText, locationOfChange, widthOfChange, out incrementalTree, out parsedTree);
+            CommentOutText(
+                oldText,
+                locationOfChange,
+                widthOfChange,
+                out incrementalTree,
+                out parsedTree
+            );
 
             CompareIncToFullParseErrors(incrementalTree, parsedTree);
         }
@@ -937,7 +1074,8 @@ class Test
         [Fact]
         public void CommentOutDotInUsingAlias()
         {
-            SourceText oldText = SourceText.From(@"using System.Runtime.CompilerServices;
+            SourceText oldText = SourceText.From(
+                @"using System.Runtime.CompilerServices;
 [assembly:InternalsVisibleTo(a)]
 class A
 {
@@ -947,11 +1085,19 @@ class A
 		return 0;
 	}
 }
-");
-            int locationOfChange = 12, widthOfChange = 1;
+"
+            );
+            int locationOfChange = 12,
+                widthOfChange = 1;
             SyntaxTree incrementalTree;
             SyntaxTree parsedTree;
-            CommentOutText(oldText, locationOfChange, widthOfChange, out incrementalTree, out parsedTree);
+            CommentOutText(
+                oldText,
+                locationOfChange,
+                widthOfChange,
+                out incrementalTree,
+                out parsedTree
+            );
             CompareIncToFullParseErrors(incrementalTree, parsedTree);
         }
 
@@ -959,7 +1105,8 @@ class A
         [Fact]
         public void CommentOutThisInIndexer()
         {
-            SourceText oldText = SourceText.From(@"class A
+            SourceText oldText = SourceText.From(
+                @"class A
 {
 		int MyInter.this[int i] {
 		get {
@@ -971,11 +1118,19 @@ class A
 	}
 
 }
-");
-            int locationOfChange = 26, widthOfChange = 4;
+"
+            );
+            int locationOfChange = 26,
+                widthOfChange = 4;
             SyntaxTree incrementalTree;
             SyntaxTree parsedTree;
-            CommentOutText(oldText, locationOfChange, widthOfChange, out incrementalTree, out parsedTree);
+            CommentOutText(
+                oldText,
+                locationOfChange,
+                widthOfChange,
+                out incrementalTree,
+                out parsedTree
+            );
             CompareIncToFullParseErrors(incrementalTree, parsedTree);
         }
 
@@ -983,7 +1138,8 @@ class A
         [Fact]
         public void CommentOutReturnStatementInProperty()
         {
-            SourceText oldText = SourceText.From(@"public class MyClass {
+            SourceText oldText = SourceText.From(
+                @"public class MyClass {
 	int this[] {
 		get {
 			return intI;
@@ -993,11 +1149,19 @@ class A
 		}
 	}
 }
-");
-            int locationOfChange = 51, widthOfChange = 7;
+"
+            );
+            int locationOfChange = 51,
+                widthOfChange = 7;
             SyntaxTree incrementalTree;
             SyntaxTree parsedTree;
-            CommentOutText(oldText, locationOfChange, widthOfChange, out incrementalTree, out parsedTree);
+            CommentOutText(
+                oldText,
+                locationOfChange,
+                widthOfChange,
+                out incrementalTree,
+                out parsedTree
+            );
             CompareIncToFullParseErrors(incrementalTree, parsedTree);
         }
 
@@ -1005,13 +1169,15 @@ class A
         [Fact]
         public void AddSemicolonInForLoop()
         {
-            SourceText oldText = SourceText.From(@"public class MyClass {
+            SourceText oldText = SourceText.From(
+                @"public class MyClass {
     void goo()
     {
         for (int i = 0
     }
 }
-");
+"
+            );
             int locationOfInsert = oldText.ToString().IndexOf('0') + 1;
             SyntaxTree oldTree = SyntaxFactory.ParseSyntaxTree(oldText);
 
@@ -1023,7 +1189,8 @@ class A
         [Fact]
         public void AddSemicolonAfterStartOfVerbatimString()
         {
-            var oldText = @"class A
+            var oldText =
+                @"class A
 {
 string s = @
 }
@@ -1036,7 +1203,8 @@ string s = @
         [Fact]
         public void AddReturnWithTriviaAtStart()
         {
-            string oldText = @"0;
+            string oldText =
+                @"0;
     }
 }";
             string diffText = "return ";
@@ -1096,32 +1264,53 @@ string s = @
         [Fact]
         public void CodeWithDollarSign()
         {
-            SourceText oldText = SourceText.From(@"class  filesystem{
+            SourceText oldText = SourceText.From(
+                @"class  filesystem{
 	po$i$;
-}");
-            int locationOfChange = 0, widthOfChange = 5;
+}"
+            );
+            int locationOfChange = 0,
+                widthOfChange = 5;
             SyntaxTree incrementalTree;
             SyntaxTree parsedTree;
 
             // This function will update "class" to "/*class*/" in oldText
-            CommentOutText(oldText, locationOfChange, widthOfChange, out incrementalTree, out parsedTree);
+            CommentOutText(
+                oldText,
+                locationOfChange,
+                widthOfChange,
+                out incrementalTree,
+                out parsedTree
+            );
 
             // Verify when you roundtrip the text from the full parse with change should match the text from the incremental parse with change
             // The bug is that the "$" sign was being swallowed on the incremental parse
-            Assert.Equal(parsedTree.GetCompilationUnitRoot().ToFullString(), incrementalTree.GetCompilationUnitRoot().ToFullString());
+            Assert.Equal(
+                parsedTree.GetCompilationUnitRoot().ToFullString(),
+                incrementalTree.GetCompilationUnitRoot().ToFullString()
+            );
         }
 
         [WorkItem(536731, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/536731")]
         [Fact]
         public void CommentCodeInGOTOStatement()
         {
-            SourceText oldText = SourceText.From(@"class CSTR020mod{ public static void CSTR020()  {  ON ERROR GOTO ErrorTrap; } }");
-            int locationOfChange = oldText.ToString().IndexOf("ON", StringComparison.Ordinal), widthOfChange = 2;
+            SourceText oldText = SourceText.From(
+                @"class CSTR020mod{ public static void CSTR020()  {  ON ERROR GOTO ErrorTrap; } }"
+            );
+            int locationOfChange = oldText.ToString().IndexOf("ON", StringComparison.Ordinal),
+                widthOfChange = 2;
             SyntaxTree incrementalTree;
             SyntaxTree parsedTree;
 
             // This function will update "ON" to "/*ON*/" in oldText
-            CommentOutText(oldText, locationOfChange, widthOfChange, out incrementalTree, out parsedTree);
+            CommentOutText(
+                oldText,
+                locationOfChange,
+                widthOfChange,
+                out incrementalTree,
+                out parsedTree
+            );
 
             // Verify that the errors from the fully parsed tree with the change and the incrementally parsed tree are the same
             CompareIncToFullParseErrors(incrementalTree, parsedTree);
@@ -1131,17 +1320,26 @@ string s = @
         [Fact]
         public void CommentConstInConstDeclError()
         {
-            SourceText oldText = SourceText.From(@"class  A
+            SourceText oldText = SourceText.From(
+                @"class  A
 {
     const byte X4var As Byte = 55;
 }
-");
-            int locationOfChange = oldText.ToString().IndexOf("const", StringComparison.Ordinal), widthOfChange = 5;
+"
+            );
+            int locationOfChange = oldText.ToString().IndexOf("const", StringComparison.Ordinal),
+                widthOfChange = 5;
             SyntaxTree incrementalTree;
             SyntaxTree parsedTree;
 
             // This function will update "const" to "/*const*/" in oldText
-            CommentOutText(oldText, locationOfChange, widthOfChange, out incrementalTree, out parsedTree);
+            CommentOutText(
+                oldText,
+                locationOfChange,
+                widthOfChange,
+                out incrementalTree,
+                out parsedTree
+            );
 
             // Verify that the errors from the fully parsed tree with the change and the incrementally parsed tree are the same
             CompareIncToFullParseErrors(incrementalTree, parsedTree);
@@ -1151,19 +1349,28 @@ string s = @
         [Fact]
         public void CommentClassWithDelegateDecl()
         {
-            SourceText oldText = SourceText.From(@"public class DynClassDrived
+            SourceText oldText = SourceText.From(
+                @"public class DynClassDrived
 {
      protected delegate void ProtectedDel(dynamic d);
 }
-");
-            int locationOfChange = oldText.ToString().IndexOf("class", StringComparison.Ordinal), widthOfChange = 5;
+"
+            );
+            int locationOfChange = oldText.ToString().IndexOf("class", StringComparison.Ordinal),
+                widthOfChange = 5;
             SyntaxTree incrementalTree;
             SyntaxTree parsedTree;
 
             var oldTree = SyntaxFactory.ParseSyntaxTree(oldText);
 
             // This function will update "class" to "/*class*/" in oldText
-            CommentOutText(oldText, locationOfChange, widthOfChange, out incrementalTree, out parsedTree);
+            CommentOutText(
+                oldText,
+                locationOfChange,
+                widthOfChange,
+                out incrementalTree,
+                out parsedTree
+            );
 
             // Verify that the errors from the fully parsed tree with the change and the incrementally parsed tree are the same
             CompareIncToFullParseErrors(incrementalTree, parsedTree);
@@ -1173,18 +1380,27 @@ string s = @
         [Fact]
         public void CommentCloseBraceInPropertyDecl()
         {
-            SourceText oldText = SourceText.From(@"public class MemberClass
+            SourceText oldText = SourceText.From(
+                @"public class MemberClass
 {
     public MyStruct[] Property_MyStructArr { get; set; }
     public MyEnum[] Property_MyEnumArr { set; private get; }
 }
-");
-            int locationOfChange = oldText.ToString().IndexOf('}'), widthOfChange = 5;
+"
+            );
+            int locationOfChange = oldText.ToString().IndexOf('}'),
+                widthOfChange = 5;
             SyntaxTree incrementalTree;
             SyntaxTree parsedTree;
 
             // This function will update the first closing brace in property declaration Property_MyStructArr "}" to "/*}*/" in oldText
-            CommentOutText(oldText, locationOfChange, widthOfChange, out incrementalTree, out parsedTree);
+            CommentOutText(
+                oldText,
+                locationOfChange,
+                widthOfChange,
+                out incrementalTree,
+                out parsedTree
+            );
 
             // Verify that the errors from the fully parsed tree with the change and the incrementally parsed tree are the same
             CompareIncToFullParseErrors(incrementalTree, parsedTree);
@@ -1193,16 +1409,25 @@ string s = @
         [Fact]
         public void CommentCloseBraceInInitOnlyPropertyDecl()
         {
-            SourceText oldText = SourceText.From(@"public class MemberClass
+            SourceText oldText = SourceText.From(
+                @"public class MemberClass
 {
     public MyStruct[] Property_MyStructArr { get; init; }
     public MyEnum[] Property_MyEnumArr { init; private get; }
 }
-");
-            int locationOfChange = oldText.ToString().IndexOf('}'), widthOfChange = 5;
+"
+            );
+            int locationOfChange = oldText.ToString().IndexOf('}'),
+                widthOfChange = 5;
 
             // This function will update the first closing brace in property declaration Property_MyStructArr "}" to "/*}*/" in oldText
-            CommentOutText(oldText, locationOfChange, widthOfChange, out SyntaxTree incrementalTree, out SyntaxTree parsedTree);
+            CommentOutText(
+                oldText,
+                locationOfChange,
+                widthOfChange,
+                out SyntaxTree incrementalTree,
+                out SyntaxTree parsedTree
+            );
 
             // Verify that the errors from the fully parsed tree with the change and the incrementally parsed tree are the same
             CompareIncToFullParseErrors(incrementalTree, parsedTree);
@@ -1212,19 +1437,28 @@ string s = @
         [Fact]
         public void CommentFixedInIllegalArrayDecl()
         {
-            SourceText oldText = SourceText.From(@"class Test
+            SourceText oldText = SourceText.From(
+                @"class Test
 {
     unsafe struct A
     {
         public fixed byte Array[dy[""Test""]];
     }
-}");
-            int locationOfChange = oldText.ToString().IndexOf("fixed", StringComparison.Ordinal), widthOfChange = 5;
+}"
+            );
+            int locationOfChange = oldText.ToString().IndexOf("fixed", StringComparison.Ordinal),
+                widthOfChange = 5;
             SyntaxTree incrementalTree;
             SyntaxTree parsedTree;
 
             // This function will update "fixed" to "/*fixed*/" in oldText above
-            CommentOutText(oldText, locationOfChange, widthOfChange, out incrementalTree, out parsedTree);
+            CommentOutText(
+                oldText,
+                locationOfChange,
+                widthOfChange,
+                out incrementalTree,
+                out parsedTree
+            );
 
             // Verify that the errors from the fully parsed tree with the change and the incrementally parsed tree are the same
             CompareIncToFullParseErrors(incrementalTree, parsedTree);
@@ -1235,25 +1469,43 @@ string s = @
         public void CommentGlobalUsedAsAlias()
         {
             SourceText oldText = SourceText.From(
-@"using @global=System.Int32;
+                @"using @global=System.Int32;
 class Test
 {
 }
-");
-            int locationOfChange = oldText.ToString().IndexOf("@global", StringComparison.Ordinal), widthOfChange = 7;
+"
+            );
+            int locationOfChange = oldText.ToString().IndexOf("@global", StringComparison.Ordinal),
+                widthOfChange = 7;
             SyntaxTree incrementalTree;
             SyntaxTree parsedTree;
 
             // This function will update "@global" to "/*@global*/" in oldText
-            CommentOutText(oldText, locationOfChange, widthOfChange, out incrementalTree, out parsedTree);
+            CommentOutText(
+                oldText,
+                locationOfChange,
+                widthOfChange,
+                out incrementalTree,
+                out parsedTree
+            );
 
             // Verify if the fully parsed tree and the incrementally parse tree have the same number of children
-            Assert.Equal(parsedTree.GetCompilationUnitRoot().ChildNodesAndTokens().Count, incrementalTree.GetCompilationUnitRoot().ChildNodesAndTokens().Count);
+            Assert.Equal(
+                parsedTree.GetCompilationUnitRoot().ChildNodesAndTokens().Count,
+                incrementalTree.GetCompilationUnitRoot().ChildNodesAndTokens().Count
+            );
 
             // Verify if the children of the trees are of the same kind
-            for (int i = 0; i < parsedTree.GetCompilationUnitRoot().ChildNodesAndTokens().Count; i++)
+            for (
+                int i = 0;
+                i < parsedTree.GetCompilationUnitRoot().ChildNodesAndTokens().Count;
+                i++
+            )
             {
-                Assert.Equal(parsedTree.GetCompilationUnitRoot().ChildNodesAndTokens()[i].Kind(), incrementalTree.GetCompilationUnitRoot().ChildNodesAndTokens()[i].Kind());
+                Assert.Equal(
+                    parsedTree.GetCompilationUnitRoot().ChildNodesAndTokens()[i].Kind(),
+                    incrementalTree.GetCompilationUnitRoot().ChildNodesAndTokens()[i].Kind()
+                );
             }
         }
 
@@ -1262,7 +1514,7 @@ class Test
         public void CommentUsingStmtGlobalUsedAsAlias()
         {
             SourceText oldText = SourceText.From(
-@"using @global=System.Int32;
+                @"using @global=System.Int32;
 class Test
 {
     static int Main()
@@ -1270,14 +1522,22 @@ class Test
         return (@global) 0;
     }
 }
-");
+"
+            );
             string txtToCmnt = @"using @global=System.Int32;";
-            int locationOfChange = oldText.ToString().IndexOf(txtToCmnt, StringComparison.Ordinal), widthOfChange = txtToCmnt.Length;
+            int locationOfChange = oldText.ToString().IndexOf(txtToCmnt, StringComparison.Ordinal),
+                widthOfChange = txtToCmnt.Length;
             SyntaxTree incrementalTree;
             SyntaxTree parsedTree;
 
             // This function will update "using @global=System.Int32;" to "/*using @global=System.Int32;*/" in oldText
-            CommentOutText(oldText, locationOfChange, widthOfChange, out incrementalTree, out parsedTree);
+            CommentOutText(
+                oldText,
+                locationOfChange,
+                widthOfChange,
+                out incrementalTree,
+                out parsedTree
+            );
 
             // Verify that the errors from the fully parsed tree with the change and the incrementally parsed tree are the same
             CompareIncToFullParseErrors(incrementalTree, parsedTree);
@@ -1288,34 +1548,46 @@ class Test
         public void CmntMainInCodeWithGlobalQualifierInUnsafe()
         {
             SourceText oldText = SourceText.From(
-@"class Test
+                @"class Test
 {
     unsafe static int Main() 
     {
         global::System.Int32* p = stackalloc global::System.Int32[5];
     }
 }
-");
+"
+            );
             string txtToCmnt = @"Main";
-            int locationOfChange = oldText.ToString().IndexOf(txtToCmnt, StringComparison.Ordinal), widthOfChange = txtToCmnt.Length;
+            int locationOfChange = oldText.ToString().IndexOf(txtToCmnt, StringComparison.Ordinal),
+                widthOfChange = txtToCmnt.Length;
             SyntaxTree incrementalTree;
             SyntaxTree parsedTree;
 
             // This function will update "Main" to "/*Main*/" in oldText
-            CommentOutText(oldText, locationOfChange, widthOfChange, out incrementalTree, out parsedTree);
+            CommentOutText(
+                oldText,
+                locationOfChange,
+                widthOfChange,
+                out incrementalTree,
+                out parsedTree
+            );
 
             // Verify that the errors from the fully parsed tree with the change and the incrementally parsed tree are the same
             CompareIncToFullParseErrors(incrementalTree, parsedTree);
         }
 
-        [WorkItem(536842, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/536842"), WorkItem(543452, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543452")]
+        [
+            WorkItem(536842, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/536842"),
+            WorkItem(543452, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543452")
+        ]
         [Fact]
         public void DelegateDeclInvalidCastException()
         {
             SourceText oldText = SourceText.From(
-@"    public delegate void MyDelegate01(dynamic d, int n);
+                @"    public delegate void MyDelegate01(dynamic d, int n);
     [System.CLSCompliant(false)]
-");
+"
+            );
             SyntaxTree incrementalTree;
             SyntaxTree parsedTree;
 
@@ -1335,7 +1607,7 @@ class Test
         public void KeyExistsArgumentException()
         {
             SourceText oldText = SourceText.From(
-@"    public abstract class AbstractCompiler : ICompiler
+                @"    public abstract class AbstractCompiler : ICompiler
     {
         protected virtual IDictionary GetOptions()
         {
@@ -1370,7 +1642,8 @@ class Test
         }
 
     }
-");
+"
+            );
             SyntaxTree incrementalTree;
             SyntaxTree parsedTree;
 
@@ -1390,12 +1663,13 @@ class Test
         public void QueryExprWithKeywordsAsVariablesAndIncompleteJoin()
         {
             SourceText oldText = SourceText.From(
-@"class Test {        
+                @"class Test {        
     static void Main()
     { 
         var q = 
 	from  string  @params in ( @foreach/9)
-	join");
+	join"
+            );
 
             SyntaxTree incrementalTree;
             SyntaxTree parsedTree;
@@ -1412,11 +1686,12 @@ class Test
         public void IncompleteGenericTypeParamVarDecl()
         {
             SourceText oldText = SourceText.From(
-@"public class Test
+                @"public class Test
 {
     public static int Main()
     {
-        C<B, A");
+        C<B, A"
+            );
 
             SyntaxTree incrementalTree;
             SyntaxTree parsedTree;
@@ -1433,11 +1708,12 @@ class Test
         public void IncompleteArglistMethodInvocation()
         {
             SourceText oldText = SourceText.From(
-@"public class Test
+                @"public class Test
 {
     public static void Run()
     {
-        testvar.Test(__arglist(10l, 1");
+        testvar.Test(__arglist(10l, 1"
+            );
 
             SyntaxTree incrementalTree;
             SyntaxTree parsedTree;
@@ -1454,9 +1730,10 @@ class Test
         public void IncompleteErrorExtensionMethodDecl()
         {
             SourceText oldText = SourceText.From(
-@"public static class Extensions
+                @"public static class Extensions
 {
-    public static this Goo(int i, this string str)");
+    public static this Goo(int i, this string str)"
+            );
 
             SyntaxTree incrementalTree;
             SyntaxTree parsedTree;
@@ -1477,11 +1754,12 @@ class Test
         public void IncompleteErrorLambdaExpr()
         {
             SourceText oldText = SourceText.From(
-@"public class Program
+                @"public class Program
 {
     public static int Main()
     {         
-        D[] a2 = new [] {(int x)=");
+        D[] a2 = new [] {(int x)="
+            );
 
             SyntaxTree incrementalTree;
             SyntaxTree parsedTree;
@@ -1498,10 +1776,11 @@ class Test
         public void IncompleteCodeFollowingXmlDocStyleComment()
         {
             SourceText oldText = SourceText.From(
-@"class C 
+                @"class C 
 {
     /// =>
-    ");
+    "
+            );
 
             SyntaxTree incrementalTree;
             SyntaxTree parsedTree;
@@ -1518,8 +1797,9 @@ class Test
         public void IncompleteNamespaceFollowingExternError()
         {
             SourceText oldText = SourceText.From(
-@"using C1 = extern;
-namespace N");
+                @"using C1 = extern;
+namespace N"
+            );
 
             SyntaxTree incrementalTree;
             SyntaxTree parsedTree;
@@ -1536,11 +1816,12 @@ namespace N");
         public void IncompleteConditionWithJaggedArrayAccess()
         {
             SourceText oldText = SourceText.From(
-@"class A
+                @"class A
 {
   public static int Main()
   {
-    if (arr[2][3l] =");
+    if (arr[2][3l] ="
+            );
 
             SyntaxTree incrementalTree;
             SyntaxTree parsedTree;
@@ -1557,11 +1838,12 @@ namespace N");
         public void TrailingCommentFollowingAttributesInsideMethod()
         {
             SourceText oldText = SourceText.From(
-@"public class goo 
+                @"public class goo 
 {
   public static int Goo
   {
-    [method:A][goo:A]/");
+    [method:A][goo:A]/"
+            );
 
             SyntaxTree incrementalTree;
             SyntaxTree parsedTree;
@@ -1572,15 +1854,19 @@ namespace N");
             CharByCharIncrementalParse(oldText, '/', out incrementalTree, out parsedTree);
 
             // Verify that the first child node of the root is equivalent between incremental tree and full parse tree
-            Assert.Equal(parsedTree.GetCompilationUnitRoot().ChildNodesAndTokens()[0].AsNode().ToFullString(), incrementalTree.GetCompilationUnitRoot().ChildNodesAndTokens()[0].AsNode().ToFullString());
+            Assert.Equal(
+                parsedTree.GetCompilationUnitRoot().ChildNodesAndTokens()[0].AsNode()
+                    .ToFullString(),
+                incrementalTree.GetCompilationUnitRoot().ChildNodesAndTokens()[0].AsNode()
+                    .ToFullString()
+            );
         }
 
         [WorkItem(536901, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/536901")]
         [Fact]
         public void SpecialAttribNameWithDoubleAtToken()
         {
-            SourceText oldText = SourceText.From(
-@"[@@X");
+            SourceText oldText = SourceText.From(@"[@@X");
 
             SyntaxTree incrementalTree;
             SyntaxTree parsedTree;
@@ -1596,8 +1882,7 @@ namespace N");
         [Fact]
         public void AssertForAttributeWithGenericType()
         {
-            SourceText oldText = SourceText.From(
-@"[Goo<i");
+            SourceText oldText = SourceText.From(@"[Goo<i");
 
             SyntaxTree incrementalTree;
             SyntaxTree parsedTree;
@@ -1614,8 +1899,7 @@ namespace N");
         [Fact]
         public void AssertOnTypingColonInGenericTypeConstraint()
         {
-            SourceText oldText = SourceText.From(
-@"class Meta<T>:imeta<T> where T");
+            SourceText oldText = SourceText.From(@"class Meta<T>:imeta<T> where T");
 
             SyntaxTree incrementalTree;
             SyntaxTree parsedTree;
@@ -1633,11 +1917,12 @@ namespace N");
         public void ArithmeticExprWithLongConstant()
         {
             SourceText oldText = SourceText.From(
-@"public class arith0018 
+                @"public class arith0018 
 {
   public static void Main()
   {
-    long l1 = 1l/0");
+    long l1 = 1l/0"
+            );
 
             SyntaxTree incrementalTree;
             SyntaxTree parsedTree;
@@ -1654,7 +1939,7 @@ namespace N");
         public void AddClassKeywordWithAnonymousMethodThrowsIndexOutOfRangeException()
         {
             SourceText oldText = SourceText.From(
-@"Production<V, T>
+                @"Production<V, T>
 {
     private readonly T epsilon=default(T);
 
@@ -1668,7 +1953,8 @@ namespace N");
             });
         })();
     }
-}");
+}"
+            );
 
             SyntaxTree incrementalTree;
             SyntaxTree parsedTree;
@@ -1678,7 +1964,10 @@ namespace N");
             TokenByTokenBottomUp(oldText, "class ", out incrementalTree, out parsedTree);
 
             // Verify the incrementalTree roundtrip text is the same as parsedTree roundtrip text
-            Assert.Equal(parsedTree.GetCompilationUnitRoot().ToFullString(), incrementalTree.GetCompilationUnitRoot().ToFullString());
+            Assert.Equal(
+                parsedTree.GetCompilationUnitRoot().ToFullString(),
+                incrementalTree.GetCompilationUnitRoot().ToFullString()
+            );
 
             // Verify that the errors from the fully parsed tree with the change and the incrementally parsed tree are the same
             CompareIncToFullParseErrors(incrementalTree, parsedTree);
@@ -1689,14 +1978,15 @@ namespace N");
         public void AddClassKeywordWithParamsModifierInAnonymousMethod()
         {
             SourceText oldText = SourceText.From(
-@"Test
+                @"Test
 {
     static int Goo()
     {
         Dele f = delegate(params int[] a) { return 1;};
     }
 }
-");
+"
+            );
 
             SyntaxTree incrementalTree;
             SyntaxTree parsedTree;
@@ -1713,8 +2003,9 @@ namespace N");
         public void AddEqualTokenBeforeLongConst()
         {
             SourceText oldText = SourceText.From(
-@"3l;
-");
+                @"3l;
+"
+            );
 
             SyntaxTree incrementalTree;
             SyntaxTree parsedTree;
@@ -1731,8 +2022,9 @@ namespace N");
         public void AddEqualTokenBeforeHugeConst()
         {
             SourceText oldText = SourceText.From(
-@"18446744073709551616;
-");
+                @"18446744073709551616;
+"
+            );
 
             SyntaxTree incrementalTree;
             SyntaxTree parsedTree;
@@ -1749,11 +2041,12 @@ namespace N");
         public void AddEndTagToXmlDocComment()
         {
             SourceText oldText = SourceText.From(
-@"class c1
+                @"class c1
 {
 /// <Summary>
 /// <
-");
+"
+            );
             SyntaxTree incrementalTree;
             SyntaxTree parsedTree;
 
@@ -1768,7 +2061,7 @@ namespace N");
         public void AddClassKeywordToCodeWithConstructorAndProperty()
         {
             SourceText oldText = SourceText.From(
-@"IntVector
+                @"IntVector
 {
     public IntVector(int length)
     {
@@ -1782,7 +2075,8 @@ namespace N");
         }
     }
 }
-");
+"
+            );
 
             SyntaxTree incrementalTree;
             SyntaxTree parsedTree;
@@ -1799,7 +2093,7 @@ namespace N");
         public void AddCurlyBracesToIncompleteCode()
         {
             SourceText oldText = SourceText.From(
-@"		int[][] arr;
+                @"		int[][] arr;
 
 		if (arr[1][1] == 0)
 			return 0;
@@ -1807,7 +2101,8 @@ namespace N");
 			return 1;
 	}
 }
-");
+"
+            );
 
             SyntaxTree incrementalTree;
             SyntaxTree parsedTree;
@@ -1824,9 +2119,10 @@ namespace N");
         public void AddOpenParenToIncompleteMethodDeclBeforeDestructor()
         {
             SourceText oldText = SourceText.From(
-@"string s) {}
+                @"string s) {}
 ~Widget() {}
-");
+"
+            );
 
             SyntaxTree incrementalTree;
             SyntaxTree parsedTree;
@@ -1843,8 +2139,9 @@ namespace N");
         public void AddTokenToIncompleteQueryExpr()
         {
             SourceText oldText = SourceText.From(
-@"equals abstract select new {  };
-");
+                @"equals abstract select new {  };
+"
+            );
 
             SyntaxTree incrementalTree;
             SyntaxTree parsedTree;
@@ -1861,9 +2158,10 @@ namespace N");
         public void IncompleteGenericInterfaceImplementation()
         {
             SourceText oldText = SourceText.From(
-@"class GenInt : IGenX<int[]>, IGenY<int> 
+                @"class GenInt : IGenX<int[]>, IGenY<int> 
 {
-	string IGenX<int[]>.m");
+	string IGenX<int[]>.m"
+            );
 
             SyntaxTree incrementalTree;
             SyntaxTree parsedTree;
@@ -1880,9 +2178,10 @@ namespace N");
         public void IncompleteIndexerDecl()
         {
             SourceText oldText = SourceText.From(
-@"public class Test 
+                @"public class Test 
 {
-	int this[ params int [] args, i");
+	int this[ params int [] args, i"
+            );
 
             SyntaxTree incrementalTree;
             SyntaxTree parsedTree;
@@ -1899,11 +2198,12 @@ namespace N");
         public void IncompleteGenericVarDeclWithUnderscore()
         {
             SourceText oldText = SourceText.From(
-@"public class Test
+                @"public class Test
 {
     public static int Main()
     {
-        cT ct = _class.TestT<cT, cU");
+        cT ct = _class.TestT<cT, cU"
+            );
 
             SyntaxTree incrementalTree;
             SyntaxTree parsedTree;
@@ -1920,9 +2220,10 @@ namespace N");
         public void IncompleteUnsafeArrayInit()
         {
             SourceText oldText = SourceText.From(
-@"unsafe class Test 
+                @"unsafe class Test 
 {
-	unsafe void*[] A = {(void*");
+	unsafe void*[] A = {(void*"
+            );
 
             SyntaxTree incrementalTree;
             SyntaxTree parsedTree;
@@ -1939,23 +2240,31 @@ namespace N");
         public void RemoveClassIdentifierTokenWithDelegDecl()
         {
             SourceText oldText = SourceText.From(
-@"class Test
+                @"class Test
 {
     static int Goo()
     {
 
         Dele f = delegate(params int[] a) { return 1;};
     }
-}");
+}"
+            );
 
             SyntaxTree incrementalTree;
             SyntaxTree parsedTree;
             string textToRemove = "Test";
-            int locationOfChange = oldText.ToString().IndexOf(textToRemove, StringComparison.Ordinal);
+            int locationOfChange = oldText.ToString()
+                .IndexOf(textToRemove, StringComparison.Ordinal);
             int widthOfChange = textToRemove.Length;
 
             // This function will remove the "Test" token from oldText
-            RemoveText(oldText, locationOfChange, widthOfChange, out incrementalTree, out parsedTree);
+            RemoveText(
+                oldText,
+                locationOfChange,
+                widthOfChange,
+                out incrementalTree,
+                out parsedTree
+            );
 
             // Verify that the errors from the fully parsed tree with the change and the incrementally parsed tree are the same
             CompareIncToFullParseErrors(incrementalTree, parsedTree);
@@ -1966,7 +2275,7 @@ namespace N");
         public void RemoveBracesInExtensionIndexer()
         {
             SourceText oldText = SourceText.From(
-@"public static class Extensions
+                @"public static class Extensions
 {
     public static int this(this int x)[int index1] { get { return 9; }  }
 
@@ -1974,16 +2283,24 @@ namespace N");
     {
         return 0;
     }
-}");
+}"
+            );
 
             SyntaxTree incrementalTree;
             SyntaxTree parsedTree;
             string textToRemove = ")[";
-            int locationOfChange = oldText.ToString().IndexOf(textToRemove, StringComparison.Ordinal);
+            int locationOfChange = oldText.ToString()
+                .IndexOf(textToRemove, StringComparison.Ordinal);
             int widthOfChange = textToRemove.Length;
 
             // This function will remove the ")[" token from oldText
-            RemoveText(oldText, locationOfChange, widthOfChange, out incrementalTree, out parsedTree);
+            RemoveText(
+                oldText,
+                locationOfChange,
+                widthOfChange,
+                out incrementalTree,
+                out parsedTree
+            );
 
             // Verify that the errors from the fully parsed tree with the change and the incrementally parsed tree are the same
             CompareIncToFullParseErrors(incrementalTree, parsedTree);
@@ -1994,18 +2311,26 @@ namespace N");
         public void RemoveParensInMethodDeclContainingPartialKeyword()
         {
             SourceText oldText = SourceText.From(
-@"static int Main()
+                @"static int Main()
 {
-    partial");
+    partial"
+            );
 
             SyntaxTree incrementalTree;
             SyntaxTree parsedTree;
             string textToRemove = "()";
-            int locationOfChange = oldText.ToString().IndexOf(textToRemove, StringComparison.Ordinal);
+            int locationOfChange = oldText.ToString()
+                .IndexOf(textToRemove, StringComparison.Ordinal);
             int widthOfChange = textToRemove.Length;
 
             // This function will remove the "()" text from oldText
-            RemoveText(oldText, locationOfChange, widthOfChange, out incrementalTree, out parsedTree);
+            RemoveText(
+                oldText,
+                locationOfChange,
+                widthOfChange,
+                out incrementalTree,
+                out parsedTree
+            );
 
             // Verify that the errors from the fully parsed tree with the change and the incrementally parsed tree are the same
             CompareIncToFullParseErrors(incrementalTree, parsedTree);
@@ -2016,9 +2341,10 @@ namespace N");
         public void IncompleteGlobalQualifierExplInterfaceImpl()
         {
             SourceText oldText = SourceText.From(
-@"class Test : N1.I1
+                @"class Test : N1.I1
 {
-    int global::N1.");
+    int global::N1."
+            );
 
             SyntaxTree incrementalTree;
             SyntaxTree parsedTree;
@@ -2027,7 +2353,10 @@ namespace N");
             CharByCharIncrementalParse(oldText, 'I', out incrementalTree, out parsedTree);
 
             // Verify that the fully parsed tree is structurally equivalent to the incrementally parsed tree
-            CompareTreeEquivalence(parsedTree.GetCompilationUnitRoot(), incrementalTree.GetCompilationUnitRoot());
+            CompareTreeEquivalence(
+                parsedTree.GetCompilationUnitRoot(),
+                incrementalTree.GetCompilationUnitRoot()
+            );
         }
 
         [WorkItem(537033, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/537033")]
@@ -2035,7 +2364,7 @@ namespace N");
         public void RemoveParensInGetEnumeratorWithPropertyAccess()
         {
             SourceText oldText = SourceText.From(
-@"public class QueueProducerConsumer
+                @"public class QueueProducerConsumer
 {
     public IEnumerator<T> GetEnumerator()
     {
@@ -2047,19 +2376,30 @@ namespace N");
         }
     }
 }
-");
+"
+            );
 
             SyntaxTree incrementalTree;
             SyntaxTree parsedTree;
             string textToRemove = "()";
-            int locationOfChange = oldText.ToString().IndexOf(textToRemove, StringComparison.Ordinal);
+            int locationOfChange = oldText.ToString()
+                .IndexOf(textToRemove, StringComparison.Ordinal);
             int widthOfChange = textToRemove.Length;
 
             // This function will remove the "()" text from oldText
-            RemoveText(oldText, locationOfChange, widthOfChange, out incrementalTree, out parsedTree);
+            RemoveText(
+                oldText,
+                locationOfChange,
+                widthOfChange,
+                out incrementalTree,
+                out parsedTree
+            );
 
             // Verify that the fully parsed tree is structurally equivalent to the incrementally parsed tree
-            CompareTreeEquivalence(parsedTree.GetCompilationUnitRoot(), incrementalTree.GetCompilationUnitRoot());
+            CompareTreeEquivalence(
+                parsedTree.GetCompilationUnitRoot(),
+                incrementalTree.GetCompilationUnitRoot()
+            );
         }
 
         [WorkItem(537053, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/537053")]
@@ -2067,7 +2407,7 @@ namespace N");
         public void RemoveReturnTypeOnProperty()
         {
             SourceText oldText = SourceText.From(
-@"public class Test
+                @"public class Test
 {
 	public int Prop
 	{
@@ -2080,19 +2420,30 @@ namespace N");
 		}
 	}
 }
-");
+"
+            );
 
             SyntaxTree incrementalTree;
             SyntaxTree parsedTree;
             string textToRemove = "int";
-            int locationOfChange = oldText.ToString().IndexOf(textToRemove, StringComparison.Ordinal);
+            int locationOfChange = oldText.ToString()
+                .IndexOf(textToRemove, StringComparison.Ordinal);
             int widthOfChange = textToRemove.Length;
 
             // This function will remove the "int" text from oldText
-            RemoveText(oldText, locationOfChange, widthOfChange, out incrementalTree, out parsedTree);
+            RemoveText(
+                oldText,
+                locationOfChange,
+                widthOfChange,
+                out incrementalTree,
+                out parsedTree
+            );
 
             // Verify that the fully parsed tree is structurally equivalent to the incrementally parsed tree
-            CompareTreeEquivalence(parsedTree.GetCompilationUnitRoot(), incrementalTree.GetCompilationUnitRoot());
+            CompareTreeEquivalence(
+                parsedTree.GetCompilationUnitRoot(),
+                incrementalTree.GetCompilationUnitRoot()
+            );
         }
 
         [WorkItem(538975, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538975")]
@@ -2100,22 +2451,30 @@ namespace N");
         public void RemoveTypeOnArrayInParameterWithMethodDeclError()
         {
             SourceText oldText = SourceText.From(
-@"public class A
+                @"public class A
 {
    public void static Main(string[] args)
    {
    }
 }
-");
+"
+            );
 
             SyntaxTree incrementalTree;
             SyntaxTree parsedTree;
             string textToRemove = "string";
-            int locationOfChange = oldText.ToString().IndexOf(textToRemove, StringComparison.Ordinal);
+            int locationOfChange = oldText.ToString()
+                .IndexOf(textToRemove, StringComparison.Ordinal);
             int widthOfChange = textToRemove.Length;
 
             // This function will remove the "string" text from oldText
-            RemoveText(oldText, locationOfChange, widthOfChange, out incrementalTree, out parsedTree);
+            RemoveText(
+                oldText,
+                locationOfChange,
+                widthOfChange,
+                out incrementalTree,
+                out parsedTree
+            );
 
             // Verify that the errors from the fully parsed tree with the change and the incrementally parsed tree are the same
             CompareIncToFullParseErrors(incrementalTree, parsedTree);
@@ -2126,24 +2485,35 @@ namespace N");
         public void RemoveReturnTypeOnGenericMethodWithTypeParamConstraint()
         {
             SourceText oldText = SourceText.From(
-@"class Test
+                @"class Test
 {
     public static int M<U>() where U : IDisposable, new()
     {
     }
-}");
+}"
+            );
 
             SyntaxTree incrementalTree;
             SyntaxTree parsedTree;
             string textToRemove = "int";
-            int locationOfChange = oldText.ToString().IndexOf(textToRemove, StringComparison.Ordinal);
+            int locationOfChange = oldText.ToString()
+                .IndexOf(textToRemove, StringComparison.Ordinal);
             int widthOfChange = textToRemove.Length;
 
             // This function will remove the "int" text from oldText
-            RemoveText(oldText, locationOfChange, widthOfChange, out incrementalTree, out parsedTree);
+            RemoveText(
+                oldText,
+                locationOfChange,
+                widthOfChange,
+                out incrementalTree,
+                out parsedTree
+            );
 
             // Verify that the fully parsed tree is structurally equivalent to the incrementally parsed tree
-            CompareTreeEquivalence(parsedTree.GetCompilationUnitRoot(), incrementalTree.GetCompilationUnitRoot());
+            CompareTreeEquivalence(
+                parsedTree.GetCompilationUnitRoot(),
+                incrementalTree.GetCompilationUnitRoot()
+            );
         }
 
         [WorkItem(537084, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/537084")]
@@ -2151,7 +2521,7 @@ namespace N");
         public void RemoveNamespaceQualifierFromTypeInIfCondition()
         {
             SourceText oldText = SourceText.From(
-@"public class Driver 
+                @"public class Driver 
 {
 	public void AddValidations()
 	{
@@ -2160,20 +2530,31 @@ namespace N");
 
 		}
 	}
-}");
+}"
+            );
 
             SyntaxTree incrementalTree;
             SyntaxTree parsedTree;
             string textToRemove = "System";
-            int locationOfChange = oldText.ToString().IndexOf(textToRemove, StringComparison.Ordinal);
+            int locationOfChange = oldText.ToString()
+                .IndexOf(textToRemove, StringComparison.Ordinal);
             int widthOfChange = textToRemove.Length;
 
             // This function will remove the "System" text from oldText
             // The bug is that "Debug.Assert" was thrown by the Incremental Parser with this change
-            RemoveText(oldText, locationOfChange, widthOfChange, out incrementalTree, out parsedTree);
+            RemoveText(
+                oldText,
+                locationOfChange,
+                widthOfChange,
+                out incrementalTree,
+                out parsedTree
+            );
 
             // Verify that the fully parsed tree is structurally equivalent to the incrementally parsed tree
-            CompareTreeEquivalence(parsedTree.GetCompilationUnitRoot(), incrementalTree.GetCompilationUnitRoot());
+            CompareTreeEquivalence(
+                parsedTree.GetCompilationUnitRoot(),
+                incrementalTree.GetCompilationUnitRoot()
+            );
         }
 
         [WorkItem(537092, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/537092")]
@@ -2181,28 +2562,39 @@ namespace N");
         public void RemoveMethodNameWithLambdaExprInMethodBody()
         {
             SourceText oldText = SourceText.From(
-@"class C
+                @"class C
 {
     static int Main()
     {
         M((x, y) => new Pair<int,double>());
     }
-}");
+}"
+            );
 
             SyntaxTree incrementalTree;
             SyntaxTree parsedTree;
             string textToRemove = "Main";
-            int locationOfChange = oldText.ToString().IndexOf(textToRemove, StringComparison.Ordinal);
+            int locationOfChange = oldText.ToString()
+                .IndexOf(textToRemove, StringComparison.Ordinal);
             int widthOfChange = textToRemove.Length;
 
             // This function will remove the "Main" text from oldText
-            RemoveText(oldText, locationOfChange, widthOfChange, out incrementalTree, out parsedTree);
+            RemoveText(
+                oldText,
+                locationOfChange,
+                widthOfChange,
+                out incrementalTree,
+                out parsedTree
+            );
 
             // Verify that the errors from the fully parsed tree with the change and the incrementally parsed tree are the same
             CompareIncToFullParseErrors(incrementalTree, parsedTree);
 
             // Verify that the fully parsed tree is structurally equivalent to the incrementally parsed tree
-            CompareTreeEquivalence(parsedTree.GetCompilationUnitRoot(), incrementalTree.GetCompilationUnitRoot());
+            CompareTreeEquivalence(
+                parsedTree.GetCompilationUnitRoot(),
+                incrementalTree.GetCompilationUnitRoot()
+            );
         }
 
         [WorkItem(538978, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538978")]
@@ -2210,17 +2602,25 @@ namespace N");
         public void RemoveInitializerOnDeclStatementWithErrors()
         {
             SourceText oldText = SourceText.From(
-@"x   public static string S = null;
-");
+                @"x   public static string S = null;
+"
+            );
 
             SyntaxTree incrementalTree;
             SyntaxTree parsedTree;
             string textToRemove = "null";
-            int locationOfChange = oldText.ToString().IndexOf(textToRemove, StringComparison.Ordinal);
+            int locationOfChange = oldText.ToString()
+                .IndexOf(textToRemove, StringComparison.Ordinal);
             int widthOfChange = textToRemove.Length;
 
             // This function will remove the "null" text from oldText
-            RemoveText(oldText, locationOfChange, widthOfChange, out incrementalTree, out parsedTree);
+            RemoveText(
+                oldText,
+                locationOfChange,
+                widthOfChange,
+                out incrementalTree,
+                out parsedTree
+            );
 
             // Verify that the errors from the fully parsed tree with the change and the incrementally parsed tree are the same
             CompareIncToFullParseErrors(incrementalTree, parsedTree);
@@ -2231,7 +2631,7 @@ namespace N");
         public void CmntEndIfInMethodDecl()
         {
             SourceText oldText = SourceText.From(
-@"class Referenced
+                @"class Referenced
 {
 
 #if PUBLIC
@@ -2241,18 +2641,27 @@ namespace N");
 #endif
 			static RecordNotFound Method(){}
 }
-//<Code>");
+//<Code>"
+            );
 
-            string txtToCmnt = @"internal
+            string txtToCmnt =
+                @"internal
 #endif
 			static RecordNotFound Method(){}";
 
-            int locationOfChange = oldText.ToString().IndexOf(txtToCmnt, StringComparison.Ordinal), widthOfChange = txtToCmnt.Length;
+            int locationOfChange = oldText.ToString().IndexOf(txtToCmnt, StringComparison.Ordinal),
+                widthOfChange = txtToCmnt.Length;
             SyntaxTree incrementalTree;
             SyntaxTree parsedTree;
 
             // This function will comment out the txtToCmnt in oldText
-            CommentOutText(oldText, locationOfChange, widthOfChange, out incrementalTree, out parsedTree);
+            CommentOutText(
+                oldText,
+                locationOfChange,
+                widthOfChange,
+                out incrementalTree,
+                out parsedTree
+            );
 
             // Verify that the errors from the fully parsed tree with the change and the incrementally parsed tree are the same
             CompareIncToFullParseErrors(incrementalTree, parsedTree);
@@ -2263,7 +2672,7 @@ namespace N");
         public void CmntAnonTypeInQueryExpr()
         {
             SourceText oldText = SourceText.From(
-@"public class QueryExpressionTest
+                @"public class QueryExpressionTest
 {
     public static int Main()
     {
@@ -2271,16 +2680,24 @@ namespace N");
         var query7 = from a in b join delegate in c on d equals delegate select new { e, delegate };
         var query13 = from delegate in f join g in h on delegate equals i select delegate;
     }
-}");
+}"
+            );
 
             string txtToCmnt = @"select new { e, delegate }";
 
-            int locationOfChange = oldText.ToString().IndexOf(txtToCmnt, StringComparison.Ordinal), widthOfChange = txtToCmnt.Length;
+            int locationOfChange = oldText.ToString().IndexOf(txtToCmnt, StringComparison.Ordinal),
+                widthOfChange = txtToCmnt.Length;
             SyntaxTree incrementalTree;
             SyntaxTree parsedTree;
 
             // This function will comment out the txtToCmnt in oldText
-            CommentOutText(oldText, locationOfChange, widthOfChange, out incrementalTree, out parsedTree);
+            CommentOutText(
+                oldText,
+                locationOfChange,
+                widthOfChange,
+                out incrementalTree,
+                out parsedTree
+            );
 
             // Verify that the errors from the fully parsed tree with the change and the incrementally parsed tree are the same
             CompareIncToFullParseErrors(incrementalTree, parsedTree);
@@ -2291,29 +2708,41 @@ namespace N");
         public void CmntParamsInExtProperty()
         {
             SourceText oldText = SourceText.From(
-@"public static class Extensions
+                @"public static class Extensions
 {
     public static int Goo2(this int x ) { set { var1 = value; } }
-}");
+}"
+            );
 
             string txtToCmnt = @"(this int x )";
 
-            int locationOfChange = oldText.ToString().IndexOf(txtToCmnt, StringComparison.Ordinal), widthOfChange = txtToCmnt.Length;
+            int locationOfChange = oldText.ToString().IndexOf(txtToCmnt, StringComparison.Ordinal),
+                widthOfChange = txtToCmnt.Length;
             SyntaxTree incrementalTree;
             SyntaxTree parsedTree;
 
             // This function will comment out the txtToCmnt in oldText
-            CommentOutText(oldText, locationOfChange, widthOfChange, out incrementalTree, out parsedTree);
+            CommentOutText(
+                oldText,
+                locationOfChange,
+                widthOfChange,
+                out incrementalTree,
+                out parsedTree
+            );
 
             // Verify that the fully parsed tree is structurally equivalent to the incrementally parsed tree
-            CompareTreeEquivalence(parsedTree.GetCompilationUnitRoot(), incrementalTree.GetCompilationUnitRoot());
+            CompareTreeEquivalence(
+                parsedTree.GetCompilationUnitRoot(),
+                incrementalTree.GetCompilationUnitRoot()
+            );
         }
 
         [WorkItem(537533, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/537533")]
         [Fact]
         public void MultiCommentInserts()
         {
-            var str = @"using System;
+            var str =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -2332,24 +2761,36 @@ class Program
             var tree = SyntaxFactory.ParseSyntaxTree(text);
 
             var text2 = text.WithChanges(
-                new TextChange(new TextSpan(str.IndexOf(" abc", StringComparison.Ordinal), 0), "//"),
-                new TextChange(new TextSpan(str.IndexOf(" 123", StringComparison.Ordinal), 0), "//"),
-                new TextChange(new TextSpan(str.IndexOf(" def", StringComparison.Ordinal), 0), "//"));
+                new TextChange(
+                    new TextSpan(str.IndexOf(" abc", StringComparison.Ordinal), 0),
+                    "//"
+                ),
+                new TextChange(
+                    new TextSpan(str.IndexOf(" 123", StringComparison.Ordinal), 0),
+                    "//"
+                ),
+                new TextChange(new TextSpan(str.IndexOf(" def", StringComparison.Ordinal), 0), "//")
+            );
 
             var parsedTree = SyntaxFactory.ParseSyntaxTree(text2);
             var reparsedTree = tree.WithChangedText(text2);
 
-            CompareTreeEquivalence(parsedTree.GetCompilationUnitRoot(), reparsedTree.GetCompilationUnitRoot());
+            CompareTreeEquivalence(
+                parsedTree.GetCompilationUnitRoot(),
+                reparsedTree.GetCompilationUnitRoot()
+            );
         }
 
         [WorkItem(542236, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542236")]
         [Fact]
         public void InsertOpenBraceBeforeCodes()
         {
-            SourceText oldText = SourceText.From(@"
+            SourceText oldText = SourceText.From(
+                @"
 		this.I = i;
 	};
-}");
+}"
+            );
             var startTree = SyntaxFactory.ParseSyntaxTree(oldText);
 
             // first make certain this text round trips
@@ -2364,27 +2805,38 @@ class Program
         [Fact]
         public void InsertExpressionStatementWithoutSemicolonBefore()
         {
-            SourceText oldText = SourceText.From(@"System.Console.WriteLine(true)
-");
+            SourceText oldText = SourceText.From(
+                @"System.Console.WriteLine(true)
+"
+            );
             var startTree = SyntaxFactory.ParseSyntaxTree(oldText, options: TestOptions.Script);
 
             startTree.GetDiagnostics().Verify();
 
-            var newText = oldText.WithChanges(new TextChange(new TextSpan(0, 0), @"System.Console.WriteLine(false)
-"));
+            var newText = oldText.WithChanges(
+                new TextChange(
+                    new TextSpan(0, 0),
+                    @"System.Console.WriteLine(false)
+"
+                )
+            );
 
-            AssertEx.AreEqual(@"System.Console.WriteLine(false)
+            AssertEx.AreEqual(
+                @"System.Console.WriteLine(false)
 System.Console.WriteLine(true)
 ",
-newText.ToString());
+                newText.ToString()
+            );
 
             var reparsedTree = startTree.WithChangedText(newText);
             var parsedTree = SyntaxFactory.ParseSyntaxTree(newText, options: TestOptions.Script);
 
-            parsedTree.GetDiagnostics().Verify(
-                // (1,32): error CS1002: ; expected
-                // System.Console.WriteLine(false)
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 32));
+            parsedTree.GetDiagnostics()
+                .Verify(
+                    // (1,32): error CS1002: ; expected
+                    // System.Console.WriteLine(false)
+                    Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 32)
+                );
 
             CompareIncToFullParseErrors(reparsedTree, parsedTree);
         }
@@ -2393,8 +2845,10 @@ newText.ToString());
         [Fact]
         public void InsertExpressionStatementWithoutSemicolonAfter()
         {
-            SourceText oldText = SourceText.From(@"System.Console.WriteLine(true)
-");
+            SourceText oldText = SourceText.From(
+                @"System.Console.WriteLine(true)
+"
+            );
             var startTree = SyntaxFactory.ParseSyntaxTree(oldText, options: TestOptions.Script);
 
             startTree.GetDiagnostics().Verify();
@@ -2402,19 +2856,25 @@ newText.ToString());
             var newText = oldText.WithInsertAt(
                 oldText.Length,
                 @"System.Console.WriteLine(false)
-");
+"
+            );
 
-            AssertEx.Equal(@"System.Console.WriteLine(true)
+            AssertEx.Equal(
+                @"System.Console.WriteLine(true)
 System.Console.WriteLine(false)
-", newText.ToString());
+",
+                newText.ToString()
+            );
 
             var reparsedTree = startTree.WithChangedText(newText);
 
             var parsedTree = SyntaxFactory.ParseSyntaxTree(newText, options: TestOptions.Script);
-            parsedTree.GetDiagnostics().Verify(
-                // (1,31): error CS1002: ; expected
-                // System.Console.WriteLine(true)
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 31));
+            parsedTree.GetDiagnostics()
+                .Verify(
+                    // (1,31): error CS1002: ; expected
+                    // System.Console.WriteLine(true)
+                    Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 31)
+                );
 
             CompareIncToFullParseErrors(reparsedTree, parsedTree);
         }
@@ -2423,26 +2883,38 @@ System.Console.WriteLine(false)
         [Fact]
         public void MakeEmbeddedExpressionStatementWithoutSemicolon()
         {
-            SourceText oldText = SourceText.From(@"System.Console.WriteLine(true)
-");
+            SourceText oldText = SourceText.From(
+                @"System.Console.WriteLine(true)
+"
+            );
             var startTree = SyntaxFactory.ParseSyntaxTree(oldText, options: TestOptions.Script);
 
             startTree.GetDiagnostics().Verify();
 
-            var newText = oldText.WithChanges(new TextChange(new TextSpan(0, 0), @"if (false)
-"));
+            var newText = oldText.WithChanges(
+                new TextChange(
+                    new TextSpan(0, 0),
+                    @"if (false)
+"
+                )
+            );
 
-            AssertEx.Equal(@"if (false)
+            AssertEx.Equal(
+                @"if (false)
 System.Console.WriteLine(true)
-", newText.ToString());
+",
+                newText.ToString()
+            );
 
             var reparsedTree = startTree.WithChangedText(newText);
             var parsedTree = SyntaxFactory.ParseSyntaxTree(newText, options: TestOptions.Script);
 
-            parsedTree.GetDiagnostics().Verify(
-                // (2,31): error CS1002: ; expected
-                // System.Console.WriteLine(true)
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(2, 31));
+            parsedTree.GetDiagnostics()
+                .Verify(
+                    // (2,31): error CS1002: ; expected
+                    // System.Console.WriteLine(true)
+                    Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(2, 31)
+                );
 
             CompareIncToFullParseErrors(reparsedTree, parsedTree);
         }
@@ -2452,7 +2924,7 @@ System.Console.WriteLine(true)
         public void AppendDisabledText()
         {
             var text =
-@"class SmallDictionary
+                @"class SmallDictionary
 {
     public void Add(int key, int value)
     {
@@ -2464,13 +2936,15 @@ System.Console.WriteLine(true)
 
             Assert.Equal(
                 parsedTree.GetCompilationUnitRoot().EndOfFileToken.FullSpan,
-                changedTree.GetCompilationUnitRoot().EndOfFileToken.FullSpan);
+                changedTree.GetCompilationUnitRoot().EndOfFileToken.FullSpan
+            );
         }
 
         [Fact, WorkItem(531614, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/531614")]
         public void IncrementalParseStopAtEscapeBackSlash()
         {
-            var text1 = @"using System;
+            var text1 =
+                @"using System;
 
 class Program
 {
@@ -2480,7 +2954,9 @@ class Program
 
             var text2 = @"        Console.WriteLine(""\'\0\a\b\";
 
-            var comp = CSharpTestBase.CreateCompilation(SyntaxFactory.ParseSyntaxTree(String.Empty));
+            var comp = CSharpTestBase.CreateCompilation(
+                SyntaxFactory.ParseSyntaxTree(String.Empty)
+            );
 
             var oldTree = comp.SyntaxTrees.First();
             var oldIText = oldTree.GetText();
@@ -2490,12 +2966,15 @@ class Program
             var newIText = oldIText.WithChanges(change);
             var newTree = oldTree.WithChangedText(newIText);
 
-            var fullTree = SyntaxFactory.ParseSyntaxTree(newIText.ToString(), options: newTree.Options);
+            var fullTree = SyntaxFactory.ParseSyntaxTree(
+                newIText.ToString(),
+                options: newTree.Options
+            );
             var fullText = fullTree.GetCompilationUnitRoot().ToFullString();
             var incText = newTree.GetCompilationUnitRoot().ToFullString();
             Assert.Equal(fullText.Length, incText.Length);
             Assert.Equal(fullText, incText);
-            // 
+            //
             oldTree = newTree;
             oldIText = oldTree.GetText();
             span = new TextSpan(oldIText.Length, 0);
@@ -2514,7 +2993,8 @@ class Program
         [Fact, WorkItem(552741, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/552741")]
         public void IncrementalParseTopDownCommentOutLines()
         {
-            var text = @"// <Title> Query Expression syntax </Title>
+            var text =
+                @"// <Title> Query Expression syntax </Title>
 // <Description>
 // from, join, on, equals, into, let, orderby, ascending, descending, group, by
 // @-with contextual keywords parseable as a type or identifier in a query expression
@@ -2579,14 +3059,18 @@ public class QueryExpressionTest
                 int incCount = currTree.GetCompilationUnitRoot().ChildNodesAndTokens().Count;
                 int fullCount = fullTree.GetCompilationUnitRoot().ChildNodesAndTokens().Count;
 
-                WalkTreeAndVerify(currTree.GetCompilationUnitRoot(), fullTree.GetCompilationUnitRoot());
+                WalkTreeAndVerify(
+                    currTree.GetCompilationUnitRoot(),
+                    fullTree.GetCompilationUnitRoot()
+                );
             }
         }
 
         [Fact, WorkItem(552741, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/552741")]
         public void IncrementalParseStatementAfterQuery()
         {
-            var text = @"
+            var text =
+                @"
 using System.Linq;
  
 class equals
@@ -2618,7 +3102,8 @@ class equals
         [Fact, WorkItem(529260, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529260")]
         public void DoNotReuseAnnotatedNodes()
         {
-            var text = @"
+            var text =
+                @"
 class C { }
 class D { }
 ";
@@ -2639,26 +3124,35 @@ class D { }
             {
                 var tempTree = SyntaxFactory.ParseSyntaxTree(text);
                 var tempRoot = tempTree.GetRoot();
-                var tempToken = tempRoot.DescendantTokens().First(t => t.Kind() == SyntaxKind.IdentifierToken);
-                var oldRoot = tempRoot.ReplaceToken(tempToken, tempToken.WithAdditionalAnnotations(new SyntaxAnnotation()));
+                var tempToken = tempRoot.DescendantTokens()
+                    .First(t => t.Kind() == SyntaxKind.IdentifierToken);
+                var oldRoot = tempRoot.ReplaceToken(
+                    tempToken,
+                    tempToken.WithAdditionalAnnotations(new SyntaxAnnotation())
+                );
                 Assert.True(oldRoot.ContainsAnnotations, "Should contain annotations.");
                 Assert.Equal(text, oldRoot.ToFullString());
 
-                var oldTree = SyntaxFactory.SyntaxTree(oldRoot, options: tempTree.Options, path: tempTree.FilePath);
+                var oldTree = SyntaxFactory.SyntaxTree(
+                    oldRoot,
+                    options: tempTree.Options,
+                    path: tempTree.FilePath
+                );
                 var newTree = oldTree.WithInsertAt(text.Length, " ");
-
 
                 var oldClassC = extractGreenClassC(oldTree);
                 var newClassC = extractGreenClassC(newTree);
 
                 Assert.True(oldClassC.ContainsAnnotations, "Should contain annotations");
-                Assert.False(newClassC.ContainsAnnotations, "Annotations should have been removed.");
+                Assert.False(
+                    newClassC.ContainsAnnotations,
+                    "Annotations should have been removed."
+                );
 
                 // Class declaration is not reused...
                 Assert.NotSame(oldClassC, newClassC);
                 // ...even though the text is the same.
                 Assert.Equal(oldClassC.ToFullString(), newClassC.ToFullString());
-
 
                 var oldToken = ((Syntax.InternalSyntax.ClassDeclarationSyntax)oldClassC).Identifier;
                 var newToken = ((Syntax.InternalSyntax.ClassDeclarationSyntax)newClassC).Identifier;
@@ -2677,11 +3171,7 @@ class D { }
         [WorkItem(658496, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/658496")]
         public void DontReuseLambdaParameterAsMethodParameter()
         {
-            var items = new string[]
-            {
-                "a b.c*/ d => {e(f =>",
-                "/*",
-            };
+            var items = new string[] { "a b.c*/ d => {e(f =>", "/*", };
 
             var oldText = SourceText.From(items[0]);
             var oldTree = SyntaxFactory.ParseSyntaxTree(oldText); // f is a simple lambda parameter
@@ -2694,11 +3184,11 @@ class D { }
 
             Assert.Equal(
                 fullTree.GetDiagnostics().Select(d => d.ToString()),
-                incrTree.GetDiagnostics().Select(d => d.ToString()));
+                incrTree.GetDiagnostics().Select(d => d.ToString())
+            );
 
             WalkTreeAndVerify(incrTree.GetRoot(), fullTree.GetRoot());
         }
-
 
         [Fact]
         public void TestRescanInterpolatedString()
@@ -2715,7 +3205,8 @@ class D { }
         [Fact]
         public void Goo()
         {
-            var oldText = SourceText.From(@"
+            var oldText = SourceText.From(
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -2740,8 +3231,10 @@ class G: Program
             throw new NotImplementedException();
         }
     }
-}");
-            var newText = SourceText.From(@"
+}"
+            );
+            var newText = SourceText.From(
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -2767,10 +3260,14 @@ class G: Program
         }
     }
 }
-");
+"
+            );
             var oldTree = SyntaxFactory.ParseSyntaxTree(oldText);
             var newTree = oldTree.WithChangedText(newText);
-            WalkTreeAndVerify(newTree.GetCompilationUnitRoot(), SyntaxFactory.ParseSyntaxTree(newText).GetCompilationUnitRoot());
+            WalkTreeAndVerify(
+                newTree.GetCompilationUnitRoot(),
+                SyntaxFactory.ParseSyntaxTree(newText).GetCompilationUnitRoot()
+            );
         }
 
         [WorkItem(23272, "https://github.com/dotnet/roslyn/issues/23272")]
@@ -2778,7 +3275,7 @@ class G: Program
         public void AddAccessibilityToNullableArray()
         {
             var source =
-@"class A { }
+                @"class A { }
 class B
 {
     A[]? F;
@@ -2797,7 +3294,8 @@ class B
         [WorkItem(37663, "https://github.com/dotnet/roslyn/issues/37663")]
         public void AssemblyAttributeBeforeNamespace()
         {
-            var src = @"
+            var src =
+                @"
 using System;
 using System.Linq;
 
@@ -2819,7 +3317,7 @@ namespace N
         public void AddBracketInUsingDirective()
         {
             var source =
-@"using System;
+                @"using System;
 namespace NS
 {
     class A { }
@@ -2840,7 +3338,7 @@ namespace NS
         public void AddAttributeAfterUsingDirective()
         {
             var source =
-@"using System;
+                @"using System;
 namespace NS
 {
     class A { }
@@ -2861,7 +3359,7 @@ namespace NS
         public void AddTrailingModifierInUsingDirective()
         {
             var source =
-@"using System;
+                @"using System;
 namespace NS
 {
     class A { }
@@ -2882,7 +3380,7 @@ namespace NS
         public void AddTrailingModifierInUsingDirective_2()
         {
             var source =
-@"using System;publi
+                @"using System;publi
 namespace NS
 {
     class A { }
@@ -2902,7 +3400,8 @@ namespace NS
         [Fact]
         public void Statement_EditAttributeList_01()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void M()
@@ -2926,7 +3425,8 @@ class C
         [Fact]
         public void Statement_EditAttributeList_02()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void M()
@@ -2950,7 +3450,8 @@ class C
         [Fact]
         public void Statement_AddAttributeList()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void M()
@@ -2974,7 +3475,8 @@ class C
         [Fact]
         public void EditStatementWithAttributes_01()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void M()
@@ -2998,7 +3500,8 @@ class C
         [Fact]
         public void EditStatementWithAttributes_02()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void M()
@@ -3022,7 +3525,8 @@ class C
         [Fact]
         public void EditGlobalStatementWithAttributes_01()
         {
-            var source = @"
+            var source =
+                @"
 [Attr]
 x.y();
 ";
@@ -3040,7 +3544,8 @@ x.y();
         [Fact]
         public void EditGlobalStatementWithAttributes_02()
         {
-            var source = @"
+            var source =
+                @"
 [Attr]
 if (b) { }
 ";
@@ -3058,7 +3563,8 @@ if (b) { }
         [Fact]
         public void EditGlobalStatementWithAttributes_03()
         {
-            var source = @"
+            var source =
+                @"
 [Attr]
 if (b) { }
 ";
@@ -3134,21 +3640,37 @@ if (b) { }
             }
         }
 
-        private static void CommentOutText(SourceText oldText, int locationOfChange, int widthOfChange, out SyntaxTree incrementalTree, out SyntaxTree parsedTree)
+        private static void CommentOutText(
+            SourceText oldText,
+            int locationOfChange,
+            int widthOfChange,
+            out SyntaxTree incrementalTree,
+            out SyntaxTree parsedTree
+        )
         {
             var newText = oldText.WithChanges(
-                new TextChange[] {
+                new TextChange[]
+                {
                     new TextChange(new TextSpan(locationOfChange, 0), "/*"),
                     new TextChange(new TextSpan(locationOfChange + widthOfChange, 0), "*/")
-                });
+                }
+            );
             var tree = SyntaxFactory.ParseSyntaxTree(oldText);
             incrementalTree = tree.WithChangedText(newText);
             parsedTree = SyntaxFactory.ParseSyntaxTree(newText);
         }
 
-        private static void RemoveText(SourceText oldText, int locationOfChange, int widthOfChange, out SyntaxTree incrementalTree, out SyntaxTree parsedTree)
+        private static void RemoveText(
+            SourceText oldText,
+            int locationOfChange,
+            int widthOfChange,
+            out SyntaxTree incrementalTree,
+            out SyntaxTree parsedTree
+        )
         {
-            var newText = oldText.WithChanges(new TextChange(new TextSpan(locationOfChange, widthOfChange), ""));
+            var newText = oldText.WithChanges(
+                new TextChange(new TextSpan(locationOfChange, widthOfChange), "")
+            );
             var tree = SyntaxFactory.ParseSyntaxTree(oldText);
             incrementalTree = tree.WithChangedText(newText);
             parsedTree = SyntaxFactory.ParseSyntaxTree(newText);
@@ -3168,18 +3690,30 @@ if (b) { }
             ParentChecker.CheckParents(incrementalTree.GetCompilationUnitRoot(), incrementalTree);
         }
 
-        private static void CharByCharIncrementalParse(SourceText oldText, char newChar, out SyntaxTree incrementalTree, out SyntaxTree parsedTree)
+        private static void CharByCharIncrementalParse(
+            SourceText oldText,
+            char newChar,
+            out SyntaxTree incrementalTree,
+            out SyntaxTree parsedTree
+        )
         {
             var startTree = SyntaxFactory.ParseSyntaxTree(oldText);
 
             // first make certain this text round trips
             Assert.Equal(oldText.ToString(), startTree.GetCompilationUnitRoot().ToFullString());
-            var newText = oldText.WithChanges(new TextChange(new TextSpan(oldText.Length, 0), newChar.ToString()));
+            var newText = oldText.WithChanges(
+                new TextChange(new TextSpan(oldText.Length, 0), newChar.ToString())
+            );
             incrementalTree = startTree.WithChangedText(newText);
             parsedTree = SyntaxFactory.ParseSyntaxTree(newText);
         }
 
-        private static void TokenByTokenBottomUp(SourceText oldText, string token, out SyntaxTree incrementalTree, out SyntaxTree parsedTree)
+        private static void TokenByTokenBottomUp(
+            SourceText oldText,
+            string token,
+            out SyntaxTree incrementalTree,
+            out SyntaxTree parsedTree
+        )
         {
             var startTree = SyntaxFactory.ParseSyntaxTree(oldText);
             SourceText newText = SourceText.From(token + oldText.ToString());
@@ -3187,18 +3721,26 @@ if (b) { }
             parsedTree = SyntaxFactory.ParseSyntaxTree(newText);
         }
 
-        private static void CompareTreeEquivalence(SyntaxNodeOrToken parsedTreeNode, SyntaxNodeOrToken incrementalTreeNode)
+        private static void CompareTreeEquivalence(
+            SyntaxNodeOrToken parsedTreeNode,
+            SyntaxNodeOrToken incrementalTreeNode
+        )
         {
             Assert.Equal(parsedTreeNode.Kind(), incrementalTreeNode.Kind());
 
-            Assert.Equal(parsedTreeNode.ChildNodesAndTokens().Count, incrementalTreeNode.ChildNodesAndTokens().Count);
+            Assert.Equal(
+                parsedTreeNode.ChildNodesAndTokens().Count,
+                incrementalTreeNode.ChildNodesAndTokens().Count
+            );
 
             for (int i = 0; i < parsedTreeNode.ChildNodesAndTokens().Count; i++)
             {
-                CompareTreeEquivalence(parsedTreeNode.ChildNodesAndTokens()[i], incrementalTreeNode.ChildNodesAndTokens()[i]);
+                CompareTreeEquivalence(
+                    parsedTreeNode.ChildNodesAndTokens()[i],
+                    incrementalTreeNode.ChildNodesAndTokens()[i]
+                );
             }
         }
-
         #endregion
     }
 }

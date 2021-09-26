@@ -27,8 +27,7 @@ namespace System.Runtime.Intrinsics
     [DebuggerDisplay("{DisplayString,nq}")]
     [DebuggerTypeProxy(typeof(Vector128DebugView<>))]
     [StructLayout(LayoutKind.Sequential, Size = Vector128.Size)]
-    public readonly struct Vector128<T> : IEquatable<Vector128<T>>
-        where T : struct
+    public readonly struct Vector128<T> : IEquatable<Vector128<T>> where T : struct
     {
         // These fields exist to ensure the alignment is 8, rather than 1.
         // This also allows the debug view to work https://github.com/dotnet/runtime/issues/9495)
@@ -89,16 +88,17 @@ namespace System.Runtime.Intrinsics
         internal static bool IsSupported
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => (typeof(T) == typeof(byte)) ||
-                   (typeof(T) == typeof(sbyte)) ||
-                   (typeof(T) == typeof(short)) ||
-                   (typeof(T) == typeof(ushort)) ||
-                   (typeof(T) == typeof(int)) ||
-                   (typeof(T) == typeof(uint)) ||
-                   (typeof(T) == typeof(long)) ||
-                   (typeof(T) == typeof(ulong)) ||
-                   (typeof(T) == typeof(float)) ||
-                   (typeof(T) == typeof(double));
+            get =>
+                (typeof(T) == typeof(byte))
+                || (typeof(T) == typeof(sbyte))
+                || (typeof(T) == typeof(short))
+                || (typeof(T) == typeof(ushort))
+                || (typeof(T) == typeof(int))
+                || (typeof(T) == typeof(uint))
+                || (typeof(T) == typeof(long))
+                || (typeof(T) == typeof(ulong))
+                || (typeof(T) == typeof(float))
+                || (typeof(T) == typeof(double));
         }
 
         /// <summary>Determines whether the specified <see cref="Vector128{T}" /> is equal to the current instance.</summary>

@@ -28,7 +28,10 @@ namespace Microsoft.CodeAnalysis.Editor.FindUsages
     internal interface IDefinitionsAndReferencesFactory : IWorkspaceService
     {
         DefinitionItem? GetThirdPartyDefinitionItem(
-            Solution solution, DefinitionItem definitionItem, CancellationToken cancellationToken);
+            Solution solution,
+            DefinitionItem definitionItem,
+            CancellationToken cancellationToken
+        );
     }
 
     [ExportWorkspaceService(typeof(IDefinitionsAndReferencesFactory)), Shared]
@@ -36,16 +39,17 @@ namespace Microsoft.CodeAnalysis.Editor.FindUsages
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public DefaultDefinitionsAndReferencesFactory()
-        {
-        }
+        public DefaultDefinitionsAndReferencesFactory() { }
 
         /// <summary>
         /// Provides an extension point that allows for other workspace layers to add additional
         /// results to the results found by the FindReferences engine.
         /// </summary>
         public virtual DefinitionItem? GetThirdPartyDefinitionItem(
-            Solution solution, DefinitionItem definitionItem, CancellationToken cancellationToken)
+            Solution solution,
+            DefinitionItem definitionItem,
+            CancellationToken cancellationToken
+        )
         {
             return null;
         }
@@ -53,21 +57,29 @@ namespace Microsoft.CodeAnalysis.Editor.FindUsages
 
     internal static class DefinitionItemExtensions
     {
-        private static readonly SymbolDisplayFormat s_namePartsFormat = new(
-            memberOptions: SymbolDisplayMemberOptions.IncludeContainingType);
+        private static readonly SymbolDisplayFormat s_namePartsFormat =
+            new(memberOptions: SymbolDisplayMemberOptions.IncludeContainingType);
 
         public static DefinitionItem ToNonClassifiedDefinitionItem(
             this ISymbol definition,
             Solution solution,
-            bool includeHiddenLocations)
+            bool includeHiddenLocations
+        )
         {
             // Because we're passing in 'false' for 'includeClassifiedSpans', this won't ever have
             // to actually do async work.  This is because the only asynchrony is when we are trying
-            // to compute the classified spans for the locations of the definition.  So it's totally 
+            // to compute the classified spans for the locations of the definition.  So it's totally
             // fine to pass in CancellationToken.None and block on the result.
             return ToDefinitionItemAsync(
-                definition, solution, isPrimary: false, includeHiddenLocations, includeClassifiedSpans: false,
-                options: FindReferencesSearchOptions.Default, cancellationToken: CancellationToken.None).WaitAndGetResult_CanCallOnBackground(CancellationToken.None);
+                    definition,
+                    solution,
+                    isPrimary: false,
+                    includeHiddenLocations,
+                    includeClassifiedSpans: false,
+                    options: FindReferencesSearchOptions.Default,
+                    cancellationToken: CancellationToken.None
+                )
+                .WaitAndGetResult_CanCallOnBackground(CancellationToken.None);
         }
 
         public static Task<DefinitionItem> ToClassifiedDefinitionItemAsync(
@@ -76,26 +88,63 @@ namespace Microsoft.CodeAnalysis.Editor.FindUsages
             bool isPrimary,
             bool includeHiddenLocations,
             FindReferencesSearchOptions options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             return ToDefinitionItemAsync(
-                definition, solution, isPrimary,
-                includeHiddenLocations, includeClassifiedSpans: true,
-                options, cancellationToken);
+                definition,
+                solution,
+                isPrimary,
+                includeHiddenLocations,
+                includeClassifiedSpans: true,
+                options,
+                cancellationToken
+            );
         }
 
         public static Task<DefinitionItem> ToClassifiedDefinitionItemAsync(
-            this SymbolGroup group, Solution solution, bool isPrimary, bool includeHiddenLocations, FindReferencesSearchOptions options, CancellationToken cancellationToken)
+            this SymbolGroup group,
+            Solution solution,
+            bool isPrimary,
+            bool includeHiddenLocations,
+            FindReferencesSearchOptions options,
+            CancellationToken cancellationToken
+        )
         {
             // Make a single definition item that knows about all the locations of all the symbols in the group.
             var allLocations = group.Symbols.SelectMany(s => s.Locations).ToImmutableArray();
-            return ToDefinitionItemAsync(group.Symbols.First(), allLocations, solution, isPrimary, includeHiddenLocations, includeClassifiedSpans: true, options, cancellationToken);
+            return ToDefinitionItemAsync(
+                group.Symbols.First(),
+                allLocations,
+                solution,
+                isPrimary,
+                includeHiddenLocations,
+                includeClassifiedSpans: true,
+                options,
+                cancellationToken
+            );
         }
 
         private static Task<DefinitionItem> ToDefinitionItemAsync(
-            ISymbol definition, Solution solution, bool isPrimary, bool includeHiddenLocations, bool includeClassifiedSpans, FindReferencesSearchOptions options, CancellationToken cancellationToken)
+            ISymbol definition,
+            Solution solution,
+            bool isPrimary,
+            bool includeHiddenLocations,
+            bool includeClassifiedSpans,
+            FindReferencesSearchOptions options,
+            CancellationToken cancellationToken
+        )
         {
-            return ToDefinitionItemAsync(definition, definition.Locations, solution, isPrimary, includeHiddenLocations, includeClassifiedSpans, options, cancellationToken);
+            return ToDefinitionItemAsync(
+                definition,
+                definition.Locations,
+                solution,
+                isPrimary,
+                includeHiddenLocations,
+                includeClassifiedSpans,
+                options,
+                cancellationToken
+            );
         }
 
         private static async Task<DefinitionItem> ToDefinitionItemAsync(
@@ -106,11 +155,12 @@ namespace Microsoft.CodeAnalysis.Editor.FindUsages
             bool includeHiddenLocations,
             bool includeClassifiedSpans,
             FindReferencesSearchOptions options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            // Ensure we're working with the original definition for the symbol. I.e. When we're 
+            // Ensure we're working with the original definition for the symbol. I.e. When we're
             // creating definition items, we want to create them for types like Dictionary<TKey,TValue>
-            // not some random instantiation of that type.  
+            // not some random instantiation of that type.
             //
             // This ensures that the type will both display properly to the user, as well as ensuring
             // that we can accurately resolve the type later on when we try to navigate to it.
@@ -126,12 +176,14 @@ namespace Microsoft.CodeAnalysis.Editor.FindUsages
 
             var tags = GlyphTags.GetTags(definition.GetGlyph());
             var displayIfNoReferences = definition.ShouldShowWithNoReferenceLocations(
-                options, showMetadataSymbolsWithoutReferences: false);
+                options,
+                showMetadataSymbolsWithoutReferences: false
+            );
 
             var properties = GetProperties(definition, isPrimary);
 
             // If it's a namespace, don't create any normal location.  Namespaces
-            // come from many different sources, but we'll only show a single 
+            // come from many different sources, but we'll only show a single
             // root definition node for it.  That node won't be navigable.
             using var sourceLocations = TemporaryArray<DocumentSpan>.Empty;
             if (definition.Kind != SymbolKind.Namespace)
@@ -141,13 +193,18 @@ namespace Microsoft.CodeAnalysis.Editor.FindUsages
                     if (location.IsInMetadata)
                     {
                         return DefinitionItem.CreateMetadataDefinition(
-                            tags, displayParts, nameDisplayParts, solution,
-                            definition, properties, displayIfNoReferences);
+                            tags,
+                            displayParts,
+                            nameDisplayParts,
+                            solution,
+                            definition,
+                            properties,
+                            displayIfNoReferences
+                        );
                     }
                     else if (location.IsInSource)
                     {
-                        if (!location.IsVisibleSourceLocation() &&
-                            !includeHiddenLocations)
+                        if (!location.IsVisibleSourceLocation() && !includeHiddenLocations)
                         {
                             continue;
                         }
@@ -158,7 +215,11 @@ namespace Microsoft.CodeAnalysis.Editor.FindUsages
                             var documentLocation = !includeClassifiedSpans
                                 ? new DocumentSpan(document, location.SourceSpan)
                                 : await ClassifiedSpansAndHighlightSpanFactory.GetClassifiedDocumentSpanAsync(
-                                    document, location.SourceSpan, cancellationToken).ConfigureAwait(false);
+                                          document,
+                                          location.SourceSpan,
+                                          cancellationToken
+                                      )
+                                      .ConfigureAwait(false);
 
                             sourceLocations.Add(documentLocation);
                         }
@@ -171,19 +232,33 @@ namespace Microsoft.CodeAnalysis.Editor.FindUsages
                 // If we got no definition locations, then create a sentinel one
                 // that we can display but which will not allow navigation.
                 return DefinitionItem.CreateNonNavigableItem(
-                    tags, displayParts,
+                    tags,
+                    displayParts,
                     DefinitionItem.GetOriginationParts(definition),
-                    properties, displayIfNoReferences);
+                    properties,
+                    displayIfNoReferences
+                );
             }
 
-            var displayableProperties = AbstractReferenceFinder.GetAdditionalFindUsagesProperties(definition);
+            var displayableProperties = AbstractReferenceFinder.GetAdditionalFindUsagesProperties(
+                definition
+            );
 
             return DefinitionItem.Create(
-                tags, displayParts, sourceLocations.ToImmutableAndClear(),
-                nameDisplayParts, properties, displayableProperties, displayIfNoReferences);
+                tags,
+                displayParts,
+                sourceLocations.ToImmutableAndClear(),
+                nameDisplayParts,
+                properties,
+                displayableProperties,
+                displayIfNoReferences
+            );
         }
 
-        private static ImmutableDictionary<string, string> GetProperties(ISymbol definition, bool isPrimary)
+        private static ImmutableDictionary<string, string> GetProperties(
+            ISymbol definition,
+            bool isPrimary
+        )
         {
             var properties = ImmutableDictionary<string, string>.Empty;
 
@@ -216,13 +291,13 @@ namespace Microsoft.CodeAnalysis.Editor.FindUsages
             this ReferenceLocation referenceLocation,
             DefinitionItem definitionItem,
             bool includeHiddenLocations,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var location = referenceLocation.Location;
 
             Debug.Assert(location.IsInSource);
-            if (!location.IsVisibleSourceLocation() &&
-                !includeHiddenLocations)
+            if (!location.IsVisibleSourceLocation() && !includeHiddenLocations)
             {
                 return null;
             }
@@ -230,10 +305,20 @@ namespace Microsoft.CodeAnalysis.Editor.FindUsages
             var document = referenceLocation.Document;
             var sourceSpan = location.SourceSpan;
 
-            var documentSpan = await ClassifiedSpansAndHighlightSpanFactory.GetClassifiedDocumentSpanAsync(
-                document, sourceSpan, cancellationToken).ConfigureAwait(false);
+            var documentSpan =
+                await ClassifiedSpansAndHighlightSpanFactory.GetClassifiedDocumentSpanAsync(
+                        document,
+                        sourceSpan,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
-            return new SourceReferenceItem(definitionItem, documentSpan, referenceLocation.SymbolUsageInfo, referenceLocation.AdditionalProperties);
+            return new SourceReferenceItem(
+                definitionItem,
+                documentSpan,
+                referenceLocation.SymbolUsageInfo,
+                referenceLocation.AdditionalProperties
+            );
         }
     }
 }

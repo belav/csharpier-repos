@@ -53,21 +53,23 @@ namespace System.Numerics
                     return length;
 
                 // Let q1 = v/2^(k-1) * mu
-                int l1 = DivMul(value, length, _mu, _muLength,
-                                _q1, _modulus.Length - 1);
+                int l1 = DivMul(value, length, _mu, _muLength, _q1, _modulus.Length - 1);
 
                 // Let q2 = q1/2^(k+1) * m
-                int l2 = DivMul(_q1, l1, _modulus, _modulus.Length,
-                                _q2, _modulus.Length + 1);
+                int l2 = DivMul(_q1, l1, _modulus, _modulus.Length, _q2, _modulus.Length + 1);
 
                 // Let v = (v - q2) % 2^(k+1) - i*m
-                return SubMod(value, length, _q2, l2,
-                              _modulus, _modulus.Length + 1);
+                return SubMod(value, length, _q2, l2, _modulus, _modulus.Length + 1);
             }
 
-            private static unsafe int DivMul(uint[] left, int leftLength,
-                                             uint[] right, int rightLength,
-                                             uint[] bits, int k)
+            private static unsafe int DivMul(
+                uint[] left,
+                int leftLength,
+                uint[] right,
+                int rightLength,
+                uint[] bits,
+                int k
+            )
             {
                 Debug.Assert(left != null);
                 Debug.Assert(left.Length >= leftLength);
@@ -87,19 +89,33 @@ namespace System.Numerics
                 {
                     leftLength -= k;
 
-                    fixed (uint* l = left, r = right, b = bits)
+                    fixed (
+                        uint* l = left,
+                            r = right,
+                            b = bits
+                    )
                     {
                         if (leftLength < rightLength)
                         {
-                            Multiply(r, rightLength,
-                                     l + k, leftLength,
-                                     b, leftLength + rightLength);
+                            Multiply(
+                                r,
+                                rightLength,
+                                l + k,
+                                leftLength,
+                                b,
+                                leftLength + rightLength
+                            );
                         }
                         else
                         {
-                            Multiply(l + k, leftLength,
-                                     r, rightLength,
-                                     b, leftLength + rightLength);
+                            Multiply(
+                                l + k,
+                                leftLength,
+                                r,
+                                rightLength,
+                                b,
+                                leftLength + rightLength
+                            );
                         }
                     }
 
@@ -109,9 +125,14 @@ namespace System.Numerics
                 return 0;
             }
 
-            private static unsafe int SubMod(uint[] left, int leftLength,
-                                             uint[] right, int rightLength,
-                                             uint[] modulus, int k)
+            private static unsafe int SubMod(
+                uint[] left,
+                int leftLength,
+                uint[] right,
+                int rightLength,
+                uint[] modulus,
+                int k
+            )
             {
                 Debug.Assert(left != null);
                 Debug.Assert(left.Length >= leftLength);
@@ -128,7 +149,11 @@ namespace System.Numerics
                 if (rightLength > k)
                     rightLength = k;
 
-                fixed (uint* l = left, r = right, m = modulus)
+                fixed (
+                    uint* l = left,
+                        r = right,
+                        m = modulus
+                )
                 {
                     SubtractSelf(l, leftLength, r, rightLength);
                     leftLength = ActualLength(left, leftLength);

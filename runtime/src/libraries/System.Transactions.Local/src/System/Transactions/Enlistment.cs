@@ -29,11 +29,7 @@ namespace System.Transactions
 
         byte[] GetRecoveryInformation();
 
-        InternalEnlistment InternalEnlistment
-        {
-            get;
-            set;
-        }
+        InternalEnlistment InternalEnlistment { get; set; }
     }
 
     //
@@ -88,9 +84,15 @@ namespace System.Transactions
         private IPromotedEnlistment? _promotedEnlistment;
 
         // For Recovering Enlistments
-        protected InternalEnlistment(Enlistment enlistment, IEnlistmentNotification twoPhaseNotifications)
+        protected InternalEnlistment(
+            Enlistment enlistment,
+            IEnlistmentNotification twoPhaseNotifications
+        )
         {
-            Debug.Assert(this is RecoveringInternalEnlistment, "this is RecoveringInternalEnlistment");
+            Debug.Assert(
+                this is RecoveringInternalEnlistment,
+                "this is RecoveringInternalEnlistment"
+            );
             _enlistment = enlistment;
             _twoPhaseNotifications = twoPhaseNotifications;
             _enlistmentId = 1;
@@ -98,9 +100,16 @@ namespace System.Transactions
         }
 
         // For Promotable Enlistments
-        protected InternalEnlistment(Enlistment enlistment, InternalTransaction transaction, Transaction atomicTransaction)
+        protected InternalEnlistment(
+            Enlistment enlistment,
+            InternalTransaction transaction,
+            Transaction atomicTransaction
+        )
         {
-            Debug.Assert(this is PromotableInternalEnlistment, "this is PromotableInternalEnlistment");
+            Debug.Assert(
+                this is PromotableInternalEnlistment,
+                "this is PromotableInternalEnlistment"
+            );
             _enlistment = enlistment;
             _transaction = transaction;
             _atomicTransaction = atomicTransaction;
@@ -113,7 +122,8 @@ namespace System.Transactions
             InternalTransaction transaction,
             IEnlistmentNotification twoPhaseNotifications,
             ISinglePhaseNotification? singlePhaseNotifications,
-            Transaction atomicTransaction)
+            Transaction atomicTransaction
+        )
         {
             _enlistment = enlistment;
             _transaction = transaction;
@@ -128,7 +138,8 @@ namespace System.Transactions
             Enlistment enlistment,
             IEnlistmentNotification twoPhaseNotifications,
             InternalTransaction transaction,
-            Transaction atomicTransaction)
+            Transaction atomicTransaction
+        )
         {
             _enlistment = enlistment;
             _twoPhaseNotifications = twoPhaseNotifications;
@@ -138,7 +149,8 @@ namespace System.Transactions
 
         internal EnlistmentState State
         {
-            get {
+            get
+            {
                 Debug.Assert(_twoPhaseState != null);
                 return _twoPhaseState;
             }
@@ -192,7 +204,9 @@ namespace System.Transactions
         {
             get
             {
-                Debug.Fail("PromotableSinglePhaseNotification called for a non promotable enlistment.");
+                Debug.Fail(
+                    "PromotableSinglePhaseNotification called for a non promotable enlistment."
+                );
                 throw new NotImplementedException();
             }
         }
@@ -219,17 +233,25 @@ namespace System.Transactions
                                 temp = new EnlistmentTraceIdentifier(
                                     Guid.Empty,
                                     _atomicTransaction.TransactionTraceId,
-                                    _enlistmentId);
+                                    _enlistmentId
+                                );
                             }
                             else
                             {
                                 temp = new EnlistmentTraceIdentifier(
                                     Guid.Empty,
                                     new TransactionTraceIdentifier(
-                                        InternalTransaction.InstanceIdentifier +
-                                            Convert.ToString(Interlocked.Increment(ref InternalTransaction._nextHash), CultureInfo.InvariantCulture),
-                                        0),
-                                    _enlistmentId);
+                                        InternalTransaction.InstanceIdentifier
+                                            + Convert.ToString(
+                                                Interlocked.Increment(
+                                                    ref InternalTransaction._nextHash
+                                                ),
+                                                CultureInfo.InvariantCulture
+                                            ),
+                                        0
+                                    ),
+                                    _enlistmentId
+                                );
                             }
                             Interlocked.MemoryBarrier();
                             _traceIdentifier = temp;
@@ -250,12 +272,18 @@ namespace System.Transactions
         internal virtual void CheckComplete()
         {
             // Make certain we increment the right list.
-            Debug.Assert(Transaction._phase0Volatiles._preparedVolatileEnlistments <=
-                Transaction._phase0Volatiles._volatileEnlistmentCount + Transaction._phase0Volatiles._dependentClones);
+            Debug.Assert(
+                Transaction._phase0Volatiles._preparedVolatileEnlistments
+                    <= Transaction._phase0Volatiles._volatileEnlistmentCount
+                        + Transaction._phase0Volatiles._dependentClones
+            );
 
             // Check to see if all of the volatile enlistments are done.
-            if (Transaction._phase0Volatiles._preparedVolatileEnlistments ==
-                Transaction._phase0VolatileWaveCount + Transaction._phase0Volatiles._dependentClones)
+            if (
+                Transaction._phase0Volatiles._preparedVolatileEnlistments
+                == Transaction._phase0VolatileWaveCount
+                    + Transaction._phase0Volatiles._dependentClones
+            )
             {
                 Transaction.State!.Phase0VolatilePrepareDone(Transaction);
             }
@@ -270,7 +298,9 @@ namespace System.Transactions
             }
         }
 
-        void ISinglePhaseNotificationInternal.SinglePhaseCommit(IPromotedEnlistment singlePhaseEnlistment)
+        void ISinglePhaseNotificationInternal.SinglePhaseCommit(
+            IPromotedEnlistment singlePhaseEnlistment
+        )
         {
             bool spcCommitted = false;
             _promotedEnlistment = singlePhaseEnlistment;
@@ -280,6 +310,7 @@ namespace System.Transactions
                 _singlePhaseNotifications.SinglePhaseCommit(SinglePhaseEnlistment);
                 spcCommitted = true;
             }
+
             finally
             {
                 if (!spcCommitted)
@@ -289,36 +320,28 @@ namespace System.Transactions
             }
         }
 
-        void IEnlistmentNotificationInternal.Prepare(
-            IPromotedEnlistment preparingEnlistment
-            )
+        void IEnlistmentNotificationInternal.Prepare(IPromotedEnlistment preparingEnlistment)
         {
             Debug.Assert(_twoPhaseNotifications != null);
             _promotedEnlistment = preparingEnlistment;
             _twoPhaseNotifications.Prepare(PreparingEnlistment);
         }
 
-        void IEnlistmentNotificationInternal.Commit(
-            IPromotedEnlistment enlistment
-            )
+        void IEnlistmentNotificationInternal.Commit(IPromotedEnlistment enlistment)
         {
             Debug.Assert(_twoPhaseNotifications != null);
             _promotedEnlistment = enlistment;
             _twoPhaseNotifications.Commit(Enlistment);
         }
 
-        void IEnlistmentNotificationInternal.Rollback(
-            IPromotedEnlistment enlistment
-            )
+        void IEnlistmentNotificationInternal.Rollback(IPromotedEnlistment enlistment)
         {
             Debug.Assert(_twoPhaseNotifications != null);
             _promotedEnlistment = enlistment;
             _twoPhaseNotifications.Rollback(Enlistment);
         }
 
-        void IEnlistmentNotificationInternal.InDoubt(
-            IPromotedEnlistment enlistment
-            )
+        void IEnlistmentNotificationInternal.InDoubt(IPromotedEnlistment enlistment)
         {
             Debug.Assert(_twoPhaseNotifications != null);
             _promotedEnlistment = enlistment;
@@ -337,16 +360,23 @@ namespace System.Transactions
             InternalTransaction transaction,
             IEnlistmentNotification twoPhaseNotifications,
             ISinglePhaseNotification? singlePhaseNotifications,
-            Transaction atomicTransaction) :
-            base(enlistment, transaction, twoPhaseNotifications, singlePhaseNotifications, atomicTransaction)
+            Transaction atomicTransaction
+        )
+            : base(
+                enlistment,
+                transaction,
+                twoPhaseNotifications,
+                singlePhaseNotifications,
+                atomicTransaction
+            )
         {
             _resourceManagerIdentifier = resourceManagerIdentifier;
         }
 
-        protected DurableInternalEnlistment(Enlistment enlistment, IEnlistmentNotification twoPhaseNotifications) :
-            base(enlistment, twoPhaseNotifications)
-        {
-        }
+        protected DurableInternalEnlistment(
+            Enlistment enlistment,
+            IEnlistmentNotification twoPhaseNotifications
+        ) : base(enlistment, twoPhaseNotifications) { }
 
         internal override Guid ResourceManagerIdentifier => _resourceManagerIdentifier;
     }
@@ -359,8 +389,11 @@ namespace System.Transactions
     {
         private readonly object _syncRoot;
 
-        internal RecoveringInternalEnlistment(Enlistment enlistment, IEnlistmentNotification twoPhaseNotifications, object syncRoot) :
-            base(enlistment, twoPhaseNotifications)
+        internal RecoveringInternalEnlistment(
+            Enlistment enlistment,
+            IEnlistmentNotification twoPhaseNotifications,
+            object syncRoot
+        ) : base(enlistment, twoPhaseNotifications)
         {
             _syncRoot = syncRoot;
         }
@@ -378,15 +411,15 @@ namespace System.Transactions
             Enlistment enlistment,
             InternalTransaction transaction,
             IPromotableSinglePhaseNotification promotableSinglePhaseNotification,
-            Transaction atomicTransaction) :
-            base(enlistment, transaction, atomicTransaction)
+            Transaction atomicTransaction
+        ) : base(enlistment, transaction, atomicTransaction)
         {
             _promotableNotificationInterface = promotableSinglePhaseNotification;
         }
 
-        internal override IPromotableSinglePhaseNotification PromotableSinglePhaseNotification => _promotableNotificationInterface;
+        internal override IPromotableSinglePhaseNotification PromotableSinglePhaseNotification =>
+            _promotableNotificationInterface;
     }
-
 
     // This class supports volatile enlistments
     //
@@ -397,10 +430,15 @@ namespace System.Transactions
             InternalTransaction transaction,
             IEnlistmentNotification twoPhaseNotifications,
             ISinglePhaseNotification? singlePhaseNotifications,
-            Transaction atomicTransaction)
-            : base(enlistment, transaction, twoPhaseNotifications, singlePhaseNotifications, atomicTransaction)
-        {
-        }
+            Transaction atomicTransaction
+        )
+            : base(
+                enlistment,
+                transaction,
+                twoPhaseNotifications,
+                singlePhaseNotifications,
+                atomicTransaction
+            ) { }
 
         internal override void FinishEnlistment()
         {
@@ -412,14 +450,18 @@ namespace System.Transactions
         internal override void CheckComplete()
         {
             // Make certain we increment the right list.
-            Debug.Assert(_transaction._phase1Volatiles._preparedVolatileEnlistments <=
-                _transaction._phase1Volatiles._volatileEnlistmentCount +
-                _transaction._phase1Volatiles._dependentClones);
+            Debug.Assert(
+                _transaction._phase1Volatiles._preparedVolatileEnlistments
+                    <= _transaction._phase1Volatiles._volatileEnlistmentCount
+                        + _transaction._phase1Volatiles._dependentClones
+            );
 
             // Check to see if all of the volatile enlistments are done.
-            if (_transaction._phase1Volatiles._preparedVolatileEnlistments ==
-                _transaction._phase1Volatiles._volatileEnlistmentCount +
-                _transaction._phase1Volatiles._dependentClones)
+            if (
+                _transaction._phase1Volatiles._preparedVolatileEnlistments
+                == _transaction._phase1Volatiles._volatileEnlistmentCount
+                    + _transaction._phase1Volatiles._dependentClones
+            )
             {
                 _transaction.State!.Phase1VolatilePrepareDone(_transaction);
             }
@@ -441,7 +483,8 @@ namespace System.Transactions
             InternalTransaction transaction,
             IEnlistmentNotification twoPhaseNotifications,
             ISinglePhaseNotification? singlePhaseNotifications,
-            Transaction atomicTransaction)
+            Transaction atomicTransaction
+        )
         {
             _internalEnlistment = new DurableInternalEnlistment(
                 this,
@@ -450,7 +493,7 @@ namespace System.Transactions
                 twoPhaseNotifications,
                 singlePhaseNotifications,
                 atomicTransaction
-                );
+            );
         }
 
         internal Enlistment(
@@ -458,7 +501,8 @@ namespace System.Transactions
             IEnlistmentNotification twoPhaseNotifications,
             ISinglePhaseNotification? singlePhaseNotifications,
             Transaction atomicTransaction,
-            EnlistmentOptions enlistmentOptions)
+            EnlistmentOptions enlistmentOptions
+        )
         {
             if ((enlistmentOptions & EnlistmentOptions.EnlistDuringPrepareRequired) != 0)
             {
@@ -468,16 +512,16 @@ namespace System.Transactions
                     twoPhaseNotifications,
                     singlePhaseNotifications,
                     atomicTransaction
-                    );
+                );
             }
             else
             {
                 _internalEnlistment = new Phase1VolatileEnlistment(
-                this,
-                transaction,
-                twoPhaseNotifications,
-                singlePhaseNotifications,
-                atomicTransaction
+                    this,
+                    transaction,
+                    twoPhaseNotifications,
+                    singlePhaseNotifications,
+                    atomicTransaction
                 );
             }
         }
@@ -486,27 +530,29 @@ namespace System.Transactions
         internal Enlistment(
             InternalTransaction transaction,
             IPromotableSinglePhaseNotification promotableSinglePhaseNotification,
-            Transaction atomicTransaction)
+            Transaction atomicTransaction
+        )
         {
             _internalEnlistment = new PromotableInternalEnlistment(
                 this,
                 transaction,
                 promotableSinglePhaseNotification,
                 atomicTransaction
-                );
+            );
         }
 
         internal Enlistment(
             IEnlistmentNotification twoPhaseNotifications,
             InternalTransaction transaction,
-            Transaction atomicTransaction)
+            Transaction atomicTransaction
+        )
         {
             _internalEnlistment = new InternalEnlistment(
                 this,
                 twoPhaseNotifications,
                 transaction,
                 atomicTransaction
-                );
+            );
         }
 
         internal Enlistment(IEnlistmentNotification twoPhaseNotifications, object syncRoot)
@@ -515,7 +561,7 @@ namespace System.Transactions
                 this,
                 twoPhaseNotifications,
                 syncRoot
-                );
+            );
         }
 
         public void Done()
@@ -537,7 +583,6 @@ namespace System.Transactions
                 etwLog.MethodExit(TraceSourceType.TraceSourceLtm, this);
             }
         }
-
 
         internal InternalEnlistment InternalEnlistment => _internalEnlistment;
     }

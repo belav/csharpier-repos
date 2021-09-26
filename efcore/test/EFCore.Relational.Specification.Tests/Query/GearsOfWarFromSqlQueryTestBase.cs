@@ -12,8 +12,7 @@ namespace Microsoft.EntityFrameworkCore.Query
     public abstract class GearsOfWarFromSqlQueryTestBase<TFixture> : IClassFixture<TFixture>
         where TFixture : GearsOfWarQueryRelationalFixture, new()
     {
-        protected GearsOfWarFromSqlQueryTestBase(TFixture fixture)
-            => Fixture = fixture;
+        protected GearsOfWarFromSqlQueryTestBase(TFixture fixture) => Fixture = fixture;
 
         protected TFixture Fixture { get; }
 
@@ -21,9 +20,12 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual void From_sql_queryable_simple_columns_out_of_order()
         {
             using var context = CreateContext();
-            var actual = context.Set<Weapon>().FromSqlRaw(
+            var actual = context.Set<Weapon>()
+                .FromSqlRaw(
                     NormalizeDelimitersInRawString(
-                        "SELECT [Id], [Name], [IsAutomatic], [AmmunitionType], [OwnerFullName], [SynergyWithId] FROM [Weapons] ORDER BY [Name]"))
+                        "SELECT [Id], [Name], [IsAutomatic], [AmmunitionType], [OwnerFullName], [SynergyWithId] FROM [Weapons] ORDER BY [Name]"
+                    )
+                )
                 .ToArray();
 
             Assert.Equal(10, actual.Length);
@@ -34,17 +36,14 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Equal("Baird's Gnasher", first.Name);
         }
 
-        private string NormalizeDelimitersInRawString(string sql)
-            => Fixture.TestStore.NormalizeDelimitersInRawString(sql);
+        private string NormalizeDelimitersInRawString(string sql) =>
+            Fixture.TestStore.NormalizeDelimitersInRawString(sql);
 
-        private FormattableString NormalizeDelimitersInInterpolatedString(FormattableString sql)
-            => Fixture.TestStore.NormalizeDelimitersInInterpolatedString(sql);
+        private FormattableString NormalizeDelimitersInInterpolatedString(FormattableString sql) =>
+            Fixture.TestStore.NormalizeDelimitersInInterpolatedString(sql);
 
-        protected GearsOfWarContext CreateContext()
-            => Fixture.CreateContext();
+        protected GearsOfWarContext CreateContext() => Fixture.CreateContext();
 
-        protected virtual void ClearLog()
-        {
-        }
+        protected virtual void ClearLog() { }
     }
 }

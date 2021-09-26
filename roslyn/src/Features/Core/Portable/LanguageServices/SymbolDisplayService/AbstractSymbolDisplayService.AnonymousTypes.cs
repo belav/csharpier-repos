@@ -27,10 +27,14 @@ namespace Microsoft.CodeAnalysis.LanguageServices
 
             private void InlineAllDelegateAnonymousTypes()
             {
-restart:
+                restart:
                 foreach (var (group, parts) in _groupMap)
                 {
-                    var updatedParts = _anonymousTypeDisplayService.InlineDelegateAnonymousTypes(parts, _semanticModel, _position);
+                    var updatedParts = _anonymousTypeDisplayService.InlineDelegateAnonymousTypes(
+                        parts,
+                        _semanticModel,
+                        _position
+                    );
                     if (parts != updatedParts)
                     {
                         _groupMap[group] = updatedParts;
@@ -48,14 +52,17 @@ restart:
                     select (INamedTypeSymbol)part.Symbol;
 
                 var info = _anonymousTypeDisplayService.GetNormalAnonymousTypeDisplayInfo(
-                    firstSymbol, directNormalAnonymousTypeReferences, _semanticModel, _position);
+                    firstSymbol,
+                    directNormalAnonymousTypeReferences,
+                    _semanticModel,
+                    _position
+                );
 
                 if (info.AnonymousTypesParts.Count > 0)
                 {
-                    AddToGroup(SymbolDescriptionGroups.AnonymousTypes,
-                        info.AnonymousTypesParts);
+                    AddToGroup(SymbolDescriptionGroups.AnonymousTypes, info.AnonymousTypesParts);
 
-restart:
+                    restart:
                     foreach (var (group, parts) in _groupMap)
                     {
                         var updatedParts = info.ReplaceAnonymousTypes(parts);

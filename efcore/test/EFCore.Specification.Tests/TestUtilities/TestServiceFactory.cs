@@ -18,21 +18,30 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
     {
         public static readonly TestServiceFactory Instance = new();
 
-        private TestServiceFactory()
-        {
-        }
+        private TestServiceFactory() { }
 
         private readonly ConcurrentDictionary<Type, IServiceProvider> _factories = new();
 
-        private readonly IReadOnlyList<(Type Type, object Implementation)> _wellKnownExceptions
-            = new List<(Type, object)>
+        private readonly IReadOnlyList<(Type Type, object Implementation)> _wellKnownExceptions =
+            new List<(Type, object)>
             {
                 (typeof(IRegisteredServices), new RegisteredServices(Enumerable.Empty<Type>())),
-                (typeof(ServiceParameterBindingFactory), new ServiceParameterBindingFactory(typeof(IStateManager))),
-                (typeof(IDiagnosticsLogger<DbLoggerCategory.Model>), new TestLogger<DbLoggerCategory.Model, TestLoggingDefinitions>()),
-                (typeof(IDiagnosticsLogger<DbLoggerCategory.Model.Validation>),
-                    new TestLogger<DbLoggerCategory.Model.Validation, TestLoggingDefinitions>()),
-                (typeof(IDiagnosticsLogger<DbLoggerCategory.Query>), new TestLogger<DbLoggerCategory.Query, TestLoggingDefinitions>())
+                (
+                    typeof(ServiceParameterBindingFactory),
+                    new ServiceParameterBindingFactory(typeof(IStateManager))
+                ),
+                (
+                    typeof(IDiagnosticsLogger<DbLoggerCategory.Model>),
+                    new TestLogger<DbLoggerCategory.Model, TestLoggingDefinitions>()
+                ),
+                (
+                    typeof(IDiagnosticsLogger<DbLoggerCategory.Model.Validation>),
+                    new TestLogger<DbLoggerCategory.Model.Validation, TestLoggingDefinitions>()
+                ),
+                (
+                    typeof(IDiagnosticsLogger<DbLoggerCategory.Query>),
+                    new TestLogger<DbLoggerCategory.Query, TestLoggingDefinitions>()
+                )
             };
 
         public TService Create<TService>(params (Type Type, object Implementation)[] specialCases)
@@ -41,16 +50,23 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             var exceptions = specialCases.Concat(_wellKnownExceptions).ToList();
 
             return _factories.GetOrAdd(
-                typeof(TService),
-                t => AddType(new ServiceCollection(), typeof(TService), exceptions).BuildServiceProvider()).GetService<TService>();
+                    typeof(TService),
+                    t =>
+                        AddType(new ServiceCollection(), typeof(TService), exceptions)
+                            .BuildServiceProvider()
+                )
+                .GetService<TService>();
         }
 
         private static ServiceCollection AddType(
             ServiceCollection serviceCollection,
             Type serviceType,
-            IList<(Type Type, object Implementation)> specialCases)
+            IList<(Type Type, object Implementation)> specialCases
+        )
         {
-            var implementation = specialCases.Where(s => s.Type == serviceType).Select(s => s.Implementation).FirstOrDefault();
+            var implementation = specialCases.Where(s => s.Type == serviceType)
+                .Select(s => s.Implementation)
+                .FirstOrDefault();
 
             if (implementation != null)
             {
@@ -58,9 +74,13 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             }
             else
             {
-                foreach (var (ServiceType, ImplementationType) in GetImplementationType(serviceType))
+                foreach (
+                    var (ServiceType, ImplementationType) in GetImplementationType(serviceType)
+                )
                 {
-                    implementation = specialCases.Where(s => s.Type == ImplementationType).Select(s => s.Implementation).FirstOrDefault();
+                    implementation = specialCases.Where(s => s.Type == ImplementationType)
+                        .Select(s => s.Implementation)
+                        .FirstOrDefault();
 
                     if (implementation != null)
                     {
@@ -71,13 +91,17 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                         serviceCollection.AddSingleton(ServiceType, ImplementationType);
 
                         var constructors = ImplementationType.GetConstructors();
-                        var constructor = constructors
-                            .FirstOrDefault(c => c.GetParameters().Length == constructors.Max(c2 => c2.GetParameters().Length));
+                        var constructor = constructors.FirstOrDefault(
+                            c =>
+                                c.GetParameters().Length
+                                == constructors.Max(c2 => c2.GetParameters().Length)
+                        );
 
                         if (constructor == null)
                         {
                             throw new InvalidOperationException(
-                                $"Cannot use 'TestServiceFactory' for '{ImplementationType.ShortDisplayName()}': no public constructor.");
+                                $"Cannot use 'TestServiceFactory' for '{ImplementationType.ShortDisplayName()}': no public constructor."
+                            );
                         }
 
                         foreach (var parameter in constructor.GetParameters())
@@ -91,7 +115,9 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             return serviceCollection;
         }
 
-        private static IList<(Type ServiceType, Type ImplementationType)> GetImplementationType(Type serviceType)
+        private static IList<(Type ServiceType, Type ImplementationType)> GetImplementationType(
+            Type serviceType
+        )
         {
             if (!serviceType.IsInterface)
             {
@@ -100,9 +126,7 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
 
             var elementType = TryGetEnumerableType(serviceType);
 
-            var implementationTypes = (elementType ?? serviceType)
-                .Assembly
-                .GetTypes()
+            var implementationTypes = (elementType ?? serviceType).Assembly.GetTypes()
                 .Where(t => (elementType ?? serviceType).IsAssignableFrom(t) && !t.IsAbstract)
                 .ToList();
 
@@ -111,7 +135,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 if (implementationTypes.Count != 1)
                 {
                     throw new InvalidOperationException(
-                        $"Cannot use 'TestServiceFactory' for '{serviceType.ShortDisplayName()}': no single implementation type in same assembly.");
+                        $"Cannot use 'TestServiceFactory' for '{serviceType.ShortDisplayName()}': no single implementation type in same assembly."
+                    );
                 }
 
                 return new[] { (serviceType, implementationTypes[0]) };
@@ -120,11 +145,11 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             return implementationTypes.Select(t => (elementType, t)).ToList();
         }
 
-        private static Type TryGetEnumerableType(Type type)
-            => !type.IsGenericTypeDefinition
-                && type.IsGenericType
-                && type.GetGenericTypeDefinition() == typeof(IEnumerable<>)
-                    ? type.GenericTypeArguments[0]
-                    : null;
+        private static Type TryGetEnumerableType(Type type) =>
+            !type.IsGenericTypeDefinition
+            && type.IsGenericType
+            && type.GetGenericTypeDefinition() == typeof(IEnumerable<>)
+                ? type.GenericTypeArguments[0]
+                : null;
     }
 }

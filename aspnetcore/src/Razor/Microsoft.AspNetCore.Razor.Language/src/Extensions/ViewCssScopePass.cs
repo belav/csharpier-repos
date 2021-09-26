@@ -11,7 +11,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
         // Runs after taghelpers are bound
         public override int Order => 110;
 
-        protected override void ExecuteCore(RazorCodeDocument codeDocument, DocumentIntermediateNode documentNode)
+        protected override void ExecuteCore(
+            RazorCodeDocument codeDocument,
+            DocumentIntermediateNode documentNode
+        )
         {
             var cssScope = codeDocument.GetCssScope();
             if (string.IsNullOrEmpty(cssScope))
@@ -19,8 +22,14 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
                 return;
             }
 
-            if (!string.Equals(documentNode.DocumentKind, "mvc.1.0.view", StringComparison.Ordinal) &&
-                !string.Equals(documentNode.DocumentKind, "mvc.1.0.razor-page", StringComparison.Ordinal))
+            if (
+                !string.Equals(documentNode.DocumentKind, "mvc.1.0.view", StringComparison.Ordinal)
+                && !string.Equals(
+                    documentNode.DocumentKind,
+                    "mvc.1.0.razor-page",
+                    StringComparison.Ordinal
+                )
+            )
             {
                 return;
             }
@@ -42,15 +51,21 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
                 if (child is IntermediateToken token && token.IsHtml)
                 {
                     var content = token.Content;
-                    var isValidToken = content.StartsWith("<", StringComparison.Ordinal) && !content.StartsWith("</", StringComparison.Ordinal) && !content.StartsWith("<!", StringComparison.Ordinal);
+                    var isValidToken =
+                        content.StartsWith("<", StringComparison.Ordinal)
+                        && !content.StartsWith("</", StringComparison.Ordinal)
+                        && !content.StartsWith("<!", StringComparison.Ordinal);
                     if (isValidToken)
                     {
-                        node.Children.Insert(i + 1, new IntermediateToken()
-                        {
-                            Content = cssScope,
-                            Kind = TokenKind.Html,
-                            Source = null
-                        });
+                        node.Children.Insert(
+                            i + 1,
+                            new IntermediateToken()
+                            {
+                                Content = cssScope,
+                                Kind = TokenKind.Html,
+                                Source = null
+                            }
+                        );
                         i++;
                     }
                 }

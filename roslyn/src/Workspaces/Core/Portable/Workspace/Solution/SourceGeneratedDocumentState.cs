@@ -23,16 +23,22 @@ namespace Microsoft.CodeAnalysis
             ISourceGenerator sourceGenerator,
             HostLanguageServices languageServices,
             SolutionServices solutionServices,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var options = generatedSyntaxTree.Options;
             var filePath = generatedSyntaxTree.FilePath;
 
             var textAndVersion = TextAndVersion.Create(generatedSourceText, VersionStamp.Create());
-            ValueSource<TextAndVersion> textSource = new ConstantValueSource<TextAndVersion>(textAndVersion);
+            ValueSource<TextAndVersion> textSource = new ConstantValueSource<TextAndVersion>(
+                textAndVersion
+            );
 
             var root = generatedSyntaxTree.GetRoot(cancellationToken);
-            Contract.ThrowIfNull(languageServices.SyntaxTreeFactory, "We should not have a generated syntax tree for a language that doesn't support trees.");
+            Contract.ThrowIfNull(
+                languageServices.SyntaxTreeFactory,
+                "We should not have a generated syntax tree for a language that doesn't support trees."
+            );
 
             if (languageServices.SyntaxTreeFactory.CanCreateRecoverableTree(root))
             {
@@ -48,7 +54,8 @@ namespace Microsoft.CodeAnalysis
                     options,
                     textSource,
                     generatedSourceText.Encoding,
-                    root);
+                    root
+                );
             }
 
             var treeAndVersion = TreeAndVersion.Create(generatedSyntaxTree, textAndVersion.Version);
@@ -64,13 +71,15 @@ namespace Microsoft.CodeAnalysis
                     options.Kind,
                     filePath: filePath,
                     isGenerated: true,
-                    designTimeOnly: false),
+                    designTimeOnly: false
+                ),
                 options,
                 sourceText: null, // don't strongly hold the text
                 textSource,
                 treeAndVersion,
                 sourceGenerator,
-                hintName);
+                hintName
+            );
         }
 
         private SourceGeneratedDocumentState(
@@ -83,8 +92,18 @@ namespace Microsoft.CodeAnalysis
             ValueSource<TextAndVersion> textSource,
             TreeAndVersion treeAndVersion,
             ISourceGenerator sourceGenerator,
-            string hintName)
-            : base(languageServices, solutionServices, documentServiceProvider, attributes, options, sourceText, textSource, new ConstantValueSource<TreeAndVersion>(treeAndVersion))
+            string hintName
+        )
+            : base(
+                languageServices,
+                solutionServices,
+                documentServiceProvider,
+                attributes,
+                options,
+                sourceText,
+                textSource,
+                new ConstantValueSource<TreeAndVersion>(treeAndVersion)
+            )
         {
             SourceGenerator = sourceGenerator;
             HintName = hintName;
@@ -108,16 +127,30 @@ namespace Microsoft.CodeAnalysis
             }
         }
 
-        protected override TextDocumentState UpdateText(ValueSource<TextAndVersion> newTextSource, PreservationMode mode, bool incremental)
+        protected override TextDocumentState UpdateText(
+            ValueSource<TextAndVersion> newTextSource,
+            PreservationMode mode,
+            bool incremental
+        )
         {
-            throw new NotSupportedException(WorkspacesResources.The_contents_of_a_SourceGeneratedDocument_may_not_be_changed);
+            throw new NotSupportedException(
+                WorkspacesResources.The_contents_of_a_SourceGeneratedDocument_may_not_be_changed
+            );
         }
 
-        public SourceGeneratedDocumentState WithUpdatedGeneratedContent(SourceText sourceText, SyntaxTree lazySyntaxTree, ParseOptions parseOptions, CancellationToken cancellationToken)
+        public SourceGeneratedDocumentState WithUpdatedGeneratedContent(
+            SourceText sourceText,
+            SyntaxTree lazySyntaxTree,
+            ParseOptions parseOptions,
+            CancellationToken cancellationToken
+        )
         {
-            if (TryGetText(out var existingText) &&
-                Checksum.From(existingText.GetChecksum()) == Checksum.From(sourceText.GetChecksum()) &&
-                SyntaxTree.Options.Equals(parseOptions))
+            if (
+                TryGetText(out var existingText)
+                && Checksum.From(existingText.GetChecksum())
+                    == Checksum.From(sourceText.GetChecksum())
+                && SyntaxTree.Options.Equals(parseOptions)
+            )
             {
                 // We can reuse this instance directly
                 return this;
@@ -131,7 +164,8 @@ namespace Microsoft.CodeAnalysis
                 this.SourceGenerator,
                 this.LanguageServices,
                 this.solutionServices,
-                cancellationToken);
+                cancellationToken
+            );
         }
     }
 }

@@ -13,8 +13,10 @@ namespace System.Xml.Serialization
 
         public static bool TryConvertTo(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
-            this Type targetType,
-            object? data, out object? returnValue)
+                this Type targetType,
+            object? data,
+            out object? returnValue
+        )
         {
             if (targetType == null)
             {
@@ -30,8 +32,7 @@ namespace System.Xml.Serialization
 
             Type sourceType = data.GetType();
 
-            if (targetType == sourceType ||
-                targetType.IsAssignableFrom(sourceType))
+            if (targetType == sourceType || targetType.IsAssignableFrom(sourceType))
             {
                 returnValue = data;
                 return true;
@@ -41,15 +42,19 @@ namespace System.Xml.Serialization
 
             foreach (MethodInfo method in methods)
             {
-                if (method.Name == ImplicitCastOperatorName &&
-                    method.ReturnType != null &&
-                    targetType.IsAssignableFrom(method.ReturnType))
+                if (
+                    method.Name == ImplicitCastOperatorName
+                    && method.ReturnType != null
+                    && targetType.IsAssignableFrom(method.ReturnType)
+                )
                 {
                     ParameterInfo[] parameters = method.GetParameters();
 
-                    if (parameters != null &&
-                        parameters.Length == 1 &&
-                        parameters[0].ParameterType.IsAssignableFrom(sourceType))
+                    if (
+                        parameters != null
+                        && parameters.Length == 1
+                        && parameters[0].ParameterType.IsAssignableFrom(sourceType)
+                    )
                     {
                         returnValue = method.Invoke(null, new object[] { data });
                         return true;

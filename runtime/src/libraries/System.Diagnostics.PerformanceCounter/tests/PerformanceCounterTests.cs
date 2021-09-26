@@ -27,7 +27,13 @@ namespace System.Diagnostics.Tests
         public static void PerformanceCounter_CreateCounter_Count0()
         {
             var name = nameof(PerformanceCounter_CreateCounter_Count0) + "_Counter";
-            using (PerformanceCounter counterSample = CreateCounterWithCategory(name, false, PerformanceCounterCategoryType.SingleInstance))
+            using (
+                PerformanceCounter counterSample = CreateCounterWithCategory(
+                    name,
+                    false,
+                    PerformanceCounterCategoryType.SingleInstance
+                )
+            )
             {
                 counterSample.RawValue = 0;
 
@@ -39,7 +45,14 @@ namespace System.Diagnostics.Tests
         [Fact]
         public static void PerformanceCounter_CreateCounter_ProcessorCounter()
         {
-            using (PerformanceCounter counterSample = new PerformanceCounter("Processor", "Interrupts/sec", "0", "."))
+            using (
+                PerformanceCounter counterSample = new PerformanceCounter(
+                    "Processor",
+                    "Interrupts/sec",
+                    "0",
+                    "."
+                )
+            )
             {
                 Assert.Equal(0, Helpers.RetryOnAllPlatforms(() => counterSample.NextValue()));
 
@@ -47,33 +60,56 @@ namespace System.Diagnostics.Tests
             }
         }
 
-        [ConditionalFact(typeof(Helpers), nameof(Helpers.IsElevatedAndCanWriteAndReadNetPerfCounters))]
+        [ConditionalFact(
+            typeof(Helpers),
+            nameof(Helpers.IsElevatedAndCanWriteAndReadNetPerfCounters)
+        )]
         public static void PerformanceCounter_CreateCounter_MultiInstanceReadOnly()
         {
             var name = nameof(PerformanceCounter_CreateCounter_MultiInstanceReadOnly) + "_Counter";
             var instance = name + "_Instance";
 
-            var category = Helpers.CreateCategory(name, PerformanceCounterCategoryType.MultiInstance);
+            var category = Helpers.CreateCategory(
+                name,
+                PerformanceCounterCategoryType.MultiInstance
+            );
 
-            using (PerformanceCounter counterSample = Helpers.RetryOnAllPlatforms(() => new PerformanceCounter(category, name, instance)))
+            using (
+                PerformanceCounter counterSample = Helpers.RetryOnAllPlatforms(
+                    () => new PerformanceCounter(category, name, instance)
+                )
+            )
             {
                 Assert.Equal(name, counterSample.CounterName);
                 Assert.Equal(category, counterSample.CategoryName);
                 Assert.Equal(instance, counterSample.InstanceName);
-                Assert.Equal("counter description",  Helpers.RetryOnAllPlatforms(() => counterSample.CounterHelp));
+                Assert.Equal(
+                    "counter description",
+                    Helpers.RetryOnAllPlatforms(() => counterSample.CounterHelp)
+                );
                 Assert.True(counterSample.ReadOnly);
                 Helpers.DeleteCategory(name);
             }
         }
 
-        [ConditionalFact(typeof(Helpers), nameof(Helpers.IsElevatedAndCanWriteAndReadNetPerfCounters))]
+        [ConditionalFact(
+            typeof(Helpers),
+            nameof(Helpers.IsElevatedAndCanWriteAndReadNetPerfCounters)
+        )]
         public static void PerformanceCounter_CreateCounter_SetReadOnly()
         {
             var name = nameof(PerformanceCounter_CreateCounter_SetReadOnly) + "_Counter";
 
-            var category = Helpers.CreateCategory(name, PerformanceCounterCategoryType.SingleInstance);
+            var category = Helpers.CreateCategory(
+                name,
+                PerformanceCounterCategoryType.SingleInstance
+            );
 
-            using (PerformanceCounter counterSample = Helpers.RetryOnAllPlatforms(() => new PerformanceCounter(category, name)))
+            using (
+                PerformanceCounter counterSample = Helpers.RetryOnAllPlatforms(
+                    () => new PerformanceCounter(category, name)
+                )
+            )
             {
                 counterSample.ReadOnly = false;
 
@@ -147,7 +183,14 @@ namespace System.Diagnostics.Tests
         [Fact]
         public static void PerformanceCounter_NextValue_ProcessorCounter()
         {
-            using (PerformanceCounter counterSample = new PerformanceCounter("Processor", "Interrupts/sec", "0", "."))
+            using (
+                PerformanceCounter counterSample = new PerformanceCounter(
+                    "Processor",
+                    "Interrupts/sec",
+                    "0",
+                    "."
+                )
+            )
             {
                 Helpers.RetryOnAllPlatforms(() => counterSample.NextValue());
                 System.Threading.Thread.Sleep(30);
@@ -159,7 +202,14 @@ namespace System.Diagnostics.Tests
         [Fact]
         public static void PerformanceCounter_BeginInit_ProcessorCounter()
         {
-            using (PerformanceCounter counterSample = new PerformanceCounter("Processor", "Interrupts/sec", "0", "."))
+            using (
+                PerformanceCounter counterSample = new PerformanceCounter(
+                    "Processor",
+                    "Interrupts/sec",
+                    "0",
+                    "."
+                )
+            )
             {
                 counterSample.BeginInit();
 
@@ -170,7 +220,14 @@ namespace System.Diagnostics.Tests
         [Fact]
         public static void PerformanceCounter_BeginInitEndInit_ProcessorCounter()
         {
-            using (PerformanceCounter counterSample = new PerformanceCounter("Processor", "Interrupts/sec", "0", "."))
+            using (
+                PerformanceCounter counterSample = new PerformanceCounter(
+                    "Processor",
+                    "Interrupts/sec",
+                    "0",
+                    "."
+                )
+            )
             {
                 counterSample.BeginInit();
                 counterSample.EndInit();
@@ -179,11 +236,20 @@ namespace System.Diagnostics.Tests
             }
         }
 
-        [ConditionalFact(typeof(Helpers), nameof(Helpers.IsElevatedAndCanWriteAndReadNetPerfCounters))]
+        [ConditionalFact(
+            typeof(Helpers),
+            nameof(Helpers.IsElevatedAndCanWriteAndReadNetPerfCounters)
+        )]
         public static void PerformanceCounter_Decrement()
         {
             var name = nameof(PerformanceCounter_Decrement) + "_Counter";
-            using (PerformanceCounter counterSample = CreateCounterWithCategory(name, false, PerformanceCounterCategoryType.SingleInstance))
+            using (
+                PerformanceCounter counterSample = CreateCounterWithCategory(
+                    name,
+                    false,
+                    PerformanceCounterCategoryType.SingleInstance
+                )
+            )
             {
                 counterSample.RawValue = 10;
                 Helpers.RetryOnAllPlatforms(() => counterSample.Decrement());
@@ -193,25 +259,46 @@ namespace System.Diagnostics.Tests
             }
         }
 
-        [ConditionalFact(typeof(Helpers), nameof(Helpers.IsElevatedAndCanWriteAndReadNetPerfCounters))]
+        [ConditionalFact(
+            typeof(Helpers),
+            nameof(Helpers.IsElevatedAndCanWriteAndReadNetPerfCounters)
+        )]
         public static void PerformanceCounter_Increment()
         {
             var name = nameof(PerformanceCounter_Increment) + "_Counter";
-            using (PerformanceCounter counterSample = CreateCounterWithCategory(name, false, PerformanceCounterCategoryType.SingleInstance))
+            using (
+                PerformanceCounter counterSample = CreateCounterWithCategory(
+                    name,
+                    false,
+                    PerformanceCounterCategoryType.SingleInstance
+                )
+            )
             {
                 counterSample.RawValue = 10;
                 Helpers.RetryOnAllPlatforms(() => counterSample.Increment());
 
-                Assert.Equal(11, Helpers.RetryOnAllPlatforms(() => counterSample.NextSample().RawValue));
+                Assert.Equal(
+                    11,
+                    Helpers.RetryOnAllPlatforms(() => counterSample.NextSample().RawValue)
+                );
                 Helpers.DeleteCategory(name);
             }
         }
 
-        [ConditionalFact(typeof(Helpers), nameof(Helpers.IsElevatedAndCanWriteAndReadNetPerfCounters))]
+        [ConditionalFact(
+            typeof(Helpers),
+            nameof(Helpers.IsElevatedAndCanWriteAndReadNetPerfCounters)
+        )]
         public static void PerformanceCounter_IncrementBy_IncrementBy2()
         {
             var name = nameof(PerformanceCounter_IncrementBy_IncrementBy2) + "_Counter";
-            using (PerformanceCounter counterSample = CreateCounterWithCategory(name, false, PerformanceCounterCategoryType.SingleInstance))
+            using (
+                PerformanceCounter counterSample = CreateCounterWithCategory(
+                    name,
+                    false,
+                    PerformanceCounterCategoryType.SingleInstance
+                )
+            )
             {
                 counterSample.RawValue = 10;
                 Helpers.RetryOnAllPlatforms(() => counterSample.IncrementBy(2));
@@ -221,33 +308,60 @@ namespace System.Diagnostics.Tests
             }
         }
 
-        [ConditionalFact(typeof(Helpers), nameof(Helpers.IsElevatedAndCanWriteAndReadNetPerfCounters))]
+        [ConditionalFact(
+            typeof(Helpers),
+            nameof(Helpers.IsElevatedAndCanWriteAndReadNetPerfCounters)
+        )]
         public static void PerformanceCounter_IncrementBy_IncrementByReadOnly()
         {
             var name = nameof(PerformanceCounter_IncrementBy_IncrementByReadOnly) + "_Counter";
-            using (PerformanceCounter counterSample = CreateCounterWithCategory(name, true, PerformanceCounterCategoryType.SingleInstance))
+            using (
+                PerformanceCounter counterSample = CreateCounterWithCategory(
+                    name,
+                    true,
+                    PerformanceCounterCategoryType.SingleInstance
+                )
+            )
             {
                 Assert.Throws<InvalidOperationException>(() => counterSample.IncrementBy(2));
                 Helpers.DeleteCategory(name);
             }
         }
 
-        [ConditionalFact(typeof(Helpers), nameof(Helpers.IsElevatedAndCanWriteAndReadNetPerfCounters))]
+        [ConditionalFact(
+            typeof(Helpers),
+            nameof(Helpers.IsElevatedAndCanWriteAndReadNetPerfCounters)
+        )]
         public static void PerformanceCounter_Increment_IncrementReadOnly()
         {
             var name = nameof(PerformanceCounter_Increment_IncrementReadOnly) + "_Counter";
-            using (PerformanceCounter counterSample = CreateCounterWithCategory(name, true, PerformanceCounterCategoryType.SingleInstance))
+            using (
+                PerformanceCounter counterSample = CreateCounterWithCategory(
+                    name,
+                    true,
+                    PerformanceCounterCategoryType.SingleInstance
+                )
+            )
             {
                 Assert.Throws<InvalidOperationException>(() => counterSample.Increment());
                 Helpers.DeleteCategory(name);
             }
         }
 
-        [ConditionalFact(typeof(Helpers), nameof(Helpers.IsElevatedAndCanWriteAndReadNetPerfCounters))]
+        [ConditionalFact(
+            typeof(Helpers),
+            nameof(Helpers.IsElevatedAndCanWriteAndReadNetPerfCounters)
+        )]
         public static void PerformanceCounter_Decrement_DecrementReadOnly()
         {
             var name = nameof(PerformanceCounter_Decrement_DecrementReadOnly) + "_Counter";
-            using (PerformanceCounter counterSample = CreateCounterWithCategory(name, true, PerformanceCounterCategoryType.SingleInstance))
+            using (
+                PerformanceCounter counterSample = CreateCounterWithCategory(
+                    name,
+                    true,
+                    PerformanceCounterCategoryType.SingleInstance
+                )
+            )
             {
                 Assert.Throws<InvalidOperationException>(() => counterSample.Decrement());
                 Helpers.DeleteCategory(name);
@@ -258,7 +372,13 @@ namespace System.Diagnostics.Tests
         public static void PerformanceCounter_RemoveInstance()
         {
             var name = nameof(PerformanceCounter_RemoveInstance) + "_Counter";
-            using (PerformanceCounter counterSample = CreateCounterWithCategory(name, false, PerformanceCounterCategoryType.SingleInstance))
+            using (
+                PerformanceCounter counterSample = CreateCounterWithCategory(
+                    name,
+                    false,
+                    PerformanceCounterCategoryType.SingleInstance
+                )
+            )
             {
                 counterSample.RawValue = 100;
                 counterSample.RemoveInstance();
@@ -269,15 +389,28 @@ namespace System.Diagnostics.Tests
             }
         }
 
-        [ConditionalFact(typeof(Helpers), nameof(Helpers.IsElevatedAndCanWriteAndReadNetPerfCounters))]
+        [ConditionalFact(
+            typeof(Helpers),
+            nameof(Helpers.IsElevatedAndCanWriteAndReadNetPerfCounters)
+        )]
         public static void PerformanceCounter_NextSample_MultiInstance()
         {
             var name = nameof(PerformanceCounter_NextSample_MultiInstance) + "_Counter";
             var instance = name + "_Instance";
 
-            var category = Helpers.CreateCategory(name, PerformanceCounterCategoryType.MultiInstance);
+            var category = Helpers.CreateCategory(
+                name,
+                PerformanceCounterCategoryType.MultiInstance
+            );
 
-            using (PerformanceCounter counterSample = new PerformanceCounter(category, name, instance, false))
+            using (
+                PerformanceCounter counterSample = new PerformanceCounter(
+                    category,
+                    name,
+                    instance,
+                    false
+                )
+            )
             {
                 counterSample.RawValue = 10;
                 Helpers.RetryOnAllPlatforms(() => counterSample.Decrement());
@@ -287,11 +420,17 @@ namespace System.Diagnostics.Tests
             }
         }
 
-        public static PerformanceCounter CreateCounterWithCategory(string name, bool readOnly, PerformanceCounterCategoryType categoryType )
+        public static PerformanceCounter CreateCounterWithCategory(
+            string name,
+            bool readOnly,
+            PerformanceCounterCategoryType categoryType
+        )
         {
             var category = Helpers.CreateCategory(name, categoryType);
 
-            PerformanceCounter counterSample =  Helpers.RetryOnAllPlatforms(() => new PerformanceCounter(category, name, readOnly));
+            PerformanceCounter counterSample = Helpers.RetryOnAllPlatforms(
+                () => new PerformanceCounter(category, name, readOnly)
+            );
 
             return counterSample;
         }

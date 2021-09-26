@@ -16,58 +16,117 @@ namespace System.ServiceModel.Syndication.Tests
         [Fact]
         public void Add_Invoke_ReturnsExpected()
         {
-            SyndicationElementExtensionCollection elementExtensions = new SyndicationCategory().ElementExtensions;
+            SyndicationElementExtensionCollection elementExtensions =
+                new SyndicationCategory().ElementExtensions;
             elementExtensions.Add(new ExtensionObject { Value = 10 });
-            elementExtensions.Add(new SyndicationElementExtension(new ExtensionObject { Value = 11 }));
-            using (var stringReader = new StringReader(@"<SyndicationElementExtensionCollectionTests.ExtensionObject xmlns=""http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication"" xmlns:i=""http://www.w3.org/2001/XMLSchema-instance""><Value>12</Value></SyndicationElementExtensionCollectionTests.ExtensionObject>"))
+            elementExtensions.Add(
+                new SyndicationElementExtension(new ExtensionObject { Value = 11 })
+            );
+            using (
+                var stringReader = new StringReader(
+                    @"<SyndicationElementExtensionCollectionTests.ExtensionObject xmlns=""http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication"" xmlns:i=""http://www.w3.org/2001/XMLSchema-instance""><Value>12</Value></SyndicationElementExtensionCollectionTests.ExtensionObject>"
+                )
+            )
             using (XmlReader reader = XmlReader.Create(stringReader))
             {
                 elementExtensions.Add(reader);
             }
-            elementExtensions.Add(new ExtensionObject { Value = 13 }, new DataContractSerializer(typeof(ExtensionObject)));
+            elementExtensions.Add(
+                new ExtensionObject { Value = 13 },
+                new DataContractSerializer(typeof(ExtensionObject))
+            );
             elementExtensions.Add(new ExtensionObject { Value = 14 }, (DataContractSerializer)null);
-            elementExtensions.Add(new ExtensionObject { Value = 15 }, new XmlSerializer(typeof(ExtensionObject)));
+            elementExtensions.Add(
+                new ExtensionObject { Value = 15 },
+                new XmlSerializer(typeof(ExtensionObject))
+            );
             elementExtensions.Add(new ExtensionObject { Value = 16 }, (XmlSerializer)null);
-            elementExtensions.Add("outerName", "outerNamespace", new ExtensionObject { Value = 17 });
-            elementExtensions.Add("outerName", "outerNamespace", new ExtensionObject { Value = 18 }, new DataContractSerializer(typeof(ExtensionObject)));
-            elementExtensions.Add("outerName", "outerNamespace", new ExtensionObject { Value = 19 }, null);
+            elementExtensions.Add(
+                "outerName",
+                "outerNamespace",
+                new ExtensionObject { Value = 17 }
+            );
+            elementExtensions.Add(
+                "outerName",
+                "outerNamespace",
+                new ExtensionObject { Value = 18 },
+                new DataContractSerializer(typeof(ExtensionObject))
+            );
+            elementExtensions.Add(
+                "outerName",
+                "outerNamespace",
+                new ExtensionObject { Value = 19 },
+                null
+            );
 
             Assert.Equal(10, elementExtensions.Count);
 
             using (XmlReader reader = elementExtensions.GetReaderAtElementExtensions())
             {
-                Assert.Equal(@"<SyndicationElementExtensionCollectionTests.ExtensionObject xmlns=""http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests"" xmlns:i=""http://www.w3.org/2001/XMLSchema-instance""><Value>10</Value></SyndicationElementExtensionCollectionTests.ExtensionObject>", reader.ReadOuterXml());
+                Assert.Equal(
+                    @"<SyndicationElementExtensionCollectionTests.ExtensionObject xmlns=""http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests"" xmlns:i=""http://www.w3.org/2001/XMLSchema-instance""><Value>10</Value></SyndicationElementExtensionCollectionTests.ExtensionObject>",
+                    reader.ReadOuterXml()
+                );
             }
         }
 
         [Fact]
         public void Add_NullDataContractExtension_ThrowsArgumentNullException()
         {
-            SyndicationElementExtensionCollection elementExtensions = new SyndicationCategory().ElementExtensions;
-            AssertExtensions.Throws<ArgumentNullException>("dataContractExtension", () => elementExtensions.Add((object)null));
-            AssertExtensions.Throws<ArgumentNullException>("dataContractExtension", () => elementExtensions.Add(null, new DataContractSerializer(typeof(ExtensionObject))));
-            AssertExtensions.Throws<ArgumentNullException>("dataContractExtension", () => elementExtensions.Add("outerName", "outerNamespace", null));
-            AssertExtensions.Throws<ArgumentNullException>("dataContractExtension", () => elementExtensions.Add("outerName", "outerNamespace", null, new DataContractSerializer(typeof(ExtensionObject))));
+            SyndicationElementExtensionCollection elementExtensions =
+                new SyndicationCategory().ElementExtensions;
+            AssertExtensions.Throws<ArgumentNullException>(
+                "dataContractExtension",
+                () => elementExtensions.Add((object)null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "dataContractExtension",
+                () =>
+                    elementExtensions.Add(null, new DataContractSerializer(typeof(ExtensionObject)))
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "dataContractExtension",
+                () => elementExtensions.Add("outerName", "outerNamespace", null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "dataContractExtension",
+                () =>
+                    elementExtensions.Add(
+                        "outerName",
+                        "outerNamespace",
+                        null,
+                        new DataContractSerializer(typeof(ExtensionObject))
+                    )
+            );
         }
 
         [Fact]
         public void Add_NullXmlSerializerExtension_ThrowsArgumentNullException()
         {
-            SyndicationElementExtensionCollection elementExtensions = new SyndicationCategory().ElementExtensions;
-            AssertExtensions.Throws<ArgumentNullException>("xmlSerializerExtension", () => elementExtensions.Add(null, new XmlSerializer(typeof(ExtensionObject))));
+            SyndicationElementExtensionCollection elementExtensions =
+                new SyndicationCategory().ElementExtensions;
+            AssertExtensions.Throws<ArgumentNullException>(
+                "xmlSerializerExtension",
+                () => elementExtensions.Add(null, new XmlSerializer(typeof(ExtensionObject)))
+            );
         }
 
         [Fact]
         public void Add_NullReader_ThrowsArgumentNullException()
         {
-            SyndicationElementExtensionCollection elementExtensions = new SyndicationCategory().ElementExtensions;
-            AssertExtensions.Throws<ArgumentNullException>("xmlReader", () => elementExtensions.Add(null));
+            SyndicationElementExtensionCollection elementExtensions =
+                new SyndicationCategory().ElementExtensions;
+            AssertExtensions.Throws<ArgumentNullException>(
+                "xmlReader",
+                () => elementExtensions.Add(null)
+            );
         }
 
         [Fact]
         public void Clear_Invoke_Success()
         {
-            SyndicationElementExtensionCollection elementExtensions = new SyndicationCategory().ElementExtensions;
+            SyndicationElementExtensionCollection elementExtensions =
+                new SyndicationCategory().ElementExtensions;
             elementExtensions.Add(new ExtensionObject { Value = 10 });
 
             elementExtensions.Clear();
@@ -81,7 +140,8 @@ namespace System.ServiceModel.Syndication.Tests
         public void Insert_Invoke_Success()
         {
             var extension = new SyndicationElementExtension(new ExtensionObject { Value = 10 });
-            SyndicationElementExtensionCollection elementExtensions = new SyndicationCategory().ElementExtensions;
+            SyndicationElementExtensionCollection elementExtensions =
+                new SyndicationCategory().ElementExtensions;
 
             elementExtensions.Insert(0, extension);
             Assert.Same(extension, elementExtensions[0]);
@@ -90,15 +150,20 @@ namespace System.ServiceModel.Syndication.Tests
         [Fact]
         public void Insert_Null_ThrowsArgumentNullException()
         {
-            SyndicationElementExtensionCollection elementExtensions = new SyndicationCategory().ElementExtensions;
-            AssertExtensions.Throws<ArgumentNullException>("item", () => elementExtensions.Insert(0, null));
+            SyndicationElementExtensionCollection elementExtensions =
+                new SyndicationCategory().ElementExtensions;
+            AssertExtensions.Throws<ArgumentNullException>(
+                "item",
+                () => elementExtensions.Insert(0, null)
+            );
         }
 
         [Fact]
         public void ItemSet_Get_ReturnsExpected()
         {
             var extension = new SyndicationElementExtension(new ExtensionObject { Value = 10 });
-            SyndicationElementExtensionCollection elementExtensions = new SyndicationCategory().ElementExtensions;
+            SyndicationElementExtensionCollection elementExtensions =
+                new SyndicationCategory().ElementExtensions;
             elementExtensions.Add(new ExtensionObject { Value = 9 });
 
             elementExtensions[0] = extension;
@@ -108,17 +173,22 @@ namespace System.ServiceModel.Syndication.Tests
         [Fact]
         public void ItemSet_Null_ThrowsArgumentNullException()
         {
-            SyndicationElementExtensionCollection elementExtensions = new SyndicationCategory().ElementExtensions;
+            SyndicationElementExtensionCollection elementExtensions =
+                new SyndicationCategory().ElementExtensions;
             elementExtensions.Add(new ExtensionObject { Value = 9 });
 
-            AssertExtensions.Throws<ArgumentNullException>("item", () => elementExtensions[0] = null);
+            AssertExtensions.Throws<ArgumentNullException>(
+                "item",
+                () => elementExtensions[0] = null
+            );
         }
 
         [Fact]
         public void Remove_Invoke_Success()
         {
             var extension = new SyndicationElementExtension(new ExtensionObject { Value = 10 });
-            SyndicationElementExtensionCollection elementExtensions = new SyndicationCategory().ElementExtensions;
+            SyndicationElementExtensionCollection elementExtensions =
+                new SyndicationCategory().ElementExtensions;
             elementExtensions.Add(extension);
 
             elementExtensions.RemoveAt(0);
@@ -128,30 +198,47 @@ namespace System.ServiceModel.Syndication.Tests
         [Fact]
         public void GetReaderAtElementExtensions_InvokeMultipleTimes_ReturnsNewReader()
         {
-            SyndicationElementExtensionCollection elementExtensions = new SyndicationCategory().ElementExtensions;
-            Assert.NotSame(elementExtensions.GetReaderAtElementExtensions(), elementExtensions.GetReaderAtElementExtensions());
+            SyndicationElementExtensionCollection elementExtensions =
+                new SyndicationCategory().ElementExtensions;
+            Assert.NotSame(
+                elementExtensions.GetReaderAtElementExtensions(),
+                elementExtensions.GetReaderAtElementExtensions()
+            );
         }
 
         [Fact]
         public void ReadElementExtensions_Invoke_ReturnsExpected()
         {
-            SyndicationElementExtensionCollection elementExtensions = new SyndicationCategory().ElementExtensions;
+            SyndicationElementExtensionCollection elementExtensions =
+                new SyndicationCategory().ElementExtensions;
             elementExtensions.Add(new ExtensionObject { Value = 10 });
             elementExtensions.Add(new ExtensionObject { Value = 11 });
             elementExtensions.Add(new OtherExtensionObject { Value = 11 });
             elementExtensions.Add(new Inner.OtherExtensionObject { Value = 11 });
 
-            Collection<ExtensionObject> results = elementExtensions.ReadElementExtensions<ExtensionObject>("SyndicationElementExtensionCollectionTests.ExtensionObject", "http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests");
+            Collection<ExtensionObject> results =
+                elementExtensions.ReadElementExtensions<ExtensionObject>(
+                    "SyndicationElementExtensionCollectionTests.ExtensionObject",
+                    "http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests"
+                );
             Assert.Equal(2, results.Count);
             Assert.Equal(10, results[0].Value);
             Assert.Equal(11, results[1].Value);
 
-            results = elementExtensions.ReadElementExtensions<ExtensionObject>("SyndicationElementExtensionCollectionTests.ExtensionObject", "http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests", new DataContractSerializer(typeof(ExtensionObject)));
+            results = elementExtensions.ReadElementExtensions<ExtensionObject>(
+                "SyndicationElementExtensionCollectionTests.ExtensionObject",
+                "http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests",
+                new DataContractSerializer(typeof(ExtensionObject))
+            );
             Assert.Equal(2, results.Count);
             Assert.Equal(10, results[0].Value);
             Assert.Equal(11, results[1].Value);
 
-            results = elementExtensions.ReadElementExtensions<ExtensionObject>("SyndicationElementExtensionCollectionTests.ExtensionObject", "http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests", new XmlSerializer(typeof(ExtensionObject)));
+            results = elementExtensions.ReadElementExtensions<ExtensionObject>(
+                "SyndicationElementExtensionCollectionTests.ExtensionObject",
+                "http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests",
+                new XmlSerializer(typeof(ExtensionObject))
+            );
             Assert.Equal(2, results.Count);
             Assert.Equal(10, results[0].Value);
             Assert.Equal(11, results[1].Value);
@@ -160,45 +247,126 @@ namespace System.ServiceModel.Syndication.Tests
         [Theory]
         [InlineData("NoSuchObject", null)]
         [InlineData("SyndicationElementExtensionCollectionTests.ExtensionObject", "")]
-        [InlineData("SyndicationElementExtensionCollectionTests.ExtensionObject", "http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Testss")]
-        [InlineData("SyndicationElementExtensionCollectionTests.extensionobject", "http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests")]
-        [InlineData("SyndicationElementExtensionCollectionTests.ExtensionObject", "http://schemas.datacontract.org/2004/07/system.servicemodel.syndication.tests")]
-        [InlineData("SyndicationElementExtensionCollectionTests.ExtensionObject", "System.ServiceModel.Syndication.Tests")]
+        [InlineData(
+            "SyndicationElementExtensionCollectionTests.ExtensionObject",
+            "http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Testss"
+        )]
+        [InlineData(
+            "SyndicationElementExtensionCollectionTests.extensionobject",
+            "http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests"
+        )]
+        [InlineData(
+            "SyndicationElementExtensionCollectionTests.ExtensionObject",
+            "http://schemas.datacontract.org/2004/07/system.servicemodel.syndication.tests"
+        )]
+        [InlineData(
+            "SyndicationElementExtensionCollectionTests.ExtensionObject",
+            "System.ServiceModel.Syndication.Tests"
+        )]
         public void ReadElementExtensions_NoSuchObject_ReturnsEmpty(string name, string ns)
         {
-            SyndicationElementExtensionCollection elementExtensions = new SyndicationCategory().ElementExtensions;
+            SyndicationElementExtensionCollection elementExtensions =
+                new SyndicationCategory().ElementExtensions;
             elementExtensions.Add(new ExtensionObject { Value = 10 });
             elementExtensions.Add(new ExtensionObject { Value = 11 });
 
             Assert.Empty(elementExtensions.ReadElementExtensions<ExtensionObject>(name, ns));
-            Assert.Empty(elementExtensions.ReadElementExtensions<ExtensionObject>(name, ns, new DataContractSerializer(typeof(ExtensionObject))));
-            Assert.Empty(elementExtensions.ReadElementExtensions<ExtensionObject>(name, ns, new XmlSerializer(typeof(ExtensionObject))));
+            Assert.Empty(
+                elementExtensions.ReadElementExtensions<ExtensionObject>(
+                    name,
+                    ns,
+                    new DataContractSerializer(typeof(ExtensionObject))
+                )
+            );
+            Assert.Empty(
+                elementExtensions.ReadElementExtensions<ExtensionObject>(
+                    name,
+                    ns,
+                    new XmlSerializer(typeof(ExtensionObject))
+                )
+            );
         }
 
         [Fact]
         public void ReadElementExtensions_Empty_ReturnsEmpty()
         {
-            SyndicationElementExtensionCollection elementExtensions = new SyndicationCategory().ElementExtensions;
-            Assert.Empty(elementExtensions.ReadElementExtensions<ExtensionObject>("ExtensionName", null));
-            Assert.Empty(elementExtensions.ReadElementExtensions<ExtensionObject>("ExtensionName", null, new DataContractSerializer(typeof(ExtensionObject))));
-            Assert.Empty(elementExtensions.ReadElementExtensions<ExtensionObject>("ExtensionName", null, new XmlSerializer(typeof(ExtensionObject))));
+            SyndicationElementExtensionCollection elementExtensions =
+                new SyndicationCategory().ElementExtensions;
+            Assert.Empty(
+                elementExtensions.ReadElementExtensions<ExtensionObject>("ExtensionName", null)
+            );
+            Assert.Empty(
+                elementExtensions.ReadElementExtensions<ExtensionObject>(
+                    "ExtensionName",
+                    null,
+                    new DataContractSerializer(typeof(ExtensionObject))
+                )
+            );
+            Assert.Empty(
+                elementExtensions.ReadElementExtensions<ExtensionObject>(
+                    "ExtensionName",
+                    null,
+                    new XmlSerializer(typeof(ExtensionObject))
+                )
+            );
         }
 
         [Fact]
         public void ReadElementExtensions_NullSerializer_ThrowsArgumentNullException()
         {
-            SyndicationElementExtensionCollection elementExtensions = new SyndicationCategory().ElementExtensions;
-            AssertExtensions.Throws<ArgumentNullException>("serializer", () => elementExtensions.ReadElementExtensions<SyndicationElementExtension>("extensionName", "extensionNamespace", (XmlObjectSerializer)null));
-            AssertExtensions.Throws<ArgumentNullException>("serializer", () => elementExtensions.ReadElementExtensions<SyndicationElementExtension>("extensionName", "extensionNamespace", (XmlSerializer)null));
+            SyndicationElementExtensionCollection elementExtensions =
+                new SyndicationCategory().ElementExtensions;
+            AssertExtensions.Throws<ArgumentNullException>(
+                "serializer",
+                () =>
+                    elementExtensions.ReadElementExtensions<SyndicationElementExtension>(
+                        "extensionName",
+                        "extensionNamespace",
+                        (XmlObjectSerializer)null
+                    )
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "serializer",
+                () =>
+                    elementExtensions.ReadElementExtensions<SyndicationElementExtension>(
+                        "extensionName",
+                        "extensionNamespace",
+                        (XmlSerializer)null
+                    )
+            );
         }
 
         [Fact]
         public void ReadElementExtensions_EmptyExtensionName_ThrowsArgumentException()
         {
-            SyndicationElementExtensionCollection elementExtensions = new SyndicationCategory().ElementExtensions;
-            AssertExtensions.Throws<ArgumentException>(null, () => elementExtensions.ReadElementExtensions<SyndicationElementExtension>("", "extensionNamespace"));
-            AssertExtensions.Throws<ArgumentException>(null, () => elementExtensions.ReadElementExtensions<SyndicationElementExtension>("", "extensionNamespace", new DataContractSerializer(typeof(ExtensionObject))));
-            AssertExtensions.Throws<ArgumentException>(null, () => elementExtensions.ReadElementExtensions<SyndicationElementExtension>("", "extensionNamespace", new XmlSerializer(typeof(ExtensionObject))));
+            SyndicationElementExtensionCollection elementExtensions =
+                new SyndicationCategory().ElementExtensions;
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () =>
+                    elementExtensions.ReadElementExtensions<SyndicationElementExtension>(
+                        "",
+                        "extensionNamespace"
+                    )
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () =>
+                    elementExtensions.ReadElementExtensions<SyndicationElementExtension>(
+                        "",
+                        "extensionNamespace",
+                        new DataContractSerializer(typeof(ExtensionObject))
+                    )
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () =>
+                    elementExtensions.ReadElementExtensions<SyndicationElementExtension>(
+                        "",
+                        "extensionNamespace",
+                        new XmlSerializer(typeof(ExtensionObject))
+                    )
+            );
         }
 
         [Fact]

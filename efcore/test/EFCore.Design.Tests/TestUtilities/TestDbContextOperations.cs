@@ -13,9 +13,7 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             Assembly assembly,
             Assembly startupAssembly,
             string[] args,
-            AppServiceProviderFactory appServicesFactory)
-            : base(reporter, assembly, startupAssembly, args, appServicesFactory)
-        {
-        }
+            AppServiceProviderFactory appServicesFactory
+        ) : base(reporter, assembly, startupAssembly, args, appServicesFactory) { }
     }
 }

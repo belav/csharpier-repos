@@ -12,8 +12,7 @@ namespace System.Linq.Tests
         [Fact]
         public void SameResultsRepeatCallsIntQuery()
         {
-            var q = from x in new[] { 0.12335f }
-                    select x;
+            var q = from x in new[] { 0.12335f } select x;
 
             Assert.Equal(q.SingleOrDefault(), q.SingleOrDefault());
         }
@@ -21,16 +20,18 @@ namespace System.Linq.Tests
         [Fact]
         public void SameResultsRepeatCallsStringQuery()
         {
-            var q = from x in new[] { "" }
-                    select x;
+            var q = from x in new[] { "" } select x;
 
-            Assert.Equal(q.SingleOrDefault(string.IsNullOrEmpty), q.SingleOrDefault(string.IsNullOrEmpty));
+            Assert.Equal(
+                q.SingleOrDefault(string.IsNullOrEmpty),
+                q.SingleOrDefault(string.IsNullOrEmpty)
+            );
         }
 
         [Fact]
         public void EmptyIList()
         {
-            int?[] source = { };
+            int?[] source = {  };
             int? expected = null;
 
             Assert.Equal(expected, source.SingleOrDefault());
@@ -39,7 +40,7 @@ namespace System.Linq.Tests
         [Fact]
         public void EmptyIListDefault()
         {
-            int?[] source = { };
+            int?[] source = {  };
             int expected = 5;
 
             Assert.Equal(expected, source.SingleOrDefault(5));
@@ -108,7 +109,7 @@ namespace System.Linq.Tests
         [Fact]
         public void EmptySourceWithPredicate()
         {
-            int[] source = { };
+            int[] source = {  };
             int expected = default(int);
 
             Assert.Equal(expected, source.SingleOrDefault(i => i % 2 == 0));
@@ -117,7 +118,7 @@ namespace System.Linq.Tests
         [Fact]
         public void EmptySourceWithPredicateDefault()
         {
-            int[] source = { };
+            int[] source = {  };
             int expected = 5;
 
             Assert.Equal(expected, source.SingleOrDefault(i => i % 2 == 0, 5));
@@ -208,7 +209,9 @@ namespace System.Linq.Tests
         {
             int[] source = { 2, 3, 1, 7, 10, 13, 19, 9 };
 
-            Assert.Throws<InvalidOperationException>(() => source.SingleOrDefault(i => i % 2 == 0, 5));
+            Assert.Throws<InvalidOperationException>(
+                () => source.SingleOrDefault(i => i % 2 == 0, 5)
+            );
         }
 
         [Theory]
@@ -224,39 +227,60 @@ namespace System.Linq.Tests
         [InlineData(42, 100)]
         public void RunOnce(int target, int range)
         {
-            Assert.Equal(target, Enumerable.Range(0, range).RunOnce().SingleOrDefault(i => i == target));
+            Assert.Equal(
+                target,
+                Enumerable.Range(0, range).RunOnce().SingleOrDefault(i => i == target)
+            );
         }
 
         [Fact]
         public void ThrowsOnNullSource()
         {
             int[] source = null;
-            AssertExtensions.Throws<ArgumentNullException>("source", () => source.SingleOrDefault());
-            AssertExtensions.Throws<ArgumentNullException>("source", () => source.SingleOrDefault(i => i % 2 == 0));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => source.SingleOrDefault()
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => source.SingleOrDefault(i => i % 2 == 0)
+            );
         }
 
         [Fact]
         public void ThrowsOnNullSourceDefault()
         {
             int[] source = null;
-            AssertExtensions.Throws<ArgumentNullException>("source", () => source.SingleOrDefault(5));
-            AssertExtensions.Throws<ArgumentNullException>("source", () => source.SingleOrDefault(i => i % 2 == 0, 5));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => source.SingleOrDefault(5)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => source.SingleOrDefault(i => i % 2 == 0, 5)
+            );
         }
 
         [Fact]
         public void ThrowsOnNullPredicate()
         {
-            int[] source = { };
+            int[] source = {  };
             Func<int, bool> nullPredicate = null;
-            AssertExtensions.Throws<ArgumentNullException>("predicate", () => source.SingleOrDefault(nullPredicate));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "predicate",
+                () => source.SingleOrDefault(nullPredicate)
+            );
         }
 
         [Fact]
         public void ThrowsOnNullPredicateDefault()
         {
-            int[] source = { };
+            int[] source = {  };
             Func<int, bool> nullPredicate = null;
-            AssertExtensions.Throws<ArgumentNullException>("predicate", () => source.SingleOrDefault(nullPredicate, 5));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "predicate",
+                () => source.SingleOrDefault(nullPredicate, 5)
+            );
         }
     }
 }

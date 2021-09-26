@@ -22,8 +22,7 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
 
         public override bool CanSeek => false;
 
-        public override long Length
-            => throw new NotSupportedException();
+        public override long Length => throw new NotSupportedException();
 
         public override long Position
         {
@@ -31,9 +30,7 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
             set => throw new NotSupportedException();
         }
 
-        public override void Flush()
-        {
-        }
+        public override void Flush() { }
 
         public override Task FlushAsync(CancellationToken cancellationToken)
         {
@@ -55,7 +52,12 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
             throw new NotSupportedException();
         }
 
-        public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override Task WriteAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             throw new NotSupportedException();
         }

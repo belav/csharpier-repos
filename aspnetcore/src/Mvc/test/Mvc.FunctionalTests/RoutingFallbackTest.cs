@@ -10,15 +10,19 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 {
-    public class RoutingFallbackTest : IClassFixture<MvcTestFixture<RoutingWebSite.StartupForFallback>>
+    public class RoutingFallbackTest
+        : IClassFixture<MvcTestFixture<RoutingWebSite.StartupForFallback>>
     {
         public RoutingFallbackTest(MvcTestFixture<RoutingWebSite.StartupForFallback> fixture)
         {
-            var factory = fixture.Factories.FirstOrDefault() ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
+            var factory =
+                fixture.Factories.FirstOrDefault()
+                ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
             Client = factory.CreateDefaultClient();
         }
 
-        private static void ConfigureWebHostBuilder(IWebHostBuilder builder) => builder.UseStartup<RoutingWebSite.StartupForFallback>();
+        private static void ConfigureWebHostBuilder(IWebHostBuilder builder) =>
+            builder.UseStartup<RoutingWebSite.StartupForFallback>();
 
         public HttpClient Client { get; }
 
@@ -66,7 +70,10 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 
             // Assert
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-            Assert.Equal("Hello from fallback controller: /link_generation/Admin/Fallback/Index", content);
+            Assert.Equal(
+                "Hello from fallback controller: /link_generation/Admin/Fallback/Index",
+                content
+            );
         }
 
         [Fact]
@@ -82,7 +89,10 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 
             // Assert
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-            Assert.Equal("Hello from fallback controller POST: /link_generation/Admin/Fallback/Index", content);
+            Assert.Equal(
+                "Hello from fallback controller POST: /link_generation/Admin/Fallback/Index",
+                content
+            );
         }
 
         [Fact]
@@ -98,7 +108,10 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 
             // Assert
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-            Assert.Equal("Hello from fallback controller POST: /link_generation/Admin/Fallback/Index", content);
+            Assert.Equal(
+                "Hello from fallback controller POST: /link_generation/Admin/Fallback/Index",
+                content
+            );
         }
 
         [Fact]

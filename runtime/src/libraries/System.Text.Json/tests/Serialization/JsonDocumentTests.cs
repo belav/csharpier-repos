@@ -31,15 +31,15 @@ namespace System.Text.Json.Serialization.Tests
             public JsonDocument Document { get; set; }
 
             public static readonly string s_json =
-                @"{" +
-                    @"""Number"" : 1," +
-                    @"""True"" : true," +
-                    @"""False"" : false," +
-                    @"""String"" : ""Hello""," +
-                    @"""Array"" : [2, false, true, ""Goodbye""]," +
-                    @"""Object"" : {}," +
-                    @"""Null"" : null" +
-                @"}";
+                @"{"
+                + @"""Number"" : 1,"
+                + @"""True"" : true,"
+                + @"""False"" : false,"
+                + @"""String"" : ""Hello"","
+                + @"""Array"" : [2, false, true, ""Goodbye""],"
+                + @"""Object"" : {},"
+                + @"""Null"" : null"
+                + @"}";
 
             public readonly byte[] s_data = Encoding.UTF8.GetBytes(s_json);
 
@@ -98,7 +98,10 @@ namespace System.Text.Json.Serialization.Tests
 
             // Properties in the exported json will be in the order that they were reflected, doing a quick check to see that
             // we end up with the same length (i.e. same amount of data) to start.
-            Assert.Equal(JsonDocumentArrayClass.s_json.StripWhitespace().Length, reserialized.Length);
+            Assert.Equal(
+                JsonDocumentArrayClass.s_json.StripWhitespace().Length,
+                reserialized.Length
+            );
 
             // Shoving it back through the parser should validate round tripping.
             obj.Document = JsonSerializer.Deserialize<JsonDocument>(reserialized);
@@ -110,16 +113,16 @@ namespace System.Text.Json.Serialization.Tests
             public JsonDocument Document { get; set; }
 
             public static readonly string s_json =
-                @"{" +
-                    @"""Array"" : [" +
-                        @"1, " +
-                        @"true, " +
-                        @"false, " +
-                        @"""Hello""," +
-                        @"[2, false, true, ""Goodbye""]," +
-                        @"{}" +
-                    @"]" +
-                @"}";
+                @"{"
+                + @"""Array"" : ["
+                + @"1, "
+                + @"true, "
+                + @"false, "
+                + @"""Hello"","
+                + @"[2, false, true, ""Goodbye""],"
+                + @"{}"
+                + @"]"
+                + @"}";
 
             public static readonly byte[] s_data = Encoding.UTF8.GetBytes(s_json);
 
@@ -130,7 +133,9 @@ namespace System.Text.Json.Serialization.Tests
 
             public void Verify()
             {
-                JsonElement[] array = Document.RootElement.GetProperty("Array").EnumerateArray().ToArray();
+                JsonElement[] array = Document.RootElement.GetProperty("Array")
+                    .EnumerateArray()
+                    .ToArray();
 
                 Assert.Equal(JsonValueKind.Number, array[0].ValueKind);
                 Assert.Equal("1", array[0].ToString());
@@ -148,31 +153,49 @@ namespace System.Text.Json.Serialization.Tests
             }
         }
 
-        [Theory,
-            InlineData(5),
-            InlineData(10),
-            InlineData(20),
-            InlineData(1024)]
+        [Theory, InlineData(5), InlineData(10), InlineData(20), InlineData(1024)]
         public void ReadJsonDocumentFromStream(int defaultBufferSize)
         {
             // Streams need to read ahead when they hit objects or arrays that are assigned to JsonElement or object.
 
-            byte[] data = Encoding.UTF8.GetBytes(@"{""Data"":[1,true,{""City"":""MyCity""},null,""foo""]}");
+            byte[] data = Encoding.UTF8.GetBytes(
+                @"{""Data"":[1,true,{""City"":""MyCity""},null,""foo""]}"
+            );
             MemoryStream stream = new MemoryStream(data);
-            JsonDocument obj = JsonSerializer.DeserializeAsync<JsonDocument>(stream, new JsonSerializerOptions { DefaultBufferSize = defaultBufferSize }).Result;
+            JsonDocument obj =
+                JsonSerializer.DeserializeAsync<JsonDocument>(
+                    stream,
+                    new JsonSerializerOptions { DefaultBufferSize = defaultBufferSize }
+                ).Result;
 
             data = Encoding.UTF8.GetBytes(@"[1,true,{""City"":""MyCity""},null,""foo""]");
             stream = new MemoryStream(data);
-            obj = JsonSerializer.DeserializeAsync<JsonDocument>(stream, new JsonSerializerOptions { DefaultBufferSize = defaultBufferSize }).Result;
+            obj =
+                JsonSerializer.DeserializeAsync<JsonDocument>(
+                    stream,
+                    new JsonSerializerOptions { DefaultBufferSize = defaultBufferSize }
+                ).Result;
 
             // Ensure we fail with incomplete data
             data = Encoding.UTF8.GetBytes(@"{""Data"":[1,true,{""City"":""MyCity""},null,""foo""]");
             stream = new MemoryStream(data);
-            Assert.Throws<JsonException>(() => JsonSerializer.DeserializeAsync<JsonDocument>(stream, new JsonSerializerOptions { DefaultBufferSize = defaultBufferSize }).Result);
+            Assert.Throws<JsonException>(
+                () =>
+                    JsonSerializer.DeserializeAsync<JsonDocument>(
+                        stream,
+                        new JsonSerializerOptions { DefaultBufferSize = defaultBufferSize }
+                    ).Result
+            );
 
             data = Encoding.UTF8.GetBytes(@"[1,true,{""City"":""MyCity""},null,""foo""");
             stream = new MemoryStream(data);
-            Assert.Throws<JsonException>(() => JsonSerializer.DeserializeAsync<JsonDocument>(stream, new JsonSerializerOptions { DefaultBufferSize = defaultBufferSize }).Result);
+            Assert.Throws<JsonException>(
+                () =>
+                    JsonSerializer.DeserializeAsync<JsonDocument>(
+                        stream,
+                        new JsonSerializerOptions { DefaultBufferSize = defaultBufferSize }
+                    ).Result
+            );
         }
     }
 }

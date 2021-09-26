@@ -5,14 +5,20 @@ using Internal.TypeSystem;
 
 namespace ILCompiler.DependencyAnalysis.ReadyToRun
 {
-    public class ImportSectionsTableNode : ArrayOfEmbeddedDataNode<ImportSectionNode>, ISignatureEmitter
+    public class ImportSectionsTableNode
+        : ArrayOfEmbeddedDataNode<ImportSectionNode>,
+          ISignatureEmitter
     {
         private readonly NodeFactory _r2rFactory;
 
         private bool _materializedSignature;
 
         public ImportSectionsTableNode(NodeFactory r2rFactory)
-            : base("ImportSectionsTableStart", "ImportSectionsTableEnd", new EmbeddedObjectNodeComparer(new CompilerComparer()))
+            : base(
+                "ImportSectionsTableStart",
+                "ImportSectionsTableEnd",
+                new EmbeddedObjectNodeComparer(new CompilerComparer())
+            )
         {
             _r2rFactory = r2rFactory;
             _r2rFactory.ManifestMetadataTable.RegisterEmitter(this);
@@ -30,7 +36,11 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             }
         }
 
-        protected override void GetElementDataForNodes(ref ObjectDataBuilder builder, NodeFactory factory, bool relocsOnly)
+        protected override void GetElementDataForNodes(
+            ref ObjectDataBuilder builder,
+            NodeFactory factory,
+            bool relocsOnly
+        )
         {
             builder.RequireInitialPointerAlignment();
             int index = 0;

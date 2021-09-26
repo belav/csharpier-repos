@@ -49,9 +49,7 @@ namespace System.Collections.Generic
         {
             Debug.Assert(Column <= endColumn);
 
-            return Column == endColumn ?
-                new CopyPosition(Row + 1, 0) :
-                this;
+            return Column == endColumn ? new CopyPosition(Row + 1, 0) : this;
         }
 
         /// <summary>

@@ -16,54 +16,58 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertConditional
 {
     public partial class InvertConditionalTests : AbstractCSharpCodeActionTest
     {
-        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(Workspace workspace, TestParameters parameters)
-            => new CSharpInvertConditionalCodeRefactoringProvider();
+        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
+            Workspace workspace,
+            TestParameters parameters
+        ) => new CSharpInvertConditionalCodeRefactoringProvider();
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsInvertConditional)]
         public async Task InvertConditional1()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool x, int a, int b)
     {
         var c = x [||]? a : b;
     }
 }",
-@"class C
+                @"class C
 {
     void M(bool x, int a, int b)
     {
         var c = !x ? b : a;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsInvertConditional)]
         public async Task InvertConditional2()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool x, int a, int b)
     {
         var c = !x [||]? a : b;
     }
 }",
-@"class C
+                @"class C
 {
     void M(bool x, int a, int b)
     {
         var c = x ? b : a;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsInvertConditional)]
         public async Task TestTrivia()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool x, int a, int b)
     {
@@ -72,7 +76,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertConditional
             : b;
     }
 }",
-@"class C
+                @"class C
 {
     void M(bool x, int a, int b)
     {
@@ -80,14 +84,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertConditional
             ? b
             : a;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsInvertConditional)]
         public async Task TestTrivia1()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool x, int a, int b)
     {
@@ -96,7 +101,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertConditional
             b;
     }
 }",
-@"class C
+                @"class C
 {
     void M(bool x, int a, int b)
     {
@@ -104,7 +109,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertConditional
             b :
             a;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsInvertConditional)]
@@ -114,7 +120,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertConditional
             // trying to intelligently do that in the future.  It would require moving the comments,
             // but preserving the whitespace/newlines.
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool x, int a, int b)
     {
@@ -123,7 +129,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertConditional
             : b /*trivia2*/;
     }
 }",
-@"class C
+                @"class C
 {
     void M(bool x, int a, int b)
     {
@@ -131,27 +137,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertConditional
             ? b /*trivia1*/
             : a /*trivia2*/;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsInvertConditional)]
         public async Task TestStartOfConditional()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool x, int a, int b)
     {
         var c = [||]x ? a : b;
     }
 }",
-@"class C
+                @"class C
 {
     void M(bool x, int a, int b)
     {
         var c = !x ? b : a;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(35525, "https://github.com/dotnet/roslyn/issues/35525")]
@@ -159,20 +167,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertConditional
         public async Task TestAfterCondition()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool x, int a, int b)
     {
         var c = x ? a [||]: b;
     }
 }",
-@"class C
+                @"class C
 {
     void M(bool x, int a, int b)
     {
         var c = !x ? b : a;
     }
-}");
+}"
+            );
         }
     }
 }

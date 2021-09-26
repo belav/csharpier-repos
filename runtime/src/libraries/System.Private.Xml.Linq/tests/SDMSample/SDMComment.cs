@@ -73,9 +73,11 @@ namespace XDocumentTests.SDMSample
             Assert.True(XNode.DeepEquals(c1, c2));
             Assert.False(XNode.DeepEquals(c1, c3));
 
-            Assert.Equal(XNode.EqualityComparer.GetHashCode(c1), XNode.EqualityComparer.GetHashCode(c2));
+            Assert.Equal(
+                XNode.EqualityComparer.GetHashCode(c1),
+                XNode.EqualityComparer.GetHashCode(c2)
+            );
         }
-
 
         /// <summary>
         /// Validates the behavior of the Value property on XComment.
@@ -115,7 +117,10 @@ namespace XDocumentTests.SDMSample
 
             xmlWriter.Flush();
 
-            Assert.Equal("<?xml version=\"1.0\" encoding=\"utf-16\"?><x><!--abcd --></x>", stringBuilder.ToString());
+            Assert.Equal(
+                "<?xml version=\"1.0\" encoding=\"utf-16\"?><x><!--abcd --></x>",
+                stringBuilder.ToString()
+            );
         }
     }
 }

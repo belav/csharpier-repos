@@ -18,8 +18,11 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
     /// </summary>
     public class SelfHostDeployer : ApplicationDeployer
     {
-        private static readonly Regex NowListeningRegex = new Regex(@"^\s*Now listening on: (?<url>.*)$");
-        private const string ApplicationStartedMessage = "Application started. Press Ctrl+C to shut down.";
+        private static readonly Regex NowListeningRegex = new Regex(
+            @"^\s*Now listening on: (?<url>.*)$"
+        );
+        private const string ApplicationStartedMessage =
+            "Application started. Press Ctrl+C to shut down.";
 
         public Process HostProcess { get; private set; }
 
@@ -28,10 +31,10 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
         // in order to capture process output from the beginning of the process
         public Action<string> ProcessOutputListener { get; set; }
 
-        public SelfHostDeployer(DeploymentParameters deploymentParameters, ILoggerFactory loggerFactory)
-            : base(deploymentParameters, loggerFactory)
-        {
-        }
+        public SelfHostDeployer(
+            DeploymentParameters deploymentParameters,
+            ILoggerFactory loggerFactory
+        ) : base(deploymentParameters, loggerFactory) { }
 
         public override async Task<DeploymentResult> DeployAsync()
         {
@@ -40,15 +43,19 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
                 // Start timer
                 StartTimer();
 
-                if (DeploymentParameters.RuntimeFlavor == RuntimeFlavor.Clr
-                        && DeploymentParameters.RuntimeArchitecture == RuntimeArchitecture.x86)
+                if (
+                    DeploymentParameters.RuntimeFlavor == RuntimeFlavor.Clr
+                    && DeploymentParameters.RuntimeArchitecture == RuntimeArchitecture.x86
+                )
                 {
                     // Publish is required to rebuild for the right bitness
                     DeploymentParameters.PublishApplicationBeforeDeployment = true;
                 }
 
-                if (DeploymentParameters.RuntimeFlavor == RuntimeFlavor.CoreClr
-                        && DeploymentParameters.ApplicationType == ApplicationType.Standalone)
+                if (
+                    DeploymentParameters.RuntimeFlavor == RuntimeFlavor.CoreClr
+                    && DeploymentParameters.ApplicationType == ApplicationType.Standalone
+                )
                 {
                     // Publish is required to get the correct files in the output directory
                     DeploymentParameters.PublishApplicationBeforeDeployment = true;
@@ -63,7 +70,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
                     DeploymentParameters.ServerType,
                     DeploymentParameters.Scheme,
                     DeploymentParameters.ApplicationBaseUriHint,
-                    DeploymentParameters.StatusMessagesEnabled);
+                    DeploymentParameters.StatusMessagesEnabled
+                );
 
                 // Launch the host process.
                 var (actualUrl, hostExitToken) = await StartSelfHostAsync(hintUrl);
@@ -74,20 +82,27 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
                     LoggerFactory,
                     DeploymentParameters,
                     applicationBaseUri: actualUrl.ToString(),
-                    contentRoot: DeploymentParameters.PublishApplicationBeforeDeployment ? DeploymentParameters.PublishedApplicationRootPath : DeploymentParameters.ApplicationPath,
-                    hostShutdownToken: hostExitToken);
+                    contentRoot: DeploymentParameters.PublishApplicationBeforeDeployment
+                      ? DeploymentParameters.PublishedApplicationRootPath
+                      : DeploymentParameters.ApplicationPath,
+                    hostShutdownToken: hostExitToken
+                );
             }
         }
 
-        protected async Task<(Uri url, CancellationToken hostExitToken)> StartSelfHostAsync(Uri hintUrl)
+        protected async Task<(Uri url, CancellationToken hostExitToken)> StartSelfHostAsync(
+            Uri hintUrl
+        )
         {
             using (Logger.BeginScope("StartSelfHost"))
             {
                 var executableName = string.Empty;
                 var executableArgs = string.Empty;
                 var workingDirectory = string.Empty;
-                var executableExtension = DeploymentParameters.ApplicationType == ApplicationType.Portable ? ".dll"
-                    : (OperatingSystem.IsWindows() ? ".exe" : "");
+                var executableExtension =
+                    DeploymentParameters.ApplicationType == ApplicationType.Portable
+                        ? ".dll"
+                        : (OperatingSystem.IsWindows() ? ".exe" : "");
 
                 if (DeploymentParameters.PublishApplicationBeforeDeployment)
                 {
@@ -97,16 +112,33 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
                 {
                     // Core+Standalone always publishes. This must be Clr+Standalone or Core+Portable.
                     // Run from the pre-built bin/{config}/{tfm} directory.
-                    var targetFramework = DeploymentParameters.TargetFramework
-                        ?? (DeploymentParameters.RuntimeFlavor == RuntimeFlavor.Clr ? Tfm.Net461 : Tfm.NetCoreApp22);
-                    workingDirectory = Path.Combine(DeploymentParameters.ApplicationPath, "bin", DeploymentParameters.Configuration, targetFramework);
+                    var targetFramework =
+                        DeploymentParameters.TargetFramework
+                        ?? (
+                            DeploymentParameters.RuntimeFlavor == RuntimeFlavor.Clr
+                                ? Tfm.Net461
+                                : Tfm.NetCoreApp22
+                        );
+                    workingDirectory = Path.Combine(
+                        DeploymentParameters.ApplicationPath,
+                        "bin",
+                        DeploymentParameters.Configuration,
+                        targetFramework
+                    );
                     // CurrentDirectory will point to bin/{config}/{tfm}, but the config and static files aren't copied, point to the app base instead.
-                    DeploymentParameters.EnvironmentVariables["ASPNETCORE_CONTENTROOT"] = DeploymentParameters.ApplicationPath;
+                    DeploymentParameters.EnvironmentVariables["ASPNETCORE_CONTENTROOT"] =
+                        DeploymentParameters.ApplicationPath;
                 }
 
-                var executable = Path.Combine(workingDirectory, DeploymentParameters.ApplicationName + executableExtension);
+                var executable = Path.Combine(
+                    workingDirectory,
+                    DeploymentParameters.ApplicationName + executableExtension
+                );
 
-                if (DeploymentParameters.RuntimeFlavor == RuntimeFlavor.CoreClr && DeploymentParameters.ApplicationType == ApplicationType.Portable)
+                if (
+                    DeploymentParameters.RuntimeFlavor == RuntimeFlavor.CoreClr
+                    && DeploymentParameters.ApplicationType == ApplicationType.Portable
+                )
                 {
                     executableName = GetDotNetExeForArchitecture();
                     executableArgs = executable;
@@ -116,8 +148,10 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
                     executableName = executable;
                 }
 
-                var server = DeploymentParameters.ServerType == ServerType.HttpSys
-                    ? "Microsoft.AspNetCore.Server.HttpSys" : "Microsoft.AspNetCore.Server.Kestrel";
+                var server =
+                    DeploymentParameters.ServerType == ServerType.HttpSys
+                        ? "Microsoft.AspNetCore.Server.HttpSys"
+                        : "Microsoft.AspNetCore.Server.Kestrel";
                 executableArgs += $" --urls {hintUrl} --server {server}";
 
                 Logger.LogInformation($"Executing {executableName} {executableArgs}");
@@ -141,7 +175,10 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
                 Logger.LogInformation($"{File.Exists(executableName)}");
                 Logger.LogInformation($"Arguments {executableArgs}");
 
-                AddEnvironmentVariablesToProcess(startInfo, DeploymentParameters.EnvironmentVariables);
+                AddEnvironmentVariablesToProcess(
+                    startInfo,
+                    DeploymentParameters.EnvironmentVariables
+                );
 
                 Uri actualUrl = null;
                 var started = new TaskCompletionSource();
@@ -171,7 +208,11 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
                     Logger.LogInformation("host process ID {pid} shut down", HostProcess.Id);
 
                     // If TrySetResult was called above, this will just silently fail to set the new state, which is what we want
-                    started.TrySetException(new Exception($"Command exited unexpectedly with exit code: {HostProcess.ExitCode}"));
+                    started.TrySetException(
+                        new Exception(
+                            $"Command exited unexpectedly with exit code: {HostProcess.ExitCode}"
+                        )
+                    );
 
                     TriggerHostShutdown(hostExitTokenSource);
                 };
@@ -182,16 +223,28 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
                 }
                 catch (Exception ex)
                 {
-                    Logger.LogError("Error occurred while starting the process. Exception: {exception}", ex.ToString());
+                    Logger.LogError(
+                        "Error occurred while starting the process. Exception: {exception}",
+                        ex.ToString()
+                    );
                 }
 
                 if (HostProcess.HasExited)
                 {
-                    Logger.LogError("Host process {processName} {pid} exited with code {exitCode} or failed to start.", startInfo.FileName, HostProcess.Id, HostProcess.ExitCode);
+                    Logger.LogError(
+                        "Host process {processName} {pid} exited with code {exitCode} or failed to start.",
+                        startInfo.FileName,
+                        HostProcess.Id,
+                        HostProcess.ExitCode
+                    );
                     throw new Exception("Failed to start host");
                 }
 
-                Logger.LogInformation("Started {fileName}. Process Id : {processId}", startInfo.FileName, HostProcess.Id);
+                Logger.LogInformation(
+                    "Started {fileName}. Process Id : {processId}",
+                    startInfo.FileName,
+                    HostProcess.Id
+                );
 
                 // Host may not write startup messages, in which case assume it started
                 if (DeploymentParameters.StatusMessagesEnabled)

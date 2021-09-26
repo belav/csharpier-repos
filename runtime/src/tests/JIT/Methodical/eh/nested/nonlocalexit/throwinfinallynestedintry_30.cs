@@ -265,77 +265,130 @@ class Class1
                                                         Console.WriteLine("------------in foo try");
                                                         try
                                                         {
-                                                            Console.WriteLine("-------------in foo try");
+                                                            Console.WriteLine(
+                                                                "-------------in foo try"
+                                                            );
                                                             try
                                                             {
-                                                                Console.WriteLine("--------------in foo try");
+                                                                Console.WriteLine(
+                                                                    "--------------in foo try"
+                                                                );
                                                                 try
                                                                 {
-                                                                    Console.WriteLine("---------------in foo try");
+                                                                    Console.WriteLine(
+                                                                        "---------------in foo try"
+                                                                    );
                                                                     try
                                                                     {
-                                                                        Console.WriteLine("----------------in foo try");
+                                                                        Console.WriteLine(
+                                                                            "----------------in foo try"
+                                                                        );
                                                                         try
                                                                         {
-                                                                            Console.WriteLine("-----------------in foo try");
+                                                                            Console.WriteLine(
+                                                                                "-----------------in foo try"
+                                                                            );
                                                                             try
                                                                             {
-                                                                                Console.WriteLine("------------------in foo try");
+                                                                                Console.WriteLine(
+                                                                                    "------------------in foo try"
+                                                                                );
                                                                                 try
                                                                                 {
-                                                                                    Console.WriteLine("-------------------in foo try");
+                                                                                    Console.WriteLine(
+                                                                                        "-------------------in foo try"
+                                                                                    );
                                                                                     try
                                                                                     {
-                                                                                        Console.WriteLine("--------------------in foo try");
+                                                                                        Console.WriteLine(
+                                                                                            "--------------------in foo try"
+                                                                                        );
                                                                                         try
                                                                                         {
-                                                                                            Console.WriteLine("---------------------in foo try");
+                                                                                            Console.WriteLine(
+                                                                                                "---------------------in foo try"
+                                                                                            );
                                                                                             try
                                                                                             {
-                                                                                                Console.WriteLine("----------------------in foo try");
+                                                                                                Console.WriteLine(
+                                                                                                    "----------------------in foo try"
+                                                                                                );
                                                                                                 try
                                                                                                 {
-                                                                                                    Console.WriteLine("-----------------------in foo try");
+                                                                                                    Console.WriteLine(
+                                                                                                        "-----------------------in foo try"
+                                                                                                    );
                                                                                                     try
                                                                                                     {
-                                                                                                        Console.WriteLine("------------------------in foo try");
+                                                                                                        Console.WriteLine(
+                                                                                                            "------------------------in foo try"
+                                                                                                        );
                                                                                                         try
                                                                                                         {
-                                                                                                            Console.WriteLine("-------------------------in foo try");
+                                                                                                            Console.WriteLine(
+                                                                                                                "-------------------------in foo try"
+                                                                                                            );
                                                                                                             try
                                                                                                             {
-                                                                                                                Console.WriteLine("--------------------------in foo try");
+                                                                                                                Console.WriteLine(
+                                                                                                                    "--------------------------in foo try"
+                                                                                                                );
                                                                                                                 try
                                                                                                                 {
-                                                                                                                    Console.WriteLine("---------------------------in foo try");
+                                                                                                                    Console.WriteLine(
+                                                                                                                        "---------------------------in foo try"
+                                                                                                                    );
                                                                                                                     try
                                                                                                                     {
-                                                                                                                        Console.WriteLine("----------------------------in foo try");
+                                                                                                                        Console.WriteLine(
+                                                                                                                            "----------------------------in foo try"
+                                                                                                                        );
                                                                                                                         try
                                                                                                                         {
-                                                                                                                            Console.WriteLine("-----------------------------in foo try");
+                                                                                                                            Console.WriteLine(
+                                                                                                                                "-----------------------------in foo try"
+                                                                                                                            );
                                                                                                                             try
                                                                                                                             {
-                                                                                                                                Console.WriteLine("------------------------------in foo try");
+                                                                                                                                Console.WriteLine(
+                                                                                                                                    "------------------------------in foo try"
+                                                                                                                                );
                                                                                                                                 goto L30;
                                                                                                                             }
+
                                                                                                                             finally
                                                                                                                             {
-                                                                                                                                Console.WriteLine("------------------------------in foo finally");
+                                                                                                                                Console.WriteLine(
+                                                                                                                                    "------------------------------in foo finally"
+                                                                                                                                );
                                                                                                                             }
                                                                                                                             L30:
-                                                                                                                            Console.WriteLine("------------------------------foo L30");
+                                                                                                                            Console.WriteLine(
+                                                                                                                                "------------------------------foo L30"
+                                                                                                                            );
                                                                                                                             goto L29;
                                                                                                                         }
+
                                                                                                                         finally
                                                                                                                         {
-                                                                                                                            Console.WriteLine("-----------------------------in foo finally");
+                                                                                                                            Console.WriteLine(
+                                                                                                                                "-----------------------------in foo finally"
+                                                                                                                            );
                                                                                                                             try
                                                                                                                             {
-                                                                                                                                Console.WriteLine("------------------------------in foo try");
-                                                                                                                                if (i % 2 == 1)
+                                                                                                                                Console.WriteLine(
+                                                                                                                                    "------------------------------in foo try"
+                                                                                                                                );
+                                                                                                                                if (
+                                                                                                                                    i
+                                                                                                                                        % 2
+                                                                                                                                    == 1
+                                                                                                                                )
                                                                                                                                 {
-                                                                                                                                    Console.WriteLine("------------------------------throwing an exception [i = {0}]", i);
+                                                                                                                                    Console.WriteLine(
+                                                                                                                                        "------------------------------throwing an exception [i = {0}]",
+                                                                                                                                        i
+                                                                                                                                    );
                                                                                                                                     throw new Exception();
                                                                                                                                 }
                                                                                                                                 else
@@ -345,34 +398,61 @@ class Class1
                                                                                                                             }
                                                                                                                             catch
                                                                                                                             {
-                                                                                                                                Console.WriteLine("------------------------------in foo catch");
+                                                                                                                                Console.WriteLine(
+                                                                                                                                    "------------------------------in foo catch"
+                                                                                                                                );
                                                                                                                                 i++;
                                                                                                                             }
                                                                                                                             finally
                                                                                                                             {
-                                                                                                                                Console.WriteLine("------------------------------in foo finally");
-                                                                                                                                if (i % 2 == 0)
+                                                                                                                                Console.WriteLine(
+                                                                                                                                    "------------------------------in foo finally"
+                                                                                                                                );
+                                                                                                                                if (
+                                                                                                                                    i
+                                                                                                                                        % 2
+                                                                                                                                    == 0
+                                                                                                                                )
                                                                                                                                 {
-                                                                                                                                    Console.WriteLine("------------------------------throwing an exception [i = {0}]", i);
+                                                                                                                                    Console.WriteLine(
+                                                                                                                                        "------------------------------throwing an exception [i = {0}]",
+                                                                                                                                        i
+                                                                                                                                    );
                                                                                                                                     throw new Exception();
                                                                                                                                 }
                                                                                                                             }
                                                                                                                             L29A:
-                                                                                                                            Console.WriteLine("------------------------------foo L29A");
+                                                                                                                            Console.WriteLine(
+                                                                                                                                "------------------------------foo L29A"
+                                                                                                                            );
                                                                                                                         }
                                                                                                                         L29:
-                                                                                                                        Console.WriteLine("-----------------------------foo L29");
+                                                                                                                        Console.WriteLine(
+                                                                                                                            "-----------------------------foo L29"
+                                                                                                                        );
                                                                                                                         goto L28;
                                                                                                                     }
+
                                                                                                                     finally
                                                                                                                     {
-                                                                                                                        Console.WriteLine("----------------------------in foo finally");
+                                                                                                                        Console.WriteLine(
+                                                                                                                            "----------------------------in foo finally"
+                                                                                                                        );
                                                                                                                         try
                                                                                                                         {
-                                                                                                                            Console.WriteLine("-----------------------------in foo try");
-                                                                                                                            if (i % 2 == 0)
+                                                                                                                            Console.WriteLine(
+                                                                                                                                "-----------------------------in foo try"
+                                                                                                                            );
+                                                                                                                            if (
+                                                                                                                                i
+                                                                                                                                    % 2
+                                                                                                                                == 0
+                                                                                                                            )
                                                                                                                             {
-                                                                                                                                Console.WriteLine("-----------------------------throwing an exception [i = {0}]", i);
+                                                                                                                                Console.WriteLine(
+                                                                                                                                    "-----------------------------throwing an exception [i = {0}]",
+                                                                                                                                    i
+                                                                                                                                );
                                                                                                                                 throw new Exception();
                                                                                                                             }
                                                                                                                             else
@@ -382,34 +462,61 @@ class Class1
                                                                                                                         }
                                                                                                                         catch
                                                                                                                         {
-                                                                                                                            Console.WriteLine("-----------------------------in foo catch");
+                                                                                                                            Console.WriteLine(
+                                                                                                                                "-----------------------------in foo catch"
+                                                                                                                            );
                                                                                                                             i++;
                                                                                                                         }
                                                                                                                         finally
                                                                                                                         {
-                                                                                                                            Console.WriteLine("-----------------------------in foo finally");
-                                                                                                                            if (i % 2 == 1)
+                                                                                                                            Console.WriteLine(
+                                                                                                                                "-----------------------------in foo finally"
+                                                                                                                            );
+                                                                                                                            if (
+                                                                                                                                i
+                                                                                                                                    % 2
+                                                                                                                                == 1
+                                                                                                                            )
                                                                                                                             {
-                                                                                                                                Console.WriteLine("-----------------------------throwing an exception [i = {0}]", i);
+                                                                                                                                Console.WriteLine(
+                                                                                                                                    "-----------------------------throwing an exception [i = {0}]",
+                                                                                                                                    i
+                                                                                                                                );
                                                                                                                                 throw new Exception();
                                                                                                                             }
                                                                                                                         }
                                                                                                                         L28A:
-                                                                                                                        Console.WriteLine("-----------------------------foo L28A");
+                                                                                                                        Console.WriteLine(
+                                                                                                                            "-----------------------------foo L28A"
+                                                                                                                        );
                                                                                                                     }
                                                                                                                     L28:
-                                                                                                                    Console.WriteLine("----------------------------foo L28");
+                                                                                                                    Console.WriteLine(
+                                                                                                                        "----------------------------foo L28"
+                                                                                                                    );
                                                                                                                     goto L27;
                                                                                                                 }
+
                                                                                                                 finally
                                                                                                                 {
-                                                                                                                    Console.WriteLine("---------------------------in foo finally");
+                                                                                                                    Console.WriteLine(
+                                                                                                                        "---------------------------in foo finally"
+                                                                                                                    );
                                                                                                                     try
                                                                                                                     {
-                                                                                                                        Console.WriteLine("----------------------------in foo try");
-                                                                                                                        if (i % 2 == 1)
+                                                                                                                        Console.WriteLine(
+                                                                                                                            "----------------------------in foo try"
+                                                                                                                        );
+                                                                                                                        if (
+                                                                                                                            i
+                                                                                                                                % 2
+                                                                                                                            == 1
+                                                                                                                        )
                                                                                                                         {
-                                                                                                                            Console.WriteLine("----------------------------throwing an exception [i = {0}]", i);
+                                                                                                                            Console.WriteLine(
+                                                                                                                                "----------------------------throwing an exception [i = {0}]",
+                                                                                                                                i
+                                                                                                                            );
                                                                                                                             throw new Exception();
                                                                                                                         }
                                                                                                                         else
@@ -419,34 +526,61 @@ class Class1
                                                                                                                     }
                                                                                                                     catch
                                                                                                                     {
-                                                                                                                        Console.WriteLine("----------------------------in foo catch");
+                                                                                                                        Console.WriteLine(
+                                                                                                                            "----------------------------in foo catch"
+                                                                                                                        );
                                                                                                                         i++;
                                                                                                                     }
                                                                                                                     finally
                                                                                                                     {
-                                                                                                                        Console.WriteLine("----------------------------in foo finally");
-                                                                                                                        if (i % 2 == 0)
+                                                                                                                        Console.WriteLine(
+                                                                                                                            "----------------------------in foo finally"
+                                                                                                                        );
+                                                                                                                        if (
+                                                                                                                            i
+                                                                                                                                % 2
+                                                                                                                            == 0
+                                                                                                                        )
                                                                                                                         {
-                                                                                                                            Console.WriteLine("----------------------------throwing an exception [i = {0}]", i);
+                                                                                                                            Console.WriteLine(
+                                                                                                                                "----------------------------throwing an exception [i = {0}]",
+                                                                                                                                i
+                                                                                                                            );
                                                                                                                             throw new Exception();
                                                                                                                         }
                                                                                                                     }
                                                                                                                     L27A:
-                                                                                                                    Console.WriteLine("----------------------------foo L27A");
+                                                                                                                    Console.WriteLine(
+                                                                                                                        "----------------------------foo L27A"
+                                                                                                                    );
                                                                                                                 }
                                                                                                                 L27:
-                                                                                                                Console.WriteLine("---------------------------foo L27");
+                                                                                                                Console.WriteLine(
+                                                                                                                    "---------------------------foo L27"
+                                                                                                                );
                                                                                                                 goto L26;
                                                                                                             }
+
                                                                                                             finally
                                                                                                             {
-                                                                                                                Console.WriteLine("--------------------------in foo finally");
+                                                                                                                Console.WriteLine(
+                                                                                                                    "--------------------------in foo finally"
+                                                                                                                );
                                                                                                                 try
                                                                                                                 {
-                                                                                                                    Console.WriteLine("---------------------------in foo try");
-                                                                                                                    if (i % 2 == 0)
+                                                                                                                    Console.WriteLine(
+                                                                                                                        "---------------------------in foo try"
+                                                                                                                    );
+                                                                                                                    if (
+                                                                                                                        i
+                                                                                                                            % 2
+                                                                                                                        == 0
+                                                                                                                    )
                                                                                                                     {
-                                                                                                                        Console.WriteLine("---------------------------throwing an exception [i = {0}]", i);
+                                                                                                                        Console.WriteLine(
+                                                                                                                            "---------------------------throwing an exception [i = {0}]",
+                                                                                                                            i
+                                                                                                                        );
                                                                                                                         throw new Exception();
                                                                                                                     }
                                                                                                                     else
@@ -456,34 +590,61 @@ class Class1
                                                                                                                 }
                                                                                                                 catch
                                                                                                                 {
-                                                                                                                    Console.WriteLine("---------------------------in foo catch");
+                                                                                                                    Console.WriteLine(
+                                                                                                                        "---------------------------in foo catch"
+                                                                                                                    );
                                                                                                                     i++;
                                                                                                                 }
                                                                                                                 finally
                                                                                                                 {
-                                                                                                                    Console.WriteLine("---------------------------in foo finally");
-                                                                                                                    if (i % 2 == 1)
+                                                                                                                    Console.WriteLine(
+                                                                                                                        "---------------------------in foo finally"
+                                                                                                                    );
+                                                                                                                    if (
+                                                                                                                        i
+                                                                                                                            % 2
+                                                                                                                        == 1
+                                                                                                                    )
                                                                                                                     {
-                                                                                                                        Console.WriteLine("---------------------------throwing an exception [i = {0}]", i);
+                                                                                                                        Console.WriteLine(
+                                                                                                                            "---------------------------throwing an exception [i = {0}]",
+                                                                                                                            i
+                                                                                                                        );
                                                                                                                         throw new Exception();
                                                                                                                     }
                                                                                                                 }
                                                                                                                 L26A:
-                                                                                                                Console.WriteLine("---------------------------foo L26A");
+                                                                                                                Console.WriteLine(
+                                                                                                                    "---------------------------foo L26A"
+                                                                                                                );
                                                                                                             }
                                                                                                             L26:
-                                                                                                            Console.WriteLine("--------------------------foo L26");
+                                                                                                            Console.WriteLine(
+                                                                                                                "--------------------------foo L26"
+                                                                                                            );
                                                                                                             goto L25;
                                                                                                         }
+
                                                                                                         finally
                                                                                                         {
-                                                                                                            Console.WriteLine("-------------------------in foo finally");
+                                                                                                            Console.WriteLine(
+                                                                                                                "-------------------------in foo finally"
+                                                                                                            );
                                                                                                             try
                                                                                                             {
-                                                                                                                Console.WriteLine("--------------------------in foo try");
-                                                                                                                if (i % 2 == 1)
+                                                                                                                Console.WriteLine(
+                                                                                                                    "--------------------------in foo try"
+                                                                                                                );
+                                                                                                                if (
+                                                                                                                    i
+                                                                                                                        % 2
+                                                                                                                    == 1
+                                                                                                                )
                                                                                                                 {
-                                                                                                                    Console.WriteLine("--------------------------throwing an exception [i = {0}]", i);
+                                                                                                                    Console.WriteLine(
+                                                                                                                        "--------------------------throwing an exception [i = {0}]",
+                                                                                                                        i
+                                                                                                                    );
                                                                                                                     throw new Exception();
                                                                                                                 }
                                                                                                                 else
@@ -493,34 +654,61 @@ class Class1
                                                                                                             }
                                                                                                             catch
                                                                                                             {
-                                                                                                                Console.WriteLine("--------------------------in foo catch");
+                                                                                                                Console.WriteLine(
+                                                                                                                    "--------------------------in foo catch"
+                                                                                                                );
                                                                                                                 i++;
                                                                                                             }
                                                                                                             finally
                                                                                                             {
-                                                                                                                Console.WriteLine("--------------------------in foo finally");
-                                                                                                                if (i % 2 == 0)
+                                                                                                                Console.WriteLine(
+                                                                                                                    "--------------------------in foo finally"
+                                                                                                                );
+                                                                                                                if (
+                                                                                                                    i
+                                                                                                                        % 2
+                                                                                                                    == 0
+                                                                                                                )
                                                                                                                 {
-                                                                                                                    Console.WriteLine("--------------------------throwing an exception [i = {0}]", i);
+                                                                                                                    Console.WriteLine(
+                                                                                                                        "--------------------------throwing an exception [i = {0}]",
+                                                                                                                        i
+                                                                                                                    );
                                                                                                                     throw new Exception();
                                                                                                                 }
                                                                                                             }
                                                                                                             L25A:
-                                                                                                            Console.WriteLine("--------------------------foo L25A");
+                                                                                                            Console.WriteLine(
+                                                                                                                "--------------------------foo L25A"
+                                                                                                            );
                                                                                                         }
                                                                                                         L25:
-                                                                                                        Console.WriteLine("-------------------------foo L25");
+                                                                                                        Console.WriteLine(
+                                                                                                            "-------------------------foo L25"
+                                                                                                        );
                                                                                                         goto L24;
                                                                                                     }
+
                                                                                                     finally
                                                                                                     {
-                                                                                                        Console.WriteLine("------------------------in foo finally");
+                                                                                                        Console.WriteLine(
+                                                                                                            "------------------------in foo finally"
+                                                                                                        );
                                                                                                         try
                                                                                                         {
-                                                                                                            Console.WriteLine("-------------------------in foo try");
-                                                                                                            if (i % 2 == 0)
+                                                                                                            Console.WriteLine(
+                                                                                                                "-------------------------in foo try"
+                                                                                                            );
+                                                                                                            if (
+                                                                                                                i
+                                                                                                                    % 2
+                                                                                                                == 0
+                                                                                                            )
                                                                                                             {
-                                                                                                                Console.WriteLine("-------------------------throwing an exception [i = {0}]", i);
+                                                                                                                Console.WriteLine(
+                                                                                                                    "-------------------------throwing an exception [i = {0}]",
+                                                                                                                    i
+                                                                                                                );
                                                                                                                 throw new Exception();
                                                                                                             }
                                                                                                             else
@@ -530,34 +718,61 @@ class Class1
                                                                                                         }
                                                                                                         catch
                                                                                                         {
-                                                                                                            Console.WriteLine("-------------------------in foo catch");
+                                                                                                            Console.WriteLine(
+                                                                                                                "-------------------------in foo catch"
+                                                                                                            );
                                                                                                             i++;
                                                                                                         }
                                                                                                         finally
                                                                                                         {
-                                                                                                            Console.WriteLine("-------------------------in foo finally");
-                                                                                                            if (i % 2 == 1)
+                                                                                                            Console.WriteLine(
+                                                                                                                "-------------------------in foo finally"
+                                                                                                            );
+                                                                                                            if (
+                                                                                                                i
+                                                                                                                    % 2
+                                                                                                                == 1
+                                                                                                            )
                                                                                                             {
-                                                                                                                Console.WriteLine("-------------------------throwing an exception [i = {0}]", i);
+                                                                                                                Console.WriteLine(
+                                                                                                                    "-------------------------throwing an exception [i = {0}]",
+                                                                                                                    i
+                                                                                                                );
                                                                                                                 throw new Exception();
                                                                                                             }
                                                                                                         }
                                                                                                         L24A:
-                                                                                                        Console.WriteLine("-------------------------foo L24A");
+                                                                                                        Console.WriteLine(
+                                                                                                            "-------------------------foo L24A"
+                                                                                                        );
                                                                                                     }
                                                                                                     L24:
-                                                                                                    Console.WriteLine("------------------------foo L24");
+                                                                                                    Console.WriteLine(
+                                                                                                        "------------------------foo L24"
+                                                                                                    );
                                                                                                     goto L23;
                                                                                                 }
+
                                                                                                 finally
                                                                                                 {
-                                                                                                    Console.WriteLine("-----------------------in foo finally");
+                                                                                                    Console.WriteLine(
+                                                                                                        "-----------------------in foo finally"
+                                                                                                    );
                                                                                                     try
                                                                                                     {
-                                                                                                        Console.WriteLine("------------------------in foo try");
-                                                                                                        if (i % 2 == 1)
+                                                                                                        Console.WriteLine(
+                                                                                                            "------------------------in foo try"
+                                                                                                        );
+                                                                                                        if (
+                                                                                                            i
+                                                                                                                % 2
+                                                                                                            == 1
+                                                                                                        )
                                                                                                         {
-                                                                                                            Console.WriteLine("------------------------throwing an exception [i = {0}]", i);
+                                                                                                            Console.WriteLine(
+                                                                                                                "------------------------throwing an exception [i = {0}]",
+                                                                                                                i
+                                                                                                            );
                                                                                                             throw new Exception();
                                                                                                         }
                                                                                                         else
@@ -567,34 +782,61 @@ class Class1
                                                                                                     }
                                                                                                     catch
                                                                                                     {
-                                                                                                        Console.WriteLine("------------------------in foo catch");
+                                                                                                        Console.WriteLine(
+                                                                                                            "------------------------in foo catch"
+                                                                                                        );
                                                                                                         i++;
                                                                                                     }
                                                                                                     finally
                                                                                                     {
-                                                                                                        Console.WriteLine("------------------------in foo finally");
-                                                                                                        if (i % 2 == 0)
+                                                                                                        Console.WriteLine(
+                                                                                                            "------------------------in foo finally"
+                                                                                                        );
+                                                                                                        if (
+                                                                                                            i
+                                                                                                                % 2
+                                                                                                            == 0
+                                                                                                        )
                                                                                                         {
-                                                                                                            Console.WriteLine("------------------------throwing an exception [i = {0}]", i);
+                                                                                                            Console.WriteLine(
+                                                                                                                "------------------------throwing an exception [i = {0}]",
+                                                                                                                i
+                                                                                                            );
                                                                                                             throw new Exception();
                                                                                                         }
                                                                                                     }
                                                                                                     L23A:
-                                                                                                    Console.WriteLine("------------------------foo L23A");
+                                                                                                    Console.WriteLine(
+                                                                                                        "------------------------foo L23A"
+                                                                                                    );
                                                                                                 }
                                                                                                 L23:
-                                                                                                Console.WriteLine("-----------------------foo L23");
+                                                                                                Console.WriteLine(
+                                                                                                    "-----------------------foo L23"
+                                                                                                );
                                                                                                 goto L22;
                                                                                             }
+
                                                                                             finally
                                                                                             {
-                                                                                                Console.WriteLine("----------------------in foo finally");
+                                                                                                Console.WriteLine(
+                                                                                                    "----------------------in foo finally"
+                                                                                                );
                                                                                                 try
                                                                                                 {
-                                                                                                    Console.WriteLine("-----------------------in foo try");
-                                                                                                    if (i % 2 == 0)
+                                                                                                    Console.WriteLine(
+                                                                                                        "-----------------------in foo try"
+                                                                                                    );
+                                                                                                    if (
+                                                                                                        i
+                                                                                                            % 2
+                                                                                                        == 0
+                                                                                                    )
                                                                                                     {
-                                                                                                        Console.WriteLine("-----------------------throwing an exception [i = {0}]", i);
+                                                                                                        Console.WriteLine(
+                                                                                                            "-----------------------throwing an exception [i = {0}]",
+                                                                                                            i
+                                                                                                        );
                                                                                                         throw new Exception();
                                                                                                     }
                                                                                                     else
@@ -604,34 +846,61 @@ class Class1
                                                                                                 }
                                                                                                 catch
                                                                                                 {
-                                                                                                    Console.WriteLine("-----------------------in foo catch");
+                                                                                                    Console.WriteLine(
+                                                                                                        "-----------------------in foo catch"
+                                                                                                    );
                                                                                                     i++;
                                                                                                 }
                                                                                                 finally
                                                                                                 {
-                                                                                                    Console.WriteLine("-----------------------in foo finally");
-                                                                                                    if (i % 2 == 1)
+                                                                                                    Console.WriteLine(
+                                                                                                        "-----------------------in foo finally"
+                                                                                                    );
+                                                                                                    if (
+                                                                                                        i
+                                                                                                            % 2
+                                                                                                        == 1
+                                                                                                    )
                                                                                                     {
-                                                                                                        Console.WriteLine("-----------------------throwing an exception [i = {0}]", i);
+                                                                                                        Console.WriteLine(
+                                                                                                            "-----------------------throwing an exception [i = {0}]",
+                                                                                                            i
+                                                                                                        );
                                                                                                         throw new Exception();
                                                                                                     }
                                                                                                 }
                                                                                                 L22A:
-                                                                                                Console.WriteLine("-----------------------foo L22A");
+                                                                                                Console.WriteLine(
+                                                                                                    "-----------------------foo L22A"
+                                                                                                );
                                                                                             }
                                                                                             L22:
-                                                                                            Console.WriteLine("----------------------foo L22");
+                                                                                            Console.WriteLine(
+                                                                                                "----------------------foo L22"
+                                                                                            );
                                                                                             goto L21;
                                                                                         }
+
                                                                                         finally
                                                                                         {
-                                                                                            Console.WriteLine("---------------------in foo finally");
+                                                                                            Console.WriteLine(
+                                                                                                "---------------------in foo finally"
+                                                                                            );
                                                                                             try
                                                                                             {
-                                                                                                Console.WriteLine("----------------------in foo try");
-                                                                                                if (i % 2 == 1)
+                                                                                                Console.WriteLine(
+                                                                                                    "----------------------in foo try"
+                                                                                                );
+                                                                                                if (
+                                                                                                    i
+                                                                                                        % 2
+                                                                                                    == 1
+                                                                                                )
                                                                                                 {
-                                                                                                    Console.WriteLine("----------------------throwing an exception [i = {0}]", i);
+                                                                                                    Console.WriteLine(
+                                                                                                        "----------------------throwing an exception [i = {0}]",
+                                                                                                        i
+                                                                                                    );
                                                                                                     throw new Exception();
                                                                                                 }
                                                                                                 else
@@ -641,34 +910,61 @@ class Class1
                                                                                             }
                                                                                             catch
                                                                                             {
-                                                                                                Console.WriteLine("----------------------in foo catch");
+                                                                                                Console.WriteLine(
+                                                                                                    "----------------------in foo catch"
+                                                                                                );
                                                                                                 i++;
                                                                                             }
                                                                                             finally
                                                                                             {
-                                                                                                Console.WriteLine("----------------------in foo finally");
-                                                                                                if (i % 2 == 0)
+                                                                                                Console.WriteLine(
+                                                                                                    "----------------------in foo finally"
+                                                                                                );
+                                                                                                if (
+                                                                                                    i
+                                                                                                        % 2
+                                                                                                    == 0
+                                                                                                )
                                                                                                 {
-                                                                                                    Console.WriteLine("----------------------throwing an exception [i = {0}]", i);
+                                                                                                    Console.WriteLine(
+                                                                                                        "----------------------throwing an exception [i = {0}]",
+                                                                                                        i
+                                                                                                    );
                                                                                                     throw new Exception();
                                                                                                 }
                                                                                             }
                                                                                             L21A:
-                                                                                            Console.WriteLine("----------------------foo L21A");
+                                                                                            Console.WriteLine(
+                                                                                                "----------------------foo L21A"
+                                                                                            );
                                                                                         }
                                                                                         L21:
-                                                                                        Console.WriteLine("---------------------foo L21");
+                                                                                        Console.WriteLine(
+                                                                                            "---------------------foo L21"
+                                                                                        );
                                                                                         goto L20;
                                                                                     }
+
                                                                                     finally
                                                                                     {
-                                                                                        Console.WriteLine("--------------------in foo finally");
+                                                                                        Console.WriteLine(
+                                                                                            "--------------------in foo finally"
+                                                                                        );
                                                                                         try
                                                                                         {
-                                                                                            Console.WriteLine("---------------------in foo try");
-                                                                                            if (i % 2 == 0)
+                                                                                            Console.WriteLine(
+                                                                                                "---------------------in foo try"
+                                                                                            );
+                                                                                            if (
+                                                                                                i
+                                                                                                    % 2
+                                                                                                == 0
+                                                                                            )
                                                                                             {
-                                                                                                Console.WriteLine("---------------------throwing an exception [i = {0}]", i);
+                                                                                                Console.WriteLine(
+                                                                                                    "---------------------throwing an exception [i = {0}]",
+                                                                                                    i
+                                                                                                );
                                                                                                 throw new Exception();
                                                                                             }
                                                                                             else
@@ -678,34 +974,60 @@ class Class1
                                                                                         }
                                                                                         catch
                                                                                         {
-                                                                                            Console.WriteLine("---------------------in foo catch");
+                                                                                            Console.WriteLine(
+                                                                                                "---------------------in foo catch"
+                                                                                            );
                                                                                             i++;
                                                                                         }
                                                                                         finally
                                                                                         {
-                                                                                            Console.WriteLine("---------------------in foo finally");
-                                                                                            if (i % 2 == 1)
+                                                                                            Console.WriteLine(
+                                                                                                "---------------------in foo finally"
+                                                                                            );
+                                                                                            if (
+                                                                                                i
+                                                                                                    % 2
+                                                                                                == 1
+                                                                                            )
                                                                                             {
-                                                                                                Console.WriteLine("---------------------throwing an exception [i = {0}]", i);
+                                                                                                Console.WriteLine(
+                                                                                                    "---------------------throwing an exception [i = {0}]",
+                                                                                                    i
+                                                                                                );
                                                                                                 throw new Exception();
                                                                                             }
                                                                                         }
                                                                                         L20A:
-                                                                                        Console.WriteLine("---------------------foo L20A");
+                                                                                        Console.WriteLine(
+                                                                                            "---------------------foo L20A"
+                                                                                        );
                                                                                     }
                                                                                     L20:
-                                                                                    Console.WriteLine("--------------------foo L20");
+                                                                                    Console.WriteLine(
+                                                                                        "--------------------foo L20"
+                                                                                    );
                                                                                     goto L19;
                                                                                 }
+
                                                                                 finally
                                                                                 {
-                                                                                    Console.WriteLine("-------------------in foo finally");
+                                                                                    Console.WriteLine(
+                                                                                        "-------------------in foo finally"
+                                                                                    );
                                                                                     try
                                                                                     {
-                                                                                        Console.WriteLine("--------------------in foo try");
-                                                                                        if (i % 2 == 1)
+                                                                                        Console.WriteLine(
+                                                                                            "--------------------in foo try"
+                                                                                        );
+                                                                                        if (
+                                                                                            i % 2
+                                                                                            == 1
+                                                                                        )
                                                                                         {
-                                                                                            Console.WriteLine("--------------------throwing an exception [i = {0}]", i);
+                                                                                            Console.WriteLine(
+                                                                                                "--------------------throwing an exception [i = {0}]",
+                                                                                                i
+                                                                                            );
                                                                                             throw new Exception();
                                                                                         }
                                                                                         else
@@ -715,34 +1037,56 @@ class Class1
                                                                                     }
                                                                                     catch
                                                                                     {
-                                                                                        Console.WriteLine("--------------------in foo catch");
+                                                                                        Console.WriteLine(
+                                                                                            "--------------------in foo catch"
+                                                                                        );
                                                                                         i++;
                                                                                     }
                                                                                     finally
                                                                                     {
-                                                                                        Console.WriteLine("--------------------in foo finally");
-                                                                                        if (i % 2 == 0)
+                                                                                        Console.WriteLine(
+                                                                                            "--------------------in foo finally"
+                                                                                        );
+                                                                                        if (
+                                                                                            i % 2
+                                                                                            == 0
+                                                                                        )
                                                                                         {
-                                                                                            Console.WriteLine("--------------------throwing an exception [i = {0}]", i);
+                                                                                            Console.WriteLine(
+                                                                                                "--------------------throwing an exception [i = {0}]",
+                                                                                                i
+                                                                                            );
                                                                                             throw new Exception();
                                                                                         }
                                                                                     }
                                                                                     L19A:
-                                                                                    Console.WriteLine("--------------------foo L19A");
+                                                                                    Console.WriteLine(
+                                                                                        "--------------------foo L19A"
+                                                                                    );
                                                                                 }
                                                                                 L19:
-                                                                                Console.WriteLine("-------------------foo L19");
+                                                                                Console.WriteLine(
+                                                                                    "-------------------foo L19"
+                                                                                );
                                                                                 goto L18;
                                                                             }
+
                                                                             finally
                                                                             {
-                                                                                Console.WriteLine("------------------in foo finally");
+                                                                                Console.WriteLine(
+                                                                                    "------------------in foo finally"
+                                                                                );
                                                                                 try
                                                                                 {
-                                                                                    Console.WriteLine("-------------------in foo try");
+                                                                                    Console.WriteLine(
+                                                                                        "-------------------in foo try"
+                                                                                    );
                                                                                     if (i % 2 == 0)
                                                                                     {
-                                                                                        Console.WriteLine("-------------------throwing an exception [i = {0}]", i);
+                                                                                        Console.WriteLine(
+                                                                                            "-------------------throwing an exception [i = {0}]",
+                                                                                            i
+                                                                                        );
                                                                                         throw new Exception();
                                                                                     }
                                                                                     else
@@ -752,34 +1096,53 @@ class Class1
                                                                                 }
                                                                                 catch
                                                                                 {
-                                                                                    Console.WriteLine("-------------------in foo catch");
+                                                                                    Console.WriteLine(
+                                                                                        "-------------------in foo catch"
+                                                                                    );
                                                                                     i++;
                                                                                 }
                                                                                 finally
                                                                                 {
-                                                                                    Console.WriteLine("-------------------in foo finally");
+                                                                                    Console.WriteLine(
+                                                                                        "-------------------in foo finally"
+                                                                                    );
                                                                                     if (i % 2 == 1)
                                                                                     {
-                                                                                        Console.WriteLine("-------------------throwing an exception [i = {0}]", i);
+                                                                                        Console.WriteLine(
+                                                                                            "-------------------throwing an exception [i = {0}]",
+                                                                                            i
+                                                                                        );
                                                                                         throw new Exception();
                                                                                     }
                                                                                 }
                                                                                 L18A:
-                                                                                Console.WriteLine("-------------------foo L18A");
+                                                                                Console.WriteLine(
+                                                                                    "-------------------foo L18A"
+                                                                                );
                                                                             }
                                                                             L18:
-                                                                            Console.WriteLine("------------------foo L18");
+                                                                            Console.WriteLine(
+                                                                                "------------------foo L18"
+                                                                            );
                                                                             goto L17;
                                                                         }
+
                                                                         finally
                                                                         {
-                                                                            Console.WriteLine("-----------------in foo finally");
+                                                                            Console.WriteLine(
+                                                                                "-----------------in foo finally"
+                                                                            );
                                                                             try
                                                                             {
-                                                                                Console.WriteLine("------------------in foo try");
+                                                                                Console.WriteLine(
+                                                                                    "------------------in foo try"
+                                                                                );
                                                                                 if (i % 2 == 1)
                                                                                 {
-                                                                                    Console.WriteLine("------------------throwing an exception [i = {0}]", i);
+                                                                                    Console.WriteLine(
+                                                                                        "------------------throwing an exception [i = {0}]",
+                                                                                        i
+                                                                                    );
                                                                                     throw new Exception();
                                                                                 }
                                                                                 else
@@ -789,34 +1152,53 @@ class Class1
                                                                             }
                                                                             catch
                                                                             {
-                                                                                Console.WriteLine("------------------in foo catch");
+                                                                                Console.WriteLine(
+                                                                                    "------------------in foo catch"
+                                                                                );
                                                                                 i++;
                                                                             }
                                                                             finally
                                                                             {
-                                                                                Console.WriteLine("------------------in foo finally");
+                                                                                Console.WriteLine(
+                                                                                    "------------------in foo finally"
+                                                                                );
                                                                                 if (i % 2 == 0)
                                                                                 {
-                                                                                    Console.WriteLine("------------------throwing an exception [i = {0}]", i);
+                                                                                    Console.WriteLine(
+                                                                                        "------------------throwing an exception [i = {0}]",
+                                                                                        i
+                                                                                    );
                                                                                     throw new Exception();
                                                                                 }
                                                                             }
                                                                             L17A:
-                                                                            Console.WriteLine("------------------foo L17A");
+                                                                            Console.WriteLine(
+                                                                                "------------------foo L17A"
+                                                                            );
                                                                         }
                                                                         L17:
-                                                                        Console.WriteLine("-----------------foo L17");
+                                                                        Console.WriteLine(
+                                                                            "-----------------foo L17"
+                                                                        );
                                                                         goto L16;
                                                                     }
+
                                                                     finally
                                                                     {
-                                                                        Console.WriteLine("----------------in foo finally");
+                                                                        Console.WriteLine(
+                                                                            "----------------in foo finally"
+                                                                        );
                                                                         try
                                                                         {
-                                                                            Console.WriteLine("-----------------in foo try");
+                                                                            Console.WriteLine(
+                                                                                "-----------------in foo try"
+                                                                            );
                                                                             if (i % 2 == 0)
                                                                             {
-                                                                                Console.WriteLine("-----------------throwing an exception [i = {0}]", i);
+                                                                                Console.WriteLine(
+                                                                                    "-----------------throwing an exception [i = {0}]",
+                                                                                    i
+                                                                                );
                                                                                 throw new Exception();
                                                                             }
                                                                             else
@@ -826,34 +1208,53 @@ class Class1
                                                                         }
                                                                         catch
                                                                         {
-                                                                            Console.WriteLine("-----------------in foo catch");
+                                                                            Console.WriteLine(
+                                                                                "-----------------in foo catch"
+                                                                            );
                                                                             i++;
                                                                         }
                                                                         finally
                                                                         {
-                                                                            Console.WriteLine("-----------------in foo finally");
+                                                                            Console.WriteLine(
+                                                                                "-----------------in foo finally"
+                                                                            );
                                                                             if (i % 2 == 1)
                                                                             {
-                                                                                Console.WriteLine("-----------------throwing an exception [i = {0}]", i);
+                                                                                Console.WriteLine(
+                                                                                    "-----------------throwing an exception [i = {0}]",
+                                                                                    i
+                                                                                );
                                                                                 throw new Exception();
                                                                             }
                                                                         }
                                                                         L16A:
-                                                                        Console.WriteLine("-----------------foo L16A");
+                                                                        Console.WriteLine(
+                                                                            "-----------------foo L16A"
+                                                                        );
                                                                     }
                                                                     L16:
-                                                                    Console.WriteLine("----------------foo L16");
+                                                                    Console.WriteLine(
+                                                                        "----------------foo L16"
+                                                                    );
                                                                     goto L15;
                                                                 }
+
                                                                 finally
                                                                 {
-                                                                    Console.WriteLine("---------------in foo finally");
+                                                                    Console.WriteLine(
+                                                                        "---------------in foo finally"
+                                                                    );
                                                                     try
                                                                     {
-                                                                        Console.WriteLine("----------------in foo try");
+                                                                        Console.WriteLine(
+                                                                            "----------------in foo try"
+                                                                        );
                                                                         if (i % 2 == 1)
                                                                         {
-                                                                            Console.WriteLine("----------------throwing an exception [i = {0}]", i);
+                                                                            Console.WriteLine(
+                                                                                "----------------throwing an exception [i = {0}]",
+                                                                                i
+                                                                            );
                                                                             throw new Exception();
                                                                         }
                                                                         else
@@ -863,34 +1264,53 @@ class Class1
                                                                     }
                                                                     catch
                                                                     {
-                                                                        Console.WriteLine("----------------in foo catch");
+                                                                        Console.WriteLine(
+                                                                            "----------------in foo catch"
+                                                                        );
                                                                         i++;
                                                                     }
                                                                     finally
                                                                     {
-                                                                        Console.WriteLine("----------------in foo finally");
+                                                                        Console.WriteLine(
+                                                                            "----------------in foo finally"
+                                                                        );
                                                                         if (i % 2 == 0)
                                                                         {
-                                                                            Console.WriteLine("----------------throwing an exception [i = {0}]", i);
+                                                                            Console.WriteLine(
+                                                                                "----------------throwing an exception [i = {0}]",
+                                                                                i
+                                                                            );
                                                                             throw new Exception();
                                                                         }
                                                                     }
                                                                     L15A:
-                                                                    Console.WriteLine("----------------foo L15A");
+                                                                    Console.WriteLine(
+                                                                        "----------------foo L15A"
+                                                                    );
                                                                 }
                                                                 L15:
-                                                                Console.WriteLine("---------------foo L15");
+                                                                Console.WriteLine(
+                                                                    "---------------foo L15"
+                                                                );
                                                                 goto L14;
                                                             }
+
                                                             finally
                                                             {
-                                                                Console.WriteLine("--------------in foo finally");
+                                                                Console.WriteLine(
+                                                                    "--------------in foo finally"
+                                                                );
                                                                 try
                                                                 {
-                                                                    Console.WriteLine("---------------in foo try");
+                                                                    Console.WriteLine(
+                                                                        "---------------in foo try"
+                                                                    );
                                                                     if (i % 2 == 0)
                                                                     {
-                                                                        Console.WriteLine("---------------throwing an exception [i = {0}]", i);
+                                                                        Console.WriteLine(
+                                                                            "---------------throwing an exception [i = {0}]",
+                                                                            i
+                                                                        );
                                                                         throw new Exception();
                                                                     }
                                                                     else
@@ -900,34 +1320,53 @@ class Class1
                                                                 }
                                                                 catch
                                                                 {
-                                                                    Console.WriteLine("---------------in foo catch");
+                                                                    Console.WriteLine(
+                                                                        "---------------in foo catch"
+                                                                    );
                                                                     i++;
                                                                 }
                                                                 finally
                                                                 {
-                                                                    Console.WriteLine("---------------in foo finally");
+                                                                    Console.WriteLine(
+                                                                        "---------------in foo finally"
+                                                                    );
                                                                     if (i % 2 == 1)
                                                                     {
-                                                                        Console.WriteLine("---------------throwing an exception [i = {0}]", i);
+                                                                        Console.WriteLine(
+                                                                            "---------------throwing an exception [i = {0}]",
+                                                                            i
+                                                                        );
                                                                         throw new Exception();
                                                                     }
                                                                 }
                                                                 L14A:
-                                                                Console.WriteLine("---------------foo L14A");
+                                                                Console.WriteLine(
+                                                                    "---------------foo L14A"
+                                                                );
                                                             }
                                                             L14:
-                                                            Console.WriteLine("--------------foo L14");
+                                                            Console.WriteLine(
+                                                                "--------------foo L14"
+                                                            );
                                                             goto L13;
                                                         }
+
                                                         finally
                                                         {
-                                                            Console.WriteLine("-------------in foo finally");
+                                                            Console.WriteLine(
+                                                                "-------------in foo finally"
+                                                            );
                                                             try
                                                             {
-                                                                Console.WriteLine("--------------in foo try");
+                                                                Console.WriteLine(
+                                                                    "--------------in foo try"
+                                                                );
                                                                 if (i % 2 == 1)
                                                                 {
-                                                                    Console.WriteLine("--------------throwing an exception [i = {0}]", i);
+                                                                    Console.WriteLine(
+                                                                        "--------------throwing an exception [i = {0}]",
+                                                                        i
+                                                                    );
                                                                     throw new Exception();
                                                                 }
                                                                 else
@@ -937,34 +1376,51 @@ class Class1
                                                             }
                                                             catch
                                                             {
-                                                                Console.WriteLine("--------------in foo catch");
+                                                                Console.WriteLine(
+                                                                    "--------------in foo catch"
+                                                                );
                                                                 i++;
                                                             }
                                                             finally
                                                             {
-                                                                Console.WriteLine("--------------in foo finally");
+                                                                Console.WriteLine(
+                                                                    "--------------in foo finally"
+                                                                );
                                                                 if (i % 2 == 0)
                                                                 {
-                                                                    Console.WriteLine("--------------throwing an exception [i = {0}]", i);
+                                                                    Console.WriteLine(
+                                                                        "--------------throwing an exception [i = {0}]",
+                                                                        i
+                                                                    );
                                                                     throw new Exception();
                                                                 }
                                                             }
                                                             L13A:
-                                                            Console.WriteLine("--------------foo L13A");
+                                                            Console.WriteLine(
+                                                                "--------------foo L13A"
+                                                            );
                                                         }
                                                         L13:
                                                         Console.WriteLine("-------------foo L13");
                                                         goto L12;
                                                     }
+
                                                     finally
                                                     {
-                                                        Console.WriteLine("------------in foo finally");
+                                                        Console.WriteLine(
+                                                            "------------in foo finally"
+                                                        );
                                                         try
                                                         {
-                                                            Console.WriteLine("-------------in foo try");
+                                                            Console.WriteLine(
+                                                                "-------------in foo try"
+                                                            );
                                                             if (i % 2 == 0)
                                                             {
-                                                                Console.WriteLine("-------------throwing an exception [i = {0}]", i);
+                                                                Console.WriteLine(
+                                                                    "-------------throwing an exception [i = {0}]",
+                                                                    i
+                                                                );
                                                                 throw new Exception();
                                                             }
                                                             else
@@ -974,15 +1430,22 @@ class Class1
                                                         }
                                                         catch
                                                         {
-                                                            Console.WriteLine("-------------in foo catch");
+                                                            Console.WriteLine(
+                                                                "-------------in foo catch"
+                                                            );
                                                             i++;
                                                         }
                                                         finally
                                                         {
-                                                            Console.WriteLine("-------------in foo finally");
+                                                            Console.WriteLine(
+                                                                "-------------in foo finally"
+                                                            );
                                                             if (i % 2 == 1)
                                                             {
-                                                                Console.WriteLine("-------------throwing an exception [i = {0}]", i);
+                                                                Console.WriteLine(
+                                                                    "-------------throwing an exception [i = {0}]",
+                                                                    i
+                                                                );
                                                                 throw new Exception();
                                                             }
                                                         }
@@ -993,6 +1456,7 @@ class Class1
                                                     Console.WriteLine("------------foo L12");
                                                     goto L11;
                                                 }
+
                                                 finally
                                                 {
                                                     Console.WriteLine("-----------in foo finally");
@@ -1001,7 +1465,10 @@ class Class1
                                                         Console.WriteLine("------------in foo try");
                                                         if (i % 2 == 1)
                                                         {
-                                                            Console.WriteLine("------------throwing an exception [i = {0}]", i);
+                                                            Console.WriteLine(
+                                                                "------------throwing an exception [i = {0}]",
+                                                                i
+                                                            );
                                                             throw new Exception();
                                                         }
                                                         else
@@ -1011,15 +1478,22 @@ class Class1
                                                     }
                                                     catch
                                                     {
-                                                        Console.WriteLine("------------in foo catch");
+                                                        Console.WriteLine(
+                                                            "------------in foo catch"
+                                                        );
                                                         i++;
                                                     }
                                                     finally
                                                     {
-                                                        Console.WriteLine("------------in foo finally");
+                                                        Console.WriteLine(
+                                                            "------------in foo finally"
+                                                        );
                                                         if (i % 2 == 0)
                                                         {
-                                                            Console.WriteLine("------------throwing an exception [i = {0}]", i);
+                                                            Console.WriteLine(
+                                                                "------------throwing an exception [i = {0}]",
+                                                                i
+                                                            );
                                                             throw new Exception();
                                                         }
                                                     }
@@ -1030,6 +1504,7 @@ class Class1
                                                 Console.WriteLine("-----------foo L11");
                                                 goto L10;
                                             }
+
                                             finally
                                             {
                                                 Console.WriteLine("----------in foo finally");
@@ -1038,7 +1513,10 @@ class Class1
                                                     Console.WriteLine("-----------in foo try");
                                                     if (i % 2 == 0)
                                                     {
-                                                        Console.WriteLine("-----------throwing an exception [i = {0}]", i);
+                                                        Console.WriteLine(
+                                                            "-----------throwing an exception [i = {0}]",
+                                                            i
+                                                        );
                                                         throw new Exception();
                                                     }
                                                     else
@@ -1056,7 +1534,10 @@ class Class1
                                                     Console.WriteLine("-----------in foo finally");
                                                     if (i % 2 == 1)
                                                     {
-                                                        Console.WriteLine("-----------throwing an exception [i = {0}]", i);
+                                                        Console.WriteLine(
+                                                            "-----------throwing an exception [i = {0}]",
+                                                            i
+                                                        );
                                                         throw new Exception();
                                                     }
                                                 }
@@ -1067,6 +1548,7 @@ class Class1
                                             Console.WriteLine("----------foo L10");
                                             goto L9;
                                         }
+
                                         finally
                                         {
                                             Console.WriteLine("---------in foo finally");
@@ -1075,7 +1557,10 @@ class Class1
                                                 Console.WriteLine("----------in foo try");
                                                 if (i % 2 == 1)
                                                 {
-                                                    Console.WriteLine("----------throwing an exception [i = {0}]", i);
+                                                    Console.WriteLine(
+                                                        "----------throwing an exception [i = {0}]",
+                                                        i
+                                                    );
                                                     throw new Exception();
                                                 }
                                                 else
@@ -1093,7 +1578,10 @@ class Class1
                                                 Console.WriteLine("----------in foo finally");
                                                 if (i % 2 == 0)
                                                 {
-                                                    Console.WriteLine("----------throwing an exception [i = {0}]", i);
+                                                    Console.WriteLine(
+                                                        "----------throwing an exception [i = {0}]",
+                                                        i
+                                                    );
                                                     throw new Exception();
                                                 }
                                             }
@@ -1104,6 +1592,7 @@ class Class1
                                         Console.WriteLine("---------foo L9");
                                         goto L8;
                                     }
+
                                     finally
                                     {
                                         Console.WriteLine("--------in foo finally");
@@ -1112,7 +1601,10 @@ class Class1
                                             Console.WriteLine("---------in foo try");
                                             if (i % 2 == 0)
                                             {
-                                                Console.WriteLine("---------throwing an exception [i = {0}]", i);
+                                                Console.WriteLine(
+                                                    "---------throwing an exception [i = {0}]",
+                                                    i
+                                                );
                                                 throw new Exception();
                                             }
                                             else
@@ -1130,7 +1622,10 @@ class Class1
                                             Console.WriteLine("---------in foo finally");
                                             if (i % 2 == 1)
                                             {
-                                                Console.WriteLine("---------throwing an exception [i = {0}]", i);
+                                                Console.WriteLine(
+                                                    "---------throwing an exception [i = {0}]",
+                                                    i
+                                                );
                                                 throw new Exception();
                                             }
                                         }
@@ -1141,6 +1636,7 @@ class Class1
                                     Console.WriteLine("--------foo L8");
                                     goto L7;
                                 }
+
                                 finally
                                 {
                                     Console.WriteLine("-------in foo finally");
@@ -1149,7 +1645,10 @@ class Class1
                                         Console.WriteLine("--------in foo try");
                                         if (i % 2 == 1)
                                         {
-                                            Console.WriteLine("--------throwing an exception [i = {0}]", i);
+                                            Console.WriteLine(
+                                                "--------throwing an exception [i = {0}]",
+                                                i
+                                            );
                                             throw new Exception();
                                         }
                                         else
@@ -1167,7 +1666,10 @@ class Class1
                                         Console.WriteLine("--------in foo finally");
                                         if (i % 2 == 0)
                                         {
-                                            Console.WriteLine("--------throwing an exception [i = {0}]", i);
+                                            Console.WriteLine(
+                                                "--------throwing an exception [i = {0}]",
+                                                i
+                                            );
                                             throw new Exception();
                                         }
                                     }
@@ -1178,6 +1680,7 @@ class Class1
                                 Console.WriteLine("-------foo L7");
                                 goto L6;
                             }
+
                             finally
                             {
                                 Console.WriteLine("------in foo finally");
@@ -1186,7 +1689,10 @@ class Class1
                                     Console.WriteLine("-------in foo try");
                                     if (i % 2 == 0)
                                     {
-                                        Console.WriteLine("-------throwing an exception [i = {0}]", i);
+                                        Console.WriteLine(
+                                            "-------throwing an exception [i = {0}]",
+                                            i
+                                        );
                                         throw new Exception();
                                     }
                                     else
@@ -1204,7 +1710,10 @@ class Class1
                                     Console.WriteLine("-------in foo finally");
                                     if (i % 2 == 1)
                                     {
-                                        Console.WriteLine("-------throwing an exception [i = {0}]", i);
+                                        Console.WriteLine(
+                                            "-------throwing an exception [i = {0}]",
+                                            i
+                                        );
                                         throw new Exception();
                                     }
                                 }
@@ -1215,6 +1724,7 @@ class Class1
                             Console.WriteLine("------foo L6");
                             goto L5;
                         }
+
                         finally
                         {
                             Console.WriteLine("-----in foo finally");
@@ -1252,6 +1762,7 @@ class Class1
                         Console.WriteLine("-----foo L5");
                         goto L4;
                     }
+
                     finally
                     {
                         Console.WriteLine("----in foo finally");
@@ -1289,6 +1800,7 @@ class Class1
                     Console.WriteLine("----foo L4");
                     goto L3;
                 }
+
                 finally
                 {
                     Console.WriteLine("---in foo finally");
@@ -1326,6 +1838,7 @@ class Class1
                 Console.WriteLine("---foo L3");
                 goto L2;
             }
+
             finally
             {
                 Console.WriteLine("--in foo finally");
@@ -1363,6 +1876,7 @@ class Class1
             Console.WriteLine("--foo L2");
             goto L1;
         }
+
         finally
         {
             Console.WriteLine("-in foo finally");
@@ -1399,7 +1913,6 @@ class Class1
         L1:
         Console.WriteLine("-foo L1");
     }
-
 
     static public int Main(string[] args)
     {

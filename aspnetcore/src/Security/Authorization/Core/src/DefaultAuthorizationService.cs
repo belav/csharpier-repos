@@ -31,8 +31,15 @@ namespace Microsoft.AspNetCore.Authorization
         /// <param name="logger">The logger used to log messages, warnings and errors.</param>  
         /// <param name="contextFactory">The <see cref="IAuthorizationHandlerContextFactory"/> used to create the context to handle the authorization.</param>  
         /// <param name="evaluator">The <see cref="IAuthorizationEvaluator"/> used to determine if authorization was successful.</param>  
-        /// <param name="options">The <see cref="AuthorizationOptions"/> used.</param>  
-        public DefaultAuthorizationService(IAuthorizationPolicyProvider policyProvider, IAuthorizationHandlerProvider handlers, ILogger<DefaultAuthorizationService> logger, IAuthorizationHandlerContextFactory contextFactory, IAuthorizationEvaluator evaluator, IOptions<AuthorizationOptions> options)
+        /// <param name="options">The <see cref="AuthorizationOptions"/> used.</param>
+        public DefaultAuthorizationService(
+            IAuthorizationPolicyProvider policyProvider,
+            IAuthorizationHandlerProvider handlers,
+            ILogger<DefaultAuthorizationService> logger,
+            IAuthorizationHandlerContextFactory contextFactory,
+            IAuthorizationEvaluator evaluator,
+            IOptions<AuthorizationOptions> options
+        )
         {
             if (options == null)
             {
@@ -77,7 +84,11 @@ namespace Microsoft.AspNetCore.Authorization
         /// A flag indicating whether authorization has succeeded.
         /// This value is <value>true</value> when the user fulfills the policy otherwise <value>false</value>.
         /// </returns>
-        public virtual async Task<AuthorizationResult> AuthorizeAsync(ClaimsPrincipal user, object? resource, IEnumerable<IAuthorizationRequirement> requirements)
+        public virtual async Task<AuthorizationResult> AuthorizeAsync(
+            ClaimsPrincipal user,
+            object? resource,
+            IEnumerable<IAuthorizationRequirement> requirements
+        )
         {
             if (requirements == null)
             {
@@ -117,7 +128,11 @@ namespace Microsoft.AspNetCore.Authorization
         /// A flag indicating whether authorization has succeeded.
         /// This value is <value>true</value> when the user fulfills the policy otherwise <value>false</value>.
         /// </returns>
-        public virtual async Task<AuthorizationResult> AuthorizeAsync(ClaimsPrincipal user, object? resource, string policyName)
+        public virtual async Task<AuthorizationResult> AuthorizeAsync(
+            ClaimsPrincipal user,
+            object? resource,
+            string policyName
+        )
         {
             if (policyName == null)
             {

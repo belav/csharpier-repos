@@ -38,19 +38,17 @@ namespace Microsoft.AspNetCore.Routing.Matching
         }
 
         [Theory]
-
         // Identity
         [InlineData('c', 'c')]
         [InlineData('C', 'C')]
         [InlineData('#', '#')]
         [InlineData('\u0080', '\u0080')]
-
         // Case-insensitive
         [InlineData('c', 'C')]
         public void AsciiIgnoreCaseEquals_ReturnsTrue(char x, char y)
         {
             // Arrange
-            
+
             // Act
             var result = Ascii.AsciiIgnoreCaseEquals(x, y);
 
@@ -59,13 +57,11 @@ namespace Microsoft.AspNetCore.Routing.Matching
         }
 
         [Theory]
-
         // Different letter
         [InlineData('c', 'd')]
         [InlineData('C', 'D')]
-
         // Non-letter + casing difference - 'a' and 'A' are 32 bits apart and so are ' ' and '@'
-        [InlineData(' ', '@')] 
+        [InlineData(' ', '@')]
         [InlineData('\u0080', '\u0080' + 32)] // Outside of ASCII range
         public void AsciiIgnoreCaseEquals_ReturnsFalse(char x, char y)
         {

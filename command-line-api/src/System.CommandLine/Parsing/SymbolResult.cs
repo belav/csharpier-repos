@@ -9,11 +9,10 @@ namespace System.CommandLine.Parsing
     {
         private protected readonly List<Token> _tokens = new List<Token>();
         private Resources? _validationMessages;
-        private readonly Dictionary<IArgument, ArgumentResult> _defaultArgumentValues = new Dictionary<IArgument, ArgumentResult>();
+        private readonly Dictionary<IArgument, ArgumentResult> _defaultArgumentValues =
+            new Dictionary<IArgument, ArgumentResult>();
 
-        private protected SymbolResult(
-            ISymbol symbol, 
-            SymbolResult? parent)
+        private protected SymbolResult(ISymbol symbol, SymbolResult? parent)
         {
             Symbol = symbol ?? throw new ArgumentNullException(nameof(symbol));
 
@@ -44,7 +43,7 @@ namespace System.CommandLine.Parsing
             var value = 0;
 
             var arguments = Symbol.Arguments();
-            
+
             for (var i = 0; i < arguments.Count; i++)
             {
                 value += arguments[i].Arity.MaximumNumberOfValues;
@@ -67,15 +66,10 @@ namespace System.CommandLine.Parsing
         public virtual CommandResult? FindResultFor(ICommand command) =>
             Root?.FindResultFor(command);
 
-        public virtual OptionResult? FindResultFor(IOption option) =>
-            Root?.FindResultFor(option);
+        public virtual OptionResult? FindResultFor(IOption option) => Root?.FindResultFor(option);
 
         internal ArgumentResult GetOrCreateDefaultArgumentResult(Argument argument) =>
-            _defaultArgumentValues.GetOrAdd(
-                argument,
-                arg => new ArgumentResult(
-                    argument,
-                    this));
+            _defaultArgumentValues.GetOrAdd(argument, arg => new ArgumentResult(argument, this));
 
         internal virtual bool UseDefaultValueFor(IArgument argument) => false;
 
@@ -83,8 +77,7 @@ namespace System.CommandLine.Parsing
 
         internal ParseError? UnrecognizedArgumentError(Argument argument)
         {
-            if (argument.AllowedValues?.Count > 0 &&
-                Tokens.Count > 0)
+            if (argument.AllowedValues?.Count > 0 && Tokens.Count > 0)
             {
                 for (var i = 0; i < Tokens.Count; i++)
                 {
@@ -92,9 +85,12 @@ namespace System.CommandLine.Parsing
                     if (!argument.AllowedValues.Contains(token.Value))
                     {
                         return new ParseError(
-                            ValidationMessages
-                                .UnrecognizedArgument(token.Value, argument.AllowedValues),
-                            this);
+                            ValidationMessages.UnrecognizedArgument(
+                                token.Value,
+                                argument.AllowedValues
+                            ),
+                            this
+                        );
                     }
                 }
             }

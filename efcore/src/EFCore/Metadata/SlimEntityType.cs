@@ -26,31 +26,34 @@ namespace Microsoft.EntityFrameworkCore.Metadata
     {
         private readonly List<SlimForeignKey> _foreignKeys = new();
 
-        private readonly SortedDictionary<string, SlimNavigation> _navigations
-            = new(StringComparer.Ordinal);
+        private readonly SortedDictionary<string, SlimNavigation> _navigations =
+            new(StringComparer.Ordinal);
 
-        private readonly SortedDictionary<string, SlimSkipNavigation> _skipNavigations
-            = new(StringComparer.Ordinal);
+        private readonly SortedDictionary<string, SlimSkipNavigation> _skipNavigations =
+            new(StringComparer.Ordinal);
 
-        private readonly SortedDictionary<IReadOnlyList<IReadOnlyProperty>, SlimIndex> _unnamedIndexes
-            = new(PropertyListComparer.Instance);
+        private readonly SortedDictionary<
+            IReadOnlyList<IReadOnlyProperty>,
+            SlimIndex
+        > _unnamedIndexes = new(PropertyListComparer.Instance);
 
-        private readonly SortedDictionary<string, SlimIndex> _namedIndexes
-            = new(StringComparer.Ordinal);
+        private readonly SortedDictionary<string, SlimIndex> _namedIndexes =
+            new(StringComparer.Ordinal);
 
         private readonly SortedDictionary<string, SlimProperty> _properties;
 
-        private readonly SortedDictionary<IReadOnlyList<IReadOnlyProperty>, SlimKey> _keys
-            = new(PropertyListComparer.Instance);
+        private readonly SortedDictionary<IReadOnlyList<IReadOnlyProperty>, SlimKey> _keys =
+            new(PropertyListComparer.Instance);
 
-        private readonly SortedDictionary<string, SlimServiceProperty> _serviceProperties
-            = new(StringComparer.Ordinal);
+        private readonly SortedDictionary<string, SlimServiceProperty> _serviceProperties =
+            new(StringComparer.Ordinal);
 
         private SlimKey? _primaryKey;
         private readonly bool _hasSharedClrType;
         private readonly Type _clrType;
         private readonly SlimEntityType? _baseType;
-        private readonly SortedSet<SlimEntityType> _directlyDerivedTypes = new(EntityTypeFullNameComparer.Instance);
+        private readonly SortedSet<SlimEntityType> _directlyDerivedTypes =
+            new(EntityTypeFullNameComparer.Instance);
         private readonly ChangeTrackingStrategy _changeTrackingStrategy;
         private InstantiationBinding? _constructorBinding;
         private InstantiationBinding? _serviceOnlyConstructorBinding;
@@ -86,7 +89,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             string? discriminatorProperty,
             ChangeTrackingStrategy changeTrackingStrategy,
             PropertyInfo? indexerPropertyInfo,
-            bool propertyBag)
+            bool propertyBag
+        )
         {
             Name = name;
             _clrType = type;
@@ -102,18 +106,28 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             _isPropertyBag = propertyBag;
             SetAnnotation(CoreAnnotationNames.DiscriminatorProperty, discriminatorProperty);
 
-            _properties = new SortedDictionary<string, SlimProperty>(new PropertyNameComparer(this));
+            _properties = new SortedDictionary<string, SlimProperty>(
+                new PropertyNameComparer(this)
+            );
         }
 
         /// <summary>
         ///     Gets the name of this type.
         /// </summary>
-        public virtual string Name { [DebuggerStepThrough] get; }
+        public virtual string Name
+        {
+            [DebuggerStepThrough]
+            get;
+        }
 
         /// <summary>
         ///     Gets the model that this type belongs to.
         /// </summary>
-        public virtual SlimModel Model { [DebuggerStepThrough] get; }
+        public virtual SlimModel Model
+        {
+            [DebuggerStepThrough]
+            get;
+        }
 
         private IEnumerable<SlimEntityType> GetDerivedTypes()
         {
@@ -128,17 +142,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             while (type != null)
             {
                 derivedTypes.AddRange(type._directlyDerivedTypes);
-                type = derivedTypes.Count > currentTypeIndex
-                    ? derivedTypes[currentTypeIndex]
-                    : null;
+                type =
+                    derivedTypes.Count > currentTypeIndex ? derivedTypes[currentTypeIndex] : null;
                 currentTypeIndex++;
             }
 
             return derivedTypes;
         }
 
-        private SlimKey? FindPrimaryKey()
-            => _baseType?.FindPrimaryKey() ?? _primaryKey;
+        private SlimKey? FindPrimaryKey() => _baseType?.FindPrimaryKey() ?? _primaryKey;
 
         /// <summary>
         ///     Sets the primary key for this entity type.
@@ -191,16 +203,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// </summary>
         /// <param name="properties"> The properties that make up the key. </param>
         /// <returns> The key, or <see langword="null" /> if none is defined. </returns>
-        public virtual SlimKey? FindKey(IReadOnlyList<IReadOnlyProperty> properties)
-            => _keys.TryGetValue(properties, out var key)
-                ? key
-                : _baseType?.FindKey(properties);
+        public virtual SlimKey? FindKey(IReadOnlyList<IReadOnlyProperty> properties) =>
+            _keys.TryGetValue(properties, out var key) ? key : _baseType?.FindKey(properties);
 
-        private IEnumerable<SlimKey> GetDeclaredKeys()
-            => _keys.Values;
+        private IEnumerable<SlimKey> GetDeclaredKeys() => _keys.Values;
 
-        private IEnumerable<SlimKey> GetKeys()
-            => _baseType?.GetKeys().Concat(_keys.Values) ?? _keys.Values;
+        private IEnumerable<SlimKey> GetKeys() =>
+            _baseType?.GetKeys().Concat(_keys.Values) ?? _keys.Values;
 
         /// <summary>
         ///     Adds a new relationship to this entity type.
@@ -229,10 +238,20 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             bool unique = false,
             bool required = false,
             bool requiredDependent = false,
-            bool ownership = false)
+            bool ownership = false
+        )
         {
             var foreignKey = new SlimForeignKey(
-                properties, principalKey, this, principalEntityType, deleteBehavior, unique, required, requiredDependent, ownership);
+                properties,
+                principalKey,
+                this,
+                principalEntityType,
+                deleteBehavior,
+                unique,
+                required,
+                requiredDependent,
+                ownership
+            );
 
             _foreignKeys.Add(foreignKey);
 
@@ -250,7 +269,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata
 
             if (principalKey.ReferencingForeignKeys == null)
             {
-                principalKey.ReferencingForeignKeys = new SortedSet<SlimForeignKey>(ForeignKeyComparer.Instance) { foreignKey };
+                principalKey.ReferencingForeignKeys = new SortedSet<SlimForeignKey>(
+                    ForeignKeyComparer.Instance
+                ) {
+                    foreignKey
+                };
             }
             else
             {
@@ -259,7 +282,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata
 
             if (principalEntityType.DeclaredReferencingForeignKeys == null)
             {
-                principalEntityType.DeclaredReferencingForeignKeys = new SortedSet<SlimForeignKey>(ForeignKeyComparer.Instance) { foreignKey };
+                principalEntityType.DeclaredReferencingForeignKeys = new SortedSet<SlimForeignKey>(
+                    ForeignKeyComparer.Instance
+                ) {
+                    foreignKey
+                };
             }
             else
             {
@@ -269,27 +296,31 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             return foreignKey;
         }
 
-        private IEnumerable<SlimForeignKey> FindForeignKeys(IReadOnlyList<IReadOnlyProperty> properties)
-            => _baseType != null
+        private IEnumerable<SlimForeignKey> FindForeignKeys(
+            IReadOnlyList<IReadOnlyProperty> properties
+        ) =>
+            _baseType != null
                 ? _foreignKeys.Count == 0
                     ? _baseType.FindForeignKeys(properties)
-                    : _baseType.FindForeignKeys(properties).Concat(FindDeclaredForeignKeys(properties))
+                    : _baseType.FindForeignKeys(properties)
+                          .Concat(FindDeclaredForeignKeys(properties))
                 : FindDeclaredForeignKeys(properties);
 
         private SlimForeignKey? FindForeignKey(
             IReadOnlyList<IReadOnlyProperty> properties,
             IReadOnlyKey principalKey,
-            IReadOnlyEntityType principalEntityType)
-            => FindDeclaredForeignKey(properties, principalKey, principalEntityType)
-                ?? _baseType?.FindForeignKey(properties, principalKey, principalEntityType);
+            IReadOnlyEntityType principalEntityType
+        ) =>
+            FindDeclaredForeignKey(properties, principalKey, principalEntityType)
+            ?? _baseType?.FindForeignKey(properties, principalKey, principalEntityType);
 
-        private IEnumerable<SlimForeignKey> GetDerivedForeignKeys()
-            => _directlyDerivedTypes.Count == 0
+        private IEnumerable<SlimForeignKey> GetDerivedForeignKeys() =>
+            _directlyDerivedTypes.Count == 0
                 ? Enumerable.Empty<SlimForeignKey>()
                 : GetDerivedTypes().SelectMany(et => et._foreignKeys);
 
-        private IEnumerable<SlimForeignKey> GetForeignKeys()
-            => _baseType != null
+        private IEnumerable<SlimForeignKey> GetForeignKeys() =>
+            _baseType != null
                 ? _foreignKeys.Count == 0
                     ? _baseType.GetForeignKeys()
                     : _baseType.GetForeignKeys().Concat(_foreignKeys)
@@ -300,15 +331,20 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// </summary>
         /// <param name="properties"> The properties to find the foreign keys on. </param>
         /// <returns> Declared foreign keys. </returns>
-        public virtual IEnumerable<SlimForeignKey> FindDeclaredForeignKeys(IReadOnlyList<IReadOnlyProperty> properties)
-            => _foreignKeys.Count == 0
+        public virtual IEnumerable<SlimForeignKey> FindDeclaredForeignKeys(
+            IReadOnlyList<IReadOnlyProperty> properties
+        ) =>
+            _foreignKeys.Count == 0
                 ? Enumerable.Empty<SlimForeignKey>()
-                : _foreignKeys.Where(fk => PropertyListComparer.Instance.Equals(fk.Properties, properties));
+                : _foreignKeys.Where(
+                      fk => PropertyListComparer.Instance.Equals(fk.Properties, properties)
+                  );
 
         private SlimForeignKey? FindDeclaredForeignKey(
             IReadOnlyList<IReadOnlyProperty> properties,
             IReadOnlyKey principalKey,
-            IReadOnlyEntityType principalEntityType)
+            IReadOnlyEntityType principalEntityType
+        )
         {
             if (_foreignKeys.Count == 0)
             {
@@ -317,8 +353,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata
 
             foreach (var fk in FindDeclaredForeignKeys(properties))
             {
-                if (PropertyListComparer.Instance.Equals(fk.PrincipalKey.Properties, principalKey.Properties)
-                    && fk.PrincipalEntityType == principalEntityType)
+                if (
+                    PropertyListComparer.Instance.Equals(
+                        fk.PrincipalKey.Properties,
+                        principalKey.Properties
+                    )
+                    && fk.PrincipalEntityType == principalEntityType
+                )
                 {
                     return fk;
                 }
@@ -327,15 +368,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             return null;
         }
 
-        private IEnumerable<SlimForeignKey> GetReferencingForeignKeys()
-            => _baseType != null
+        private IEnumerable<SlimForeignKey> GetReferencingForeignKeys() =>
+            _baseType != null
                 ? (DeclaredReferencingForeignKeys?.Count ?? 0) == 0
                     ? _baseType.GetReferencingForeignKeys()
-                    : _baseType.GetReferencingForeignKeys().Concat(GetDeclaredReferencingForeignKeys())
+                    : _baseType.GetReferencingForeignKeys()
+                          .Concat(GetDeclaredReferencingForeignKeys())
                 : GetDeclaredReferencingForeignKeys();
 
-        private IEnumerable<SlimForeignKey> GetDeclaredReferencingForeignKeys()
-            => DeclaredReferencingForeignKeys ?? Enumerable.Empty<SlimForeignKey>();
+        private IEnumerable<SlimForeignKey> GetDeclaredReferencingForeignKeys() =>
+            DeclaredReferencingForeignKeys ?? Enumerable.Empty<SlimForeignKey>();
 
         private SortedSet<SlimForeignKey>? DeclaredReferencingForeignKeys { get; set; }
 
@@ -361,9 +403,18 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             SlimForeignKey foreignKey,
             bool onDependent,
             PropertyAccessMode propertyAccessMode = Internal.Model.DefaultPropertyAccessMode,
-            bool eagerLoaded = false)
+            bool eagerLoaded = false
+        )
         {
-            var navigation = new SlimNavigation(name, clrType, propertyInfo, fieldInfo, foreignKey, propertyAccessMode, eagerLoaded);
+            var navigation = new SlimNavigation(
+                name,
+                clrType,
+                propertyInfo,
+                fieldInfo,
+                foreignKey,
+                propertyAccessMode,
+                eagerLoaded
+            );
 
             _navigations.Add(name, navigation);
 
@@ -377,20 +428,19 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// </summary>
         /// <param name="name"> The name of the navigation property on the entity class. </param>
         /// <returns> The navigation property, or <see langword="null" /> if none is found. </returns>
-        public virtual SlimNavigation? FindNavigation(string name)
-            => (SlimNavigation?)((IReadOnlyEntityType)this).FindNavigation(name);
+        public virtual SlimNavigation? FindNavigation(string name) =>
+            (SlimNavigation?)((IReadOnlyEntityType)this).FindNavigation(name);
 
-        private SlimNavigation? FindDeclaredNavigation(string name)
-            => _navigations.TryGetValue(name, out var navigation)
-                ? navigation
-                : null;
+        private SlimNavigation? FindDeclaredNavigation(string name) =>
+            _navigations.TryGetValue(name, out var navigation) ? navigation : null;
 
-        private IEnumerable<SlimNavigation> GetDeclaredNavigations()
-            => _navigations.Values;
+        private IEnumerable<SlimNavigation> GetDeclaredNavigations() => _navigations.Values;
 
-        private IEnumerable<SlimNavigation> GetNavigations()
-            => _baseType != null
-                ? _navigations.Count == 0 ? _baseType.GetNavigations() : _baseType.GetNavigations().Concat(_navigations.Values)
+        private IEnumerable<SlimNavigation> GetNavigations() =>
+            _baseType != null
+                ? _navigations.Count == 0
+                    ? _baseType.GetNavigations()
+                    : _baseType.GetNavigations().Concat(_navigations.Values)
                 : _navigations.Values;
 
         /// <summary>
@@ -419,7 +469,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             bool collection,
             bool onDependent,
             PropertyAccessMode propertyAccessMode = Internal.Model.DefaultPropertyAccessMode,
-            bool eagerLoaded = false)
+            bool eagerLoaded = false
+        )
         {
             var skipNavigation = new SlimSkipNavigation(
                 name,
@@ -432,7 +483,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 collection,
                 onDependent,
                 propertyAccessMode,
-                eagerLoaded);
+                eagerLoaded
+            );
 
             _skipNavigations.Add(name, skipNavigation);
 
@@ -444,27 +496,25 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// </summary>
         /// <param name="name"> The name of the navigation property on the entity class. </param>
         /// <returns> The navigation property, or <see langword="null" /> if none is found. </returns>
-        public virtual SlimSkipNavigation? FindSkipNavigation(string name)
-            => FindDeclaredSkipNavigation(name) ?? _baseType?.FindSkipNavigation(name);
+        public virtual SlimSkipNavigation? FindSkipNavigation(string name) =>
+            FindDeclaredSkipNavigation(name) ?? _baseType?.FindSkipNavigation(name);
 
-        private SlimSkipNavigation? FindSkipNavigation(MemberInfo memberInfo)
-            => FindSkipNavigation(memberInfo.GetSimpleMemberName());
+        private SlimSkipNavigation? FindSkipNavigation(MemberInfo memberInfo) =>
+            FindSkipNavigation(memberInfo.GetSimpleMemberName());
 
-        private SlimSkipNavigation? FindDeclaredSkipNavigation(string name)
-            => _skipNavigations.TryGetValue(name, out var navigation)
-                ? navigation
-                : null;
+        private SlimSkipNavigation? FindDeclaredSkipNavigation(string name) =>
+            _skipNavigations.TryGetValue(name, out var navigation) ? navigation : null;
 
-        private IEnumerable<SlimSkipNavigation> GetDeclaredSkipNavigations()
-            => _skipNavigations.Values;
+        private IEnumerable<SlimSkipNavigation> GetDeclaredSkipNavigations() =>
+            _skipNavigations.Values;
 
-        private IEnumerable<SlimSkipNavigation> GetDerivedSkipNavigations()
-            => _directlyDerivedTypes.Count == 0
+        private IEnumerable<SlimSkipNavigation> GetDerivedSkipNavigations() =>
+            _directlyDerivedTypes.Count == 0
                 ? Enumerable.Empty<SlimSkipNavigation>()
                 : GetDerivedTypes().SelectMany(et => et.GetDeclaredSkipNavigations());
 
-        private IEnumerable<SlimSkipNavigation> GetSkipNavigations()
-            => _baseType != null
+        private IEnumerable<SlimSkipNavigation> GetSkipNavigations() =>
+            _baseType != null
                 ? _skipNavigations.Count == 0
                     ? _baseType.GetSkipNavigations()
                     : _baseType.GetSkipNavigations().Concat(_skipNavigations.Values)
@@ -480,7 +530,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         public virtual SlimIndex AddIndex(
             IReadOnlyList<SlimProperty> properties,
             string? name = null,
-            bool unique = false)
+            bool unique = false
+        )
         {
             var index = new SlimIndex(properties, this, name, unique);
             if (name != null)
@@ -517,8 +568,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// </summary>
         /// <param name="properties"> The properties to find the index on. </param>
         /// <returns> The index, or <see langword="null" /> if none is found. </returns>
-        public virtual SlimIndex? FindIndex(IReadOnlyList<IReadOnlyProperty> properties)
-            => _unnamedIndexes.TryGetValue(properties, out var index)
+        public virtual SlimIndex? FindIndex(IReadOnlyList<IReadOnlyProperty> properties) =>
+            _unnamedIndexes.TryGetValue(properties, out var index)
                 ? index
                 : _baseType?.FindIndex(properties);
 
@@ -527,23 +578,21 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// </summary>
         /// <param name="name"> The name of the index. </param>
         /// <returns> The index, or <see langword="null" /> if none is found. </returns>
-        public virtual SlimIndex? FindIndex(string name)
-            => _namedIndexes.TryGetValue(name, out var index)
-                ? index
-                : _baseType?.FindIndex(name);
+        public virtual SlimIndex? FindIndex(string name) =>
+            _namedIndexes.TryGetValue(name, out var index) ? index : _baseType?.FindIndex(name);
 
-        private IEnumerable<SlimIndex> GetDeclaredIndexes()
-            => _namedIndexes.Count == 0
+        private IEnumerable<SlimIndex> GetDeclaredIndexes() =>
+            _namedIndexes.Count == 0
                 ? _unnamedIndexes.Values
                 : _unnamedIndexes.Values.Concat(_namedIndexes.Values);
 
-        private IEnumerable<SlimIndex> GetDerivedIndexes()
-            => _directlyDerivedTypes.Count == 0
+        private IEnumerable<SlimIndex> GetDerivedIndexes() =>
+            _directlyDerivedTypes.Count == 0
                 ? Enumerable.Empty<SlimIndex>()
                 : GetDerivedTypes().SelectMany(et => et.GetDeclaredIndexes());
 
-        private IEnumerable<SlimIndex> GetIndexes()
-            => _baseType != null
+        private IEnumerable<SlimIndex> GetIndexes() =>
+            _baseType != null
                 ? _namedIndexes.Count == 0 && _unnamedIndexes.Count == 0
                     ? _baseType.GetIndexes()
                     : _baseType.GetIndexes().Concat(GetDeclaredIndexes())
@@ -599,7 +648,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             ValueConverter? valueConverter = null,
             ValueComparer? valueComparer = null,
             ValueComparer? keyValueComparer = null,
-            CoreTypeMapping? typeMapping = null)
+            CoreTypeMapping? typeMapping = null
+        )
         {
             var property = new SlimProperty(
                 name,
@@ -622,7 +672,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 valueConverter,
                 valueComparer,
                 keyValueComparer,
-                typeMapping);
+                typeMapping
+            );
 
             _properties.Add(property.Name, property);
 
@@ -640,19 +691,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// </summary>
         /// <param name="name"> The name of the property. </param>
         /// <returns> The property, or <see langword="null" /> if none is found. </returns>
-        public virtual SlimProperty? FindProperty(string name)
-            => FindDeclaredProperty(name) ?? _baseType?.FindProperty(name);
+        public virtual SlimProperty? FindProperty(string name) =>
+            FindDeclaredProperty(name) ?? _baseType?.FindProperty(name);
 
-        private SlimProperty? FindDeclaredProperty(string name)
-            => _properties.TryGetValue(name, out var property)
-                ? property
-                : null;
+        private SlimProperty? FindDeclaredProperty(string name) =>
+            _properties.TryGetValue(name, out var property) ? property : null;
 
-        private IEnumerable<SlimProperty> GetDeclaredProperties()
-            => _properties.Values;
+        private IEnumerable<SlimProperty> GetDeclaredProperties() => _properties.Values;
 
-        private IEnumerable<SlimProperty> GetDerivedProperties()
-            => _directlyDerivedTypes.Count == 0
+        private IEnumerable<SlimProperty> GetDerivedProperties() =>
+            _directlyDerivedTypes.Count == 0
                 ? Enumerable.Empty<SlimProperty>()
                 : GetDerivedTypes().SelectMany(et => et.GetDeclaredProperties());
 
@@ -666,7 +714,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// </summary>
         /// <param name="propertyNames"> The property names. </param>
         /// <returns> The properties, or <see langword="null" /> if any property is not found. </returns>
-        public virtual IReadOnlyList<SlimProperty>? FindProperties(IEnumerable<string> propertyNames)
+        public virtual IReadOnlyList<SlimProperty>? FindProperties(
+            IEnumerable<string> propertyNames
+        )
         {
             var properties = new List<SlimProperty>();
             foreach (var propertyName in propertyNames)
@@ -683,8 +733,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             return properties;
         }
 
-        private IEnumerable<SlimProperty> GetProperties()
-            => _baseType != null
+        private IEnumerable<SlimProperty> GetProperties() =>
+            _baseType != null
                 ? _baseType.GetProperties().Concat(_properties.Values)
                 : _properties.Values;
 
@@ -700,14 +750,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             string name,
             PropertyInfo? propertyInfo,
             FieldInfo? fieldInfo,
-            PropertyAccessMode propertyAccessMode = Internal.Model.DefaultPropertyAccessMode)
+            PropertyAccessMode propertyAccessMode = Internal.Model.DefaultPropertyAccessMode
+        )
         {
             var serviceProperty = new SlimServiceProperty(
                 name,
                 propertyInfo,
                 fieldInfo,
                 this,
-                propertyAccessMode);
+                propertyAccessMode
+            );
 
             _serviceProperties[serviceProperty.Name] = serviceProperty;
 
@@ -725,26 +777,24 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// </summary>
         /// <param name="name"> The name of the service property. </param>
         /// <returns> The service property, or <see langword="null" /> if none is found. </returns>
-        public virtual SlimServiceProperty? FindServiceProperty(string name)
-            => FindDeclaredServiceProperty(name) ?? _baseType?.FindServiceProperty(name);
+        public virtual SlimServiceProperty? FindServiceProperty(string name) =>
+            FindDeclaredServiceProperty(name) ?? _baseType?.FindServiceProperty(name);
 
-        private SlimServiceProperty? FindDeclaredServiceProperty(string name)
-            => _serviceProperties.TryGetValue(name, out var property)
-                ? property
-                : null;
+        private SlimServiceProperty? FindDeclaredServiceProperty(string name) =>
+            _serviceProperties.TryGetValue(name, out var property) ? property : null;
 
-        private IEnumerable<SlimServiceProperty> GetServiceProperties()
-            => _baseType != null
+        private IEnumerable<SlimServiceProperty> GetServiceProperties() =>
+            _baseType != null
                 ? _serviceProperties.Count == 0
                     ? _baseType.GetServiceProperties()
                     : _baseType.GetServiceProperties().Concat(_serviceProperties.Values)
                 : _serviceProperties.Values;
 
-        private IEnumerable<SlimServiceProperty> GetDeclaredServiceProperties()
-            => _serviceProperties.Values;
+        private IEnumerable<SlimServiceProperty> GetDeclaredServiceProperties() =>
+            _serviceProperties.Values;
 
-        private IEnumerable<SlimServiceProperty> GetDerivedServiceProperties()
-            => _directlyDerivedTypes.Count == 0
+        private IEnumerable<SlimServiceProperty> GetDerivedServiceProperties() =>
+            _directlyDerivedTypes.Count == 0
                 ? Enumerable.Empty<SlimServiceProperty>()
                 : GetDerivedTypes().SelectMany(et => et.GetDeclaredServiceProperties());
 
@@ -753,16 +803,22 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// </summary>
         public virtual InstantiationBinding? ConstructorBinding
         {
-            get => !_clrType.IsAbstract
-                    ? NonCapturingLazyInitializer.EnsureInitialized(ref _constructorBinding, this, static entityType =>
-                    {
-                        ((IModel)entityType.Model).GetModelDependencies().ConstructorBindingFactory.GetBindings(
-                            entityType,
-                            out entityType._constructorBinding,
-                            out entityType._serviceOnlyConstructorBinding);
-                    })
+            get =>
+                !_clrType.IsAbstract
+                    ? NonCapturingLazyInitializer.EnsureInitialized(
+                          ref _constructorBinding,
+                          this,
+                          static entityType =>
+                          {
+                              ((IModel)entityType.Model).GetModelDependencies()
+                                  .ConstructorBindingFactory.GetBindings(
+                                      entityType,
+                                      out entityType._constructorBinding,
+                                      out entityType._serviceOnlyConstructorBinding
+                                  );
+                          }
+                      )
                     : _constructorBinding;
-
             [DebuggerStepThrough]
             set => _constructorBinding = value;
         }
@@ -778,7 +834,6 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         {
             [DebuggerStepThrough]
             get => _serviceOnlyConstructorBinding;
-
             [DebuggerStepThrough]
             set => _serviceOnlyConstructorBinding = value;
         }
@@ -787,8 +842,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     Returns a string that represents the current object.
         /// </summary>
         /// <returns> A string that represents the current object. </returns>
-        public override string ToString()
-            => ((IReadOnlyEntityType)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
+        public override string ToString() =>
+            ((IReadOnlyEntityType)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -797,10 +852,17 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         [EntityFrameworkInternal]
-        public virtual DebugView DebugView
-            => new(
-                () => ((IReadOnlyEntityType)this).ToDebugString(MetadataDebugStringOptions.ShortDefault),
-                () => ((IReadOnlyEntityType)this).ToDebugString(MetadataDebugStringOptions.LongDefault));
+        public virtual DebugView DebugView =>
+            new(
+                () =>
+                    ((IReadOnlyEntityType)this).ToDebugString(
+                        MetadataDebugStringOptions.ShortDefault
+                    ),
+                () =>
+                    ((IReadOnlyEntityType)this).ToDebugString(
+                        MetadataDebugStringOptions.LongDefault
+                    )
+            );
 
         /// <inheritdoc/>
         Type IReadOnlyTypeBase.ClrType
@@ -811,13 +873,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        ChangeTrackingStrategy IReadOnlyEntityType.GetChangeTrackingStrategy()
-            => _changeTrackingStrategy;
+        ChangeTrackingStrategy IReadOnlyEntityType.GetChangeTrackingStrategy() =>
+            _changeTrackingStrategy;
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        LambdaExpression? IReadOnlyEntityType.GetQueryFilter()
-            => (LambdaExpression?)this[CoreAnnotationNames.QueryFilter];
+        LambdaExpression? IReadOnlyEntityType.GetQueryFilter() =>
+            (LambdaExpression?)this[CoreAnnotationNames.QueryFilter];
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
@@ -875,392 +937,384 @@ namespace Microsoft.EntityFrameworkCore.Metadata
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        PropertyInfo? IReadOnlyTypeBase.FindIndexerPropertyInfo()
-            => _indexerPropertyInfo;
+        PropertyInfo? IReadOnlyTypeBase.FindIndexerPropertyInfo() => _indexerPropertyInfo;
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        IEnumerable<IReadOnlyEntityType> IReadOnlyEntityType.GetDerivedTypes()
-            => GetDerivedTypes();
+        IEnumerable<IReadOnlyEntityType> IReadOnlyEntityType.GetDerivedTypes() => GetDerivedTypes();
 
         /// <inheritdoc/>
-        IEnumerable<IReadOnlyEntityType> IReadOnlyEntityType.GetDerivedTypesInclusive()
-            => _directlyDerivedTypes.Count == 0
+        IEnumerable<IReadOnlyEntityType> IReadOnlyEntityType.GetDerivedTypesInclusive() =>
+            _directlyDerivedTypes.Count == 0
                 ? new[] { this }
                 : new[] { this }.Concat(GetDerivedTypes());
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        IEnumerable<IReadOnlyEntityType> IReadOnlyEntityType.GetDirectlyDerivedTypes()
-            => _directlyDerivedTypes;
+        IEnumerable<IReadOnlyEntityType> IReadOnlyEntityType.GetDirectlyDerivedTypes() =>
+            _directlyDerivedTypes;
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        IEnumerable<IEntityType> IEntityType.GetDirectlyDerivedTypes()
-            => _directlyDerivedTypes;
+        IEnumerable<IEntityType> IEntityType.GetDirectlyDerivedTypes() => _directlyDerivedTypes;
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        IReadOnlyKey? IReadOnlyEntityType.FindPrimaryKey()
-            => FindPrimaryKey();
+        IReadOnlyKey? IReadOnlyEntityType.FindPrimaryKey() => FindPrimaryKey();
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        IKey? IEntityType.FindPrimaryKey()
-            => FindPrimaryKey();
+        IKey? IEntityType.FindPrimaryKey() => FindPrimaryKey();
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        IReadOnlyKey? IReadOnlyEntityType.FindKey(IReadOnlyList<IReadOnlyProperty> properties)
-            => FindKey(properties);
+        IReadOnlyKey? IReadOnlyEntityType.FindKey(IReadOnlyList<IReadOnlyProperty> properties) =>
+            FindKey(properties);
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        IKey? IEntityType.FindKey(IReadOnlyList<IReadOnlyProperty> properties)
-            => FindKey(properties);
+        IKey? IEntityType.FindKey(IReadOnlyList<IReadOnlyProperty> properties) =>
+            FindKey(properties);
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        IEnumerable<IReadOnlyKey> IReadOnlyEntityType.GetDeclaredKeys()
-            => GetDeclaredKeys();
+        IEnumerable<IReadOnlyKey> IReadOnlyEntityType.GetDeclaredKeys() => GetDeclaredKeys();
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        IEnumerable<IKey> IEntityType.GetDeclaredKeys()
-            => GetDeclaredKeys();
+        IEnumerable<IKey> IEntityType.GetDeclaredKeys() => GetDeclaredKeys();
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        IEnumerable<IReadOnlyKey> IReadOnlyEntityType.GetKeys()
-            => GetKeys();
+        IEnumerable<IReadOnlyKey> IReadOnlyEntityType.GetKeys() => GetKeys();
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        IEnumerable<IKey> IEntityType.GetKeys()
-            => GetKeys();
+        IEnumerable<IKey> IEntityType.GetKeys() => GetKeys();
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
         IReadOnlyForeignKey? IReadOnlyEntityType.FindForeignKey(
             IReadOnlyList<IReadOnlyProperty> properties,
             IReadOnlyKey principalKey,
-            IReadOnlyEntityType principalEntityType)
-            => FindForeignKey(properties, principalKey, principalEntityType);
+            IReadOnlyEntityType principalEntityType
+        ) => FindForeignKey(properties, principalKey, principalEntityType);
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
         IForeignKey? IEntityType.FindForeignKey(
             IReadOnlyList<IReadOnlyProperty> properties,
             IReadOnlyKey principalKey,
-            IReadOnlyEntityType principalEntityType)
-            => FindForeignKey(properties, principalKey, principalEntityType);
+            IReadOnlyEntityType principalEntityType
+        ) => FindForeignKey(properties, principalKey, principalEntityType);
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        IEnumerable<IReadOnlyForeignKey> IReadOnlyEntityType.FindForeignKeys(IReadOnlyList<IReadOnlyProperty> properties)
-            => FindForeignKeys(properties);
+        IEnumerable<IReadOnlyForeignKey> IReadOnlyEntityType.FindForeignKeys(
+            IReadOnlyList<IReadOnlyProperty> properties
+        ) => FindForeignKeys(properties);
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        IEnumerable<IForeignKey> IEntityType.FindForeignKeys(IReadOnlyList<IReadOnlyProperty> properties)
-            => FindForeignKeys(properties);
+        IEnumerable<IForeignKey> IEntityType.FindForeignKeys(
+            IReadOnlyList<IReadOnlyProperty> properties
+        ) => FindForeignKeys(properties);
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        IEnumerable<IReadOnlyForeignKey> IReadOnlyEntityType.FindDeclaredForeignKeys(IReadOnlyList<IReadOnlyProperty> properties)
-            => FindDeclaredForeignKeys(properties);
+        IEnumerable<IReadOnlyForeignKey> IReadOnlyEntityType.FindDeclaredForeignKeys(
+            IReadOnlyList<IReadOnlyProperty> properties
+        ) => FindDeclaredForeignKeys(properties);
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        IEnumerable<IForeignKey> IEntityType.FindDeclaredForeignKeys(IReadOnlyList<IReadOnlyProperty> properties)
-            => FindDeclaredForeignKeys(properties);
+        IEnumerable<IForeignKey> IEntityType.FindDeclaredForeignKeys(
+            IReadOnlyList<IReadOnlyProperty> properties
+        ) => FindDeclaredForeignKeys(properties);
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        IEnumerable<IReadOnlyForeignKey> IReadOnlyEntityType.GetForeignKeys()
-            => GetForeignKeys();
+        IEnumerable<IReadOnlyForeignKey> IReadOnlyEntityType.GetForeignKeys() => GetForeignKeys();
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        IEnumerable<IForeignKey> IEntityType.GetForeignKeys()
-            => GetForeignKeys();
+        IEnumerable<IForeignKey> IEntityType.GetForeignKeys() => GetForeignKeys();
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        IEnumerable<IReadOnlyForeignKey> IReadOnlyEntityType.GetDeclaredForeignKeys()
-            => _foreignKeys;
+        IEnumerable<IReadOnlyForeignKey> IReadOnlyEntityType.GetDeclaredForeignKeys() =>
+            _foreignKeys;
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        IEnumerable<IForeignKey> IEntityType.GetDeclaredForeignKeys()
-            => _foreignKeys;
+        IEnumerable<IForeignKey> IEntityType.GetDeclaredForeignKeys() => _foreignKeys;
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        IEnumerable<IReadOnlyForeignKey> IReadOnlyEntityType.GetDerivedForeignKeys()
-            => GetDerivedForeignKeys();
+        IEnumerable<IReadOnlyForeignKey> IReadOnlyEntityType.GetDerivedForeignKeys() =>
+            GetDerivedForeignKeys();
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        IEnumerable<IForeignKey> IEntityType.GetDerivedForeignKeys()
-            => GetDerivedForeignKeys();
+        IEnumerable<IForeignKey> IEntityType.GetDerivedForeignKeys() => GetDerivedForeignKeys();
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        IEnumerable<IReadOnlyForeignKey> IReadOnlyEntityType.GetDeclaredReferencingForeignKeys()
-            => GetDeclaredReferencingForeignKeys();
+        IEnumerable<IReadOnlyForeignKey> IReadOnlyEntityType.GetDeclaredReferencingForeignKeys() =>
+            GetDeclaredReferencingForeignKeys();
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        IEnumerable<IForeignKey> IEntityType.GetDeclaredReferencingForeignKeys()
-            => GetDeclaredReferencingForeignKeys();
+        IEnumerable<IForeignKey> IEntityType.GetDeclaredReferencingForeignKeys() =>
+            GetDeclaredReferencingForeignKeys();
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        IEnumerable<IReadOnlyForeignKey> IReadOnlyEntityType.GetReferencingForeignKeys()
-            => GetReferencingForeignKeys();
+        IEnumerable<IReadOnlyForeignKey> IReadOnlyEntityType.GetReferencingForeignKeys() =>
+            GetReferencingForeignKeys();
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        IEnumerable<IForeignKey> IEntityType.GetReferencingForeignKeys()
-            => GetReferencingForeignKeys();
+        IEnumerable<IForeignKey> IEntityType.GetReferencingForeignKeys() =>
+            GetReferencingForeignKeys();
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        IEnumerable<IReadOnlyNavigation> IReadOnlyEntityType.GetDeclaredNavigations()
-            => GetDeclaredNavigations();
+        IEnumerable<IReadOnlyNavigation> IReadOnlyEntityType.GetDeclaredNavigations() =>
+            GetDeclaredNavigations();
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        IEnumerable<INavigation> IEntityType.GetDeclaredNavigations()
-            => GetDeclaredNavigations();
+        IEnumerable<INavigation> IEntityType.GetDeclaredNavigations() => GetDeclaredNavigations();
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        IReadOnlyNavigation? IReadOnlyEntityType.FindDeclaredNavigation(string name)
-            => FindDeclaredNavigation(name);
+        IReadOnlyNavigation? IReadOnlyEntityType.FindDeclaredNavigation(string name) =>
+            FindDeclaredNavigation(name);
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        INavigation? IEntityType.FindDeclaredNavigation(string name)
-            => FindDeclaredNavigation(name);
+        INavigation? IEntityType.FindDeclaredNavigation(string name) =>
+            FindDeclaredNavigation(name);
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        IEnumerable<IReadOnlyNavigation> IReadOnlyEntityType.GetDerivedNavigations()
-            => _directlyDerivedTypes.Count == 0
+        IEnumerable<IReadOnlyNavigation> IReadOnlyEntityType.GetDerivedNavigations() =>
+            _directlyDerivedTypes.Count == 0
                 ? Enumerable.Empty<SlimNavigation>()
                 : GetDerivedTypes().SelectMany(et => et.GetDeclaredNavigations());
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        IEnumerable<IReadOnlyNavigation> IReadOnlyEntityType.GetNavigations()
-            => GetNavigations();
+        IEnumerable<IReadOnlyNavigation> IReadOnlyEntityType.GetNavigations() => GetNavigations();
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        IEnumerable<INavigation> IEntityType.GetNavigations()
-            => GetNavigations();
+        IEnumerable<INavigation> IEntityType.GetNavigations() => GetNavigations();
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        IReadOnlySkipNavigation? IReadOnlyEntityType.FindSkipNavigation(MemberInfo memberInfo)
-            => FindSkipNavigation(memberInfo);
+        IReadOnlySkipNavigation? IReadOnlyEntityType.FindSkipNavigation(MemberInfo memberInfo) =>
+            FindSkipNavigation(memberInfo);
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        ISkipNavigation? IEntityType.FindSkipNavigation(MemberInfo memberInfo)
-            => FindSkipNavigation(memberInfo);
+        ISkipNavigation? IEntityType.FindSkipNavigation(MemberInfo memberInfo) =>
+            FindSkipNavigation(memberInfo);
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        IReadOnlySkipNavigation? IReadOnlyEntityType.FindSkipNavigation(string name)
-            => FindSkipNavigation(name);
+        IReadOnlySkipNavigation? IReadOnlyEntityType.FindSkipNavigation(string name) =>
+            FindSkipNavigation(name);
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        ISkipNavigation? IEntityType.FindSkipNavigation(string name)
-            => FindSkipNavigation(name);
+        ISkipNavigation? IEntityType.FindSkipNavigation(string name) => FindSkipNavigation(name);
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        IReadOnlySkipNavigation? IReadOnlyEntityType.FindDeclaredSkipNavigation(string name)
-            => FindDeclaredSkipNavigation(name);
+        IReadOnlySkipNavigation? IReadOnlyEntityType.FindDeclaredSkipNavigation(string name) =>
+            FindDeclaredSkipNavigation(name);
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        IEnumerable<IReadOnlySkipNavigation> IReadOnlyEntityType.GetDeclaredSkipNavigations()
-            => GetDeclaredSkipNavigations();
+        IEnumerable<IReadOnlySkipNavigation> IReadOnlyEntityType.GetDeclaredSkipNavigations() =>
+            GetDeclaredSkipNavigations();
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        IEnumerable<ISkipNavigation> IEntityType.GetDeclaredSkipNavigations()
-            => GetDeclaredSkipNavigations();
+        IEnumerable<ISkipNavigation> IEntityType.GetDeclaredSkipNavigations() =>
+            GetDeclaredSkipNavigations();
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        IEnumerable<IReadOnlySkipNavigation> IReadOnlyEntityType.GetDerivedSkipNavigations()
-            => GetDerivedSkipNavigations();
+        IEnumerable<IReadOnlySkipNavigation> IReadOnlyEntityType.GetDerivedSkipNavigations() =>
+            GetDerivedSkipNavigations();
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        IEnumerable<ISkipNavigation> IEntityType.GetDerivedSkipNavigations()
-            => GetDerivedSkipNavigations();
+        IEnumerable<ISkipNavigation> IEntityType.GetDerivedSkipNavigations() =>
+            GetDerivedSkipNavigations();
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        IEnumerable<IReadOnlySkipNavigation> IReadOnlyEntityType.GetSkipNavigations()
-            => GetSkipNavigations();
+        IEnumerable<IReadOnlySkipNavigation> IReadOnlyEntityType.GetSkipNavigations() =>
+            GetSkipNavigations();
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        IEnumerable<ISkipNavigation> IEntityType.GetSkipNavigations()
-            => GetSkipNavigations();
+        IEnumerable<ISkipNavigation> IEntityType.GetSkipNavigations() => GetSkipNavigations();
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        IReadOnlyIndex? IReadOnlyEntityType.FindIndex(IReadOnlyList<IReadOnlyProperty> properties)
-            => FindIndex(properties);
+        IReadOnlyIndex? IReadOnlyEntityType.FindIndex(
+            IReadOnlyList<IReadOnlyProperty> properties
+        ) => FindIndex(properties);
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        IIndex? IEntityType.FindIndex(IReadOnlyList<IReadOnlyProperty> properties)
-            => FindIndex(properties);
+        IIndex? IEntityType.FindIndex(IReadOnlyList<IReadOnlyProperty> properties) =>
+            FindIndex(properties);
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        IReadOnlyIndex? IReadOnlyEntityType.FindIndex(string name)
-            => FindIndex(name);
+        IReadOnlyIndex? IReadOnlyEntityType.FindIndex(string name) => FindIndex(name);
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        IIndex? IEntityType.FindIndex(string name)
-            => FindIndex(name);
+        IIndex? IEntityType.FindIndex(string name) => FindIndex(name);
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        IEnumerable<IReadOnlyIndex> IReadOnlyEntityType.GetDeclaredIndexes()
-            => GetDeclaredIndexes();
+        IEnumerable<IReadOnlyIndex> IReadOnlyEntityType.GetDeclaredIndexes() =>
+            GetDeclaredIndexes();
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        IEnumerable<IIndex> IEntityType.GetDeclaredIndexes()
-            => GetDeclaredIndexes();
+        IEnumerable<IIndex> IEntityType.GetDeclaredIndexes() => GetDeclaredIndexes();
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        IEnumerable<IReadOnlyIndex> IReadOnlyEntityType.GetDerivedIndexes()
-            => GetDerivedIndexes();
+        IEnumerable<IReadOnlyIndex> IReadOnlyEntityType.GetDerivedIndexes() => GetDerivedIndexes();
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        IEnumerable<IIndex> IEntityType.GetDerivedIndexes()
-            => GetDerivedIndexes();
+        IEnumerable<IIndex> IEntityType.GetDerivedIndexes() => GetDerivedIndexes();
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        IEnumerable<IReadOnlyIndex> IReadOnlyEntityType.GetIndexes()
-            => GetIndexes();
+        IEnumerable<IReadOnlyIndex> IReadOnlyEntityType.GetIndexes() => GetIndexes();
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        IEnumerable<IIndex> IEntityType.GetIndexes()
-            => GetIndexes();
+        IEnumerable<IIndex> IEntityType.GetIndexes() => GetIndexes();
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        IReadOnlyProperty? IReadOnlyEntityType.FindDeclaredProperty(string name)
-            => FindDeclaredProperty(name);
+        IReadOnlyProperty? IReadOnlyEntityType.FindDeclaredProperty(string name) =>
+            FindDeclaredProperty(name);
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        IProperty? IEntityType.FindDeclaredProperty(string name)
-            => FindDeclaredProperty(name);
+        IProperty? IEntityType.FindDeclaredProperty(string name) => FindDeclaredProperty(name);
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        IReadOnlyList<IReadOnlyProperty>? IReadOnlyEntityType.FindProperties(IReadOnlyList<string> propertyNames)
-            => FindProperties(propertyNames);
+        IReadOnlyList<IReadOnlyProperty>? IReadOnlyEntityType.FindProperties(
+            IReadOnlyList<string> propertyNames
+        ) => FindProperties(propertyNames);
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        IReadOnlyProperty? IReadOnlyEntityType.FindProperty(string name)
-            => FindProperty(name);
+        IReadOnlyProperty? IReadOnlyEntityType.FindProperty(string name) => FindProperty(name);
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        IProperty? IEntityType.FindProperty(string name)
-            => FindProperty(name);
+        IProperty? IEntityType.FindProperty(string name) => FindProperty(name);
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        IEnumerable<IReadOnlyProperty> IReadOnlyEntityType.GetDeclaredProperties()
-            => GetDeclaredProperties();
+        IEnumerable<IReadOnlyProperty> IReadOnlyEntityType.GetDeclaredProperties() =>
+            GetDeclaredProperties();
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        IEnumerable<IProperty> IEntityType.GetDeclaredProperties()
-            => GetDeclaredProperties();
+        IEnumerable<IProperty> IEntityType.GetDeclaredProperties() => GetDeclaredProperties();
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        IEnumerable<IReadOnlyProperty> IReadOnlyEntityType.GetDerivedProperties()
-            => GetDerivedProperties();
+        IEnumerable<IReadOnlyProperty> IReadOnlyEntityType.GetDerivedProperties() =>
+            GetDerivedProperties();
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        IEnumerable<IReadOnlyProperty> IReadOnlyEntityType.GetProperties()
-            => GetProperties();
+        IEnumerable<IReadOnlyProperty> IReadOnlyEntityType.GetProperties() => GetProperties();
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        IEnumerable<IProperty> IEntityType.GetProperties()
-            => GetProperties();
+        IEnumerable<IProperty> IEntityType.GetProperties() => GetProperties();
 
         /// <inheritdoc/>
-        PropertyCounts IRuntimeEntityType.Counts
-            => NonCapturingLazyInitializer.EnsureInitialized(ref _counts, this, static entityType => entityType.CalculateCounts());
+        PropertyCounts IRuntimeEntityType.Counts =>
+            NonCapturingLazyInitializer.EnsureInitialized(
+                ref _counts,
+                this,
+                static entityType => entityType.CalculateCounts()
+            );
 
         /// <inheritdoc/>
-        Func<InternalEntityEntry, ISnapshot> IRuntimeEntityType.RelationshipSnapshotFactory
-            => NonCapturingLazyInitializer.EnsureInitialized(
-                ref _relationshipSnapshotFactory, this,
-                static entityType => new RelationshipSnapshotFactoryFactory().Create(entityType));
+        Func<InternalEntityEntry, ISnapshot> IRuntimeEntityType.RelationshipSnapshotFactory =>
+            NonCapturingLazyInitializer.EnsureInitialized(
+                ref _relationshipSnapshotFactory,
+                this,
+                static entityType => new RelationshipSnapshotFactoryFactory().Create(entityType)
+            );
 
         /// <inheritdoc/>
-        Func<InternalEntityEntry, ISnapshot> IRuntimeEntityType.OriginalValuesFactory
-            => NonCapturingLazyInitializer.EnsureInitialized(
-                ref _originalValuesFactory, this,
-                static entityType => new OriginalValuesFactoryFactory().Create(entityType));
+        Func<InternalEntityEntry, ISnapshot> IRuntimeEntityType.OriginalValuesFactory =>
+            NonCapturingLazyInitializer.EnsureInitialized(
+                ref _originalValuesFactory,
+                this,
+                static entityType => new OriginalValuesFactoryFactory().Create(entityType)
+            );
 
         /// <inheritdoc/>
-        Func<InternalEntityEntry, ISnapshot> IRuntimeEntityType.StoreGeneratedValuesFactory
-            => NonCapturingLazyInitializer.EnsureInitialized(
-                ref _storeGeneratedValuesFactory, this,
-                static entityType => new SidecarValuesFactoryFactory().Create(entityType));
+        Func<InternalEntityEntry, ISnapshot> IRuntimeEntityType.StoreGeneratedValuesFactory =>
+            NonCapturingLazyInitializer.EnsureInitialized(
+                ref _storeGeneratedValuesFactory,
+                this,
+                static entityType => new SidecarValuesFactoryFactory().Create(entityType)
+            );
 
         /// <inheritdoc/>
-        Func<InternalEntityEntry, ISnapshot> IRuntimeEntityType.TemporaryValuesFactory
-            => NonCapturingLazyInitializer.EnsureInitialized(
-                ref _temporaryValuesFactory, this,
-                static entityType => new TemporaryValuesFactoryFactory().Create(entityType));
+        Func<InternalEntityEntry, ISnapshot> IRuntimeEntityType.TemporaryValuesFactory =>
+            NonCapturingLazyInitializer.EnsureInitialized(
+                ref _temporaryValuesFactory,
+                this,
+                static entityType => new TemporaryValuesFactoryFactory().Create(entityType)
+            );
 
         /// <inheritdoc/>
-        Func<ValueBuffer, ISnapshot> IRuntimeEntityType.ShadowValuesFactory
-            => NonCapturingLazyInitializer.EnsureInitialized(
-                ref _shadowValuesFactory, this,
-                static entityType => new ShadowValuesFactoryFactory().Create(entityType));
+        Func<ValueBuffer, ISnapshot> IRuntimeEntityType.ShadowValuesFactory =>
+            NonCapturingLazyInitializer.EnsureInitialized(
+                ref _shadowValuesFactory,
+                this,
+                static entityType => new ShadowValuesFactoryFactory().Create(entityType)
+            );
 
         /// <inheritdoc/>
-        Func<ISnapshot> IRuntimeEntityType.EmptyShadowValuesFactory
-            => NonCapturingLazyInitializer.EnsureInitialized(
-                ref _emptyShadowValuesFactory, this,
-                static entityType => new EmptyShadowValuesFactoryFactory().CreateEmpty(entityType));
+        Func<ISnapshot> IRuntimeEntityType.EmptyShadowValuesFactory =>
+            NonCapturingLazyInitializer.EnsureInitialized(
+                ref _emptyShadowValuesFactory,
+                this,
+                static entityType => new EmptyShadowValuesFactoryFactory().CreateEmpty(entityType)
+            );
 
         /// <inheritdoc/>
-        Func<MaterializationContext, object> IRuntimeEntityType.InstanceFactory
-            => NonCapturingLazyInitializer.EnsureInitialized(
-                ref _instanceFactory, this,
+        Func<MaterializationContext, object> IRuntimeEntityType.InstanceFactory =>
+            NonCapturingLazyInitializer.EnsureInitialized(
+                ref _instanceFactory,
+                this,
                 static entityType =>
                 {
                     var binding = entityType._serviceOnlyConstructorBinding;
@@ -1270,8 +1324,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                         binding = entityType._serviceOnlyConstructorBinding;
                         if (binding == null)
                         {
-                            throw new InvalidOperationException(CoreStrings.NoParameterlessConstructor(
-                                ((IReadOnlyEntityType)entityType).DisplayName()));
+                            throw new InvalidOperationException(
+                                CoreStrings.NoParameterlessConstructor(
+                                    ((IReadOnlyEntityType)entityType).DisplayName()
+                                )
+                            );
                         }
                     }
 
@@ -1279,67 +1336,77 @@ namespace Microsoft.EntityFrameworkCore.Metadata
 
                     return Expression.Lambda<Func<MaterializationContext, object>>(
                             binding.CreateConstructorExpression(
-                                new ParameterBindingInfo(entityType, contextParam)),
-                            contextParam)
+                                new ParameterBindingInfo(entityType, contextParam)
+                            ),
+                            contextParam
+                        )
                         .Compile();
-                });
+                }
+            );
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        IEnumerable<IProperty> IEntityType.GetForeignKeyProperties()
-            => NonCapturingLazyInitializer.EnsureInitialized(
-                ref _foreignKeyProperties, this,
+        IEnumerable<IProperty> IEntityType.GetForeignKeyProperties() =>
+            NonCapturingLazyInitializer.EnsureInitialized(
+                ref _foreignKeyProperties,
+                this,
                 static entityType =>
                 {
-                    return entityType.GetProperties().Where(p => ((IReadOnlyProperty)p).IsForeignKey()).ToArray();
-                });
+                    return entityType.GetProperties()
+                        .Where(p => ((IReadOnlyProperty)p).IsForeignKey())
+                        .ToArray();
+                }
+            );
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        IEnumerable<IProperty> IEntityType.GetValueGeneratingProperties()
-            => NonCapturingLazyInitializer.EnsureInitialized(
-                ref _valueGeneratingProperties, this,
+        IEnumerable<IProperty> IEntityType.GetValueGeneratingProperties() =>
+            NonCapturingLazyInitializer.EnsureInitialized(
+                ref _valueGeneratingProperties,
+                this,
                 static entityType =>
                 {
-                    return entityType.GetProperties().Where(p => p.RequiresValueGenerator()).ToArray();
-                });
+                    return entityType.GetProperties()
+                        .Where(p => p.RequiresValueGenerator())
+                        .ToArray();
+                }
+            );
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        IReadOnlyServiceProperty? IReadOnlyEntityType.FindServiceProperty(string name)
-            => FindServiceProperty(name);
+        IReadOnlyServiceProperty? IReadOnlyEntityType.FindServiceProperty(string name) =>
+            FindServiceProperty(name);
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        IServiceProperty? IEntityType.FindServiceProperty(string name)
-            => FindServiceProperty(name);
+        IServiceProperty? IEntityType.FindServiceProperty(string name) => FindServiceProperty(name);
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        IEnumerable<IReadOnlyServiceProperty> IReadOnlyEntityType.GetDeclaredServiceProperties()
-            => GetDeclaredServiceProperties();
+        IEnumerable<IReadOnlyServiceProperty> IReadOnlyEntityType.GetDeclaredServiceProperties() =>
+            GetDeclaredServiceProperties();
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        IEnumerable<IServiceProperty> IEntityType.GetDeclaredServiceProperties()
-            => GetDeclaredServiceProperties();
+        IEnumerable<IServiceProperty> IEntityType.GetDeclaredServiceProperties() =>
+            GetDeclaredServiceProperties();
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        IEnumerable<IReadOnlyServiceProperty> IReadOnlyEntityType.GetDerivedServiceProperties()
-            => GetDerivedServiceProperties();
+        IEnumerable<IReadOnlyServiceProperty> IReadOnlyEntityType.GetDerivedServiceProperties() =>
+            GetDerivedServiceProperties();
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        IEnumerable<IReadOnlyServiceProperty> IReadOnlyEntityType.GetServiceProperties()
-            => GetServiceProperties();
+        IEnumerable<IReadOnlyServiceProperty> IReadOnlyEntityType.GetServiceProperties() =>
+            GetServiceProperties();
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        IEnumerable<IServiceProperty> IEntityType.GetServiceProperties()
-            => GetServiceProperties();
+        IEnumerable<IServiceProperty> IEntityType.GetServiceProperties() => GetServiceProperties();
 
-        IEnumerable<IDictionary<string, object?>> IReadOnlyEntityType.GetSeedData(bool providerValues)
-            => throw new InvalidOperationException(CoreStrings.SlimModelMissingData);
+        IEnumerable<IDictionary<string, object?>> IReadOnlyEntityType.GetSeedData(
+            bool providerValues
+        ) => throw new InvalidOperationException(CoreStrings.SlimModelMissingData);
     }
 }

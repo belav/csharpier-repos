@@ -8,6 +8,7 @@ namespace XPathTests.Common
     public static partial class Utils
     {
         private static readonly ICreateNavigator _navigatorCreator = new CreateNavigatorComparer();
-        public static readonly string ResourceFilesPath = "System.Xml.XPath.XDocument.Tests.TestData.";
+        public static readonly string ResourceFilesPath =
+            "System.Xml.XPath.XDocument.Tests.TestData.";
     }
 }

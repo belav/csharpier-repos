@@ -10,9 +10,7 @@ namespace System.Data
     internal sealed class RelationshipConverter : ExpandableObjectConverter
     {
         // converter classes should have public ctor
-        public RelationshipConverter()
-        {
-        }
+        public RelationshipConverter() { }
 
         /// <summary>
         /// Gets a value indicating whether this converter can
@@ -34,7 +32,12 @@ namespace System.Data
         ///      type is string.  If this cannot convert to the destination type, this will
         ///      throw a NotSupportedException.
         /// </summary>
-        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
+        public override object ConvertTo(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value,
+            Type destinationType
+        )
         {
             if (destinationType == null)
             {
@@ -50,21 +53,72 @@ namespace System.Data
                 DataTable parentTable = rel.ParentKey.Table;
                 DataTable childTable = rel.ChildKey.Table;
 
-                if (string.IsNullOrEmpty(parentTable.Namespace) && string.IsNullOrEmpty(childTable.Namespace))
+                if (
+                    string.IsNullOrEmpty(parentTable.Namespace)
+                    && string.IsNullOrEmpty(childTable.Namespace)
+                )
                 {
-                    ctor = typeof(DataRelation).GetConstructor(new Type[] { typeof(string) /*relationName*/, typeof(string) /*parentTableName*/, typeof(string) /*childTableName */,
-                        typeof(string[]) /*parentColumnNames */, typeof(string[])  /*childColumnNames*/, typeof(bool) /*nested*/ })!;
+                    ctor = typeof(DataRelation).GetConstructor(
+                        new Type[]
+                        {
+                            typeof(string) /*relationName*/
+                            ,
+                            typeof(string) /*parentTableName*/
+                            ,
+                            typeof(string) /*childTableName */
+                            ,
+                            typeof(string[]) /*parentColumnNames */
+                            ,
+                            typeof(string[]) /*childColumnNames*/
+                            ,
+                            typeof(bool) /*nested*/
+                        }
+                    )!;
 
-                    values = new object[] { rel.RelationName, rel.ParentKey.Table.TableName, rel.ChildKey.Table.TableName, rel.ParentColumnNames, rel.ChildColumnNames, rel.Nested };
+                    values = new object[]
+                    {
+                        rel.RelationName,
+                        rel.ParentKey.Table.TableName,
+                        rel.ChildKey.Table.TableName,
+                        rel.ParentColumnNames,
+                        rel.ChildColumnNames,
+                        rel.Nested
+                    };
                 }
                 else
                 {
-                    ctor = typeof(DataRelation).GetConstructor(new Type[] { typeof(string)/*relationName*/, typeof(string)/*parentTableName*/, typeof(string)/*parentTableNamespace*/,
-                        typeof(string)/*childTableName */, typeof(string)/*childTableNamespace */,
-                        typeof(string[])/*parentColumnNames */, typeof(string[]) /*childColumnNames*/, typeof(bool) /*nested*/})!;
+                    ctor = typeof(DataRelation).GetConstructor(
+                        new Type[]
+                        {
+                            typeof(string) /*relationName*/
+                            ,
+                            typeof(string) /*parentTableName*/
+                            ,
+                            typeof(string) /*parentTableNamespace*/
+                            ,
+                            typeof(string) /*childTableName */
+                            ,
+                            typeof(string) /*childTableNamespace */
+                            ,
+                            typeof(string[]) /*parentColumnNames */
+                            ,
+                            typeof(string[]) /*childColumnNames*/
+                            ,
+                            typeof(bool) /*nested*/
+                        }
+                    )!;
 
-                    values = new object[] { rel.RelationName, rel.ParentKey.Table.TableName, rel.ParentKey.Table.Namespace, rel.ChildKey.Table.TableName,
-                        rel.ChildKey.Table.Namespace, rel.ParentColumnNames, rel.ChildColumnNames, rel.Nested };
+                    values = new object[]
+                    {
+                        rel.RelationName,
+                        rel.ParentKey.Table.TableName,
+                        rel.ParentKey.Table.Namespace,
+                        rel.ChildKey.Table.TableName,
+                        rel.ChildKey.Table.Namespace,
+                        rel.ParentColumnNames,
+                        rel.ChildColumnNames,
+                        rel.Nested
+                    };
                 }
 
                 return new InstanceDescriptor(ctor, values);

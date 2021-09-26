@@ -36,9 +36,17 @@ namespace System.Formats.Cbor
 
             if (header.AdditionalInfo == CborAdditionalInfo.IndefiniteLength)
             {
-                if (_isConformanceModeCheckEnabled && CborConformanceModeHelpers.RequiresDefiniteLengthItems(ConformanceMode))
+                if (
+                    _isConformanceModeCheckEnabled
+                    && CborConformanceModeHelpers.RequiresDefiniteLengthItems(ConformanceMode)
+                )
                 {
-                    throw new CborContentException(SR.Format(SR.Cbor_ConformanceMode_IndefiniteLengthItemsNotSupported, ConformanceMode));
+                    throw new CborContentException(
+                        SR.Format(
+                            SR.Cbor_ConformanceMode_IndefiniteLengthItemsNotSupported,
+                            ConformanceMode
+                        )
+                    );
                 }
 
                 return ReadIndefiniteLengthByteStringConcatenated();
@@ -82,9 +90,17 @@ namespace System.Formats.Cbor
 
             if (header.AdditionalInfo == CborAdditionalInfo.IndefiniteLength)
             {
-                if (_isConformanceModeCheckEnabled && CborConformanceModeHelpers.RequiresDefiniteLengthItems(ConformanceMode))
+                if (
+                    _isConformanceModeCheckEnabled
+                    && CborConformanceModeHelpers.RequiresDefiniteLengthItems(ConformanceMode)
+                )
                 {
-                    throw new CborContentException(SR.Format(SR.Cbor_ConformanceMode_IndefiniteLengthItemsNotSupported, ConformanceMode));
+                    throw new CborContentException(
+                        SR.Format(
+                            SR.Cbor_ConformanceMode_IndefiniteLengthItemsNotSupported,
+                            ConformanceMode
+                        )
+                    );
                 }
 
                 return TryReadIndefiniteLengthByteStringConcatenated(destination, out bytesWritten);
@@ -163,9 +179,17 @@ namespace System.Formats.Cbor
                 throw new InvalidOperationException(SR.Cbor_Reader_NotIndefiniteLengthString);
             }
 
-            if (_isConformanceModeCheckEnabled && CborConformanceModeHelpers.RequiresDefiniteLengthItems(ConformanceMode))
+            if (
+                _isConformanceModeCheckEnabled
+                && CborConformanceModeHelpers.RequiresDefiniteLengthItems(ConformanceMode)
+            )
             {
-                throw new CborContentException(SR.Format(SR.Cbor_ConformanceMode_IndefiniteLengthItemsNotSupported, ConformanceMode));
+                throw new CborContentException(
+                    SR.Format(
+                        SR.Cbor_ConformanceMode_IndefiniteLengthItemsNotSupported,
+                        ConformanceMode
+                    )
+                );
             }
 
             AdvanceBuffer(1);
@@ -211,9 +235,17 @@ namespace System.Formats.Cbor
 
             if (header.AdditionalInfo == CborAdditionalInfo.IndefiniteLength)
             {
-                if (_isConformanceModeCheckEnabled && CborConformanceModeHelpers.RequiresDefiniteLengthItems(ConformanceMode))
+                if (
+                    _isConformanceModeCheckEnabled
+                    && CborConformanceModeHelpers.RequiresDefiniteLengthItems(ConformanceMode)
+                )
                 {
-                    throw new CborContentException(SR.Format(SR.Cbor_ConformanceMode_IndefiniteLengthItemsNotSupported, ConformanceMode));
+                    throw new CborContentException(
+                        SR.Format(
+                            SR.Cbor_ConformanceMode_IndefiniteLengthItemsNotSupported,
+                            ConformanceMode
+                        )
+                    );
                 }
 
                 return ReadIndefiniteLengthTextStringConcatenated();
@@ -232,7 +264,10 @@ namespace System.Formats.Cbor
             }
             catch (DecoderFallbackException e)
             {
-                throw new CborContentException(SR.Cbor_Reader_InvalidCbor_InvalidUtf8StringEncoding, e);
+                throw new CborContentException(
+                    SR.Cbor_Reader_InvalidCbor_InvalidUtf8StringEncoding,
+                    e
+                );
             }
 
             AdvanceBuffer(bytesRead + length);
@@ -268,9 +303,17 @@ namespace System.Formats.Cbor
 
             if (header.AdditionalInfo == CborAdditionalInfo.IndefiniteLength)
             {
-                if (_isConformanceModeCheckEnabled && CborConformanceModeHelpers.RequiresDefiniteLengthItems(ConformanceMode))
+                if (
+                    _isConformanceModeCheckEnabled
+                    && CborConformanceModeHelpers.RequiresDefiniteLengthItems(ConformanceMode)
+                )
                 {
-                    throw new CborContentException(SR.Format(SR.Cbor_ConformanceMode_IndefiniteLengthItemsNotSupported, ConformanceMode));
+                    throw new CborContentException(
+                        SR.Format(
+                            SR.Cbor_ConformanceMode_IndefiniteLengthItemsNotSupported,
+                            ConformanceMode
+                        )
+                    );
                 }
 
                 return TryReadIndefiniteLengthTextStringConcatenated(destination, out charsWritten);
@@ -328,7 +371,10 @@ namespace System.Formats.Cbor
 
             ReadOnlyMemory<byte> encodedSlice = _data.Slice(_offset + bytesRead, byteLength);
 
-            if (_isConformanceModeCheckEnabled && CborConformanceModeHelpers.RequiresUtf8Validation(ConformanceMode))
+            if (
+                _isConformanceModeCheckEnabled
+                && CborConformanceModeHelpers.RequiresUtf8Validation(ConformanceMode)
+            )
             {
                 Encoding encoding = CborConformanceModeHelpers.GetUtf8Encoding(ConformanceMode);
                 ValidateUtf8AndGetCharCount(encodedSlice.Span, encoding);
@@ -360,9 +406,17 @@ namespace System.Formats.Cbor
                 throw new InvalidOperationException(SR.Cbor_Reader_NotIndefiniteLengthString);
             }
 
-            if (_isConformanceModeCheckEnabled && CborConformanceModeHelpers.RequiresDefiniteLengthItems(ConformanceMode))
+            if (
+                _isConformanceModeCheckEnabled
+                && CborConformanceModeHelpers.RequiresDefiniteLengthItems(ConformanceMode)
+            )
             {
-                throw new CborContentException(SR.Format(SR.Cbor_ConformanceMode_IndefiniteLengthItemsNotSupported, ConformanceMode));
+                throw new CborContentException(
+                    SR.Format(
+                        SR.Cbor_ConformanceMode_IndefiniteLengthItemsNotSupported,
+                        ConformanceMode
+                    )
+                );
             }
 
             AdvanceBuffer(1);
@@ -389,7 +443,11 @@ namespace System.Formats.Cbor
 
         private byte[] ReadIndefiniteLengthByteStringConcatenated()
         {
-            List<(int Offset, int Length)> ranges = ReadIndefiniteLengthStringChunkRanges(CborMajorType.ByteString, out int encodingLength, out int concatenatedBufferSize);
+            List<(int Offset, int Length)> ranges = ReadIndefiniteLengthStringChunkRanges(
+                CborMajorType.ByteString,
+                out int encodingLength,
+                out int concatenatedBufferSize
+            );
             var output = new byte[concatenatedBufferSize];
 
             ReadOnlySpan<byte> source = GetRemainingBytes();
@@ -408,9 +466,16 @@ namespace System.Formats.Cbor
             return output;
         }
 
-        private bool TryReadIndefiniteLengthByteStringConcatenated(Span<byte> destination, out int bytesWritten)
+        private bool TryReadIndefiniteLengthByteStringConcatenated(
+            Span<byte> destination,
+            out int bytesWritten
+        )
         {
-            List<(int Offset, int Length)> ranges = ReadIndefiniteLengthStringChunkRanges(CborMajorType.ByteString, out int encodingLength, out int concatenatedBufferSize);
+            List<(int Offset, int Length)> ranges = ReadIndefiniteLengthStringChunkRanges(
+                CborMajorType.ByteString,
+                out int encodingLength,
+                out int concatenatedBufferSize
+            );
 
             if (concatenatedBufferSize > destination.Length)
             {
@@ -435,7 +500,11 @@ namespace System.Formats.Cbor
 
         private string ReadIndefiniteLengthTextStringConcatenated()
         {
-            List<(int Offset, int Length)> ranges = ReadIndefiniteLengthStringChunkRanges(CborMajorType.TextString, out int encodingLength, out int concatenatedBufferSize);
+            List<(int Offset, int Length)> ranges = ReadIndefiniteLengthStringChunkRanges(
+                CborMajorType.TextString,
+                out int encodingLength,
+                out int concatenatedBufferSize
+            );
             Encoding utf8Encoding = CborConformanceModeHelpers.GetUtf8Encoding(ConformanceMode);
             ReadOnlySpan<byte> buffer = GetRemainingBytes();
 
@@ -443,18 +512,28 @@ namespace System.Formats.Cbor
             int concatenatedStringSize = 0;
             foreach ((int o, int l) in ranges)
             {
-                concatenatedStringSize += ValidateUtf8AndGetCharCount(buffer.Slice(o, l), utf8Encoding);
+                concatenatedStringSize += ValidateUtf8AndGetCharCount(
+                    buffer.Slice(o, l),
+                    utf8Encoding
+                );
             }
 
             // build the string using range data
-            string output = string.Create(concatenatedStringSize, (ranges, _data.Slice(_offset), utf8Encoding), BuildString);
+            string output = string.Create(
+                concatenatedStringSize,
+                (ranges, _data.Slice(_offset), utf8Encoding),
+                BuildString
+            );
 
             AdvanceBuffer(encodingLength);
             AdvanceDataItemCounters();
             ReturnIndefiniteLengthStringRangeList(ranges);
             return output;
 
-            static void BuildString(Span<char> target, (List<(int Offset, int Length)> ranges, ReadOnlyMemory<byte> source, Encoding utf8Encoding) input)
+            static void BuildString(
+                Span<char> target,
+                (List<(int Offset, int Length)> ranges, ReadOnlyMemory<byte> source, Encoding utf8Encoding) input
+            )
             {
                 ReadOnlySpan<byte> source = input.source.Span;
 
@@ -468,9 +547,16 @@ namespace System.Formats.Cbor
             }
         }
 
-        private bool TryReadIndefiniteLengthTextStringConcatenated(Span<char> destination, out int charsWritten)
+        private bool TryReadIndefiniteLengthTextStringConcatenated(
+            Span<char> destination,
+            out int charsWritten
+        )
         {
-            List<(int Offset, int Length)> ranges = ReadIndefiniteLengthStringChunkRanges(CborMajorType.TextString, out int encodingLength, out int _);
+            List<(int Offset, int Length)> ranges = ReadIndefiniteLengthStringChunkRanges(
+                CborMajorType.TextString,
+                out int encodingLength,
+                out int _
+            );
             ReadOnlySpan<byte> buffer = GetRemainingBytes();
             Encoding utf8Encoding = CborConformanceModeHelpers.GetUtf8Encoding(ConformanceMode);
 
@@ -478,7 +564,10 @@ namespace System.Formats.Cbor
             int concatenatedStringSize = 0;
             foreach ((int o, int l) in ranges)
             {
-                concatenatedStringSize += ValidateUtf8AndGetCharCount(buffer.Slice(o, l), utf8Encoding);
+                concatenatedStringSize += ValidateUtf8AndGetCharCount(
+                    buffer.Slice(o, l),
+                    utf8Encoding
+                );
             }
 
             if (concatenatedStringSize > destination.Length)
@@ -503,7 +592,11 @@ namespace System.Formats.Cbor
         // Reads a buffer starting with an indefinite-length string,
         // performing validation and returning a list of ranges
         // containing the individual chunk payloads
-        private List<(int Offset, int Length)> ReadIndefiniteLengthStringChunkRanges(CborMajorType type, out int encodingLength, out int concatenatedBufferSize)
+        private List<(int Offset, int Length)> ReadIndefiniteLengthStringChunkRanges(
+            CborMajorType type,
+            out int encodingLength,
+            out int concatenatedBufferSize
+        )
         {
             List<(int Offset, int Length)> ranges = AcquireIndefiniteLengthStringRangeList();
             ReadOnlySpan<byte> data = GetRemainingBytes();
@@ -514,7 +607,11 @@ namespace System.Formats.Cbor
 
             while (nextInitialByte.InitialByte != CborInitialByte.IndefiniteLengthBreakByte)
             {
-                int chunkLength = DecodeDefiniteLength(nextInitialByte, data.Slice(i), out int bytesRead);
+                int chunkLength = DecodeDefiniteLength(
+                    nextInitialByte,
+                    data.Slice(i),
+                    out int bytesRead
+                );
                 ranges.Add((i + bytesRead, chunkLength));
                 i += bytesRead + chunkLength;
                 concatenatedBufferSize += chunkLength;
@@ -525,14 +622,22 @@ namespace System.Formats.Cbor
             encodingLength = i + 1; // include the break byte
             return ranges;
 
-            static CborInitialByte ReadNextInitialByte(ReadOnlySpan<byte> buffer, CborMajorType expectedType)
+            static CborInitialByte ReadNextInitialByte(
+                ReadOnlySpan<byte> buffer,
+                CborMajorType expectedType
+            )
             {
                 EnsureReadCapacity(buffer, 1);
                 var header = new CborInitialByte(buffer[0]);
 
-                if (header.InitialByte != CborInitialByte.IndefiniteLengthBreakByte && header.MajorType != expectedType)
+                if (
+                    header.InitialByte != CborInitialByte.IndefiniteLengthBreakByte
+                    && header.MajorType != expectedType
+                )
                 {
-                    throw new CborContentException(SR.Cbor_Reader_InvalidCbor_IndefiniteLengthStringContainsInvalidDataItem);
+                    throw new CborContentException(
+                        SR.Cbor_Reader_InvalidCbor_IndefiniteLengthStringContainsInvalidDataItem
+                    );
                 }
 
                 return header;
@@ -551,8 +656,11 @@ namespace System.Formats.Cbor
             EnsureReadCapacity(bytesRead + byteLength);
 
             // if conformance mode requires it, validate the utf-8 encoding that is being skipped
-            if (type == CborMajorType.TextString && _isConformanceModeCheckEnabled &&
-                CborConformanceModeHelpers.RequiresUtf8Validation(ConformanceMode))
+            if (
+                type == CborMajorType.TextString
+                && _isConformanceModeCheckEnabled
+                && CborConformanceModeHelpers.RequiresUtf8Validation(ConformanceMode)
+            )
             {
                 ReadOnlySpan<byte> encodedSlice = buffer.Slice(bytesRead, byteLength);
                 Encoding utf8Encoding = CborConformanceModeHelpers.GetUtf8Encoding(ConformanceMode);
@@ -571,13 +679,19 @@ namespace System.Formats.Cbor
             }
             catch (DecoderFallbackException e)
             {
-                throw new CborContentException(SR.Cbor_Reader_InvalidCbor_InvalidUtf8StringEncoding, e);
+                throw new CborContentException(
+                    SR.Cbor_Reader_InvalidCbor_InvalidUtf8StringEncoding,
+                    e
+                );
             }
         }
 
         private List<(int Offset, int Length)> AcquireIndefiniteLengthStringRangeList()
         {
-            List<(int Offset, int Length)>? ranges = Interlocked.Exchange(ref _indefiniteLengthStringRangeAllocation, null);
+            List<(int Offset, int Length)>? ranges = Interlocked.Exchange(
+                ref _indefiniteLengthStringRangeAllocation,
+                null
+            );
 
             if (ranges != null)
             {

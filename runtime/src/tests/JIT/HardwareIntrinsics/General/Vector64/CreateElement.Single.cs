@@ -38,7 +38,8 @@ namespace JIT.HardwareIntrinsics.General
     {
         private static readonly int LargestVectorSize = 8;
 
-        private static readonly int ElementCount = Unsafe.SizeOf<Vector64<Single>>() / sizeof(Single);
+        private static readonly int ElementCount =
+            Unsafe.SizeOf<Vector64<Single>>() / sizeof(Single);
 
         public bool Succeeded { get; set; } = true;
 
@@ -71,21 +72,28 @@ namespace JIT.HardwareIntrinsics.General
                 values[i] = TestLibrary.Generator.GetSingle();
             }
 
-            object result = typeof(Vector64)
-                                .GetMethod(nameof(Vector64.Create), operandTypes)
-                                .Invoke(null, new object[] { values[0], values[1] });
+            object result = typeof(Vector64).GetMethod(nameof(Vector64.Create), operandTypes)
+                .Invoke(null, new object[] { values[0], values[1] });
 
             ValidateResult((Vector64<Single>)(result), values);
         }
 
-        private void ValidateResult(Vector64<Single> result, Single[] expectedValues, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            Vector64<Single> result,
+            Single[] expectedValues,
+            [CallerMemberName] string method = ""
+        )
         {
             Single[] resultElements = new Single[ElementCount];
             Unsafe.WriteUnaligned(ref Unsafe.As<Single, byte>(ref resultElements[0]), result);
             ValidateResult(resultElements, expectedValues, method);
         }
 
-        private void ValidateResult(Single[] resultElements, Single[] expectedValues, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            Single[] resultElements,
+            Single[] expectedValues,
+            [CallerMemberName] string method = ""
+        )
         {
             bool succeeded = true;
 
@@ -100,9 +108,15 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"Vector64.Create(Single): {method} failed:");
-                TestLibrary.TestFramework.LogInformation($"   value: ({string.Join(", ", expectedValues)})");
-                TestLibrary.TestFramework.LogInformation($"  result: ({string.Join(", ", resultElements)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector64.Create(Single): {method} failed:"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"   value: ({string.Join(", ", expectedValues)})"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"  result: ({string.Join(", ", resultElements)})"
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

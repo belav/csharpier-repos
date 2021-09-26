@@ -7,43 +7,41 @@ using System;
 public struct VT
 {
     public long[,] long2darr;
-    public long[, ,] long3darr;
+    public long[,,] long3darr;
     public long[,] long2darr_b;
-    public long[, ,] long3darr_b;
+    public long[,,] long3darr_b;
     public long[,] long2darr_c;
-    public long[, ,] long3darr_c;
+    public long[,,] long3darr_c;
 }
 
 public class CL
 {
     public long[,] long2darr = { { 0, -1 }, { 0, 0 } };
-    public long[, ,] long3darr = { { { 0, 0 } }, { { 0, -1 } }, { { 0, 0 } } };
+    public long[,,] long3darr = { { { 0, 0 } }, { { 0, -1 } }, { { 0, 0 } } };
     public long[,] long2darr_b = { { 0, 1 }, { 0, 0 } };
-    public long[, ,] long3darr_b = { { { 0, 0 } }, { { 0, 1 } }, { { 0, 0 } } };
+    public long[,,] long3darr_b = { { { 0, 0 } }, { { 0, 1 } }, { { 0, 0 } } };
     public long[,] long2darr_c = { { 0, 49 }, { 0, 0 } };
-    public long[, ,] long3darr_c = { { { 0, 0 } }, { { 0, 49 } }, { { 0, 0 } } };
+    public long[,,] long3darr_c = { { { 0, 0 } }, { { 0, 49 } }, { { 0, 0 } } };
 }
 
 public class longMDArrTest
 {
-
     static long[,] long2darr = { { 0, -1 }, { 0, 0 } };
-    static long[, ,] long3darr = { { { 0, 0 } }, { { 0, -1 } }, { { 0, 0 } } };
+    static long[,,] long3darr = { { { 0, 0 } }, { { 0, -1 } }, { { 0, 0 } } };
     static long[,] long2darr_b = { { 0, 1 }, { 0, 0 } };
-    static long[, ,] long3darr_b = { { { 0, 0 } }, { { 0, 1 } }, { { 0, 0 } } };
+    static long[,,] long3darr_b = { { { 0, 0 } }, { { 0, 1 } }, { { 0, 0 } } };
     static long[,] long2darr_c = { { 0, 49 }, { 0, 0 } };
-    static long[, ,] long3darr_c = { { { 0, 0 } }, { { 0, 49 } }, { { 0, 0 } } };
+    static long[,,] long3darr_c = { { { 0, 0 } }, { { 0, 49 } }, { { 0, 0 } } };
 
     static long[][,] ja1 = new long[2][,];
-    static long[][, ,] ja2 = new long[2][, ,];
+    static long[][,,] ja2 = new long[2][,,];
     static long[][,] ja1_b = new long[2][,];
-    static long[][, ,] ja2_b = new long[2][, ,];
+    static long[][,,] ja2_b = new long[2][,,];
     static long[][,] ja1_c = new long[2][,];
-    static long[][, ,] ja2_c = new long[2][, ,];
+    static long[][,,] ja2_c = new long[2][,,];
 
     public static int Main()
     {
-
         bool pass = true;
 
         VT vt1;
@@ -1177,8 +1175,5 @@ public class longMDArrTest
             Console.WriteLine("PASSED");
             return 100;
         }
-
-
     }
-
 };

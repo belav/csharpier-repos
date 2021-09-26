@@ -24,8 +24,9 @@ using Task = System.Threading.Tasks.Task;
 
 namespace Microsoft.VisualStudio.LanguageServices.Interactive
 {
-    internal abstract partial class VsInteractiveWindowPackage<TVsInteractiveWindowProvider> : AsyncPackage, IVsToolWindowFactory
-        where TVsInteractiveWindowProvider : VsInteractiveWindowProvider
+    internal abstract partial class VsInteractiveWindowPackage<TVsInteractiveWindowProvider>
+        : AsyncPackage,
+          IVsToolWindowFactory where TVsInteractiveWindowProvider : VsInteractiveWindowProvider
     {
         protected abstract void InitializeMenuCommands(OleMenuCommandService menuCommandService);
 
@@ -35,15 +36,22 @@ namespace Microsoft.VisualStudio.LanguageServices.Interactive
         private IComponentModel _componentModel;
         private TVsInteractiveWindowProvider _interactiveWindowProvider;
 
-        protected override async Task InitializeAsync(CancellationToken cancellationToken, IProgress<ServiceProgressData> progress)
+        protected override async Task InitializeAsync(
+            CancellationToken cancellationToken,
+            IProgress<ServiceProgressData> progress
+        )
         {
             await base.InitializeAsync(cancellationToken, progress).ConfigureAwait(true);
 
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
             var shell = (IVsShell)await GetServiceAsync(typeof(SVsShell)).ConfigureAwait(true);
-            _componentModel = (IComponentModel)await GetServiceAsync(typeof(SComponentModel)).ConfigureAwait(true);
-            var menuCommandService = (OleMenuCommandService)await GetServiceAsync(typeof(IMenuCommandService)).ConfigureAwait(true);
+            _componentModel = (IComponentModel)await GetServiceAsync(typeof(SComponentModel))
+                .ConfigureAwait(true);
+            var menuCommandService = (OleMenuCommandService)await GetServiceAsync(
+                    typeof(IMenuCommandService)
+                )
+                .ConfigureAwait(true);
             cancellationToken.ThrowIfCancellationRequested();
             Assumes.Present(shell);
             Assumes.Present(_componentModel);
@@ -64,14 +72,23 @@ namespace Microsoft.VisualStudio.LanguageServices.Interactive
             SetErrorHandlers(typeof(IInteractiveWindow).Assembly, fatalHandler, nonFatalHandler);
             SetErrorHandlers(typeof(IVsInteractiveWindow).Assembly, fatalHandler, nonFatalHandler);
 
-            _interactiveWindowProvider = _componentModel.DefaultExportProvider.GetExportedValue<TVsInteractiveWindowProvider>();
+            _interactiveWindowProvider =
+                _componentModel.DefaultExportProvider.GetExportedValue<TVsInteractiveWindowProvider>();
 
             InitializeMenuCommands(menuCommandService);
         }
 
-        private static void SetErrorHandlers(Assembly assembly, Action<Exception> fatalHandler, Action<Exception> nonFatalHandler)
+        private static void SetErrorHandlers(
+            Assembly assembly,
+            Action<Exception> fatalHandler,
+            Action<Exception> nonFatalHandler
+        )
         {
-            var type = assembly.GetType("Microsoft.VisualStudio.InteractiveWindow.FatalError", throwOnError: true).GetTypeInfo();
+            var type = assembly.GetType(
+                    "Microsoft.VisualStudio.InteractiveWindow.FatalError",
+                    throwOnError: true
+                )
+                .GetTypeInfo();
 
             var handlerSetter = type.GetDeclaredMethod("set_Handler");
             var nonFatalHandlerSetter = type.GetDeclaredMethod("set_NonFatalHandler");

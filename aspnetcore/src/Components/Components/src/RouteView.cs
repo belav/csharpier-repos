@@ -58,7 +58,9 @@ namespace Microsoft.AspNetCore.Components
 
             if (RouteData == null)
             {
-                throw new InvalidOperationException($"The {nameof(RouteView)} component requires a non-null value for the parameter {nameof(RouteData)}.");
+                throw new InvalidOperationException(
+                    $"The {nameof(RouteView)} component requires a non-null value for the parameter {nameof(RouteData)}."
+                );
             }
 
             _renderHandle.Render(_renderDelegate);
@@ -71,12 +73,17 @@ namespace Microsoft.AspNetCore.Components
         /// <param name="builder">The <see cref="RenderTreeBuilder"/>.</param>
         protected virtual void Render(RenderTreeBuilder builder)
         {
-            var pageLayoutType = RouteData.PageType.GetCustomAttribute<LayoutAttribute>()?.LayoutType
+            var pageLayoutType =
+                RouteData.PageType.GetCustomAttribute<LayoutAttribute>()?.LayoutType
                 ?? DefaultLayout;
 
             builder.OpenComponent<LayoutView>(0);
             builder.AddAttribute(1, nameof(LayoutView.Layout), pageLayoutType);
-            builder.AddAttribute(2, nameof(LayoutView.ChildContent), _renderPageWithParametersDelegate);
+            builder.AddAttribute(
+                2,
+                nameof(LayoutView.ChildContent),
+                _renderPageWithParametersDelegate
+            );
             builder.CloseComponent();
         }
 

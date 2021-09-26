@@ -27,7 +27,11 @@ namespace Microsoft.AspNetCore.ResponseCompression
                 throw new ArgumentNullException(nameof(serviceProvider));
             }
 
-            return (ICompressionProvider)ActivatorUtilities.CreateInstance(serviceProvider, ProviderType, Type.EmptyTypes);
+            return (ICompressionProvider)ActivatorUtilities.CreateInstance(
+                serviceProvider,
+                ProviderType,
+                Type.EmptyTypes
+            );
         }
 
         string ICompressionProvider.EncodingName

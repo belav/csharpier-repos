@@ -79,7 +79,12 @@ namespace Microsoft.AspNetCore.Mvc
         [InlineData(6, 10, "World", 5)]
         [InlineData(null, 5, "World", 5)]
         [InlineData(6, null, "World", 5)]
-        public async Task WriteFileAsync_PreconditionStateShouldProcess_WritesRangeRequested(long? start, long? end, string expectedString, long contentLength)
+        public async Task WriteFileAsync_PreconditionStateShouldProcess_WritesRangeRequested(
+            long? start,
+            long? end,
+            string expectedString,
+            long contentLength
+        )
         {
             // Arrange
             var contentType = "text/plain";
@@ -99,13 +104,14 @@ namespace Microsoft.AspNetCore.Mvc
             var httpContext = GetHttpContext();
             var requestHeaders = httpContext.Request.GetTypedHeaders();
             requestHeaders.Range = new RangeHeaderValue(start, end);
-            requestHeaders.IfMatch = new[]
-            {
-                new EntityTagHeaderValue("\"Etag\""),
-            };
+            requestHeaders.IfMatch = new[] { new EntityTagHeaderValue("\"Etag\""), };
             httpContext.Request.Method = HttpMethods.Get;
             httpContext.Response.Body = new MemoryStream();
-            var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
+            var actionContext = new ActionContext(
+                httpContext,
+                new RouteData(),
+                new ActionDescriptor()
+            );
 
             // Act
             await result.ExecuteResultAsync(actionContext);
@@ -117,8 +123,15 @@ namespace Microsoft.AspNetCore.Mvc
             httpResponse.Body.Seek(0, SeekOrigin.Begin);
             var streamReader = new StreamReader(httpResponse.Body);
             var body = streamReader.ReadToEndAsync().Result;
-            var contentRange = new ContentRangeHeaderValue(start.Value, end.Value, byteArray.Length);
-            Assert.Equal(lastModified.ToString("R"), httpResponse.Headers[HeaderNames.LastModified]);
+            var contentRange = new ContentRangeHeaderValue(
+                start.Value,
+                end.Value,
+                byteArray.Length
+            );
+            Assert.Equal(
+                lastModified.ToString("R"),
+                httpResponse.Headers[HeaderNames.LastModified]
+            );
             Assert.Equal(entityTag.ToString(), httpResponse.Headers[HeaderNames.ETag]);
             Assert.Equal(StatusCodes.Status206PartialContent, httpResponse.StatusCode);
             Assert.Equal("bytes", httpResponse.Headers[HeaderNames.AcceptRanges]);
@@ -148,15 +161,18 @@ namespace Microsoft.AspNetCore.Mvc
 
             var httpContext = GetHttpContext();
             var requestHeaders = httpContext.Request.GetTypedHeaders();
-            requestHeaders.IfMatch = new[]
-            {
-                new EntityTagHeaderValue("\"Etag\""),
-            };
+            requestHeaders.IfMatch = new[] { new EntityTagHeaderValue("\"Etag\""), };
             requestHeaders.Range = new RangeHeaderValue(0, 4);
-            requestHeaders.IfRange = new RangeConditionHeaderValue(new EntityTagHeaderValue("\"Etag\""));
+            requestHeaders.IfRange = new RangeConditionHeaderValue(
+                new EntityTagHeaderValue("\"Etag\"")
+            );
             httpContext.Request.Method = HttpMethods.Get;
             httpContext.Response.Body = new MemoryStream();
-            var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
+            var actionContext = new ActionContext(
+                httpContext,
+                new RouteData(),
+                new ActionDescriptor()
+            );
 
             // Act
             await result.ExecuteResultAsync(actionContext);
@@ -166,7 +182,10 @@ namespace Microsoft.AspNetCore.Mvc
             httpResponse.Body.Seek(0, SeekOrigin.Begin);
             var streamReader = new StreamReader(httpResponse.Body);
             var body = streamReader.ReadToEndAsync().Result;
-            Assert.Equal(lastModified.ToString("R"), httpResponse.Headers[HeaderNames.LastModified]);
+            Assert.Equal(
+                lastModified.ToString("R"),
+                httpResponse.Headers[HeaderNames.LastModified]
+            );
             Assert.Equal(entityTag.ToString(), httpResponse.Headers[HeaderNames.ETag]);
             var contentRange = new ContentRangeHeaderValue(0, 4, byteArray.Length);
             Assert.Equal(StatusCodes.Status206PartialContent, httpResponse.StatusCode);
@@ -196,15 +215,16 @@ namespace Microsoft.AspNetCore.Mvc
 
             var httpContext = GetHttpContext();
             var requestHeaders = httpContext.Request.GetTypedHeaders();
-            requestHeaders.IfMatch = new[]
-            {
-                new EntityTagHeaderValue("\"Etag\""),
-            };
+            requestHeaders.IfMatch = new[] { new EntityTagHeaderValue("\"Etag\""), };
             requestHeaders.Range = new RangeHeaderValue(0, 4);
             requestHeaders.IfRange = new RangeConditionHeaderValue(DateTimeOffset.MinValue);
             httpContext.Request.Method = HttpMethods.Get;
             httpContext.Response.Body = new MemoryStream();
-            var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
+            var actionContext = new ActionContext(
+                httpContext,
+                new RouteData(),
+                new ActionDescriptor()
+            );
 
             // Act
             await result.ExecuteResultAsync(actionContext);
@@ -215,7 +235,10 @@ namespace Microsoft.AspNetCore.Mvc
             var streamReader = new StreamReader(httpResponse.Body);
             var body = streamReader.ReadToEndAsync().Result;
             Assert.Equal(StatusCodes.Status200OK, httpResponse.StatusCode);
-            Assert.Equal(lastModified.ToString("R"), httpResponse.Headers[HeaderNames.LastModified]);
+            Assert.Equal(
+                lastModified.ToString("R"),
+                httpResponse.Headers[HeaderNames.LastModified]
+            );
             Assert.Equal(entityTag.ToString(), httpResponse.Headers[HeaderNames.ETag]);
             Assert.Equal("Hello World", body);
             Assert.False(readStream.CanSeek);
@@ -241,15 +264,16 @@ namespace Microsoft.AspNetCore.Mvc
 
             var httpContext = GetHttpContext();
             var requestHeaders = httpContext.Request.GetTypedHeaders();
-            requestHeaders.IfMatch = new[]
-            {
-                new EntityTagHeaderValue("\"Etag\""),
-            };
+            requestHeaders.IfMatch = new[] { new EntityTagHeaderValue("\"Etag\""), };
             requestHeaders.Range = new RangeHeaderValue(0, 4);
             requestHeaders.IfRange = new RangeConditionHeaderValue(DateTimeOffset.MinValue);
             httpContext.Request.Method = HttpMethods.Get;
             httpContext.Response.Body = new MemoryStream();
-            var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
+            var actionContext = new ActionContext(
+                httpContext,
+                new RouteData(),
+                new ActionDescriptor()
+            );
 
             // Act
             await result.ExecuteResultAsync(actionContext);
@@ -260,7 +284,10 @@ namespace Microsoft.AspNetCore.Mvc
             var streamReader = new StreamReader(httpResponse.Body);
             var body = streamReader.ReadToEndAsync().Result;
             Assert.Equal(StatusCodes.Status200OK, httpResponse.StatusCode);
-            Assert.Equal(lastModified.ToString("R"), httpResponse.Headers[HeaderNames.LastModified]);
+            Assert.Equal(
+                lastModified.ToString("R"),
+                httpResponse.Headers[HeaderNames.LastModified]
+            );
             Assert.Equal(entityTag.ToString(), httpResponse.Headers[HeaderNames.ETag]);
             Assert.Equal("Hello World", body);
             Assert.False(readStream.CanSeek);
@@ -270,9 +297,11 @@ namespace Microsoft.AspNetCore.Mvc
         [InlineData("0-5")]
         [InlineData("bytes = ")]
         [InlineData("bytes = 1-4, 5-11")]
-        public async Task WriteFileAsync_PreconditionStateUnspecified_RangeRequestIgnored(string rangeString)
+        public async Task WriteFileAsync_PreconditionStateUnspecified_RangeRequestIgnored(
+            string rangeString
+        )
         {
-            // Arrange            
+            // Arrange
             var contentType = "text/plain";
             var lastModified = new DateTimeOffset();
             var entityTag = new EntityTagHeaderValue("\"Etag\"");
@@ -291,7 +320,11 @@ namespace Microsoft.AspNetCore.Mvc
             httpContext.Request.Headers[HeaderNames.Range] = rangeString;
             httpContext.Request.Method = HttpMethods.Get;
             httpContext.Response.Body = new MemoryStream();
-            var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
+            var actionContext = new ActionContext(
+                httpContext,
+                new RouteData(),
+                new ActionDescriptor()
+            );
 
             // Act
             await result.ExecuteResultAsync(actionContext);
@@ -303,7 +336,10 @@ namespace Microsoft.AspNetCore.Mvc
             var body = streamReader.ReadToEndAsync().Result;
             Assert.Empty(httpResponse.Headers[HeaderNames.ContentRange]);
             Assert.Equal(StatusCodes.Status200OK, httpResponse.StatusCode);
-            Assert.Equal(lastModified.ToString("R"), httpResponse.Headers[HeaderNames.LastModified]);
+            Assert.Equal(
+                lastModified.ToString("R"),
+                httpResponse.Headers[HeaderNames.LastModified]
+            );
             Assert.Equal(entityTag.ToString(), httpResponse.Headers[HeaderNames.ETag]);
             Assert.Equal("Hello World", body);
             Assert.False(readStream.CanSeek);
@@ -312,9 +348,11 @@ namespace Microsoft.AspNetCore.Mvc
         [Theory]
         [InlineData("bytes = 12-13")]
         [InlineData("bytes = -0")]
-        public async Task WriteFileAsync_PreconditionStateUnspecified_RangeRequestedNotSatisfiable(string rangeString)
+        public async Task WriteFileAsync_PreconditionStateUnspecified_RangeRequestedNotSatisfiable(
+            string rangeString
+        )
         {
-            // Arrange            
+            // Arrange
             var contentType = "text/plain";
             var lastModified = new DateTimeOffset();
             var entityTag = new EntityTagHeaderValue("\"Etag\"");
@@ -332,7 +370,11 @@ namespace Microsoft.AspNetCore.Mvc
             httpContext.Request.Headers[HeaderNames.Range] = rangeString;
             httpContext.Request.Method = HttpMethods.Get;
             httpContext.Response.Body = new MemoryStream();
-            var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
+            var actionContext = new ActionContext(
+                httpContext,
+                new RouteData(),
+                new ActionDescriptor()
+            );
 
             // Act
             await result.ExecuteResultAsync(actionContext);
@@ -343,7 +385,10 @@ namespace Microsoft.AspNetCore.Mvc
             var streamReader = new StreamReader(httpResponse.Body);
             var body = streamReader.ReadToEndAsync().Result;
             var contentRange = new ContentRangeHeaderValue(byteArray.Length);
-            Assert.Equal(lastModified.ToString("R"), httpResponse.Headers[HeaderNames.LastModified]);
+            Assert.Equal(
+                lastModified.ToString("R"),
+                httpResponse.Headers[HeaderNames.LastModified]
+            );
             Assert.Equal(entityTag.ToString(), httpResponse.Headers[HeaderNames.ETag]);
             Assert.Equal(StatusCodes.Status416RangeNotSatisfiable, httpResponse.StatusCode);
             Assert.Equal("bytes", httpResponse.Headers[HeaderNames.AcceptRanges]);
@@ -372,14 +417,15 @@ namespace Microsoft.AspNetCore.Mvc
 
             var httpContext = GetHttpContext();
             var requestHeaders = httpContext.Request.GetTypedHeaders();
-            requestHeaders.IfMatch = new[]
-            {
-                new EntityTagHeaderValue("\"NotEtag\""),
-            };
+            requestHeaders.IfMatch = new[] { new EntityTagHeaderValue("\"NotEtag\""), };
             httpContext.Request.Headers[HeaderNames.Range] = "bytes = 0-6";
             httpContext.Request.Method = HttpMethods.Get;
             httpContext.Response.Body = new MemoryStream();
-            var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
+            var actionContext = new ActionContext(
+                httpContext,
+                new RouteData(),
+                new ActionDescriptor()
+            );
 
             // Act
             await result.ExecuteResultAsync(actionContext);
@@ -400,7 +446,7 @@ namespace Microsoft.AspNetCore.Mvc
         [Fact]
         public async Task WriteFileAsync_NotModified_RangeRequestedIgnored()
         {
-            // Arrange       
+            // Arrange
             var contentType = "text/plain";
             var lastModified = new DateTimeOffset();
             var entityTag = new EntityTagHeaderValue("\"Etag\"");
@@ -416,14 +462,15 @@ namespace Microsoft.AspNetCore.Mvc
 
             var httpContext = GetHttpContext();
             var requestHeaders = httpContext.Request.GetTypedHeaders();
-            requestHeaders.IfNoneMatch = new[]
-            {
-                new EntityTagHeaderValue("\"Etag\""),
-            };
+            requestHeaders.IfNoneMatch = new[] { new EntityTagHeaderValue("\"Etag\""), };
             httpContext.Request.Headers[HeaderNames.Range] = "bytes = 0-6";
             httpContext.Request.Method = HttpMethods.Get;
             httpContext.Response.Body = new MemoryStream();
-            var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
+            var actionContext = new ActionContext(
+                httpContext,
+                new RouteData(),
+                new ActionDescriptor()
+            );
 
             // Act
             await result.ExecuteResultAsync(actionContext);
@@ -435,7 +482,7 @@ namespace Microsoft.AspNetCore.Mvc
             var body = await streamReader.ReadToEndAsync();
             Assert.Equal(StatusCodes.Status304NotModified, httpResponse.StatusCode);
             Assert.Null(httpResponse.ContentLength);
-            Assert.Empty(httpResponse.Headers[HeaderNames.ContentRange]);            
+            Assert.Empty(httpResponse.Headers[HeaderNames.ContentRange]);
             Assert.False(httpResponse.Headers.ContainsKey(HeaderNames.ContentType));
             Assert.NotEmpty(httpResponse.Headers[HeaderNames.LastModified]);
             Assert.Empty(body);
@@ -465,13 +512,14 @@ namespace Microsoft.AspNetCore.Mvc
             var httpContext = GetHttpContext();
             var requestHeaders = httpContext.Request.GetTypedHeaders();
             requestHeaders.Range = new RangeHeaderValue(0, 5);
-            requestHeaders.IfMatch = new[]
-            {
-                new EntityTagHeaderValue("\"Etag\""),
-            };
+            requestHeaders.IfMatch = new[] { new EntityTagHeaderValue("\"Etag\""), };
             httpContext.Request.Method = HttpMethods.Get;
             httpContext.Response.Body = new MemoryStream();
-            var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
+            var actionContext = new ActionContext(
+                httpContext,
+                new RouteData(),
+                new ActionDescriptor()
+            );
 
             // Act
             await result.ExecuteResultAsync(actionContext);
@@ -481,7 +529,10 @@ namespace Microsoft.AspNetCore.Mvc
             httpResponse.Body.Seek(0, SeekOrigin.Begin);
             var streamReader = new StreamReader(httpResponse.Body);
             var body = streamReader.ReadToEndAsync().Result;
-            Assert.Equal(lastModified.ToString("R"), httpResponse.Headers[HeaderNames.LastModified]);
+            Assert.Equal(
+                lastModified.ToString("R"),
+                httpResponse.Headers[HeaderNames.LastModified]
+            );
             Assert.Equal(entityTag.ToString(), httpResponse.Headers[HeaderNames.ETag]);
             var contentRange = new ContentRangeHeaderValue(byteArray.Length);
             Assert.Equal(StatusCodes.Status416RangeNotSatisfiable, httpResponse.StatusCode);
@@ -497,18 +548,22 @@ namespace Microsoft.AspNetCore.Mvc
         {
             // Arrange
             var mockReadStream = new Mock<Stream>();
-            mockReadStream.SetupSequence(s => s.ReadAsync(It.IsAny<byte[]>(), 0, 0x1000, CancellationToken.None))
+            mockReadStream.SetupSequence(
+                    s => s.ReadAsync(It.IsAny<byte[]>(), 0, 0x1000, CancellationToken.None)
+                )
                 .Returns(Task.FromResult(0x1000))
                 .Returns(Task.FromResult(0x500))
                 .Returns(Task.FromResult(0));
 
             var mockBodyStream = new Mock<Stream>();
-            mockBodyStream
-                .Setup(s => s.WriteAsync(It.IsAny<byte[]>(), 0, 0x1000, CancellationToken.None))
+            mockBodyStream.Setup(
+                    s => s.WriteAsync(It.IsAny<byte[]>(), 0, 0x1000, CancellationToken.None)
+                )
                 .Returns(Task.FromResult(0));
 
-            mockBodyStream
-                .Setup(s => s.WriteAsync(It.IsAny<byte[]>(), 0, 0x500, CancellationToken.None))
+            mockBodyStream.Setup(
+                    s => s.WriteAsync(It.IsAny<byte[]>(), 0, 0x500, CancellationToken.None)
+                )
                 .Returns(Task.FromResult(0));
 
             var result = new FileStreamResult(mockReadStream.Object, "text/plain");
@@ -516,7 +571,11 @@ namespace Microsoft.AspNetCore.Mvc
             var httpContext = GetHttpContext();
             httpContext.Response.Body = mockBodyStream.Object;
 
-            var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
+            var actionContext = new ActionContext(
+                httpContext,
+                new RouteData(),
+                new ActionDescriptor()
+            );
 
             // Act
             await result.ExecuteResultAsync(actionContext);
@@ -532,8 +591,7 @@ namespace Microsoft.AspNetCore.Mvc
             // Arrange
             // Generate an array of bytes with a predictable pattern
             // 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C, D, E, F, 10, 11, 12, 13
-            var originalBytes = Enumerable.Range(0, 0x1234)
-                .Select(b => (byte)(b % 20)).ToArray();
+            var originalBytes = Enumerable.Range(0, 0x1234).Select(b => (byte)(b % 20)).ToArray();
 
             var originalStream = new MemoryStream(originalBytes);
 
@@ -541,7 +599,11 @@ namespace Microsoft.AspNetCore.Mvc
             var outStream = new MemoryStream();
             httpContext.Response.Body = outStream;
 
-            var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
+            var actionContext = new ActionContext(
+                httpContext,
+                new RouteData(),
+                new ActionDescriptor()
+            );
 
             var result = new FileStreamResult(originalStream, "text/plain");
 
@@ -561,8 +623,7 @@ namespace Microsoft.AspNetCore.Mvc
             var expectedContentType = "text/foo; charset=us-ascii";
             // Generate an array of bytes with a predictable pattern
             // 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C, D, E, F, 10, 11, 12, 13
-            var originalBytes = Enumerable.Range(0, 0x1234)
-                .Select(b => (byte)(b % 20)).ToArray();
+            var originalBytes = Enumerable.Range(0, 0x1234).Select(b => (byte)(b % 20)).ToArray();
 
             var originalStream = new MemoryStream(originalBytes);
 
@@ -570,7 +631,11 @@ namespace Microsoft.AspNetCore.Mvc
             var outStream = new MemoryStream();
             httpContext.Response.Body = outStream;
 
-            var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
+            var actionContext = new ActionContext(
+                httpContext,
+                new RouteData(),
+                new ActionDescriptor()
+            );
 
             var result = new FileStreamResult(originalStream, expectedContentType);
 
@@ -595,7 +660,11 @@ namespace Microsoft.AspNetCore.Mvc
             var outStream = new MemoryStream();
             httpContext.Response.Body = outStream;
 
-            var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
+            var actionContext = new ActionContext(
+                httpContext,
+                new RouteData(),
+                new ActionDescriptor()
+            );
 
             var result = new FileStreamResult(readStream, "text/plain");
 
@@ -611,7 +680,10 @@ namespace Microsoft.AspNetCore.Mvc
         private static IServiceCollection CreateServices()
         {
             var services = new ServiceCollection();
-            services.AddSingleton<IActionResultExecutor<FileStreamResult>, FileStreamResultExecutor>();
+            services.AddSingleton<
+                IActionResultExecutor<FileStreamResult>,
+                FileStreamResultExecutor
+            >();
             services.AddSingleton<ILoggerFactory>(NullLoggerFactory.Instance);
             return services;
         }

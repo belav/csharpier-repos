@@ -19,7 +19,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <param name="materializationContextExpression"> The expression tree from which the parameter value will come. </param>
         public ParameterBindingInfo(
             IEntityType entityType,
-            Expression materializationContextExpression)
+            Expression materializationContextExpression
+        )
         {
             Check.NotNull(entityType, nameof(entityType));
             Check.NotNull(entityType, nameof(materializationContextExpression));
@@ -43,7 +44,6 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// </summary>
         /// <param name="property"> The property. </param>
         /// <returns> The index where its value can be found. </returns>
-        public int GetValueBufferIndex(IPropertyBase property)
-            => property.GetIndex();
+        public int GetValueBufferIndex(IPropertyBase property) => property.GetIndex();
     }
 }

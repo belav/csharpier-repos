@@ -22,7 +22,8 @@ using Microsoft.VisualStudio.Shell.TableManager;
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
 {
     [ExportEventListener(WellKnownEventListeners.DiagnosticService, WorkspaceKind.Host), Shared]
-    internal partial class VisualStudioDiagnosticListTableWorkspaceEventListener : IEventListener<IDiagnosticService>
+    internal partial class VisualStudioDiagnosticListTableWorkspaceEventListener
+        : IEventListener<IDiagnosticService>
     {
         internal const string IdentifierString = nameof(VisualStudioDiagnosticListTable);
 
@@ -33,9 +34,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public VisualStudioDiagnosticListTableWorkspaceEventListener(
-            [Import("Microsoft.VisualStudio.Shell.Interop.SAsyncServiceProvider")] object asyncServiceProvider,
+            [Import("Microsoft.VisualStudio.Shell.Interop.SAsyncServiceProvider")]
+                object asyncServiceProvider,
             IThreadingContext threadingContext,
-            ITableManagerProvider tableManagerProvider)
+            ITableManagerProvider tableManagerProvider
+        )
         {
             // MEFv2 doesn't support type based contract for Import above and for this particular contract (SAsyncServiceProvider)
             // actual type cast doesn't work. (https://github.com/microsoft/vs-mef/issues/138)
@@ -47,16 +50,19 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
 
         public void StartListening(Workspace workspace, IDiagnosticService diagnosticService)
         {
-            var errorList = _threadingContext.JoinableTaskFactory.Run(async () =>
-            {
-                await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();
+            var errorList = _threadingContext.JoinableTaskFactory.Run(
+                async () =>
+                {
+                    await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();
 
-                return await _asyncServiceProvider.GetServiceAsync(typeof(SVsErrorList)).ConfigureAwait(true) as IErrorList;
-            });
+                    return await _asyncServiceProvider.GetServiceAsync(typeof(SVsErrorList))
+                            .ConfigureAwait(true) as IErrorList;
+                }
+            );
 
             if (errorList == null)
             {
-                // nothing to do when there is no error list. 
+                // nothing to do when there is no error list.
                 // it can happen if VS ran in command line mode
                 return;
             }
@@ -65,7 +71,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                 (VisualStudioWorkspaceImpl)workspace,
                 diagnosticService,
                 _tableManagerProvider,
-                errorList);
+                errorList
+            );
         }
 
         internal partial class VisualStudioDiagnosticListTable : VisualStudioBaseDiagnosticListTable
@@ -79,13 +86,21 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                 VisualStudioWorkspaceImpl workspace,
                 IDiagnosticService diagnosticService,
                 ITableManagerProvider provider,
-                IErrorList errorList) :
-                base(workspace, provider)
+                IErrorList errorList
+            ) : base(workspace, provider)
             {
                 _errorList = errorList;
 
-                _liveTableSource = new LiveTableDataSource(workspace, diagnosticService, IdentifierString, workspace.ExternalErrorDiagnosticUpdateSource);
-                _buildTableSource = new BuildTableDataSource(workspace, workspace.ExternalErrorDiagnosticUpdateSource);
+                _liveTableSource = new LiveTableDataSource(
+                    workspace,
+                    diagnosticService,
+                    IdentifierString,
+                    workspace.ExternalErrorDiagnosticUpdateSource
+                );
+                _buildTableSource = new BuildTableDataSource(
+                    workspace,
+                    workspace.ExternalErrorDiagnosticUpdateSource
+                );
 
                 AddInitialTableSource(Workspace.CurrentSolution, GetCurrentDataSource());
                 ConnectWorkspaceEvents();
@@ -100,21 +115,35 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                     return _liveTableSource;
                 }
 
-                return _errorList.AreOtherErrorSourceEntriesShown ? (ITableDataSource)_liveTableSource : _buildTableSource;
+                return _errorList.AreOtherErrorSourceEntriesShown
+                  ? (ITableDataSource)_liveTableSource
+                  : _buildTableSource;
             }
 
             /// this is for test only
-            internal VisualStudioDiagnosticListTable(Workspace workspace, IDiagnosticService diagnosticService, ITableManagerProvider provider) :
-                base(workspace, provider)
+            internal VisualStudioDiagnosticListTable(
+                Workspace workspace,
+                IDiagnosticService diagnosticService,
+                ITableManagerProvider provider
+            ) : base(workspace, provider)
             {
-                AddInitialTableSource(workspace.CurrentSolution, new LiveTableDataSource(workspace, diagnosticService, IdentifierString));
+                AddInitialTableSource(
+                    workspace.CurrentSolution,
+                    new LiveTableDataSource(workspace, diagnosticService, IdentifierString)
+                );
             }
 
             /// this is for test only
-            internal VisualStudioDiagnosticListTable(Workspace workspace, ExternalErrorDiagnosticUpdateSource errorSource, ITableManagerProvider provider) :
-                base(workspace, provider)
+            internal VisualStudioDiagnosticListTable(
+                Workspace workspace,
+                ExternalErrorDiagnosticUpdateSource errorSource,
+                ITableManagerProvider provider
+            ) : base(workspace, provider)
             {
-                AddInitialTableSource(workspace.CurrentSolution, new BuildTableDataSource(workspace, errorSource));
+                AddInitialTableSource(
+                    workspace.CurrentSolution,
+                    new BuildTableDataSource(workspace, errorSource)
+                );
             }
 
             protected override void AddTableSourceIfNecessary(Solution solution)

@@ -11,7 +11,11 @@ namespace System.Security.Cryptography
     {
         private readonly TripleDES _impl;
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA5350", Justification = "This is the implementation of TripleDES")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Security",
+            "CA5350",
+            Justification = "This is the implementation of TripleDES"
+        )]
         public TripleDESCryptoServiceProvider()
         {
             // This class wraps TripleDES

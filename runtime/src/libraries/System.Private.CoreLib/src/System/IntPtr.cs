@@ -20,8 +20,15 @@ namespace System
 {
     [Serializable]
     [StructLayout(LayoutKind.Sequential)]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
-    public readonly struct IntPtr : IEquatable<IntPtr>, IComparable, IComparable<IntPtr>, ISpanFormattable, ISerializable
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
+    public readonly struct IntPtr
+        : IEquatable<IntPtr>,
+          IComparable,
+          IComparable<IntPtr>,
+          ISpanFormattable,
+          ISerializable
     {
         // WARNING: We allow diagnostic tools to directly inspect this member (_value).
         // See https://github.com/dotnet/corert/blob/master/Documentation/design-docs/diagnostics/diagnostics-tools-contract.md for more details.
@@ -74,8 +81,7 @@ namespace System
         }
 
         public override unsafe bool Equals([NotNullWhen(true)] object? obj) =>
-            obj is IntPtr other &&
-            _value == other._value;
+            obj is IntPtr other && _value == other._value;
 
         public override unsafe int GetHashCode()
         {
@@ -99,26 +105,21 @@ namespace System
         }
 
         [NonVersionable]
-        public unsafe long ToInt64() =>
-            (nint)_value;
+        public unsafe long ToInt64() => (nint)_value;
 
         [NonVersionable]
-        public static unsafe explicit operator IntPtr(int value) =>
-            new IntPtr(value);
+        public static unsafe explicit operator IntPtr(int value) => new IntPtr(value);
 
         [NonVersionable]
-        public static unsafe explicit operator IntPtr(long value) =>
-            new IntPtr(value);
+        public static unsafe explicit operator IntPtr(long value) => new IntPtr(value);
 
         [CLSCompliant(false)]
         [NonVersionable]
-        public static unsafe explicit operator IntPtr(void* value) =>
-            new IntPtr(value);
+        public static unsafe explicit operator IntPtr(void* value) => new IntPtr(value);
 
         [CLSCompliant(false)]
         [NonVersionable]
-        public static unsafe explicit operator void*(IntPtr value) =>
-            value._value;
+        public static unsafe explicit operator void*(IntPtr value) => value._value;
 
         [NonVersionable]
         public static unsafe explicit operator int(IntPtr value)
@@ -132,8 +133,7 @@ namespace System
         }
 
         [NonVersionable]
-        public static unsafe explicit operator long(IntPtr value) =>
-            (nint)value._value;
+        public static unsafe explicit operator long(IntPtr value) => (nint)value._value;
 
         [NonVersionable]
         public static unsafe bool operator ==(IntPtr value1, IntPtr value2) =>
@@ -144,16 +144,14 @@ namespace System
             value1._value != value2._value;
 
         [NonVersionable]
-        public static IntPtr Add(IntPtr pointer, int offset) =>
-            pointer + offset;
+        public static IntPtr Add(IntPtr pointer, int offset) => pointer + offset;
 
         [NonVersionable]
         public static unsafe IntPtr operator +(IntPtr pointer, int offset) =>
             (nint)pointer._value + offset;
 
         [NonVersionable]
-        public static IntPtr Subtract(IntPtr pointer, int offset) =>
-            pointer - offset;
+        public static IntPtr Subtract(IntPtr pointer, int offset) => pointer - offset;
 
         [NonVersionable]
         public static unsafe IntPtr operator -(IntPtr pointer, int offset) =>
@@ -190,8 +188,10 @@ namespace System
             }
             if (value is nint i)
             {
-                if ((nint)_value < i) return -1;
-                if ((nint)_value > i) return 1;
+                if ((nint)_value < i)
+                    return -1;
+                if ((nint)_value > i)
+                    return 1;
                 return 0;
             }
 
@@ -205,17 +205,29 @@ namespace System
 
         public unsafe override string ToString() => ((nint_t)_value).ToString();
         public unsafe string ToString(string? format) => ((nint_t)_value).ToString(format);
-        public unsafe string ToString(IFormatProvider? provider) => ((nint_t)_value).ToString(provider);
-        public unsafe string ToString(string? format, IFormatProvider? provider) => ((nint_t)_value).ToString(format, provider);
+        public unsafe string ToString(IFormatProvider? provider) =>
+            ((nint_t)_value).ToString(provider);
+        public unsafe string ToString(string? format, IFormatProvider? provider) =>
+            ((nint_t)_value).ToString(format, provider);
 
-        public unsafe bool TryFormat(Span<char> destination, out int charsWritten, ReadOnlySpan<char> format = default, IFormatProvider? provider = null) =>
-            ((nint_t)_value).TryFormat(destination, out charsWritten, format, provider);
+        public unsafe bool TryFormat(
+            Span<char> destination,
+            out int charsWritten,
+            ReadOnlySpan<char> format = default,
+            IFormatProvider? provider = null
+        ) => ((nint_t)_value).TryFormat(destination, out charsWritten, format, provider);
 
         public static IntPtr Parse(string s) => (IntPtr)nint_t.Parse(s);
         public static IntPtr Parse(string s, NumberStyles style) => (IntPtr)nint_t.Parse(s, style);
-        public static IntPtr Parse(string s, IFormatProvider? provider) => (IntPtr)nint_t.Parse(s, provider);
-        public static IntPtr Parse(string s, NumberStyles style, IFormatProvider? provider) => (IntPtr)nint_t.Parse(s, style, provider);
-        public static IntPtr Parse(ReadOnlySpan<char> s, NumberStyles style = NumberStyles.Integer, IFormatProvider? provider = null) => (IntPtr)nint_t.Parse(s, style, provider);
+        public static IntPtr Parse(string s, IFormatProvider? provider) =>
+            (IntPtr)nint_t.Parse(s, provider);
+        public static IntPtr Parse(string s, NumberStyles style, IFormatProvider? provider) =>
+            (IntPtr)nint_t.Parse(s, style, provider);
+        public static IntPtr Parse(
+            ReadOnlySpan<char> s,
+            NumberStyles style = NumberStyles.Integer,
+            IFormatProvider? provider = null
+        ) => (IntPtr)nint_t.Parse(s, style, provider);
 
         public static bool TryParse([NotNullWhen(true)] string? s, out IntPtr result)
         {
@@ -223,7 +235,12 @@ namespace System
             return nint_t.TryParse(s, out Unsafe.As<IntPtr, nint_t>(ref result));
         }
 
-        public static bool TryParse([NotNullWhen(true)] string? s, NumberStyles style, IFormatProvider? provider, out IntPtr result)
+        public static bool TryParse(
+            [NotNullWhen(true)] string? s,
+            NumberStyles style,
+            IFormatProvider? provider,
+            out IntPtr result
+        )
         {
             Unsafe.SkipInit(out result);
             return nint_t.TryParse(s, style, provider, out Unsafe.As<IntPtr, nint_t>(ref result));
@@ -235,7 +252,12 @@ namespace System
             return nint_t.TryParse(s, out Unsafe.As<IntPtr, nint_t>(ref result));
         }
 
-        public static bool TryParse(ReadOnlySpan<char> s, NumberStyles style, IFormatProvider? provider, out IntPtr result)
+        public static bool TryParse(
+            ReadOnlySpan<char> s,
+            NumberStyles style,
+            IFormatProvider? provider,
+            out IntPtr result
+        )
         {
             Unsafe.SkipInit(out result);
             return nint_t.TryParse(s, style, provider, out Unsafe.As<IntPtr, nint_t>(ref result));

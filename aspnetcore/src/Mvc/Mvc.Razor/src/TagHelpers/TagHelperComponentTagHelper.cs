@@ -34,7 +34,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.TagHelpers
         /// added from controllers and views correctly.</remarks>
         public TagHelperComponentTagHelper(
             ITagHelperComponentManager manager,
-            ILoggerFactory loggerFactory)
+            ILoggerFactory loggerFactory
+        )
         {
             if (manager == null)
             {
@@ -69,7 +70,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.TagHelpers
             if (PropertyActivator == null)
             {
                 var serviceProvider = ViewContext.HttpContext.RequestServices;
-                PropertyActivator = serviceProvider.GetRequiredService<ITagHelperComponentPropertyActivator>();
+                PropertyActivator =
+                    serviceProvider.GetRequiredService<ITagHelperComponentPropertyActivator>();
             }
 
             foreach (var component in _components)

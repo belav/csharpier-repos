@@ -14,7 +14,10 @@ namespace Microsoft.Win32.SystemEventsTests
             SendMessage(User32.WM_POWERBROADCAST, (IntPtr)pmEvent, IntPtr.Zero);
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsNotWindowsNanoNorServerCore))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotWindowsNanoNorServerCore)
+        )]
         [InlineData(User32.PBT_APMBATTERYLOW, PowerModes.StatusChange)]
         [InlineData(User32.PBT_APMOEMEVENT, PowerModes.StatusChange)]
         [InlineData(User32.PBT_APMPOWERSTATUSCHANGE, PowerModes.StatusChange)]
@@ -42,13 +45,17 @@ namespace Microsoft.Win32.SystemEventsTests
                 Assert.NotNull(args);
                 Assert.Equal(powerMode, args.Mode);
             }
+
             finally
             {
                 SystemEvents.PowerModeChanged -= changedHandler;
             }
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsNotWindowsNanoNorServerCore))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotWindowsNanoNorServerCore)
+        )]
         [InlineData(User32.PBT_APMQUERYSTANDBY)]
         [InlineData(User32.PBT_APMQUERYSTANDBYFAILED)]
         [InlineData(User32.PBT_APMQUERYSUSPEND)]
@@ -70,6 +77,7 @@ namespace Microsoft.Win32.SystemEventsTests
                 SendMessage(pmEvent);
                 Assert.False(changed);
             }
+
             finally
             {
                 SystemEvents.PowerModeChanged -= changedHandler;

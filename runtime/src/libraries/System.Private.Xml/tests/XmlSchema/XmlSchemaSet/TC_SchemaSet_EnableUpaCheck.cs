@@ -63,12 +63,15 @@ namespace System.Xml.Tests
 
             settings.Schemas = new XmlSchemaSet();
             settings.Schemas.CompilationSettings.EnableUpaCheck = UpaCheck;
-            settings.Schemas.ValidationEventHandler += new ValidationEventHandler(ValidationCallback);
+            settings.Schemas.ValidationEventHandler += new ValidationEventHandler(
+                ValidationCallback
+            );
             settings.Schemas.Add(ss);
             settings.ValidationType = ValidationType.Schema;
-            settings.ValidationFlags |= XmlSchemaValidationFlags.ProcessSchemaLocation |
-                                        XmlSchemaValidationFlags.ProcessInlineSchema |
-                                        XmlSchemaValidationFlags.ReportValidationWarnings;
+            settings.ValidationFlags |=
+                XmlSchemaValidationFlags.ProcessSchemaLocation
+                | XmlSchemaValidationFlags.ProcessInlineSchema
+                | XmlSchemaValidationFlags.ReportValidationWarnings;
 
             settings.ValidationEventHandler += new ValidationEventHandler(ValidationCallback);
             XmlReader vr = XmlReader.Create(xmlFile, settings);
@@ -78,9 +81,9 @@ namespace System.Xml.Tests
         /* a choice containing a wildcard and element declaraions */
 
         //[Variation(Desc = "v6-2- a choice containing a wildcard and element declaraions(2)", Priority = 1, id = 25, Params = new object[] { "v6-2.xml", "v6-2.xsd", 0 })]
-        [InlineData("v6-2.xml", "v6-2.xsd", 0, new int[] { })]
+        [InlineData("v6-2.xml", "v6-2.xsd", 0, new int[] {  })]
         //[Variation(Desc = "v6-1- a choice containing a wildcard and element declaraions(1)", Priority = 1, id = 24, Params = new object[] { "v6-1.xml", "v6-1.xsd", 0 })]
-        [InlineData("v6-1.xml", "v6-1.xsd", 0, new int[] { })]
+        [InlineData("v6-1.xml", "v6-1.xsd", 0, new int[] {  })]
         /* Sequence having 3 sequences each having an optional wildcard and two elements of same name */
         //[Variation(Desc = "v5-2- Sequence having 3 sequences each having an optional wildcard and two elements of same name(2)", Priority = 1, id = 23, Params = new object[] { "v5-2.xml", "v5-2.xsd", 1, 15 })]
         [InlineData("v5-2.xml", "v5-2.xsd", 1, new int[] { 15 })]
@@ -96,7 +99,7 @@ namespace System.Xml.Tests
         //[Variation(Desc = "v4.2- Optional wildcards before two element declarations(2)", Priority = 1, id = 18, Params = new object[] { "v4-2.xml", "v4-1.xsd", 1, 11 })]
         [InlineData("v4-2.xml", "v4-1.xsd", 1, new int[] { 11 })]
         //[Variation(Desc = "v4.1- Optional wildcards before two element declarations(1)", Priority = 1, id = 17, Params = new object[] { "v4-1.xml", "v4-1.xsd", 0 })]
-        [InlineData("v4-1.xml", "v4-1.xsd", 0, new int[] { })]
+        [InlineData("v4-1.xml", "v4-1.xsd", 0, new int[] {  })]
         /* Optional wildcards between two element declarations*/
         //[Variation(Desc = "v3.6- Optional wildcards between two element declarations(6)", Priority = 1, id = 16, Params = new object[] { "v3-6.xml", "v3.xsd", 1, 76 })]
         [InlineData("v3-6.xml", "v3.xsd", 1, new int[] { 76 })]
@@ -112,7 +115,7 @@ namespace System.Xml.Tests
         [InlineData("v3-1.xml", "v3.xsd", 1, new int[] { 11 })]
         /* Sequence of choices having same element name and same type */
         //[Variation(Desc = "v2.7- Sequence of choices with same element name,one which doesnt match fixed value in schema(7)", Priority = 1, id = 10, Params = new object[] { "v2-7.xml", "v2-7.xsd", 0 })]
-        [InlineData("v2-7.xml", "v2-7.xsd", 0, new int[] { })]
+        [InlineData("v2-7.xml", "v2-7.xsd", 0, new int[] {  })]
         //[Variation(Desc = "v2.6- Sequence of choices with same element name,one which doesnt match fixed value in schema(6)", Priority = 1, id = 9, Params = new object[] { "v2-6.xml", "v2-6.xsd", 3, 2, 5, 10 })]
         [InlineData("v2-6.xml", "v2-6.xsd", 3, new int[] { 2, 5, 10 })]
         //[Variation(Desc = "v2.5- Sequence of choices with same element name,one which doesnt match fixed value in schema(5)", Priority = 1, id = 8, Params = new object[] { "v2-5.xml", "v2-5.xsd", 2, 5, 10 })]
@@ -130,9 +133,9 @@ namespace System.Xml.Tests
         //[Variation(Desc = "v1.3- Sequence on element with same name and type, one has fixed value, instance has violation of fixed", Priority = 1, id = 3, Params = new object[] { "v1-3.xml", "v1-3.xsd", 1, 2 })]
         [InlineData("v1-3.xml", "v1-3.xsd", 1, new int[] { 2 })]
         //[Variation(Desc = "v1.2- Sequence on element with same name and type, one has default value", Priority = 1, id = 2, Params = new object[] { "v1-2.xml", "v1-2.xsd", 0 })]
-        [InlineData("v1-2.xml", "v1-2.xsd", 0, new int[] { })]
+        [InlineData("v1-2.xml", "v1-2.xsd", 0, new int[] {  })]
         //[Variation(Desc = "v1.1- Sequence on element with same name and type", Priority = 1, id = 1, Params = new object[] { "v1-1.xml", "v1.xsd", 0 })]
-        [InlineData("v1-1.xml", "v1.xsd", 0, new int[] { })]
+        [InlineData("v1-1.xml", "v1.xsd", 0, new int[] {  })]
         [Theory]
         public void v1(object param0, object param1, object param2, int[] expectedErrorLineNumbers)
         {
@@ -147,7 +150,8 @@ namespace System.Xml.Tests
             xss.Add(null, Path.Combine(testData, xsdFile));
 
             XmlReader vr = CreateReader(Path.Combine(testData, xmlFile), xss, false);
-            while (vr.Read()) ;
+            while (vr.Read())
+                ;
 
             CError.Compare(errorCount, expectedErrorCount, "Error Count mismatch");
 
@@ -155,7 +159,11 @@ namespace System.Xml.Tests
             {
                 for (int i = 0; i < errorCount; i++)
                 {
-                    CError.Compare(errorLineNumbers[i], expectedErrorLineNumbers[i], "Error Line Number is different");
+                    CError.Compare(
+                        errorLineNumbers[i],
+                        expectedErrorLineNumbers[i],
+                        "Error Line Number is different"
+                    );
                 }
             }
 

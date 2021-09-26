@@ -13,6 +13,7 @@ internal static partial class Interop
         internal static extern void WebSocketCompleteAction(
             [In] SafeHandle webSocketHandle,
             [In] IntPtr actionContext,
-            [In] uint bytesTransferred);
+            [In] uint bytesTransferred
+        );
     }
 }

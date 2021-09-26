@@ -21,11 +21,10 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             private readonly SqliteConnection _connection;
 
-            public YouNoTinyContext(SqliteConnection connection)
-                => _connection = connection;
+            public YouNoTinyContext(SqliteConnection connection) => _connection = connection;
 
-            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-                => optionsBuilder.UseSqlite(_connection);
+            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+                optionsBuilder.UseSqlite(_connection);
 
             public DbSet<NoTiny> NoTinnies { get; set; }
         }
@@ -57,8 +56,7 @@ namespace Microsoft.EntityFrameworkCore.Storage
             {
                 context.Database.EnsureCreated();
 
-                context.Add(
-                    new NoTiny { TinyState = TinyState.Two });
+                context.Add(new NoTiny { TinyState = TinyState.Two });
                 context.SaveChanges();
             }
 
@@ -71,11 +69,9 @@ namespace Microsoft.EntityFrameworkCore.Storage
             connection.Close();
         }
 
-        protected override DbCommand CreateTestCommand()
-            => new SqliteCommand();
+        protected override DbCommand CreateTestCommand() => new SqliteCommand();
 
-        protected override DbType DefaultParameterType
-            => DbType.String;
+        protected override DbType DefaultParameterType => DbType.String;
 
         [ConditionalTheory]
         [InlineData(typeof(SqliteDateTimeOffsetTypeMapping), typeof(DateTimeOffset))]
@@ -110,19 +106,19 @@ namespace Microsoft.EntityFrameworkCore.Storage
             Assert.Equal(type, CreateTypeMapper().FindMapping(typeName)?.ClrType);
         }
 
-        private static IRelationalTypeMappingSource CreateTypeMapper()
-            => TestServiceFactory.Instance.Create<SqliteTypeMappingSource>();
+        private static IRelationalTypeMappingSource CreateTypeMapper() =>
+            TestServiceFactory.Instance.Create<SqliteTypeMappingSource>();
 
-        public static RelationalTypeMapping GetMapping(
-            Type type)
-            => CreateTypeMapper().FindMapping(type);
+        public static RelationalTypeMapping GetMapping(Type type) =>
+            CreateTypeMapper().FindMapping(type);
 
         public override void DateTimeOffset_literal_generated_correctly()
         {
             Test_GenerateSqlLiteral_helper(
                 GetMapping(typeof(DateTimeOffset)),
                 new DateTimeOffset(2015, 3, 12, 13, 36, 37, 371, new TimeSpan(-7, 0, 0)),
-                "'2015-03-12 13:36:37.371-07:00'");
+                "'2015-03-12 13:36:37.371-07:00'"
+            );
         }
 
         public override void DateTime_literal_generated_correctly()
@@ -130,15 +126,24 @@ namespace Microsoft.EntityFrameworkCore.Storage
             Test_GenerateSqlLiteral_helper(
                 GetMapping(typeof(DateTime)),
                 new DateTime(2015, 3, 12, 13, 36, 37, 371, DateTimeKind.Utc),
-                "'2015-03-12 13:36:37.371'");
+                "'2015-03-12 13:36:37.371'"
+            );
         }
 
         public override void Decimal_literal_generated_correctly()
         {
             var typeMapping = new SqliteDecimalTypeMapping("TEXT");
 
-            Test_GenerateSqlLiteral_helper(typeMapping, decimal.MinValue, "'-79228162514264337593543950335.0'");
-            Test_GenerateSqlLiteral_helper(typeMapping, decimal.MaxValue, "'79228162514264337593543950335.0'");
+            Test_GenerateSqlLiteral_helper(
+                typeMapping,
+                decimal.MinValue,
+                "'-79228162514264337593543950335.0'"
+            );
+            Test_GenerateSqlLiteral_helper(
+                typeMapping,
+                decimal.MaxValue,
+                "'79228162514264337593543950335.0'"
+            );
         }
 
         public override void Guid_literal_generated_correctly()
@@ -146,7 +151,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             Test_GenerateSqlLiteral_helper(
                 GetMapping(typeof(Guid)),
                 new Guid("c6f43a9e-91e1-45ef-a320-832ea23b7292"),
-                "'C6F43A9E-91E1-45EF-A320-832EA23B7292'");
+                "'C6F43A9E-91E1-45EF-A320-832EA23B7292'"
+            );
         }
 
         public override void ULong_literal_generated_correctly()
@@ -155,12 +161,17 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
             Test_GenerateSqlLiteral_helper(typeMapping, ulong.MinValue, "0");
             Test_GenerateSqlLiteral_helper(typeMapping, ulong.MaxValue, "-1");
-            Test_GenerateSqlLiteral_helper(typeMapping, long.MaxValue + 1ul, "-9223372036854775808");
+            Test_GenerateSqlLiteral_helper(
+                typeMapping,
+                long.MaxValue + 1ul,
+                "-9223372036854775808"
+            );
         }
 
-        protected override DbContextOptions ContextOptions { get; }
-            = new DbContextOptionsBuilder()
-                .UseInternalServiceProvider(new ServiceCollection().AddEntityFrameworkSqlite().BuildServiceProvider())
+        protected override DbContextOptions ContextOptions { get; } =
+            new DbContextOptionsBuilder().UseInternalServiceProvider(
+                    new ServiceCollection().AddEntityFrameworkSqlite().BuildServiceProvider()
+                )
                 .UseSqlite("Filename=dummy.db").Options;
     }
 }

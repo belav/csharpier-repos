@@ -13,10 +13,7 @@ namespace Microsoft.EntityFrameworkCore.Query
     public abstract class InheritanceRelationshipsQueryTestBase<TFixture> : QueryTestBase<TFixture>
         where TFixture : InheritanceRelationshipsQueryFixtureBase, new()
     {
-        protected InheritanceRelationshipsQueryTestBase(TFixture fixture)
-            : base(fixture)
-        {
-        }
+        protected InheritanceRelationshipsQueryTestBase(TFixture fixture) : base(fixture) { }
 
         [ConditionalFact]
         public virtual void Changes_in_derived_related_entities_are_detected()
@@ -24,12 +21,14 @@ namespace Microsoft.EntityFrameworkCore.Query
             using var context = CreateContext();
             context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.TrackAll;
 
-            var derivedEntity = context.BaseEntities.Include(e => e.BaseCollectionOnBase)
-                .Single(e => e.Name == "Derived1(4)") as DerivedInheritanceRelationshipEntity;
+            var derivedEntity =
+                context.BaseEntities.Include(e => e.BaseCollectionOnBase)
+                    .Single(e => e.Name == "Derived1(4)") as DerivedInheritanceRelationshipEntity;
 
             Assert.NotNull(derivedEntity);
 
-            var firstRelatedEntity = derivedEntity.BaseCollectionOnBase.Cast<DerivedCollectionOnBase>().First();
+            var firstRelatedEntity =
+                derivedEntity.BaseCollectionOnBase.Cast<DerivedCollectionOnBase>().First();
 
             var originalValue = firstRelatedEntity.DerivedProperty;
             Assert.NotEqual(0, originalValue);
@@ -41,7 +40,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             Assert.Equal(
                 "Microsoft.EntityFrameworkCore.TestModels.InheritanceRelationshipsModel.DerivedCollectionOnBase",
-                entry.Metadata.Name);
+                entry.Metadata.Name
+            );
 
             firstRelatedEntity.DerivedProperty = originalValue + 1;
             context.ChangeTracker.DetectChanges();
@@ -58,15 +58,25 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             using var context = CreateContext();
             var model = context.Model;
-            var principalEntityType = model.FindEntityType(typeof(DerivedInheritanceRelationshipEntity));
+            var principalEntityType = model.FindEntityType(
+                typeof(DerivedInheritanceRelationshipEntity)
+            );
             var dependentEntityType = model.FindEntityType(typeof(BaseReferenceOnDerived));
-            var derivedDependentEntityType = model.FindEntityType(typeof(DerivedReferenceOnDerived));
+            var derivedDependentEntityType = model.FindEntityType(
+                typeof(DerivedReferenceOnDerived)
+            );
 
             var fkOnBase = dependentEntityType.GetForeignKeys().Single();
             Assert.Equal(principalEntityType, fkOnBase.PrincipalEntityType);
             Assert.Equal(dependentEntityType, fkOnBase.DeclaringEntityType);
-            Assert.Equal(nameof(BaseReferenceOnDerived.BaseParent), fkOnBase.DependentToPrincipal.Name);
-            Assert.Equal(nameof(DerivedInheritanceRelationshipEntity.BaseReferenceOnDerived), fkOnBase.PrincipalToDependent.Name);
+            Assert.Equal(
+                nameof(BaseReferenceOnDerived.BaseParent),
+                fkOnBase.DependentToPrincipal.Name
+            );
+            Assert.Equal(
+                nameof(DerivedInheritanceRelationshipEntity.BaseReferenceOnDerived),
+                fkOnBase.PrincipalToDependent.Name
+            );
 
             var fkOnDerived = derivedDependentEntityType.GetDeclaredForeignKeys()
                 .Single(fk => fk.PrincipalEntityType != dependentEntityType);
@@ -74,7 +84,10 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Equal(principalEntityType, fkOnDerived.PrincipalEntityType);
             Assert.Equal(derivedDependentEntityType, fkOnDerived.DeclaringEntityType);
             Assert.Null(fkOnDerived.DependentToPrincipal);
-            Assert.Equal(nameof(DerivedInheritanceRelationshipEntity.DerivedReferenceOnDerived), fkOnDerived.PrincipalToDependent.Name);
+            Assert.Equal(
+                nameof(DerivedInheritanceRelationshipEntity.DerivedReferenceOnDerived),
+                fkOnDerived.PrincipalToDependent.Name
+            );
         }
 
         [ConditionalTheory]
@@ -83,10 +96,17 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             return AssertQuery(
                 async,
-                ss => ss.Set<BaseInheritanceRelationshipEntity>().Include(e => e.BaseReferenceOnBase),
-                elementAsserter: (e, a) => AssertInclude(
-                    e, a,
-                    new ExpectedInclude<BaseInheritanceRelationshipEntity>(x => x.BaseReferenceOnBase)));
+                ss =>
+                    ss.Set<BaseInheritanceRelationshipEntity>().Include(e => e.BaseReferenceOnBase),
+                elementAsserter: (e, a) =>
+                    AssertInclude(
+                        e,
+                        a,
+                        new ExpectedInclude<BaseInheritanceRelationshipEntity>(
+                            x => x.BaseReferenceOnBase
+                        )
+                    )
+            );
         }
 
         [ConditionalTheory]
@@ -96,9 +116,9 @@ namespace Microsoft.EntityFrameworkCore.Query
             return AssertQuery(
                 async,
                 ss => ss.Set<BaseReferenceOnBase>().Include(e => e.BaseParent),
-                elementAsserter: (e, a) => AssertInclude(
-                    e, a,
-                    new ExpectedInclude<BaseReferenceOnBase>(x => x.BaseParent)));
+                elementAsserter: (e, a) =>
+                    AssertInclude(e, a, new ExpectedInclude<BaseReferenceOnBase>(x => x.BaseParent))
+            );
         }
 
         [ConditionalTheory]
@@ -107,10 +127,18 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             return AssertQuery(
                 async,
-                ss => ss.Set<BaseInheritanceRelationshipEntity>().Include(e => e.DerivedSefReferenceOnBase),
-                elementAsserter: (e, a) => AssertInclude(
-                    e, a,
-                    new ExpectedInclude<BaseInheritanceRelationshipEntity>(x => x.DerivedSefReferenceOnBase)));
+                ss =>
+                    ss.Set<BaseInheritanceRelationshipEntity>()
+                        .Include(e => e.DerivedSefReferenceOnBase),
+                elementAsserter: (e, a) =>
+                    AssertInclude(
+                        e,
+                        a,
+                        new ExpectedInclude<BaseInheritanceRelationshipEntity>(
+                            x => x.DerivedSefReferenceOnBase
+                        )
+                    )
+            );
         }
 
         [ConditionalTheory]
@@ -119,10 +147,18 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             return AssertQuery(
                 async,
-                ss => ss.Set<DerivedInheritanceRelationshipEntity>().Include(e => e.BaseSelfReferenceOnDerived),
-                elementAsserter: (e, a) => AssertInclude(
-                    e, a,
-                    new ExpectedInclude<DerivedInheritanceRelationshipEntity>(x => x.BaseSelfReferenceOnDerived)));
+                ss =>
+                    ss.Set<DerivedInheritanceRelationshipEntity>()
+                        .Include(e => e.BaseSelfReferenceOnDerived),
+                elementAsserter: (e, a) =>
+                    AssertInclude(
+                        e,
+                        a,
+                        new ExpectedInclude<DerivedInheritanceRelationshipEntity>(
+                            x => x.BaseSelfReferenceOnDerived
+                        )
+                    )
+            );
         }
 
         [ConditionalTheory]
@@ -131,10 +167,19 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             return AssertQuery(
                 async,
-                ss => ss.Set<BaseInheritanceRelationshipEntity>().Include(e => e.BaseReferenceOnBase).Where(e => e.Name != "Bar"),
-                elementAsserter: (e, a) => AssertInclude(
-                    e, a,
-                    new ExpectedInclude<BaseInheritanceRelationshipEntity>(x => x.BaseReferenceOnBase)));
+                ss =>
+                    ss.Set<BaseInheritanceRelationshipEntity>()
+                        .Include(e => e.BaseReferenceOnBase)
+                        .Where(e => e.Name != "Bar"),
+                elementAsserter: (e, a) =>
+                    AssertInclude(
+                        e,
+                        a,
+                        new ExpectedInclude<BaseInheritanceRelationshipEntity>(
+                            x => x.BaseReferenceOnBase
+                        )
+                    )
+            );
         }
 
         [ConditionalTheory]
@@ -143,10 +188,13 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             return AssertQuery(
                 async,
-                ss => ss.Set<BaseReferenceOnBase>().Include(e => e.BaseParent).Where(e => e.Name != "Bar"),
-                elementAsserter: (e, a) => AssertInclude(
-                    e, a,
-                    new ExpectedInclude<BaseReferenceOnBase>(x => x.BaseParent)));
+                ss =>
+                    ss.Set<BaseReferenceOnBase>()
+                        .Include(e => e.BaseParent)
+                        .Where(e => e.Name != "Bar"),
+                elementAsserter: (e, a) =>
+                    AssertInclude(e, a, new ExpectedInclude<BaseReferenceOnBase>(x => x.BaseParent))
+            );
         }
 
         [ConditionalTheory]
@@ -156,9 +204,15 @@ namespace Microsoft.EntityFrameworkCore.Query
             return AssertQuery(
                 async,
                 ss => ss.Set<BaseInheritanceRelationshipEntity>().Include(e => e.ReferenceOnBase),
-                elementAsserter: (e, a) => AssertInclude(
-                    e, a,
-                    new ExpectedInclude<BaseInheritanceRelationshipEntity>(x => x.ReferenceOnBase)));
+                elementAsserter: (e, a) =>
+                    AssertInclude(
+                        e,
+                        a,
+                        new ExpectedInclude<BaseInheritanceRelationshipEntity>(
+                            x => x.ReferenceOnBase
+                        )
+                    )
+            );
         }
 
         [ConditionalTheory]
@@ -168,9 +222,9 @@ namespace Microsoft.EntityFrameworkCore.Query
             return AssertQuery(
                 async,
                 ss => ss.Set<ReferenceOnBase>().Include(e => e.Parent),
-                elementAsserter: (e, a) => AssertInclude(
-                    e, a,
-                    new ExpectedInclude<ReferenceOnBase>(x => x.Parent)));
+                elementAsserter: (e, a) =>
+                    AssertInclude(e, a, new ExpectedInclude<ReferenceOnBase>(x => x.Parent))
+            );
         }
 
         [ConditionalTheory]
@@ -179,10 +233,19 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             return AssertQuery(
                 async,
-                ss => ss.Set<BaseInheritanceRelationshipEntity>().Include(e => e.ReferenceOnBase).Where(e => e.Name != "Bar"),
-                elementAsserter: (e, a) => AssertInclude(
-                    e, a,
-                    new ExpectedInclude<BaseInheritanceRelationshipEntity>(x => x.ReferenceOnBase)));
+                ss =>
+                    ss.Set<BaseInheritanceRelationshipEntity>()
+                        .Include(e => e.ReferenceOnBase)
+                        .Where(e => e.Name != "Bar"),
+                elementAsserter: (e, a) =>
+                    AssertInclude(
+                        e,
+                        a,
+                        new ExpectedInclude<BaseInheritanceRelationshipEntity>(
+                            x => x.ReferenceOnBase
+                        )
+                    )
+            );
         }
 
         [ConditionalTheory]
@@ -192,9 +255,9 @@ namespace Microsoft.EntityFrameworkCore.Query
             return AssertQuery(
                 async,
                 ss => ss.Set<ReferenceOnBase>().Include(e => e.Parent).Where(e => e.Name != "Bar"),
-                elementAsserter: (e, a) => AssertInclude(
-                    e, a,
-                    new ExpectedInclude<ReferenceOnBase>(x => x.Parent)));
+                elementAsserter: (e, a) =>
+                    AssertInclude(e, a, new ExpectedInclude<ReferenceOnBase>(x => x.Parent))
+            );
         }
 
         [ConditionalTheory]
@@ -203,10 +266,18 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             return AssertQuery(
                 async,
-                ss => ss.Set<BaseInheritanceRelationshipEntity>().Include(e => e.BaseCollectionOnBase),
-                elementAsserter: (e, a) => AssertInclude(
-                    e, a,
-                    new ExpectedInclude<BaseInheritanceRelationshipEntity>(x => x.BaseCollectionOnBase)));
+                ss =>
+                    ss.Set<BaseInheritanceRelationshipEntity>()
+                        .Include(e => e.BaseCollectionOnBase),
+                elementAsserter: (e, a) =>
+                    AssertInclude(
+                        e,
+                        a,
+                        new ExpectedInclude<BaseInheritanceRelationshipEntity>(
+                            x => x.BaseCollectionOnBase
+                        )
+                    )
+            );
         }
 
         [ConditionalTheory]
@@ -216,10 +287,13 @@ namespace Microsoft.EntityFrameworkCore.Query
             return AssertQuery(
                 async,
                 ss => ss.Set<BaseCollectionOnBase>().Include(e => e.BaseParent),
-                elementAsserter: (e, a) => AssertInclude(
-                    e,
-                    a,
-                    new ExpectedInclude<BaseCollectionOnBase>(x => x.BaseParent)));
+                elementAsserter: (e, a) =>
+                    AssertInclude(
+                        e,
+                        a,
+                        new ExpectedInclude<BaseCollectionOnBase>(x => x.BaseParent)
+                    )
+            );
         }
 
         [ConditionalTheory]
@@ -228,10 +302,19 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             return AssertQuery(
                 async,
-                ss => ss.Set<BaseInheritanceRelationshipEntity>().Include(e => e.BaseCollectionOnBase).Where(e => e.Name != "Bar"),
-                elementAsserter: (e, a) => AssertInclude(
-                    e, a,
-                    new ExpectedInclude<BaseInheritanceRelationshipEntity>(x => x.BaseCollectionOnBase)));
+                ss =>
+                    ss.Set<BaseInheritanceRelationshipEntity>()
+                        .Include(e => e.BaseCollectionOnBase)
+                        .Where(e => e.Name != "Bar"),
+                elementAsserter: (e, a) =>
+                    AssertInclude(
+                        e,
+                        a,
+                        new ExpectedInclude<BaseInheritanceRelationshipEntity>(
+                            x => x.BaseCollectionOnBase
+                        )
+                    )
+            );
         }
 
         [ConditionalTheory]
@@ -240,10 +323,17 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             return AssertQuery(
                 async,
-                ss => ss.Set<BaseCollectionOnBase>().Include(e => e.BaseParent).Where(e => e.Name != "Bar"),
-                elementAsserter: (e, a) => AssertInclude(
-                    e, a,
-                    new ExpectedInclude<BaseCollectionOnBase>(x => x.BaseParent)));
+                ss =>
+                    ss.Set<BaseCollectionOnBase>()
+                        .Include(e => e.BaseParent)
+                        .Where(e => e.Name != "Bar"),
+                elementAsserter: (e, a) =>
+                    AssertInclude(
+                        e,
+                        a,
+                        new ExpectedInclude<BaseCollectionOnBase>(x => x.BaseParent)
+                    )
+            );
         }
 
         [ConditionalTheory]
@@ -253,9 +343,15 @@ namespace Microsoft.EntityFrameworkCore.Query
             return AssertQuery(
                 async,
                 ss => ss.Set<BaseInheritanceRelationshipEntity>().Include(e => e.CollectionOnBase),
-                elementAsserter: (e, a) => AssertInclude(
-                    e, a,
-                    new ExpectedInclude<BaseInheritanceRelationshipEntity>(x => x.CollectionOnBase)));
+                elementAsserter: (e, a) =>
+                    AssertInclude(
+                        e,
+                        a,
+                        new ExpectedInclude<BaseInheritanceRelationshipEntity>(
+                            x => x.CollectionOnBase
+                        )
+                    )
+            );
         }
 
         [ConditionalTheory]
@@ -265,9 +361,9 @@ namespace Microsoft.EntityFrameworkCore.Query
             return AssertQuery(
                 async,
                 ss => ss.Set<CollectionOnBase>().Include(e => e.Parent),
-                elementAsserter: (e, a) => AssertInclude(
-                    e, a,
-                    new ExpectedInclude<CollectionOnBase>(x => x.Parent)));
+                elementAsserter: (e, a) =>
+                    AssertInclude(e, a, new ExpectedInclude<CollectionOnBase>(x => x.Parent))
+            );
         }
 
         [ConditionalTheory]
@@ -276,10 +372,19 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             return AssertQuery(
                 async,
-                ss => ss.Set<BaseInheritanceRelationshipEntity>().Include(e => e.CollectionOnBase).Where(e => e.Name != "Bar"),
-                elementAsserter: (e, a) => AssertInclude(
-                    e, a,
-                    new ExpectedInclude<BaseInheritanceRelationshipEntity>(x => x.CollectionOnBase)));
+                ss =>
+                    ss.Set<BaseInheritanceRelationshipEntity>()
+                        .Include(e => e.CollectionOnBase)
+                        .Where(e => e.Name != "Bar"),
+                elementAsserter: (e, a) =>
+                    AssertInclude(
+                        e,
+                        a,
+                        new ExpectedInclude<BaseInheritanceRelationshipEntity>(
+                            x => x.CollectionOnBase
+                        )
+                    )
+            );
         }
 
         [ConditionalTheory]
@@ -289,9 +394,9 @@ namespace Microsoft.EntityFrameworkCore.Query
             return AssertQuery(
                 async,
                 ss => ss.Set<CollectionOnBase>().Include(e => e.Parent).Where(e => e.Name != "Bar"),
-                elementAsserter: (e, a) => AssertInclude(
-                    e, a,
-                    new ExpectedInclude<CollectionOnBase>(x => x.Parent)));
+                elementAsserter: (e, a) =>
+                    AssertInclude(e, a, new ExpectedInclude<CollectionOnBase>(x => x.Parent))
+            );
         }
 
         [ConditionalTheory]
@@ -300,10 +405,18 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             return AssertQuery(
                 async,
-                ss => ss.Set<DerivedInheritanceRelationshipEntity>().Include(e => e.BaseReferenceOnBase),
-                elementAsserter: (e, a) => AssertInclude(
-                    e, a,
-                    new ExpectedInclude<DerivedInheritanceRelationshipEntity>(x => x.BaseReferenceOnBase)));
+                ss =>
+                    ss.Set<DerivedInheritanceRelationshipEntity>()
+                        .Include(e => e.BaseReferenceOnBase),
+                elementAsserter: (e, a) =>
+                    AssertInclude(
+                        e,
+                        a,
+                        new ExpectedInclude<DerivedInheritanceRelationshipEntity>(
+                            x => x.BaseReferenceOnBase
+                        )
+                    )
+            );
         }
 
         [ConditionalTheory]
@@ -312,10 +425,18 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             return AssertQuery(
                 async,
-                ss => ss.Set<DerivedInheritanceRelationshipEntity>().Include(e => e.BaseReferenceOnDerived),
-                elementAsserter: (e, a) => AssertInclude(
-                    e, a,
-                    new ExpectedInclude<DerivedInheritanceRelationshipEntity>(x => x.BaseReferenceOnDerived)));
+                ss =>
+                    ss.Set<DerivedInheritanceRelationshipEntity>()
+                        .Include(e => e.BaseReferenceOnDerived),
+                elementAsserter: (e, a) =>
+                    AssertInclude(
+                        e,
+                        a,
+                        new ExpectedInclude<DerivedInheritanceRelationshipEntity>(
+                            x => x.BaseReferenceOnDerived
+                        )
+                    )
+            );
         }
 
         [ConditionalTheory]
@@ -324,10 +445,18 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             return AssertQuery(
                 async,
-                ss => ss.Set<DerivedInheritanceRelationshipEntity>().Include(e => e.DerivedReferenceOnDerived),
-                elementAsserter: (e, a) => AssertInclude(
-                    e, a,
-                    new ExpectedInclude<DerivedInheritanceRelationshipEntity>(x => x.DerivedReferenceOnDerived)));
+                ss =>
+                    ss.Set<DerivedInheritanceRelationshipEntity>()
+                        .Include(e => e.DerivedReferenceOnDerived),
+                elementAsserter: (e, a) =>
+                    AssertInclude(
+                        e,
+                        a,
+                        new ExpectedInclude<DerivedInheritanceRelationshipEntity>(
+                            x => x.DerivedReferenceOnDerived
+                        )
+                    )
+            );
         }
 
         [ConditionalTheory]
@@ -337,9 +466,13 @@ namespace Microsoft.EntityFrameworkCore.Query
             return AssertQuery(
                 async,
                 ss => ss.Set<BaseReferenceOnDerived>().Include(e => e.BaseParent),
-                elementAsserter: (e, a) => AssertInclude(
-                    e, a,
-                    new ExpectedInclude<BaseReferenceOnDerived>(x => x.BaseParent)));
+                elementAsserter: (e, a) =>
+                    AssertInclude(
+                        e,
+                        a,
+                        new ExpectedInclude<BaseReferenceOnDerived>(x => x.BaseParent)
+                    )
+            );
         }
 
         [ConditionalTheory]
@@ -348,10 +481,19 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             return AssertQuery(
                 async,
-                ss => ss.Set<DerivedInheritanceRelationshipEntity>().Include(e => e.BaseReferenceOnBase).Where(e => e.Name != "Bar"),
-                elementAsserter: (e, a) => AssertInclude(
-                    e, a,
-                    new ExpectedInclude<DerivedInheritanceRelationshipEntity>(x => x.BaseReferenceOnBase)));
+                ss =>
+                    ss.Set<DerivedInheritanceRelationshipEntity>()
+                        .Include(e => e.BaseReferenceOnBase)
+                        .Where(e => e.Name != "Bar"),
+                elementAsserter: (e, a) =>
+                    AssertInclude(
+                        e,
+                        a,
+                        new ExpectedInclude<DerivedInheritanceRelationshipEntity>(
+                            x => x.BaseReferenceOnBase
+                        )
+                    )
+            );
         }
 
         [ConditionalTheory]
@@ -360,10 +502,19 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             return AssertQuery(
                 async,
-                ss => ss.Set<DerivedInheritanceRelationshipEntity>().Include(e => e.BaseReferenceOnDerived).Where(e => e.Name != "Bar"),
-                elementAsserter: (e, a) => AssertInclude(
-                    e, a,
-                    new ExpectedInclude<DerivedInheritanceRelationshipEntity>(x => x.BaseReferenceOnDerived)));
+                ss =>
+                    ss.Set<DerivedInheritanceRelationshipEntity>()
+                        .Include(e => e.BaseReferenceOnDerived)
+                        .Where(e => e.Name != "Bar"),
+                elementAsserter: (e, a) =>
+                    AssertInclude(
+                        e,
+                        a,
+                        new ExpectedInclude<DerivedInheritanceRelationshipEntity>(
+                            x => x.BaseReferenceOnDerived
+                        )
+                    )
+            );
         }
 
         [ConditionalTheory]
@@ -372,22 +523,40 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             return AssertQuery(
                 async,
-                ss => ss.Set<DerivedInheritanceRelationshipEntity>().Include(e => e.DerivedReferenceOnDerived).Where(e => e.Name != "Bar"),
-                elementAsserter: (e, a) => AssertInclude(
-                    e, a,
-                    new ExpectedInclude<DerivedInheritanceRelationshipEntity>(x => x.DerivedReferenceOnDerived)));
+                ss =>
+                    ss.Set<DerivedInheritanceRelationshipEntity>()
+                        .Include(e => e.DerivedReferenceOnDerived)
+                        .Where(e => e.Name != "Bar"),
+                elementAsserter: (e, a) =>
+                    AssertInclude(
+                        e,
+                        a,
+                        new ExpectedInclude<DerivedInheritanceRelationshipEntity>(
+                            x => x.DerivedReferenceOnDerived
+                        )
+                    )
+            );
         }
 
         [ConditionalTheory]
         [MemberData(nameof(IsAsyncData))]
-        public virtual Task Include_reference_with_inheritance_on_derived_with_filter_reverse(bool async)
+        public virtual Task Include_reference_with_inheritance_on_derived_with_filter_reverse(
+            bool async
+        )
         {
             return AssertQuery(
                 async,
-                ss => ss.Set<BaseReferenceOnDerived>().Include(e => e.BaseParent).Where(e => e.Name != "Bar"),
-                elementAsserter: (e, a) => AssertInclude(
-                    e, a,
-                    new ExpectedInclude<BaseReferenceOnDerived>(x => x.BaseParent)));
+                ss =>
+                    ss.Set<BaseReferenceOnDerived>()
+                        .Include(e => e.BaseParent)
+                        .Where(e => e.Name != "Bar"),
+                elementAsserter: (e, a) =>
+                    AssertInclude(
+                        e,
+                        a,
+                        new ExpectedInclude<BaseReferenceOnDerived>(x => x.BaseParent)
+                    )
+            );
         }
 
         [ConditionalTheory]
@@ -396,10 +565,17 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             return AssertQuery(
                 async,
-                ss => ss.Set<DerivedInheritanceRelationshipEntity>().Include(e => e.ReferenceOnBase),
-                elementAsserter: (e, a) => AssertInclude(
-                    e, a,
-                    new ExpectedInclude<DerivedInheritanceRelationshipEntity>(x => x.ReferenceOnBase)));
+                ss =>
+                    ss.Set<DerivedInheritanceRelationshipEntity>().Include(e => e.ReferenceOnBase),
+                elementAsserter: (e, a) =>
+                    AssertInclude(
+                        e,
+                        a,
+                        new ExpectedInclude<DerivedInheritanceRelationshipEntity>(
+                            x => x.ReferenceOnBase
+                        )
+                    )
+            );
         }
 
         [ConditionalTheory]
@@ -408,10 +584,18 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             return AssertQuery(
                 async,
-                ss => ss.Set<DerivedInheritanceRelationshipEntity>().Include(e => e.ReferenceOnDerived),
-                elementAsserter: (e, a) => AssertInclude(
-                    e, a,
-                    new ExpectedInclude<DerivedInheritanceRelationshipEntity>(x => x.ReferenceOnDerived)));
+                ss =>
+                    ss.Set<DerivedInheritanceRelationshipEntity>()
+                        .Include(e => e.ReferenceOnDerived),
+                elementAsserter: (e, a) =>
+                    AssertInclude(
+                        e,
+                        a,
+                        new ExpectedInclude<DerivedInheritanceRelationshipEntity>(
+                            x => x.ReferenceOnDerived
+                        )
+                    )
+            );
         }
 
         [ConditionalTheory]
@@ -421,9 +605,9 @@ namespace Microsoft.EntityFrameworkCore.Query
             return AssertQuery(
                 async,
                 ss => ss.Set<ReferenceOnDerived>().Include(e => e.Parent),
-                elementAsserter: (e, a) => AssertInclude(
-                    e, a,
-                    new ExpectedInclude<ReferenceOnDerived>(x => x.Parent)));
+                elementAsserter: (e, a) =>
+                    AssertInclude(e, a, new ExpectedInclude<ReferenceOnDerived>(x => x.Parent))
+            );
         }
 
         [ConditionalTheory]
@@ -432,10 +616,18 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             return AssertQuery(
                 async,
-                ss => ss.Set<DerivedInheritanceRelationshipEntity>().Include(e => e.BaseCollectionOnBase),
-                elementAsserter: (e, a) => AssertInclude(
-                    e, a,
-                    new ExpectedInclude<DerivedInheritanceRelationshipEntity>(x => x.BaseCollectionOnBase)));
+                ss =>
+                    ss.Set<DerivedInheritanceRelationshipEntity>()
+                        .Include(e => e.BaseCollectionOnBase),
+                elementAsserter: (e, a) =>
+                    AssertInclude(
+                        e,
+                        a,
+                        new ExpectedInclude<DerivedInheritanceRelationshipEntity>(
+                            x => x.BaseCollectionOnBase
+                        )
+                    )
+            );
         }
 
         [ConditionalTheory]
@@ -444,10 +636,18 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             return AssertQuery(
                 async,
-                ss => ss.Set<DerivedInheritanceRelationshipEntity>().Include(e => e.BaseCollectionOnDerived),
-                elementAsserter: (e, a) => AssertInclude(
-                    e, a,
-                    new ExpectedInclude<DerivedInheritanceRelationshipEntity>(x => x.BaseCollectionOnDerived)));
+                ss =>
+                    ss.Set<DerivedInheritanceRelationshipEntity>()
+                        .Include(e => e.BaseCollectionOnDerived),
+                elementAsserter: (e, a) =>
+                    AssertInclude(
+                        e,
+                        a,
+                        new ExpectedInclude<DerivedInheritanceRelationshipEntity>(
+                            x => x.BaseCollectionOnDerived
+                        )
+                    )
+            );
         }
 
         [ConditionalTheory]
@@ -456,10 +656,18 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             return AssertQuery(
                 async,
-                ss => ss.Set<DerivedInheritanceRelationshipEntity>().Include(e => e.DerivedCollectionOnDerived),
-                elementAsserter: (e, a) => AssertInclude(
-                    e, a,
-                    new ExpectedInclude<DerivedInheritanceRelationshipEntity>(x => x.DerivedCollectionOnDerived)));
+                ss =>
+                    ss.Set<DerivedInheritanceRelationshipEntity>()
+                        .Include(e => e.DerivedCollectionOnDerived),
+                elementAsserter: (e, a) =>
+                    AssertInclude(
+                        e,
+                        a,
+                        new ExpectedInclude<DerivedInheritanceRelationshipEntity>(
+                            x => x.DerivedCollectionOnDerived
+                        )
+                    )
+            );
         }
 
         [ConditionalTheory]
@@ -469,9 +677,13 @@ namespace Microsoft.EntityFrameworkCore.Query
             return AssertQuery(
                 async,
                 ss => ss.Set<BaseCollectionOnDerived>().Include(e => e.BaseParent),
-                elementAsserter: (e, a) => AssertInclude(
-                    e, a,
-                    new ExpectedInclude<BaseCollectionOnDerived>(x => x.BaseParent)));
+                elementAsserter: (e, a) =>
+                    AssertInclude(
+                        e,
+                        a,
+                        new ExpectedInclude<BaseCollectionOnDerived>(x => x.BaseParent)
+                    )
+            );
         }
 
         [ConditionalTheory]
@@ -480,11 +692,19 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             return AssertQuery(
                 async,
-                ss => ss.Set<BaseInheritanceRelationshipEntity>().Include(e => e.BaseReferenceOnBase.NestedReference),
-                elementAsserter: (e, a) => AssertInclude(
-                    e, a,
-                    new ExpectedInclude<BaseInheritanceRelationshipEntity>(x => x.BaseReferenceOnBase),
-                    new ExpectedInclude<BaseReferenceOnBase>(x => x.NestedReference)));
+                ss =>
+                    ss.Set<BaseInheritanceRelationshipEntity>()
+                        .Include(e => e.BaseReferenceOnBase.NestedReference),
+                elementAsserter: (e, a) =>
+                    AssertInclude(
+                        e,
+                        a,
+                        new ExpectedInclude<BaseInheritanceRelationshipEntity>(
+                            x => x.BaseReferenceOnBase
+                        ),
+                        new ExpectedInclude<BaseReferenceOnBase>(x => x.NestedReference)
+                    )
+            );
         }
 
         [ConditionalTheory]
@@ -493,11 +713,19 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             return AssertQuery(
                 async,
-                ss => ss.Set<DerivedInheritanceRelationshipEntity>().Include(e => e.BaseReferenceOnBase.NestedReference),
-                elementAsserter: (e, a) => AssertInclude(
-                    e, a,
-                    new ExpectedInclude<DerivedInheritanceRelationshipEntity>(x => x.BaseReferenceOnBase),
-                    new ExpectedInclude<BaseReferenceOnBase>(x => x.NestedReference)));
+                ss =>
+                    ss.Set<DerivedInheritanceRelationshipEntity>()
+                        .Include(e => e.BaseReferenceOnBase.NestedReference),
+                elementAsserter: (e, a) =>
+                    AssertInclude(
+                        e,
+                        a,
+                        new ExpectedInclude<DerivedInheritanceRelationshipEntity>(
+                            x => x.BaseReferenceOnBase
+                        ),
+                        new ExpectedInclude<BaseReferenceOnBase>(x => x.NestedReference)
+                    )
+            );
         }
 
         [ConditionalTheory]
@@ -507,10 +735,14 @@ namespace Microsoft.EntityFrameworkCore.Query
             return AssertQuery(
                 async,
                 ss => ss.Set<NestedReferenceBase>().Include(e => e.ParentReference.BaseParent),
-                elementAsserter: (e, a) => AssertInclude(
-                    e, a,
-                    new ExpectedInclude<NestedReferenceBase>(x => x.ParentReference),
-                    new ExpectedInclude<BaseReferenceOnBase>(x => x.BaseParent)));
+                elementAsserter: (e, a) =>
+                    AssertInclude(
+                        e,
+                        a,
+                        new ExpectedInclude<NestedReferenceBase>(x => x.ParentReference),
+                        new ExpectedInclude<BaseReferenceOnBase>(x => x.BaseParent)
+                    )
+            );
         }
 
         [ConditionalTheory]
@@ -519,11 +751,19 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             return AssertQuery(
                 async,
-                ss => ss.Set<BaseInheritanceRelationshipEntity>().Include(e => e.BaseReferenceOnBase.NestedCollection),
-                elementAsserter: (e, a) => AssertInclude(
-                    e, a,
-                    new ExpectedInclude<BaseInheritanceRelationshipEntity>(x => x.BaseReferenceOnBase),
-                    new ExpectedInclude<BaseReferenceOnBase>(x => x.NestedCollection)));
+                ss =>
+                    ss.Set<BaseInheritanceRelationshipEntity>()
+                        .Include(e => e.BaseReferenceOnBase.NestedCollection),
+                elementAsserter: (e, a) =>
+                    AssertInclude(
+                        e,
+                        a,
+                        new ExpectedInclude<BaseInheritanceRelationshipEntity>(
+                            x => x.BaseReferenceOnBase
+                        ),
+                        new ExpectedInclude<BaseReferenceOnBase>(x => x.NestedCollection)
+                    )
+            );
         }
 
         [ConditionalTheory]
@@ -532,11 +772,19 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             return AssertQuery(
                 async,
-                ss => ss.Set<DerivedInheritanceRelationshipEntity>().Include(e => e.BaseReferenceOnBase.NestedCollection),
-                elementAsserter: (e, a) => AssertInclude(
-                    e, a,
-                    new ExpectedInclude<DerivedInheritanceRelationshipEntity>(x => x.BaseReferenceOnBase),
-                    new ExpectedInclude<BaseReferenceOnBase>(x => x.NestedCollection)));
+                ss =>
+                    ss.Set<DerivedInheritanceRelationshipEntity>()
+                        .Include(e => e.BaseReferenceOnBase.NestedCollection),
+                elementAsserter: (e, a) =>
+                    AssertInclude(
+                        e,
+                        a,
+                        new ExpectedInclude<DerivedInheritanceRelationshipEntity>(
+                            x => x.BaseReferenceOnBase
+                        ),
+                        new ExpectedInclude<BaseReferenceOnBase>(x => x.NestedCollection)
+                    )
+            );
         }
 
         [ConditionalTheory]
@@ -546,10 +794,14 @@ namespace Microsoft.EntityFrameworkCore.Query
             return AssertQuery(
                 async,
                 ss => ss.Set<NestedCollectionBase>().Include(e => e.ParentReference.BaseParent),
-                elementAsserter: (e, a) => AssertInclude(
-                    e, a,
-                    new ExpectedInclude<NestedCollectionBase>(x => x.ParentReference),
-                    new ExpectedInclude<BaseReferenceOnBase>(x => x.BaseParent)));
+                elementAsserter: (e, a) =>
+                    AssertInclude(
+                        e,
+                        a,
+                        new ExpectedInclude<NestedCollectionBase>(x => x.ParentReference),
+                        new ExpectedInclude<BaseReferenceOnBase>(x => x.BaseParent)
+                    )
+            );
         }
 
         [ConditionalTheory]
@@ -558,11 +810,20 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             return AssertQuery(
                 async,
-                ss => ss.Set<BaseInheritanceRelationshipEntity>().Include(e => e.BaseCollectionOnBase).ThenInclude(e => e.NestedReference),
-                elementAsserter: (e, a) => AssertInclude(
-                    e, a,
-                    new ExpectedInclude<BaseInheritanceRelationshipEntity>(x => x.BaseCollectionOnBase),
-                    new ExpectedInclude<BaseCollectionOnBase>(x => x.NestedReference)));
+                ss =>
+                    ss.Set<BaseInheritanceRelationshipEntity>()
+                        .Include(e => e.BaseCollectionOnBase)
+                        .ThenInclude(e => e.NestedReference),
+                elementAsserter: (e, a) =>
+                    AssertInclude(
+                        e,
+                        a,
+                        new ExpectedInclude<BaseInheritanceRelationshipEntity>(
+                            x => x.BaseCollectionOnBase
+                        ),
+                        new ExpectedInclude<BaseCollectionOnBase>(x => x.NestedReference)
+                    )
+            );
         }
 
         [ConditionalTheory]
@@ -572,10 +833,14 @@ namespace Microsoft.EntityFrameworkCore.Query
             return AssertQuery(
                 async,
                 ss => ss.Set<NestedReferenceBase>().Include(e => e.ParentCollection.BaseParent),
-                elementAsserter: (e, a) => AssertInclude(
-                    e, a,
-                    new ExpectedInclude<NestedReferenceBase>(x => x.ParentCollection),
-                    new ExpectedInclude<BaseCollectionOnBase>(x => x.BaseParent)));
+                elementAsserter: (e, a) =>
+                    AssertInclude(
+                        e,
+                        a,
+                        new ExpectedInclude<NestedReferenceBase>(x => x.ParentCollection),
+                        new ExpectedInclude<BaseCollectionOnBase>(x => x.BaseParent)
+                    )
+            );
         }
 
         [ConditionalTheory]
@@ -584,24 +849,39 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             return AssertQuery(
                 async,
-                ss => ss.Set<BaseInheritanceRelationshipEntity>().Include(e => e.BaseCollectionOnBase).ThenInclude(e => e.NestedCollection),
-                elementAsserter: (e, a) => AssertInclude(
-                    e, a,
-                    new ExpectedInclude<BaseInheritanceRelationshipEntity>(x => x.BaseCollectionOnBase),
-                    new ExpectedInclude<BaseCollectionOnBase>(x => x.NestedCollection)));
+                ss =>
+                    ss.Set<BaseInheritanceRelationshipEntity>()
+                        .Include(e => e.BaseCollectionOnBase)
+                        .ThenInclude(e => e.NestedCollection),
+                elementAsserter: (e, a) =>
+                    AssertInclude(
+                        e,
+                        a,
+                        new ExpectedInclude<BaseInheritanceRelationshipEntity>(
+                            x => x.BaseCollectionOnBase
+                        ),
+                        new ExpectedInclude<BaseCollectionOnBase>(x => x.NestedCollection)
+                    )
+            );
         }
 
         [ConditionalTheory]
         [MemberData(nameof(IsAsyncData))]
-        public virtual Task Nested_include_with_inheritance_collection_collection_reverse(bool async)
+        public virtual Task Nested_include_with_inheritance_collection_collection_reverse(
+            bool async
+        )
         {
             return AssertQuery(
                 async,
                 ss => ss.Set<NestedCollectionBase>().Include(e => e.ParentCollection.BaseParent),
-                elementAsserter: (e, a) => AssertInclude(
-                    e, a,
-                    new ExpectedInclude<NestedCollectionBase>(x => x.ParentCollection),
-                    new ExpectedInclude<BaseCollectionOnBase>(x => x.BaseParent)));
+                elementAsserter: (e, a) =>
+                    AssertInclude(
+                        e,
+                        a,
+                        new ExpectedInclude<NestedCollectionBase>(x => x.ParentCollection),
+                        new ExpectedInclude<BaseCollectionOnBase>(x => x.BaseParent)
+                    )
+            );
         }
 
         [ConditionalTheory]
@@ -610,11 +890,18 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             return AssertQuery(
                 async,
-                ss => ss.Set<ReferencedEntity>().Include(e => e.Principals).ThenInclude(e => e.Reference),
-                elementAsserter: (e, a) => AssertInclude(
-                    e, a,
-                    new ExpectedInclude<ReferencedEntity>(x => x.Principals),
-                    new ExpectedInclude<PrincipalEntity>(x => x.Reference)));
+                ss =>
+                    ss.Set<ReferencedEntity>()
+                        .Include(e => e.Principals)
+                        .ThenInclude(e => e.Reference),
+                elementAsserter: (e, a) =>
+                    AssertInclude(
+                        e,
+                        a,
+                        new ExpectedInclude<ReferencedEntity>(x => x.Principals),
+                        new ExpectedInclude<PrincipalEntity>(x => x.Reference)
+                    )
+            );
         }
 
         [ConditionalTheory]
@@ -623,22 +910,20 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             return AssertQuery(
                 async,
-                ss => ss.Set<BaseInheritanceRelationshipEntity>().Select(
-                    e =>
-                        new { e.Id, e.BaseCollectionOnBase }),
+                ss =>
+                    ss.Set<BaseInheritanceRelationshipEntity>()
+                        .Select(e => new { e.Id, e.BaseCollectionOnBase }),
                 elementSorter: e => e.Id,
                 elementAsserter: (e, a) =>
                 {
                     AssertEqual(e.Id, a.Id);
                     AssertCollection(e.BaseCollectionOnBase, a.BaseCollectionOnBase);
-                });
+                }
+            );
         }
 
-        protected InheritanceRelationshipsContext CreateContext()
-            => Fixture.CreateContext();
+        protected InheritanceRelationshipsContext CreateContext() => Fixture.CreateContext();
 
-        protected virtual void ClearLog()
-        {
-        }
+        protected virtual void ClearLog() { }
     }
 }

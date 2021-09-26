@@ -11,6 +11,7 @@ internal static partial class Interop
         [DllImport(Interop.Libraries.Ws2_32, SetLastError = true)]
         internal static extern SocketError shutdown(
             [In] SafeSocketHandle socketHandle,
-            [In] int how);
+            [In] int how
+        );
     }
 }

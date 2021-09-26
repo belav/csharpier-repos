@@ -13,23 +13,26 @@ namespace LocalizationWebsite
     {
         public static Task Main(string[] args)
         {
-            var config = new ConfigurationBuilder()
-                .AddCommandLine(args)
-                .Build();
+            var config = new ConfigurationBuilder().AddCommandLine(args).Build();
 
-            var host = new HostBuilder()
-                .ConfigureWebHost(webHostBuilder =>
-                {
-                    webHostBuilder
-                    .ConfigureLogging((_, factory) =>
+            var host = new HostBuilder().ConfigureWebHost(
+                    webHostBuilder =>
                     {
-                        factory.AddConsole();
-                        factory.AddFilter("Console", level => level >= LogLevel.Warning);
-                    })
-                    .UseKestrel()
-                    .UseConfiguration(config)
-                    .UseStartup("LocalizationWebsite");
-                })
+                        webHostBuilder.ConfigureLogging(
+                                (_, factory) =>
+                                {
+                                    factory.AddConsole();
+                                    factory.AddFilter(
+                                        "Console",
+                                        level => level >= LogLevel.Warning
+                                    );
+                                }
+                            )
+                            .UseKestrel()
+                            .UseConfiguration(config)
+                            .UseStartup("LocalizationWebsite");
+                    }
+                )
                 .Build();
 
             return host.RunAsync();

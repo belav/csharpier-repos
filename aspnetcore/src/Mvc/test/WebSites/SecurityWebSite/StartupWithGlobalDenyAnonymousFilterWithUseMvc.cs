@@ -14,25 +14,31 @@ namespace SecurityWebSite
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services
-                .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddCookie(options =>
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(
+                    options =>
+                    {
+                        options.LoginPath = "/Home/Login";
+                        options.LogoutPath = "/Home/Logout";
+                    }
+                )
+                .AddCookie("Cookie2");
+
+            services.AddAuthorization(
+                options =>
                 {
-                    options.LoginPath = "/Home/Login";
-                    options.LogoutPath = "/Home/Logout";
-                }).AddCookie("Cookie2");
+                    options.AddPolicy("RequireClaimA", policy => policy.RequireClaim("ClaimA"));
+                    options.AddPolicy("RequireClaimB", policy => policy.RequireClaim("ClaimB"));
+                }
+            );
 
-            services.AddAuthorization(options =>
-            {
-                options.AddPolicy("RequireClaimA", policy => policy.RequireClaim("ClaimA"));
-                options.AddPolicy("RequireClaimB", policy => policy.RequireClaim("ClaimB"));
-            });
-
-            services.AddMvc(o =>
-            {
-                o.EnableEndpointRouting = false;
-                o.Filters.Add(new AuthorizeFilter());
-            });
+            services.AddMvc(
+                o =>
+                {
+                    o.EnableEndpointRouting = false;
+                    o.Filters.Add(new AuthorizeFilter());
+                }
+            );
 
             services.AddScoped<IPolicyEvaluator, CountingPolicyEvaluator>();
         }

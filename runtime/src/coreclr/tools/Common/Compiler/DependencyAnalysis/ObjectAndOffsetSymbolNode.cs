@@ -16,7 +16,12 @@ namespace ILCompiler.DependencyAnalysis
         private Utf8String _name;
         private bool _includeCompilationUnitPrefix;
 
-        public ObjectAndOffsetSymbolNode(ObjectNode obj, int offset, Utf8String name, bool includeCompilationUnitPrefix)
+        public ObjectAndOffsetSymbolNode(
+            ObjectNode obj,
+            int offset,
+            Utf8String name,
+            bool includeCompilationUnitPrefix
+        )
         {
             _object = obj;
             _offset = offset;
@@ -24,7 +29,8 @@ namespace ILCompiler.DependencyAnalysis
             _includeCompilationUnitPrefix = includeCompilationUnitPrefix;
         }
 
-        protected override string GetName(NodeFactory factory) => $"Symbol {_name.ToString()} at offset {_offset.ToStringInvariant()}";
+        protected override string GetName(NodeFactory factory) =>
+            $"Symbol {_name.ToString()} at offset {_offset.ToStringInvariant()}";
 
         public override bool HasConditionalStaticDependencies => false;
         public override bool HasDynamicDependencies => false;
@@ -51,10 +57,19 @@ namespace ILCompiler.DependencyAnalysis
 
         public override IEnumerable<DependencyListEntry> GetStaticDependencies(NodeFactory factory)
         {
-            return new DependencyListEntry[] { new DependencyListEntry(_object, "ObjectAndOffsetDependency") };
+            return new DependencyListEntry[]
+            {
+                new DependencyListEntry(_object, "ObjectAndOffsetDependency")
+            };
         }
 
-        public override IEnumerable<CombinedDependencyListEntry> GetConditionalStaticDependencies(NodeFactory factory) => null;
-        public override IEnumerable<CombinedDependencyListEntry> SearchDynamicDependencies(List<DependencyNodeCore<NodeFactory>> markedNodes, int firstNode, NodeFactory factory) => null;
+        public override IEnumerable<CombinedDependencyListEntry> GetConditionalStaticDependencies(
+            NodeFactory factory
+        ) => null;
+        public override IEnumerable<CombinedDependencyListEntry> SearchDynamicDependencies(
+            List<DependencyNodeCore<NodeFactory>> markedNodes,
+            int firstNode,
+            NodeFactory factory
+        ) => null;
     }
 }

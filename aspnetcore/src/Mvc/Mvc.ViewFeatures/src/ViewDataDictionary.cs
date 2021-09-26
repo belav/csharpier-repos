@@ -33,10 +33,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         /// <remarks>For use when creating a <see cref="ViewDataDictionary"/> for a new top-level scope.</remarks>
         public ViewDataDictionary(
             IModelMetadataProvider metadataProvider,
-            ModelStateDictionary modelState)
-            : this(metadataProvider, modelState, declaredModelType: typeof(object))
-        {
-        }
+            ModelStateDictionary modelState
+        ) : this(metadataProvider, modelState, declaredModelType: typeof(object)) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ViewDataDictionary"/> class based entirely on an existing
@@ -55,9 +53,7 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         /// </para>
         /// </remarks>
         public ViewDataDictionary(ViewDataDictionary source)
-            : this(source, source.Model, source._declaredModelType)
-        {
-        }
+            : this(source, source.Model, source._declaredModelType) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ViewDataDictionary"/> class.
@@ -68,9 +64,7 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         /// </param>
         /// <remarks>Internal for testing.</remarks>
         internal ViewDataDictionary(IModelMetadataProvider metadataProvider)
-            : this(metadataProvider, new ModelStateDictionary())
-        {
-        }
+            : this(metadataProvider, new ModelStateDictionary()) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ViewDataDictionary"/> class.
@@ -87,10 +81,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         /// </remarks>
         protected ViewDataDictionary(
             IModelMetadataProvider metadataProvider,
-            Type declaredModelType)
-            : this(metadataProvider, new ModelStateDictionary(), declaredModelType)
-        {
-        }
+            Type declaredModelType
+        ) : this(metadataProvider, new ModelStateDictionary(), declaredModelType) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ViewDataDictionary"/> class.
@@ -110,12 +102,15 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         protected ViewDataDictionary(
             IModelMetadataProvider metadataProvider,
             ModelStateDictionary modelState,
-            Type declaredModelType)
-            : this(metadataProvider,
-                   modelState,
-                   declaredModelType,
-                   data: new Dictionary<string, object?>(StringComparer.OrdinalIgnoreCase),
-                   templateInfo: new TemplateInfo())
+            Type declaredModelType
+        )
+            : this(
+                metadataProvider,
+                modelState,
+                declaredModelType,
+                data: new Dictionary<string, object?>(StringComparer.OrdinalIgnoreCase),
+                templateInfo: new TemplateInfo()
+            )
         {
             if (metadataProvider == null)
             {
@@ -133,7 +128,10 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             }
 
             // Base ModelMetadata on the declared type.
-            ModelExplorer = _metadataProvider.GetModelExplorerForType(declaredModelType, model: null);
+            ModelExplorer = _metadataProvider.GetModelExplorerForType(
+                declaredModelType,
+                model: null
+            );
         }
 
         /// <summary>
@@ -158,9 +156,7 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         /// </para>
         /// </remarks>
         protected ViewDataDictionary(ViewDataDictionary source, Type declaredModelType)
-            : this(source, model: source.Model, declaredModelType: declaredModelType)
-        {
-        }
+            : this(source, model: source.Model, declaredModelType: declaredModelType) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ViewDataDictionary"/> class based in part on an existing
@@ -183,12 +179,21 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         /// </para>
         /// </remarks>
         // This is the core constructor called when Model is known.
-        protected ViewDataDictionary(ViewDataDictionary source, object? model, Type declaredModelType)
-            : this(source._metadataProvider,
-                   source.ModelState,
-                   declaredModelType,
-                   data: new CopyOnWriteDictionary<string, object?>(source, StringComparer.OrdinalIgnoreCase),
-                   templateInfo: new TemplateInfo(source.TemplateInfo))
+        protected ViewDataDictionary(
+            ViewDataDictionary source,
+            object? model,
+            Type declaredModelType
+        )
+            : this(
+                source._metadataProvider,
+                source.ModelState,
+                declaredModelType,
+                data: new CopyOnWriteDictionary<string, object?>(
+                    source,
+                    StringComparer.OrdinalIgnoreCase
+                ),
+                templateInfo: new TemplateInfo(source.TemplateInfo)
+            )
         {
             if (source == null)
             {
@@ -206,20 +211,30 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             // metadata despite _declaredModelType changes.
             var modelType = model?.GetType();
             var modelOrDeclaredType = modelType ?? declaredModelType;
-            if (source.ModelMetadata.MetadataKind == ModelMetadataKind.Type &&
-                source.ModelMetadata.ModelType == typeof(object) &&
-                modelOrDeclaredType != typeof(object))
+            if (
+                source.ModelMetadata.MetadataKind == ModelMetadataKind.Type
+                && source.ModelMetadata.ModelType == typeof(object)
+                && modelOrDeclaredType != typeof(object)
+            )
             {
                 // Base ModelMetadata on new type when there's no property information to preserve and type changes to
                 // something besides typeof(object).
-                ModelExplorer = _metadataProvider.GetModelExplorerForType(modelOrDeclaredType, model);
+                ModelExplorer = _metadataProvider.GetModelExplorerForType(
+                    modelOrDeclaredType,
+                    model
+                );
             }
             else if (!declaredModelType.IsAssignableFrom(source.ModelMetadata.ModelType))
             {
                 // Base ModelMetadata on new type when existing metadata is incompatible with the new declared type.
-                ModelExplorer = _metadataProvider.GetModelExplorerForType(modelOrDeclaredType, model);
+                ModelExplorer = _metadataProvider.GetModelExplorerForType(
+                    modelOrDeclaredType,
+                    model
+                );
             }
-            else if (modelType != null && !source.ModelMetadata.ModelType.IsAssignableFrom(modelType))
+            else if (
+                modelType != null && !source.ModelMetadata.ModelType.IsAssignableFrom(modelType)
+            )
             {
                 // Base ModelMetadata on new type when new model is incompatible with the existing metadata.
                 ModelExplorer = _metadataProvider.GetModelExplorerForType(modelType, model);
@@ -236,7 +251,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                     _metadataProvider,
                     source.ModelExplorer.Container,
                     source.ModelMetadata,
-                    model);
+                    model
+                );
             }
 
             // Ensure the given Model is compatible with _declaredModelType. Do not do this one of the following
@@ -256,7 +272,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             ModelStateDictionary modelState,
             Type declaredModelType,
             IDictionary<string, object?> data,
-            TemplateInfo templateInfo)
+            TemplateInfo templateInfo
+        )
         {
             _metadataProvider = metadataProvider;
             ModelState = modelState;
@@ -270,10 +287,7 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         /// </summary>
         public object? Model
         {
-            get
-            {
-                return ModelExplorer.Model;
-            }
+            get { return ModelExplorer.Model; }
             set
             {
                 // Reset ModelExplorer to ensure Model and ModelExplorer.Model remain equal.
@@ -296,10 +310,7 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         /// </remarks>
         public ModelMetadata ModelMetadata
         {
-            get
-            {
-                return ModelExplorer.Metadata;
-            }
+            get { return ModelExplorer.Metadata; }
         }
 
         /// <summary>
@@ -322,10 +333,7 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 _data.TryGetValue(index, out var result);
                 return result;
             }
-            set
-            {
-                _data[index] = value;
-            }
+            set { _data[index] = value; }
         }
 
         /// <inheritdoc />
@@ -449,10 +457,12 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             // Update ModelExplorer to reflect the new value. When possible, preserve ModelMetadata to avoid losing
             // property information.
             var modelType = value?.GetType();
-            if (ModelMetadata.MetadataKind == ModelMetadataKind.Type &&
-                ModelMetadata.ModelType == typeof(object) &&
-                modelType != null &&
-                modelType != typeof(object))
+            if (
+                ModelMetadata.MetadataKind == ModelMetadataKind.Type
+                && ModelMetadata.ModelType == typeof(object)
+                && modelType != null
+                && modelType != typeof(object)
+            )
             {
                 // Base ModelMetadata on new type when there's no property information to preserve and type changes to
                 // something besides typeof(object).
@@ -469,21 +479,31 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             else if (object.ReferenceEquals(value, Model))
             {
                 // The metadata matches and the model is literally the same; usually nothing to do here.
-                if (value == null &&
-                    !ModelMetadata.IsReferenceOrNullableType &&
-                    _declaredModelType != ModelMetadata.ModelType)
+                if (
+                    value == null
+                    && !ModelMetadata.IsReferenceOrNullableType
+                    && _declaredModelType != ModelMetadata.ModelType
+                )
                 {
                     // Base ModelMetadata on declared type when setting Model to null, source VDD's Model was never
                     // set, and source VDD had a non-Nullable value type. Though _declaredModelType might also be a
                     // non-Nullable value type, would need to duplicate logic behind
                     // ModelMetadata.IsReferenceOrNullableType to avoid this allocation in the error case.
-                    ModelExplorer = _metadataProvider.GetModelExplorerForType(_declaredModelType, value);
+                    ModelExplorer = _metadataProvider.GetModelExplorerForType(
+                        _declaredModelType,
+                        value
+                    );
                 }
             }
             else
             {
                 // The existing metadata is compatible with the value but it's a new value.
-                ModelExplorer = new ModelExplorer(_metadataProvider, ModelExplorer.Container, ModelMetadata, value);
+                ModelExplorer = new ModelExplorer(
+                    _metadataProvider,
+                    ModelExplorer.Container,
+                    ModelMetadata,
+                    value
+                );
             }
 
             EnsureCompatible(value);
@@ -504,7 +524,10 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 }
                 else
                 {
-                    message = Resources.FormatViewData_WrongTModelType(value.GetType(), _declaredModelType);
+                    message = Resources.FormatViewData_WrongTModelType(
+                        value.GetType(),
+                        _declaredModelType
+                    );
                 }
 
                 throw new InvalidOperationException(message);
@@ -607,7 +630,9 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         }
 
         /// <inheritdoc />
-        IEnumerator<KeyValuePair<string, object?>> IEnumerable<KeyValuePair<string, object?>>.GetEnumerator()
+        IEnumerator<KeyValuePair<string, object?>> IEnumerable<
+            KeyValuePair<string, object?>
+        >.GetEnumerator()
         {
             return _data.GetEnumerator();
         }

@@ -16,9 +16,7 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
         public ServerErrorNotificationTest(
             BrowserFixture browserFixture,
             ToggleExecutionModeServerFixture<Program> serverFixture,
-            ITestOutputHelper output)
-            : base(browserFixture, serverFixture.WithServerExecution(), output)
-        {
-        }
+            ITestOutputHelper output
+        ) : base(browserFixture, serverFixture.WithServerExecution(), output) { }
     }
 }

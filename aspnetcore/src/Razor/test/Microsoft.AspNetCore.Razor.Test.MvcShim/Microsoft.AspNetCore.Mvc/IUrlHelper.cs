@@ -5,6 +5,5 @@ namespace Microsoft.AspNetCore.Mvc
 {
     public interface IUrlHelper
     {
-
     }
 }

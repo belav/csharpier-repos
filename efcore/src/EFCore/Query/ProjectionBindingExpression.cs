@@ -31,7 +31,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         public ProjectionBindingExpression(
             Expression queryExpression,
             ProjectionMember projectionMember,
-            Type type)
+            Type type
+        )
         {
             Check.NotNull(queryExpression, nameof(queryExpression));
             Check.NotNull(projectionMember, nameof(projectionMember));
@@ -48,10 +49,7 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <param name="queryExpression"> The query expression to get the value from. </param>
         /// <param name="index"> The index to bind with query expression projection. </param>
         /// <param name="type"> The clr type of value being read. </param>
-        public ProjectionBindingExpression(
-            Expression queryExpression,
-            int index,
-            Type type)
+        public ProjectionBindingExpression(Expression queryExpression, int index, Type type)
         {
             Check.NotNull(queryExpression, nameof(queryExpression));
             Check.NotNull(type, nameof(type));
@@ -68,7 +66,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <param name="indexMap"> The index map to bind with query expression projection for ValueBuffer. </param>
         public ProjectionBindingExpression(
             Expression queryExpression,
-            IReadOnlyDictionary<IProperty, int> indexMap)
+            IReadOnlyDictionary<IProperty, int> indexMap
+        )
         {
             Check.NotNull(queryExpression, nameof(queryExpression));
             Check.NotNull(indexMap, nameof(indexMap));
@@ -102,8 +101,7 @@ namespace Microsoft.EntityFrameworkCore.Query
         public override Type Type { get; }
 
         /// <inheritdoc />
-        public sealed override ExpressionType NodeType
-            => ExpressionType.Extension;
+        public sealed override ExpressionType NodeType => ExpressionType.Extension;
 
         /// <inheritdoc />
         protected override Expression VisitChildren(ExpressionVisitor visitor)
@@ -140,23 +138,27 @@ namespace Microsoft.EntityFrameworkCore.Query
         }
 
         /// <inheritdoc />
-        public override bool Equals(object? obj)
-            => obj != null
-                && (ReferenceEquals(this, obj)
-                    || obj is ProjectionBindingExpression projectionBindingExpression
-                    && Equals(projectionBindingExpression));
+        public override bool Equals(object? obj) =>
+            obj != null
+            && (
+                ReferenceEquals(this, obj)
+                || obj is ProjectionBindingExpression projectionBindingExpression
+                    && Equals(projectionBindingExpression)
+            );
 
-        private bool Equals(ProjectionBindingExpression projectionBindingExpression)
-            => QueryExpression.Equals(projectionBindingExpression.QueryExpression)
-                && Type == projectionBindingExpression.Type
-                && (ProjectionMember?.Equals(projectionBindingExpression.ProjectionMember)
-                    ?? projectionBindingExpression.ProjectionMember == null)
-                && Index == projectionBindingExpression.Index
-                // Using reference equality here since if we are this far, we don't need to compare this.
-                && IndexMap == projectionBindingExpression.IndexMap;
+        private bool Equals(ProjectionBindingExpression projectionBindingExpression) =>
+            QueryExpression.Equals(projectionBindingExpression.QueryExpression)
+            && Type == projectionBindingExpression.Type
+            && (
+                ProjectionMember?.Equals(projectionBindingExpression.ProjectionMember)
+                ?? projectionBindingExpression.ProjectionMember == null
+            )
+            && Index == projectionBindingExpression.Index
+            // Using reference equality here since if we are this far, we don't need to compare this.
+            && IndexMap == projectionBindingExpression.IndexMap;
 
         /// <inheritdoc />
-        public override int GetHashCode()
-            => HashCode.Combine(QueryExpression, ProjectionMember, Index, IndexMap);
+        public override int GetHashCode() =>
+            HashCode.Combine(QueryExpression, ProjectionMember, Index, IndexMap);
     }
 }

@@ -14,8 +14,7 @@ namespace Microsoft.EntityFrameworkCore
     public abstract class CompositeKeyEndToEndTestBase<TFixture> : IClassFixture<TFixture>
         where TFixture : CompositeKeyEndToEndTestBase<TFixture>.CompositeKeyEndToEndFixtureBase
     {
-        protected CompositeKeyEndToEndTestBase(TFixture fixture)
-            => Fixture = fixture;
+        protected CompositeKeyEndToEndTestBase(TFixture fixture) => Fixture = fixture;
 
         private TFixture Fixture { get; }
 
@@ -26,13 +25,7 @@ namespace Microsoft.EntityFrameworkCore
 
             using (var context = CreateContext())
             {
-                context.Add(
-                    new Pegasus
-                    {
-                        Id1 = ticks,
-                        Id2 = ticks + 1,
-                        Name = "Rainbow Dash"
-                    });
+                context.Add(new Pegasus { Id1 = ticks, Id2 = ticks + 1, Name = "Rainbow Dash" });
                 await context.SaveChangesAsync();
             }
 
@@ -73,8 +66,7 @@ namespace Microsoft.EntityFrameworkCore
             {
                 context.Database.EnsureCreatedResiliently();
 
-                var added = context.Add(
-                    new Unicorn { Id2 = id2, Name = "Rarity" }).Entity;
+                var added = context.Add(new Unicorn { Id2 = id2, Name = "Rarity" }).Entity;
 
                 await context.SaveChangesAsync();
 
@@ -87,12 +79,17 @@ namespace Microsoft.EntityFrameworkCore
 
             using (var context = CreateContext())
             {
-                Assert.Equal(1, context.Unicorns.Count(e => e.Id1 == id1 && e.Id2 == id2 && e.Id3 == id3));
+                Assert.Equal(
+                    1,
+                    context.Unicorns.Count(e => e.Id1 == id1 && e.Id2 == id2 && e.Id3 == id3)
+                );
             }
 
             using (var context = CreateContext())
             {
-                var unicorn = context.Unicorns.Single(e => e.Id1 == id1 && e.Id2 == id2 && e.Id3 == id3);
+                var unicorn = context.Unicorns.Single(
+                    e => e.Id1 == id1 && e.Id2 == id2 && e.Id3 == id3
+                );
 
                 unicorn.Name = "Bad Hair Day";
 
@@ -101,7 +98,9 @@ namespace Microsoft.EntityFrameworkCore
 
             using (var context = CreateContext())
             {
-                var unicorn = context.Unicorns.Single(e => e.Id1 == id1 && e.Id2 == id2 && e.Id3 == id3);
+                var unicorn = context.Unicorns.Single(
+                    e => e.Id1 == id1 && e.Id2 == id2 && e.Id3 == id3
+                );
 
                 Assert.Equal("Bad Hair Day", unicorn.Name);
 
@@ -112,7 +111,10 @@ namespace Microsoft.EntityFrameworkCore
 
             using (var context = CreateContext())
             {
-                Assert.Equal(0, context.Unicorns.Count(e => e.Id1 == id1 && e.Id2 == id2 && e.Id3 == id3));
+                Assert.Equal(
+                    0,
+                    context.Unicorns.Count(e => e.Id1 == id1 && e.Id2 == id2 && e.Id3 == id3)
+                );
             }
         }
 
@@ -123,27 +125,12 @@ namespace Microsoft.EntityFrameworkCore
 
             using (var context = CreateContext())
             {
-                var pony1 = context.Add(
-                    new EarthPony
-                    {
-                        Id1 = 1,
-                        Id2 = 7,
-                        Name = "Apple Jack 1"
-                    }).Entity;
-                var pony2 = context.Add(
-                    new EarthPony
-                    {
-                        Id1 = 2,
-                        Id2 = 7,
-                        Name = "Apple Jack 2"
-                    }).Entity;
-                var pony3 = context.Add(
-                    new EarthPony
-                    {
-                        Id1 = 3,
-                        Id2 = 7,
-                        Name = "Apple Jack 3"
-                    }).Entity;
+                var pony1 =
+                    context.Add(new EarthPony { Id1 = 1, Id2 = 7, Name = "Apple Jack 1" }).Entity;
+                var pony2 =
+                    context.Add(new EarthPony { Id1 = 2, Id2 = 7, Name = "Apple Jack 2" }).Entity;
+                var pony3 =
+                    context.Add(new EarthPony { Id1 = 3, Id2 = 7, Name = "Apple Jack 3" }).Entity;
 
                 await context.SaveChangesAsync();
 
@@ -186,8 +173,7 @@ namespace Microsoft.EntityFrameworkCore
             }
         }
 
-        protected BronieContext CreateContext()
-            => (BronieContext)Fixture.CreateContext();
+        protected BronieContext CreateContext() => (BronieContext)Fixture.CreateContext();
 
         public abstract class CompositeKeyEndToEndFixtureBase : SharedStoreFixtureBase<DbContext>
         {
@@ -198,10 +184,7 @@ namespace Microsoft.EntityFrameworkCore
 
         protected class BronieContext : PoolableDbContext
         {
-            public BronieContext(DbContextOptions options)
-                : base(options)
-            {
-            }
+            public BronieContext(DbContextOptions options) : base(options) { }
 
             // ReSharper disable UnusedAutoPropertyAccessor.Local
             public DbSet<Pegasus> Pegasuses { get; set; }
@@ -215,31 +198,26 @@ namespace Microsoft.EntityFrameworkCore
                 modelBuilder.Entity<Pegasus>(
                     b =>
                     {
-                        b.HasKey(
-                            e => new { e.Id1, e.Id2 });
-                    });
+                        b.HasKey(e => new { e.Id1, e.Id2 });
+                    }
+                );
 
                 modelBuilder.Entity<Unicorn>(
                     b =>
                     {
-                        b.HasKey(
-                            e => new
-                            {
-                                e.Id1,
-                                e.Id2,
-                                e.Id3
-                            });
+                        b.HasKey(e => new { e.Id1, e.Id2, e.Id3 });
                         b.Property(e => e.Id1).ValueGeneratedOnAdd();
                         b.Property(e => e.Id3).ValueGeneratedOnAdd();
-                    });
+                    }
+                );
 
                 modelBuilder.Entity<EarthPony>(
                     b =>
                     {
-                        b.HasKey(
-                            e => new { e.Id1, e.Id2 });
+                        b.HasKey(e => new { e.Id1, e.Id2 });
                         b.Property(e => e.Id1);
-                    });
+                    }
+                );
             }
         }
 

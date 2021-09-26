@@ -23,7 +23,10 @@ namespace System.Speech.Internal
                 }
                 else
                 {
-                    throw new ArgumentException(SR.Get(SRID.StringCanNotBeEmpty, paramName), paramName);
+                    throw new ArgumentException(
+                        SR.Get(SRID.StringCanNotBeEmpty, paramName),
+                        paramName
+                    );
                 }
             }
         }
@@ -109,7 +112,6 @@ namespace System.Speech.Internal
 
         // Size of a char (avoid to use the marshal class
         internal const int _sizeOfChar = 2;
-
         #endregion
     }
 }

@@ -1,7 +1,7 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-// A nonlocal exit and a catchret in a funclet where the destination label is also in the same funclet 
+// A nonlocal exit and a catchret in a funclet where the destination label is also in the same funclet
 // cause confusion when we're building FG for the funclet (114611)
 
 
@@ -41,11 +41,13 @@ namespace hello
             {
                 try
                 {
-                    if (i != 0) goto incatch;
+                    if (i != 0)
+                        goto incatch;
                 }
                 catch
                 {
-                    if (i != 0) goto incatch;
+                    if (i != 0)
+                        goto incatch;
                     Console.WriteLine("end inner catch");
                 }
                 Console.WriteLine("unreached");
@@ -58,7 +60,6 @@ namespace hello
             testLog.StopRecording();
 
             return testLog.VerifyOutput();
-
         }
     }
 }

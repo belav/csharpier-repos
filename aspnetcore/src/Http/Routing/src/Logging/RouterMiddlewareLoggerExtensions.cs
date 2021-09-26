@@ -15,7 +15,8 @@ namespace Microsoft.AspNetCore.Routing.Logging
             _requestNotMatched = LoggerMessage.Define(
                 LogLevel.Debug,
                 new EventId(1, "RequestNotMatched"),
-                "Request did not match any routes");
+                "Request did not match any routes"
+            );
         }
 
         public static void RequestNotMatched(this ILogger logger)

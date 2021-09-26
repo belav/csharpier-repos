@@ -13,8 +13,8 @@ namespace System.CommandLine.Help
     {
         private const string Indent = "  ";
 
-        private Dictionary<ISymbol, Customization> Customizations { get; }
-            = new Dictionary<ISymbol, Customization>();
+        private Dictionary<ISymbol, Customization> Customizations { get; } =
+            new Dictionary<ISymbol, Customization>();
 
         protected IConsole Console { get; }
         public int MaxWidth { get; }
@@ -22,7 +22,11 @@ namespace System.CommandLine.Help
         public HelpBuilder(IConsole console, int maxWidth = int.MaxValue)
         {
             Console = console ?? throw new ArgumentNullException(nameof(console));
-            if (maxWidth <= 0) throw new ArgumentOutOfRangeException(nameof(maxWidth), "Max width must be positive");
+            if (maxWidth <= 0)
+                throw new ArgumentOutOfRangeException(
+                    nameof(maxWidth),
+                    "Max width must be positive"
+                );
             MaxWidth = maxWidth;
         }
 
@@ -46,9 +50,11 @@ namespace System.CommandLine.Help
             AddAdditionalArguments(command);
         }
 
-        protected internal void Customize(ISymbol symbol,
+        protected internal void Customize(
+            ISymbol symbol,
             Func<string?>? descriptor = null,
-            Func<string?>? defaultValue = null)
+            Func<string?>? defaultValue = null
+        )
         {
             if (symbol is null)
             {
@@ -77,11 +83,10 @@ namespace System.CommandLine.Help
 
             IEnumerable<string> GetUsageParts()
             {
-
-                IEnumerable<ICommand> parentCommands =
-                    command
-                        .RecurseWhileNotNull(c => c.Parents.FirstOrDefaultOfType<ICommand>())
-                        .Reverse();
+                IEnumerable<ICommand> parentCommands = command.RecurseWhileNotNull(
+                        c => c.Parents.FirstOrDefaultOfType<ICommand>()
+                    )
+                    .Reverse();
 
                 var displayOptionTitle = command.Options.Any(x => !x.IsHidden);
 
@@ -98,10 +103,7 @@ namespace System.CommandLine.Help
                     yield return FormatArgumentUsage(parentCommand.Arguments);
                 }
 
-
-                var hasCommandWithHelp = command.Children
-                    .OfType<ICommand>()
-                    .Any(x => !x.IsHidden);
+                var hasCommandWithHelp = command.Children.OfType<ICommand>().Any(x => !x.IsHidden);
 
                 if (hasCommandWithHelp)
                 {
@@ -131,10 +133,9 @@ namespace System.CommandLine.Help
         {
             //TODO: This shows all parent arguments not just the first level
             return command.RecurseWhileNotNull(c => c.Parents.FirstOrDefaultOfType<ICommand>())
-                    .Reverse()
-                    .SelectMany(GetArguments)
-                    .Distinct();
-
+                .Reverse()
+                .SelectMany(GetArguments)
+                .Distinct();
 
             IEnumerable<HelpItem> GetArguments(ICommand command)
             {
@@ -143,7 +144,10 @@ namespace System.CommandLine.Help
                 {
                     string argumentDescriptor = GetArgumentDescriptor(argument);
 
-                    yield return new HelpItem(argumentDescriptor, string.Join(" ", GetArgumentDescription(command, argument)));
+                    yield return new HelpItem(
+                        argumentDescriptor,
+                        string.Join(" ", GetArgumentDescription(command, argument))
+                    );
                 }
             }
 
@@ -174,8 +178,8 @@ namespace System.CommandLine.Help
             }
         }
 
-        protected IEnumerable<HelpItem> GetOptions(ICommand command)
-            => command.Options.Where(x => !x.IsHidden).Select(GetHelpItem);
+        protected IEnumerable<HelpItem> GetOptions(ICommand command) =>
+            command.Options.Where(x => !x.IsHidden).Select(GetHelpItem);
 
         protected virtual void AddSubcommands(ICommand command)
         {
@@ -189,8 +193,8 @@ namespace System.CommandLine.Help
             }
         }
 
-        protected IEnumerable<HelpItem> GetSubcommands(ICommand command)
-            => command.Children.OfType<ICommand>().Where(x => !x.IsHidden).Select(GetHelpItem);
+        protected IEnumerable<HelpItem> GetSubcommands(ICommand command) =>
+            command.Children.OfType<ICommand>().Where(x => !x.IsHidden).Select(GetHelpItem);
 
         protected virtual void AddAdditionalArguments(ICommand command)
         {
@@ -199,8 +203,10 @@ namespace System.CommandLine.Help
                 return;
             }
 
-            WriteHeading(Resources.Instance.HelpAdditionalArgumentsTitle(),
-                Resources.Instance.HelpAdditionalArgumentsDescription());
+            WriteHeading(
+                Resources.Instance.HelpAdditionalArgumentsTitle(),
+                Resources.Instance.HelpAdditionalArgumentsDescription()
+            );
         }
 
         protected void WriteHeading(string descriptor, string? description)
@@ -236,10 +242,7 @@ namespace System.CommandLine.Help
                         continue;
                     }
 
-                    var arityIndicator =
-                        argument.Arity.MaximumNumberOfValues > 1
-                            ? "..."
-                            : "";
+                    var arityIndicator = argument.Arity.MaximumNumberOfValues > 1 ? "..." : "";
 
                     var isOptional = IsOptional(argument);
 
@@ -271,23 +274,23 @@ namespace System.CommandLine.Help
 
                 return sb.ToString();
             }
+
             finally
             {
                 StringBuilderPool.Default.ReturnToPool(sb);
             }
 
             bool IsMultiParented(IArgument argument) =>
-                argument is Argument a &&
-                a.Parents.Count > 1;
+                argument is Argument a && a.Parents.Count > 1;
 
             bool IsOptional(IArgument argument) =>
-                IsMultiParented(argument) ||
-                argument.Arity.MinimumNumberOfValues == 0;
+                IsMultiParented(argument) || argument.Arity.MinimumNumberOfValues == 0;
         }
 
         protected void RenderAsColumns(params HelpItem[] items)
         {
-            if (items.Length == 0) return;
+            if (items.Length == 0)
+                return;
             int windowWidth = MaxWidth;
 
             int firstColumnWidth = items.Select(x => x.Descriptor.Length).Max();
@@ -298,7 +301,10 @@ namespace System.CommandLine.Help
                 int firstColumnMaxWidth = windowWidth / 2 - Indent.Length;
                 if (firstColumnWidth > firstColumnMaxWidth)
                 {
-                    firstColumnWidth = items.SelectMany(x => WrapItem(x.Descriptor, firstColumnMaxWidth).Select(x => x.Length)).Max();
+                    firstColumnWidth = items.SelectMany(
+                            x => WrapItem(x.Descriptor, firstColumnMaxWidth).Select(x => x.Length)
+                        )
+                        .Max();
                 }
                 secondColumnWidth = windowWidth - firstColumnWidth - Indent.Length - Indent.Length;
             }
@@ -325,11 +331,15 @@ namespace System.CommandLine.Help
                 }
             }
 
-            static IEnumerable<(string, string)> ZipWithEmpty(IEnumerable<string> first, IEnumerable<string> second)
+            static IEnumerable<(string, string)> ZipWithEmpty(
+                IEnumerable<string> first,
+                IEnumerable<string> second
+            )
             {
                 using var enum1 = first.GetEnumerator();
                 using var enum2 = second.GetEnumerator();
-                bool hasFirst = false, hasSecond = false;
+                bool hasFirst = false,
+                    hasSecond = false;
                 while ((hasFirst = enum1.MoveNext()) | (hasSecond = enum2.MoveNext()))
                 {
                     yield return (hasFirst ? enum1.Current : "", hasSecond ? enum2.Current : "");
@@ -339,7 +349,8 @@ namespace System.CommandLine.Help
 
         private static IEnumerable<string> WrapItem(string item, int maxWidth)
         {
-            if (string.IsNullOrWhiteSpace(item)) yield break;
+            if (string.IsNullOrWhiteSpace(item))
+                yield break;
             //First handle existing new lines
             var parts = item.Split(new string[] { "\r\n", "\n", }, StringSplitOptions.None);
 
@@ -385,20 +396,21 @@ namespace System.CommandLine.Help
         protected HelpItem GetHelpItem(IIdentifierSymbol symbol)
         {
             string descriptor;
-            if (Customizations.TryGetValue(symbol, out Customization customization) &&
-                customization.GetDescriptor?.Invoke() is { } setDescriptor)
+            if (
+                Customizations.TryGetValue(symbol, out Customization customization)
+                && customization.GetDescriptor?.Invoke() is { } setDescriptor
+            )
             {
                 descriptor = setDescriptor;
             }
             else
             {
-                var rawAliases = symbol.Aliases
-                                 .Select(r => r.SplitPrefix())
-                                 .OrderBy(r => r.Prefix, StringComparer.OrdinalIgnoreCase)
-                                 .ThenBy(r => r.Alias, StringComparer.OrdinalIgnoreCase)
-                                 .GroupBy(t => t.Alias)
-                                 .Select(t => t.First())
-                                 .Select(t => $"{t.Prefix}{t.Alias}");
+                var rawAliases = symbol.Aliases.Select(r => r.SplitPrefix())
+                    .OrderBy(r => r.Prefix, StringComparer.OrdinalIgnoreCase)
+                    .ThenBy(r => r.Alias, StringComparer.OrdinalIgnoreCase)
+                    .GroupBy(t => t.Alias)
+                    .Select(t => t.First())
+                    .Select(t => $"{t.Prefix}{t.Alias}");
 
                 descriptor = string.Join(", ", rawAliases);
 
@@ -414,8 +426,7 @@ namespace System.CommandLine.Help
                     }
                 }
 
-                if (symbol is IOption option &&
-                    option.IsRequired)
+                if (symbol is IOption option && option.IsRequired)
                 {
                     descriptor += $" {Resources.Instance.HelpOptionsRequired()}";
                 }
@@ -445,34 +456,48 @@ namespace System.CommandLine.Help
             string GetArgumentsDescription(IIdentifierSymbol symbol)
             {
                 IEnumerable<IArgument> arguments = symbol.Arguments();
-                var defaultArguments = arguments.Where(x => !x.IsHidden && x.HasDefaultValue).ToArray();
+                var defaultArguments = arguments.Where(x => !x.IsHidden && x.HasDefaultValue)
+                    .ToArray();
 
-                if (defaultArguments.Length == 0) return "";
+                if (defaultArguments.Length == 0)
+                    return "";
 
                 var isSingleArgument = defaultArguments.Length == 1;
-                var argumentDefaultValues = defaultArguments
-                    .Select(argument => GetArgumentDefaultValue(symbol, argument, isSingleArgument));
+                var argumentDefaultValues = defaultArguments.Select(
+                    argument => GetArgumentDefaultValue(symbol, argument, isSingleArgument)
+                );
                 return $"[{string.Join(", ", argumentDefaultValues)}]";
             }
         }
 
-        private string GetArgumentDefaultValue(IIdentifierSymbol parent, IArgument argument, bool displayArgumentName)
+        private string GetArgumentDefaultValue(
+            IIdentifierSymbol parent,
+            IArgument argument,
+            bool displayArgumentName
+        )
         {
             string? defaultValue;
-            if (Customizations.TryGetValue(parent, out Customization customization) &&
-                customization.GetDefaultValue?.Invoke() is { } parentSetDefaultValue)
+            if (
+                Customizations.TryGetValue(parent, out Customization customization)
+                && customization.GetDefaultValue?.Invoke() is { } parentSetDefaultValue
+            )
             {
                 defaultValue = parentSetDefaultValue;
             }
-            else if (Customizations.TryGetValue(argument, out customization) &&
-                customization.GetDefaultValue?.Invoke() is { } setDefaultValue)
+            else if (
+                Customizations.TryGetValue(argument, out customization)
+                && customization.GetDefaultValue?.Invoke() is { } setDefaultValue
+            )
             {
                 defaultValue = setDefaultValue;
             }
             else
             {
                 object? argumentDefaultValue = argument.GetDefaultValue();
-                if (argumentDefaultValue is IEnumerable enumerable && !(argumentDefaultValue is string))
+                if (
+                    argumentDefaultValue is IEnumerable enumerable
+                    && !(argumentDefaultValue is string)
+                )
                 {
                     defaultValue = string.Join("|", enumerable.OfType<object>().ToArray());
                 }
@@ -482,23 +507,24 @@ namespace System.CommandLine.Help
                 }
             }
 
-            string name = displayArgumentName ?
-                Resources.Instance.HelpArgumentDefaultValueTitle() :
-                argument.Name;
+            string name = displayArgumentName
+                ? Resources.Instance.HelpArgumentDefaultValueTitle()
+                : argument.Name;
 
             return $"{name}: {defaultValue}";
         }
 
         protected string GetArgumentDescriptor(IArgument argument)
         {
-            if (Customizations.TryGetValue(argument, out Customization customization) &&
-                customization.GetDescriptor?.Invoke() is { } setDescriptor)
+            if (
+                Customizations.TryGetValue(argument, out Customization customization)
+                && customization.GetDescriptor?.Invoke() is { } setDescriptor
+            )
             {
                 return setDescriptor;
             }
 
-            if (argument.ValueType == typeof(bool) ||
-                argument.ValueType == typeof(bool?))
+            if (argument.ValueType == typeof(bool) || argument.ValueType == typeof(bool?))
             {
                 return "";
             }
@@ -523,8 +549,7 @@ namespace System.CommandLine.Help
 
         private class Customization
         {
-            public Customization(Func<string?>? getDescriptor,
-                Func<string?>? getDefaultValue)
+            public Customization(Func<string?>? getDescriptor, Func<string?>? getDefaultValue)
             {
                 GetDescriptor = getDescriptor;
                 GetDefaultValue = getDefaultValue;

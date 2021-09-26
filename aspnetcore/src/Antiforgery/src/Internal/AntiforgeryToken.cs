@@ -15,10 +15,7 @@ namespace Microsoft.AspNetCore.Antiforgery
         public string AdditionalData
         {
             get { return _additionalData; }
-            set
-            {
-                _additionalData = value ?? string.Empty;
-            }
+            set { _additionalData = value ?? string.Empty; }
         }
 
         public BinaryBlob? ClaimUid { get; set; }
@@ -35,19 +32,13 @@ namespace Microsoft.AspNetCore.Antiforgery
                 }
                 return _securityToken;
             }
-            set
-            {
-                _securityToken = value;
-            }
+            set { _securityToken = value; }
         }
 
         public string? Username
         {
             get { return _username; }
-            set
-            {
-                _username = value ?? string.Empty;
-            }
+            set { _username = value ?? string.Empty; }
         }
     }
 }

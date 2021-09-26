@@ -94,10 +94,7 @@ namespace Microsoft.AspNetCore.JsonPatch
                 NamingStrategy = new TestNamingStrategy()
             };
 
-            var targetObject = new Dictionary<string, int>()
-            {
-                { "customTest", 1},
-            };
+            var targetObject = new Dictionary<string, int>() { { "customTest", 1 }, };
 
             var patchDocument = new JsonPatchDocument();
             patchDocument.Remove("Test");

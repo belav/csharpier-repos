@@ -35,9 +35,7 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters
             var responseFeature = new TestResponseFeature(hasStarted: true);
             var httpContext = GetHttpContext(responseFeature);
             var tempDataFactory = new Mock<ITempDataDictionaryFactory>(MockBehavior.Loose);
-            tempDataFactory
-                .Setup(f => f.GetTempData(It.IsAny<HttpContext>()))
-                .Verifiable();
+            tempDataFactory.Setup(f => f.GetTempData(It.IsAny<HttpContext>())).Verifiable();
             var filter = new SaveTempDataFilter(tempDataFactory.Object);
             var context = GetResultExecutingContext(httpContext);
             filter.OnResultExecuting(context);
@@ -52,17 +50,14 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters
         {
             // Arrange
             var responseFeature = new Mock<IHttpResponseFeature>(MockBehavior.Strict);
-            responseFeature
-                .Setup(rf => rf.OnStarting(It.IsAny<Func<object, Task>>(), It.IsAny<object>()))
+            responseFeature.Setup(
+                    rf => rf.OnStarting(It.IsAny<Func<object, Task>>(), It.IsAny<object>())
+                )
                 .Verifiable();
-            responseFeature
-                .SetupGet(rf => rf.HasStarted)
-                .Returns(false);
+            responseFeature.SetupGet(rf => rf.HasStarted).Returns(false);
 
             var tempDataFactory = new Mock<ITempDataDictionaryFactory>(MockBehavior.Strict);
-            tempDataFactory
-                .Setup(f => f.GetTempData(It.IsAny<HttpContext>()))
-                .Verifiable();
+            tempDataFactory.Setup(f => f.GetTempData(It.IsAny<HttpContext>())).Verifiable();
             var filter = new SaveTempDataFilter(tempDataFactory.Object);
             var httpContext = GetHttpContext(responseFeature.Object);
             var context = GetResourceExecutingContext(httpContext);
@@ -83,8 +78,7 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters
             var httpContext = GetHttpContext(responseFeature);
             var tempData = GetTempDataDictionary();
             var tempDataFactory = new Mock<ITempDataDictionaryFactory>(MockBehavior.Strict);
-            tempDataFactory
-                .Setup(f => f.GetTempData(It.IsAny<HttpContext>()))
+            tempDataFactory.Setup(f => f.GetTempData(It.IsAny<HttpContext>()))
                 .Returns(tempData.Object)
                 .Verifiable();
             var filter = new SaveTempDataFilter(tempDataFactory.Object);
@@ -102,11 +96,10 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters
             // Arrange
             var responseFeature = new TestResponseFeature();
             var httpContext = GetHttpContext(responseFeature);
-            httpContext.Items[SaveTempDataFilter.SaveTempDataFilterContextKey] = new SaveTempDataFilter.SaveTempDataContext() { TempDataSaved = true };
+            httpContext.Items[SaveTempDataFilter.SaveTempDataFilterContextKey] =
+                new SaveTempDataFilter.SaveTempDataContext() { TempDataSaved = true };
             var tempDataFactory = new Mock<ITempDataDictionaryFactory>(MockBehavior.Strict);
-            tempDataFactory
-                .Setup(f => f.GetTempData(It.IsAny<HttpContext>()))
-                .Verifiable();
+            tempDataFactory.Setup(f => f.GetTempData(It.IsAny<HttpContext>())).Verifiable();
             var filter = new SaveTempDataFilter(tempDataFactory.Object);
             var context = GetResourceExecutingContext(httpContext);
             filter.OnResourceExecuting(context); // registers callback
@@ -124,11 +117,13 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters
             // Arrange
             var responseFeature = new TestResponseFeature();
             var httpContext = GetHttpContext(responseFeature);
-            httpContext.Items[SaveTempDataFilter.SaveTempDataFilterContextKey] = new SaveTempDataFilter.SaveTempDataContext() { RequestHasUnhandledException = true };
+            httpContext.Items[SaveTempDataFilter.SaveTempDataFilterContextKey] =
+                new SaveTempDataFilter.SaveTempDataContext()
+                {
+                    RequestHasUnhandledException = true
+                };
             var tempDataFactory = new Mock<ITempDataDictionaryFactory>(MockBehavior.Strict);
-            tempDataFactory
-                .Setup(f => f.GetTempData(It.IsAny<HttpContext>()))
-                .Verifiable();
+            tempDataFactory.Setup(f => f.GetTempData(It.IsAny<HttpContext>())).Verifiable();
             var filter = new SaveTempDataFilter(tempDataFactory.Object);
             var context = GetResourceExecutingContext(httpContext);
             filter.OnResourceExecuting(context); // registers callback
@@ -142,7 +137,9 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters
 
         [Theory]
         [MemberData(nameof(ActionResultsData))]
-        public async Task OnResultExecuting_SavesTempData_WhenTempData_NotSavedAlready(IActionResult result)
+        public async Task OnResultExecuting_SavesTempData_WhenTempData_NotSavedAlready(
+            IActionResult result
+        )
         {
             // Arrange
             var tempDataDictionary = GetTempDataDictionary();
@@ -170,7 +167,10 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters
             var responseFeature = new TestResponseFeature();
             var httpContext = GetHttpContext(responseFeature);
             var resourceContext = GetResourceExecutingContext(httpContext);
-            var resultContext = GetResultExecutedContext(httpContext, new TestKeepTempDataActionResult());
+            var resultContext = GetResultExecutedContext(
+                httpContext,
+                new TestKeepTempDataActionResult()
+            );
             filter.OnResourceExecuting(resourceContext); // registers callback
             filter.OnResultExecuted(resultContext);
 
@@ -206,9 +206,7 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters
         {
             // Arrange
             var tempDataFactory = new Mock<ITempDataDictionaryFactory>(MockBehavior.Strict);
-            tempDataFactory
-                .Setup(f => f.GetTempData(It.IsAny<HttpContext>()))
-                .Verifiable();
+            tempDataFactory.Setup(f => f.GetTempData(It.IsAny<HttpContext>())).Verifiable();
             var filter = new SaveTempDataFilter(tempDataFactory.Object);
             var httpContext = GetHttpContext(new TestResponseFeature(hasStarted: true));
             var context = GetResultExecutedContext(httpContext);
@@ -242,7 +240,9 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters
             // Arrange
             var tempDataDictionary = GetTempDataDictionary();
             var filter = GetFilter(tempDataDictionary.Object);
-            var context = GetResultExecutedContext(actionResult: new TestKeepTempDataActionResult());
+            var context = GetResultExecutedContext(
+                actionResult: new TestKeepTempDataActionResult()
+            );
 
             // Act
             filter.OnResultExecuted(context);
@@ -274,11 +274,12 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters
             return new SaveTempDataFilter(tempDataFactory.Object);
         }
 
-        private Mock<ITempDataDictionaryFactory> GetTempDataDictionaryFactory(ITempDataDictionary tempDataDictionary)
+        private Mock<ITempDataDictionaryFactory> GetTempDataDictionaryFactory(
+            ITempDataDictionary tempDataDictionary
+        )
         {
             var tempDataFactory = new Mock<ITempDataDictionaryFactory>(MockBehavior.Strict);
-            tempDataFactory
-                .Setup(f => f.GetTempData(It.IsAny<HttpContext>()))
+            tempDataFactory.Setup(f => f.GetTempData(It.IsAny<HttpContext>()))
                 .Returns(tempDataDictionary);
             return tempDataFactory;
         }
@@ -286,12 +287,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters
         private Mock<ITempDataDictionary> GetTempDataDictionary()
         {
             var tempDataDictionary = new Mock<ITempDataDictionary>(MockBehavior.Strict);
-            tempDataDictionary
-                .Setup(tdd => tdd.Keep())
-                .Verifiable();
-            tempDataDictionary
-                .Setup(tdd => tdd.Save())
-                .Verifiable();
+            tempDataDictionary.Setup(tdd => tdd.Keep()).Verifiable();
+            tempDataDictionary.Setup(tdd => tdd.Save()).Verifiable();
             return tempDataDictionary;
         }
 
@@ -303,14 +300,21 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters
             }
             var actionResult = new TestActionResult();
 
-            var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
-            var filters = new IFilterMetadata[] { };
-            var valueProviderFactories = new IValueProviderFactory[] { };
+            var actionContext = new ActionContext(
+                httpContext,
+                new RouteData(),
+                new ActionDescriptor()
+            );
+            var filters = new IFilterMetadata[] {  };
+            var valueProviderFactories = new IValueProviderFactory[] {  };
 
             return new ResourceExecutingContext(actionContext, filters, valueProviderFactories);
         }
 
-        private ResultExecutedContext GetResultExecutedContext(HttpContext httpContext = null, IActionResult actionResult = null)
+        private ResultExecutedContext GetResultExecutedContext(
+            HttpContext httpContext = null,
+            IActionResult actionResult = null
+        )
         {
             if (httpContext == null)
             {
@@ -322,12 +326,16 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters
             }
             return new ResultExecutedContext(
                 new ActionContext(httpContext, new RouteData(), new ActionDescriptor()),
-                new IFilterMetadata[] { },
+                new IFilterMetadata[] {  },
                 actionResult,
-                new TestController());
+                new TestController()
+            );
         }
 
-        private ResultExecutingContext GetResultExecutingContext(ActionContext actionContext, IActionResult actionResult = null)
+        private ResultExecutingContext GetResultExecutingContext(
+            ActionContext actionContext,
+            IActionResult actionResult = null
+        )
         {
             if (actionResult == null)
             {
@@ -335,12 +343,16 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters
             }
             return new ResultExecutingContext(
                 actionContext,
-                new IFilterMetadata[] { },
+                new IFilterMetadata[] {  },
                 actionResult,
-                new TestController());
+                new TestController()
+            );
         }
 
-        private ResultExecutingContext GetResultExecutingContext(HttpContext httpContext = null, IActionResult actionResult = null)
+        private ResultExecutingContext GetResultExecutingContext(
+            HttpContext httpContext = null,
+            IActionResult actionResult = null
+        )
         {
             if (httpContext == null)
             {
@@ -352,9 +364,10 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters
             }
             return new ResultExecutingContext(
                 new ActionContext(httpContext, new RouteData(), new ActionDescriptor()),
-                new IFilterMetadata[] { },
+                new IFilterMetadata[] {  },
                 new Mock<IActionResult>().Object,
-                new TestController());
+                new TestController()
+            );
         }
 
         private HttpContext GetHttpContext(IHttpResponseFeature responseFeature = null)
@@ -385,7 +398,9 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters
         {
             public Task ExecuteResultAsync(ActionContext context)
             {
-                return context.HttpContext.Response.WriteAsync($"Hello from {nameof(TestActionResult)}");
+                return context.HttpContext.Response.WriteAsync(
+                    $"Hello from {nameof(TestActionResult)}"
+                );
             }
         }
 
@@ -393,7 +408,9 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters
         {
             public Task ExecuteResultAsync(ActionContext context)
             {
-                return context.HttpContext.Response.WriteAsync($"Hello from {nameof(TestKeepTempDataActionResult)}");
+                return context.HttpContext.Response.WriteAsync(
+                    $"Hello from {nameof(TestKeepTempDataActionResult)}"
+                );
             }
         }
 
@@ -409,10 +426,7 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters
 
             public override bool HasStarted
             {
-                get
-                {
-                    return _hasStarted;
-                }
+                get { return _hasStarted; }
             }
 
             public override void OnStarting(Func<object, Task> callback, object state)

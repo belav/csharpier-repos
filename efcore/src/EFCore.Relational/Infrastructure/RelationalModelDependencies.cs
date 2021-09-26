@@ -50,8 +50,6 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         ///     </para>
         /// </summary>
         [EntityFrameworkInternal]
-        public RelationalModelDependencies()
-        {
-        }
+        public RelationalModelDependencies() { }
     }
 }

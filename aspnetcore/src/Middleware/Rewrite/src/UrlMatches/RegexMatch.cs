@@ -18,7 +18,10 @@ namespace Microsoft.AspNetCore.Rewrite.UrlMatches
         public override MatchResults Evaluate(string pattern, RewriteContext context)
         {
             var res = _match.Match(pattern);
-            return new MatchResults(success: res.Success != Negate, new BackReferenceCollection(res.Groups));
+            return new MatchResults(
+                success: res.Success != Negate,
+                new BackReferenceCollection(res.Groups)
+            );
         }
     }
 }

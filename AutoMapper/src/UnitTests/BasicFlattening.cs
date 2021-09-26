@@ -71,13 +71,15 @@ namespace AutoMapper.UnitTests
             public IEnumerable<int> Ints { get; set; }
         }
 
-
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<Address, AddressDTO>();
-            cfg.CreateMap<Customer, CustomerDTO>();
-            cfg.CreateMap<Foo, Foo>();
-        });
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<Address, AddressDTO>();
+                    cfg.CreateMap<Customer, CustomerDTO>();
+                    cfg.CreateMap<Foo, Foo>();
+                }
+            );
 
         [Fact]
         public void Should_map()
@@ -88,30 +90,32 @@ namespace AutoMapper.UnitTests
         [Fact]
         public void Should_map_foo()
         {
-            Mapper.Map<Foo, Foo>(new Foo
-            {
-                Name = "foo",
-                Int32 = 12,
-                Int64 = 123123,
-                NullInt = 16,
-                DateTime = DateTime.Now,
-                Doublen = 2312112,
-                Foo1 = new Foo { Name = "foo one" },
-                Foos = new List<Foo>
-                                       {
-                                           new Foo {Name = "j1", Int64 = 123, NullInt = 321},
-                                           new Foo {Name = "j2", Int32 = 12345, NullInt = 54321},
-                                           new Foo {Name = "j3", Int32 = 12345, NullInt = 54321},
-                                       },
-                FooArr = new[]
-                                         {
-                                             new Foo {Name = "a1"},
-                                             new Foo {Name = "a2"},
-                                             new Foo {Name = "a3"},
-                                         },
-                IntArr = new[] { 1, 2, 3, 4, 5 },
-                Ints = new[] { 7, 8, 9 },
-            });
+            Mapper.Map<Foo, Foo>(
+                new Foo
+                {
+                    Name = "foo",
+                    Int32 = 12,
+                    Int64 = 123123,
+                    NullInt = 16,
+                    DateTime = DateTime.Now,
+                    Doublen = 2312112,
+                    Foo1 = new Foo { Name = "foo one" },
+                    Foos = new List<Foo>
+                    {
+                        new Foo { Name = "j1", Int64 = 123, NullInt = 321 },
+                        new Foo { Name = "j2", Int32 = 12345, NullInt = 54321 },
+                        new Foo { Name = "j3", Int32 = 12345, NullInt = 54321 },
+                    },
+                    FooArr = new[]
+                    {
+                        new Foo { Name = "a1" },
+                        new Foo { Name = "a2" },
+                        new Foo { Name = "a3" },
+                    },
+                    IntArr = new[] { 1, 2, 3, 4, 5 },
+                    Ints = new[] { 7, 8, 9 },
+                }
+            );
         }
     }
 
@@ -133,10 +137,13 @@ namespace AutoMapper.UnitTests
             public int? ParentDataInteger { get; set; }
         }
 
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<Source, Destination>();
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<Source, Destination>();
+                }
+            );
 
         protected override void Because_of()
         {
@@ -171,7 +178,6 @@ namespace AutoMapper.UnitTests
             public string Name { get; set; }
         }
 
-
         public class OrderDTO
         {
             public CurrencyDTO VendorCurrency { get; set; }
@@ -184,19 +190,18 @@ namespace AutoMapper.UnitTests
             public string Name { get; set; }
         }
 
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<OrderModel, OrderDTO>();
-            cfg.CreateMap<CurrencyModel, CurrencyDTO>();
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<OrderModel, OrderDTO>();
+                    cfg.CreateMap<CurrencyModel, CurrencyDTO>();
+                }
+            );
 
         protected override void Because_of()
         {
-            var orderModel = new OrderModel()
-            {
-                Number = "1",
-                Vendor = null
-            };
+            var orderModel = new OrderModel() { Number = "1", Vendor = null };
             _dto = Mapper.Map<OrderDTO>(orderModel);
         }
 
@@ -229,9 +234,18 @@ namespace AutoMapper.UnitTests
             public string Name { get; set; }
             public string AddressCity { get; set; }
         }
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg => cfg.CreateMap<Customer, CustomerDTO>(MemberList.Source).ForMember(d=>d.Id, o=>o.MapFrom(s=>s.AnotherId)));
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(
+                cfg =>
+                    cfg.CreateMap<Customer, CustomerDTO>(MemberList.Source)
+                        .ForMember(d => d.Id, o => o.MapFrom(s => s.AnotherId))
+            );
         [Fact]
         public void Should_validate() =>
-            new Action(() => Configuration.AssertConfigurationIsValid()).ShouldThrowException<AutoMapperConfigurationException>(ex => ex.Errors[0].UnmappedPropertyNames[0].ShouldBe(nameof(Address.Id)));
+            new Action(
+                () => Configuration.AssertConfigurationIsValid()
+            ).ShouldThrowException<AutoMapperConfigurationException>(
+                ex => ex.Errors[0].UnmappedPropertyNames[0].ShouldBe(nameof(Address.Id))
+            );
     }
 }

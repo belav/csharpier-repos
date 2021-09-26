@@ -36,12 +36,14 @@ namespace AutoMapper.IntegrationTests.Net4
         {
             protected override void Seed(Context context)
             {
-                context.EntityA.AddRange(new[]
-                {
-                    new DbEntityA { ID = 1, Name = "Alain Brito"},
-                    new DbEntityA { ID = 2, Name = "Jimmy Bogard"},
-                    new DbEntityA { ID = 3, Name = "Bill Gates"}
-                });
+                context.EntityA.AddRange(
+                    new[]
+                    {
+                        new DbEntityA { ID = 1, Name = "Alain Brito" },
+                        new DbEntityA { ID = 2, Name = "Jimmy Bogard" },
+                        new DbEntityA { ID = 3, Name = "Bill Gates" }
+                    }
+                );
                 base.Seed(context);
             }
         }
@@ -55,16 +57,19 @@ namespace AutoMapper.IntegrationTests.Net4
             public DbSet<DbEntityA> EntityA { get; set; }
         }
 
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<DbEntityA, ITypeA>().As<ConcreteTypeA>();
-            cfg.CreateProjection<DbEntityA, ConcreteTypeA>();
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<DbEntityA, ITypeA>().As<ConcreteTypeA>();
+                    cfg.CreateProjection<DbEntityA, ConcreteTypeA>();
+                }
+            );
 
         [Fact]
         public void Should_project_to_abstract_type()
         {
-            using(var context = new Context())
+            using (var context = new Context())
             {
                 _destinations = ProjectTo<ITypeA>(context.EntityA).ToArray();
             }
@@ -164,14 +169,18 @@ namespace AutoMapper.IntegrationTests.Net4
 
             public virtual ICollection<ICalendarDay> Days { get; set; }
 
-            internal Calendar()
-            {
+            internal Calendar() { }
 
-            }
-
-            public Calendar(string name, Guid businessUnitId, ICalendar reference, DateTime? validFrom, DateTime? validTo)
+            public Calendar(
+                string name,
+                Guid businessUnitId,
+                ICalendar reference,
+                DateTime? validFrom,
+                DateTime? validTo
+            )
             {
-                if(businessUnitId == Guid.Empty) throw new ArgumentException();
+                if (businessUnitId == Guid.Empty)
+                    throw new ArgumentException();
 
                 Name = name;
                 BusinessUnitId = businessUnitId;
@@ -190,10 +199,7 @@ namespace AutoMapper.IntegrationTests.Net4
             public bool Cancel { get; private set; }
             public bool Deleted { get; private set; }
 
-            internal CalendarDay()
-            {
-
-            }
+            internal CalendarDay() { }
 
             public CalendarDay(DateTime date, IValidityDayType dayType, ICalendar calendar)
             {
@@ -223,10 +229,7 @@ namespace AutoMapper.IntegrationTests.Net4
 
             public ICollection<ICalendarDay> Days { get; internal set; } = new List<ICalendarDay>();
 
-            internal ValidityDayType()
-            {
-
-            }
+            internal ValidityDayType() { }
 
             public ValidityDayType(string name, string acronym)
             {
@@ -242,7 +245,7 @@ namespace AutoMapper.IntegrationTests.Net4
 
             public IEnumerable<ICalendarDay> GetCalendarDays(ICalendar calendar)
             {
-                if(calendar == null)
+                if (calendar == null)
                     throw new ArgumentNullException();
 
                 return Days.Where(d => d.Calendar == calendar);
@@ -280,10 +283,7 @@ namespace AutoMapper.IntegrationTests.Net4
                     BusinessUnitId = Guid.NewGuid(),
                     ValidFrom = DateTime.Parse("2018-01-01"),
                     ValidTo = null,
-                    Days = new Collection<DataLayer.CalendarDay>()
-                    {
-                        day
-                    }
+                    Days = new Collection<DataLayer.CalendarDay>() { day }
                 };
 
                 var cal2 = new DataLayer.Calendar()
@@ -298,10 +298,7 @@ namespace AutoMapper.IntegrationTests.Net4
                     Days = new Collection<DataLayer.CalendarDay>()
                 };
 
-                var dataCalendars = new List<DataLayer.Calendar>()
-                {
-                    cal1, cal2
-                };
+                var dataCalendars = new List<DataLayer.Calendar>() { cal1, cal2 };
                 return dataCalendars;
             }
         }
@@ -316,12 +313,13 @@ namespace AutoMapper.IntegrationTests.Net4
             public DbSet<DataLayer.Calendar> Calendars { get; set; }
         }
 
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg => cfg.AddProfile<MyProfile>());
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(cfg => cfg.AddProfile<MyProfile>());
 
         [Fact]
         public void Should_project_to_abstract_type()
         {
-            using(var context = new Context())
+            using (var context = new Context())
             {
                 var domainCalendars = ProjectTo<ICalendar>(context.Calendars).ToList();
                 domainCalendars.Count.ShouldBe(2);

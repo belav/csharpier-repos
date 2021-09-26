@@ -30,18 +30,12 @@ namespace System.Net.Security
 
         public bool LeaveInnerStreamOpen
         {
-            get
-            {
-                return _leaveStreamOpen;
-            }
+            get { return _leaveStreamOpen; }
         }
 
         protected Stream InnerStream
         {
-            get
-            {
-                return _innerStream;
-            }
+            get { return _innerStream; }
         }
 
         protected override void Dispose(bool disposing)
@@ -60,6 +54,7 @@ namespace System.Net.Security
                     }
                 }
             }
+
             finally
             {
                 base.Dispose(disposing);
@@ -70,9 +65,9 @@ namespace System.Net.Security
         {
             try
             {
-                ValueTask vt = _leaveStreamOpen ?
-                    new ValueTask(_innerStream.FlushAsync()) :
-                    _innerStream.DisposeAsync();
+                ValueTask vt = _leaveStreamOpen
+                    ? new ValueTask(_innerStream.FlushAsync())
+                    : _innerStream.DisposeAsync();
                 GC.SuppressFinalize(this);
                 return vt;
             }

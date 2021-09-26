@@ -96,7 +96,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks
             }
         }
 
-        private PipeScheduler[] ParallelBody(int i, ParallelLoopState state, PipeScheduler[] schedulers)
+        private PipeScheduler[] ParallelBody(
+            int i,
+            ParallelLoopState state,
+            PipeScheduler[] schedulers
+        )
         {
             PipeScheduler pipeScheduler = schedulers[i % schedulers.Length];
             object counter = i;

@@ -32,7 +32,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
             return Expression.Lambda<Func<TInput, ISnapshot>>(
                     CreateConstructorExpression(entityType, parameter),
-                    parameter)
+                    parameter
+                )
                 .Compile();
         }
     }

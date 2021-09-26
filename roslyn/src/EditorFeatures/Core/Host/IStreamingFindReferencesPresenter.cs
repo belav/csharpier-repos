@@ -36,12 +36,22 @@ namespace Microsoft.CodeAnalysis.Editor.Host
         /// or not.  This will be combined with a cancellation token owned by the <see cref="FindUsagesContext"/>.
         /// Callers should consider <see cref="FindUsagesContext.CancellationToken"/> to be the source of truth for
         /// cancellation from that point on.</param>
-        FindUsagesContext StartSearch(string title, bool supportsReferences, CancellationToken cancellationToken);
+        FindUsagesContext StartSearch(
+            string title,
+            bool supportsReferences,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Call this method to display the Containing Type, Containing Member, or Kind columns
         /// </summary>
-        FindUsagesContext StartSearchWithCustomColumns(string title, bool supportsReferences, bool includeContainingTypeAndMemberColumns, bool includeKindColumn, CancellationToken cancellationToken);
+        FindUsagesContext StartSearchWithCustomColumns(
+            string title,
+            bool supportsReferences,
+            bool includeContainingTypeAndMemberColumns,
+            bool includeKindColumn,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Clears all the items from the presenter.
@@ -61,15 +71,18 @@ namespace Microsoft.CodeAnalysis.Editor.Host
             Workspace workspace,
             string title,
             ImmutableArray<DefinitionItem> items,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             // Can only navigate or present items on UI thread.
             await threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
             // Ignore any definitions that we can't navigate to.
-            var definitions = items.WhereAsArray(d => d.CanNavigateTo(workspace, cancellationToken));
+            var definitions = items.WhereAsArray(
+                d => d.CanNavigateTo(workspace, cancellationToken)
+            );
 
-            // See if there's a third party external item we can navigate to.  If so, defer 
+            // See if there's a third party external item we can navigate to.  If so, defer
             // to that item and finish.
             var externalItems = definitions.WhereAsArray(d => d.IsExternal);
             foreach (var item in externalItems)
@@ -77,7 +90,14 @@ namespace Microsoft.CodeAnalysis.Editor.Host
                 // If we're directly going to a location we need to activate the preview so
                 // that focus follows to the new cursor position. This behavior is expected
                 // because we are only going to navigate once successfully
-                if (item.TryNavigateTo(workspace, showInPreviewTab: true, activateTab: true, cancellationToken))
+                if (
+                    item.TryNavigateTo(
+                        workspace,
+                        showInPreviewTab: true,
+                        activateTab: true,
+                        cancellationToken
+                    )
+                )
                 {
                     return true;
                 }
@@ -89,13 +109,17 @@ namespace Microsoft.CodeAnalysis.Editor.Host
                 return false;
             }
 
-            if (nonExternalItems.Length == 1 &&
-                nonExternalItems[0].SourceSpans.Length <= 1)
+            if (nonExternalItems.Length == 1 && nonExternalItems[0].SourceSpans.Length <= 1)
             {
                 // There was only one location to navigate to.  Just directly go to that location. If we're directly
                 // going to a location we need to activate the preview so that focus follows to the new cursor position.
 
-                return nonExternalItems[0].TryNavigateTo(workspace, showInPreviewTab: true, activateTab: true, cancellationToken);
+                return nonExternalItems[0].TryNavigateTo(
+                    workspace,
+                    showInPreviewTab: true,
+                    activateTab: true,
+                    cancellationToken
+                );
             }
 
             if (presenter != null)
@@ -103,12 +127,17 @@ namespace Microsoft.CodeAnalysis.Editor.Host
                 // We have multiple definitions, or we have definitions with multiple locations. Present this to the
                 // user so they can decide where they want to go to.  If we cancel this will trigger the context to
                 // cancel as well.
-                var context = presenter.StartSearch(title, supportsReferences: false, cancellationToken);
+                var context = presenter.StartSearch(
+                    title,
+                    supportsReferences: false,
+                    cancellationToken
+                );
                 try
                 {
                     foreach (var definition in nonExternalItems)
                         await context.OnDefinitionFoundAsync(definition).ConfigureAwait(false);
                 }
+
                 finally
                 {
                     await context.OnCompletedAsync().ConfigureAwait(false);

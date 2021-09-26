@@ -14,8 +14,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
         private readonly MemberKind _kind;
         private readonly bool _isInherited;
 
-        internal MemberListItem(ProjectId projectId, ISymbol symbol, string displayText, string fullNameText, string searchText, bool isHidden, bool isInherited)
-            : base(projectId, symbol, displayText, fullNameText, searchText, isHidden)
+        internal MemberListItem(
+            ProjectId projectId,
+            ISymbol symbol,
+            string displayText,
+            string fullNameText,
+            string searchText,
+            bool isHidden,
+            bool isInherited
+        ) : base(projectId, symbol, displayText, fullNameText, searchText, isHidden)
         {
             _isInherited = isInherited;
 
@@ -33,20 +40,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
                     }
                     else
                     {
-                        _kind = fieldSymbol.IsConst
-                            ? MemberKind.Constant
-                            : MemberKind.Field;
+                        _kind = fieldSymbol.IsConst ? MemberKind.Constant : MemberKind.Field;
                     }
-
                     break;
 
                 case SymbolKind.Method:
                     var methodSymbol = (IMethodSymbol)symbol;
-                    _kind = methodSymbol.MethodKind == MethodKind.Conversion ||
-                                      methodSymbol.MethodKind == MethodKind.UserDefinedOperator
-                        ? MemberKind.Operator
-                        : MemberKind.Method;
-
+                    _kind =
+                        methodSymbol.MethodKind == MethodKind.Conversion
+                        || methodSymbol.MethodKind == MethodKind.UserDefinedOperator
+                            ? MemberKind.Operator
+                            : MemberKind.Method;
                     break;
 
                 case SymbolKind.Property:

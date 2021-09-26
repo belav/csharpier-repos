@@ -15,14 +15,22 @@ namespace System.Text.RegularExpressions.Tests
         [InlineData("^aA$", "aA", "da-DK", RegexOptions.None, true)]
         [InlineData("^aa$", "aA", "da-DK", RegexOptions.IgnoreCase, true)]
         [InlineData("^aA$", "aA", "da-DK", RegexOptions.IgnoreCase, true)]
-        public void CharactersComparedOneByOne_AnchoredPattern(string pattern, string input, string culture, RegexOptions options, bool expected)
+        public void CharactersComparedOneByOne_AnchoredPattern(
+            string pattern,
+            string input,
+            string culture,
+            RegexOptions options,
+            bool expected
+        )
         {
             // Regex compares characters one by one.  If that changes, it could impact the behavior of
             // a case like this, where these characters are not the same, but the strings compare
             // as equal with the invariant culture (and some other cultures as well).
             using (new ThreadCultureChange(culture))
             {
-                foreach (RegexOptions compiled in new[] { RegexOptions.None, RegexOptions.Compiled })
+                foreach (
+                    RegexOptions compiled in new[] { RegexOptions.None, RegexOptions.Compiled }
+                )
                 {
                     Assert.Equal(expected, new Regex(pattern, options | compiled).IsMatch(input));
                 }
@@ -33,7 +41,9 @@ namespace System.Text.RegularExpressions.Tests
         [InlineData(RegexOptions.None)]
         [InlineData(RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)]
         [InlineData(RegexOptions.Compiled)]
-        [InlineData(RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)]
+        [InlineData(
+            RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant
+        )]
         public void CharactersComparedOneByOne_Invariant(RegexOptions options)
         {
             // Regex compares characters one by one.  If that changes, it could impact the behavior of
@@ -78,7 +88,11 @@ namespace System.Text.RegularExpressions.Tests
             var turkish = new CultureInfo("tr-TR");
             string input = string.Concat(Enumerable.Repeat("I\u0131\u0130i", length / 2));
 
-            Regex[] cultInvariantRegex = Create(input, CultureInfo.InvariantCulture, RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
+            Regex[] cultInvariantRegex = Create(
+                input,
+                CultureInfo.InvariantCulture,
+                RegexOptions.IgnoreCase | RegexOptions.CultureInvariant
+            );
             Regex[] turkishRegex = Create(input, turkish, RegexOptions.IgnoreCase);
 
             // same input and regex does match so far so good
@@ -91,8 +105,14 @@ namespace System.Text.RegularExpressions.Tests
 
             // Now comes the tricky part depending on the use locale in ToUpper the results differ
             // Hence the regular expression will not match if different locales were used
-            Assert.All(cultInvariantRegex, rex => Assert.True(rex.IsMatch(input.ToLowerInvariant())));
-            Assert.All(cultInvariantRegex, rex => Assert.False(rex.IsMatch(input.ToLower(turkish))));
+            Assert.All(
+                cultInvariantRegex,
+                rex => Assert.True(rex.IsMatch(input.ToLowerInvariant()))
+            );
+            Assert.All(
+                cultInvariantRegex,
+                rex => Assert.False(rex.IsMatch(input.ToLower(turkish)))
+            );
 
             Assert.All(turkishRegex, rex => Assert.False(rex.IsMatch(input.ToLowerInvariant())));
             Assert.All(turkishRegex, rex => Assert.True(rex.IsMatch(input.ToLower(turkish))));

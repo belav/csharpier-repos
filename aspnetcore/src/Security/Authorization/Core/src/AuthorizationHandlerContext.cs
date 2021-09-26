@@ -26,7 +26,8 @@ namespace Microsoft.AspNetCore.Authorization
         public AuthorizationHandlerContext(
             IEnumerable<IAuthorizationRequirement> requirements,
             ClaimsPrincipal user,
-            object? resource)
+            object? resource
+        )
         {
             if (requirements == null)
             {
@@ -57,22 +58,25 @@ namespace Microsoft.AspNetCore.Authorization
         /// <summary>
         /// Gets the requirements that have not yet been marked as succeeded.
         /// </summary>
-        public virtual IEnumerable<IAuthorizationRequirement> PendingRequirements { get { return _pendingRequirements; } }
+        public virtual IEnumerable<IAuthorizationRequirement> PendingRequirements
+        {
+            get { return _pendingRequirements; }
+        }
 
         /// <summary>
         /// Flag indicating whether the current authorization processing has failed.
         /// </summary>
-        public virtual bool HasFailed { get { return _failCalled; } }
+        public virtual bool HasFailed
+        {
+            get { return _failCalled; }
+        }
 
         /// <summary>
         /// Flag indicating whether the current authorization processing has succeeded.
         /// </summary>
         public virtual bool HasSucceeded
         {
-            get
-            {
-                return !_failCalled && _succeedCalled && !PendingRequirements.Any();
-            }
+            get { return !_failCalled && _succeedCalled && !PendingRequirements.Any(); }
         }
 
         /// <summary>

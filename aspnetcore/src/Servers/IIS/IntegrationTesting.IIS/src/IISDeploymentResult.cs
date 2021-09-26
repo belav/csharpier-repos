@@ -13,17 +13,21 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
         public ILogger Logger { get; set; }
         public Process HostProcess { get; }
 
-        public IISDeploymentResult(ILoggerFactory loggerFactory,
+        public IISDeploymentResult(
+            ILoggerFactory loggerFactory,
             IISDeploymentParameters deploymentParameters,
             string applicationBaseUri,
             string contentRoot,
             CancellationToken hostShutdownToken,
-            Process hostProcess)
-            : base(loggerFactory,
-                  deploymentParameters,
-                  applicationBaseUri,
-                  contentRoot,
-                  hostShutdownToken)
+            Process hostProcess
+        )
+            : base(
+                loggerFactory,
+                deploymentParameters,
+                applicationBaseUri,
+                contentRoot,
+                hostShutdownToken
+            )
         {
             HostProcess = hostProcess;
             Logger = loggerFactory.CreateLogger(deploymentParameters.SiteName);
@@ -42,10 +46,7 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
         {
             var loggingHandler = new LoggingHandler(messageHandler, Logger);
             var retryHandler = new RetryHandler(loggingHandler, Logger);
-            return new HttpClient(retryHandler)
-            {
-                BaseAddress = base.HttpClient.BaseAddress
-            };
+            return new HttpClient(retryHandler) { BaseAddress = base.HttpClient.BaseAddress };
         }
 
         public new HttpClient HttpClient { get; set; }

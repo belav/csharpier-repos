@@ -14,14 +14,33 @@ namespace System.Data.SqlTypes
     /// </summary>
     [Serializable]
     [XmlSchemaProvider("GetXsdType")]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public struct SqlGuid : INullable, IComparable, IXmlSerializable
     {
         private const int SizeOfGuid = 16;
 
         // Comparison orders.
         private static readonly int[] s_rgiGuidOrder = new int[16]
-        {10, 11, 12, 13, 14, 15, 8, 9, 6, 7, 4, 5, 0, 1, 2, 3};
+        {
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            8,
+            9,
+            6,
+            7,
+            4,
+            5,
+            0,
+            1,
+            2,
+            3
+        };
 
         // NOTE: If any instance fields change, update SqlTypeWorkarounds type in System.Data.SqlClient.
         private byte[]? m_value; // the SqlGuid is null if m_value is null
@@ -60,11 +79,19 @@ namespace System.Data.SqlTypes
             m_value = g.ToByteArray();
         }
 
-        public SqlGuid(int a, short b, short c, byte d, byte e, byte f, byte g, byte h, byte i, byte j, byte k)
-            : this(new Guid(a, b, c, d, e, f, g, h, i, j, k))
-        {
-        }
-
+        public SqlGuid(
+            int a,
+            short b,
+            short c,
+            byte d,
+            byte e,
+            byte f,
+            byte g,
+            byte h,
+            byte i,
+            byte j,
+            byte k
+        ) : this(new Guid(a, b, c, d, e, f, g, h, i, j, k)) { }
 
         // INullable
         public bool IsNull
@@ -120,14 +147,14 @@ namespace System.Data.SqlTypes
                 return new SqlGuid(s);
         }
 
-
         // Comparison operators
         private static EComparison Compare(SqlGuid x, SqlGuid y)
         {
             //Swap to the correct order to be compared
             for (int i = 0; i < SizeOfGuid; i++)
             {
-                byte b1, b2;
+                byte b1,
+                    b2;
 
                 b1 = x.m_value![s_rgiGuidOrder[i]];
                 b2 = y.m_value![s_rgiGuidOrder[i]];
@@ -136,8 +163,6 @@ namespace System.Data.SqlTypes
             }
             return EComparison.EQ;
         }
-
-
 
         // Implicit conversions
 
@@ -158,7 +183,9 @@ namespace System.Data.SqlTypes
         // Overloading comparison operators
         public static SqlBoolean operator ==(SqlGuid x, SqlGuid y)
         {
-            return (x.IsNull || y.IsNull) ? SqlBoolean.Null : new SqlBoolean(Compare(x, y) == EComparison.EQ);
+            return (x.IsNull || y.IsNull)
+              ? SqlBoolean.Null
+              : new SqlBoolean(Compare(x, y) == EComparison.EQ);
         }
 
         public static SqlBoolean operator !=(SqlGuid x, SqlGuid y)
@@ -168,12 +195,16 @@ namespace System.Data.SqlTypes
 
         public static SqlBoolean operator <(SqlGuid x, SqlGuid y)
         {
-            return (x.IsNull || y.IsNull) ? SqlBoolean.Null : new SqlBoolean(Compare(x, y) == EComparison.LT);
+            return (x.IsNull || y.IsNull)
+              ? SqlBoolean.Null
+              : new SqlBoolean(Compare(x, y) == EComparison.LT);
         }
 
         public static SqlBoolean operator >(SqlGuid x, SqlGuid y)
         {
-            return (x.IsNull || y.IsNull) ? SqlBoolean.Null : new SqlBoolean(Compare(x, y) == EComparison.GT);
+            return (x.IsNull || y.IsNull)
+              ? SqlBoolean.Null
+              : new SqlBoolean(Compare(x, y) == EComparison.GT);
         }
 
         public static SqlBoolean operator <=(SqlGuid x, SqlGuid y)
@@ -246,7 +277,6 @@ namespace System.Data.SqlTypes
             return (SqlBinary)this;
         }
 
-
         // IComparable
         // Compares this object to another object, returning an integer that
         // indicates the relationship.
@@ -274,8 +304,10 @@ namespace System.Data.SqlTypes
             else if (value.IsNull)
                 return 1;
 
-            if (this < value) return -1;
-            if (this > value) return 1;
+            if (this < value)
+                return -1;
+            if (this > value)
+                return 1;
             return 0;
         }
 
@@ -301,7 +333,10 @@ namespace System.Data.SqlTypes
             return IsNull ? 0 : Value.GetHashCode();
         }
 
-        XmlSchema? IXmlSerializable.GetSchema() { return null; }
+        XmlSchema? IXmlSerializable.GetSchema()
+        {
+            return null;
+        }
 
         void IXmlSerializable.ReadXml(XmlReader reader)
         {

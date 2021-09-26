@@ -16,43 +16,50 @@ namespace Microsoft.EntityFrameworkCore.Query
         private NtsGeometryServices _geometryServices;
         private GeometryFactory _geometryFactory;
 
-        public NtsGeometryServices GeometryServices
-            => LazyInitializer.EnsureInitialized(
+        public NtsGeometryServices GeometryServices =>
+            LazyInitializer.EnsureInitialized(
                 ref _geometryServices,
-                () => CreateGeometryServices());
+                () => CreateGeometryServices()
+            );
 
-        protected static NtsGeometryServices CreateGeometryServices()
-            => new(
+        protected static NtsGeometryServices CreateGeometryServices() =>
+            new(
                 NtsGeometryServices.Instance.DefaultCoordinateSequenceFactory,
                 NtsGeometryServices.Instance.DefaultPrecisionModel,
-                4326);
+                4326
+            );
 
-        public override GeometryFactory GeometryFactory
-            => LazyInitializer.EnsureInitialized(
+        public override GeometryFactory GeometryFactory =>
+            LazyInitializer.EnsureInitialized(
                 ref _geometryFactory,
-                () => GeometryServices.CreateGeometryFactory());
+                () => GeometryServices.CreateGeometryFactory()
+            );
 
-        protected override string StoreName
-            => "SpatialQueryGeographyTest";
+        protected override string StoreName => "SpatialQueryGeographyTest";
 
-        protected override IServiceCollection AddServices(IServiceCollection serviceCollection)
-            => base.AddServices(serviceCollection.AddSingleton(GeometryServices))
+        protected override IServiceCollection AddServices(IServiceCollection serviceCollection) =>
+            base.AddServices(serviceCollection.AddSingleton(GeometryServices))
                 .AddSingleton<IRelationalTypeMappingSource, ReplacementTypeMappingSource>();
 
         protected class ReplacementTypeMappingSource : SqlServerTypeMappingSource
         {
             public ReplacementTypeMappingSource(
                 TypeMappingSourceDependencies dependencies,
-                RelationalTypeMappingSourceDependencies relationalDependencies)
-                : base(dependencies, relationalDependencies)
-            {
-            }
+                RelationalTypeMappingSourceDependencies relationalDependencies
+            ) : base(dependencies, relationalDependencies) { }
 
-            protected override RelationalTypeMapping FindMapping(in RelationalTypeMappingInfo mappingInfo)
-                => mappingInfo.ClrType == typeof(GeoPoint)
-                    ? ((RelationalTypeMapping)base.FindMapping(typeof(Point))
-                        .Clone(new GeoPointConverter(CreateGeometryServices().CreateGeometryFactory())))
-                    .Clone("geography", null)
+            protected override RelationalTypeMapping FindMapping(
+                in RelationalTypeMappingInfo mappingInfo
+            ) =>
+                mappingInfo.ClrType == typeof(GeoPoint)
+                    ? (
+                          (RelationalTypeMapping)base.FindMapping(typeof(Point))
+                              .Clone(
+                                  new GeoPointConverter(
+                                      CreateGeometryServices().CreateGeometryFactory()
+                                  )
+                              )
+                      ).Clone("geography", null)
                     : base.FindMapping(mappingInfo);
         }
     }

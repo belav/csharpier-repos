@@ -14,7 +14,7 @@ using Microsoft.CodeAnalysis.Text;
 using Roslyn.Test.Utilities;
 using Xunit;
 
-// "__arglist" is an undocumented keyword of the C# language. 
+// "__arglist" is an undocumented keyword of the C# language.
 //
 // There are three places where __arglist may legally appear in C#. It may appear:
 //
@@ -49,9 +49,9 @@ using Xunit;
 // THE SECOND FORM
 // ---------------
 //
-// The second form is a legal expression (almost) anywhere inside a method that includes 
-// an __arglist parameter. It is an expression of type System.RuntimeArgumentHandle and 
-// classified as a value. It is usually passed to the ctor of the ArgIterator type. 
+// The second form is a legal expression (almost) anywhere inside a method that includes
+// an __arglist parameter. It is an expression of type System.RuntimeArgumentHandle and
+// classified as a value. It is usually passed to the ctor of the ArgIterator type.
 //
 // Speaking of which, we should talk about some special types.
 //
@@ -61,8 +61,8 @@ using Xunit;
 // * It is illegal to declare a field or property of a restricted type.
 // * A restricted type may not be used as a generic type argument.
 // * A method or delegate may not return a restricted type.
-// * Since a field may not be of a restricted type, a restricted type may not be used 
-//   in an anonymous method, lambda or query expression if it would have to be hoisted 
+// * Since a field may not be of a restricted type, a restricted type may not be used
+//   in an anonymous method, lambda or query expression if it would have to be hoisted
 //   to a field.
 //
 // The native compiler does not consistently enforce these rules. For example,
@@ -103,10 +103,10 @@ using Xunit;
 //
 // "__refvalue" is also an undocumented keyword of C#. It is badly named, as it has the semantics
 // of *dereference to produce a variable*. It is the opposite of the __makeref operator and is
-// analogous to the "*" dereference operator. The operator takes a TypedReference and a 
+// analogous to the "*" dereference operator. The operator takes a TypedReference and a
 // type, and produces a variable of that type.
 //
-// 
+//
 
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
@@ -115,7 +115,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void ExpressionTreeTest()
         {
-            var text = @"
+            var text =
+                @"
 using System; 
 using System.Linq.Expressions;
 public struct C
@@ -134,34 +135,60 @@ public struct C
 
             var comp = CreateCompilationWithMscorlib40AndSystemCore(text);
             comp.VerifyDiagnostics(
-// (8,44): error CS8640: Expression tree cannot contain value of ref struct or restricted type 'TypedReference'.
-//         Expression<Func<bool>> ex1 = ()=>M(__makeref(S)); // CS7053
-Diagnostic(ErrorCode.ERR_ExpressionTreeCantContainRefStruct, "__makeref(S)").WithArguments("TypedReference").WithLocation(8, 44),
-// (8,44): error CS7053: An expression tree may not contain '__makeref'
-//         Expression<Func<bool>> ex1 = ()=>M(__makeref(S)); // CS7053
-Diagnostic(ErrorCode.ERR_FeatureNotValidInExpressionTree, "__makeref(S)").WithArguments("__makeref").WithLocation(8, 44),
-// (9,42): error CS7053: An expression tree may not contain '__reftype'
-//         Expression<Func<Type>> ex2 = ()=>__reftype(default(TypedReference));
-Diagnostic(ErrorCode.ERR_FeatureNotValidInExpressionTree, "__reftype(default(TypedReference))").WithArguments("__reftype").WithLocation(9, 42),
-// (9,52): error CS8640: Expression tree cannot contain value of ref struct or restricted type 'TypedReference'.
-//         Expression<Func<Type>> ex2 = ()=>__reftype(default(TypedReference));
-Diagnostic(ErrorCode.ERR_ExpressionTreeCantContainRefStruct, "default(TypedReference)").WithArguments("TypedReference").WithLocation(9, 52),
-// (10,41): error CS7053: An expression tree may not contain '__refvalue'
-//         Expression<Func<int>> ex3 = ()=>__refvalue(default(TypedReference), int);
-Diagnostic(ErrorCode.ERR_FeatureNotValidInExpressionTree, "__refvalue(default(TypedReference), int)").WithArguments("__refvalue").WithLocation(10, 41),
-// (10,52): error CS8640: Expression tree cannot contain value of ref struct or restricted type 'TypedReference'.
-//         Expression<Func<int>> ex3 = ()=>__refvalue(default(TypedReference), int);
-Diagnostic(ErrorCode.ERR_ExpressionTreeCantContainRefStruct, "default(TypedReference)").WithArguments("TypedReference").WithLocation(10, 52),
-// (11,44): error CS1952: An expression tree lambda may not contain a method with variable arguments
-//         Expression<Func<bool>> ex4 = ()=>N(__arglist());
-Diagnostic(ErrorCode.ERR_VarArgsInExpressionTree, "__arglist()").WithLocation(11, 44)
-                );
+                // (8,44): error CS8640: Expression tree cannot contain value of ref struct or restricted type 'TypedReference'.
+                //         Expression<Func<bool>> ex1 = ()=>M(__makeref(S)); // CS7053
+                Diagnostic(ErrorCode.ERR_ExpressionTreeCantContainRefStruct, "__makeref(S)")
+                    .WithArguments("TypedReference")
+                    .WithLocation(8, 44),
+                // (8,44): error CS7053: An expression tree may not contain '__makeref'
+                //         Expression<Func<bool>> ex1 = ()=>M(__makeref(S)); // CS7053
+                Diagnostic(ErrorCode.ERR_FeatureNotValidInExpressionTree, "__makeref(S)")
+                    .WithArguments("__makeref")
+                    .WithLocation(8, 44),
+                // (9,42): error CS7053: An expression tree may not contain '__reftype'
+                //         Expression<Func<Type>> ex2 = ()=>__reftype(default(TypedReference));
+                Diagnostic(
+                        ErrorCode.ERR_FeatureNotValidInExpressionTree,
+                        "__reftype(default(TypedReference))"
+                    )
+                    .WithArguments("__reftype")
+                    .WithLocation(9, 42),
+                // (9,52): error CS8640: Expression tree cannot contain value of ref struct or restricted type 'TypedReference'.
+                //         Expression<Func<Type>> ex2 = ()=>__reftype(default(TypedReference));
+                Diagnostic(
+                        ErrorCode.ERR_ExpressionTreeCantContainRefStruct,
+                        "default(TypedReference)"
+                    )
+                    .WithArguments("TypedReference")
+                    .WithLocation(9, 52),
+                // (10,41): error CS7053: An expression tree may not contain '__refvalue'
+                //         Expression<Func<int>> ex3 = ()=>__refvalue(default(TypedReference), int);
+                Diagnostic(
+                        ErrorCode.ERR_FeatureNotValidInExpressionTree,
+                        "__refvalue(default(TypedReference), int)"
+                    )
+                    .WithArguments("__refvalue")
+                    .WithLocation(10, 41),
+                // (10,52): error CS8640: Expression tree cannot contain value of ref struct or restricted type 'TypedReference'.
+                //         Expression<Func<int>> ex3 = ()=>__refvalue(default(TypedReference), int);
+                Diagnostic(
+                        ErrorCode.ERR_ExpressionTreeCantContainRefStruct,
+                        "default(TypedReference)"
+                    )
+                    .WithArguments("TypedReference")
+                    .WithLocation(10, 52),
+                // (11,44): error CS1952: An expression tree lambda may not contain a method with variable arguments
+                //         Expression<Func<bool>> ex4 = ()=>N(__arglist());
+                Diagnostic(ErrorCode.ERR_VarArgsInExpressionTree, "__arglist()")
+                    .WithLocation(11, 44)
+            );
         }
 
         [ClrOnlyFact(ClrOnlyReason.Ilasm)]
         public void MakeRefTest01()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 public struct C
 {
@@ -176,7 +203,8 @@ public struct C
     }
 }";
 
-            string expectedIL = @"{
+            string expectedIL =
+                @"{
   // Code size       20 (0x14)
   .maxstack  1
   .locals init (int V_0) //i
@@ -202,7 +230,8 @@ public struct C
             // errors for bad assignments; first of all, making a ref does not do an assignment, and second, the
             // user might assume that it is the assignment to the local that is bad.
 
-            var text = @"
+            var text =
+                @"
 using System;
 public struct C
 {
@@ -222,27 +251,31 @@ public struct C
 
             var comp = CreateCompilation(text);
             comp.VerifyDiagnostics(
-    // (8,30): error CS1601: Cannot make reference to variable of type 'TypedReference'
-    //         TypedReference tr2 = __makeref(tr1); // CS1601
-    Diagnostic(ErrorCode.ERR_MethodArgCantBeRefAny, "__makeref(tr1)").WithArguments("System.TypedReference").WithLocation(8, 30),
-    // (9,40): error CS1510: A ref or out value must be an assignable variable
-    //         TypedReference tr3 = __makeref(123); // CS1510
-    Diagnostic(ErrorCode.ERR_RefLvalueExpected, "123").WithLocation(9, 40),
-    // (10,40): error CS0206: A property or indexer may not be passed as an out or ref parameter
-    //         TypedReference tr4 = __makeref(P); // CS0206
-    Diagnostic(ErrorCode.ERR_RefProperty, "P").WithArguments("C.P").WithLocation(10, 40),
-    // (11,40): error CS0199: A static readonly field cannot be used as a ref or out value (except in a static constructor)
-    //         TypedReference tr5 = __makeref(R); // CS0199
-    Diagnostic(ErrorCode.ERR_RefReadonlyStatic, "R").WithLocation(11, 40)
-
-                );
+                // (8,30): error CS1601: Cannot make reference to variable of type 'TypedReference'
+                //         TypedReference tr2 = __makeref(tr1); // CS1601
+                Diagnostic(ErrorCode.ERR_MethodArgCantBeRefAny, "__makeref(tr1)")
+                    .WithArguments("System.TypedReference")
+                    .WithLocation(8, 30),
+                // (9,40): error CS1510: A ref or out value must be an assignable variable
+                //         TypedReference tr3 = __makeref(123); // CS1510
+                Diagnostic(ErrorCode.ERR_RefLvalueExpected, "123").WithLocation(9, 40),
+                // (10,40): error CS0206: A property or indexer may not be passed as an out or ref parameter
+                //         TypedReference tr4 = __makeref(P); // CS0206
+                Diagnostic(ErrorCode.ERR_RefProperty, "P")
+                    .WithArguments("C.P")
+                    .WithLocation(10, 40),
+                // (11,40): error CS0199: A static readonly field cannot be used as a ref or out value (except in a static constructor)
+                //         TypedReference tr5 = __makeref(R); // CS0199
+                Diagnostic(ErrorCode.ERR_RefReadonlyStatic, "R").WithLocation(11, 40)
+            );
         }
 
         [Fact]
         [WorkItem(23369, "https://github.com/dotnet/roslyn/issues/23369")]
         public void ArglistWithVoidMethod()
         {
-            var text = @"
+            var text =
+                @"
 public class C
 {
     void M()
@@ -259,13 +292,14 @@ public class C
                 // (6,25): error CS8361: __arglist cannot have an argument of void type
                 //         M2(__arglist(1, M()));
                 Diagnostic(ErrorCode.ERR_CantUseVoidInArglist, "M()").WithLocation(6, 25)
-                );
+            );
         }
 
         [Fact]
         public void RefValueUnsafeToReturn()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 class C
@@ -295,18 +329,21 @@ class C
             comp.VerifyDiagnostics(
                 // (13,20): error CS8157: Cannot return 'r' by reference because it was initialized to a value that cannot be returned by reference
                 //         return ref r;
-                Diagnostic(ErrorCode.ERR_RefReturnNonreturnableLocal, "r").WithArguments("r").WithLocation(13, 20),
+                Diagnostic(ErrorCode.ERR_RefReturnNonreturnableLocal, "r")
+                    .WithArguments("r")
+                    .WithLocation(13, 20),
                 // (23,20): error CS8156: An expression cannot be used in this context because it may not be returned by reference
                 //         return ref __refvalue(tr, int);
-                Diagnostic(ErrorCode.ERR_RefReturnLvalueExpected, "__refvalue(tr, int)").WithLocation(23, 20)
-
-                );
+                Diagnostic(ErrorCode.ERR_RefReturnLvalueExpected, "__refvalue(tr, int)")
+                    .WithLocation(23, 20)
+            );
         }
 
         [Fact]
         public void MakeRefTest03_Dynamic_Bind()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 public struct C
 {
@@ -327,7 +364,8 @@ public struct C
         [ClrOnlyFact(ClrOnlyReason.Ilasm)]
         public void RefTypeTest01()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 using System.Reflection;
 public struct C
@@ -348,7 +386,8 @@ public struct C
 
 }";
 
-            string expectedIL = @"{
+            string expectedIL =
+                @"{
   // Code size        9 (0x9)
   .maxstack  1
   IL_0000:  ldarg.0
@@ -364,7 +403,8 @@ public struct C
         [Fact]
         public void RefTypeTest02()
         {
-            var text = @"
+            var text =
+                @"
 public struct C
 {
     static void Main()
@@ -373,19 +413,23 @@ public struct C
     }
 }";
 
-
             var comp = CreateCompilation(text);
             comp.VerifyDiagnostics(
-// (6,25): error CS0037: Cannot convert null to 'System.TypedReference' because it is a non-nullable value type
-//         System.Type t = __reftype(null);
-Diagnostic(ErrorCode.ERR_ValueCantBeNull, "__reftype(null)").WithArguments("System.TypedReference")
-                );
+                // (6,25): error CS0037: Cannot convert null to 'System.TypedReference' because it is a non-nullable value type
+                //         System.Type t = __reftype(null);
+                Diagnostic(ErrorCode.ERR_ValueCantBeNull, "__reftype(null)")
+                    .WithArguments("System.TypedReference")
+            );
         }
 
-        [ConditionalFact(typeof(DesktopOnly), Reason = ConditionalSkipReason.RestrictedTypesNeedDesktop)]
+        [ConditionalFact(
+            typeof(DesktopOnly),
+            Reason = ConditionalSkipReason.RestrictedTypesNeedDesktop
+        )]
         public void ArglistTest01()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 public class C
 {
@@ -399,7 +443,8 @@ public class C
     }
 }";
 
-            string expectedIL = @"{
+            string expectedIL =
+                @"{
   // Code size        9 (0x9)
   .maxstack  1
   IL_0000:  arglist
@@ -412,10 +457,14 @@ public class C
             verifier.VerifyIL("C.M(__arglist)", expectedIL);
         }
 
-        [ConditionalFact(typeof(DesktopOnly), Reason = ConditionalSkipReason.RestrictedTypesNeedDesktop)]
+        [ConditionalFact(
+            typeof(DesktopOnly),
+            Reason = ConditionalSkipReason.RestrictedTypesNeedDesktop
+        )]
         public void ArglistTest02()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 public class C
 {
@@ -467,7 +516,8 @@ public class C
             // that then we'll need to add special code to the symbol display visitor that knows how to emit
             // the desired format.
 
-            string expectedIL = @"{
+            string expectedIL =
+                @"{
   // Code size       10 (0xa)
   .maxstack  4
   IL_0000:  ldc.i4.1
@@ -483,13 +533,17 @@ public class C
             verifier.VerifyIL("C.Main", expectedIL);
         }
 
-        [ConditionalFact(typeof(DesktopOnly), Reason = ConditionalSkipReason.RestrictedTypesNeedDesktop)]
+        [ConditionalFact(
+            typeof(DesktopOnly),
+            Reason = ConditionalSkipReason.RestrictedTypesNeedDesktop
+        )]
         public void ArglistTest03()
         {
             // The native parser produces "type expected" when __arglist is preceded by an illegal
             // modifier. The Roslyn compiler produces the more informative "__arglist not valid" error.
 
-            var text = @"
+            var text =
+                @"
 static class C
 {
     static void M(int x, __arglist) {}
@@ -552,13 +606,19 @@ public class MyAttribute : System.Attribute
                 Diagnostic(ErrorCode.ERR_IllegalVarArgs, "__arglist").WithLocation(8, 24),
                 // (11,9): error CS7036: There is no argument given that corresponds to the required formal parameter '__arglist' of 'C.M(int, __arglist)'
                 //         M(1);
-                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "M").WithArguments("__arglist", "C.M(int, __arglist)").WithLocation(11, 9),
+                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "M")
+                    .WithArguments("__arglist", "C.M(int, __arglist)")
+                    .WithLocation(11, 9),
                 // (12,14): error CS1503: Argument 2: cannot convert from 'int' to '__arglist'
                 //         M(2, 3);
-                Diagnostic(ErrorCode.ERR_BadArgType, "3").WithArguments("2", "int", "__arglist").WithLocation(12, 14),
+                Diagnostic(ErrorCode.ERR_BadArgType, "3")
+                    .WithArguments("2", "int", "__arglist")
+                    .WithLocation(12, 14),
                 // (13,9): error CS1501: No overload for method 'M' takes 3 arguments
                 //         M(4, 5, 6);
-                Diagnostic(ErrorCode.ERR_BadArgCount, "M").WithArguments("M", "3").WithLocation(13, 9),
+                Diagnostic(ErrorCode.ERR_BadArgCount, "M")
+                    .WithArguments("M", "3")
+                    .WithLocation(13, 9),
                 // (15,24): error CS0226: An __arglist expression may only appear inside of a call or new expression
                 //         M(1, __arglist(__arglist()));
                 Diagnostic(ErrorCode.ERR_IllegalArglist, "__arglist()").WithLocation(15, 24),
@@ -570,25 +630,38 @@ public class MyAttribute : System.Attribute
                 Diagnostic(ErrorCode.ERR_IllegalArglist, "__arglist(456)").WithLocation(20, 16),
                 // (24,11): error CS1503: Argument 1: cannot convert from '__arglist' to 'int'
                 //         S(__arglist(1));
-                Diagnostic(ErrorCode.ERR_BadArgType, "__arglist(1)").WithArguments("1", "__arglist", "int").WithLocation(24, 11),
+                Diagnostic(ErrorCode.ERR_BadArgType, "__arglist(1)")
+                    .WithArguments("1", "__arglist", "int")
+                    .WithLocation(24, 11),
                 // (27,18): error CS0226: An __arglist expression may only appear inside of a call or new expression
                 //     [MyAttribute(__arglist(2))]
                 Diagnostic(ErrorCode.ERR_IllegalArglist, "__arglist(2)").WithLocation(27, 18),
                 // (30,23): error CS0029: Cannot implicitly convert type 'System.TypedReference' to 'object'
                 //         object obj1 = new System.TypedReference();
-                Diagnostic(ErrorCode.ERR_NoImplicitConv, "new System.TypedReference()").WithArguments("System.TypedReference", "object").WithLocation(30, 23),
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "new System.TypedReference()")
+                    .WithArguments("System.TypedReference", "object")
+                    .WithLocation(30, 23),
                 // (31,23): error CS0030: Cannot convert type 'System.ArgIterator' to 'object'
                 //         object obj2 = (object)new System.ArgIterator();
-                Diagnostic(ErrorCode.ERR_NoExplicitConv, "(object)new System.ArgIterator()").WithArguments("System.ArgIterator", "object").WithLocation(31, 23),
+                Diagnostic(ErrorCode.ERR_NoExplicitConv, "(object)new System.ArgIterator()")
+                    .WithArguments("System.ArgIterator", "object")
+                    .WithLocation(31, 23),
                 // (38,29): error CS0828: Cannot assign System.TypedReference to anonymous type property
                 //         object obj3 = new { X = new System.TypedReference() };
-                Diagnostic(ErrorCode.ERR_AnonymousTypePropertyAssignedBadValue, "X = new System.TypedReference()").WithArguments("System.TypedReference").WithLocation(38, 29));
+                Diagnostic(
+                        ErrorCode.ERR_AnonymousTypePropertyAssignedBadValue,
+                        "X = new System.TypedReference()"
+                    )
+                    .WithArguments("System.TypedReference")
+                    .WithLocation(38, 29)
+            );
         }
 
         [Fact]
         public void ArglistTest04()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 class error
@@ -599,16 +672,19 @@ class error
 }
 ";
 
-            CreateCompilation(text).VerifyDiagnostics(
-                // (7,24): error CS1669: __arglist is not valid in this context
-                // 		Action a = delegate (__arglist) { };
-                Diagnostic(ErrorCode.ERR_IllegalVarArgs, "__arglist"));
+            CreateCompilation(text)
+                .VerifyDiagnostics(
+                    // (7,24): error CS1669: __arglist is not valid in this context
+                    // 		Action a = delegate (__arglist) { };
+                    Diagnostic(ErrorCode.ERR_IllegalVarArgs, "__arglist")
+                );
         }
 
         [ClrOnlyFact(ClrOnlyReason.Ilasm)]
         public void RefValueTest01()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 public struct C
 {
@@ -643,7 +719,8 @@ public struct C
     }
 }";
 
-            string expectedGetIL = @"{
+            string expectedGetIL =
+                @"{
   // Code size        8 (0x8)
   .maxstack  1
   IL_0000:  ldarg.0
@@ -652,7 +729,8 @@ public struct C
   IL_0007:  ret
 }";
 
-            string expectedSetIL = @"{
+            string expectedSetIL =
+                @"{
   // Code size        9 (0x9)
   .maxstack  2
   IL_0000:  ldarg.0
@@ -662,7 +740,8 @@ public struct C
   IL_0008:  ret
 }";
 
-            string expectedRefIL = @"{
+            string expectedRefIL =
+                @"{
   // Code size       13 (0xd)
   .maxstack  2
   IL_0000:  ldarg.0
@@ -681,7 +760,8 @@ public struct C
         [ClrOnlyFact(ClrOnlyReason.Ilasm)]
         public void RefValueTest01a()
         {
-            var text = @"
+            var text =
+                @"
 using System;
     class Program
     {
@@ -725,7 +805,8 @@ using System;
     }
 ";
 
-            string expectedGetIL = @"
+            string expectedGetIL =
+                @"
 {
   // Code size      202 (0xca)
   .maxstack  3
@@ -789,19 +870,23 @@ using System;
   IL_00c9:  ret
 }";
 
-            var verifier = CompileAndVerify(source: text, expectedOutput: @"42
+            var verifier = CompileAndVerify(
+                source: text,
+                expectedOutput: @"42
 333
 42
 333
 0
-42");
+42"
+            );
             verifier.VerifyIL("Program.Main", expectedGetIL);
         }
 
         [Fact]
         public void RefValueTest02()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 static class C
 {
@@ -816,7 +901,7 @@ static class C
     }
 }";
 
-            // The native compiler produces 
+            // The native compiler produces
             // CS0118: 'C.Main()' is a 'method' but is used like a 'type'
             // instead of
             // CS0246: The type or namespace name 'Main' could not be found
@@ -824,28 +909,28 @@ static class C
 
             var comp = CreateCompilation(text);
             comp.VerifyDiagnostics(
-// (9,17): error CS0029: Cannot implicitly convert type 'int' to 'System.TypedReference'
-//         int b = __refvalue(123, int);
-Diagnostic(ErrorCode.ERR_NoImplicitConv, "__refvalue(123, int)").WithArguments("int", "System.TypedReference"),
-
-// (10,32): error CS0246: The type or namespace name 'Main' could not be found (are you missing a using directive or an assembly reference?)
-//         int c = __refvalue(tr, Main);
-Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Main").WithArguments("Main"),
-
-// (11,17): error CS0266: Cannot implicitly convert type 'double' to 'int'. An explicit conversion exists (are you missing a cast?)
-//         int d = __refvalue(tr, double);
-Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "__refvalue(tr, double)").WithArguments("double", "int"),
-
-// (12,31): error CS0037: Cannot convert null to 'int' because it is a non-nullable value type
-//         __refvalue(tr, int) = null;
-Diagnostic(ErrorCode.ERR_ValueCantBeNull, "null").WithArguments("int")
-);
+                // (9,17): error CS0029: Cannot implicitly convert type 'int' to 'System.TypedReference'
+                //         int b = __refvalue(123, int);
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "__refvalue(123, int)")
+                    .WithArguments("int", "System.TypedReference"),
+                // (10,32): error CS0246: The type or namespace name 'Main' could not be found (are you missing a using directive or an assembly reference?)
+                //         int c = __refvalue(tr, Main);
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Main").WithArguments("Main"),
+                // (11,17): error CS0266: Cannot implicitly convert type 'double' to 'int'. An explicit conversion exists (are you missing a cast?)
+                //         int d = __refvalue(tr, double);
+                Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "__refvalue(tr, double)")
+                    .WithArguments("double", "int"),
+                // (12,31): error CS0037: Cannot convert null to 'int' because it is a non-nullable value type
+                //         __refvalue(tr, int) = null;
+                Diagnostic(ErrorCode.ERR_ValueCantBeNull, "null").WithArguments("int")
+            );
         }
 
         [Fact]
         public void RefValueTest03_Dynamic_Bind()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 public struct C
 {
@@ -875,7 +960,8 @@ public struct C
         [ClrOnlyFact(ClrOnlyReason.Ilasm)]
         public void RefValueTest04_optimizer()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 public struct C
 {
@@ -903,7 +989,9 @@ public struct C
 }";
 
             var verifier = CompileAndVerify(source: text, expectedOutput: "4242");
-            verifier.VerifyIL("C.Main", @"
+            verifier.VerifyIL(
+                "C.Main",
+                @"
 {
   // Code size       72 (0x48)
   .maxstack  3
@@ -946,7 +1034,8 @@ public struct C
   IL_0042:  call       ""void System.Console.Write(int)""
   IL_0047:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
@@ -970,7 +1059,8 @@ public struct C
         [Fact]
         public void MethodArgListParameterCount()
         {
-            var text = @"
+            var text =
+                @"
 class A
 {
     public void M1(__arglist) { }
@@ -1005,13 +1095,15 @@ class A
         [Fact]
         public void ILMethodArgListParameterCount()
         {
-            var csharp = @"
+            var csharp =
+                @"
 class Unused
 {
 }
 ";
 
-            var il = @"
+            var il =
+                @"
 .class public auto ansi beforefieldinit A
        extends [mscorlib]System.Object
 {
@@ -1056,7 +1148,8 @@ class Unused
         [Fact]
         public void OperatorArgListParameterCount()
         {
-            var text = @"
+            var text =
+                @"
 class A
 {
     public int operator +(__arglist) { return 0; } //illegal, but shouldn't break
@@ -1091,7 +1184,8 @@ class A
         [Fact]
         public void ConversionArgListParameterCount1()
         {
-            var text = @"
+            var text =
+                @"
 class A
 {
     public explicit operator A(__arglist) { return null; } //illegal, but shouldn't break
@@ -1101,7 +1195,9 @@ class A
 
             var type = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("A");
 
-            var conversion = type.GetMember<MethodSymbol>(WellKnownMemberNames.ExplicitConversionName);
+            var conversion = type.GetMember<MethodSymbol>(
+                WellKnownMemberNames.ExplicitConversionName
+            );
             Assert.Equal(0, conversion.ParameterCount);
             Assert.Equal(0, conversion.Parameters.Length);
         }
@@ -1111,7 +1207,8 @@ class A
         [Fact]
         public void ConversionArgListParameterCount2()
         {
-            var text = @"
+            var text =
+                @"
 class A
 {
     public explicit operator A(int x, __arglist) { return null; } //illegal, but shouldn't break
@@ -1121,7 +1218,9 @@ class A
 
             var type = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("A");
 
-            var conversion = type.GetMember<MethodSymbol>(WellKnownMemberNames.ExplicitConversionName);
+            var conversion = type.GetMember<MethodSymbol>(
+                WellKnownMemberNames.ExplicitConversionName
+            );
             Assert.Equal(1, conversion.ParameterCount);
             Assert.Equal(1, conversion.Parameters.Length);
         }
@@ -1131,7 +1230,8 @@ class A
         [Fact]
         public void ConversionArgListParameterCount3()
         {
-            var text = @"
+            var text =
+                @"
 class A
 {
     public explicit operator A(__arglist, A a) { return null; } //illegal, but shouldn't break
@@ -1141,7 +1241,9 @@ class A
 
             var type = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("A");
 
-            var conversion = type.GetMember<MethodSymbol>(WellKnownMemberNames.ExplicitConversionName);
+            var conversion = type.GetMember<MethodSymbol>(
+                WellKnownMemberNames.ExplicitConversionName
+            );
             Assert.Equal(1, conversion.ParameterCount);
             Assert.Equal(1, conversion.Parameters.Length);
         }
@@ -1151,7 +1253,8 @@ class A
         [Fact]
         public void ConversionArgListParameterCount4()
         {
-            var text = @"
+            var text =
+                @"
 class A
 {
     public explicit operator A(__arglist, A a, __arglist) { return null; } //illegal, but shouldn't break
@@ -1161,7 +1264,9 @@ class A
 
             var type = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("A");
 
-            var conversion = type.GetMember<MethodSymbol>(WellKnownMemberNames.ExplicitConversionName);
+            var conversion = type.GetMember<MethodSymbol>(
+                WellKnownMemberNames.ExplicitConversionName
+            );
             Assert.Equal(1, conversion.ParameterCount);
             Assert.Equal(1, conversion.Parameters.Length);
         }
@@ -1171,7 +1276,8 @@ class A
         [Fact]
         public void ConstructorArgListParameterCount1()
         {
-            var text = @"
+            var text =
+                @"
 class A
 {
     public A(__arglist) { }
@@ -1179,7 +1285,8 @@ class A
 ";
             var comp = CreateCompilation(text);
 
-            var constructor = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("A").GetMember<MethodSymbol>(WellKnownMemberNames.InstanceConstructorName);
+            var constructor = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("A")
+                .GetMember<MethodSymbol>(WellKnownMemberNames.InstanceConstructorName);
             Assert.Equal(0, constructor.ParameterCount); //doesn't use syntax
             Assert.Equal(0, constructor.Parameters.Length);
         }
@@ -1189,7 +1296,8 @@ class A
         [Fact]
         public void ConstructorArgListParameterCount2()
         {
-            var text = @"
+            var text =
+                @"
 class A
 {
     public A(int x, __arglist) { }
@@ -1197,18 +1305,19 @@ class A
 ";
             var comp = CreateCompilation(text);
 
-            var constructor = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("A").GetMember<MethodSymbol>(WellKnownMemberNames.InstanceConstructorName);
+            var constructor = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("A")
+                .GetMember<MethodSymbol>(WellKnownMemberNames.InstanceConstructorName);
             Assert.Equal(1, constructor.ParameterCount); //doesn't use syntax
             Assert.Equal(1, constructor.Parameters.Length);
         }
-
 
         [WorkItem(545055, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545055")]
         [WorkItem(545056, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545056")]
         [Fact]
         public void ConstructorArgListParameterCount3()
         {
-            var text = @"
+            var text =
+                @"
 class A
 {
     public A(__arglist, int x) { } //illegal, but shouldn't break
@@ -1216,7 +1325,8 @@ class A
 ";
             var comp = CreateCompilation(text);
 
-            var constructor = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("A").GetMember<MethodSymbol>(WellKnownMemberNames.InstanceConstructorName);
+            var constructor = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("A")
+                .GetMember<MethodSymbol>(WellKnownMemberNames.InstanceConstructorName);
             Assert.Equal(1, constructor.ParameterCount); //doesn't use syntax
             Assert.Equal(1, constructor.Parameters.Length);
         }
@@ -1226,7 +1336,8 @@ class A
         [Fact]
         public void ConstructorArgListParameterCount4()
         {
-            var text = @"
+            var text =
+                @"
 class A
 {
     public A(__arglist, int x, __arglist) { } //illegal, but shouldn't break
@@ -1234,7 +1345,8 @@ class A
 ";
             var comp = CreateCompilation(text);
 
-            var constructor = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("A").GetMember<MethodSymbol>(WellKnownMemberNames.InstanceConstructorName);
+            var constructor = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("A")
+                .GetMember<MethodSymbol>(WellKnownMemberNames.InstanceConstructorName);
             Assert.Equal(1, constructor.ParameterCount); //doesn't use syntax
             Assert.Equal(1, constructor.Parameters.Length);
         }
@@ -1244,7 +1356,8 @@ class A
         [Fact]
         public void IndexerArgListParameterCount1()
         {
-            var text = @"
+            var text =
+                @"
 class A
 {
     public int this[__arglist] { get { return 0; } set { } } //illegal, but shouldn't break
@@ -1252,7 +1365,8 @@ class A
 ";
             var comp = CreateCompilation(text);
 
-            var indexer = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("A").GetMember<PropertySymbol>(WellKnownMemberNames.Indexer);
+            var indexer = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("A")
+                .GetMember<PropertySymbol>(WellKnownMemberNames.Indexer);
             Assert.Equal(0, indexer.ParameterCount); //doesn't use syntax
             Assert.Equal(0, indexer.Parameters.Length);
 
@@ -1270,7 +1384,8 @@ class A
         [Fact]
         public void IndexerArgListParameterCount2()
         {
-            var text = @"
+            var text =
+                @"
 class A
 {
     public int this[int x, __arglist] { get { return 0; } set { } } //illegal, but shouldn't break
@@ -1278,7 +1393,8 @@ class A
 ";
             var comp = CreateCompilation(text);
 
-            var indexer = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("A").GetMember<PropertySymbol>(WellKnownMemberNames.Indexer);
+            var indexer = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("A")
+                .GetMember<PropertySymbol>(WellKnownMemberNames.Indexer);
             Assert.Equal(1, indexer.ParameterCount); //doesn't use syntax
             Assert.Equal(1, indexer.Parameters.Length);
 
@@ -1296,7 +1412,8 @@ class A
         [Fact]
         public void IndexerArgListParameterCount3()
         {
-            var text = @"
+            var text =
+                @"
 class A
 {
     public int this[__arglist, int x] { get { return 0; } set { } } //illegal, but shouldn't break
@@ -1304,7 +1421,8 @@ class A
 ";
             var comp = CreateCompilation(text);
 
-            var indexer = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("A").GetMember<PropertySymbol>(WellKnownMemberNames.Indexer);
+            var indexer = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("A")
+                .GetMember<PropertySymbol>(WellKnownMemberNames.Indexer);
             Assert.Equal(1, indexer.ParameterCount); //doesn't use syntax
             Assert.Equal(1, indexer.Parameters.Length);
 
@@ -1322,7 +1440,8 @@ class A
         [Fact]
         public void IndexerArgListParameterCount4()
         {
-            var text = @"
+            var text =
+                @"
 class A
 {
     public int this[__arglist, int x, __arglist] { get { return 0; } set { } } //illegal, but shouldn't break
@@ -1330,7 +1449,8 @@ class A
 ";
             var comp = CreateCompilation(text);
 
-            var indexer = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("A").GetMember<PropertySymbol>(WellKnownMemberNames.Indexer);
+            var indexer = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("A")
+                .GetMember<PropertySymbol>(WellKnownMemberNames.Indexer);
             Assert.Equal(1, indexer.ParameterCount); //doesn't use syntax
             Assert.Equal(1, indexer.Parameters.Length);
 
@@ -1344,10 +1464,14 @@ class A
         }
 
         [WorkItem(545086, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545086")]
-        [ConditionalFact(typeof(DesktopOnly), Reason = ConditionalSkipReason.RestrictedTypesNeedDesktop)]
+        [ConditionalFact(
+            typeof(DesktopOnly),
+            Reason = ConditionalSkipReason.RestrictedTypesNeedDesktop
+        )]
         public void BoxReceiverTest()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 class C
 {
@@ -1370,28 +1494,35 @@ class C
 }";
             var comp = CreateCompilation(text);
             comp.VerifyDiagnostics(
-// (11,9): error CS0029: Cannot implicitly convert type 'System.RuntimeArgumentHandle' to 'object'
-//         rah.GetType(); // not virtual
-Diagnostic(ErrorCode.ERR_NoImplicitConv, "rah").WithArguments("System.RuntimeArgumentHandle", "object"),
-// (12,9): error CS0029: Cannot implicitly convert type 'System.ArgIterator' to 'object'
-//         ai.GetType();  // not virtual
-Diagnostic(ErrorCode.ERR_NoImplicitConv, "ai").WithArguments("System.ArgIterator", "object"),
-// (13,9): error CS0029: Cannot implicitly convert type 'System.TypedReference' to 'object'
-//         tr.GetType();  // not virtual
-Diagnostic(ErrorCode.ERR_NoImplicitConv, "tr").WithArguments("System.TypedReference", "object"),
-// (14,9): error CS0029: Cannot implicitly convert type 'System.RuntimeArgumentHandle' to 'System.ValueType'
-//         rah.ToString(); // virtual, overridden on ValueType
-Diagnostic(ErrorCode.ERR_NoImplicitConv, "rah").WithArguments("System.RuntimeArgumentHandle", "System.ValueType"),
-// (15,9): error CS0029: Cannot implicitly convert type 'System.ArgIterator' to 'System.ValueType'
-//         ai.ToString();  // virtual, overridden on ValueType
-Diagnostic(ErrorCode.ERR_NoImplicitConv, "ai").WithArguments("System.ArgIterator", "System.ValueType"),
-// (16,9): error CS0029: Cannot implicitly convert type 'System.TypedReference' to 'System.ValueType'
-//         tr.ToString();  // virtual, overridden on ValueType
-Diagnostic(ErrorCode.ERR_NoImplicitConv, "tr").WithArguments("System.TypedReference", "System.ValueType"),
-// (17,9): error CS0029: Cannot implicitly convert type 'System.RuntimeArgumentHandle' to 'System.ValueType'
-//         rah.GetHashCode();  // virtual, overridden on ValueType
-Diagnostic(ErrorCode.ERR_NoImplicitConv, "rah").WithArguments("System.RuntimeArgumentHandle", "System.ValueType")
-                );
+                // (11,9): error CS0029: Cannot implicitly convert type 'System.RuntimeArgumentHandle' to 'object'
+                //         rah.GetType(); // not virtual
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "rah")
+                    .WithArguments("System.RuntimeArgumentHandle", "object"),
+                // (12,9): error CS0029: Cannot implicitly convert type 'System.ArgIterator' to 'object'
+                //         ai.GetType();  // not virtual
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "ai")
+                    .WithArguments("System.ArgIterator", "object"),
+                // (13,9): error CS0029: Cannot implicitly convert type 'System.TypedReference' to 'object'
+                //         tr.GetType();  // not virtual
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "tr")
+                    .WithArguments("System.TypedReference", "object"),
+                // (14,9): error CS0029: Cannot implicitly convert type 'System.RuntimeArgumentHandle' to 'System.ValueType'
+                //         rah.ToString(); // virtual, overridden on ValueType
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "rah")
+                    .WithArguments("System.RuntimeArgumentHandle", "System.ValueType"),
+                // (15,9): error CS0029: Cannot implicitly convert type 'System.ArgIterator' to 'System.ValueType'
+                //         ai.ToString();  // virtual, overridden on ValueType
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "ai")
+                    .WithArguments("System.ArgIterator", "System.ValueType"),
+                // (16,9): error CS0029: Cannot implicitly convert type 'System.TypedReference' to 'System.ValueType'
+                //         tr.ToString();  // virtual, overridden on ValueType
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "tr")
+                    .WithArguments("System.TypedReference", "System.ValueType"),
+                // (17,9): error CS0029: Cannot implicitly convert type 'System.RuntimeArgumentHandle' to 'System.ValueType'
+                //         rah.GetHashCode();  // virtual, overridden on ValueType
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "rah")
+                    .WithArguments("System.RuntimeArgumentHandle", "System.ValueType")
+            );
         }
 
         [WorkItem(649808, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/649808")]
@@ -1399,7 +1530,7 @@ Diagnostic(ErrorCode.ERR_NoImplicitConv, "rah").WithArguments("System.RuntimeArg
         public void MissingArgumentsAndOptionalParameters_1()
         {
             var source =
-@"class A
+                @"class A
 {
     internal A(object x, __arglist) { }
     internal static void M(object x, __arglist) { }
@@ -1449,43 +1580,69 @@ class E
         D.M(null, null, __arglist());
     }
 }";
-            CreateCompilation(source).VerifyDiagnostics(
-                // (26,13): error CS7036: There is no argument given that corresponds to the required formal parameter '__arglist' of 'A.A(object, __arglist)'
-                //         new A(__arglist());
-                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "A").WithArguments("__arglist", "A.A(object, __arglist)").WithLocation(26, 13),
-                // (28,9): error CS7036: There is no argument given that corresponds to the required formal parameter '__arglist' of 'A.M(object, __arglist)'
-                //         A.M(__arglist());
-                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "M").WithArguments("__arglist", "A.M(object, __arglist)").WithLocation(28, 11),
-                // (31,13): error CS7036: There is no argument given that corresponds to the required formal parameter '__arglist' of 'B.B(object, __arglist)'
-                //         new B(__arglist());
-                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "B").WithArguments("__arglist", "B.B(object, __arglist)").WithLocation(31, 13),
-                // (33,9): error CS7036: There is no argument given that corresponds to the required formal parameter '__arglist' of 'B.M(object, __arglist)'
-                //         B.M(__arglist());
-                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "M").WithArguments("__arglist", "B.M(object, __arglist)").WithLocation(33, 11),
-                // (36,13): error CS7036: There is no argument given that corresponds to the required formal parameter '__arglist' of 'C.C(object, object, __arglist)'
-                //         new C(__arglist());
-                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "C").WithArguments("__arglist", "C.C(object, object, __arglist)").WithLocation(36, 13),
-                // (37,13): error CS7036: There is no argument given that corresponds to the required formal parameter '__arglist' of 'C.C(object, object, __arglist)'
-                //         new C(null, __arglist());
-                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "C").WithArguments("__arglist", "C.C(object, object, __arglist)").WithLocation(37, 13),
-                // (39,9): error CS7036: There is no argument given that corresponds to the required formal parameter '__arglist' of 'C.M(object, object, __arglist)'
-                //         C.M(__arglist());
-                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "M").WithArguments("__arglist", "C.M(object, object, __arglist)").WithLocation(39, 11),
-                // (40,9): error CS7036: There is no argument given that corresponds to the required formal parameter '__arglist' of 'C.M(object, object, __arglist)'
-                //         C.M(null, __arglist());
-                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "M").WithArguments("__arglist", "C.M(object, object, __arglist)").WithLocation(40, 11),
-                // (43,13): error CS7036: There is no argument given that corresponds to the required formal parameter '__arglist' of 'D.D(object, object, __arglist)'
-                //         new D(__arglist());
-                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "D").WithArguments("__arglist", "D.D(object, object, __arglist)").WithLocation(43, 13),
-                // (44,13): error CS7036: There is no argument given that corresponds to the required formal parameter '__arglist' of 'D.D(object, object, __arglist)'
-                //         new D(null, __arglist());
-                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "D").WithArguments("__arglist", "D.D(object, object, __arglist)").WithLocation(44, 13),
-                // (46,9): error CS7036: There is no argument given that corresponds to the required formal parameter '__arglist' of 'D.M(object, object, __arglist)'
-                //         D.M(__arglist());
-                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "M").WithArguments("__arglist", "D.M(object, object, __arglist)").WithLocation(46, 11),
-                // (47,9): error CS7036: There is no argument given that corresponds to the required formal parameter '__arglist' of 'D.M(object, object, __arglist)'
-                //         D.M(null, __arglist());
-                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "M").WithArguments("__arglist", "D.M(object, object, __arglist)").WithLocation(47, 11));
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (26,13): error CS7036: There is no argument given that corresponds to the required formal parameter '__arglist' of 'A.A(object, __arglist)'
+                    //         new A(__arglist());
+                    Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "A")
+                        .WithArguments("__arglist", "A.A(object, __arglist)")
+                        .WithLocation(26, 13),
+                    // (28,9): error CS7036: There is no argument given that corresponds to the required formal parameter '__arglist' of 'A.M(object, __arglist)'
+                    //         A.M(__arglist());
+                    Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "M")
+                        .WithArguments("__arglist", "A.M(object, __arglist)")
+                        .WithLocation(28, 11),
+                    // (31,13): error CS7036: There is no argument given that corresponds to the required formal parameter '__arglist' of 'B.B(object, __arglist)'
+                    //         new B(__arglist());
+                    Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "B")
+                        .WithArguments("__arglist", "B.B(object, __arglist)")
+                        .WithLocation(31, 13),
+                    // (33,9): error CS7036: There is no argument given that corresponds to the required formal parameter '__arglist' of 'B.M(object, __arglist)'
+                    //         B.M(__arglist());
+                    Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "M")
+                        .WithArguments("__arglist", "B.M(object, __arglist)")
+                        .WithLocation(33, 11),
+                    // (36,13): error CS7036: There is no argument given that corresponds to the required formal parameter '__arglist' of 'C.C(object, object, __arglist)'
+                    //         new C(__arglist());
+                    Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "C")
+                        .WithArguments("__arglist", "C.C(object, object, __arglist)")
+                        .WithLocation(36, 13),
+                    // (37,13): error CS7036: There is no argument given that corresponds to the required formal parameter '__arglist' of 'C.C(object, object, __arglist)'
+                    //         new C(null, __arglist());
+                    Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "C")
+                        .WithArguments("__arglist", "C.C(object, object, __arglist)")
+                        .WithLocation(37, 13),
+                    // (39,9): error CS7036: There is no argument given that corresponds to the required formal parameter '__arglist' of 'C.M(object, object, __arglist)'
+                    //         C.M(__arglist());
+                    Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "M")
+                        .WithArguments("__arglist", "C.M(object, object, __arglist)")
+                        .WithLocation(39, 11),
+                    // (40,9): error CS7036: There is no argument given that corresponds to the required formal parameter '__arglist' of 'C.M(object, object, __arglist)'
+                    //         C.M(null, __arglist());
+                    Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "M")
+                        .WithArguments("__arglist", "C.M(object, object, __arglist)")
+                        .WithLocation(40, 11),
+                    // (43,13): error CS7036: There is no argument given that corresponds to the required formal parameter '__arglist' of 'D.D(object, object, __arglist)'
+                    //         new D(__arglist());
+                    Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "D")
+                        .WithArguments("__arglist", "D.D(object, object, __arglist)")
+                        .WithLocation(43, 13),
+                    // (44,13): error CS7036: There is no argument given that corresponds to the required formal parameter '__arglist' of 'D.D(object, object, __arglist)'
+                    //         new D(null, __arglist());
+                    Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "D")
+                        .WithArguments("__arglist", "D.D(object, object, __arglist)")
+                        .WithLocation(44, 13),
+                    // (46,9): error CS7036: There is no argument given that corresponds to the required formal parameter '__arglist' of 'D.M(object, object, __arglist)'
+                    //         D.M(__arglist());
+                    Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "M")
+                        .WithArguments("__arglist", "D.M(object, object, __arglist)")
+                        .WithLocation(46, 11),
+                    // (47,9): error CS7036: There is no argument given that corresponds to the required formal parameter '__arglist' of 'D.M(object, object, __arglist)'
+                    //         D.M(null, __arglist());
+                    Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "M")
+                        .WithArguments("__arglist", "D.M(object, object, __arglist)")
+                        .WithLocation(47, 11)
+                );
         }
 
         [WorkItem(649808, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/649808")]
@@ -1493,7 +1650,7 @@ class E
         public void MissingArgumentsAndOptionalParameters_2()
         {
             var ilSource =
-@".class public sealed D extends [mscorlib]System.MulticastDelegate
+                @".class public sealed D extends [mscorlib]System.MulticastDelegate
 {
   .method public hidebysig specialname rtspecialname instance void .ctor(object o, native int m) runtime { }
   .method public hidebysig instance vararg void Invoke([opt] object o) runtime { }
@@ -1501,7 +1658,7 @@ class E
   .method public hidebysig instance void EndInvoke(class [mscorlib]System.IAsyncResult r) runtime { }
 }";
             var source =
-@"class C
+                @"class C
 {
     static void M(D d)
     {
@@ -1513,14 +1670,17 @@ class E
             compilation.VerifyDiagnostics(
                 // (6,9): error CS7036: There is no argument given that corresponds to the required formal parameter '__arglist' of 'D'
                 //         d(__arglist());
-                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "d").WithArguments("__arglist", "D").WithLocation(6, 9));
+                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "d")
+                    .WithArguments("__arglist", "D")
+                    .WithLocation(6, 9)
+            );
         }
 
         [Fact, WorkItem(1253, "https://github.com/dotnet/roslyn/issues/1253")]
         public void LambdaWithUnsafeParameter()
         {
             var source =
-@"
+                @"
 
 using System;
 using System.Threading;
@@ -1541,18 +1701,24 @@ namespace ConsoleApplication21
     }
 }
 ";
-            CreateCompilation(source, options: TestOptions.UnsafeReleaseDll).VerifyDiagnostics(
-    // (12,44): error CS7036: There is no argument given that corresponds to the required formal parameter 'context' of 'GooBar.AllocateNativeOverlapped(IOCompletionCallback, object, byte[])'
-    //             NativeOverlapped* overlapped = AllocateNativeOverlapped(() => { });
-    Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "AllocateNativeOverlapped").WithArguments("context", "ConsoleApplication21.GooBar.AllocateNativeOverlapped(System.Threading.IOCompletionCallback, object, byte[])").WithLocation(12, 44)
-);
+            CreateCompilation(source, options: TestOptions.UnsafeReleaseDll)
+                .VerifyDiagnostics(
+                    // (12,44): error CS7036: There is no argument given that corresponds to the required formal parameter 'context' of 'GooBar.AllocateNativeOverlapped(IOCompletionCallback, object, byte[])'
+                    //             NativeOverlapped* overlapped = AllocateNativeOverlapped(() => { });
+                    Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "AllocateNativeOverlapped")
+                        .WithArguments(
+                            "context",
+                            "ConsoleApplication21.GooBar.AllocateNativeOverlapped(System.Threading.IOCompletionCallback, object, byte[])"
+                        )
+                        .WithLocation(12, 44)
+                );
         }
 
         [Fact, WorkItem(8152, "https://github.com/dotnet/roslyn/issues/8152")]
         public void DuplicateDeclaration()
         {
             var source =
-@"
+                @"
 public class SpecialCases
 {
     public void ArgListMethod(__arglist)
@@ -1565,23 +1731,40 @@ public class SpecialCases
     }
 }
 ";
-            CreateCompilation(source, options: TestOptions.UnsafeReleaseDll).VerifyDiagnostics(
-    // (8,17): error CS0111: Type 'SpecialCases' already defines a member called 'ArgListMethod' with the same parameter types
-    //     public void ArgListMethod(__arglist)
-    Diagnostic(ErrorCode.ERR_MemberAlreadyExists, "ArgListMethod").WithArguments("ArgListMethod", "SpecialCases").WithLocation(8, 17),
-    // (6,9): error CS0121: The call is ambiguous between the following methods or properties: 'SpecialCases.ArgListMethod(__arglist)' and 'SpecialCases.ArgListMethod(__arglist)'
-    //         ArgListMethod(__arglist(""));
-    Diagnostic(ErrorCode.ERR_AmbigCall, "ArgListMethod").WithArguments("SpecialCases.ArgListMethod(__arglist)", "SpecialCases.ArgListMethod(__arglist)").WithLocation(6, 9),
-    // (10,9): error CS0121: The call is ambiguous between the following methods or properties: 'SpecialCases.ArgListMethod(__arglist)' and 'SpecialCases.ArgListMethod(__arglist)'
-    //         ArgListMethod(__arglist(""));
-    Diagnostic(ErrorCode.ERR_AmbigCall, "ArgListMethod").WithArguments("SpecialCases.ArgListMethod(__arglist)", "SpecialCases.ArgListMethod(__arglist)").WithLocation(10, 9)
+            CreateCompilation(source, options: TestOptions.UnsafeReleaseDll)
+                .VerifyDiagnostics(
+                    // (8,17): error CS0111: Type 'SpecialCases' already defines a member called 'ArgListMethod' with the same parameter types
+                    //     public void ArgListMethod(__arglist)
+                    Diagnostic(ErrorCode.ERR_MemberAlreadyExists, "ArgListMethod")
+                        .WithArguments("ArgListMethod", "SpecialCases")
+                        .WithLocation(8, 17),
+                    // (6,9): error CS0121: The call is ambiguous between the following methods or properties: 'SpecialCases.ArgListMethod(__arglist)' and 'SpecialCases.ArgListMethod(__arglist)'
+                    //         ArgListMethod(__arglist(""));
+                    Diagnostic(ErrorCode.ERR_AmbigCall, "ArgListMethod")
+                        .WithArguments(
+                            "SpecialCases.ArgListMethod(__arglist)",
+                            "SpecialCases.ArgListMethod(__arglist)"
+                        )
+                        .WithLocation(6, 9),
+                    // (10,9): error CS0121: The call is ambiguous between the following methods or properties: 'SpecialCases.ArgListMethod(__arglist)' and 'SpecialCases.ArgListMethod(__arglist)'
+                    //         ArgListMethod(__arglist(""));
+                    Diagnostic(ErrorCode.ERR_AmbigCall, "ArgListMethod")
+                        .WithArguments(
+                            "SpecialCases.ArgListMethod(__arglist)",
+                            "SpecialCases.ArgListMethod(__arglist)"
+                        )
+                        .WithLocation(10, 9)
                 );
         }
 
-        [ConditionalFact(typeof(DesktopOnly), Reason = ConditionalSkipReason.RestrictedTypesNeedDesktop)]
+        [ConditionalFact(
+            typeof(DesktopOnly),
+            Reason = ConditionalSkipReason.RestrictedTypesNeedDesktop
+        )]
         public void ArgListMayNotHaveAnOutArgument()
         {
-            CreateCompilation(@"
+            CreateCompilation(
+                    @"
 class Program
 {
     static void Test(__arglist)
@@ -1590,16 +1773,20 @@ class Program
     	Test(__arglist(out a));
     }
 }
-").VerifyDiagnostics(
-                // (7,25): error CS8378: __arglist cannot have an argument passed by 'in' or 'out'
-                //     	Test(__arglist(out a));
-                Diagnostic(ErrorCode.ERR_CantUseInOrOutInArglist, "a").WithLocation(7, 25));
+"
+                )
+                .VerifyDiagnostics(
+                    // (7,25): error CS8378: __arglist cannot have an argument passed by 'in' or 'out'
+                    //     	Test(__arglist(out a));
+                    Diagnostic(ErrorCode.ERR_CantUseInOrOutInArglist, "a").WithLocation(7, 25)
+                );
         }
 
         [Fact]
         public void ArgListMayNotHaveAnInArgument()
         {
-            CreateCompilation(@"
+            CreateCompilation(
+                    @"
 class Program
 {
     static void Test(__arglist)
@@ -1608,16 +1795,23 @@ class Program
     	Test(__arglist(in a));
     }
 }
-").VerifyDiagnostics(
-                // (7,24): error CS8378: __arglist cannot have an argument passed by 'in' or 'out'
-                //     	Test(__arglist(in a));
-                Diagnostic(ErrorCode.ERR_CantUseInOrOutInArglist, "a").WithLocation(7, 24));
+"
+                )
+                .VerifyDiagnostics(
+                    // (7,24): error CS8378: __arglist cannot have an argument passed by 'in' or 'out'
+                    //     	Test(__arglist(in a));
+                    Diagnostic(ErrorCode.ERR_CantUseInOrOutInArglist, "a").WithLocation(7, 24)
+                );
         }
 
-        [ConditionalFact(typeof(WindowsDesktopOnly), Reason = ConditionalSkipReason.RestrictedTypesNeedDesktop)]
+        [ConditionalFact(
+            typeof(WindowsDesktopOnly),
+            Reason = ConditionalSkipReason.RestrictedTypesNeedDesktop
+        )]
         public void ArgListMayHaveARefArgument()
         {
-            CompileAndVerify(@"
+            CompileAndVerify(
+                @"
 using System;
 class Program
 {
@@ -1635,13 +1829,18 @@ class Program
     }
 }",
                 options: TestOptions.DebugExe,
-                expectedOutput: "5");
+                expectedOutput: "5"
+            );
         }
 
-        [ConditionalFact(typeof(DesktopOnly), Reason = ConditionalSkipReason.RestrictedTypesNeedDesktop)]
+        [ConditionalFact(
+            typeof(DesktopOnly),
+            Reason = ConditionalSkipReason.RestrictedTypesNeedDesktop
+        )]
         public void ArgListMayHaveAByValArgument()
         {
-            CompileAndVerify(@"
+            CompileAndVerify(
+                @"
 using System;
 class Program
 {
@@ -1658,7 +1857,8 @@ class Program
     }
 }",
                 options: TestOptions.DebugExe,
-                expectedOutput: "5");
+                expectedOutput: "5"
+            );
         }
     }
 }

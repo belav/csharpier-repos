@@ -25,8 +25,9 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests
         where TStartup : class
         where TContext : DbContext
     {
-        private readonly SqliteConnection _connection
-            = new SqliteConnection($"DataSource=:memory:");
+        private readonly SqliteConnection _connection = new SqliteConnection(
+            $"DataSource=:memory:"
+        );
 
         public ServerFactory()
         {
@@ -48,14 +49,16 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests
             base.ConfigureWebHost(builder);
             builder.UseStartup<TStartup>();
 
-            builder.ConfigureServices(sc =>
-            {
-                sc.SetupTestDatabase<TContext>(_connection)
-                    .AddMvc()
-                    // Mark the cookie as essential for right now, as Identity uses it on
-                    // several places to pass important data in post-redirect-get flows.
-                    .AddCookieTempDataProvider(o => o.Cookie.IsEssential = true);
-            });
+            builder.ConfigureServices(
+                sc =>
+                {
+                    sc.SetupTestDatabase<TContext>(_connection)
+                        .AddMvc()
+                        // Mark the cookie as essential for right now, as Identity uses it on
+                        // several places to pass important data in post-redirect-get flows.
+                        .AddCookieTempDataProvider(o => o.Cookie.IsEssential = true);
+                }
+            );
 
             UpdateStaticAssets(builder);
             UpdateApplicationParts(builder);
@@ -66,37 +69,54 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests
 
         private void UpdateStaticAssets(IWebHostBuilder builder)
         {
-            var manifestPath = Path.GetDirectoryName(typeof(ServerFactory<,>).Assembly.Location);
-            builder.ConfigureAppConfiguration((ctx, cb) =>
-            {
-                if (ctx.HostingEnvironment.WebRootFileProvider is CompositeFileProvider composite)
+            var manifestPath = Path.GetDirectoryName(typeof(ServerFactory<, >).Assembly.Location);
+            builder.ConfigureAppConfiguration(
+                (ctx, cb) =>
                 {
-                    var originalWebRoot = composite.FileProviders.First();
-                    ctx.HostingEnvironment.WebRootFileProvider = originalWebRoot;
+                    if (
+                        ctx.HostingEnvironment.WebRootFileProvider
+                        is CompositeFileProvider composite
+                    )
+                    {
+                        var originalWebRoot = composite.FileProviders.First();
+                        ctx.HostingEnvironment.WebRootFileProvider = originalWebRoot;
+                    }
                 }
-            });
+            );
 
-            string versionedPath = Path.Combine(manifestPath, $"Testing.DefaultWebSite.StaticWebAssets.{BootstrapFrameworkVersion}.xml");
+            string versionedPath = Path.Combine(
+                manifestPath,
+                $"Testing.DefaultWebSite.StaticWebAssets.{BootstrapFrameworkVersion}.xml"
+            );
             UpdateManifest(versionedPath);
 
-            builder.ConfigureAppConfiguration((context, configBuilder) =>
-            {
-                using (var manifest = File.OpenRead(versionedPath))
+            builder.ConfigureAppConfiguration(
+                (context, configBuilder) =>
                 {
-                    typeof(StaticWebAssetsLoader)
-                        .GetMethod("UseStaticWebAssetsCore", BindingFlags.NonPublic | BindingFlags.Static)
-                        .Invoke(null, new object[] { context.HostingEnvironment, manifest });
+                    using (var manifest = File.OpenRead(versionedPath))
+                    {
+                        typeof(StaticWebAssetsLoader).GetMethod(
+                                "UseStaticWebAssetsCore",
+                                BindingFlags.NonPublic | BindingFlags.Static
+                            )
+                            .Invoke(null, new object[] { context.HostingEnvironment, manifest });
+                    }
                 }
-            });
+            );
         }
 
         private void UpdateManifest(string versionedPath)
         {
             var content = File.ReadAllText(versionedPath);
-            var path = typeof(ServerFactory<,>).Assembly.GetCustomAttributes<AssemblyMetadataAttribute>()
-                    .Single(a => a.Key == "Microsoft.AspNetCore.Testing.IdentityUIProjectPath").Value;
+            var path =
+                typeof(ServerFactory<, >).Assembly.GetCustomAttributes<AssemblyMetadataAttribute>()
+                    .Single(
+                        a => a.Key == "Microsoft.AspNetCore.Testing.IdentityUIProjectPath"
+                    ).Value;
 
-            path = Directory.Exists(path) ? Path.Combine(path, "wwwroot") : Path.Combine(FindHelixSlnFileDirectory(), "UI", "wwwroot");
+            path = Directory.Exists(path)
+                ? Path.Combine(path, "wwwroot")
+                : Path.Combine(FindHelixSlnFileDirectory(), "UI", "wwwroot");
 
             var updatedContent = content.Replace("{TEST_PLACEHOLDER}", path);
 
@@ -105,21 +125,25 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests
 
         private string FindHelixSlnFileDirectory()
         {
-            var applicationPath = Path.GetDirectoryName(typeof(ServerFactory<,>).Assembly.Location);
+            var applicationPath = Path.GetDirectoryName(
+                typeof(ServerFactory<, >).Assembly.Location
+            );
             var directoryInfo = new DirectoryInfo(applicationPath);
             do
             {
-                var solutionPath = Directory.EnumerateFiles(directoryInfo.FullName, "*.sln").FirstOrDefault();
+                var solutionPath = Directory.EnumerateFiles(directoryInfo.FullName, "*.sln")
+                    .FirstOrDefault();
                 if (solutionPath != null)
                 {
                     return directoryInfo.FullName;
                 }
 
                 directoryInfo = directoryInfo.Parent;
-            }
-            while (directoryInfo.Parent != null);
+            } while (directoryInfo.Parent != null);
 
-            throw new InvalidOperationException($"Solution root could not be located using application root {applicationPath}.");
+            throw new InvalidOperationException(
+                $"Solution root could not be located using application root {applicationPath}."
+            );
         }
 
         protected override IHost CreateHost(IHostBuilder builder)

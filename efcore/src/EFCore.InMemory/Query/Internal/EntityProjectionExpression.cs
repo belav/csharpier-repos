@@ -21,7 +21,10 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
     public class EntityProjectionExpression : Expression, IPrintableExpression
     {
         private readonly IReadOnlyDictionary<IProperty, MethodCallExpression> _readExpressionMap;
-        private readonly Dictionary<INavigation, EntityShaperExpression> _navigationExpressionsCache = new();
+        private readonly Dictionary<
+            INavigation,
+            EntityShaperExpression
+        > _navigationExpressionsCache = new();
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -31,7 +34,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
         /// </summary>
         public EntityProjectionExpression(
             IEntityType entityType,
-            IReadOnlyDictionary<IProperty, MethodCallExpression> readExpressionMap)
+            IReadOnlyDictionary<IProperty, MethodCallExpression> readExpressionMap
+        )
         {
             EntityType = entityType;
             _readExpressionMap = readExpressionMap;
@@ -51,8 +55,7 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public override Type Type
-            => EntityType.ClrType;
+        public override Type Type => EntityType.ClrType;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -60,8 +63,7 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public sealed override ExpressionType NodeType
-            => ExpressionType.Extension;
+        public sealed override ExpressionType NodeType => ExpressionType.Extension;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -75,15 +77,20 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
             {
                 throw new InvalidOperationException(
                     InMemoryStrings.InvalidDerivedTypeInEntityProjection(
-                        derivedType.DisplayName(), EntityType.DisplayName()));
+                        derivedType.DisplayName(),
+                        EntityType.DisplayName()
+                    )
+                );
             }
 
             var readExpressionMap = new Dictionary<IProperty, MethodCallExpression>();
             foreach (var kvp in _readExpressionMap)
             {
                 var property = kvp.Key;
-                if (derivedType.IsAssignableFrom(property.DeclaringEntityType)
-                    || property.DeclaringEntityType.IsAssignableFrom(derivedType))
+                if (
+                    derivedType.IsAssignableFrom(property.DeclaringEntityType)
+                    || property.DeclaringEntityType.IsAssignableFrom(derivedType)
+                )
                 {
                     readExpressionMap[property] = kvp.Value;
                 }
@@ -100,11 +107,18 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
         /// </summary>
         public virtual MethodCallExpression BindProperty(IProperty property)
         {
-            if (!EntityType.IsAssignableFrom(property.DeclaringEntityType)
-                && !property.DeclaringEntityType.IsAssignableFrom(EntityType))
+            if (
+                !EntityType.IsAssignableFrom(property.DeclaringEntityType)
+                && !property.DeclaringEntityType.IsAssignableFrom(EntityType)
+            )
             {
                 throw new InvalidOperationException(
-                    InMemoryStrings.UnableToBindMemberToEntityProjection("property", property.Name, EntityType.DisplayName()));
+                    InMemoryStrings.UnableToBindMemberToEntityProjection(
+                        "property",
+                        property.Name,
+                        EntityType.DisplayName()
+                    )
+                );
             }
 
             return _readExpressionMap[property];
@@ -116,13 +130,23 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual void AddNavigationBinding(INavigation navigation, EntityShaperExpression entityShaper)
+        public virtual void AddNavigationBinding(
+            INavigation navigation,
+            EntityShaperExpression entityShaper
+        )
         {
-            if (!EntityType.IsAssignableFrom(navigation.DeclaringEntityType)
-                && !navigation.DeclaringEntityType.IsAssignableFrom(EntityType))
+            if (
+                !EntityType.IsAssignableFrom(navigation.DeclaringEntityType)
+                && !navigation.DeclaringEntityType.IsAssignableFrom(EntityType)
+            )
             {
                 throw new InvalidOperationException(
-                    InMemoryStrings.UnableToBindMemberToEntityProjection("navigation", navigation.Name, EntityType.DisplayName()));
+                    InMemoryStrings.UnableToBindMemberToEntityProjection(
+                        "navigation",
+                        navigation.Name,
+                        EntityType.DisplayName()
+                    )
+                );
             }
 
             _navigationExpressionsCache[navigation] = entityShaper;
@@ -136,16 +160,23 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
         /// </summary>
         public virtual EntityShaperExpression? BindNavigation(INavigation navigation)
         {
-            if (!EntityType.IsAssignableFrom(navigation.DeclaringEntityType)
-                && !navigation.DeclaringEntityType.IsAssignableFrom(EntityType))
+            if (
+                !EntityType.IsAssignableFrom(navigation.DeclaringEntityType)
+                && !navigation.DeclaringEntityType.IsAssignableFrom(EntityType)
+            )
             {
                 throw new InvalidOperationException(
-                    InMemoryStrings.UnableToBindMemberToEntityProjection("navigation", navigation.Name, EntityType.DisplayName()));
+                    InMemoryStrings.UnableToBindMemberToEntityProjection(
+                        "navigation",
+                        navigation.Name,
+                        EntityType.DisplayName()
+                    )
+                );
             }
 
             return _navigationExpressionsCache.TryGetValue(navigation, out var expression)
-                ? expression
-                : null;
+              ? expression
+              : null;
         }
 
         /// <summary>

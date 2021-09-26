@@ -77,21 +77,39 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
         {
             get
             {
-                yield return new object[] { "sampleString",
-                    "<string xmlns=\"http://schemas.microsoft.com/2003/10/Serialization/\">sampleString</string>" };
-                yield return new object[] { 5,
-                    "<int xmlns=\"http://schemas.microsoft.com/2003/10/Serialization/\">5</int>" };
-                yield return new object[] { 5.43,
-                    "<double xmlns=\"http://schemas.microsoft.com/2003/10/Serialization/\">5.43</double>" };
-                yield return new object[] { 'a',
-                    "<char xmlns=\"http://schemas.microsoft.com/2003/10/Serialization/\">97</char>" };
-                yield return new object[] { new DummyClass { SampleInt = 10 },
-                    "<DummyClass xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\">" +
-                    "<SampleInt>10</SampleInt></DummyClass>" };
-                yield return new object[] { new Dictionary<string, string>() { { "Hello", "World" } },
-                    "<ArrayOfKeyValueOfstringstring xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" " +
-                    "xmlns=\"http://schemas.microsoft.com/2003/10/Serialization/Arrays\"><KeyValueOfstringstring>" +
-                    "<Key>Hello</Key><Value>World</Value></KeyValueOfstringstring></ArrayOfKeyValueOfstringstring>" };
+                yield return new object[]
+                {
+                    "sampleString",
+                    "<string xmlns=\"http://schemas.microsoft.com/2003/10/Serialization/\">sampleString</string>"
+                };
+                yield return new object[]
+                {
+                    5,
+                    "<int xmlns=\"http://schemas.microsoft.com/2003/10/Serialization/\">5</int>"
+                };
+                yield return new object[]
+                {
+                    5.43,
+                    "<double xmlns=\"http://schemas.microsoft.com/2003/10/Serialization/\">5.43</double>"
+                };
+                yield return new object[]
+                {
+                    'a',
+                    "<char xmlns=\"http://schemas.microsoft.com/2003/10/Serialization/\">97</char>"
+                };
+                yield return new object[]
+                {
+                    new DummyClass { SampleInt = 10 },
+                    "<DummyClass xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\">"
+                        + "<SampleInt>10</SampleInt></DummyClass>"
+                };
+                yield return new object[]
+                {
+                    new Dictionary<string, string>() { { "Hello", "World" } },
+                    "<ArrayOfKeyValueOfstringstring xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" "
+                        + "xmlns=\"http://schemas.microsoft.com/2003/10/Serialization/Arrays\"><KeyValueOfstringstring>"
+                        + "<Key>Hello</Key><Value>World</Value></KeyValueOfstringstring></ArrayOfKeyValueOfstringstring>"
+                };
             }
         }
 
@@ -163,9 +181,10 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
             var sampleInput = new DummyClass { SampleInt = 10 };
             var formatterContext = GetOutputFormatterContext(sampleInput, sampleInput.GetType());
             var formatter = new XmlDataContractSerializerOutputFormatter(writerSettings);
-            var expectedOutput = "<?xml version=\"1.0\" encoding=\"utf-8\"?>" +
-                                "<DummyClass xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\">" +
-                                "<SampleInt>10</SampleInt></DummyClass>";
+            var expectedOutput =
+                "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
+                + "<DummyClass xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\">"
+                + "<SampleInt>10</SampleInt></DummyClass>";
 
             // Act
             await formatter.WriteAsync(formatterContext);
@@ -187,12 +206,15 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
         {
             // Arrange
             var expectedOutput =
-                "<DummyClass xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\">" +
-                "<SampleInt>10</SampleInt></DummyClass>";
+                "<DummyClass xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\">"
+                + "<SampleInt>10</SampleInt></DummyClass>";
 
             var sampleInput = new DummyClass { SampleInt = 10 };
             var formatter = new XmlDataContractSerializerOutputFormatter();
-            var outputFormatterContext = GetOutputFormatterContext(sampleInput, sampleInput.GetType());
+            var outputFormatterContext = GetOutputFormatterContext(
+                sampleInput,
+                sampleInput.GetType()
+            );
 
             // Act
             await formatter.WriteAsync(outputFormatterContext);
@@ -212,22 +234,21 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
         {
             // Arrange
             var expectedOutput =
-                "<TestLevelTwo xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\">" +
-                "<SampleString>TestString</SampleString>" +
-                "<TestOne><SampleInt>10</SampleInt><sampleString>TestLevelOne string</sampleString>" +
-                "</TestOne></TestLevelTwo>";
+                "<TestLevelTwo xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\">"
+                + "<SampleString>TestString</SampleString>"
+                + "<TestOne><SampleInt>10</SampleInt><sampleString>TestLevelOne string</sampleString>"
+                + "</TestOne></TestLevelTwo>";
 
             var sampleInput = new TestLevelTwo
             {
                 SampleString = "TestString",
-                TestOne = new TestLevelOne
-                {
-                    SampleInt = 10,
-                    sampleString = "TestLevelOne string"
-                }
+                TestOne = new TestLevelOne { SampleInt = 10, sampleString = "TestLevelOne string" }
             };
             var formatter = new XmlDataContractSerializerOutputFormatter();
-            var outputFormatterContext = GetOutputFormatterContext(sampleInput, sampleInput.GetType());
+            var outputFormatterContext = GetOutputFormatterContext(
+                sampleInput,
+                sampleInput.GetType()
+            );
 
             // Act
             await formatter.WriteAsync(outputFormatterContext);
@@ -247,18 +268,18 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
         {
             // Arrange
             var expectedOutput =
-                "<?xml version=\"1.0\" encoding=\"utf-8\"?>" +
-                "<DummyClass xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\">" +
-                "<SampleInt>10</SampleInt></DummyClass>";
+                "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
+                + "<DummyClass xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\">"
+                + "<SampleInt>10</SampleInt></DummyClass>";
 
             var sampleInput = new DummyClass { SampleInt = 10 };
-            var outputFormatterContext = GetOutputFormatterContext(sampleInput, sampleInput.GetType());
+            var outputFormatterContext = GetOutputFormatterContext(
+                sampleInput,
+                sampleInput.GetType()
+            );
             var formatter = new XmlDataContractSerializerOutputFormatter(
-                new XmlWriterSettings
-                {
-                    OmitXmlDeclaration = false,
-                    CloseOutput = false
-                });
+                new XmlWriterSettings { OmitXmlDeclaration = false, CloseOutput = false }
+            );
 
             // Act
             await formatter.WriteAsync(outputFormatterContext);
@@ -278,13 +299,16 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
         {
             // Arrange
             var expectedOutput =
-                "<?xml version=\"1.0\" encoding=\"utf-16\"?>" +
-                "<DummyClass xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\">" +
-                "<SampleInt>10</SampleInt></DummyClass>";
+                "<?xml version=\"1.0\" encoding=\"utf-16\"?>"
+                + "<DummyClass xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\">"
+                + "<SampleInt>10</SampleInt></DummyClass>";
 
             var sampleInput = new DummyClass { SampleInt = 10 };
-            var outputFormatterContext = GetOutputFormatterContext(sampleInput, sampleInput.GetType(),
-                "application/xml; charset=utf-16");
+            var outputFormatterContext = GetOutputFormatterContext(
+                sampleInput,
+                sampleInput.GetType(),
+                "application/xml; charset=utf-16"
+            );
             var formatter = new XmlDataContractSerializerOutputFormatter();
             formatter.WriterSettings.OmitXmlDeclaration = false;
 
@@ -297,7 +321,12 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
 
             var content = new StreamReader(
                 body,
-                new UnicodeEncoding(bigEndian: false, byteOrderMark: false, throwOnInvalidBytes: true)).ReadToEnd();
+                new UnicodeEncoding(
+                    bigEndian: false,
+                    byteOrderMark: false,
+                    throwOnInvalidBytes: true
+                )
+            ).ReadToEnd();
             XmlAssert.Equal(expectedOutput, content);
         }
 
@@ -308,13 +337,16 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
         {
             // Arrange
             var expectedOutput =
-                "<DummyClass xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\">" +
-                "\r\n  <SampleInt>10</SampleInt>\r\n</DummyClass>";
+                "<DummyClass xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\">"
+                + "\r\n  <SampleInt>10</SampleInt>\r\n</DummyClass>";
 
             var sampleInput = new DummyClass { SampleInt = 10 };
             var formatter = new XmlDataContractSerializerOutputFormatter();
             formatter.WriterSettings.Indent = true;
-            var outputFormatterContext = GetOutputFormatterContext(sampleInput, sampleInput.GetType());
+            var outputFormatterContext = GetOutputFormatterContext(
+                sampleInput,
+                sampleInput.GetType()
+            );
 
             // Act
             await formatter.WriteAsync(outputFormatterContext);
@@ -335,7 +367,10 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
             // Arrange
             var sampleInput = new DummyClass { SampleInt = 10 };
             var formatter = new XmlDataContractSerializerOutputFormatter();
-            var outputFormatterContext = GetOutputFormatterContext(sampleInput, sampleInput.GetType());
+            var outputFormatterContext = GetOutputFormatterContext(
+                sampleInput,
+                sampleInput.GetType()
+            );
 
             // Act
             await formatter.WriteAsync(outputFormatterContext);
@@ -353,7 +388,10 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
             // Arrange
             var sampleInput = new DummyClass { SampleInt = 10 };
             var formatter = new XmlDataContractSerializerOutputFormatter();
-            var outputFormatterContext = GetOutputFormatterContext(sampleInput, sampleInput.GetType());
+            var outputFormatterContext = GetOutputFormatterContext(
+                sampleInput,
+                sampleInput.GetType()
+            );
 
             var response = outputFormatterContext.HttpContext.Response;
             response.Body = FlushReportingStream.GetThrowingStream();
@@ -368,11 +406,24 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
             {
                 yield return new object[] { null, typeof(string), true };
                 yield return new object[] { null, null, false };
-                yield return new object[] { new DummyClass { SampleInt = 5 }, typeof(DummyClass), true };
-                yield return new object[] {
-                    new Dictionary<string, string> { { "Hello", "world" } }, typeof(object), true };
-                yield return new object[] {
-                    new Dictionary<string, string> { { "Hello", "world" } }, typeof(Dictionary<string,string>), true };
+                yield return new object[]
+                {
+                    new DummyClass { SampleInt = 5 },
+                    typeof(DummyClass),
+                    true
+                };
+                yield return new object[]
+                {
+                    new Dictionary<string, string> { { "Hello", "world" } },
+                    typeof(object),
+                    true
+                };
+                yield return new object[]
+                {
+                    new Dictionary<string, string> { { "Hello", "world" } },
+                    typeof(Dictionary<string, string>),
+                    true
+                };
             }
         }
 
@@ -380,7 +431,11 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
         // Mono issue - https://github.com/aspnet/External/issues/18
         [FrameworkSkipCondition(RuntimeFrameworks.Mono)]
         [MemberData(nameof(TypesForCanWriteResult))]
-        public void CanWriteResult_ReturnsExpectedValueForObjectType(object input, Type declaredType, bool expectedOutput)
+        public void CanWriteResult_ReturnsExpectedValueForObjectType(
+            object input,
+            Type declaredType,
+            bool expectedOutput
+        )
         {
             // Arrange
             var formatter = new XmlDataContractSerializerOutputFormatter();
@@ -413,7 +468,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
         public void CanWriteResult_ReturnsExpectedValueForMediaType(
             string mediaType,
             bool isServerDefined,
-            string expectedResult)
+            string expectedResult
+        )
         {
             // Arrange
             var formatter = new XmlDataContractSerializerOutputFormatter();
@@ -427,7 +483,10 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
             // Assert
             var expectedContentType = expectedResult ?? mediaType;
             Assert.Equal(expectedResult != null, actualCanWriteValue);
-            Assert.Equal(new StringSegment(expectedContentType), outputFormatterContext.ContentType);
+            Assert.Equal(
+                new StringSegment(expectedContentType),
+                outputFormatterContext.ContentType
+            );
         }
 
         public static IEnumerable<object[]> TypesForGetSupportedContentTypes
@@ -450,9 +509,7 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
             var formatter = new XmlDataContractSerializerOutputFormatter();
 
             // Act
-            var result = formatter.GetSupportedContentTypes(
-                "application/xml",
-                type);
+            var result = formatter.GetSupportedContentTypes("application/xml", type);
 
             // Assert
             if (expectedOutput != null)
@@ -474,7 +531,9 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
             var outputFormatterContext = GetOutputFormatterContext(sampleInput, typeof(DummyClass));
 
             // Act & Assert
-            await Assert.ThrowsAsync<SerializationException>(async () => await formatter.WriteAsync(outputFormatterContext));
+            await Assert.ThrowsAsync<SerializationException>(
+                async () => await formatter.WriteAsync(outputFormatterContext)
+            );
         }
 
         [ConditionalFact]
@@ -491,7 +550,9 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
             var outputFormatterContext = GetOutputFormatterContext(parent, parent.GetType());
 
             // Act & Assert
-            await Assert.ThrowsAsync<SerializationException>(async () => await formatter.WriteAsync(outputFormatterContext));
+            await Assert.ThrowsAsync<SerializationException>(
+                async () => await formatter.WriteAsync(outputFormatterContext)
+            );
         }
 
         [ConditionalFact]
@@ -511,7 +572,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
                 SubstituteRootName,
                 SubstituteRootNamespace,
                 InstanceNamespace,
-                sampleInt);
+                sampleInt
+            );
 
             var sampleInput = new DummyClass { SampleInt = sampleInt };
 
@@ -525,7 +587,10 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
             {
                 SerializerSettings = settings
             };
-            var outputFormatterContext = GetOutputFormatterContext(sampleInput, sampleInput.GetType());
+            var outputFormatterContext = GetOutputFormatterContext(
+                sampleInput,
+                sampleInput.GetType()
+            );
 
             // Act
             await formatter.WriteAsync(outputFormatterContext);
@@ -553,10 +618,11 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
                 CultureInfo.InvariantCulture,
                 "<DummyClass xmlns:i=\"{1}\" xmlns=\"\" i:type=\"{0}\"><SampleInt>{2}</SampleInt>"
                     + "<SampleString>{3}</SampleString></DummyClass>",
-                    KnownTypeName,
-                    InstanceNamespace,
-                    sampleInt,
-                    sampleString);
+                KnownTypeName,
+                InstanceNamespace,
+                sampleInt,
+                sampleString
+            );
 
             var sampleInput = new SomeDummyClass
             {
@@ -598,23 +664,21 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
 
             var expectedOutput = string.Format(
                 CultureInfo.InvariantCulture,
-                "<Parent xmlns:i=\"{0}\" z:Id=\"{2}\" xmlns:z=\"{1}\">" +
-                "<Children z:Id=\"2\" z:Size=\"1\">" +
-                "<Child z:Id=\"3\"><Id>{2}</Id><Parent z:Ref=\"1\" i:nil=\"true\" />" +
-                "</Child></Children><Name z:Id=\"4\">{3}</Name></Parent>",
+                "<Parent xmlns:i=\"{0}\" z:Id=\"{2}\" xmlns:z=\"{1}\">"
+                    + "<Children z:Id=\"2\" z:Size=\"1\">"
+                    + "<Child z:Id=\"3\"><Id>{2}</Id><Parent z:Ref=\"1\" i:nil=\"true\" />"
+                    + "</Child></Children><Name z:Id=\"4\">{3}</Name></Parent>",
                 InstanceNamespace,
                 SerializationNamespace,
                 sampleId,
-                sampleName);
+                sampleName
+            );
 
             var child = new Child { Id = sampleId };
             var parent = new Parent { Name = sampleName, Children = new List<Child> { child } };
             child.Parent = parent;
 
-            var settings = new DataContractSerializerSettings
-            {
-                PreserveObjectReferences = true
-            };
+            var settings = new DataContractSerializerSettings { PreserveObjectReferences = true };
             var formatter = new XmlDataContractSerializerOutputFormatter
             {
                 SerializerSettings = settings
@@ -632,22 +696,28 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
             XmlAssert.Equal(expectedOutput, content);
         }
 
-        public static TheoryData<XmlDataContractSerializerOutputFormatter, TestSink> LogsWhenUnableToCreateSerializerForTypeData
+        public static TheoryData<
+            XmlDataContractSerializerOutputFormatter,
+            TestSink
+        > LogsWhenUnableToCreateSerializerForTypeData
         {
             get
             {
                 var sink1 = new TestSink();
-                var formatter1 = new XmlDataContractSerializerOutputFormatter(new TestLoggerFactory(sink1, enabled: true));
+                var formatter1 = new XmlDataContractSerializerOutputFormatter(
+                    new TestLoggerFactory(sink1, enabled: true)
+                );
 
                 var sink2 = new TestSink();
                 var formatter2 = new XmlDataContractSerializerOutputFormatter(
                     new XmlWriterSettings(),
-                    new TestLoggerFactory(sink2, enabled: true));
+                    new TestLoggerFactory(sink2, enabled: true)
+                );
 
                 return new TheoryData<XmlDataContractSerializerOutputFormatter, TestSink>()
                 {
                     { formatter1, sink1 },
-                    { formatter2, sink2}
+                    { formatter2, sink2 }
                 };
             }
         }
@@ -656,10 +726,14 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
         [MemberData(nameof(LogsWhenUnableToCreateSerializerForTypeData))]
         public void CannotCreateSerializer_LogsWarning(
             XmlDataContractSerializerOutputFormatter formatter,
-            TestSink sink)
+            TestSink sink
+        )
         {
             // Arrange
-            var outputFormatterContext = GetOutputFormatterContext(new Customer(10), typeof(Customer));
+            var outputFormatterContext = GetOutputFormatterContext(
+                new Customer(10),
+                typeof(Customer)
+            );
 
             // Act
             var result = formatter.CanWriteResult(outputFormatterContext);
@@ -668,8 +742,10 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
             Assert.False(result);
             var write = Assert.Single(sink.Writes);
             Assert.Equal(LogLevel.Warning, write.LogLevel);
-            Assert.Equal($"An error occurred while trying to create a DataContractSerializer for the type '{typeof(Customer).FullName}'.",
-                write.State.ToString());
+            Assert.Equal(
+                $"An error occurred while trying to create a DataContractSerializer for the type '{typeof(Customer).FullName}'.",
+                write.State.ToString()
+            );
         }
 
         [Fact]
@@ -677,7 +753,10 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
         {
             // Arrange
             var formatter = new XmlDataContractSerializerOutputFormatter(); // no logger is being supplied here on purpose
-            var outputFormatterContext = GetOutputFormatterContext(new Customer(10), typeof(Customer));
+            var outputFormatterContext = GetOutputFormatterContext(
+                new Customer(10),
+                typeof(Customer)
+            );
 
             // Act
             var canWriteResult = formatter.CanWriteResult(outputFormatterContext);
@@ -694,22 +773,36 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
                 var newLine = Environment.NewLine;
                 return new TheoryData<bool, object, string>()
                 {
-                    { true, obj, "<DummyClass xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\">" +
-                    $"{newLine}  <SampleInt>10</SampleInt>{newLine}</DummyClass>" },
-                    { false, obj, "<DummyClass xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\">" +
-                        "<SampleInt>10</SampleInt></DummyClass>" }
+                    {
+                        true,
+                        obj,
+                        "<DummyClass xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\">"
+                            + $"{newLine}  <SampleInt>10</SampleInt>{newLine}</DummyClass>"
+                    },
+                    {
+                        false,
+                        obj,
+                        "<DummyClass xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\">"
+                            + "<SampleInt>10</SampleInt></DummyClass>"
+                    }
                 };
             }
         }
 
         [Theory]
         [MemberData(nameof(CanIndentOutputConditionallyData))]
-        public async Task CanIndentOutputConditionally(bool indent, object input, string expectedOutput)
+        public async Task CanIndentOutputConditionally(
+            bool indent,
+            object input,
+            string expectedOutput
+        )
         {
             // Arrange
             var formatter = new IndentingXmlDataContractSerializerOutputFormatter();
             var outputFormatterContext = GetOutputFormatterContext(input, input.GetType());
-            outputFormatterContext.HttpContext.Request.QueryString = new QueryString("?indent=" + indent);
+            outputFormatterContext.HttpContext.Request.QueryString = new QueryString(
+                "?indent=" + indent
+            );
 
             // Act
             await formatter.WriteAsync(outputFormatterContext);
@@ -725,29 +818,34 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
         private OutputFormatterWriteContext GetOutputFormatterContext(
             object outputValue,
             Type outputType,
-            string contentType = "application/xml; charset=utf-8")
+            string contentType = "application/xml; charset=utf-8"
+        )
         {
             return new OutputFormatterWriteContext(
                 GetHttpContext(contentType),
                 new TestHttpResponseStreamWriterFactory().CreateWriter,
                 outputType,
-                outputValue);
+                outputValue
+            );
         }
 
         private static HttpContext GetHttpContext(string contentType)
         {
             var httpContext = new DefaultHttpContext();
             var request = httpContext.Request;
-            request.Headers["Accept-Charset"] = MediaTypeHeaderValue.Parse(contentType).Charset.ToString();
+            request.Headers["Accept-Charset"] = MediaTypeHeaderValue.Parse(contentType)
+                .Charset.ToString();
             request.ContentType = contentType;
             httpContext.Response.Body = new MemoryStream();
-            httpContext.RequestServices = new ServiceCollection()
-                .AddSingleton(Options.Create(new MvcOptions()))
+            httpContext.RequestServices = new ServiceCollection().AddSingleton(
+                    Options.Create(new MvcOptions())
+                )
                 .BuildServiceProvider();
             return httpContext;
         }
 
-        private class TestXmlDataContractSerializerOutputFormatter : XmlDataContractSerializerOutputFormatter
+        private class TestXmlDataContractSerializerOutputFormatter
+            : XmlDataContractSerializerOutputFormatter
         {
             public int createSerializerCalledCount = 0;
 
@@ -758,12 +856,14 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
             }
         }
 
-        private class IndentingXmlDataContractSerializerOutputFormatter : XmlDataContractSerializerOutputFormatter
+        private class IndentingXmlDataContractSerializerOutputFormatter
+            : XmlDataContractSerializerOutputFormatter
         {
             public override XmlWriter CreateXmlWriter(
                 OutputFormatterWriteContext context,
                 TextWriter writer,
-                XmlWriterSettings xmlWriterSettings)
+                XmlWriterSettings xmlWriterSettings
+            )
             {
                 var request = context.HttpContext.Request;
                 if (request.Query["indent"] == "True")
@@ -776,9 +876,7 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
         }
         public class Customer
         {
-            public Customer(int id)
-            {
-            }
+            public Customer(int id) { }
 
             public int MyProperty { get; set; }
         }

@@ -18,7 +18,10 @@ namespace Microsoft.AspNetCore.Builder
         private readonly object _lock;
         private readonly List<Action<EndpointBuilder>> _conventions;
 
-        internal PageActionEndpointConventionBuilder(object @lock, List<Action<EndpointBuilder>> conventions)
+        internal PageActionEndpointConventionBuilder(
+            object @lock,
+            List<Action<EndpointBuilder>> conventions
+        )
         {
             _lock = @lock;
             _conventions = conventions;

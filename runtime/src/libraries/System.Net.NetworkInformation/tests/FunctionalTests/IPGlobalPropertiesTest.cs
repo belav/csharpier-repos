@@ -25,7 +25,10 @@ namespace System.Net.NetworkInformation.Tests
             _log = output;
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotWindowsSubsystemForLinux))] // [ActiveIssue("https://github.com/dotnet/runtime/issues/18258")]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotWindowsSubsystemForLinux)
+        )] // [ActiveIssue("https://github.com/dotnet/runtime/issues/18258")]
         public void IPGlobalProperties_AccessAllMethods_NoErrors()
         {
             IPGlobalProperties gp = IPGlobalProperties.GetIPGlobalProperties();
@@ -49,17 +52,23 @@ namespace System.Net.NetworkInformation.Tests
             Assert.NotNull(gp.GetUdpIPv6Statistics());
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsNotWindowsSubsystemForLinux))] // [ActiveIssue("https://github.com/dotnet/runtime/issues/18258")]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotWindowsSubsystemForLinux)
+        )] // [ActiveIssue("https://github.com/dotnet/runtime/issues/18258")]
         [MemberData(nameof(Loopbacks))]
         public void IPGlobalProperties_TcpListeners_Succeed(IPAddress address)
         {
-            using (var server = new Socket(address.AddressFamily, SocketType.Stream, ProtocolType.Tcp))
+            using (
+                var server = new Socket(address.AddressFamily, SocketType.Stream, ProtocolType.Tcp)
+            )
             {
                 server.Bind(new IPEndPoint(address, 0));
                 server.Listen(1);
                 _log.WriteLine($"listening on {server.LocalEndPoint}");
 
-                IPEndPoint[] tcpListeners = IPGlobalProperties.GetIPGlobalProperties().GetActiveTcpListeners();
+                IPEndPoint[] tcpListeners = IPGlobalProperties.GetIPGlobalProperties()
+                    .GetActiveTcpListeners();
                 bool found = false;
                 foreach (IPEndPoint ep in tcpListeners)
                 {
@@ -74,27 +83,45 @@ namespace System.Net.NetworkInformation.Tests
             }
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsNotWindowsSubsystemForLinux))] // [ActiveIssue("https://github.com/dotnet/runtime/issues/18258")]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/34690", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotWindowsSubsystemForLinux)
+        )] // [ActiveIssue("https://github.com/dotnet/runtime/issues/18258")]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/34690",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         [MemberData(nameof(Loopbacks))]
         public async Task IPGlobalProperties_TcpActiveConnections_Succeed(IPAddress address)
         {
-            using (var server = new Socket(address.AddressFamily, SocketType.Stream, ProtocolType.Tcp))
-            using (var client = new Socket(address.AddressFamily, SocketType.Stream, ProtocolType.Tcp))
+            using (
+                var server = new Socket(address.AddressFamily, SocketType.Stream, ProtocolType.Tcp)
+            )
+            using (
+                var client = new Socket(address.AddressFamily, SocketType.Stream, ProtocolType.Tcp)
+            )
             {
                 server.Bind(new IPEndPoint(address, 0));
                 server.Listen(1);
                 _log.WriteLine($"listening on {server.LocalEndPoint}");
 
                 await client.ConnectAsync(server.LocalEndPoint);
-                _log.WriteLine($"Looking for connection {client.LocalEndPoint} <-> {client.RemoteEndPoint}");
+                _log.WriteLine(
+                    $"Looking for connection {client.LocalEndPoint} <-> {client.RemoteEndPoint}"
+                );
 
-                TcpConnectionInformation[] tcpCconnections = IPGlobalProperties.GetIPGlobalProperties().GetActiveTcpConnections();
+                TcpConnectionInformation[] tcpCconnections =
+                    IPGlobalProperties.GetIPGlobalProperties().GetActiveTcpConnections();
                 bool found = false;
                 foreach (TcpConnectionInformation ti in tcpCconnections)
                 {
-                    if (ti.LocalEndPoint.Equals(client.LocalEndPoint) && ti.RemoteEndPoint.Equals(client.RemoteEndPoint) &&
-                       (ti.State == TcpState.Established))
+                    if (
+                        ti.LocalEndPoint.Equals(client.LocalEndPoint)
+                        && ti.RemoteEndPoint.Equals(client.RemoteEndPoint)
+                        && (ti.State == TcpState.Established)
+                    )
                     {
                         found = true;
                         break;
@@ -105,23 +132,36 @@ namespace System.Net.NetworkInformation.Tests
             }
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotWindowsSubsystemForLinux))] // [ActiveIssue("https://github.com/dotnet/runtime/issues/18258")]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotWindowsSubsystemForLinux)
+        )] // [ActiveIssue("https://github.com/dotnet/runtime/issues/18258")]
         public void IPGlobalProperties_TcpActiveConnections_NotListening()
         {
-            TcpConnectionInformation[] tcpCconnections = IPGlobalProperties.GetIPGlobalProperties().GetActiveTcpConnections();
+            TcpConnectionInformation[] tcpCconnections = IPGlobalProperties.GetIPGlobalProperties()
+                .GetActiveTcpConnections();
             foreach (TcpConnectionInformation ti in tcpCconnections)
             {
                 Assert.NotEqual(TcpState.Listen, ti.State);
             }
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotWindowsSubsystemForLinux))] // [ActiveIssue("https://github.com/dotnet/runtime/issues/18258")]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotWindowsSubsystemForLinux)
+        )] // [ActiveIssue("https://github.com/dotnet/runtime/issues/18258")]
         public async Task GetUnicastAddresses_NotEmpty()
         {
             IPGlobalProperties props = IPGlobalProperties.GetIPGlobalProperties();
             Assert.NotEmpty(props.GetUnicastAddresses());
             Assert.NotEmpty(await props.GetUnicastAddressesAsync());
-            Assert.NotEmpty(await Task.Factory.FromAsync(props.BeginGetUnicastAddresses, props.EndGetUnicastAddresses, null));
+            Assert.NotEmpty(
+                await Task.Factory.FromAsync(
+                    props.BeginGetUnicastAddresses,
+                    props.EndGetUnicastAddresses,
+                    null
+                )
+            );
         }
     }
 }

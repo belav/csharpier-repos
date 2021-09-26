@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved. 
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information. 
+// Copyright (c) .NET Foundation. All rights reserved.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System;
 
@@ -15,7 +15,10 @@ namespace Microsoft.AspNetCore.Localization
         /// </summary>
         /// <param name="requestCulture">The <see cref="Localization.RequestCulture"/>.</param>
         /// <param name="provider">The <see cref="IRequestCultureProvider"/>.</param>
-        public RequestCultureFeature(RequestCulture requestCulture, IRequestCultureProvider? provider)
+        public RequestCultureFeature(
+            RequestCulture requestCulture,
+            IRequestCultureProvider? provider
+        )
         {
             if (requestCulture == null)
             {

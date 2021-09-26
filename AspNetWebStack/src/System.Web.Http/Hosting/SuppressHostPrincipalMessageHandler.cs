@@ -22,11 +22,15 @@ namespace System.Web.Http.Hosting
     public class SuppressHostPrincipalMessageHandler : DelegatingHandler
     {
         private static readonly Lazy<IPrincipal> _anonymousPrincipal = new Lazy<IPrincipal>(
-            () => new ClaimsPrincipal(new ClaimsIdentity()), isThreadSafe: true);
+            () => new ClaimsPrincipal(new ClaimsIdentity()),
+            isThreadSafe: true
+        );
 
         /// <inheritdoc />
-        protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request,
-            CancellationToken cancellationToken)
+        protected override async Task<HttpResponseMessage> SendAsync(
+            HttpRequestMessage request,
+            CancellationToken cancellationToken
+        )
         {
             if (request == null)
             {
@@ -38,20 +42,27 @@ namespace System.Web.Http.Hosting
             {
                 return await base.SendAsync(request, cancellationToken);
             }
+
             finally
             {
                 SetCurrentPrincipal(request, previousPrincipal);
             }
         }
 
-        private static IPrincipal SetCurrentPrincipal(HttpRequestMessage request, IPrincipal principal)
+        private static IPrincipal SetCurrentPrincipal(
+            HttpRequestMessage request,
+            IPrincipal principal
+        )
         {
             Contract.Assert(request != null);
 
             HttpRequestContext requestContext = request.GetRequestContext();
             if (requestContext == null)
             {
-                throw new ArgumentException(SRResources.Request_RequestContextMustNotBeNull, "request");
+                throw new ArgumentException(
+                    SRResources.Request_RequestContextMustNotBeNull,
+                    "request"
+                );
             }
 
             var previousPrincipal = requestContext.Principal;

@@ -38,7 +38,12 @@ namespace Microsoft.AspNetCore.Server.KestrelTests
         static byte[] _invalidMethod12 = Encoding.ASCII.GetBytes("TRACE_\0\0");
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static object[] CreateTestDataEntry(byte[] methodData, int expectedMethod, int expectedLength, bool expectedResult)
+        private static object[] CreateTestDataEntry(
+            byte[] methodData,
+            int expectedMethod,
+            int expectedLength,
+            bool expectedResult
+        )
         {
             return new object[] { methodData, expectedMethod, expectedLength, expectedResult };
         }
@@ -72,7 +77,12 @@ namespace Microsoft.AspNetCore.Server.KestrelTests
 
         [Theory]
         [MemberData(nameof(TestData), MemberType = typeof(KnownStringsTests))]
-        public void GetsKnownMethod(byte[] methodData, int intExpectedMethod, int expectedLength, bool expectedResult)
+        public void GetsKnownMethod(
+            byte[] methodData,
+            int intExpectedMethod,
+            int expectedLength,
+            bool expectedResult
+        )
         {
             var expectedMethod = (HttpMethod)intExpectedMethod;
             var data = new ReadOnlySpan<byte>(methodData);

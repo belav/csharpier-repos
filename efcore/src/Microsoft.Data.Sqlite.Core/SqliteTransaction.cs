@@ -20,12 +20,22 @@ namespace Microsoft.Data.Sqlite
         private readonly IsolationLevel _isolationLevel;
         private bool _completed;
 
-        internal SqliteTransaction(SqliteConnection connection, IsolationLevel isolationLevel, bool deferred)
+        internal SqliteTransaction(
+            SqliteConnection connection,
+            IsolationLevel isolationLevel,
+            bool deferred
+        )
         {
-            if ((isolationLevel == IsolationLevel.ReadUncommitted
-                    && ((connection.ConnectionOptions!.Cache != SqliteCacheMode.Shared) || !deferred))
+            if (
+                (
+                    isolationLevel == IsolationLevel.ReadUncommitted
+                    && (
+                        (connection.ConnectionOptions!.Cache != SqliteCacheMode.Shared) || !deferred
+                    )
+                )
                 || isolationLevel == IsolationLevel.ReadCommitted
-                || isolationLevel == IsolationLevel.RepeatableRead)
+                || isolationLevel == IsolationLevel.RepeatableRead
+            )
             {
                 isolationLevel = IsolationLevel.Serializable;
             }
@@ -48,8 +58,9 @@ namespace Microsoft.Data.Sqlite
 
             connection.ExecuteNonQuery(
                 IsolationLevel == IsolationLevel.Serializable && !deferred
-                    ? "BEGIN IMMEDIATE;"
-                    : "BEGIN;");
+                  ? "BEGIN IMMEDIATE;"
+                  : "BEGIN;"
+            );
             sqlite3_rollback_hook(connection.Handle, RollbackExternal, null);
         }
 
@@ -57,15 +68,13 @@ namespace Microsoft.Data.Sqlite
         ///     Gets the connection associated with the transaction.
         /// </summary>
         /// <value>The connection associated with the transaction.</value>
-        public new virtual SqliteConnection? Connection
-            => _connection;
+        public new virtual SqliteConnection? Connection => _connection;
 
         /// <summary>
         ///     Gets the connection associated with the transaction.
         /// </summary>
         /// <value>The connection associated with the transaction.</value>
-        protected override DbConnection? DbConnection
-            => Connection;
+        protected override DbConnection? DbConnection => Connection;
 
         internal bool ExternalRollback { get; private set; }
 
@@ -74,13 +83,15 @@ namespace Microsoft.Data.Sqlite
         ///     closed.
         /// </summary>
         /// <value>The isolation level for the transaction.</value>
-        public override IsolationLevel IsolationLevel
-            => _completed || _connection!.State != ConnectionState.Open
+        public override IsolationLevel IsolationLevel =>
+            _completed || _connection!.State != ConnectionState.Open
                 ? throw new InvalidOperationException(Resources.TransactionCompleted)
                 : _isolationLevel != IsolationLevel.Unspecified
                     ? _isolationLevel
-                    : (_connection.ConnectionOptions!.Cache == SqliteCacheMode.Shared
-                        && _connection.ExecuteScalar<long>("PRAGMA read_uncommitted;") != 0)
+                    : (
+                          _connection.ConnectionOptions!.Cache == SqliteCacheMode.Shared
+                          && _connection.ExecuteScalar<long>("PRAGMA read_uncommitted;") != 0
+                      )
                         ? IsolationLevel.ReadUncommitted
                         : IsolationLevel.Serializable;
 
@@ -89,9 +100,7 @@ namespace Microsoft.Data.Sqlite
         /// </summary>
         public override void Commit()
         {
-            if (ExternalRollback
-                || _completed
-                || _connection!.State != ConnectionState.Open)
+            if (ExternalRollback || _completed || _connection!.State != ConnectionState.Open)
             {
                 throw new InvalidOperationException(Resources.TransactionCompleted);
             }
@@ -141,11 +150,11 @@ namespace Microsoft.Data.Sqlite
             }
 
             _connection.ExecuteNonQuery(
-                new StringBuilder()
-                    .Append("SAVEPOINT \"")
+                new StringBuilder().Append("SAVEPOINT \"")
                     .Append(savepointName.Replace("\"", "\"\""))
                     .Append("\";")
-                    .ToString());
+                    .ToString()
+            );
         }
 
         /// <summary>
@@ -169,11 +178,11 @@ namespace Microsoft.Data.Sqlite
             }
 
             _connection.ExecuteNonQuery(
-                new StringBuilder()
-                    .Append("ROLLBACK TO SAVEPOINT \"")
+                new StringBuilder().Append("ROLLBACK TO SAVEPOINT \"")
                     .Append(savepointName.Replace("\"", "\"\""))
                     .Append("\";")
-                    .ToString());
+                    .ToString()
+            );
         }
 
         /// <summary>
@@ -198,11 +207,11 @@ namespace Microsoft.Data.Sqlite
             }
 
             _connection.ExecuteNonQuery(
-                new StringBuilder()
-                    .Append("RELEASE SAVEPOINT \"")
+                new StringBuilder().Append("RELEASE SAVEPOINT \"")
                     .Append(savepointName.Replace("\"", "\"\""))
                     .Append("\";")
-                    .ToString());
+                    .ToString()
+            );
         }
 
         /// <summary>
@@ -214,9 +223,7 @@ namespace Microsoft.Data.Sqlite
         /// </param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing
-                && !_completed
-                && _connection!.State == ConnectionState.Open)
+            if (disposing && !_completed && _connection!.State == ConnectionState.Open)
             {
                 RollbackInternal();
             }

@@ -24,21 +24,13 @@ namespace BasicWebSite.Controllers.ContentNegotiation
         [Produces("text/vcard;VERSION=V3.0")]
         public Contact ContactInfoUsingV3Format()
         {
-            return new Contact()
-            {
-                Name = "John Williams",
-                Gender = GenderType.Male
-            };
+            return new Contact() { Name = "John Williams", Gender = GenderType.Male };
         }
 
         [Produces("text/vcard;VERSION=V4.0")]
         public Contact ContactInfoUsingV4Format()
         {
-            return new Contact()
-            {
-                Name = "John Williams",
-                Gender = GenderType.Male
-            };
+            return new Contact() { Name = "John Williams", Gender = GenderType.Male };
         }
     }
 }

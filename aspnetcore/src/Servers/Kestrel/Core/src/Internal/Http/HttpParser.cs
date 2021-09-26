@@ -12,13 +12,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
 {
     using BadHttpRequestException = Microsoft.AspNetCore.Http.BadHttpRequestException;
 
-    public class HttpParser<TRequestHandler> : IHttpParser<TRequestHandler> where TRequestHandler : IHttpHeadersHandler, IHttpRequestLineHandler
+    public class HttpParser<TRequestHandler> : IHttpParser<TRequestHandler>
+        where TRequestHandler : IHttpHeadersHandler, IHttpRequestLineHandler
     {
         private readonly bool _showErrorDetails;
 
-        public HttpParser() : this(showErrorDetails: true)
-        {
-        }
+        public HttpParser() : this(showErrorDetails: true) { }
 
         public HttpParser(bool showErrorDetails)
         {
@@ -37,7 +36,13 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
 
         public bool ParseRequestLine(TRequestHandler handler, ref SequenceReader<byte> reader)
         {
-            if (reader.TryReadTo(out ReadOnlySpan<byte> requestLine, ByteLF, advancePastDelimiter: true))
+            if (
+                reader.TryReadTo(
+                    out ReadOnlySpan<byte> requestLine,
+                    ByteLF,
+                    advancePastDelimiter: true
+                )
+            )
             {
                 ParseRequestLine(handler, requestLine);
                 return true;
@@ -95,7 +100,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
                 }
             }
 
-            var path = new TargetOffsetPathLength(targetStart, length: offset - targetStart, pathEncoded);
+            var path = new TargetOffsetPathLength(
+                targetStart,
+                length: offset - targetStart,
+                pathEncoded
+            );
 
             // Query string
             if (ch == ByteQuestionMark)
@@ -141,7 +150,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
 
             // We need to reinterpret from ReadOnlySpan into Span to allow path mutation for
             // in-place normalization and decoding to transform into a canonical path
-            var startLine = MemoryMarshal.CreateSpan(ref MemoryMarshal.GetReference(requestLine), queryEnd);
+            var startLine = MemoryMarshal.CreateSpan(
+                ref MemoryMarshal.GetReference(requestLine),
+                queryEnd
+            );
             handler.OnStartLine(versionAndMethod, path, startLine);
         }
 
@@ -194,7 +206,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
                         Debug.Assert(readAhead == 0 || readAhead == 2);
                         // Headers don't end in CRLF line.
 
-                        KestrelBadHttpRequestException.Throw(RequestRejectionReason.InvalidRequestHeadersNoCRLF);
+                        KestrelBadHttpRequestException.Throw(
+                            RequestRejectionReason.InvalidRequestHeadersNoCRLF
+                        );
                     }
 
                     var length = 0;
@@ -226,10 +240,13 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
                                 // Correctly has a LF, move to next
                                 length++;
 
-                                if (expectedLF != ByteLF ||
-                                    length < 5 ||
+                                if (
+                                    expectedLF != ByteLF
+                                    || length < 5
+                                    ||
                                     // Exclude the CRLF from the headerLine and parse the header name:value pair
-                                    !TryTakeSingleHeader(handler, span[..(length - 2)]))
+                                    !TryTakeSingleHeader(handler, span[..(length - 2)])
+                                )
                                 {
                                     // Sequence needs to be CRLF and not contain an inner CR not part of terminator.
                                     // Less than min possible headerSpan of 5 bytes a:b\r\n
@@ -291,7 +308,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
 
             SequencePosition lineEnd;
             ReadOnlySpan<byte> headerSpan;
-            if (currentSlice.Slice(reader.Position, lineEndPosition.Value).Length == currentSlice.Length - 1)
+            if (
+                currentSlice.Slice(reader.Position, lineEndPosition.Value).Length
+                == currentSlice.Length - 1
+            )
             {
                 // No enough data, so CRLF can't currently be there.
                 // However, we need to check the found char is CR and not LF
@@ -322,9 +342,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
                 RejectRequestHeader(headerSpan[..^1]);
             }
 
-            if (headerSpan[^1] != ByteLF ||
+            if (
+                headerSpan[^1] != ByteLF
+                ||
                 // Exclude the CRLF from the headerLine and parse the header name:value pair
-                !TryTakeSingleHeader(handler, headerSpan[..^2]))
+                !TryTakeSingleHeader(handler, headerSpan[..^2])
+            )
             {
                 // Sequence needs to be CRLF and not contain an inner CR not part of terminator.
                 // Not parsable as a valid name:value header pair.
@@ -334,7 +357,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             return headerSpan.Length;
         }
 
-        private static bool TryTakeSingleHeader(TRequestHandler handler, ReadOnlySpan<byte> headerLine)
+        private static bool TryTakeSingleHeader(
+            TRequestHandler handler,
+            ReadOnlySpan<byte> headerLine
+        )
         {
             // We are looking for a colon to terminate the header name.
             // However, the header name cannot contain a space or tab so look for all three
@@ -374,7 +400,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
                     // Ignore first whitespace.
                     valueStart++;
 
-                    // More header chars? 
+                    // More header chars?
                     if ((uint)valueStart < (uint)headerLine.Length)
                     {
                         ch = headerLine[valueStart];
@@ -447,36 +473,59 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             // Make sure we can check at least for the existence of a TLS handshake - we check the first byte
             // See https://serializethoughts.com/2014/07/27/dissecting-tls-client-hello-message/
 
-            return (requestLine.Length >= MinTlsRequestSize && requestLine[0] == SslRecordTypeHandshake);
+            return (
+                requestLine.Length >= MinTlsRequestSize && requestLine[0] == SslRecordTypeHandshake
+            );
         }
 
         [StackTraceHidden]
         private void RejectRequestLine(ReadOnlySpan<byte> requestLine)
         {
             throw GetInvalidRequestException(
-                IsTlsHandshake(requestLine) ?
-                RequestRejectionReason.TlsOverHttpError :
-                RequestRejectionReason.InvalidRequestLine,
-                requestLine);
+                IsTlsHandshake(requestLine)
+                  ? RequestRejectionReason.TlsOverHttpError
+                  : RequestRejectionReason.InvalidRequestLine,
+                requestLine
+            );
         }
 
         [StackTraceHidden]
-        private void RejectRequestHeader(ReadOnlySpan<byte> headerLine)
-            => throw GetInvalidRequestException(RequestRejectionReason.InvalidRequestHeader, headerLine);
+        private void RejectRequestHeader(ReadOnlySpan<byte> headerLine) =>
+            throw GetInvalidRequestException(
+                RequestRejectionReason.InvalidRequestHeader,
+                headerLine
+            );
 
         [StackTraceHidden]
         private void RejectUnknownVersion(int offset, ReadOnlySpan<byte> requestLine)
             // If CR before LF, reject and log entire line
-            => throw (((uint)offset >= (uint)requestLine.Length || requestLine[offset] == ByteCR || requestLine[^1] != ByteCR) ?
-            GetInvalidRequestException(RequestRejectionReason.InvalidRequestLine, requestLine) :
-            GetInvalidRequestException(RequestRejectionReason.UnrecognizedHTTPVersion, requestLine[offset..^1]));
+            =>
+            throw (
+                (
+                    (uint)offset >= (uint)requestLine.Length
+                    || requestLine[offset] == ByteCR
+                    || requestLine[^1] != ByteCR
+                )
+                    ? GetInvalidRequestException(
+                          RequestRejectionReason.InvalidRequestLine,
+                          requestLine
+                      )
+                    : GetInvalidRequestException(
+                          RequestRejectionReason.UnrecognizedHTTPVersion,
+                          requestLine[offset..^1]
+                      )
+            );
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private BadHttpRequestException GetInvalidRequestException(RequestRejectionReason reason, ReadOnlySpan<byte> headerLine)
-            => KestrelBadHttpRequestException.GetException(
+        private BadHttpRequestException GetInvalidRequestException(
+            RequestRejectionReason reason,
+            ReadOnlySpan<byte> headerLine
+        ) =>
+            KestrelBadHttpRequestException.GetException(
                 reason,
                 _showErrorDetails
-                    ? headerLine.GetAsciiStringEscaped(Constants.MaxExceptionDetailSize)
-                    : string.Empty);
+                  ? headerLine.GetAsciiStringEscaped(Constants.MaxExceptionDetailSize)
+                  : string.Empty
+            );
     }
 }

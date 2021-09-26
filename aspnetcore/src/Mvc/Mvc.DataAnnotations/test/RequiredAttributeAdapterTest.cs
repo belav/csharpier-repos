@@ -33,10 +33,18 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             stringLocalizer.Setup(s => s[attribute.ErrorMessage, expectedProperties])
                 .Returns(new LocalizedString(attribute.ErrorMessage, expectedMessage));
 
-            var adapter = new RequiredAttributeAdapter(attribute, stringLocalizer: stringLocalizer.Object);
+            var adapter = new RequiredAttributeAdapter(
+                attribute,
+                stringLocalizer: stringLocalizer.Object
+            );
 
             var actionContext = new ActionContext();
-            var context = new ClientModelValidationContext(actionContext, metadata, provider, new Dictionary<string, string>());
+            var context = new ClientModelValidationContext(
+                actionContext,
+                metadata,
+                provider,
+                new Dictionary<string, string>()
+            );
 
             // Act
             adapter.AddValidation(context);
@@ -44,8 +52,17 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             // Assert
             Assert.Collection(
                 context.Attributes,
-                kvp => { Assert.Equal("data-val", kvp.Key); Assert.Equal("true", kvp.Value); },
-                kvp => { Assert.Equal("data-val-required", kvp.Key); Assert.Equal(expectedMessage, kvp.Value); });
+                kvp =>
+                {
+                    Assert.Equal("data-val", kvp.Key);
+                    Assert.Equal("true", kvp.Value);
+                },
+                kvp =>
+                {
+                    Assert.Equal("data-val-required", kvp.Key);
+                    Assert.Equal(expectedMessage, kvp.Value);
+                }
+            );
         }
 
         [Fact]
@@ -61,7 +78,12 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             var adapter = new RequiredAttributeAdapter(attribute, stringLocalizer: null);
 
             var actionContext = new ActionContext();
-            var context = new ClientModelValidationContext(actionContext, metadata, provider, new Dictionary<string, string>());
+            var context = new ClientModelValidationContext(
+                actionContext,
+                metadata,
+                provider,
+                new Dictionary<string, string>()
+            );
 
             // Act
             adapter.AddValidation(context);
@@ -69,8 +91,17 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             // Assert
             Assert.Collection(
                 context.Attributes,
-                kvp => { Assert.Equal("data-val", kvp.Key); Assert.Equal("true", kvp.Value); },
-                kvp => { Assert.Equal("data-val-required", kvp.Key); Assert.Equal(expectedMessage, kvp.Value); });
+                kvp =>
+                {
+                    Assert.Equal("data-val", kvp.Key);
+                    Assert.Equal("true", kvp.Value);
+                },
+                kvp =>
+                {
+                    Assert.Equal("data-val-required", kvp.Key);
+                    Assert.Equal(expectedMessage, kvp.Value);
+                }
+            );
         }
 
         [Fact]
@@ -86,7 +117,12 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             var adapter = new RequiredAttributeAdapter(attribute, stringLocalizer: null);
 
             var actionContext = new ActionContext();
-            var context = new ClientModelValidationContext(actionContext, metadata, provider, new Dictionary<string, string>());
+            var context = new ClientModelValidationContext(
+                actionContext,
+                metadata,
+                provider,
+                new Dictionary<string, string>()
+            );
 
             context.Attributes.Add("data-val", "original");
             context.Attributes.Add("data-val-required", "original");
@@ -97,8 +133,17 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             // Assert
             Assert.Collection(
                 context.Attributes,
-                kvp => { Assert.Equal("data-val", kvp.Key); Assert.Equal("original", kvp.Value); },
-                kvp => { Assert.Equal("data-val-required", kvp.Key); Assert.Equal("original", kvp.Value); });
+                kvp =>
+                {
+                    Assert.Equal("data-val", kvp.Key);
+                    Assert.Equal("original", kvp.Value);
+                },
+                kvp =>
+                {
+                    Assert.Equal("data-val-required", kvp.Key);
+                    Assert.Equal("original", kvp.Value);
+                }
+            );
         }
     }
 }

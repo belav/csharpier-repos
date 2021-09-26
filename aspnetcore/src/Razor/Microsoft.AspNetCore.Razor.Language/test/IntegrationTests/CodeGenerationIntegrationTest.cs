@@ -10,10 +10,7 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
 {
     public class CodeGenerationIntegrationTest : IntegrationTestBase
     {
-        public CodeGenerationIntegrationTest()
-            : base(generateBaselines: null)
-        {
-        }
+        public CodeGenerationIntegrationTest() : base(generateBaselines: null) { }
 
         #region Runtime
         [Fact]
@@ -402,14 +399,18 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
         public void AttributeTargetingTagHelpers_Runtime()
         {
             // Arrange, Act & Assert
-            RunRuntimeTagHelpersTest(TestTagHelperDescriptors.AttributeTargetingTagHelperDescriptors);
+            RunRuntimeTagHelpersTest(
+                TestTagHelperDescriptors.AttributeTargetingTagHelperDescriptors
+            );
         }
 
         [Fact]
         public void PrefixedAttributeTagHelpers_Runtime()
         {
             // Arrange, Act & Assert
-            RunRuntimeTagHelpersTest(TestTagHelperDescriptors.PrefixedAttributeTagHelperDescriptors);
+            RunRuntimeTagHelpersTest(
+                TestTagHelperDescriptors.PrefixedAttributeTagHelperDescriptors
+            );
         }
 
         [Fact]
@@ -423,7 +424,9 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
         public void DynamicAttributeTagHelpers_Runtime()
         {
             // Arrange, Act & Assert
-            RunRuntimeTagHelpersTest(TestTagHelperDescriptors.DynamicAttributeTagHelpers_Descriptors);
+            RunRuntimeTagHelpersTest(
+                TestTagHelperDescriptors.DynamicAttributeTagHelpers_Descriptors
+            );
         }
 
         [Fact]
@@ -817,105 +820,135 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
         public void SingleTagHelper_DesignTime()
         {
             // Arrange, Act & Assert
-            RunDesignTimeTagHelpersTest(TestTagHelperDescriptors.DefaultPAndInputTagHelperDescriptors);
+            RunDesignTimeTagHelpersTest(
+                TestTagHelperDescriptors.DefaultPAndInputTagHelperDescriptors
+            );
         }
 
         [Fact]
         public void SingleTagHelperWithNewlineBeforeAttributes_DesignTime()
         {
             // Arrange, Act & Assert
-            RunDesignTimeTagHelpersTest(TestTagHelperDescriptors.DefaultPAndInputTagHelperDescriptors);
+            RunDesignTimeTagHelpersTest(
+                TestTagHelperDescriptors.DefaultPAndInputTagHelperDescriptors
+            );
         }
 
         [Fact]
         public void TagHelpersWithWeirdlySpacedAttributes_DesignTime()
         {
             // Arrange, Act & Assert
-            RunDesignTimeTagHelpersTest(TestTagHelperDescriptors.DefaultPAndInputTagHelperDescriptors);
+            RunDesignTimeTagHelpersTest(
+                TestTagHelperDescriptors.DefaultPAndInputTagHelperDescriptors
+            );
         }
 
         [Fact]
         public void IncompleteTagHelper_DesignTime()
         {
             // Arrange, Act & Assert
-            RunDesignTimeTagHelpersTest(TestTagHelperDescriptors.DefaultPAndInputTagHelperDescriptors);
+            RunDesignTimeTagHelpersTest(
+                TestTagHelperDescriptors.DefaultPAndInputTagHelperDescriptors
+            );
         }
 
         [Fact]
         public void BasicTagHelpers_DesignTime()
         {
             // Arrange, Act & Assert
-            RunDesignTimeTagHelpersTest(TestTagHelperDescriptors.DefaultPAndInputTagHelperDescriptors);
+            RunDesignTimeTagHelpersTest(
+                TestTagHelperDescriptors.DefaultPAndInputTagHelperDescriptors
+            );
         }
 
         [Fact]
         public void BasicTagHelpers_Prefixed_DesignTime()
         {
             // Arrange, Act & Assert
-            RunDesignTimeTagHelpersTest(TestTagHelperDescriptors.DefaultPAndInputTagHelperDescriptors);
+            RunDesignTimeTagHelpersTest(
+                TestTagHelperDescriptors.DefaultPAndInputTagHelperDescriptors
+            );
         }
 
         [Fact]
         public void ComplexTagHelpers_DesignTime()
         {
             // Arrange, Act & Assert
-            RunDesignTimeTagHelpersTest(TestTagHelperDescriptors.DefaultPAndInputTagHelperDescriptors);
+            RunDesignTimeTagHelpersTest(
+                TestTagHelperDescriptors.DefaultPAndInputTagHelperDescriptors
+            );
         }
 
         [Fact]
         public void EmptyAttributeTagHelpers_DesignTime()
         {
             // Arrange, Act & Assert
-            RunDesignTimeTagHelpersTest(TestTagHelperDescriptors.DefaultPAndInputTagHelperDescriptors);
+            RunDesignTimeTagHelpersTest(
+                TestTagHelperDescriptors.DefaultPAndInputTagHelperDescriptors
+            );
         }
 
         [Fact]
         public void EscapedTagHelpers_DesignTime()
         {
             // Arrange, Act & Assert
-            RunDesignTimeTagHelpersTest(TestTagHelperDescriptors.DefaultPAndInputTagHelperDescriptors);
+            RunDesignTimeTagHelpersTest(
+                TestTagHelperDescriptors.DefaultPAndInputTagHelperDescriptors
+            );
         }
 
         [Fact]
         public void DuplicateTargetTagHelper_DesignTime()
         {
             // Arrange, Act & Assert
-            RunDesignTimeTagHelpersTest(TestTagHelperDescriptors.DuplicateTargetTagHelperDescriptors);
+            RunDesignTimeTagHelpersTest(
+                TestTagHelperDescriptors.DuplicateTargetTagHelperDescriptors
+            );
         }
 
         [Fact]
         public void AttributeTargetingTagHelpers_DesignTime()
         {
             // Arrange, Act & Assert
-            RunDesignTimeTagHelpersTest(TestTagHelperDescriptors.AttributeTargetingTagHelperDescriptors);
+            RunDesignTimeTagHelpersTest(
+                TestTagHelperDescriptors.AttributeTargetingTagHelperDescriptors
+            );
         }
 
         [Fact]
         public void PrefixedAttributeTagHelpers_DesignTime()
         {
             // Arrange, Act & Assert
-            RunDesignTimeTagHelpersTest(TestTagHelperDescriptors.PrefixedAttributeTagHelperDescriptors);
+            RunDesignTimeTagHelpersTest(
+                TestTagHelperDescriptors.PrefixedAttributeTagHelperDescriptors
+            );
         }
 
         [Fact]
         public void DuplicateAttributeTagHelpers_DesignTime()
         {
             // Arrange, Act & Assert
-            RunDesignTimeTagHelpersTest(TestTagHelperDescriptors.DefaultPAndInputTagHelperDescriptors);
+            RunDesignTimeTagHelpersTest(
+                TestTagHelperDescriptors.DefaultPAndInputTagHelperDescriptors
+            );
         }
 
         [Fact]
         public void DynamicAttributeTagHelpers_DesignTime()
         {
             // Arrange, Act & Assert
-            RunDesignTimeTagHelpersTest(TestTagHelperDescriptors.DynamicAttributeTagHelpers_Descriptors);
+            RunDesignTimeTagHelpersTest(
+                TestTagHelperDescriptors.DynamicAttributeTagHelpers_Descriptors
+            );
         }
 
         [Fact]
         public void TransitionsInTagHelperAttributes_DesignTime()
         {
             // Arrange, Act & Assert
-            RunDesignTimeTagHelpersTest(TestTagHelperDescriptors.DefaultPAndInputTagHelperDescriptors);
+            RunDesignTimeTagHelpersTest(
+                TestTagHelperDescriptors.DefaultPAndInputTagHelperDescriptors
+            );
         }
 
         [Fact]
@@ -929,7 +962,9 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
         public void NestedScriptTagTagHelpers_DesignTime()
         {
             // Arrange, Act & Assert
-            RunDesignTimeTagHelpersTest(TestTagHelperDescriptors.DefaultPAndInputTagHelperDescriptors);
+            RunDesignTimeTagHelpersTest(
+                TestTagHelperDescriptors.DefaultPAndInputTagHelperDescriptors
+            );
         }
 
         [Fact]
@@ -984,15 +1019,17 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
         private void DesignTimeTest()
         {
             // Arrange
-            var projectEngine = CreateProjectEngine(builder => 
-            {
-                builder.ConfigureDocumentClassifier();
+            var projectEngine = CreateProjectEngine(
+                builder =>
+                {
+                    builder.ConfigureDocumentClassifier();
 
-                // Some of these tests use templates
-                builder.AddTargetExtension(new TemplateTargetExtension());
-                
-                SectionDirective.Register(builder);
-            });
+                    // Some of these tests use templates
+                    builder.AddTargetExtension(new TemplateTargetExtension());
+
+                    SectionDirective.Register(builder);
+                }
+            );
 
             var projectItem = CreateProjectItemFromFile();
 
@@ -1010,15 +1047,17 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
         private void RunTimeTest()
         {
             // Arrange
-            var projectEngine = CreateProjectEngine(builder =>
-            {
-                builder.ConfigureDocumentClassifier();
+            var projectEngine = CreateProjectEngine(
+                builder =>
+                {
+                    builder.ConfigureDocumentClassifier();
 
-                // Some of these tests use templates
-                builder.AddTargetExtension(new TemplateTargetExtension());
-                
-                SectionDirective.Register(builder);
-            });
+                    // Some of these tests use templates
+                    builder.AddTargetExtension(new TemplateTargetExtension());
+
+                    SectionDirective.Register(builder);
+                }
+            );
 
             var projectItem = CreateProjectItemFromFile();
 
@@ -1034,21 +1073,28 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
         private void RunRuntimeTagHelpersTest(IEnumerable<TagHelperDescriptor> descriptors)
         {
             // Arrange
-            var projectEngine = CreateProjectEngine(builder =>
-            {
-                builder.ConfigureDocumentClassifier();
+            var projectEngine = CreateProjectEngine(
+                builder =>
+                {
+                    builder.ConfigureDocumentClassifier();
 
-                // Some of these tests use templates
-                builder.AddTargetExtension(new TemplateTargetExtension());
+                    // Some of these tests use templates
+                    builder.AddTargetExtension(new TemplateTargetExtension());
 
-                SectionDirective.Register(builder);
-            });
+                    SectionDirective.Register(builder);
+                }
+            );
 
             var projectItem = CreateProjectItemFromFile();
             var imports = GetImports(projectEngine, projectItem);
 
             // Act
-            var codeDocument = projectEngine.Process(RazorSourceDocument.ReadFrom(projectItem), FileKinds.Legacy, imports, descriptors.ToList());
+            var codeDocument = projectEngine.Process(
+                RazorSourceDocument.ReadFrom(projectItem),
+                FileKinds.Legacy,
+                imports,
+                descriptors.ToList()
+            );
 
             // Assert
             AssertDocumentNodeMatchesBaseline(codeDocument.GetDocumentIntermediateNode());
@@ -1058,21 +1104,28 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
         private void RunDesignTimeTagHelpersTest(IEnumerable<TagHelperDescriptor> descriptors)
         {
             // Arrange
-            var projectEngine = CreateProjectEngine(builder =>
-            {
-                builder.ConfigureDocumentClassifier();
+            var projectEngine = CreateProjectEngine(
+                builder =>
+                {
+                    builder.ConfigureDocumentClassifier();
 
-                // Some of these tests use templates
-                builder.AddTargetExtension(new TemplateTargetExtension());
+                    // Some of these tests use templates
+                    builder.AddTargetExtension(new TemplateTargetExtension());
 
-                SectionDirective.Register(builder);
-            });
+                    SectionDirective.Register(builder);
+                }
+            );
 
             var projectItem = CreateProjectItemFromFile();
             var imports = GetImports(projectEngine, projectItem);
 
             // Act
-            var codeDocument = projectEngine.ProcessDesignTime(RazorSourceDocument.ReadFrom(projectItem), FileKinds.Legacy, imports, descriptors.ToList());
+            var codeDocument = projectEngine.ProcessDesignTime(
+                RazorSourceDocument.ReadFrom(projectItem),
+                FileKinds.Legacy,
+                imports,
+                descriptors.ToList()
+            );
 
             // Assert
             AssertDocumentNodeMatchesBaseline(codeDocument.GetDocumentIntermediateNode());
@@ -1080,11 +1133,16 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
             AssertSourceMappingsMatchBaseline(codeDocument);
         }
 
-        private static IReadOnlyList<RazorSourceDocument> GetImports(RazorProjectEngine projectEngine, RazorProjectItem projectItem)
+        private static IReadOnlyList<RazorSourceDocument> GetImports(
+            RazorProjectEngine projectEngine,
+            RazorProjectItem projectItem
+        )
         {
             var importFeatures = projectEngine.ProjectFeatures.OfType<IImportProjectFeature>();
             var importItems = importFeatures.SelectMany(f => f.GetImports(projectItem));
-            var importSourceDocuments = importItems.Where(i => i.Exists).Select(i => RazorSourceDocument.ReadFrom(i)).ToList();
+            var importSourceDocuments = importItems.Where(i => i.Exists)
+                .Select(i => RazorSourceDocument.ReadFrom(i))
+                .ToList();
 
             return importSourceDocuments;
         }

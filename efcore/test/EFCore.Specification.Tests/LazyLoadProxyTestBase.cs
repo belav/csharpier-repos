@@ -21,8 +21,7 @@ namespace Microsoft.EntityFrameworkCore
     public abstract class LazyLoadProxyTestBase<TFixture> : IClassFixture<TFixture>
         where TFixture : LazyLoadProxyTestBase<TFixture>.LoadFixtureBase
     {
-        protected LazyLoadProxyTestBase(TFixture fixture)
-            => Fixture = fixture;
+        protected LazyLoadProxyTestBase(TFixture fixture) => Fixture = fixture;
 
         protected TFixture Fixture { get; }
 
@@ -58,7 +57,9 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(EntityState.Unchanged)]
         [InlineData(EntityState.Modified)]
         [InlineData(EntityState.Deleted)]
-        public virtual void Lazy_load_one_to_one_reference_with_recursive_property(EntityState state)
+        public virtual void Lazy_load_one_to_one_reference_with_recursive_property(
+            EntityState state
+        )
         {
             using (var context = CreateContext(lazyLoadingEnabled: true))
             {
@@ -94,7 +95,10 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(EntityState.Unchanged, true)]
         [InlineData(EntityState.Modified, true)]
         [InlineData(EntityState.Added, true)]
-        public virtual void Attached_references_to_principal_are_marked_as_loaded(EntityState state, bool lazy)
+        public virtual void Attached_references_to_principal_are_marked_as_loaded(
+            EntityState state,
+            bool lazy
+        )
         {
             using var context = CreateContext(lazy);
             var parent = context.CreateProxy<Parent>();
@@ -151,7 +155,10 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(EntityState.Unchanged, true)]
         [InlineData(EntityState.Modified, true)]
         [InlineData(EntityState.Added, true)]
-        public virtual void Attached_references_to_dependents_are_marked_as_loaded(EntityState state, bool lazy)
+        public virtual void Attached_references_to_dependents_are_marked_as_loaded(
+            EntityState state,
+            bool lazy
+        )
         {
             using var context = CreateContext(lazy);
             var parent = context.CreateProxy<Parent>();
@@ -208,7 +215,10 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(EntityState.Unchanged, true)]
         [InlineData(EntityState.Modified, true)]
         [InlineData(EntityState.Added, true)]
-        public virtual void Attached_collections_are_not_marked_as_loaded(EntityState state, bool lazy)
+        public virtual void Attached_collections_are_not_marked_as_loaded(
+            EntityState state,
+            bool lazy
+        )
         {
             using var context = CreateContext(lazy);
             var parent = context.CreateProxy<Parent>();
@@ -237,7 +247,11 @@ namespace Microsoft.EntityFrameworkCore
             childCompositeKey1.Id = 51;
             var childCompositeKey2 = context.CreateProxy<ChildCompositeKey>();
             childCompositeKey2.Id = 52;
-            parent.ChildrenCompositeKey = new List<ChildCompositeKey> { childCompositeKey1, childCompositeKey2 };
+            parent.ChildrenCompositeKey = new List<ChildCompositeKey>
+            {
+                childCompositeKey1,
+                childCompositeKey2
+            };
 
             context.Attach(parent);
 
@@ -245,10 +259,12 @@ namespace Microsoft.EntityFrameworkCore
             {
                 context.ChangeTracker.LazyLoadingEnabled = false;
 
-                foreach (var child in parent.Children.Cast<object>()
-                    .Concat(parent.ChildrenAk)
-                    .Concat(parent.ChildrenShadowFk)
-                    .Concat(parent.ChildrenCompositeKey))
+                foreach (
+                    var child in parent.Children.Cast<object>()
+                        .Concat(parent.ChildrenAk)
+                        .Concat(parent.ChildrenShadowFk)
+                        .Concat(parent.ChildrenCompositeKey)
+                )
                 {
                     context.Entry(child).State = state;
                 }
@@ -299,11 +315,14 @@ namespace Microsoft.EntityFrameworkCore
                     Assert.Equal(
                         CoreStrings.WarningAsErrorTemplate(
                             CoreEventId.LazyLoadOnDisposedContextWarning.ToString(),
-                            CoreResources.LogLazyLoadOnDisposedContext(new TestLogger<TestLoggingDefinitions>())
+                            CoreResources.LogLazyLoadOnDisposedContext(
+                                    new TestLogger<TestLoggingDefinitions>()
+                                )
                                 .GenerateMessage("MotherProxy", "Children"),
-                            "CoreEventId.LazyLoadOnDisposedContextWarning"),
-                        Assert.Throws<InvalidOperationException>(
-                            () => parent.Children).Message);
+                            "CoreEventId.LazyLoadOnDisposedContextWarning"
+                        ),
+                        Assert.Throws<InvalidOperationException>(() => parent.Children).Message
+                    );
                 }
             }
 
@@ -349,7 +368,11 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(EntityState.Unchanged, true, true)]
         [InlineData(EntityState.Modified, true, true)]
         [InlineData(EntityState.Deleted, true, true)]
-        public virtual void Lazy_load_many_to_one_reference_to_principal(EntityState state, bool useAttach, bool useDetach)
+        public virtual void Lazy_load_many_to_one_reference_to_principal(
+            EntityState state,
+            bool useAttach,
+            bool useDetach
+        )
         {
             Child child = null;
 
@@ -374,11 +397,14 @@ namespace Microsoft.EntityFrameworkCore
                     Assert.Equal(
                         CoreStrings.WarningAsErrorTemplate(
                             CoreEventId.LazyLoadOnDisposedContextWarning.ToString(),
-                            CoreResources.LogLazyLoadOnDisposedContext(new TestLogger<TestLoggingDefinitions>())
+                            CoreResources.LogLazyLoadOnDisposedContext(
+                                    new TestLogger<TestLoggingDefinitions>()
+                                )
                                 .GenerateMessage("ChildProxy", "Parent"),
-                            "CoreEventId.LazyLoadOnDisposedContextWarning"),
-                        Assert.Throws<InvalidOperationException>(
-                            () => child.Parent).Message);
+                            "CoreEventId.LazyLoadOnDisposedContextWarning"
+                        ),
+                        Assert.Throws<InvalidOperationException>(() => child.Parent).Message
+                    );
                 }
             }
 
@@ -426,7 +452,11 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(EntityState.Unchanged, true, true)]
         [InlineData(EntityState.Modified, true, true)]
         [InlineData(EntityState.Deleted, true, true)]
-        public virtual void Lazy_load_one_to_one_reference_to_principal(EntityState state, bool useAttach, bool useDetach)
+        public virtual void Lazy_load_one_to_one_reference_to_principal(
+            EntityState state,
+            bool useAttach,
+            bool useDetach
+        )
         {
             Single single = null;
 
@@ -451,11 +481,14 @@ namespace Microsoft.EntityFrameworkCore
                     Assert.Equal(
                         CoreStrings.WarningAsErrorTemplate(
                             CoreEventId.LazyLoadOnDisposedContextWarning.ToString(),
-                            CoreResources.LogLazyLoadOnDisposedContext(new TestLogger<TestLoggingDefinitions>())
+                            CoreResources.LogLazyLoadOnDisposedContext(
+                                    new TestLogger<TestLoggingDefinitions>()
+                                )
                                 .GenerateMessage("SingleProxy", "Parent"),
-                            "CoreEventId.LazyLoadOnDisposedContextWarning"),
-                        Assert.Throws<InvalidOperationException>(
-                            () => single.Parent).Message);
+                            "CoreEventId.LazyLoadOnDisposedContextWarning"
+                        ),
+                        Assert.Throws<InvalidOperationException>(() => single.Parent).Message
+                    );
                 }
             }
 
@@ -503,7 +536,11 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(EntityState.Unchanged, true, true)]
         [InlineData(EntityState.Modified, true, true)]
         [InlineData(EntityState.Deleted, true, true)]
-        public virtual void Lazy_load_one_to_one_reference_to_dependent(EntityState state, bool useAttach, bool useDetach)
+        public virtual void Lazy_load_one_to_one_reference_to_dependent(
+            EntityState state,
+            bool useAttach,
+            bool useDetach
+        )
         {
             Parent parent = null;
 
@@ -528,11 +565,14 @@ namespace Microsoft.EntityFrameworkCore
                     Assert.Equal(
                         CoreStrings.WarningAsErrorTemplate(
                             CoreEventId.LazyLoadOnDisposedContextWarning.ToString(),
-                            CoreResources.LogLazyLoadOnDisposedContext(new TestLogger<TestLoggingDefinitions>())
+                            CoreResources.LogLazyLoadOnDisposedContext(
+                                    new TestLogger<TestLoggingDefinitions>()
+                                )
                                 .GenerateMessage("MotherProxy", "Single"),
-                            "CoreEventId.LazyLoadOnDisposedContextWarning"),
-                        Assert.Throws<InvalidOperationException>(
-                            () => parent.Single).Message);
+                            "CoreEventId.LazyLoadOnDisposedContextWarning"
+                        ),
+                        Assert.Throws<InvalidOperationException>(() => parent.Single).Message
+                    );
                 }
             }
 
@@ -839,7 +879,9 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(EntityState.Unchanged)]
         [InlineData(EntityState.Modified)]
         [InlineData(EntityState.Deleted)]
-        public virtual void Lazy_load_many_to_one_reference_to_principal_changed_non_found_FK(EntityState state)
+        public virtual void Lazy_load_many_to_one_reference_to_principal_changed_non_found_FK(
+            EntityState state
+        )
         {
             using var context = CreateContext(lazyLoadingEnabled: true);
             var changeDetector = (ChangeDetectorProxy)context.GetService<IChangeDetector>();
@@ -885,7 +927,9 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(EntityState.Unchanged)]
         [InlineData(EntityState.Modified)]
         [InlineData(EntityState.Deleted)]
-        public virtual void Lazy_load_many_to_one_reference_to_principal_changed_found_FK(EntityState state)
+        public virtual void Lazy_load_many_to_one_reference_to_principal_changed_found_FK(
+            EntityState state
+        )
         {
             using var context = CreateContext(lazyLoadingEnabled: true);
             var changeDetector = (ChangeDetectorProxy)context.GetService<IChangeDetector>();
@@ -929,7 +973,9 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(3, context.ChangeTracker.Entries().Count());
 
-            var newParent = context.ChangeTracker.Entries<Parent>().Single(e => e.Entity.Id != parent.Id).Entity;
+            var newParent =
+                context.ChangeTracker.Entries<Parent>()
+                    .Single(e => e.Entity.Id != parent.Id).Entity;
 
             Assert.Same(child, newParent.Children.Single());
             Assert.Same(newParent, child.Parent);
@@ -977,7 +1023,9 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(EntityState.Unchanged)]
         [InlineData(EntityState.Modified)]
         [InlineData(EntityState.Deleted)]
-        public virtual void Lazy_load_many_to_one_reference_to_principal_not_found(EntityState state)
+        public virtual void Lazy_load_many_to_one_reference_to_principal_not_found(
+            EntityState state
+        )
         {
             using var context = CreateContext(lazyLoadingEnabled: true);
             var changeDetector = (ChangeDetectorProxy)context.GetService<IChangeDetector>();
@@ -1099,7 +1147,10 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(EntityState.Unchanged, CascadeTiming.Never)]
         [InlineData(EntityState.Modified, CascadeTiming.Never)]
         [InlineData(EntityState.Deleted, CascadeTiming.Never)]
-        public virtual void Lazy_load_collection_already_loaded(EntityState state, CascadeTiming cascadeDeleteTiming)
+        public virtual void Lazy_load_collection_already_loaded(
+            EntityState state,
+            CascadeTiming cascadeDeleteTiming
+        )
         {
             using var context = CreateContext(lazyLoadingEnabled: true);
             context.ChangeTracker.CascadeDeleteTiming = cascadeDeleteTiming;
@@ -1129,8 +1180,7 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(2, parent.Children.Count());
 
-            if (state == EntityState.Deleted
-                && cascadeDeleteTiming == CascadeTiming.Immediate)
+            if (state == EntityState.Deleted && cascadeDeleteTiming == CascadeTiming.Immediate)
             {
                 Assert.All(parent.Children.Select(e => e.Parent), c => Assert.Null(c));
             }
@@ -1154,7 +1204,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(EntityState.Deleted, CascadeTiming.Never)]
         public virtual void Lazy_load_many_to_one_reference_to_principal_already_loaded(
             EntityState state,
-            CascadeTiming cascadeDeleteTiming)
+            CascadeTiming cascadeDeleteTiming
+        )
         {
             using var context = CreateContext(lazyLoadingEnabled: true);
             context.ChangeTracker.CascadeDeleteTiming = cascadeDeleteTiming;
@@ -1194,7 +1245,9 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(EntityState.Unchanged)]
         [InlineData(EntityState.Modified)]
         [InlineData(EntityState.Deleted)]
-        public virtual void Lazy_load_one_to_one_reference_to_principal_already_loaded(EntityState state)
+        public virtual void Lazy_load_one_to_one_reference_to_principal_already_loaded(
+            EntityState state
+        )
         {
             using var context = CreateContext(lazyLoadingEnabled: true);
             var changeDetector = (ChangeDetectorProxy)context.GetService<IChangeDetector>();
@@ -1240,7 +1293,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(EntityState.Deleted, CascadeTiming.Never)]
         public virtual void Lazy_load_one_to_one_reference_to_dependent_already_loaded(
             EntityState state,
-            CascadeTiming cascadeDeleteTiming)
+            CascadeTiming cascadeDeleteTiming
+        )
         {
             using var context = CreateContext(lazyLoadingEnabled: true);
             context.ChangeTracker.CascadeDeleteTiming = cascadeDeleteTiming;
@@ -1274,8 +1328,7 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Same(single, parent.Single);
 
-            if (cascadeDeleteTiming == CascadeTiming.Immediate
-                && state == EntityState.Deleted)
+            if (cascadeDeleteTiming == CascadeTiming.Immediate && state == EntityState.Deleted)
             {
                 // No fixup to Deleted entity.
                 Assert.Null(single.Parent);
@@ -1290,7 +1343,9 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(EntityState.Unchanged)]
         [InlineData(EntityState.Modified)]
         [InlineData(EntityState.Deleted)]
-        public virtual void Lazy_load_one_to_one_PK_to_PK_reference_to_principal_already_loaded(EntityState state)
+        public virtual void Lazy_load_one_to_one_PK_to_PK_reference_to_principal_already_loaded(
+            EntityState state
+        )
         {
             using var context = CreateContext(lazyLoadingEnabled: true);
             var changeDetector = (ChangeDetectorProxy)context.GetService<IChangeDetector>();
@@ -1328,7 +1383,9 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(EntityState.Unchanged)]
         [InlineData(EntityState.Modified)]
         [InlineData(EntityState.Deleted)]
-        public virtual void Lazy_load_one_to_one_PK_to_PK_reference_to_dependent_already_loaded(EntityState state)
+        public virtual void Lazy_load_one_to_one_PK_to_PK_reference_to_dependent_already_loaded(
+            EntityState state
+        )
         {
             using var context = CreateContext(lazyLoadingEnabled: true);
             var changeDetector = (ChangeDetectorProxy)context.GetService<IChangeDetector>();
@@ -1366,7 +1423,9 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(EntityState.Unchanged)]
         [InlineData(EntityState.Modified)]
         [InlineData(EntityState.Deleted)]
-        public virtual void Lazy_load_many_to_one_reference_to_principal_alternate_key(EntityState state)
+        public virtual void Lazy_load_many_to_one_reference_to_principal_alternate_key(
+            EntityState state
+        )
         {
             using var context = CreateContext(lazyLoadingEnabled: true);
             var child = context.Set<ChildAk>().Single(e => e.Id == 32);
@@ -1398,7 +1457,9 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(EntityState.Unchanged)]
         [InlineData(EntityState.Modified)]
         [InlineData(EntityState.Deleted)]
-        public virtual void Lazy_load_one_to_one_reference_to_principal_alternate_key(EntityState state)
+        public virtual void Lazy_load_one_to_one_reference_to_principal_alternate_key(
+            EntityState state
+        )
         {
             using var context = CreateContext(lazyLoadingEnabled: true);
             var single = context.Set<SingleAk>().Single();
@@ -1430,7 +1491,9 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(EntityState.Unchanged)]
         [InlineData(EntityState.Modified)]
         [InlineData(EntityState.Deleted)]
-        public virtual void Lazy_load_one_to_one_reference_to_dependent_alternate_key(EntityState state)
+        public virtual void Lazy_load_one_to_one_reference_to_dependent_alternate_key(
+            EntityState state
+        )
         {
             using var context = CreateContext(lazyLoadingEnabled: true);
             var parent = context.Set<Parent>().Single();
@@ -1462,7 +1525,9 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(EntityState.Unchanged)]
         [InlineData(EntityState.Modified)]
         [InlineData(EntityState.Deleted)]
-        public virtual void Lazy_load_many_to_one_reference_to_principal_null_FK_alternate_key(EntityState state)
+        public virtual void Lazy_load_many_to_one_reference_to_principal_null_FK_alternate_key(
+            EntityState state
+        )
         {
             using var context = CreateContext(lazyLoadingEnabled: true);
             var child = context.CreateProxy<ChildAk>();
@@ -1493,7 +1558,9 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(EntityState.Unchanged)]
         [InlineData(EntityState.Modified)]
         [InlineData(EntityState.Deleted)]
-        public virtual void Lazy_load_one_to_one_reference_to_principal_null_FK_alternate_key(EntityState state)
+        public virtual void Lazy_load_one_to_one_reference_to_principal_null_FK_alternate_key(
+            EntityState state
+        )
         {
             using var context = CreateContext(lazyLoadingEnabled: true);
             var single = context.CreateProxy<SingleAk>();
@@ -1555,7 +1622,9 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(EntityState.Unchanged)]
         [InlineData(EntityState.Modified)]
         [InlineData(EntityState.Deleted)]
-        public virtual void Lazy_load_many_to_one_reference_to_principal_shadow_fk(EntityState state)
+        public virtual void Lazy_load_many_to_one_reference_to_principal_shadow_fk(
+            EntityState state
+        )
         {
             using var context = CreateContext(lazyLoadingEnabled: true);
             var child = context.Set<ChildShadowFk>().Single(e => e.Id == 52);
@@ -1651,7 +1720,9 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(EntityState.Unchanged)]
         [InlineData(EntityState.Modified)]
         [InlineData(EntityState.Deleted)]
-        public virtual void Lazy_load_many_to_one_reference_to_principal_null_FK_shadow_fk(EntityState state)
+        public virtual void Lazy_load_many_to_one_reference_to_principal_null_FK_shadow_fk(
+            EntityState state
+        )
         {
             using var context = CreateContext(lazyLoadingEnabled: true);
             var child = context.CreateProxy<ChildShadowFk>();
@@ -1682,7 +1753,9 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(EntityState.Unchanged)]
         [InlineData(EntityState.Modified)]
         [InlineData(EntityState.Deleted)]
-        public virtual void Lazy_load_one_to_one_reference_to_principal_null_FK_shadow_fk(EntityState state)
+        public virtual void Lazy_load_one_to_one_reference_to_principal_null_FK_shadow_fk(
+            EntityState state
+        )
         {
             using var context = CreateContext(lazyLoadingEnabled: true);
             var single = context.CreateProxy<SingleShadowFk>();
@@ -1735,7 +1808,10 @@ namespace Microsoft.EntityFrameworkCore
             context.ChangeTracker.LazyLoadingEnabled = false;
 
             Assert.Equal(2, parent.ChildrenCompositeKey.Count());
-            Assert.All(parent.ChildrenCompositeKey.Select(e => e.Parent), c => Assert.Same(parent, c));
+            Assert.All(
+                parent.ChildrenCompositeKey.Select(e => e.Parent),
+                c => Assert.Same(parent, c)
+            );
 
             Assert.Equal(3, context.ChangeTracker.Entries().Count());
         }
@@ -1744,7 +1820,9 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(EntityState.Unchanged)]
         [InlineData(EntityState.Modified)]
         [InlineData(EntityState.Deleted)]
-        public virtual void Lazy_load_many_to_one_reference_to_principal_composite_key(EntityState state)
+        public virtual void Lazy_load_many_to_one_reference_to_principal_composite_key(
+            EntityState state
+        )
         {
             using var context = CreateContext(lazyLoadingEnabled: true);
             var child = context.Set<ChildCompositeKey>().Single(e => e.Id == 52);
@@ -1776,7 +1854,9 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(EntityState.Unchanged)]
         [InlineData(EntityState.Modified)]
         [InlineData(EntityState.Deleted)]
-        public virtual void Lazy_load_one_to_one_reference_to_principal_composite_key(EntityState state)
+        public virtual void Lazy_load_one_to_one_reference_to_principal_composite_key(
+            EntityState state
+        )
         {
             using var context = CreateContext(lazyLoadingEnabled: true);
             var single = context.Set<SingleCompositeKey>().Single();
@@ -1808,7 +1888,9 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(EntityState.Unchanged)]
         [InlineData(EntityState.Modified)]
         [InlineData(EntityState.Deleted)]
-        public virtual void Lazy_load_one_to_one_reference_to_dependent_composite_key(EntityState state)
+        public virtual void Lazy_load_one_to_one_reference_to_dependent_composite_key(
+            EntityState state
+        )
         {
             using var context = CreateContext(lazyLoadingEnabled: true);
             var parent = context.Set<Parent>().Single();
@@ -1840,7 +1922,9 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(EntityState.Unchanged)]
         [InlineData(EntityState.Modified)]
         [InlineData(EntityState.Deleted)]
-        public virtual void Lazy_load_many_to_one_reference_to_principal_null_FK_composite_key(EntityState state)
+        public virtual void Lazy_load_many_to_one_reference_to_principal_null_FK_composite_key(
+            EntityState state
+        )
         {
             using var context = CreateContext(lazyLoadingEnabled: true);
             var child = context.CreateProxy<ChildCompositeKey>();
@@ -1872,7 +1956,9 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(EntityState.Unchanged)]
         [InlineData(EntityState.Modified)]
         [InlineData(EntityState.Deleted)]
-        public virtual void Lazy_load_one_to_one_reference_to_principal_null_FK_composite_key(EntityState state)
+        public virtual void Lazy_load_one_to_one_reference_to_principal_null_FK_composite_key(
+            EntityState state
+        )
         {
             using var context = CreateContext(lazyLoadingEnabled: true);
             var single = context.CreateProxy<SingleCompositeKey>();
@@ -1945,9 +2031,10 @@ namespace Microsoft.EntityFrameworkCore
                     CoreEventId.DetachedLazyLoadingWarning.ToString(),
                     CoreResources.LogDetachedLazyLoading(new TestLogger<TestLoggingDefinitions>())
                         .GenerateMessage(nameof(Parent.Children), "MotherProxy"),
-                    "CoreEventId.DetachedLazyLoadingWarning"),
-                Assert.Throws<InvalidOperationException>(
-                    () => parent.Children).Message);
+                    "CoreEventId.DetachedLazyLoadingWarning"
+                ),
+                Assert.Throws<InvalidOperationException>(() => parent.Children).Message
+            );
         }
 
         [ConditionalFact]
@@ -1961,9 +2048,10 @@ namespace Microsoft.EntityFrameworkCore
                     CoreEventId.DetachedLazyLoadingWarning.ToString(),
                     CoreResources.LogDetachedLazyLoading(new TestLogger<TestLoggingDefinitions>())
                         .GenerateMessage(nameof(Child.Parent), "ChildProxy"),
-                    "CoreEventId.DetachedLazyLoadingWarning"),
-                Assert.Throws<InvalidOperationException>(
-                    () => child.Parent).Message);
+                    "CoreEventId.DetachedLazyLoadingWarning"
+                ),
+                Assert.Throws<InvalidOperationException>(() => child.Parent).Message
+            );
         }
 
         [ConditionalFact]
@@ -1977,9 +2065,10 @@ namespace Microsoft.EntityFrameworkCore
                     CoreEventId.DetachedLazyLoadingWarning.ToString(),
                     CoreResources.LogDetachedLazyLoading(new TestLogger<TestLoggingDefinitions>())
                         .GenerateMessage(nameof(Parent.Single), "MotherProxy"),
-                    "CoreEventId.DetachedLazyLoadingWarning"),
-                Assert.Throws<InvalidOperationException>(
-                    () => parent.Single).Message);
+                    "CoreEventId.DetachedLazyLoadingWarning"
+                ),
+                Assert.Throws<InvalidOperationException>(() => parent.Single).Message
+            );
         }
 
         [ConditionalFact]
@@ -1999,7 +2088,10 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Lazy_load_reference_to_principal_for_no_tracking_does_not_throw_if_populated()
         {
             using var context = CreateContext(lazyLoadingEnabled: true);
-            var child = context.Set<Child>().Include(e => e.Parent).AsNoTracking().Single(e => e.Id == 12);
+            var child = context.Set<Child>()
+                .Include(e => e.Parent)
+                .AsNoTracking()
+                .Single(e => e.Id == 12);
 
             Assert.NotNull(child.Parent);
 
@@ -2076,7 +2168,12 @@ namespace Microsoft.EntityFrameworkCore
 
             var serialized = Newtonsoft.Json.JsonConvert.SerializeObject(
                 blogs,
-                new Newtonsoft.Json.JsonSerializerSettings { ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore, Formatting = Newtonsoft.Json.Formatting.Indented });
+                new Newtonsoft.Json.JsonSerializerSettings
+                {
+                    ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore,
+                    Formatting = Newtonsoft.Json.Formatting.Indented
+                }
+            );
 
             Assert.Equal(
                 @"[
@@ -2131,7 +2228,10 @@ namespace Microsoft.EntityFrameworkCore
     },
     ""Id"": 3
   }
-]", serialized, ignoreLineEndingDifferences: true);
+]",
+                serialized,
+                ignoreLineEndingDifferences: true
+            );
 
             var newBlogs = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Blog>>(serialized);
 
@@ -2141,11 +2241,16 @@ namespace Microsoft.EntityFrameworkCore
                 Assert.IsType<Blog>(blog);
             }
 
-            var options = new System.Text.Json.JsonSerializerOptions { ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve, WriteIndented = true };
+            var options = new System.Text.Json.JsonSerializerOptions
+            {
+                ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve,
+                WriteIndented = true
+            };
 
             serialized = System.Text.Json.JsonSerializer.Serialize(blogs, options);
 
-            Assert.Equal(@"{
+            Assert.Equal(
+                @"{
   ""$id"": ""1"",
   ""$values"": [
     {
@@ -2212,7 +2317,10 @@ namespace Microsoft.EntityFrameworkCore
       }
     }
   ]
-}", serialized, ignoreLineEndingDifferences: true);
+}",
+                serialized,
+                ignoreLineEndingDifferences: true
+            );
 
             newBlogs = System.Text.Json.JsonSerializer.Deserialize<List<Blog>>(serialized, options);
             Assert.IsType<List<Blog>>(newBlogs);
@@ -2268,8 +2376,7 @@ namespace Microsoft.EntityFrameworkCore
             using var context = CreateContext(lazyLoadingEnabled: true);
 
             // ReSharper disable once ConvertToLocalFunction
-            bool opaquePredicate(Blog _)
-                => true;
+            bool opaquePredicate(Blog _) => true;
 
             var blogs = context.Set<Blog>().Where(opaquePredicate);
 
@@ -2302,21 +2409,27 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(2, parson.ParsonNoses.Count);
             Assert.Equal(
                 new[] { "Large", "Medium" },
-                parson.ParsonNoses.Select(b => b.Size).OrderBy(h => h));
+                parson.ParsonNoses.Select(b => b.Size).OrderBy(h => h)
+            );
 
             var company = context.Set<Company>().Single();
 
             Assert.Equal(2, company.CompanyNoses.Count);
             Assert.Equal(
                 new[] { "Large", "Small" },
-                company.CompanyNoses.Select(b => b.Size).OrderBy(h => h));
+                company.CompanyNoses.Select(b => b.Size).OrderBy(h => h)
+            );
 
-            var entity = context.Set<Entity>().ToList().Except(new Entity[] { parson, company }).Single();
+            var entity = context.Set<Entity>()
+                .ToList()
+                .Except(new Entity[] { parson, company })
+                .Single();
 
             Assert.Equal(3, entity.BaseNoses.Count);
             Assert.Equal(
                 new[] { "Large", "Medium", "Small" },
-                entity.BaseNoses.Select(b => b.Size).OrderBy(h => h));
+                entity.BaseNoses.Select(b => b.Size).OrderBy(h => h)
+            );
         }
 
         [ConditionalFact]
@@ -2357,9 +2470,11 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Top_level_projection_track_entities_before_passing_to_client_method()
         {
             using var context = CreateContext(lazyLoadingEnabled: true);
-            var query = (from p in context.Set<Parent>()
-                         orderby p.Id
-                         select DtoFactory.CreateDto(p)).FirstOrDefault();
+            var query = (
+                from p in context.Set<Parent>()
+                orderby p.Id
+                select DtoFactory.CreateDto(p)
+            ).FirstOrDefault();
 
             RecordLog();
 
@@ -2375,9 +2490,7 @@ namespace Microsoft.EntityFrameworkCore
             var called = context.Set<Parent>().OrderBy(e => e.Id).FirstOrDefault();
             ClearLog();
 
-            var query = from Child q in context.Set<Child>()
-                        where q.Parent == called
-                        select q;
+            var query = from Child q in context.Set<Child>() where q.Parent == called select q;
 
             var result = async ? await query.ToListAsync() : query.ToList();
 
@@ -2388,12 +2501,7 @@ namespace Microsoft.EntityFrameworkCore
         {
             public static object CreateDto(Parent parent)
             {
-                return new
-                {
-                    parent.Id,
-                    parent.Single,
-                    parent.Single.ParentId
-                };
+                return new { parent.Id, parent.Single, parent.Single.ParentId };
             }
         }
 
@@ -2410,9 +2518,7 @@ namespace Microsoft.EntityFrameworkCore
             public int ApplicantId { get; set; }
             public virtual FullName Name { get; set; }
 
-            protected Applicant()
-            {
-            }
+            protected Applicant() { }
 
             public Applicant(FullName name)
             {
@@ -2424,9 +2530,7 @@ namespace Microsoft.EntityFrameworkCore
         {
             private readonly string _value;
 
-            protected FirstName()
-            {
-            }
+            protected FirstName() { }
 
             private FirstName(string value)
             {
@@ -2443,9 +2547,7 @@ namespace Microsoft.EntityFrameworkCore
         {
             private readonly string _value;
 
-            protected LastName()
-            {
-            }
+            protected LastName() { }
 
             private LastName(string value)
             {
@@ -2464,9 +2566,7 @@ namespace Microsoft.EntityFrameworkCore
             public virtual FullName Name { get; set; }
             public virtual Address Address { get; set; }
 
-            protected Pyrson()
-            {
-            }
+            protected Pyrson() { }
 
             public Pyrson(FullName name)
             {
@@ -2484,9 +2584,7 @@ namespace Microsoft.EntityFrameworkCore
             // ReSharper disable once AutoPropertyCanBeMadeGetOnly.Local
             public virtual LastName LastName { get; private set; }
 
-            protected FullName()
-            {
-            }
+            protected FullName() { }
 
             public FullName(FirstName firstName, LastName lastName)
             {
@@ -2777,22 +2875,16 @@ namespace Microsoft.EntityFrameworkCore
             return context;
         }
 
-        protected virtual void ClearLog()
-        {
-        }
+        protected virtual void ClearLog() { }
 
-        protected virtual void RecordLog()
-        {
-        }
+        protected virtual void RecordLog() { }
 
         protected class ChangeDetectorProxy : ChangeDetector
         {
             public ChangeDetectorProxy(
                 IDiagnosticsLogger<DbLoggerCategory.ChangeTracking> logger,
-                ILoggingOptions loggingOptions)
-                : base(logger, loggingOptions)
-            {
-            }
+                ILoggingOptions loggingOptions
+            ) : base(logger, loggingOptions) { }
 
             public bool DetectChangesCalled { get; set; }
 
@@ -2808,18 +2900,19 @@ namespace Microsoft.EntityFrameworkCore
         {
             protected override string StoreName { get; } = "LazyLoadProxyTest";
 
-            public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder)
-                => base.AddOptions(builder.UseLazyLoadingProxies());
+            public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder) =>
+                base.AddOptions(builder.UseLazyLoadingProxies());
 
-            protected override IServiceCollection AddServices(IServiceCollection serviceCollection)
-                => base.AddServices(
-                    serviceCollection
-                        .AddScoped<IChangeDetector, ChangeDetectorProxy>()
-                        .AddEntityFrameworkProxies());
+            protected override IServiceCollection AddServices(
+                IServiceCollection serviceCollection
+            ) =>
+                base.AddServices(
+                    serviceCollection.AddScoped<IChangeDetector, ChangeDetectorProxy>()
+                        .AddEntityFrameworkProxies()
+                );
 
             // By-design. Lazy loaders are not disposed when using pooling
-            protected override bool UsePooling
-                => false;
+            protected override bool UsePooling => false;
 
             protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
             {
@@ -2831,8 +2924,7 @@ namespace Microsoft.EntityFrameworkCore
                 modelBuilder.Entity<Company>();
                 modelBuilder.Entity<Parson>();
 
-                modelBuilder.Entity<SingleShadowFk>()
-                    .Property<int?>("ParentId");
+                modelBuilder.Entity<SingleShadowFk>().Property<int?>("ParentId");
 
                 modelBuilder.Entity<Parent>(
                     b =>
@@ -2874,18 +2966,17 @@ namespace Microsoft.EntityFrameworkCore
 
                         b.HasMany(e => e.ChildrenCompositeKey)
                             .WithOne(e => e.Parent)
-                            .HasPrincipalKey(
-                                e => new { e.AlternateId, e.Id })
-                            .HasForeignKey(
-                                e => new { e.ParentAlternateId, e.ParentId });
+                            .HasPrincipalKey(e => new { e.AlternateId, e.Id })
+                            .HasForeignKey(e => new { e.ParentAlternateId, e.ParentId });
 
                         b.HasOne(e => e.SingleCompositeKey)
                             .WithOne(e => e.Parent)
-                            .HasPrincipalKey<Parent>(
-                                e => new { e.AlternateId, e.Id })
+                            .HasPrincipalKey<Parent>(e => new { e.AlternateId, e.Id })
                             .HasForeignKey<SingleCompositeKey>(
-                                e => new { e.ParentAlternateId, e.ParentId });
-                    });
+                                e => new { e.ParentAlternateId, e.ParentId }
+                            );
+                    }
+                );
 
                 modelBuilder.Entity<Mother>();
                 modelBuilder.Entity<Father>();
@@ -2896,7 +2987,8 @@ namespace Microsoft.EntityFrameworkCore
                         e.OwnsOne(x => x.Writer);
                         e.OwnsOne(x => x.Reader);
                         e.OwnsOne(x => x.Host);
-                    });
+                    }
+                );
 
                 modelBuilder.Entity<Blog>(
                     e =>
@@ -2904,21 +2996,19 @@ namespace Microsoft.EntityFrameworkCore
                         e.OwnsOne(x => x.Writer);
                         e.OwnsOne(x => x.Reader);
                         e.OwnsOne(x => x.Host);
-                    });
+                    }
+                );
 
                 modelBuilder.Entity<Address>(
                     builder =>
                     {
                         builder.HasKey(prop => prop.AddressId);
 
-                        builder.Property(prop => prop.Line1)
-                            .IsRequired()
-                            .HasMaxLength(50);
+                        builder.Property(prop => prop.Line1).IsRequired().HasMaxLength(50);
 
-                        builder.Property(prop => prop.Line2)
-                            .IsRequired(false)
-                            .HasMaxLength(50);
-                    });
+                        builder.Property(prop => prop.Line2).IsRequired(false).HasMaxLength(50);
+                    }
+                );
 
                 modelBuilder.Entity<Applicant>(
                     builder =>
@@ -2926,21 +3016,22 @@ namespace Microsoft.EntityFrameworkCore
                         builder.HasKey(prop => prop.ApplicantId);
 
                         builder.OwnsOne(
-                            prop => prop.Name, name =>
+                            prop => prop.Name,
+                            name =>
                             {
-                                name
-                                    .OwnsOne(prop => prop.FirstName)
+                                name.OwnsOne(prop => prop.FirstName)
                                     .Property("_value")
                                     .HasMaxLength(50)
                                     .IsRequired();
 
-                                name
-                                    .OwnsOne(prop => prop.LastName)
+                                name.OwnsOne(prop => prop.LastName)
                                     .Property("_value")
                                     .HasMaxLength(50)
                                     .IsRequired();
-                            });
-                    });
+                            }
+                        );
+                    }
+                );
 
                 modelBuilder.Entity<Pyrson>(
                     builder =>
@@ -2948,25 +3039,26 @@ namespace Microsoft.EntityFrameworkCore
                         builder.HasKey(prop => prop.PyrsonId);
 
                         builder.OwnsOne(
-                            prop => prop.Name, name =>
+                            prop => prop.Name,
+                            name =>
                             {
-                                name
-                                    .OwnsOne(prop => prop.FirstName)
+                                name.OwnsOne(prop => prop.FirstName)
                                     .Property("_value")
                                     .HasMaxLength(50)
                                     .IsRequired();
 
-                                name
-                                    .OwnsOne(prop => prop.LastName)
+                                name.OwnsOne(prop => prop.LastName)
                                     .Property("_value")
                                     .HasMaxLength(50)
                                     .IsRequired();
-                            });
+                            }
+                        );
 
                         builder.HasOne(prop => prop.Address)
                             .WithOne()
                             .HasForeignKey<Address>(prop => prop.PyrsonId);
-                    });
+                    }
+                );
 
                 modelBuilder.Entity<NonVirtualOneToOneOwner>();
                 modelBuilder.Entity<VirtualOneToOneOwner>();
@@ -2997,37 +3089,72 @@ namespace Microsoft.EntityFrameworkCore
                         Single = new Single { Id = 21 },
                         ChildrenAk = new List<ChildAk> { new() { Id = 31 }, new() { Id = 32 } },
                         SingleAk = new SingleAk { Id = 42 },
-                        ChildrenShadowFk = new List<ChildShadowFk> { new() { Id = 51 }, new() { Id = 52 } },
+                        ChildrenShadowFk = new List<ChildShadowFk>
+                        {
+                            new() { Id = 51 },
+                            new() { Id = 52 }
+                        },
                         SingleShadowFk = new SingleShadowFk { Id = 62 },
-                        ChildrenCompositeKey =
-                            new List<ChildCompositeKey> { new() { Id = 51 }, new() { Id = 52 } },
+                        ChildrenCompositeKey = new List<ChildCompositeKey>
+                        {
+                            new() { Id = 51 },
+                            new() { Id = 52 }
+                        },
                         SingleCompositeKey = new SingleCompositeKey { Id = 62 },
                         WithRecursiveProperty = new WithRecursiveProperty { Id = 8086 }
-                    });
+                    }
+                );
 
                 context.Add(
                     new Blog
                     {
-                        Writer = new Person { FirstName = "firstNameWriter0", LastName = "lastNameWriter0" },
-                        Reader = new Person { FirstName = "firstNameReader0", LastName = "lastNameReader0" },
+                        Writer = new Person
+                        {
+                            FirstName = "firstNameWriter0",
+                            LastName = "lastNameWriter0"
+                        },
+                        Reader = new Person
+                        {
+                            FirstName = "firstNameReader0",
+                            LastName = "lastNameReader0"
+                        },
                         Host = new Host { HostName = "127.0.0.1" }
-                    });
+                    }
+                );
 
                 context.Add(
                     new Blog
                     {
-                        Writer = new Person { FirstName = "firstNameWriter1", LastName = "lastNameWriter1" },
-                        Reader = new Person { FirstName = "firstNameReader1", LastName = "lastNameReader1" },
+                        Writer = new Person
+                        {
+                            FirstName = "firstNameWriter1",
+                            LastName = "lastNameWriter1"
+                        },
+                        Reader = new Person
+                        {
+                            FirstName = "firstNameReader1",
+                            LastName = "lastNameReader1"
+                        },
                         Host = new Host { HostName = "127.0.0.2" }
-                    });
+                    }
+                );
 
                 context.Add(
                     new Blog
                     {
-                        Writer = new Person { FirstName = "firstNameWriter2", LastName = "lastNameWriter2" },
-                        Reader = new Person { FirstName = "firstNameReader2", LastName = "lastNameReader2" },
+                        Writer = new Person
+                        {
+                            FirstName = "firstNameWriter2",
+                            LastName = "lastNameWriter2"
+                        },
+                        Reader = new Person
+                        {
+                            FirstName = "firstNameReader2",
+                            LastName = "lastNameReader2"
+                        },
                         Host = new Host { HostName = "127.0.0.3" }
-                    });
+                    }
+                );
 
                 var nose1 = new Nose { Size = "Small" };
 
@@ -3035,48 +3162,55 @@ namespace Microsoft.EntityFrameworkCore
 
                 var nose3 = new Nose { Size = "Large" };
 
-                context.Add(
-                    new Entity
-                    {
-                        BaseNoses = new List<Nose>
-                        {
-                            nose1,
-                            nose2,
-                            nose3
-                        }
-                    });
+                context.Add(new Entity { BaseNoses = new List<Nose> { nose1, nose2, nose3 } });
 
-                context.Add(
-                    new Parson { ParsonNoses = new List<Nose> { nose2, nose3 } });
+                context.Add(new Parson { ParsonNoses = new List<Nose> { nose2, nose3 } });
 
-                context.Add(
-                    new Company { CompanyNoses = new List<Nose> { nose1, nose3 } });
+                context.Add(new Company { CompanyNoses = new List<Nose> { nose1, nose3 } });
 
                 context.Add(
                     new Applicant(
-                        new FullName(FirstName.Create("Amila"), LastName.Create("Udayanga"))));
+                        new FullName(FirstName.Create("Amila"), LastName.Create("Udayanga"))
+                    )
+                );
 
                 context.Add(
                     new Pyrson(new FullName(FirstName.Create("Amila"), LastName.Create("Udayanga")))
                     {
                         Address = new Address { Line1 = "Line1", Line2 = "Line2" }
-                    });
+                    }
+                );
 
                 context.Add(
                     new NonVirtualOneToOneOwner
                     {
-                        Id = 100, Address = new OwnedAddress { Street = "Paradise Alley", PostalCode = "WEEEEEE" }
-                    });
+                        Id = 100,
+                        Address = new OwnedAddress
+                        {
+                            Street = "Paradise Alley",
+                            PostalCode = "WEEEEEE"
+                        }
+                    }
+                );
 
                 context.Add(
-                    new VirtualOneToOneOwner { Id = 200, Address = new OwnedAddress { Street = "Dead End", PostalCode = "N0 WA1R" } });
+                    new VirtualOneToOneOwner
+                    {
+                        Id = 200,
+                        Address = new OwnedAddress { Street = "Dead End", PostalCode = "N0 WA1R" }
+                    }
+                );
 
                 context.Add(
                     new NonVirtualOneToManyOwner
                     {
                         Id = 300,
-                        Addresses = new List<OwnedAddress> { new() { Street = "4 Privet Drive", PostalCode = "SURREY" } }
-                    });
+                        Addresses = new List<OwnedAddress>
+                        {
+                            new() { Street = "4 Privet Drive", PostalCode = "SURREY" }
+                        }
+                    }
+                );
 
                 context.Add(
                     new VirtualOneToManyOwner
@@ -3088,14 +3222,19 @@ namespace Microsoft.EntityFrameworkCore
                             new() { Street = "Diagon Alley", PostalCode = "WC2H 0AW" },
                             new() { Street = "Shell Cottage", PostalCode = "THE SEA" }
                         }
-                    });
+                    }
+                );
 
                 context.Add(
                     new ExplicitLazyLoadNonVirtualOneToManyOwner
                     {
                         Id = 500,
-                        Addresses = new List<OwnedAddress> { new() { Street = "Spinner's End", PostalCode = "BE WA1R" } }
-                    });
+                        Addresses = new List<OwnedAddress>
+                        {
+                            new() { Street = "Spinner's End", PostalCode = "BE WA1R" }
+                        }
+                    }
+                );
 
                 context.Add(
                     new ExplicitLazyLoadVirtualOneToManyOwner
@@ -3105,7 +3244,8 @@ namespace Microsoft.EntityFrameworkCore
                         {
                             new() { Street = "12 Grimmauld Place", PostalCode = "L0N D0N" }
                         }
-                    });
+                    }
+                );
 
                 context.SaveChanges();
             }

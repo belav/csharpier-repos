@@ -30,8 +30,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
             SqlExpression match,
             SqlExpression pattern,
             SqlExpression? escapeChar,
-            RelationalTypeMapping? typeMapping)
-            : base(typeof(bool), typeMapping)
+            RelationalTypeMapping? typeMapping
+        ) : base(typeof(bool), typeMapping)
         {
             Check.NotNull(match, nameof(match));
             Check.NotNull(pattern, nameof(pattern));
@@ -79,14 +79,15 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         public virtual LikeExpression Update(
             SqlExpression match,
             SqlExpression pattern,
-            SqlExpression? escapeChar)
+            SqlExpression? escapeChar
+        )
         {
             Check.NotNull(match, nameof(match));
             Check.NotNull(pattern, nameof(pattern));
 
             return match != Match || pattern != Pattern || escapeChar != EscapeChar
-                ? new LikeExpression(match, pattern, escapeChar, TypeMapping)
-                : this;
+              ? new LikeExpression(match, pattern, escapeChar, TypeMapping)
+              : this;
         }
 
         /// <inheritdoc />
@@ -106,20 +107,21 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         }
 
         /// <inheritdoc />
-        public override bool Equals(object? obj)
-            => obj != null
-                && (ReferenceEquals(this, obj)
-                    || obj is LikeExpression likeExpression
-                    && Equals(likeExpression));
+        public override bool Equals(object? obj) =>
+            obj != null
+            && (
+                ReferenceEquals(this, obj)
+                || obj is LikeExpression likeExpression && Equals(likeExpression)
+            );
 
-        private bool Equals(LikeExpression likeExpression)
-            => base.Equals(likeExpression)
-                && Match.Equals(likeExpression.Match)
-                && Pattern.Equals(likeExpression.Pattern)
-                && EscapeChar?.Equals(likeExpression.EscapeChar) == true;
+        private bool Equals(LikeExpression likeExpression) =>
+            base.Equals(likeExpression)
+            && Match.Equals(likeExpression.Match)
+            && Pattern.Equals(likeExpression.Pattern)
+            && EscapeChar?.Equals(likeExpression.EscapeChar) == true;
 
         /// <inheritdoc />
-        public override int GetHashCode()
-            => HashCode.Combine(base.GetHashCode(), Match, Pattern, EscapeChar);
+        public override int GetHashCode() =>
+            HashCode.Combine(base.GetHashCode(), Match, Pattern, EscapeChar);
     }
 }

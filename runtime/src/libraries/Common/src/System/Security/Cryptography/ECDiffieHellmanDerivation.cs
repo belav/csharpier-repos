@@ -11,14 +11,18 @@ namespace System.Security.Cryptography
         /// <summary>
         /// Derive the raw ECDH value into <paramref name="hasher"/>, if present, otherwise returning the value.
         /// </summary>
-        internal delegate byte[]? DeriveSecretAgreement(ECDiffieHellmanPublicKey otherPartyPublicKey, IncrementalHash? hasher);
+        internal delegate byte[]? DeriveSecretAgreement(
+            ECDiffieHellmanPublicKey otherPartyPublicKey,
+            IncrementalHash? hasher
+        );
 
         internal static byte[] DeriveKeyFromHash(
             ECDiffieHellmanPublicKey otherPartyPublicKey,
             HashAlgorithmName hashAlgorithm,
             ReadOnlySpan<byte> secretPrepend,
             ReadOnlySpan<byte> secretAppend,
-            DeriveSecretAgreement deriveSecretAgreement)
+            DeriveSecretAgreement deriveSecretAgreement
+        )
         {
             Debug.Assert(otherPartyPublicKey != null);
             Debug.Assert(!string.IsNullOrEmpty(hashAlgorithm.Name));
@@ -43,7 +47,8 @@ namespace System.Security.Cryptography
             byte[]? hmacKey,
             ReadOnlySpan<byte> secretPrepend,
             ReadOnlySpan<byte> secretAppend,
-            DeriveSecretAgreement deriveSecretAgreement)
+            DeriveSecretAgreement deriveSecretAgreement
+        )
         {
             Debug.Assert(otherPartyPublicKey != null);
             Debug.Assert(!string.IsNullOrEmpty(hashAlgorithm.Name));
@@ -67,7 +72,9 @@ namespace System.Security.Cryptography
             {
                 try
                 {
-                    using (IncrementalHash hash = IncrementalHash.CreateHMAC(hashAlgorithm, hmacKey))
+                    using (
+                        IncrementalHash hash = IncrementalHash.CreateHMAC(hashAlgorithm, hmacKey)
+                    )
                     {
                         hash.AppendData(secretPrepend);
 
@@ -77,7 +84,10 @@ namespace System.Security.Cryptography
                         }
                         else
                         {
-                            byte[]? secretAgreement = deriveSecretAgreement(otherPartyPublicKey, hash);
+                            byte[]? secretAgreement = deriveSecretAgreement(
+                                otherPartyPublicKey,
+                                hash
+                            );
                             // We want the side effect, and it should not have returned the answer.
                             Debug.Assert(secretAgreement == null);
                         }
@@ -86,6 +96,7 @@ namespace System.Security.Cryptography
                         return hash.GetHashAndReset();
                     }
                 }
+
                 finally
                 {
                     // If useSecretAsKey is false then hmacKey is owned by the caller, not ours to clear.
@@ -101,7 +112,8 @@ namespace System.Security.Cryptography
             ECDiffieHellmanPublicKey otherPartyPublicKey,
             ReadOnlySpan<byte> prfLabel,
             ReadOnlySpan<byte> prfSeed,
-            DeriveSecretAgreement deriveSecretAgreement)
+            DeriveSecretAgreement deriveSecretAgreement
+        )
         {
             Debug.Assert(otherPartyPublicKey != null);
 
@@ -145,7 +157,8 @@ namespace System.Security.Cryptography
                         prfLabel,
                         prfSeed,
                         Md5Size,
-                        ret);
+                        ret
+                    );
 
                     Span<byte> part2 = stackalloc byte[ret.Length];
 
@@ -155,7 +168,8 @@ namespace System.Security.Cryptography
                         prfLabel,
                         prfSeed,
                         Sha1Size,
-                        part2);
+                        part2
+                    );
 
                     for (int i = 0; i < ret.Length; i++)
                     {
@@ -164,6 +178,7 @@ namespace System.Security.Cryptography
 
                     return ret;
                 }
+
                 finally
                 {
                     Array.Clear(secretAgreement, 0, secretAgreement.Length);
@@ -177,7 +192,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> prfLabel,
             ReadOnlySpan<byte> prfSeed,
             int hashOutputSize,
-            Span<byte> ret)
+            Span<byte> ret
+        )
         {
             // https://tools.ietf.org/html/rfc4346#section-5
             //
@@ -202,11 +218,16 @@ namespace System.Security.Cryptography
                 try
                 {
 #else
-                    ReadOnlySpan<byte> secretTmp = secret;
+            ReadOnlySpan<byte> secretTmp = secret;
 #endif
                     Span<byte> retSpan = ret;
 
-                    using (IncrementalHash hasher = IncrementalHash.CreateHMAC(algorithmName, secretTmp))
+                    using (
+                        IncrementalHash hasher = IncrementalHash.CreateHMAC(
+                            algorithmName,
+                            secretTmp
+                        )
+                    )
                     {
                         Span<byte> a = stackalloc byte[hashOutputSize];
                         Span<byte> p = stackalloc byte[hashOutputSize];
@@ -215,7 +236,10 @@ namespace System.Security.Cryptography
                         hasher.AppendData(prfLabel);
                         hasher.AppendData(prfSeed);
 
-                        if (!hasher.TryGetHashAndReset(a, out int bytesWritten) || bytesWritten != hashOutputSize)
+                        if (
+                            !hasher.TryGetHashAndReset(a, out int bytesWritten)
+                            || bytesWritten != hashOutputSize
+                        )
                         {
                             throw new CryptographicException();
                         }
@@ -227,7 +251,10 @@ namespace System.Security.Cryptography
                             hasher.AppendData(prfLabel);
                             hasher.AppendData(prfSeed);
 
-                            if (!hasher.TryGetHashAndReset(p, out bytesWritten) || bytesWritten != hashOutputSize)
+                            if (
+                                !hasher.TryGetHashAndReset(p, out bytesWritten)
+                                || bytesWritten != hashOutputSize
+                            )
                             {
                                 throw new CryptographicException();
                             }
@@ -245,7 +272,10 @@ namespace System.Security.Cryptography
                             // Build the next A(i)
                             hasher.AppendData(a);
 
-                            if (!hasher.TryGetHashAndReset(a, out bytesWritten) || bytesWritten != hashOutputSize)
+                            if (
+                                !hasher.TryGetHashAndReset(a, out bytesWritten)
+                                || bytesWritten != hashOutputSize
+                            )
                             {
                                 throw new CryptographicException();
                             }
@@ -253,6 +283,7 @@ namespace System.Security.Cryptography
                     }
 #if NETFRAMEWORK || NETCOREAPP3_0
                 }
+
                 finally
                 {
                     Array.Clear(secretTmp, 0, secretTmp.Length);

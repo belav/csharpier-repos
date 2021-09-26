@@ -15,11 +15,7 @@ namespace Negotiate.Server.Controllers
         public ObjectResult GetUnrestricted()
         {
             var user = HttpContext.User.Identity;
-            return new ObjectResult(new
-            {
-                user.Name,
-                user.AuthenticationType,
-            });
+            return new ObjectResult(new { user.Name, user.AuthenticationType, });
         }
 
         [HttpGet]
@@ -28,11 +24,7 @@ namespace Negotiate.Server.Controllers
         public ObjectResult GetAuthorized()
         {
             var user = HttpContext.User.Identity;
-            return new ObjectResult(new
-            {
-                user.Name,
-                user.AuthenticationType,
-            });
+            return new ObjectResult(new { user.Name, user.AuthenticationType, });
         }
 
         [HttpGet]

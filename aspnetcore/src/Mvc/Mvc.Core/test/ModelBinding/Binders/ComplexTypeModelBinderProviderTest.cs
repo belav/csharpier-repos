@@ -36,18 +36,20 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             var provider = new ComplexTypeModelBinderProvider();
 
             var context = new TestModelBinderProviderContext(typeof(Person));
-            context.OnCreatingBinder(m =>
-            {
-                if (m.ModelType == typeof(int) || m.ModelType == typeof(string))
+            context.OnCreatingBinder(
+                m =>
                 {
-                    return Mock.Of<IModelBinder>();
+                    if (m.ModelType == typeof(int) || m.ModelType == typeof(string))
+                    {
+                        return Mock.Of<IModelBinder>();
+                    }
+                    else
+                    {
+                        Assert.False(true, "Not the right model type");
+                        return null;
+                    }
                 }
-                else
-                {
-                    Assert.False(true, "Not the right model type");
-                    return null;
-                }
-            });
+            );
 
             // Act
             var result = provider.GetBinder(context);
@@ -63,18 +65,20 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             var provider = new ComplexTypeModelBinderProvider();
 
             var context = new TestModelBinderProviderContext(typeof(Person));
-            context.OnCreatingBinder(m =>
-            {
-                if (m.ModelType == typeof(int) || m.ModelType == typeof(string))
+            context.OnCreatingBinder(
+                m =>
                 {
-                    return Mock.Of<IModelBinder>();
+                    if (m.ModelType == typeof(int) || m.ModelType == typeof(string))
+                    {
+                        return Mock.Of<IModelBinder>();
+                    }
+                    else
+                    {
+                        Assert.False(true, "Not the right model type");
+                        return null;
+                    }
                 }
-                else
-                {
-                    Assert.False(true, "Not the right model type");
-                    return null;
-                }
-            });
+            );
 
             // Act
             var result = provider.GetBinder(context);

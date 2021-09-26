@@ -17,10 +17,7 @@ namespace System.Security.Cryptography
     [UnsupportedOSPlatform("browser")]
     public class HMACSHA256 : HMAC
     {
-        public HMACSHA256()
-            : this(RandomNumberGenerator.GetBytes(BlockSize))
-        {
-        }
+        public HMACSHA256() : this(RandomNumberGenerator.GetBytes(BlockSize)) { }
 
         public HMACSHA256(byte[] key)
         {
@@ -40,10 +37,7 @@ namespace System.Security.Cryptography
 
         public override byte[] Key
         {
-            get
-            {
-                return base.Key;
-            }
+            get { return base.Key; }
             set
             {
                 if (value is null)
@@ -62,8 +56,7 @@ namespace System.Security.Cryptography
         protected override void HashCore(ReadOnlySpan<byte> source) =>
             _hMacCommon.AppendHashData(source);
 
-        protected override byte[] HashFinal() =>
-            _hMacCommon.FinalizeHashAndReset();
+        protected override byte[] HashFinal() => _hMacCommon.FinalizeHashAndReset();
 
         protected override bool TryHashFinal(Span<byte> destination, out int bytesWritten) =>
             _hMacCommon.TryFinalizeHashAndReset(destination, out bytesWritten);

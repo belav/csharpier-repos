@@ -73,7 +73,9 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"Vector64<Int32.GetElement({imm}): {nameof(RunBasicScenario)} failed to throw ArgumentOutOfRangeException.");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector64<Int32.GetElement({imm}): {nameof(RunBasicScenario)} failed to throw ArgumentOutOfRangeException."
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;
@@ -95,7 +97,9 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"Vector64<Int32.WithElement({imm}): {nameof(RunBasicScenario)} failed to throw ArgumentOutOfRangeException.");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector64<Int32.WithElement({imm}): {nameof(RunBasicScenario)} failed to throw ArgumentOutOfRangeException."
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;
@@ -119,21 +123,22 @@ namespace JIT.HardwareIntrinsics.General
 
             try
             {
-                object result = typeof(Vector64)
-                                    .GetMethod(nameof(Vector64.GetElement))
-                                    .MakeGenericMethod(typeof(Int32))
-                                    .Invoke(null, new object[] { value, imm });
+                object result = typeof(Vector64).GetMethod(nameof(Vector64.GetElement))
+                    .MakeGenericMethod(typeof(Int32))
+                    .Invoke(null, new object[] { value, imm });
                 ValidateGetResult((Int32)(result), values);
             }
             catch (TargetInvocationException e)
             {
-                succeeded = expectedOutOfRangeException
-                          && e.InnerException is ArgumentOutOfRangeException;
+                succeeded =
+                    expectedOutOfRangeException && e.InnerException is ArgumentOutOfRangeException;
             }
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"Vector64<Int32.GetElement({imm}): {nameof(RunReflectionScenario)} failed to throw ArgumentOutOfRangeException.");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector64<Int32.GetElement({imm}): {nameof(RunReflectionScenario)} failed to throw ArgumentOutOfRangeException."
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;
@@ -145,21 +150,22 @@ namespace JIT.HardwareIntrinsics.General
 
             try
             {
-                object result2 = typeof(Vector64)
-                                    .GetMethod(nameof(Vector64.WithElement))
-                                    .MakeGenericMethod(typeof(Int32))
-                                    .Invoke(null, new object[] { value, imm, insertedValue });
+                object result2 = typeof(Vector64).GetMethod(nameof(Vector64.WithElement))
+                    .MakeGenericMethod(typeof(Int32))
+                    .Invoke(null, new object[] { value, imm, insertedValue });
                 ValidateWithResult((Vector64<Int32>)(result2), values, insertedValue);
             }
             catch (TargetInvocationException e)
             {
-                succeeded = expectedOutOfRangeException
-                          && e.InnerException is ArgumentOutOfRangeException;
+                succeeded =
+                    expectedOutOfRangeException && e.InnerException is ArgumentOutOfRangeException;
             }
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"Vector64<Int32.WithElement({imm}): {nameof(RunReflectionScenario)} failed to throw ArgumentOutOfRangeException.");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector64<Int32.WithElement({imm}): {nameof(RunReflectionScenario)} failed to throw ArgumentOutOfRangeException."
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;
@@ -175,27 +181,45 @@ namespace JIT.HardwareIntrinsics.General
             RunReflectionScenario(0 + ElementCount, expectedOutOfRangeException: true);
         }
 
-        private void ValidateGetResult(Int32 result, Int32[] values, [CallerMemberName] string method = "")
+        private void ValidateGetResult(
+            Int32 result,
+            Int32[] values,
+            [CallerMemberName] string method = ""
+        )
         {
             if (result != values[0])
             {
                 Succeeded = false;
 
-                TestLibrary.TestFramework.LogInformation($"Vector64<Int32.GetElement(0): {method} failed:");
-                TestLibrary.TestFramework.LogInformation($"   value: ({string.Join(", ", values)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector64<Int32.GetElement(0): {method} failed:"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"   value: ({string.Join(", ", values)})"
+                );
                 TestLibrary.TestFramework.LogInformation($"  result: ({result})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
             }
         }
 
-        private void ValidateWithResult(Vector64<Int32> result, Int32[] values, Int32 insertedValue, [CallerMemberName] string method = "")
+        private void ValidateWithResult(
+            Vector64<Int32> result,
+            Int32[] values,
+            Int32 insertedValue,
+            [CallerMemberName] string method = ""
+        )
         {
             Int32[] resultElements = new Int32[ElementCount];
             Unsafe.WriteUnaligned(ref Unsafe.As<Int32, byte>(ref resultElements[0]), result);
             ValidateWithResult(resultElements, values, insertedValue, method);
         }
 
-        private void ValidateWithResult(Int32[] result, Int32[] values, Int32 insertedValue, [CallerMemberName] string method = "")
+        private void ValidateWithResult(
+            Int32[] result,
+            Int32[] values,
+            Int32 insertedValue,
+            [CallerMemberName] string method = ""
+        )
         {
             bool succeeded = true;
 
@@ -215,10 +239,16 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"Vector64<Int32.WithElement(0): {method} failed:");
-                TestLibrary.TestFramework.LogInformation($"   value: ({string.Join(", ", values)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector64<Int32.WithElement(0): {method} failed:"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"   value: ({string.Join(", ", values)})"
+                );
                 TestLibrary.TestFramework.LogInformation($"  insert: insertedValue");
-                TestLibrary.TestFramework.LogInformation($"  result: ({string.Join(", ", result)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"  result: ({string.Join(", ", result)})"
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

@@ -20,9 +20,7 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         /// </summary>
         /// <param name="handlerMethod">The <see cref="System.Reflection.MethodInfo"/> for the handler.</param>
         /// <param name="attributes">Any attributes annotated on the handler method.</param>
-        public PageHandlerModel(
-            MethodInfo handlerMethod,
-            IReadOnlyList<object> attributes)
+        public PageHandlerModel(MethodInfo handlerMethod, IReadOnlyList<object> attributes)
         {
             MethodInfo = handlerMethod ?? throw new ArgumentNullException(nameof(handlerMethod));
             Attributes = attributes ?? throw new ArgumentNullException(nameof(attributes));
@@ -54,7 +52,9 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             Properties = new Dictionary<object, object>(other.Properties);
 
             // Make a deep copy of other 'model' types.
-            Parameters = new List<PageParameterModel>(other.Parameters.Select(p => new PageParameterModel(p) { Handler = this }));
+            Parameters = new List<PageParameterModel>(
+                other.Parameters.Select(p => new PageParameterModel(p) { Handler = this })
+            );
         }
 
         /// <summary>

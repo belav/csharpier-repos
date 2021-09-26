@@ -29,40 +29,66 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             {
                 return new TheoryData<string, string, object, FormMethod, object>
                 {
+                    { null, null, null, FormMethod.Get, null },
+                    { "Details", "Product", null, FormMethod.Get, null },
+                    { "Details", "Product", null, FormMethod.Post, null },
                     {
-                        null, null, null, FormMethod.Get, null
-                    },
-                    {
-                        "Details", "Product", null, FormMethod.Get, null
-                    },
-                    {
-                        "Details", "Product", null, FormMethod.Post, null
-                    },
-                    {
-                        "Details", "Product", new { isprint = "false", showreviews = "false" }, FormMethod.Get, null
-                    },
-                    {
-                        "Details", "Product", new { isprint = "false", showreviews = "true" }, FormMethod.Post, null
-                    },
-                    {
-                        "Details", "Product", new { isprint = "true", showreviews = "false" }, FormMethod.Get,
-                        new { p1_name = "p1-value" }
-                    },
-                    {
-                        "Details", "Product", new { isprint = "true", showreviews = "true" }, FormMethod.Post,
-                        new { p1_name = "p1-value" }
-                    },
-                    {
-                        "Details", "Product",
-                        new Dictionary<string, object> { { "isprint", "false" }, { "showreviews", "false" }, },
+                        "Details",
+                        "Product",
+                        new { isprint = "false", showreviews = "false" },
                         FormMethod.Get,
-                        new Dictionary<string, object> { { "p1-name", "p1-value" }, { "p2-name", "p2-value" } }
+                        null
                     },
                     {
-                        "Details", "Product",
-                        new Dictionary<string, object> { { "isprint", "false" }, { "showreviews", "false" }, },
+                        "Details",
+                        "Product",
+                        new { isprint = "false", showreviews = "true" },
                         FormMethod.Post,
-                        new Dictionary<string, object> { { "p1-name", "p1-value" }, { "p2-name", "p2-value" } }
+                        null
+                    },
+                    {
+                        "Details",
+                        "Product",
+                        new { isprint = "true", showreviews = "false" },
+                        FormMethod.Get,
+                        new { p1_name = "p1-value" }
+                    },
+                    {
+                        "Details",
+                        "Product",
+                        new { isprint = "true", showreviews = "true" },
+                        FormMethod.Post,
+                        new { p1_name = "p1-value" }
+                    },
+                    {
+                        "Details",
+                        "Product",
+                        new Dictionary<string, object>
+                        {
+                            { "isprint", "false" },
+                            { "showreviews", "false" },
+                        },
+                        FormMethod.Get,
+                        new Dictionary<string, object>
+                        {
+                            { "p1-name", "p1-value" },
+                            { "p2-name", "p2-value" }
+                        }
+                    },
+                    {
+                        "Details",
+                        "Product",
+                        new Dictionary<string, object>
+                        {
+                            { "isprint", "false" },
+                            { "showreviews", "false" },
+                        },
+                        FormMethod.Post,
+                        new Dictionary<string, object>
+                        {
+                            { "p1-name", "p1-value" },
+                            { "p2-name", "p2-value" }
+                        }
                     },
                 };
             }
@@ -75,43 +101,61 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             {
                 return new TheoryData<string, object, FormMethod, object>
                 {
-                    {
-                        null, null, FormMethod.Get, null
-                    },
-                    {
-                        null, null, FormMethod.Post, null
-                    },
-                    {
-                        "default", null, FormMethod.Get, null
-                    },
-                    {
-                        "default", null, FormMethod.Post, null
-                    },
-                    {
-                        "default", new { isprint = "false", showreviews = "false" }, FormMethod.Get, null
-                    },
-                    {
-                        "default", new { isprint = "false", showreviews = "true" }, FormMethod.Post, null
-                    },
-                    {
-                        "default", new { isprint = "true", showreviews = "false" }, FormMethod.Get,
-                        new { p1 = "p1-value" }
-                    },
-                    {
-                        "default", new { isprint = "true", showreviews = "true" }, FormMethod.Post,
-                        new { p1 = "p1-value" }
-                    },
+                    { null, null, FormMethod.Get, null },
+                    { null, null, FormMethod.Post, null },
+                    { "default", null, FormMethod.Get, null },
+                    { "default", null, FormMethod.Post, null },
                     {
                         "default",
-                        new Dictionary<string, object> { { "isprint", "false" }, { "showreviews", "false" }, },
+                        new { isprint = "false", showreviews = "false" },
                         FormMethod.Get,
-                        new Dictionary<string, object> { { "p1-name", "p1-value" }, { "p2-name", "p2-value" } }
+                        null
                     },
                     {
                         "default",
-                        new Dictionary<string, object> { { "isprint", "false" }, { "showreviews", "false" }, },
+                        new { isprint = "false", showreviews = "true" },
                         FormMethod.Post,
-                        new Dictionary<string, object> { { "p1-name", "p1-value" }, { "p2-name", "p2-value" } }
+                        null
+                    },
+                    {
+                        "default",
+                        new { isprint = "true", showreviews = "false" },
+                        FormMethod.Get,
+                        new { p1 = "p1-value" }
+                    },
+                    {
+                        "default",
+                        new { isprint = "true", showreviews = "true" },
+                        FormMethod.Post,
+                        new { p1 = "p1-value" }
+                    },
+                    {
+                        "default",
+                        new Dictionary<string, object>
+                        {
+                            { "isprint", "false" },
+                            { "showreviews", "false" },
+                        },
+                        FormMethod.Get,
+                        new Dictionary<string, object>
+                        {
+                            { "p1-name", "p1-value" },
+                            { "p2-name", "p2-value" }
+                        }
+                    },
+                    {
+                        "default",
+                        new Dictionary<string, object>
+                        {
+                            { "isprint", "false" },
+                            { "showreviews", "false" },
+                        },
+                        FormMethod.Post,
+                        new Dictionary<string, object>
+                        {
+                            { "p1-name", "p1-value" },
+                            { "p2-name", "p2-value" }
+                        }
                     },
                 };
             }
@@ -125,7 +169,11 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             var path = "/Path";
             var queryString = "?query=string";
             var expectedAction = pathBase + path + queryString;
-            var expectedStartTag = string.Format(CultureInfo.InvariantCulture, "<form action=\"HtmlEncode[[{0}]]\" method=\"HtmlEncode[[post]]\">", expectedAction);
+            var expectedStartTag = string.Format(
+                CultureInfo.InvariantCulture,
+                "<form action=\"HtmlEncode[[{0}]]\" method=\"HtmlEncode[[post]]\">",
+                expectedAction
+            );
 
             // IUrlHelper should not be used in this scenario.
             var urlHelper = new Mock<IUrlHelper>(MockBehavior.Strict);
@@ -152,7 +200,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
                 routeValues: null,
                 method: FormMethod.Post,
                 antiforgery: false,
-                htmlAttributes: null);
+                htmlAttributes: null
+            );
 
             // Assert
             Assert.NotNull(mvcForm);
@@ -173,9 +222,12 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             var queryString = "?query=string";
             var expectedAction = pathBase + path + queryString;
             var htmlAttributes = new { p1_name = "p1-value" };
-            var expectedStartTag = string.Format(CultureInfo.InvariantCulture, "<form action=\"HtmlEncode[[{0}]]\" method=\"HtmlEncode[[post]]\"{1}>",
+            var expectedStartTag = string.Format(
+                CultureInfo.InvariantCulture,
+                "<form action=\"HtmlEncode[[{0}]]\" method=\"HtmlEncode[[post]]\"{1}>",
                 expectedAction,
-                GetHtmlAttributesAsString(htmlAttributes));
+                GetHtmlAttributesAsString(htmlAttributes)
+            );
 
             // IUrlHelper should not be used in this scenario.
             var urlHelper = new Mock<IUrlHelper>(MockBehavior.Strict);
@@ -202,7 +254,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
                 routeValues: null,
                 method: FormMethod.Post,
                 antiforgery: false,
-                htmlAttributes: htmlAttributes);
+                htmlAttributes: htmlAttributes
+            );
 
             // Assert
             Assert.NotNull(mvcForm);
@@ -221,7 +274,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             string controllerName,
             object routeValues,
             FormMethod method,
-            object htmlAttributes)
+            object htmlAttributes
+        )
         {
             // Arrange
             var expectedAction = "http://localhost/Hello/World";
@@ -230,15 +284,21 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
                 "<form action=\"HtmlEncode[[{0}]]\" method=\"HtmlEncode[[{1}]]\"{2}>",
                 expectedAction,
                 method.ToString().ToLowerInvariant(),
-                GetHtmlAttributesAsString(htmlAttributes));
+                GetHtmlAttributesAsString(htmlAttributes)
+            );
 
             var urlHelper = new Mock<IUrlHelper>(MockBehavior.Strict);
-            urlHelper
-                .Setup(realHelper => realHelper.Action(It.Is<UrlActionContext>((context) =>
-                    string.Equals(context.Action, actionName) &&
-                    string.Equals(context.Controller, controllerName) &&
-                    context.Values == routeValues
-                )))
+            urlHelper.Setup(
+                    realHelper =>
+                        realHelper.Action(
+                            It.Is<UrlActionContext>(
+                                (context) =>
+                                    string.Equals(context.Action, actionName)
+                                    && string.Equals(context.Controller, controllerName)
+                                    && context.Values == routeValues
+                            )
+                        )
+                )
                 .Returns(expectedAction)
                 .Verifiable();
             var htmlHelper = DefaultTemplatesUtilities.GetHtmlHelper(urlHelper.Object);
@@ -256,7 +316,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
                 routeValues,
                 method,
                 antiforgery: false,
-                htmlAttributes: htmlAttributes);
+                htmlAttributes: htmlAttributes
+            );
 
             // Assert
             Assert.NotNull(mvcForm);
@@ -270,7 +331,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             string routeName,
             object routeValues,
             FormMethod method,
-            object htmlAttributes)
+            object htmlAttributes
+        )
         {
             // Arrange
             var expectedAction = "http://localhost/Hello/World";
@@ -279,16 +341,23 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
                 "<form action=\"HtmlEncode[[{0}]]\" method=\"HtmlEncode[[{1}]]\"{2}>",
                 expectedAction,
                 method.ToString().ToLowerInvariant(),
-                GetHtmlAttributesAsString(htmlAttributes));
+                GetHtmlAttributesAsString(htmlAttributes)
+            );
 
             var urlHelper = new Mock<IUrlHelper>(MockBehavior.Strict);
-            urlHelper
-                .Setup(realHelper => realHelper.RouteUrl(It.Is<UrlRouteContext>(context =>
-                    string.Equals(context.RouteName, routeName) &&
-                    context.Values == routeValues &&
-                    context.Protocol == null &&
-                    context.Host == null &&
-                    context.Fragment == null)))
+            urlHelper.Setup(
+                    realHelper =>
+                        realHelper.RouteUrl(
+                            It.Is<UrlRouteContext>(
+                                context =>
+                                    string.Equals(context.RouteName, routeName)
+                                    && context.Values == routeValues
+                                    && context.Protocol == null
+                                    && context.Host == null
+                                    && context.Fragment == null
+                            )
+                        )
+                )
                 .Returns(expectedAction)
                 .Verifiable();
             var htmlHelper = DefaultTemplatesUtilities.GetHtmlHelper(urlHelper.Object);
@@ -305,7 +374,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
                 routeValues,
                 method,
                 antiforgery: false,
-                htmlAttributes: htmlAttributes);
+                htmlAttributes: htmlAttributes
+            );
 
             // Assert
             Assert.NotNull(mvcForm);
@@ -341,7 +411,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             // Arrange
             var htmlHelper = DefaultTemplatesUtilities.GetHtmlHelper();
             var serviceProvider = new Mock<IServiceProvider>();
-            serviceProvider.Setup(s => s.GetService(typeof(HtmlEncoder))).Returns(new HtmlTestEncoder());
+            serviceProvider.Setup(s => s.GetService(typeof(HtmlEncoder)))
+                .Returns(new HtmlTestEncoder());
             var viewContext = htmlHelper.ViewContext;
             viewContext.HttpContext.RequestServices = serviceProvider.Object;
 
@@ -363,7 +434,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             // Assert
             Assert.Equal(
                 "<input name=\"HtmlEncode[[SomeName]]\" type=\"HtmlEncode[[hidden]]\" value=\"HtmlEncode[[false]]\" /></form>",
-                builder.ToString());
+                builder.ToString()
+            );
         }
 
         // This is an integration for the implicit antiforgery token added by BeginForm.
@@ -372,23 +444,26 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         {
             // Arrange
             var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
-            htmlGenerator
-                .Setup(g => g.GenerateForm(
-                    It.IsAny<ViewContext>(),
-                    It.IsAny<string>(),
-                    It.IsAny<string>(),
-                    It.IsAny<object>(),
-                    It.IsAny<string>(),
-                    It.IsAny<object>()))
+            htmlGenerator.Setup(
+                    g =>
+                        g.GenerateForm(
+                            It.IsAny<ViewContext>(),
+                            It.IsAny<string>(),
+                            It.IsAny<string>(),
+                            It.IsAny<object>(),
+                            It.IsAny<string>(),
+                            It.IsAny<object>()
+                        )
+                )
                 .Returns(new TagBuilder("form"));
 
-            htmlGenerator
-                .Setup(g => g.GenerateAntiforgery(It.IsAny<ViewContext>()))
+            htmlGenerator.Setup(g => g.GenerateAntiforgery(It.IsAny<ViewContext>()))
                 .Returns(new TagBuilder("antiforgery"));
 
             var htmlHelper = DefaultTemplatesUtilities.GetHtmlHelper(htmlGenerator.Object);
             var serviceProvider = new Mock<IServiceProvider>();
-            serviceProvider.Setup(s => s.GetService(typeof(HtmlEncoder))).Returns(new HtmlTestEncoder());
+            serviceProvider.Setup(s => s.GetService(typeof(HtmlEncoder)))
+                .Returns(new HtmlTestEncoder());
             var viewContext = htmlHelper.ViewContext;
             viewContext.HttpContext.RequestServices = serviceProvider.Object;
 
@@ -396,13 +471,12 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             Assert.NotNull(writer);
 
             // Act & Assert
-            using (var form = htmlHelper.BeginForm())
-            {
-            }
+            using (var form = htmlHelper.BeginForm()) { }
 
             Assert.Equal(
                 "<form><antiforgery></antiforgery></form>",
-                writer.GetStringBuilder().ToString());
+                writer.GetStringBuilder().ToString()
+            );
         }
 
         [Fact]
@@ -410,23 +484,26 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         {
             // Arrange
             var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
-            htmlGenerator
-                .Setup(g => g.GenerateForm(
-                    It.IsAny<ViewContext>(),
-                    It.IsAny<string>(),
-                    It.IsAny<string>(),
-                    It.IsAny<object>(),
-                    It.IsAny<string>(),
-                    It.IsAny<object>()))
+            htmlGenerator.Setup(
+                    g =>
+                        g.GenerateForm(
+                            It.IsAny<ViewContext>(),
+                            It.IsAny<string>(),
+                            It.IsAny<string>(),
+                            It.IsAny<object>(),
+                            It.IsAny<string>(),
+                            It.IsAny<object>()
+                        )
+                )
                 .Returns(new TagBuilder("form"));
 
-            htmlGenerator
-                .Setup(g => g.GenerateAntiforgery(It.IsAny<ViewContext>()))
+            htmlGenerator.Setup(g => g.GenerateAntiforgery(It.IsAny<ViewContext>()))
                 .Returns(new TagBuilder("antiforgery"));
 
             var htmlHelper = DefaultTemplatesUtilities.GetHtmlHelper(htmlGenerator.Object);
             var serviceProvider = new Mock<IServiceProvider>();
-            serviceProvider.Setup(s => s.GetService(typeof(HtmlEncoder))).Returns(new HtmlTestEncoder());
+            serviceProvider.Setup(s => s.GetService(typeof(HtmlEncoder)))
+                .Returns(new HtmlTestEncoder());
             var viewContext = htmlHelper.ViewContext;
             viewContext.HttpContext.RequestServices = serviceProvider.Object;
 
@@ -434,13 +511,18 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             Assert.NotNull(writer);
 
             // Act & Assert
-            using (var form = htmlHelper.BeginForm(FormMethod.Post, antiforgery: null, htmlAttributes: null))
-            {
-            }
+            using (
+                var form = htmlHelper.BeginForm(
+                    FormMethod.Post,
+                    antiforgery: null,
+                    htmlAttributes: null
+                )
+            ) { }
 
             Assert.Equal(
                 "<form><antiforgery></antiforgery></form>",
-                writer.GetStringBuilder().ToString());
+                writer.GetStringBuilder().ToString()
+            );
         }
 
         // This is an integration for suppressing implicit antiforgery token added by BeginForm.
@@ -449,23 +531,26 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         {
             // Arrange
             var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
-            htmlGenerator
-                .Setup(g => g.GenerateForm(
-                    It.IsAny<ViewContext>(),
-                    It.IsAny<string>(),
-                    It.IsAny<string>(),
-                    It.IsAny<object>(),
-                    It.IsAny<string>(),
-                    It.IsAny<object>()))
+            htmlGenerator.Setup(
+                    g =>
+                        g.GenerateForm(
+                            It.IsAny<ViewContext>(),
+                            It.IsAny<string>(),
+                            It.IsAny<string>(),
+                            It.IsAny<object>(),
+                            It.IsAny<string>(),
+                            It.IsAny<object>()
+                        )
+                )
                 .Returns(new TagBuilder("form"));
 
-            htmlGenerator
-                .Setup(g => g.GenerateAntiforgery(It.IsAny<ViewContext>()))
+            htmlGenerator.Setup(g => g.GenerateAntiforgery(It.IsAny<ViewContext>()))
                 .Returns(new TagBuilder("antiforgery"));
 
             var htmlHelper = DefaultTemplatesUtilities.GetHtmlHelper(htmlGenerator.Object);
             var serviceProvider = new Mock<IServiceProvider>();
-            serviceProvider.Setup(s => s.GetService(typeof(HtmlEncoder))).Returns(new HtmlTestEncoder());
+            serviceProvider.Setup(s => s.GetService(typeof(HtmlEncoder)))
+                .Returns(new HtmlTestEncoder());
             var viewContext = htmlHelper.ViewContext;
             viewContext.HttpContext.RequestServices = serviceProvider.Object;
 
@@ -473,13 +558,15 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             Assert.NotNull(writer);
 
             // Act & Assert
-            using (var form = htmlHelper.BeginForm(FormMethod.Post, antiforgery: false, htmlAttributes: null))
-            {
-            }
+            using (
+                var form = htmlHelper.BeginForm(
+                    FormMethod.Post,
+                    antiforgery: false,
+                    htmlAttributes: null
+                )
+            ) { }
 
-            Assert.Equal(
-                "<form></form>",
-                writer.GetStringBuilder().ToString());
+            Assert.Equal("<form></form>", writer.GetStringBuilder().ToString());
         }
 
         [Fact]
@@ -487,23 +574,26 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         {
             // Arrange
             var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
-            htmlGenerator
-                .Setup(g => g.GenerateForm(
-                    It.IsAny<ViewContext>(),
-                    It.IsAny<string>(),
-                    It.IsAny<string>(),
-                    It.IsAny<object>(),
-                    It.IsAny<string>(),
-                    It.IsAny<object>()))
+            htmlGenerator.Setup(
+                    g =>
+                        g.GenerateForm(
+                            It.IsAny<ViewContext>(),
+                            It.IsAny<string>(),
+                            It.IsAny<string>(),
+                            It.IsAny<object>(),
+                            It.IsAny<string>(),
+                            It.IsAny<object>()
+                        )
+                )
                 .Returns(new TagBuilder("form"));
 
-            htmlGenerator
-                .Setup(g => g.GenerateAntiforgery(It.IsAny<ViewContext>()))
+            htmlGenerator.Setup(g => g.GenerateAntiforgery(It.IsAny<ViewContext>()))
                 .Returns(new TagBuilder("antiforgery"));
 
             var htmlHelper = DefaultTemplatesUtilities.GetHtmlHelper(htmlGenerator.Object);
             var serviceProvider = new Mock<IServiceProvider>();
-            serviceProvider.Setup(s => s.GetService(typeof(HtmlEncoder))).Returns(new HtmlTestEncoder());
+            serviceProvider.Setup(s => s.GetService(typeof(HtmlEncoder)))
+                .Returns(new HtmlTestEncoder());
             var viewContext = htmlHelper.ViewContext;
             viewContext.HttpContext.RequestServices = serviceProvider.Object;
 
@@ -511,39 +601,46 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             Assert.NotNull(writer);
 
             // Act & Assert
-            using (var form = htmlHelper.BeginForm(FormMethod.Get, antiforgery: null, htmlAttributes: null))
-            {
-            }
+            using (
+                var form = htmlHelper.BeginForm(
+                    FormMethod.Get,
+                    antiforgery: null,
+                    htmlAttributes: null
+                )
+            ) { }
 
-            Assert.Equal(
-                "<form></form>",
-                writer.GetStringBuilder().ToString());
+            Assert.Equal("<form></form>", writer.GetStringBuilder().ToString());
         }
 
         [Theory]
         [InlineData(FormMethod.Get)]
         [InlineData(FormMethod.Post)]
-        public void BeginForm_EndForm_DoesNotSuppressAntiforgeryTokenWhenAntiforgeryIsTrue(FormMethod method)
+        public void BeginForm_EndForm_DoesNotSuppressAntiforgeryTokenWhenAntiforgeryIsTrue(
+            FormMethod method
+        )
         {
             // Arrange
             var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
-            htmlGenerator
-                .Setup(g => g.GenerateForm(
-                    It.IsAny<ViewContext>(),
-                    It.IsAny<string>(),
-                    It.IsAny<string>(),
-                    It.IsAny<object>(),
-                    It.IsAny<string>(),
-                    It.IsAny<object>()))
+            htmlGenerator.Setup(
+                    g =>
+                        g.GenerateForm(
+                            It.IsAny<ViewContext>(),
+                            It.IsAny<string>(),
+                            It.IsAny<string>(),
+                            It.IsAny<object>(),
+                            It.IsAny<string>(),
+                            It.IsAny<object>()
+                        )
+                )
                 .Returns(new TagBuilder("form"));
 
-            htmlGenerator
-                .Setup(g => g.GenerateAntiforgery(It.IsAny<ViewContext>()))
+            htmlGenerator.Setup(g => g.GenerateAntiforgery(It.IsAny<ViewContext>()))
                 .Returns(new TagBuilder("antiforgery"));
 
             var htmlHelper = DefaultTemplatesUtilities.GetHtmlHelper(htmlGenerator.Object);
             var serviceProvider = new Mock<IServiceProvider>();
-            serviceProvider.Setup(s => s.GetService(typeof(HtmlEncoder))).Returns(new HtmlTestEncoder());
+            serviceProvider.Setup(s => s.GetService(typeof(HtmlEncoder)))
+                .Returns(new HtmlTestEncoder());
             var viewContext = htmlHelper.ViewContext;
             viewContext.HttpContext.RequestServices = serviceProvider.Object;
 
@@ -552,12 +649,12 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
 
             // Act & Assert
             using (var form = htmlHelper.BeginForm(method, antiforgery: true, htmlAttributes: null))
-            {
-            }
+            { }
 
             Assert.Equal(
                 "<form><antiforgery></antiforgery></form>",
-                writer.GetStringBuilder().ToString());
+                writer.GetStringBuilder().ToString()
+            );
         }
 
         // This is an integration for suppressing implicit antiforgery token added by BeginForm.
@@ -566,23 +663,26 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         {
             // Arrange
             var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
-            htmlGenerator
-                .Setup(g => g.GenerateForm(
-                    It.IsAny<ViewContext>(),
-                    It.IsAny<string>(),
-                    It.IsAny<string>(),
-                    It.IsAny<object>(),
-                    It.IsAny<string>(),
-                    It.IsAny<object>()))
+            htmlGenerator.Setup(
+                    g =>
+                        g.GenerateForm(
+                            It.IsAny<ViewContext>(),
+                            It.IsAny<string>(),
+                            It.IsAny<string>(),
+                            It.IsAny<object>(),
+                            It.IsAny<string>(),
+                            It.IsAny<object>()
+                        )
+                )
                 .Returns(new TagBuilder("form"));
 
-            htmlGenerator
-                .Setup(g => g.GenerateAntiforgery(It.IsAny<ViewContext>()))
+            htmlGenerator.Setup(g => g.GenerateAntiforgery(It.IsAny<ViewContext>()))
                 .Returns(new TagBuilder("antiforgery"));
 
             var htmlHelper = DefaultTemplatesUtilities.GetHtmlHelper(htmlGenerator.Object);
             var serviceProvider = new Mock<IServiceProvider>();
-            serviceProvider.Setup(s => s.GetService(typeof(HtmlEncoder))).Returns(new HtmlTestEncoder());
+            serviceProvider.Setup(s => s.GetService(typeof(HtmlEncoder)))
+                .Returns(new HtmlTestEncoder());
             var viewContext = htmlHelper.ViewContext;
             viewContext.HttpContext.RequestServices = serviceProvider.Object;
 
@@ -590,15 +690,22 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             Assert.NotNull(writer);
 
             // Act & Assert
-            using (var form = htmlHelper.BeginForm(FormMethod.Post, antiforgery: false, htmlAttributes: null))
+            using (
+                var form = htmlHelper.BeginForm(
+                    FormMethod.Post,
+                    antiforgery: false,
+                    htmlAttributes: null
+                )
+            )
             {
                 // This call will output a token.
-                Assert.Equal("antiforgery", Assert.IsType<TagBuilder>(htmlHelper.AntiForgeryToken()).TagName);
+                Assert.Equal(
+                    "antiforgery",
+                    Assert.IsType<TagBuilder>(htmlHelper.AntiForgeryToken()).TagName
+                );
             }
 
-            Assert.Equal(
-                "<form></form>",
-                writer.GetStringBuilder().ToString());
+            Assert.Equal("<form></form>", writer.GetStringBuilder().ToString());
         }
 
         // This is an integration for the implicit antiforgery token added by BeginRouteForm.
@@ -607,22 +714,25 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         {
             // Arrange
             var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
-            htmlGenerator
-                .Setup(g => g.GenerateRouteForm(
-                    It.IsAny<ViewContext>(),
-                    It.IsAny<string>(),
-                    It.IsAny<object>(),
-                    It.IsAny<string>(),
-                    It.IsAny<object>()))
+            htmlGenerator.Setup(
+                    g =>
+                        g.GenerateRouteForm(
+                            It.IsAny<ViewContext>(),
+                            It.IsAny<string>(),
+                            It.IsAny<object>(),
+                            It.IsAny<string>(),
+                            It.IsAny<object>()
+                        )
+                )
                 .Returns(new TagBuilder("form"));
 
-            htmlGenerator
-                .Setup(g => g.GenerateAntiforgery(It.IsAny<ViewContext>()))
+            htmlGenerator.Setup(g => g.GenerateAntiforgery(It.IsAny<ViewContext>()))
                 .Returns(new TagBuilder("antiforgery"));
 
             var htmlHelper = DefaultTemplatesUtilities.GetHtmlHelper(htmlGenerator.Object);
             var serviceProvider = new Mock<IServiceProvider>();
-            serviceProvider.Setup(s => s.GetService(typeof(HtmlEncoder))).Returns(new HtmlTestEncoder());
+            serviceProvider.Setup(s => s.GetService(typeof(HtmlEncoder)))
+                .Returns(new HtmlTestEncoder());
             var viewContext = htmlHelper.ViewContext;
             viewContext.HttpContext.RequestServices = serviceProvider.Object;
 
@@ -630,13 +740,12 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             Assert.NotNull(writer);
 
             // Act & Assert
-            using (var form = htmlHelper.BeginRouteForm(routeValues: null))
-            {
-            }
+            using (var form = htmlHelper.BeginRouteForm(routeValues: null)) { }
 
             Assert.Equal(
                 "<form><antiforgery></antiforgery></form>",
-                writer.GetStringBuilder().ToString());
+                writer.GetStringBuilder().ToString()
+            );
         }
 
         [Fact]
@@ -644,22 +753,25 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         {
             // Arrange
             var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
-            htmlGenerator
-                .Setup(g => g.GenerateRouteForm(
-                    It.IsAny<ViewContext>(),
-                    It.IsAny<string>(),
-                    It.IsAny<object>(),
-                    It.IsAny<string>(),
-                    It.IsAny<object>()))
+            htmlGenerator.Setup(
+                    g =>
+                        g.GenerateRouteForm(
+                            It.IsAny<ViewContext>(),
+                            It.IsAny<string>(),
+                            It.IsAny<object>(),
+                            It.IsAny<string>(),
+                            It.IsAny<object>()
+                        )
+                )
                 .Returns(new TagBuilder("form"));
 
-            htmlGenerator
-                .Setup(g => g.GenerateAntiforgery(It.IsAny<ViewContext>()))
+            htmlGenerator.Setup(g => g.GenerateAntiforgery(It.IsAny<ViewContext>()))
                 .Returns(new TagBuilder("antiforgery"));
 
             var htmlHelper = DefaultTemplatesUtilities.GetHtmlHelper(htmlGenerator.Object);
             var serviceProvider = new Mock<IServiceProvider>();
-            serviceProvider.Setup(s => s.GetService(typeof(HtmlEncoder))).Returns(new HtmlTestEncoder());
+            serviceProvider.Setup(s => s.GetService(typeof(HtmlEncoder)))
+                .Returns(new HtmlTestEncoder());
             var viewContext = htmlHelper.ViewContext;
             viewContext.HttpContext.RequestServices = serviceProvider.Object;
 
@@ -667,18 +779,20 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             Assert.NotNull(writer);
 
             // Act & Assert
-            using (var form = htmlHelper.BeginRouteForm(
-                routeName: null,
-                routeValues: null,
-                method: FormMethod.Post,
-                antiforgery: null,
-                htmlAttributes: null))
-            {
-            }
+            using (
+                var form = htmlHelper.BeginRouteForm(
+                    routeName: null,
+                    routeValues: null,
+                    method: FormMethod.Post,
+                    antiforgery: null,
+                    htmlAttributes: null
+                )
+            ) { }
 
             Assert.Equal(
                 "<form><antiforgery></antiforgery></form>",
-                writer.GetStringBuilder().ToString());
+                writer.GetStringBuilder().ToString()
+            );
         }
 
         // This is an integration for suppressing implicit antiforgery token added by BeginRouteForm.
@@ -687,22 +801,25 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         {
             // Arrange
             var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
-            htmlGenerator
-                .Setup(g => g.GenerateRouteForm(
-                    It.IsAny<ViewContext>(),
-                    It.IsAny<string>(),
-                    It.IsAny<object>(),
-                    It.IsAny<string>(),
-                    It.IsAny<object>()))
+            htmlGenerator.Setup(
+                    g =>
+                        g.GenerateRouteForm(
+                            It.IsAny<ViewContext>(),
+                            It.IsAny<string>(),
+                            It.IsAny<object>(),
+                            It.IsAny<string>(),
+                            It.IsAny<object>()
+                        )
+                )
                 .Returns(new TagBuilder("form"));
 
-            htmlGenerator
-                .Setup(g => g.GenerateAntiforgery(It.IsAny<ViewContext>()))
+            htmlGenerator.Setup(g => g.GenerateAntiforgery(It.IsAny<ViewContext>()))
                 .Returns(new TagBuilder("antiforgery"));
 
             var htmlHelper = DefaultTemplatesUtilities.GetHtmlHelper(htmlGenerator.Object);
             var serviceProvider = new Mock<IServiceProvider>();
-            serviceProvider.Setup(s => s.GetService(typeof(HtmlEncoder))).Returns(new HtmlTestEncoder());
+            serviceProvider.Setup(s => s.GetService(typeof(HtmlEncoder)))
+                .Returns(new HtmlTestEncoder());
             var viewContext = htmlHelper.ViewContext;
             viewContext.HttpContext.RequestServices = serviceProvider.Object;
 
@@ -710,18 +827,17 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             Assert.NotNull(writer);
 
             // Act & Assert
-            using (var form = htmlHelper.BeginRouteForm(
-                routeName: null,
-                routeValues: null,
-                method: FormMethod.Post,
-                antiforgery: false,
-                htmlAttributes: null))
-            {
-            }
+            using (
+                var form = htmlHelper.BeginRouteForm(
+                    routeName: null,
+                    routeValues: null,
+                    method: FormMethod.Post,
+                    antiforgery: false,
+                    htmlAttributes: null
+                )
+            ) { }
 
-            Assert.Equal(
-                "<form></form>",
-                writer.GetStringBuilder().ToString());
+            Assert.Equal("<form></form>", writer.GetStringBuilder().ToString());
         }
 
         [Fact]
@@ -729,22 +845,25 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         {
             // Arrange
             var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
-            htmlGenerator
-                .Setup(g => g.GenerateRouteForm(
-                    It.IsAny<ViewContext>(),
-                    It.IsAny<string>(),
-                    It.IsAny<object>(),
-                    It.IsAny<string>(),
-                    It.IsAny<object>()))
+            htmlGenerator.Setup(
+                    g =>
+                        g.GenerateRouteForm(
+                            It.IsAny<ViewContext>(),
+                            It.IsAny<string>(),
+                            It.IsAny<object>(),
+                            It.IsAny<string>(),
+                            It.IsAny<object>()
+                        )
+                )
                 .Returns(new TagBuilder("form"));
 
-            htmlGenerator
-                .Setup(g => g.GenerateAntiforgery(It.IsAny<ViewContext>()))
+            htmlGenerator.Setup(g => g.GenerateAntiforgery(It.IsAny<ViewContext>()))
                 .Returns(new TagBuilder("antiforgery"));
 
             var htmlHelper = DefaultTemplatesUtilities.GetHtmlHelper(htmlGenerator.Object);
             var serviceProvider = new Mock<IServiceProvider>();
-            serviceProvider.Setup(s => s.GetService(typeof(HtmlEncoder))).Returns(new HtmlTestEncoder());
+            serviceProvider.Setup(s => s.GetService(typeof(HtmlEncoder)))
+                .Returns(new HtmlTestEncoder());
             var viewContext = htmlHelper.ViewContext;
             viewContext.HttpContext.RequestServices = serviceProvider.Object;
 
@@ -752,43 +871,47 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             Assert.NotNull(writer);
 
             // Act & Assert
-            using (var form = htmlHelper.BeginRouteForm(
-                routeName: null,
-                routeValues: null,
-                method: FormMethod.Get,
-                antiforgery: null,
-                htmlAttributes: null))
-            {
-            }
+            using (
+                var form = htmlHelper.BeginRouteForm(
+                    routeName: null,
+                    routeValues: null,
+                    method: FormMethod.Get,
+                    antiforgery: null,
+                    htmlAttributes: null
+                )
+            ) { }
 
-            Assert.Equal(
-                "<form></form>",
-                writer.GetStringBuilder().ToString());
+            Assert.Equal("<form></form>", writer.GetStringBuilder().ToString());
         }
 
         [Theory]
         [InlineData(FormMethod.Get)]
         [InlineData(FormMethod.Post)]
-        public void BeginRouteForm_EndForm_DoesNotSuppressAntiforgeryTokenWhenAntiforgeryIsTrue(FormMethod method)
+        public void BeginRouteForm_EndForm_DoesNotSuppressAntiforgeryTokenWhenAntiforgeryIsTrue(
+            FormMethod method
+        )
         {
             // Arrange
             var htmlGenerator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
-            htmlGenerator
-                .Setup(g => g.GenerateRouteForm(
-                    It.IsAny<ViewContext>(),
-                    It.IsAny<string>(),
-                    It.IsAny<object>(),
-                    It.IsAny<string>(),
-                    It.IsAny<object>()))
+            htmlGenerator.Setup(
+                    g =>
+                        g.GenerateRouteForm(
+                            It.IsAny<ViewContext>(),
+                            It.IsAny<string>(),
+                            It.IsAny<object>(),
+                            It.IsAny<string>(),
+                            It.IsAny<object>()
+                        )
+                )
                 .Returns(new TagBuilder("form"));
 
-            htmlGenerator
-                .Setup(g => g.GenerateAntiforgery(It.IsAny<ViewContext>()))
+            htmlGenerator.Setup(g => g.GenerateAntiforgery(It.IsAny<ViewContext>()))
                 .Returns(new TagBuilder("antiforgery"));
 
             var htmlHelper = DefaultTemplatesUtilities.GetHtmlHelper(htmlGenerator.Object);
             var serviceProvider = new Mock<IServiceProvider>();
-            serviceProvider.Setup(s => s.GetService(typeof(HtmlEncoder))).Returns(new HtmlTestEncoder());
+            serviceProvider.Setup(s => s.GetService(typeof(HtmlEncoder)))
+                .Returns(new HtmlTestEncoder());
             var viewContext = htmlHelper.ViewContext;
             viewContext.HttpContext.RequestServices = serviceProvider.Object;
 
@@ -796,18 +919,20 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             Assert.NotNull(writer);
 
             // Act & Assert
-            using (var form = htmlHelper.BeginRouteForm(
-                routeName: null,
-                routeValues: null,
-                method: method,
-                antiforgery: true,
-                htmlAttributes: null))
-            {
-            }
+            using (
+                var form = htmlHelper.BeginRouteForm(
+                    routeName: null,
+                    routeValues: null,
+                    method: method,
+                    antiforgery: true,
+                    htmlAttributes: null
+                )
+            ) { }
 
             Assert.Equal(
                 "<form><antiforgery></antiforgery></form>",
-                writer.GetStringBuilder().ToString());
+                writer.GetStringBuilder().ToString()
+            );
         }
 
         private string GetHtmlAttributesAsString(object htmlAttributes)
@@ -815,7 +940,16 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             var dictionary = HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes);
             return string.Join(
                 string.Empty,
-                dictionary.Select(keyValue => string.Format(CultureInfo.InvariantCulture, " {0}=\"HtmlEncode[[{1}]]\"", keyValue.Key, keyValue.Value)));
+                dictionary.Select(
+                    keyValue =>
+                        string.Format(
+                            CultureInfo.InvariantCulture,
+                            " {0}=\"HtmlEncode[[{1}]]\"",
+                            keyValue.Key,
+                            keyValue.Value
+                        )
+                )
+            );
         }
     }
 }

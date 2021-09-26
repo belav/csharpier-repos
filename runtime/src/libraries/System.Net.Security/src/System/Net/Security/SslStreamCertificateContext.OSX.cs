@@ -10,7 +10,10 @@ namespace System.Net.Security
         // No leaf, no root.
         private const bool TrimRootCertificate = true;
 
-        private SslStreamCertificateContext(X509Certificate2 target, X509Certificate2[] intermediates)
+        private SslStreamCertificateContext(
+            X509Certificate2 target,
+            X509Certificate2[] intermediates
+        )
         {
             Certificate = target;
             IntermediateCertificates = intermediates;

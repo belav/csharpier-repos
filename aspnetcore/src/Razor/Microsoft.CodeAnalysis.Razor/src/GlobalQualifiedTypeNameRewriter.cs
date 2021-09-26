@@ -72,7 +72,12 @@ namespace Microsoft.CodeAnalysis.Razor
                     return node;
                 }
 
-                return SyntaxFactory.AliasQualifiedName(SyntaxFactory.IdentifierName(SyntaxFactory.Token(CSharp.SyntaxKind.GlobalKeyword)), node);
+                return SyntaxFactory.AliasQualifiedName(
+                    SyntaxFactory.IdentifierName(
+                        SyntaxFactory.Token(CSharp.SyntaxKind.GlobalKeyword)
+                    ),
+                    node
+                );
             }
         }
     }

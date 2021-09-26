@@ -7,8 +7,15 @@ using Xunit;
 
 namespace System.DirectoryServices.Protocols.Tests
 {
-    [ConditionalClass(typeof(DirectoryServicesTestHelpers), nameof(DirectoryServicesTestHelpers.IsWindowsOrLibLdapIsInstalled))]
-    [ActiveIssue("https://github.com/dotnet/runtime/issues/49105", typeof(PlatformDetection), nameof(PlatformDetection.IsMacOsAppleSilicon))]
+    [ConditionalClass(
+        typeof(DirectoryServicesTestHelpers),
+        nameof(DirectoryServicesTestHelpers.IsWindowsOrLibLdapIsInstalled)
+    )]
+    [ActiveIssue(
+        "https://github.com/dotnet/runtime/issues/49105",
+        typeof(PlatformDetection),
+        nameof(PlatformDetection.IsMacOsAppleSilicon)
+    )]
     public class VerifyNameControlTests
     {
         [Fact]
@@ -21,14 +28,29 @@ namespace System.DirectoryServices.Protocols.Tests
             Assert.True(control.ServerSide);
             Assert.Equal("1.2.840.113556.1.4.1338", control.Type);
 
-            var expected = (RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) ? new byte[] { 48, 132, 0, 0, 0, 5, 2, 1, 0, 4, 0 } : new byte[] { 48, 5, 2, 1, 0, 4, 0 };
+            var expected =
+                (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                    ? new byte[] { 48, 132, 0, 0, 0, 5, 2, 1, 0, 4, 0 }
+                    : new byte[] { 48, 5, 2, 1, 0, 4, 0 };
             Assert.Equal(expected, control.GetValue());
         }
 
         public static IEnumerable<object[]> Ctor_ServerName_Data()
         {
-            yield return new object[] { "", (RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) ? new byte[] { 48, 132, 0, 0, 0, 5, 2, 1, 0, 4, 0 } : new byte[] { 48, 5, 2, 1, 0, 4, 0 } };
-            yield return new object[] { "S", (RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) ? new byte[] { 48, 132, 0, 0, 0, 7, 2, 1, 0, 4, 2, 83, 0 } : new byte[] { 48, 7, 2, 1, 0, 4, 2, 83, 0 } };
+            yield return new object[]
+            {
+                "",
+                (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                    ? new byte[] { 48, 132, 0, 0, 0, 5, 2, 1, 0, 4, 0 }
+                    : new byte[] { 48, 5, 2, 1, 0, 4, 0 }
+            };
+            yield return new object[]
+            {
+                "S",
+                (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                    ? new byte[] { 48, 132, 0, 0, 0, 7, 2, 1, 0, 4, 2, 83, 0 }
+                    : new byte[] { 48, 7, 2, 1, 0, 4, 2, 83, 0 }
+            };
         }
 
         [Theory]
@@ -47,8 +69,22 @@ namespace System.DirectoryServices.Protocols.Tests
 
         public static IEnumerable<object[]> Ctor_ServerName_Flag_Data()
         {
-            yield return new object[] { "", -1, (RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) ?  new byte[] { 48, 132, 0, 0, 0, 8, 2, 4, 255, 255, 255, 255, 4, 0 } : new byte[] { 48, 5, 2, 1, 255, 4, 0 } };
-            yield return new object[] { "S", 10, (RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) ? new byte[] { 48, 132, 0, 0, 0, 7, 2, 1, 10, 4, 2, 83, 0 } : new byte[] { 48, 7, 2, 1, 10, 4, 2, 83, 0 } };
+            yield return new object[]
+            {
+                "",
+                -1,
+                (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                    ? new byte[] { 48, 132, 0, 0, 0, 8, 2, 4, 255, 255, 255, 255, 4, 0 }
+                    : new byte[] { 48, 5, 2, 1, 255, 4, 0 }
+            };
+            yield return new object[]
+            {
+                "S",
+                10,
+                (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                    ? new byte[] { 48, 132, 0, 0, 0, 7, 2, 1, 10, 4, 2, 83, 0 }
+                    : new byte[] { 48, 7, 2, 1, 10, 4, 2, 83, 0 }
+            };
         }
 
         [Theory]
@@ -68,8 +104,14 @@ namespace System.DirectoryServices.Protocols.Tests
         [Fact]
         public void Ctor_NullServerName_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("serverName", () => new VerifyNameControl(null));
-            AssertExtensions.Throws<ArgumentNullException>("serverName", () => new VerifyNameControl(null, 0));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "serverName",
+                () => new VerifyNameControl(null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "serverName",
+                () => new VerifyNameControl(null, 0)
+            );
         }
 
         [Fact]
@@ -83,7 +125,10 @@ namespace System.DirectoryServices.Protocols.Tests
         public void ServerName_SetNull_ThrowsArgumentNullException()
         {
             var control = new VerifyNameControl();
-            AssertExtensions.Throws<ArgumentNullException>("value", () => control.ServerName = null);
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                () => control.ServerName = null
+            );
         }
 
         [Fact]

@@ -7,13 +7,18 @@ namespace System.Runtime.CompilerServices.Tests
 {
     public static class CallerArgumentExpressionAttributeTests
     {
-        public static string IntParamMethod(int val, [CallerArgumentExpression("val")] string expr = null)
+        public static string IntParamMethod(
+            int val,
+            [CallerArgumentExpression("val")] string expr = null
+        )
         {
             return expr;
         }
 
         [Theory, InlineData("testParamName"), InlineData(""), InlineData(null)]
-        public static void ArgumentToCallerArgumentExpressionSetsParameterNameProperty(string paramName)
+        public static void ArgumentToCallerArgumentExpressionSetsParameterNameProperty(
+            string paramName
+        )
         {
             var attr = new CallerArgumentExpressionAttribute(paramName);
 
@@ -31,7 +36,10 @@ namespace System.Runtime.CompilerServices.Tests
             Assert.Equal(IntParamMethod(notVal), IntParamMethodPassthrough(notVal));
         }
 
-        private static string IntParamMethodPassthrough(int val, [CallerArgumentExpression("val")] string expr = null)
+        private static string IntParamMethodPassthrough(
+            int val,
+            [CallerArgumentExpression("val")] string expr = null
+        )
         {
             return IntParamMethod(val, expr);
         }
@@ -44,7 +52,10 @@ namespace System.Runtime.CompilerServices.Tests
             Assert.Null(InvalidParameterNameMethod(notVal));
         }
 
-        private static string InvalidParameterNameMethod(int val, [CallerArgumentExpression("notVal")] string expr = null)
+        private static string InvalidParameterNameMethod(
+            int val,
+            [CallerArgumentExpression("notVal")] string expr = null
+        )
         {
             return expr;
         }
@@ -57,7 +68,10 @@ namespace System.Runtime.CompilerServices.Tests
             Assert.Null(NullParameterNameMethod(notVal));
         }
 
-        private static string NullParameterNameMethod(int val, [CallerArgumentExpression(null)] string expr = null)
+        private static string NullParameterNameMethod(
+            int val,
+            [CallerArgumentExpression(null)] string expr = null
+        )
         {
             return expr;
         }
@@ -77,7 +91,10 @@ namespace System.Runtime.CompilerServices.Tests
             return OverloadedMethodReturn;
         }
 
-        private static string OverloadedMethod(int val, [CallerArgumentExpression(null)] string expr = null)
+        private static string OverloadedMethod(
+            int val,
+            [CallerArgumentExpression(null)] string expr = null
+        )
         {
             return expr;
         }
@@ -97,8 +114,7 @@ namespace System.Runtime.CompilerServices.Tests
         {
             int x = 5;
 
-            Assert.Equal("Math.Min(x + 20, x * x)",
-                IntParamMethod(Math.Min(x + 20, x * x)));
+            Assert.Equal("Math.Min(x + 20, x * x)", IntParamMethod(Math.Min(x + 20, x * x)));
         }
 
         [Fact]
@@ -118,10 +134,11 @@ namespace System.Runtime.CompilerServices.Tests
 
             Assert.Equal("notVal  + 20", IntParamMethod(notVal + 20));
 
-            Assert.Equal(@"Math.Min(notVal * 2,
+            Assert.Equal(
+                @"Math.Min(notVal * 2,
                     notVal + 20)",
-                IntParamMethod(Math.Min(notVal * 2,
-                    notVal + 20)));
+                IntParamMethod(Math.Min(notVal * 2, notVal + 20))
+            );
         }
 
         [Fact]
@@ -130,10 +147,20 @@ namespace System.Runtime.CompilerServices.Tests
         {
             int notVal = 0;
 
-            Assert.Equal("notVal + /*comment*/20", IntParamMethod(notVal + /*comment*/20));
-            Assert.Equal("notVal + 20 //comment",
-                IntParamMethod(notVal + 20 //comment
-                ));
+            Assert.Equal(
+                "notVal + /*comment*/20",
+                IntParamMethod(
+                    notVal
+                        + /*comment*/
+                        20
+                )
+            );
+            Assert.Equal(
+                "notVal + 20 //comment",
+                IntParamMethod(
+                    notVal + 20 //comment
+                )
+            );
         }
 
         [Fact]
@@ -151,12 +178,18 @@ namespace System.Runtime.CompilerServices.Tests
 
         private const string StringConst = "hello";
 
-        private static string OptionalParamMethod(string val = StringConst + " string literal", [CallerArgumentExpression("val")] string expr = null)
+        private static string OptionalParamMethod(
+            string val = StringConst + " string literal",
+            [CallerArgumentExpression("val")] string expr = null
+        )
         {
             return expr;
         }
 
-        private static string CompilerSuppliedParamMethod([CallerFilePath] string val = "no file", [CallerArgumentExpression("val")] string expr = null)
+        private static string CompilerSuppliedParamMethod(
+            [CallerFilePath] string val = "no file",
+            [CallerArgumentExpression("val")] string expr = null
+        )
         {
             return expr;
         }
@@ -170,7 +203,10 @@ namespace System.Runtime.CompilerServices.Tests
             Assert.Equal("notVal", notVal.ExtensionMethod());
         }
 
-        private static string ExtensionMethod(this int val, [CallerArgumentExpression("val")] string expr = null)
+        private static string ExtensionMethod(
+            this int val,
+            [CallerArgumentExpression("val")] string expr = null
+        )
         {
             return expr;
         }
@@ -183,7 +219,10 @@ namespace System.Runtime.CompilerServices.Tests
 
             Assert.Equal("instance", instance.Method());
             Assert.Equal("new InstanceTest()", new InstanceTest().Method());
-            Assert.Equal("(instance ?? new InstanceTest())", (instance ?? new InstanceTest()).Method());
+            Assert.Equal(
+                "(instance ?? new InstanceTest())",
+                (instance ?? new InstanceTest()).Method()
+            );
 
             Assert.Equal("", instance.NoThisMethodCaller());
             Assert.Equal("this", instance.ThisMethodCaller());

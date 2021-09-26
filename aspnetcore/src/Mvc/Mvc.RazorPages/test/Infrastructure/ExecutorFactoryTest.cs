@@ -19,7 +19,9 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             // Arrange
             var handler = new HandlerMethodDescriptor()
             {
-                MethodInfo = typeof(TestPage).GetMethod(nameof(TestPage.ActionResultReturningHandler)),
+                MethodInfo = typeof(TestPage).GetMethod(
+                    nameof(TestPage.ActionResultReturningHandler)
+                ),
                 Parameters = new HandlerParameterDescriptor[0],
             };
 
@@ -57,7 +59,9 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
         public async Task CreateExecutor_ForActionResultReturningMethod_WithParameters()
         {
             // Arrange
-            var methodInfo = typeof(TestPage).GetMethod(nameof(TestPage.ActionResultReturnHandlerWithParameters));
+            var methodInfo = typeof(TestPage).GetMethod(
+                nameof(TestPage.ActionResultReturnHandlerWithParameters)
+            );
             var handler = new HandlerMethodDescriptor()
             {
                 MethodInfo = methodInfo,
@@ -146,7 +150,9 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
         public async Task CreateExecutor_ForTaskOfConcreteActionResultReturningMethod()
         {
             // Arrange
-            var methodInfo = typeof(TestPage).GetMethod(nameof(TestPage.TaskReturningConcreteSubtype));
+            var methodInfo = typeof(TestPage).GetMethod(
+                nameof(TestPage.TaskReturningConcreteSubtype)
+            );
             var handler = new HandlerMethodDescriptor()
             {
                 MethodInfo = methodInfo,
@@ -179,8 +185,13 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             };
 
             // Act & Assert
-            var ex = Assert.Throws<InvalidOperationException>(() => ExecutorFactory.CreateExecutor(handler));
-            Assert.Equal($"Unsupported handler method return type '{methodInfo.ReturnType}'.", ex.Message);
+            var ex = Assert.Throws<InvalidOperationException>(
+                () => ExecutorFactory.CreateExecutor(handler)
+            );
+            Assert.Equal(
+                $"Unsupported handler method return type '{methodInfo.ReturnType}'.",
+                ex.Message
+            );
         }
 
         private static object[] CreateArguments(MethodInfo methodInfo)
@@ -209,31 +220,33 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
         {
             var parameters = methodInfo.GetParameters();
 
-            return parameters.Select(p => new HandlerParameterDescriptor()
-            {
-                BindingInfo = BindingInfo.GetBindingInfo(p.GetCustomAttributes()),
-                Name = p.Name,
-                ParameterInfo = p,
-                ParameterType = p.ParameterType,
-            }).ToArray();
+            return parameters.Select(
+                    p =>
+                        new HandlerParameterDescriptor()
+                        {
+                            BindingInfo = BindingInfo.GetBindingInfo(p.GetCustomAttributes()),
+                            Name = p.Name,
+                            ParameterInfo = p,
+                            ParameterType = p.ParameterType,
+                        }
+                )
+                .ToArray();
         }
 
         private class TestPage : Page
         {
-            public TestPage()
-            {
-            }
+            public TestPage() { }
 
             public bool SideEffects { get; private set; }
 
             public IActionResult ActionResultReturningHandler() => new EmptyResult();
 
-            public IActionResult ActionResultReturnHandlerWithParameters(int arg1, string arg2 = "Hello")
+            public IActionResult ActionResultReturnHandlerWithParameters(
+                int arg1,
+                string arg2 = "Hello"
+            )
             {
-                return new ContentResult
-                {
-                    Content = $"{arg2} {arg1}",
-                };
+                return new ContentResult { Content = $"{arg2} {arg1}", };
             }
 
             public ViewResult ConcreteActionResult() => new ViewResult();
@@ -245,22 +258,21 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
 
             public async Task VoidTaskReturningHandler()
             {
-                await Task.Run(() =>
-                {
-                    SideEffects = true;
-                });
+                await Task.Run(
+                    () =>
+                    {
+                        SideEffects = true;
+                    }
+                );
             }
 
-            public Task<IActionResult> GenericTaskHandler() => Task.FromResult<IActionResult>(new EmptyResult());
+            public Task<IActionResult> GenericTaskHandler() =>
+                Task.FromResult<IActionResult>(new EmptyResult());
 
             public Task<ContentResult> TaskReturningConcreteSubtype(string arg = "value")
             {
-                return Task.FromResult(new ContentResult
-                {
-                    Content = arg,
-                });
+                return Task.FromResult(new ContentResult { Content = arg, });
             }
-
 
             public override Task ExecuteAsync()
             {
@@ -274,12 +286,12 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
 
             public IActionResult ActionResultReturningHandler() => new EmptyResult();
 
-            public IActionResult ActionResultReturnHandlerWithParameters(int arg1, string arg2 = "Hello")
+            public IActionResult ActionResultReturnHandlerWithParameters(
+                int arg1,
+                string arg2 = "Hello"
+            )
             {
-                return new ContentResult
-                {
-                    Content = $"{arg2} {arg1}",
-                };
+                return new ContentResult { Content = $"{arg2} {arg1}", };
             }
 
             public ViewResult ConcreteActionResult() => new ViewResult();
@@ -291,20 +303,20 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
 
             public async Task VoidTaskReturningHandler()
             {
-                await Task.Run(() =>
-                {
-                    SideEffects = true;
-                });
+                await Task.Run(
+                    () =>
+                    {
+                        SideEffects = true;
+                    }
+                );
             }
 
-            public Task<IActionResult> GenericTaskHandler() => Task.FromResult<IActionResult>(new EmptyResult());
+            public Task<IActionResult> GenericTaskHandler() =>
+                Task.FromResult<IActionResult>(new EmptyResult());
 
             public Task<ContentResult> TaskReturningConcreteSubtype(string arg = "value")
             {
-                return Task.FromResult(new ContentResult
-                {
-                    Content = arg,
-                });
+                return Task.FromResult(new ContentResult { Content = arg, });
             }
 
             public string StringResult() => "";
@@ -316,9 +328,7 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
 
         private class EmptyPage : Page
         {
-            public EmptyPage()
-            {
-            }
+            public EmptyPage() { }
 
             public override Task ExecuteAsync()
             {

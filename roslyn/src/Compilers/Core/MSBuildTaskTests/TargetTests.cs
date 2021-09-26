@@ -25,15 +25,22 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
         [Fact]
         public void GenerateEditorConfigShouldNotRunWhenNoPropertiesOrMetadata()
         {
-            XmlReader xmlReader = XmlReader.Create(new StringReader($@"
+            XmlReader xmlReader = XmlReader.Create(
+                new StringReader(
+                    $@"
 <Project>
     <Import Project=""Microsoft.Managed.Core.targets"" />
 </Project>
-"));
+"
+                )
+            );
 
             var instance = CreateProjectInstance(xmlReader);
 
-            bool runSuccess = instance.Build(target: "GenerateMSBuildEditorConfigFileShouldRun", GetTestLoggers());
+            bool runSuccess = instance.Build(
+                target: "GenerateMSBuildEditorConfigFileShouldRun",
+                GetTestLoggers()
+            );
             var shouldRun = instance.GetPropertyValue("_GeneratedEditorConfigShouldRun");
             var hasItems = instance.GetPropertyValue("_GeneratedEditorConfigHasItems");
 
@@ -45,7 +52,9 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
         [Fact]
         public void GenerateEditorConfigShouldRunWhenPropertiesRequested()
         {
-            XmlReader xmlReader = XmlReader.Create(new StringReader($@"
+            XmlReader xmlReader = XmlReader.Create(
+                new StringReader(
+                    $@"
 <Project>
     <Import Project=""Microsoft.Managed.Core.targets"" />
 
@@ -53,11 +62,16 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
         <CompilerVisibleProperty Include=""prop"" />
     </ItemGroup>
 </Project>
-"));
+"
+                )
+            );
 
             var instance = CreateProjectInstance(xmlReader);
 
-            bool runSuccess = instance.Build(target: "GenerateMSBuildEditorConfigFileShouldRun", GetTestLoggers());
+            bool runSuccess = instance.Build(
+                target: "GenerateMSBuildEditorConfigFileShouldRun",
+                GetTestLoggers()
+            );
             var shouldRun = instance.GetPropertyValue("_GeneratedEditorConfigShouldRun");
             var hasItems = instance.GetPropertyValue("_GeneratedEditorConfigHasItems");
 
@@ -69,7 +83,9 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
         [Fact]
         public void GenerateEditorConfigShouldRunWhenMetadataRequested()
         {
-            XmlReader xmlReader = XmlReader.Create(new StringReader($@"
+            XmlReader xmlReader = XmlReader.Create(
+                new StringReader(
+                    $@"
 <Project>
     <Import Project=""Microsoft.Managed.Core.targets"" />
 
@@ -77,11 +93,16 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
         <CompilerVisibleItemMetadata Include=""item"" />
     </ItemGroup>
 </Project>
-"));
+"
+                )
+            );
 
             var instance = CreateProjectInstance(xmlReader);
 
-            bool runSuccess = instance.Build(target: "GenerateMSBuildEditorConfigFileShouldRun", GetTestLoggers());
+            bool runSuccess = instance.Build(
+                target: "GenerateMSBuildEditorConfigFileShouldRun",
+                GetTestLoggers()
+            );
             var shouldRun = instance.GetPropertyValue("_GeneratedEditorConfigShouldRun");
             var hasItems = instance.GetPropertyValue("_GeneratedEditorConfigHasItems");
 
@@ -93,7 +114,9 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
         [Fact]
         public void GenerateEditorConfigShouldRunWhenPropertiesAndMetadata()
         {
-            XmlReader xmlReader = XmlReader.Create(new StringReader($@"
+            XmlReader xmlReader = XmlReader.Create(
+                new StringReader(
+                    $@"
 <Project>
     <Import Project=""Microsoft.Managed.Core.targets"" />
 
@@ -102,11 +125,16 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
         <CompilerVisibleItemMetadata Include=""item"" MetadataName=""meta"" />
     </ItemGroup>
 </Project>
-"));
+"
+                )
+            );
 
             var instance = CreateProjectInstance(xmlReader);
 
-            bool runSuccess = instance.Build(target: "GenerateMSBuildEditorConfigFileShouldRun", GetTestLoggers());
+            bool runSuccess = instance.Build(
+                target: "GenerateMSBuildEditorConfigFileShouldRun",
+                GetTestLoggers()
+            );
             var shouldRun = instance.GetPropertyValue("_GeneratedEditorConfigShouldRun");
             var hasItems = instance.GetPropertyValue("_GeneratedEditorConfigHasItems");
 
@@ -118,7 +146,9 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
         [Fact]
         public void GenerateEditorConfigCanBeDisabled()
         {
-            XmlReader xmlReader = XmlReader.Create(new StringReader($@"
+            XmlReader xmlReader = XmlReader.Create(
+                new StringReader(
+                    $@"
 <Project>
     <Import Project=""Microsoft.Managed.Core.targets"" />
     <PropertyGroup>
@@ -129,11 +159,16 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
         <CompilerVisibleItemMetadata Include=""item"" MetadataName=""meta"" />
     </ItemGroup>
 </Project>
-"));
+"
+                )
+            );
 
             var instance = CreateProjectInstance(xmlReader);
 
-            bool runSuccess = instance.Build(target: "GenerateMSBuildEditorConfigFileShouldRun", GetTestLoggers());
+            bool runSuccess = instance.Build(
+                target: "GenerateMSBuildEditorConfigFileShouldRun",
+                GetTestLoggers()
+            );
             var shouldRun = instance.GetPropertyValue("_GeneratedEditorConfigShouldRun");
             var hasItems = instance.GetPropertyValue("_GeneratedEditorConfigHasItems");
 
@@ -145,7 +180,9 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
         [Fact]
         public void GenerateEditorConfigCoreEvaluatesProperties()
         {
-            XmlReader xmlReader = XmlReader.Create(new StringReader($@"
+            XmlReader xmlReader = XmlReader.Create(
+                new StringReader(
+                    $@"
 <Project>
     <Import Project=""Microsoft.Managed.Core.targets"" />
     <PropertyGroup>
@@ -155,11 +192,16 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
         <CompilerVisibleProperty Include=""ValueToGet"" />
     </ItemGroup>
 </Project>
-"));
+"
+                )
+            );
 
             var instance = CreateProjectInstance(xmlReader);
 
-            bool runSuccess = instance.Build(target: "GenerateMSBuildEditorConfigFile", GetTestLoggers());
+            bool runSuccess = instance.Build(
+                target: "GenerateMSBuildEditorConfigFile",
+                GetTestLoggers()
+            );
             Assert.True(runSuccess);
 
             var items = instance.GetItems("_GeneratedEditorConfigProperty");
@@ -177,7 +219,9 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
         [Fact]
         public void GenerateEditorConfigCoreEvaluatesDynamicProperties()
         {
-            XmlReader xmlReader = XmlReader.Create(new StringReader($@"
+            XmlReader xmlReader = XmlReader.Create(
+                new StringReader(
+                    $@"
 <Project>
     <Import Project=""Microsoft.Managed.Core.targets"" />
     <PropertyGroup>
@@ -188,11 +232,16 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
         <CompilerVisibleProperty Include=""ValueToGet"" />
     </ItemGroup>
 </Project>
-"));
+"
+                )
+            );
 
             var instance = CreateProjectInstance(xmlReader);
 
-            bool runSuccess = instance.Build(target: "GenerateMSBuildEditorConfigFile", GetTestLoggers());
+            bool runSuccess = instance.Build(
+                target: "GenerateMSBuildEditorConfigFile",
+                GetTestLoggers()
+            );
             Assert.True(runSuccess);
 
             var items = instance.GetItems("_GeneratedEditorConfigProperty");
@@ -210,18 +259,25 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
         [Fact]
         public void GenerateEditorConfigCoreHandlesMissingProperties()
         {
-            XmlReader xmlReader = XmlReader.Create(new StringReader($@"
+            XmlReader xmlReader = XmlReader.Create(
+                new StringReader(
+                    $@"
 <Project>
     <Import Project=""Microsoft.Managed.Core.targets"" />
     <ItemGroup>
         <CompilerVisibleProperty Include=""ValueToGet"" />
     </ItemGroup>
 </Project>
-"));
+"
+                )
+            );
 
             var instance = CreateProjectInstance(xmlReader);
 
-            bool runSuccess = instance.Build(target: "GenerateMSBuildEditorConfigFile", GetTestLoggers());
+            bool runSuccess = instance.Build(
+                target: "GenerateMSBuildEditorConfigFile",
+                GetTestLoggers()
+            );
             Assert.True(runSuccess);
 
             var items = instance.GetItems("_GeneratedEditorConfigProperty");
@@ -239,7 +295,9 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
         [Fact]
         public void GenerateEditorConfigCoreEvaluatesMetadata()
         {
-            XmlReader xmlReader = XmlReader.Create(new StringReader($@"
+            XmlReader xmlReader = XmlReader.Create(
+                new StringReader(
+                    $@"
 <Project>
     <Import Project=""Microsoft.Managed.Core.targets"" />
     <ItemGroup>
@@ -249,11 +307,16 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
         <CompilerVisibleItemMetadata Include=""Compile"" MetadataName=""CustomMeta"" />
     </ItemGroup>
 </Project>
-"));
+"
+                )
+            );
 
             var instance = CreateProjectInstance(xmlReader);
 
-            bool runSuccess = instance.Build(target: "GenerateMSBuildEditorConfigFile", GetTestLoggers());
+            bool runSuccess = instance.Build(
+                target: "GenerateMSBuildEditorConfigFile",
+                GetTestLoggers()
+            );
             Assert.True(runSuccess);
 
             var items = instance.GetItems("_GeneratedEditorConfigMetadata");
@@ -278,7 +341,9 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
         [Fact]
         public void GenerateEditorConfigCoreEvaluatesDynamicMetadata()
         {
-            XmlReader xmlReader = XmlReader.Create(new StringReader($@"
+            XmlReader xmlReader = XmlReader.Create(
+                new StringReader(
+                    $@"
 <Project>
     <Import Project=""Microsoft.Managed.Core.targets"" />
     <PropertyGroup>
@@ -291,11 +356,16 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
         <CompilerVisibleItemMetadata Include=""Compile"" MetadataName=""CustomMeta"" />
     </ItemGroup>
 </Project>
-"));
+"
+                )
+            );
 
             var instance = CreateProjectInstance(xmlReader);
 
-            bool runSuccess = instance.Build(target: "GenerateMSBuildEditorConfigFile", GetTestLoggers());
+            bool runSuccess = instance.Build(
+                target: "GenerateMSBuildEditorConfigFile",
+                GetTestLoggers()
+            );
             Assert.True(runSuccess);
 
             var items = instance.GetItems("_GeneratedEditorConfigMetadata");
@@ -320,7 +390,9 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
         [Fact]
         public void GenerateEditorConfigCoreHandlesMissingMetadata()
         {
-            XmlReader xmlReader = XmlReader.Create(new StringReader($@"
+            XmlReader xmlReader = XmlReader.Create(
+                new StringReader(
+                    $@"
 <Project>
     <Import Project=""Microsoft.Managed.Core.targets"" />
     <ItemGroup>
@@ -331,11 +403,16 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
         <CompilerVisibleItemMetadata Include=""Compile2"" MetadataName=""CustomMeta"" />
     </ItemGroup>
 </Project>
-"));
+"
+                )
+            );
 
             var instance = CreateProjectInstance(xmlReader);
 
-            bool runSuccess = instance.Build(target: "GenerateMSBuildEditorConfigFile", GetTestLoggers());
+            bool runSuccess = instance.Build(
+                target: "GenerateMSBuildEditorConfigFile",
+                GetTestLoggers()
+            );
             Assert.True(runSuccess);
 
             var items = instance.GetItems("_GeneratedEditorConfigMetadata");
@@ -356,7 +433,9 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
         [Fact]
         public void GenerateEditorConfigCoreHandlesMalformedCompilerVisibleItemMetadata()
         {
-            XmlReader xmlReader = XmlReader.Create(new StringReader($@"
+            XmlReader xmlReader = XmlReader.Create(
+                new StringReader(
+                    $@"
 <Project>
     <Import Project=""Microsoft.Managed.Core.targets"" />
     <ItemGroup>
@@ -366,11 +445,16 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
         <CompilerVisibleItemMetadata Include=""Compile"" />
     </ItemGroup>
 </Project>
-"));
+"
+                )
+            );
 
             var instance = CreateProjectInstance(xmlReader);
 
-            bool runSuccess = instance.Build(target: "GenerateMSBuildEditorConfigFile", GetTestLoggers());
+            bool runSuccess = instance.Build(
+                target: "GenerateMSBuildEditorConfigFile",
+                GetTestLoggers()
+            );
             Assert.True(runSuccess);
 
             var items = instance.GetItems("_GeneratedEditorConfigMetadata");
@@ -392,7 +476,6 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
         [InlineData(".NETFramework", "4.5", "7.3")]
         [InlineData(".NETFramework", "4.7.2", "7.3")]
         [InlineData(".NETFramework", "4.8", "7.3")]
-
         [InlineData(".NETCoreApp", "1.0", "7.3")]
         [InlineData(".NETCoreApp", "2.0", "7.3")]
         [InlineData(".NETCoreApp", "2.1", "7.3")]
@@ -400,17 +483,21 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
         [InlineData(".NETCoreApp", "3.1", "8.0")]
         [InlineData(".NETCoreApp", "5.0", "9.0")]
         [InlineData(".NETCoreApp", "6.0", "")]
-
         [InlineData(".NETStandard", "1.0", "7.3")]
         [InlineData(".NETStandard", "1.5", "7.3")]
         [InlineData(".NETStandard", "2.0", "7.3")]
         [InlineData(".NETStandard", "2.1", "8.0")]
-
         [InlineData("UnknownTFM", "0.0", "7.3")]
         [InlineData("UnknownTFM", "5.0", "7.3")]
-        public void LanguageVersionGivenTargetFramework(string tfi, string tfv, string expectedVersion)
+        public void LanguageVersionGivenTargetFramework(
+            string tfi,
+            string tfv,
+            string expectedVersion
+        )
         {
-            XmlReader xmlReader = XmlReader.Create(new StringReader($@"
+            XmlReader xmlReader = XmlReader.Create(
+                new StringReader(
+                    $@"
 <Project>
     <PropertyGroup>
         <TargetFrameworkIdentifier>{tfi}</TargetFrameworkIdentifier>
@@ -418,7 +505,9 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
     </PropertyGroup>
     <Import Project=""Microsoft.CSharp.Core.targets"" />
 </Project>
-"));
+"
+                )
+            );
 
             var instance = CreateProjectInstance(xmlReader);
             instance.Build(GetTestLoggers());
@@ -432,13 +521,18 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
             // This will fail whenever the current language version is updated.
             // Ensure you update the target files to select the correct CSharp version for the newest target framework
             // and add to the theory data above to cover it, before changing this version to make the test pass again.
-            Assert.Equal(CSharp.LanguageVersion.CSharp9, CSharp.LanguageVersionFacts.CurrentVersion);
+            Assert.Equal(
+                CSharp.LanguageVersion.CSharp9,
+                CSharp.LanguageVersionFacts.CurrentVersion
+            );
         }
 
         [Fact]
         public void ExplicitLangVersion()
         {
-            XmlReader xmlReader = XmlReader.Create(new StringReader($@"
+            XmlReader xmlReader = XmlReader.Create(
+                new StringReader(
+                    $@"
 <Project>
     <PropertyGroup>
         <TargetFrameworkIdentifier>.NETCoreApp</TargetFrameworkIdentifier>
@@ -447,7 +541,9 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
     </PropertyGroup>
     <Import Project=""Microsoft.CSharp.Core.targets"" />
 </Project>
-"));
+"
+                )
+            );
 
             var instance = CreateProjectInstance(xmlReader);
             instance.Build(GetTestLoggers());
@@ -462,7 +558,9 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
         [Fact]
         public void MaxSupportedLangVersionIsReadable()
         {
-            XmlReader xmlReader = XmlReader.Create(new StringReader($@"
+            XmlReader xmlReader = XmlReader.Create(
+                new StringReader(
+                    $@"
 <Project>
     <PropertyGroup>
         <TargetFrameworkIdentifier>.NETCoreApp</TargetFrameworkIdentifier>
@@ -471,7 +569,9 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
     </PropertyGroup>
     <Import Project=""Microsoft.CSharp.Core.targets"" />
 </Project>
-"));
+"
+                )
+            );
 
             var instance = CreateProjectInstance(xmlReader);
             instance.Build(GetTestLoggers());
@@ -488,7 +588,9 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
         [Fact]
         public void MaxSupportedLangVersionIsnotWriteable()
         {
-            XmlReader xmlReader = XmlReader.Create(new StringReader($@"
+            XmlReader xmlReader = XmlReader.Create(
+                new StringReader(
+                    $@"
 <Project>
     <PropertyGroup>
         <TargetFrameworkIdentifier>.NETCoreApp</TargetFrameworkIdentifier>
@@ -498,7 +600,9 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
     </PropertyGroup>
     <Import Project=""Microsoft.CSharp.Core.targets"" />
 </Project>
-"));
+"
+                )
+            );
 
             var instance = CreateProjectInstance(xmlReader);
             instance.Build(GetTestLoggers());
@@ -515,7 +619,9 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
         [Fact]
         public void GenerateEditorConfigIsPassedToTheCompiler()
         {
-            XmlReader xmlReader = XmlReader.Create(new StringReader($@"
+            XmlReader xmlReader = XmlReader.Create(
+                new StringReader(
+                    $@"
 <Project>
     <Import Project=""Microsoft.Managed.Core.targets"" />
 
@@ -523,11 +629,16 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
         <CompilerVisibleProperty Include=""prop"" />
     </ItemGroup>
 </Project>
-"));
+"
+                )
+            );
 
             var instance = CreateProjectInstance(xmlReader);
 
-            bool runSuccess = instance.Build(target: "GenerateMSBuildEditorConfigFile", GetTestLoggers());
+            bool runSuccess = instance.Build(
+                target: "GenerateMSBuildEditorConfigFile",
+                GetTestLoggers()
+            );
             Assert.True(runSuccess);
 
             var items = instance.GetItems("EditorConfigFiles");
@@ -537,7 +648,9 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
         [Fact]
         public void AdditionalFilesAreAddedToNoneWhenCopied()
         {
-            XmlReader xmlReader = XmlReader.Create(new StringReader($@"
+            XmlReader xmlReader = XmlReader.Create(
+                new StringReader(
+                    $@"
 <Project>
     <Import Project=""Microsoft.Managed.Core.targets"" />
     <ItemGroup>
@@ -548,7 +661,9 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
         <AdditionalFiles Include=""file5.cs"" />
     </ItemGroup>
 </Project>
-"));
+"
+                )
+            );
             var instance = CreateProjectInstance(xmlReader);
             bool runSuccess = instance.Build(target: "CopyAdditionalFiles", GetTestLoggers());
             Assert.True(runSuccess);
@@ -569,11 +684,15 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
         [Fact]
         public void GeneratedFilesOutputPathHasDefaults()
         {
-            XmlReader xmlReader = XmlReader.Create(new StringReader($@"
+            XmlReader xmlReader = XmlReader.Create(
+                new StringReader(
+                    $@"
 <Project>
     <Import Project=""Microsoft.Managed.Core.targets"" />
 </Project>
-"));
+"
+                )
+            );
 
             var instance = CreateProjectInstance(xmlReader);
             var emit = instance.GetPropertyValue("EmitCompilerGeneratedFiles");
@@ -586,7 +705,9 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
         [Fact]
         public void GeneratedFilesOutputPathDefaultsToIntermediateOutputPathWhenSet()
         {
-            XmlReader xmlReader = XmlReader.Create(new StringReader($@"
+            XmlReader xmlReader = XmlReader.Create(
+                new StringReader(
+                    $@"
 <Project>
     <PropertyGroup>
         <IntermediateOutputPath>fallbackDirectory</IntermediateOutputPath>
@@ -594,11 +715,16 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
     </PropertyGroup>
     <Import Project=""Microsoft.Managed.Core.targets"" />
 </Project>
-"));
+"
+                )
+            );
 
             var instance = CreateProjectInstance(xmlReader);
 
-            bool runSuccess = instance.Build(target: "CreateCompilerGeneratedFilesOutputPath", GetTestLoggers());
+            bool runSuccess = instance.Build(
+                target: "CreateCompilerGeneratedFilesOutputPath",
+                GetTestLoggers()
+            );
             Assert.True(runSuccess);
 
             var emit = instance.GetPropertyValue("EmitCompilerGeneratedFiles");
@@ -611,7 +737,9 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
         [Fact]
         public void GeneratedFilesOutputPathDefaultsIsEmptyWhenEmitDisable()
         {
-            XmlReader xmlReader = XmlReader.Create(new StringReader($@"
+            XmlReader xmlReader = XmlReader.Create(
+                new StringReader(
+                    $@"
 <Project>
     <PropertyGroup>
         <EmitCompilerGeneratedFiles>false</EmitCompilerGeneratedFiles>
@@ -619,7 +747,9 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
     </PropertyGroup>
     <Import Project=""Microsoft.Managed.Core.targets"" />
 </Project>
-"));
+"
+                )
+            );
 
             var instance = CreateProjectInstance(xmlReader);
             var emit = instance.GetPropertyValue("EmitCompilerGeneratedFiles");
@@ -634,9 +764,14 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
         [InlineData(true, null)]
         [InlineData(false, "generatedDirectory")]
         [InlineData(false, null)]
-        public void GeneratedFilesOutputPathCanBeSetAndSuppressed(bool emitGeneratedFiles, string? generatedFilesDir)
+        public void GeneratedFilesOutputPathCanBeSetAndSuppressed(
+            bool emitGeneratedFiles,
+            string? generatedFilesDir
+        )
         {
-            XmlReader xmlReader = XmlReader.Create(new StringReader($@"
+            XmlReader xmlReader = XmlReader.Create(
+                new StringReader(
+                    $@"
 <Project>
     <PropertyGroup>
         <EmitCompilerGeneratedFiles>{(emitGeneratedFiles.ToString().ToLower())}</EmitCompilerGeneratedFiles>
@@ -645,11 +780,16 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
     </PropertyGroup>
     <Import Project=""Microsoft.Managed.Core.targets"" />
 </Project>
-"));
+"
+                )
+            );
 
             var instance = CreateProjectInstance(xmlReader);
 
-            bool runSuccess = instance.Build(target: "CreateCompilerGeneratedFilesOutputPath", GetTestLoggers());
+            bool runSuccess = instance.Build(
+                target: "CreateCompilerGeneratedFilesOutputPath",
+                GetTestLoggers()
+            );
             Assert.True(runSuccess);
 
             var emit = instance.GetPropertyValue("EmitCompilerGeneratedFiles");
@@ -671,12 +811,18 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
         [WorkItem(40926, "https://github.com/dotnet/roslyn/issues/40926")]
         public void TestSkipAnalyzers(
             [CombinatorialValues(true, false, null)] bool? runAnalyzers,
-            [CombinatorialValues(true, false, null)] bool? runAnalyzersDuringBuild)
+            [CombinatorialValues(true, false, null)] bool? runAnalyzersDuringBuild
+        )
         {
             var runAnalyzersPropertyGroupString = getPropertyGroup("RunAnalyzers", runAnalyzers);
-            var runAnalyzersDuringBuildPropertyGroupString = getPropertyGroup("RunAnalyzersDuringBuild", runAnalyzersDuringBuild);
+            var runAnalyzersDuringBuildPropertyGroupString = getPropertyGroup(
+                "RunAnalyzersDuringBuild",
+                runAnalyzersDuringBuild
+            );
 
-            XmlReader xmlReader = XmlReader.Create(new StringReader($@"
+            XmlReader xmlReader = XmlReader.Create(
+                new StringReader(
+                    $@"
 <Project>
     <Import Project=""Microsoft.Managed.Core.targets"" />
 
@@ -684,7 +830,9 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
 {runAnalyzersDuringBuildPropertyGroupString}
 
 </Project>
-"));
+"
+                )
+            );
 
             var instance = CreateProjectInstance(xmlReader);
 
@@ -717,11 +865,15 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
         [Fact]
         public void ProjectCapabilityIsNotAddedWhenRoslynComponentIsUnspecified()
         {
-            XmlReader xmlReader = XmlReader.Create(new StringReader($@"
+            XmlReader xmlReader = XmlReader.Create(
+                new StringReader(
+                    $@"
 <Project>
     <Import Project=""Microsoft.Managed.Core.targets"" />
 </Project>
-"));
+"
+                )
+            );
 
             var instance = CreateProjectInstance(xmlReader);
 
@@ -732,14 +884,18 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
         [Fact]
         public void ProjectCapabilityIsAddedWhenRoslynComponentSpecified()
         {
-            XmlReader xmlReader = XmlReader.Create(new StringReader($@"
+            XmlReader xmlReader = XmlReader.Create(
+                new StringReader(
+                    $@"
 <Project>
     <PropertyGroup>
         <IsRoslynComponent>true</IsRoslynComponent>
     </PropertyGroup>
     <Import Project=""Microsoft.Managed.Core.targets"" />
 </Project>
-"));
+"
+                )
+            );
 
             var instance = CreateProjectInstance(xmlReader);
 
@@ -755,26 +911,35 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
             proj.Xml.AddTarget("PrepareForBuild");
 
             // create a dummy WriteLinesToFile task
-            addTask(proj, "WriteLinesToFile", new()
-            {
-                { "Lines", "System.String[]" },
-                { "File", "System.String" },
-                { "Overwrite", "System.Boolean" },
-                { "WriteOnlyWhenDifferent", "System.Boolean" }
-            });
+            addTask(
+                proj,
+                "WriteLinesToFile",
+                new()
+                {
+                    { "Lines", "System.String[]" },
+                    { "File", "System.String" },
+                    { "Overwrite", "System.Boolean" },
+                    { "WriteOnlyWhenDifferent", "System.Boolean" }
+                }
+            );
 
             // dummy makeDir task
-            addTask(proj, "MakeDir", new()
-            {
-                { "Directories", "System.String[]" }
-            });
+            addTask(proj, "MakeDir", new() { { "Directories", "System.String[]" } });
 
             // create an instance and return it
             return proj.CreateProjectInstance();
 
-            static void addTask(Project proj, string taskName, Dictionary<string, string> parameters)
+            static void addTask(
+                Project proj,
+                string taskName,
+                Dictionary<string, string> parameters
+            )
             {
-                var task = proj.Xml.AddUsingTask(taskName, string.Empty, Assembly.GetExecutingAssembly().FullName);
+                var task = proj.Xml.AddUsingTask(
+                    taskName,
+                    string.Empty,
+                    Assembly.GetExecutingAssembly().FullName
+                );
                 task.TaskFactory = nameof(DummyTaskFactory);
 
                 var taskParams = task.AddParameterGroup();
@@ -782,7 +947,6 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
                 {
                     taskParams.AddParameter(kvp.Key, string.Empty, string.Empty, kvp.Value);
                 }
-
             }
         }
 
@@ -791,10 +955,7 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
 #if DUMP_MSBUILD_BIN_LOG
             return new ILogger[]
             {
-                new Build.Logging.BinaryLogger()
-                {
-                    Parameters = callerName + ".binlog"
-                }
+                new Build.Logging.BinaryLogger() { Parameters = callerName + ".binlog" }
             };
 #else
             return Array.Empty<ILogger>();
@@ -820,9 +981,15 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
     /// </remarks>
     public sealed class DummyTaskFactory : ITaskFactory
     {
-        public string FactoryName { get => "DummyTaskFactory"; }
+        public string FactoryName
+        {
+            get => "DummyTaskFactory";
+        }
 
-        public Type TaskType { get => typeof(DummyTaskFactory); }
+        public Type TaskType
+        {
+            get => typeof(DummyTaskFactory);
+        }
 
         private TaskPropertyInfo[]? _props;
 
@@ -832,7 +999,12 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
 
         public TaskPropertyInfo[]? GetTaskParameters() => _props;
 
-        public bool Initialize(string taskName, IDictionary<string, TaskPropertyInfo> parameterGroup, string taskBody, IBuildEngine taskFactoryLoggingHost)
+        public bool Initialize(
+            string taskName,
+            IDictionary<string, TaskPropertyInfo> parameterGroup,
+            string taskBody,
+            IBuildEngine taskFactoryLoggingHost
+        )
         {
             _props = parameterGroup.Values.ToArray();
             return true;

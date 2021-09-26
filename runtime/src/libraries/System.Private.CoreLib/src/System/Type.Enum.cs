@@ -32,7 +32,9 @@ namespace System
             if (valueType.IsEnum)
             {
                 if (!valueType.IsEquivalentTo(this))
-                    throw new ArgumentException(SR.Format(SR.Arg_EnumAndObjectMustBeSameType, valueType, this));
+                    throw new ArgumentException(
+                        SR.Format(SR.Arg_EnumAndObjectMustBeSameType, valueType, this)
+                    );
 
                 valueType = valueType.GetEnumUnderlyingType();
             }
@@ -53,7 +55,13 @@ namespace System
                 Type underlyingType = GetEnumUnderlyingType();
                 // We cannot compare the types directly because valueType is always a runtime type but underlyingType might not be.
                 if (underlyingType.GetTypeCodeImpl() != valueType.GetTypeCodeImpl())
-                    throw new ArgumentException(SR.Format(SR.Arg_EnumUnderlyingTypeAndObjectMustBeSameType, valueType, underlyingType));
+                    throw new ArgumentException(
+                        SR.Format(
+                            SR.Arg_EnumUnderlyingTypeAndObjectMustBeSameType,
+                            valueType,
+                            underlyingType
+                        )
+                    );
 
                 Array values = GetEnumRawConstantValues();
                 return BinarySearch(values, value) >= 0;
@@ -105,12 +113,17 @@ namespace System
             return values;
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2085:UnrecognizedReflectionPattern",
-            Justification = "Literal fields on enums can never be trimmed")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2085:UnrecognizedReflectionPattern",
+            Justification = "Literal fields on enums can never be trimmed"
+        )]
         // This will return enumValues and enumNames sorted by the values.
         private void GetEnumData(out string[] enumNames, out Array enumValues)
         {
-            FieldInfo[] flds = GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static);
+            FieldInfo[] flds = GetFields(
+                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static
+            );
 
             object[] values = new object[flds.Length];
             string[] names = new string[flds.Length];
@@ -168,16 +181,16 @@ namespace System
 
         internal static bool IsIntegerType(Type t)
         {
-            return t == typeof(int) ||
-                    t == typeof(short) ||
-                    t == typeof(ushort) ||
-                    t == typeof(byte) ||
-                    t == typeof(sbyte) ||
-                    t == typeof(uint) ||
-                    t == typeof(long) ||
-                    t == typeof(ulong) ||
-                    t == typeof(char) ||
-                    t == typeof(bool);
+            return t == typeof(int)
+                || t == typeof(short)
+                || t == typeof(ushort)
+                || t == typeof(byte)
+                || t == typeof(sbyte)
+                || t == typeof(uint)
+                || t == typeof(long)
+                || t == typeof(ulong)
+                || t == typeof(char)
+                || t == typeof(bool);
         }
     }
 }

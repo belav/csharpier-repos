@@ -127,7 +127,11 @@ namespace Internal.TypeSystem
         {
             get
             {
-                return LayoutInt.AlignUp(InstanceByteCountUnaligned, InstanceByteAlignment, Context.Target);
+                return LayoutInt.AlignUp(
+                    InstanceByteCountUnaligned,
+                    InstanceByteAlignment,
+                    Context.Target
+                );
             }
         }
 
@@ -193,7 +197,9 @@ namespace Internal.TypeSystem
                 {
                     ComputeInstanceLayout(InstanceLayoutKind.TypeOnly);
                 }
-                return !_fieldLayoutFlags.HasFlags(FieldLayoutFlags.ComputedInstanceLayoutAbiUnstable);
+                return !_fieldLayoutFlags.HasFlags(
+                    FieldLayoutFlags.ComputedInstanceLayoutAbiUnstable
+                );
             }
         }
 
@@ -208,7 +214,9 @@ namespace Internal.TypeSystem
                 {
                     ComputeStaticFieldLayout(StaticLayoutKind.StaticRegionSizes);
                 }
-                return _staticBlockInfo == null ? LayoutInt.Zero : _staticBlockInfo.NonGcStatics.Size;
+                return _staticBlockInfo == null
+                  ? LayoutInt.Zero
+                  : _staticBlockInfo.NonGcStatics.Size;
             }
         }
 
@@ -223,7 +231,9 @@ namespace Internal.TypeSystem
                 {
                     ComputeStaticFieldLayout(StaticLayoutKind.StaticRegionSizes);
                 }
-                return _staticBlockInfo == null ? LayoutInt.Zero : _staticBlockInfo.NonGcStatics.LargestAlignment;
+                return _staticBlockInfo == null
+                  ? LayoutInt.Zero
+                  : _staticBlockInfo.NonGcStatics.LargestAlignment;
             }
         }
 
@@ -253,7 +263,9 @@ namespace Internal.TypeSystem
                 {
                     ComputeStaticFieldLayout(StaticLayoutKind.StaticRegionSizes);
                 }
-                return _staticBlockInfo == null ? LayoutInt.Zero : _staticBlockInfo.GcStatics.LargestAlignment;
+                return _staticBlockInfo == null
+                  ? LayoutInt.Zero
+                  : _staticBlockInfo.GcStatics.LargestAlignment;
             }
         }
 
@@ -269,7 +281,9 @@ namespace Internal.TypeSystem
                 {
                     ComputeStaticFieldLayout(StaticLayoutKind.StaticRegionSizes);
                 }
-                return _staticBlockInfo == null ? LayoutInt.Zero : _staticBlockInfo.ThreadNonGcStatics.Size;
+                return _staticBlockInfo == null
+                  ? LayoutInt.Zero
+                  : _staticBlockInfo.ThreadNonGcStatics.Size;
             }
         }
 
@@ -285,7 +299,9 @@ namespace Internal.TypeSystem
                 {
                     ComputeStaticFieldLayout(StaticLayoutKind.StaticRegionSizes);
                 }
-                return _staticBlockInfo == null ? LayoutInt.Zero : _staticBlockInfo.ThreadNonGcStatics.LargestAlignment;
+                return _staticBlockInfo == null
+                  ? LayoutInt.Zero
+                  : _staticBlockInfo.ThreadNonGcStatics.LargestAlignment;
             }
         }
 
@@ -301,7 +317,9 @@ namespace Internal.TypeSystem
                 {
                     ComputeStaticFieldLayout(StaticLayoutKind.StaticRegionSizes);
                 }
-                return _staticBlockInfo == null ? LayoutInt.Zero : _staticBlockInfo.ThreadGcStatics.Size;
+                return _staticBlockInfo == null
+                  ? LayoutInt.Zero
+                  : _staticBlockInfo.ThreadGcStatics.Size;
             }
         }
 
@@ -317,7 +335,9 @@ namespace Internal.TypeSystem
                 {
                     ComputeStaticFieldLayout(StaticLayoutKind.StaticRegionSizes);
                 }
-                return _staticBlockInfo == null ? LayoutInt.Zero : _staticBlockInfo.ThreadGcStatics.LargestAlignment;
+                return _staticBlockInfo == null
+                  ? LayoutInt.Zero
+                  : _staticBlockInfo.ThreadGcStatics.LargestAlignment;
             }
         }
 
@@ -325,7 +345,11 @@ namespace Internal.TypeSystem
         {
             get
             {
-                if (!_fieldLayoutFlags.HasFlags(FieldLayoutFlags.ComputedValueTypeShapeCharacteristics))
+                if (
+                    !_fieldLayoutFlags.HasFlags(
+                        FieldLayoutFlags.ComputedValueTypeShapeCharacteristics
+                    )
+                )
                 {
                     ComputeValueTypeShapeCharacteristics();
                 }
@@ -335,7 +359,8 @@ namespace Internal.TypeSystem
 
         private void ComputeValueTypeShapeCharacteristics()
         {
-            _valueTypeShapeCharacteristics = this.Context.GetLayoutAlgorithmForType(this).ComputeValueTypeShapeCharacteristics(this);
+            _valueTypeShapeCharacteristics = this.Context.GetLayoutAlgorithmForType(this)
+                .ComputeValueTypeShapeCharacteristics(this);
             _fieldLayoutFlags.AddFlags(FieldLayoutFlags.ComputedValueTypeShapeCharacteristics);
         }
 
@@ -346,7 +371,8 @@ namespace Internal.TypeSystem
         {
             get
             {
-                return (ValueTypeShapeCharacteristics & ValueTypeShapeCharacteristics.AggregateMask) != 0;
+                return (ValueTypeShapeCharacteristics & ValueTypeShapeCharacteristics.AggregateMask)
+                    != 0;
             }
         }
 
@@ -355,7 +381,9 @@ namespace Internal.TypeSystem
         /// </summary>
         public int GetHomogeneousAggregateElementSize()
         {
-            return (ValueTypeShapeCharacteristics & ValueTypeShapeCharacteristics.AggregateMask) switch
+            return (
+                ValueTypeShapeCharacteristics & ValueTypeShapeCharacteristics.AggregateMask
+            ) switch
             {
                 ValueTypeShapeCharacteristics.Float32Aggregate => 4,
                 ValueTypeShapeCharacteristics.Float64Aggregate => 8,
@@ -367,10 +395,16 @@ namespace Internal.TypeSystem
 
         public void ComputeInstanceLayout(InstanceLayoutKind layoutKind)
         {
-            if (_fieldLayoutFlags.HasFlags(FieldLayoutFlags.ComputedInstanceTypeFieldsLayout | FieldLayoutFlags.ComputedInstanceTypeLayout))
+            if (
+                _fieldLayoutFlags.HasFlags(
+                    FieldLayoutFlags.ComputedInstanceTypeFieldsLayout
+                        | FieldLayoutFlags.ComputedInstanceTypeLayout
+                )
+            )
                 return;
 
-            var computedLayout = this.Context.GetLayoutAlgorithmForType(this).ComputeInstanceLayout(this, layoutKind);
+            var computedLayout = this.Context.GetLayoutAlgorithmForType(this)
+                .ComputeInstanceLayout(this, layoutKind);
 
             _instanceFieldSize = computedLayout.FieldSize;
             _instanceFieldAlignment = computedLayout.FieldAlignment;
@@ -396,15 +430,23 @@ namespace Internal.TypeSystem
 
         public void ComputeStaticFieldLayout(StaticLayoutKind layoutKind)
         {
-            if (_fieldLayoutFlags.HasFlags(FieldLayoutFlags.ComputedStaticFieldsLayout | FieldLayoutFlags.ComputedStaticRegionLayout))
+            if (
+                _fieldLayoutFlags.HasFlags(
+                    FieldLayoutFlags.ComputedStaticFieldsLayout
+                        | FieldLayoutFlags.ComputedStaticRegionLayout
+                )
+            )
                 return;
 
-            var computedStaticLayout = this.Context.GetLayoutAlgorithmForType(this).ComputeStaticFieldLayout(this, layoutKind);
+            var computedStaticLayout = this.Context.GetLayoutAlgorithmForType(this)
+                .ComputeStaticFieldLayout(this, layoutKind);
 
-            if ((computedStaticLayout.NonGcStatics.Size != LayoutInt.Zero) ||
-                (computedStaticLayout.GcStatics.Size != LayoutInt.Zero) ||
-                (computedStaticLayout.ThreadNonGcStatics.Size != LayoutInt.Zero) ||
-                (computedStaticLayout.ThreadGcStatics.Size != LayoutInt.Zero))
+            if (
+                (computedStaticLayout.NonGcStatics.Size != LayoutInt.Zero)
+                || (computedStaticLayout.GcStatics.Size != LayoutInt.Zero)
+                || (computedStaticLayout.ThreadNonGcStatics.Size != LayoutInt.Zero)
+                || (computedStaticLayout.ThreadGcStatics.Size != LayoutInt.Zero)
+            )
             {
                 var staticBlockInfo = new StaticBlockInfo
                 {

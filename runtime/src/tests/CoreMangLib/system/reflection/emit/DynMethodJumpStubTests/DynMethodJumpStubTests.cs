@@ -37,13 +37,14 @@ public static class DynamicMethodJumpStubTests
             // precode. Then, when compiling the method, there would be a good chance that the code will be located far from
             // the precode, forcing the use of a jump stub.
             ReserveMemoryAround(
-                (RuntimeMethodHandle)
-                typeof(DynamicMethod).InvokeMember(
+                (RuntimeMethodHandle)typeof(DynamicMethod).InvokeMember(
                     "GetMethodDescriptor",
                     BindingFlags.Instance | BindingFlags.InvokeMethod | BindingFlags.NonPublic,
                     null,
                     dynamicMethod,
-                    null));
+                    null
+                )
+            );
         }
 
         // Call each dynamic method concurrently from several threads to validate jump stub usage
@@ -68,7 +69,6 @@ public static class DynamicMethodJumpStubTests
         }
         foreach (var t in threads)
             t.Join();
-
         // This test does not release reserved pages because they may have been committed by other components on the system
     }
 
@@ -110,7 +110,8 @@ public static class DynamicMethodJumpStubTests
                 new UIntPtr(address),
                 new UIntPtr(AllocationGranularity),
                 AllocationType.RESERVE,
-                MemoryProtection.NOACCESS);
+                MemoryProtection.NOACCESS
+            );
 
             if (address + AllocationGranularity < address)
             {
@@ -153,5 +154,6 @@ public static class DynamicMethodJumpStubTests
         UIntPtr lpAddress,
         UIntPtr dwSize,
         AllocationType flAllocationType,
-        MemoryProtection flProtect);
+        MemoryProtection flProtect
+    );
 }

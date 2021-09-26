@@ -20,14 +20,12 @@ class child
             return Pass;
         else
             return Fail;
-
     }
-    [MethodImplAttribute(MethodImplOptions.NoInlining)] 
+    [MethodImplAttribute(MethodImplOptions.NoInlining)]
     public static int addref(int x, ref int a)
     {
         x += a;
         return x;
     }
-    
 }
 

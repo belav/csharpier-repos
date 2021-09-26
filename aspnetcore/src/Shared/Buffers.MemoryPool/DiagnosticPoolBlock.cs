@@ -28,7 +28,6 @@ namespace System.Buffers
         private bool _isDisposed;
         private int _pinCount;
 
-
         /// <summary>
         /// This object cannot be instantiated outside of the static Create method
         /// </summary>
@@ -49,12 +48,16 @@ namespace System.Buffers
                     {
                         if (_isDisposed)
                         {
-                            MemoryPoolThrowHelper.ThrowObjectDisposedException(MemoryPoolThrowHelper.ExceptionArgument.MemoryPoolBlock);
+                            MemoryPoolThrowHelper.ThrowObjectDisposedException(
+                                MemoryPoolThrowHelper.ExceptionArgument.MemoryPoolBlock
+                            );
                         }
 
                         if (_pool.IsDisposed)
                         {
-                            MemoryPoolThrowHelper.ThrowInvalidOperationException_BlockIsBackedByDisposedSlab(this);
+                            MemoryPoolThrowHelper.ThrowInvalidOperationException_BlockIsBackedByDisposedSlab(
+                                this
+                            );
                         }
 
                         return CreateMemory(_memory.Length);
@@ -76,12 +79,16 @@ namespace System.Buffers
                 {
                     if (Volatile.Read(ref _pinCount) > 0)
                     {
-                        MemoryPoolThrowHelper.ThrowInvalidOperationException_ReturningPinnedBlock(this);
+                        MemoryPoolThrowHelper.ThrowInvalidOperationException_ReturningPinnedBlock(
+                            this
+                        );
                     }
 
                     if (_isDisposed)
                     {
-                        MemoryPoolThrowHelper.ThrowInvalidOperationException_BlockDoubleDispose(this);
+                        MemoryPoolThrowHelper.ThrowInvalidOperationException_BlockDoubleDispose(
+                            this
+                        );
                     }
 
                     _memoryOwner.Dispose();
@@ -106,12 +113,16 @@ namespace System.Buffers
                 {
                     if (_isDisposed)
                     {
-                        MemoryPoolThrowHelper.ThrowObjectDisposedException(MemoryPoolThrowHelper.ExceptionArgument.MemoryPoolBlock);
+                        MemoryPoolThrowHelper.ThrowObjectDisposedException(
+                            MemoryPoolThrowHelper.ExceptionArgument.MemoryPoolBlock
+                        );
                     }
 
                     if (_pool.IsDisposed)
                     {
-                        MemoryPoolThrowHelper.ThrowInvalidOperationException_BlockIsBackedByDisposedSlab(this);
+                        MemoryPoolThrowHelper.ThrowInvalidOperationException_BlockIsBackedByDisposedSlab(
+                            this
+                        );
                     }
 
                     return _memory.Span;
@@ -132,26 +143,36 @@ namespace System.Buffers
                 {
                     if (_isDisposed)
                     {
-                        MemoryPoolThrowHelper.ThrowObjectDisposedException(MemoryPoolThrowHelper.ExceptionArgument.MemoryPoolBlock);
+                        MemoryPoolThrowHelper.ThrowObjectDisposedException(
+                            MemoryPoolThrowHelper.ExceptionArgument.MemoryPoolBlock
+                        );
                     }
 
                     if (_pool.IsDisposed)
                     {
-                        MemoryPoolThrowHelper.ThrowInvalidOperationException_BlockIsBackedByDisposedSlab(this);
+                        MemoryPoolThrowHelper.ThrowInvalidOperationException_BlockIsBackedByDisposedSlab(
+                            this
+                        );
                     }
 
                     if (byteOffset < 0 || byteOffset > _memory.Length)
                     {
-                        MemoryPoolThrowHelper.ThrowArgumentOutOfRangeException(_memory.Length, byteOffset);
+                        MemoryPoolThrowHelper.ThrowArgumentOutOfRangeException(
+                            _memory.Length,
+                            byteOffset
+                        );
                     }
 
                     _pinCount++;
 
                     _memoryHandle = _memoryHandle ?? _memory.Pin();
-
                     unsafe
                     {
-                        return new MemoryHandle(((IntPtr)_memoryHandle.Value.Pointer + byteOffset).ToPointer(), default, this);
+                        return new MemoryHandle(
+                            ((IntPtr)_memoryHandle.Value.Pointer + byteOffset).ToPointer(),
+                            default,
+                            this
+                        );
                     }
                 }
             }
@@ -170,12 +191,16 @@ namespace System.Buffers
                 {
                     if (_isDisposed)
                     {
-                        MemoryPoolThrowHelper.ThrowObjectDisposedException(MemoryPoolThrowHelper.ExceptionArgument.MemoryPoolBlock);
+                        MemoryPoolThrowHelper.ThrowObjectDisposedException(
+                            MemoryPoolThrowHelper.ExceptionArgument.MemoryPoolBlock
+                        );
                     }
 
                     if (_pool.IsDisposed)
                     {
-                        MemoryPoolThrowHelper.ThrowInvalidOperationException_BlockIsBackedByDisposedSlab(this);
+                        MemoryPoolThrowHelper.ThrowInvalidOperationException_BlockIsBackedByDisposedSlab(
+                            this
+                        );
                     }
 
                     return MemoryMarshal.TryGetArray(_memory, out segment);

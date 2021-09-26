@@ -8,53 +8,58 @@ using System.Runtime.Serialization;
 namespace System.Data
 {
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class InvalidExpressionException : DataException
     {
         protected InvalidExpressionException(SerializationInfo info, StreamingContext context)
-        : base(info, context)
-        {
-        }
+            : base(info, context) { }
 
         public InvalidExpressionException() : base() { }
         public InvalidExpressionException(string? s) : base(s) { }
 
-        public InvalidExpressionException(string? message, Exception? innerException) : base(message, innerException) { }
+        public InvalidExpressionException(string? message, Exception? innerException)
+            : base(message, innerException) { }
     }
 
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class EvaluateException : InvalidExpressionException
     {
         protected EvaluateException(SerializationInfo info, StreamingContext context)
-        : base(info, context)
-        {
-        }
+            : base(info, context) { }
 
         public EvaluateException() : base() { }
         public EvaluateException(string? s) : base(s) { }
 
-        public EvaluateException(string? message, Exception? innerException) : base(message, innerException) { }
+        public EvaluateException(string? message, Exception? innerException)
+            : base(message, innerException) { }
     }
 
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class SyntaxErrorException : InvalidExpressionException
     {
         protected SyntaxErrorException(SerializationInfo info, StreamingContext context)
-        : base(info, context)
-        {
-        }
+            : base(info, context) { }
 
         public SyntaxErrorException() : base() { }
         public SyntaxErrorException(string? s) : base(s) { }
 
-        public SyntaxErrorException(string? message, Exception? innerException) : base(message, innerException) { }
+        public SyntaxErrorException(string? message, Exception? innerException)
+            : base(message, innerException) { }
     }
 
     internal sealed class ExprException
     {
-        private ExprException() { /* prevent utility class from being insantiated*/ }
+        private ExprException()
+        { /* prevent utility class from being insantiated*/
+        }
 
         private static OverflowException _Overflow(string error)
         {
@@ -82,7 +87,9 @@ namespace System.Data
         }
         private static EvaluateException _Eval(string error, Exception? innerException)
         {
-            EvaluateException e = new EvaluateException(error/*, innerException*/);
+            EvaluateException e = new EvaluateException(
+                error /*, innerException*/
+            );
             ExceptionBuilder.TraceExceptionAsReturnValue(e);
             return e;
         }
@@ -116,7 +123,10 @@ namespace System.Data
 
         public static Exception FunctionArgumentOutOfRange(string arg, string func)
         {
-            return ExceptionBuilder._ArgumentOutOfRange(arg, SR.Format(SR.Expr_ArgumentOutofRange, func));
+            return ExceptionBuilder._ArgumentOutOfRange(
+                arg,
+                SR.Format(SR.Expr_ArgumentOutofRange, func)
+            );
         }
 
         public static Exception ExpressionTooComplex()
@@ -156,12 +166,25 @@ namespace System.Data
 
         public static Exception UnknownToken(string token, int position)
         {
-            return _Syntax(SR.Format(SR.Expr_UnknownToken, token, position.ToString(CultureInfo.InvariantCulture)));
+            return _Syntax(
+                SR.Format(
+                    SR.Expr_UnknownToken,
+                    token,
+                    position.ToString(CultureInfo.InvariantCulture)
+                )
+            );
         }
 
         public static Exception UnknownToken(Tokens tokExpected, Tokens tokCurr, int position)
         {
-            return _Syntax(SR.Format(SR.Expr_UnknownToken1, tokExpected.ToString(), tokCurr.ToString(), position.ToString(CultureInfo.InvariantCulture)));
+            return _Syntax(
+                SR.Format(
+                    SR.Expr_UnknownToken1,
+                    tokExpected.ToString(),
+                    tokCurr.ToString(),
+                    position.ToString(CultureInfo.InvariantCulture)
+                )
+            );
         }
 
         public static Exception DatatypeConvertion(Type type1, Type type2)
@@ -169,9 +192,16 @@ namespace System.Data
             return _Eval(SR.Format(SR.Expr_DatatypeConvertion, type1.ToString(), type2.ToString()));
         }
 
-        public static Exception DatavalueConvertion(object value, Type type, Exception? innerException)
+        public static Exception DatavalueConvertion(
+            object value,
+            Type type,
+            Exception? innerException
+        )
         {
-            return _Eval(SR.Format(SR.Expr_DatavalueConvertion, value.ToString(), type.ToString()), innerException);
+            return _Eval(
+                SR.Format(SR.Expr_DatavalueConvertion, value.ToString(), type.ToString()),
+                innerException
+            );
         }
 
         public static Exception InvalidName(string name)
@@ -216,17 +246,32 @@ namespace System.Data
 
         public static Exception ArgumentType(string function, int arg, Type type)
         {
-            return _Eval(SR.Format(SR.Expr_ArgumentType, function, arg.ToString(CultureInfo.InvariantCulture), type));
+            return _Eval(
+                SR.Format(
+                    SR.Expr_ArgumentType,
+                    function,
+                    arg.ToString(CultureInfo.InvariantCulture),
+                    type
+                )
+            );
         }
 
         public static Exception ArgumentTypeInteger(string function, int arg)
         {
-            return _Eval(SR.Format(SR.Expr_ArgumentTypeInteger, function, arg.ToString(CultureInfo.InvariantCulture)));
+            return _Eval(
+                SR.Format(
+                    SR.Expr_ArgumentTypeInteger,
+                    function,
+                    arg.ToString(CultureInfo.InvariantCulture)
+                )
+            );
         }
 
         public static Exception TypeMismatchInBinop(int op, Type type1, Type type2)
         {
-            return _Eval(SR.Format(SR.Expr_TypeMismatchInBinop, Operators.ToString(op), type1, type2));
+            return _Eval(
+                SR.Format(SR.Expr_TypeMismatchInBinop, Operators.ToString(op), type1, type2)
+            );
         }
 
         public static Exception AmbiguousBinop(int op, Type type1, Type type2)

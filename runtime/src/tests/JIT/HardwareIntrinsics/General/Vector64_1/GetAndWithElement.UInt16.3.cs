@@ -42,7 +42,8 @@ namespace JIT.HardwareIntrinsics.General
     {
         private static readonly int LargestVectorSize = 8;
 
-        private static readonly int ElementCount = Unsafe.SizeOf<Vector64<UInt16>>() / sizeof(UInt16);
+        private static readonly int ElementCount =
+            Unsafe.SizeOf<Vector64<UInt16>>() / sizeof(UInt16);
 
         public bool Succeeded { get; set; } = true;
 
@@ -73,7 +74,9 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"Vector64<UInt16.GetElement({imm}): {nameof(RunBasicScenario)} failed to throw ArgumentOutOfRangeException.");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector64<UInt16.GetElement({imm}): {nameof(RunBasicScenario)} failed to throw ArgumentOutOfRangeException."
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;
@@ -95,7 +98,9 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"Vector64<UInt16.WithElement({imm}): {nameof(RunBasicScenario)} failed to throw ArgumentOutOfRangeException.");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector64<UInt16.WithElement({imm}): {nameof(RunBasicScenario)} failed to throw ArgumentOutOfRangeException."
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;
@@ -119,21 +124,22 @@ namespace JIT.HardwareIntrinsics.General
 
             try
             {
-                object result = typeof(Vector64)
-                                    .GetMethod(nameof(Vector64.GetElement))
-                                    .MakeGenericMethod(typeof(UInt16))
-                                    .Invoke(null, new object[] { value, imm });
+                object result = typeof(Vector64).GetMethod(nameof(Vector64.GetElement))
+                    .MakeGenericMethod(typeof(UInt16))
+                    .Invoke(null, new object[] { value, imm });
                 ValidateGetResult((UInt16)(result), values);
             }
             catch (TargetInvocationException e)
             {
-                succeeded = expectedOutOfRangeException
-                          && e.InnerException is ArgumentOutOfRangeException;
+                succeeded =
+                    expectedOutOfRangeException && e.InnerException is ArgumentOutOfRangeException;
             }
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"Vector64<UInt16.GetElement({imm}): {nameof(RunReflectionScenario)} failed to throw ArgumentOutOfRangeException.");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector64<UInt16.GetElement({imm}): {nameof(RunReflectionScenario)} failed to throw ArgumentOutOfRangeException."
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;
@@ -145,21 +151,22 @@ namespace JIT.HardwareIntrinsics.General
 
             try
             {
-                object result2 = typeof(Vector64)
-                                    .GetMethod(nameof(Vector64.WithElement))
-                                    .MakeGenericMethod(typeof(UInt16))
-                                    .Invoke(null, new object[] { value, imm, insertedValue });
+                object result2 = typeof(Vector64).GetMethod(nameof(Vector64.WithElement))
+                    .MakeGenericMethod(typeof(UInt16))
+                    .Invoke(null, new object[] { value, imm, insertedValue });
                 ValidateWithResult((Vector64<UInt16>)(result2), values, insertedValue);
             }
             catch (TargetInvocationException e)
             {
-                succeeded = expectedOutOfRangeException
-                          && e.InnerException is ArgumentOutOfRangeException;
+                succeeded =
+                    expectedOutOfRangeException && e.InnerException is ArgumentOutOfRangeException;
             }
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"Vector64<UInt16.WithElement({imm}): {nameof(RunReflectionScenario)} failed to throw ArgumentOutOfRangeException.");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector64<UInt16.WithElement({imm}): {nameof(RunReflectionScenario)} failed to throw ArgumentOutOfRangeException."
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;
@@ -175,27 +182,45 @@ namespace JIT.HardwareIntrinsics.General
             RunReflectionScenario(3 + ElementCount, expectedOutOfRangeException: true);
         }
 
-        private void ValidateGetResult(UInt16 result, UInt16[] values, [CallerMemberName] string method = "")
+        private void ValidateGetResult(
+            UInt16 result,
+            UInt16[] values,
+            [CallerMemberName] string method = ""
+        )
         {
             if (result != values[3])
             {
                 Succeeded = false;
 
-                TestLibrary.TestFramework.LogInformation($"Vector64<UInt16.GetElement(3): {method} failed:");
-                TestLibrary.TestFramework.LogInformation($"   value: ({string.Join(", ", values)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector64<UInt16.GetElement(3): {method} failed:"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"   value: ({string.Join(", ", values)})"
+                );
                 TestLibrary.TestFramework.LogInformation($"  result: ({result})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
             }
         }
 
-        private void ValidateWithResult(Vector64<UInt16> result, UInt16[] values, UInt16 insertedValue, [CallerMemberName] string method = "")
+        private void ValidateWithResult(
+            Vector64<UInt16> result,
+            UInt16[] values,
+            UInt16 insertedValue,
+            [CallerMemberName] string method = ""
+        )
         {
             UInt16[] resultElements = new UInt16[ElementCount];
             Unsafe.WriteUnaligned(ref Unsafe.As<UInt16, byte>(ref resultElements[0]), result);
             ValidateWithResult(resultElements, values, insertedValue, method);
         }
 
-        private void ValidateWithResult(UInt16[] result, UInt16[] values, UInt16 insertedValue, [CallerMemberName] string method = "")
+        private void ValidateWithResult(
+            UInt16[] result,
+            UInt16[] values,
+            UInt16 insertedValue,
+            [CallerMemberName] string method = ""
+        )
         {
             bool succeeded = true;
 
@@ -215,10 +240,16 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"Vector64<UInt16.WithElement(3): {method} failed:");
-                TestLibrary.TestFramework.LogInformation($"   value: ({string.Join(", ", values)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector64<UInt16.WithElement(3): {method} failed:"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"   value: ({string.Join(", ", values)})"
+                );
                 TestLibrary.TestFramework.LogInformation($"  insert: insertedValue");
-                TestLibrary.TestFramework.LogInformation($"  result: ({string.Join(", ", result)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"  result: ({string.Join(", ", result)})"
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

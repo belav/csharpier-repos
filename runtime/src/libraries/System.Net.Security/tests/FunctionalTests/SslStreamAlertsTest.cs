@@ -30,13 +30,19 @@ namespace System.Net.Security.Tests
             using (X509Certificate2 certificate = Configuration.Certificates.GetServerCertificate())
             {
                 Task serverAuth = server.AuthenticateAsServerAsync(certificate);
-                await client.AuthenticateAsClientAsync(certificate.GetNameInfo(X509NameType.SimpleName, false)).WaitAsync(TestConfiguration.PassingTestTimeout);
+                await client.AuthenticateAsClientAsync(
+                        certificate.GetNameInfo(X509NameType.SimpleName, false)
+                    )
+                    .WaitAsync(TestConfiguration.PassingTestTimeout);
 
                 byte[] buffer = new byte[1024];
 
                 // Schannel semantics require that Decrypt is called to receive an alert.
                 await client.WriteAsync(buffer, 0, buffer.Length);
-                var exception = await Assert.ThrowsAsync<IOException>(() => client.ReadAsync(buffer, 0, buffer.Length)).WaitAsync(TestConfiguration.PassingTestTimeout);
+                var exception = await Assert.ThrowsAsync<IOException>(
+                        () => client.ReadAsync(buffer, 0, buffer.Length)
+                    )
+                    .WaitAsync(TestConfiguration.PassingTestTimeout);
 
                 Assert.IsType<Win32Exception>(exception.InnerException);
                 var win32ex = (Win32Exception)exception.InnerException;
@@ -45,10 +51,15 @@ namespace System.Net.Security.Tests
                 // https://msdn.microsoft.com/en-us/library/windows/desktop/dd721886(v=vs.85).aspx
                 Assert.Equal(SEC_E_CERT_UNKNOWN, unchecked((uint)win32ex.NativeErrorCode));
 
-                await Assert.ThrowsAsync<AuthenticationException>(() => serverAuth).WaitAsync(TestConfiguration.PassingTestTimeout);
+                await Assert.ThrowsAsync<AuthenticationException>(() => serverAuth)
+                    .WaitAsync(TestConfiguration.PassingTestTimeout);
 
-                await Assert.ThrowsAsync<AuthenticationException>(() => server.WriteAsync(buffer, 0, buffer.Length));
-                await Assert.ThrowsAsync<AuthenticationException>(() => server.ReadAsync(buffer, 0, buffer.Length));
+                await Assert.ThrowsAsync<AuthenticationException>(
+                    () => server.WriteAsync(buffer, 0, buffer.Length)
+                );
+                await Assert.ThrowsAsync<AuthenticationException>(
+                    () => server.ReadAsync(buffer, 0, buffer.Length)
+                );
             }
         }
 
@@ -63,7 +74,9 @@ namespace System.Net.Security.Tests
                 var handshake = new Task[2];
 
                 handshake[0] = server.AuthenticateAsServerAsync(certificate);
-                handshake[1] = client.AuthenticateAsClientAsync(certificate.GetNameInfo(X509NameType.SimpleName, false));
+                handshake[1] = client.AuthenticateAsClientAsync(
+                    certificate.GetNameInfo(X509NameType.SimpleName, false)
+                );
 
                 await Task.WhenAll(handshake).WaitAsync(TestConfiguration.PassingTestTimeout);
 
@@ -96,10 +109,11 @@ namespace System.Net.Security.Tests
                 var handshake = new Task[2];
 
                 handshake[0] = server.AuthenticateAsServerAsync(certificate);
-                handshake[1] = client.AuthenticateAsClientAsync(certificate.GetNameInfo(X509NameType.SimpleName, false));
+                handshake[1] = client.AuthenticateAsClientAsync(
+                    certificate.GetNameInfo(X509NameType.SimpleName, false)
+                );
 
                 await Task.WhenAll(handshake).WaitAsync(TestConfiguration.PassingTestTimeout);
-
 
                 var readBuffer = new byte[1024];
 
@@ -133,7 +147,9 @@ namespace System.Net.Security.Tests
                 var handshake = new Task[2];
 
                 handshake[0] = server.AuthenticateAsServerAsync(certificate);
-                handshake[1] = client.AuthenticateAsClientAsync(certificate.GetNameInfo(X509NameType.SimpleName, false));
+                handshake[1] = client.AuthenticateAsClientAsync(
+                    certificate.GetNameInfo(X509NameType.SimpleName, false)
+                );
 
                 await Task.WhenAll(handshake).WaitAsync(TestConfiguration.PassingTestTimeout);
 
@@ -146,11 +162,18 @@ namespace System.Net.Security.Tests
                 Assert.False(client.CanWrite);
 
                 await Assert.ThrowsAsync<InvalidOperationException>(() => client.ShutdownAsync());
-                await Assert.ThrowsAsync<InvalidOperationException>(() => client.WriteAsync(buffer, 0, buffer.Length));
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () => client.WriteAsync(buffer, 0, buffer.Length)
+                );
             }
         }
 
-        private bool FailClientCertificate(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
+        private bool FailClientCertificate(
+            object sender,
+            X509Certificate certificate,
+            X509Chain chain,
+            SslPolicyErrors sslPolicyErrors
+        )
         {
             return false;
         }
@@ -159,7 +182,8 @@ namespace System.Net.Security.Tests
             object sender,
             X509Certificate certificate,
             X509Chain chain,
-            SslPolicyErrors sslPolicyErrors)
+            SslPolicyErrors sslPolicyErrors
+        )
         {
             return true;
         }

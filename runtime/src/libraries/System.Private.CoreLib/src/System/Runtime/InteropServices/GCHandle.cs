@@ -123,14 +123,15 @@ namespace System.Runtime.InteropServices
             {
                 return default;
             }
-
             unsafe
             {
                 if (RuntimeHelpers.ObjectHasComponentSize(target))
                 {
                     if (target.GetType() == typeof(string))
                     {
-                        return (IntPtr)Unsafe.AsPointer(ref Unsafe.As<string>(target).GetRawStringData());
+                        return (IntPtr)Unsafe.AsPointer(
+                            ref Unsafe.As<string>(target).GetRawStringData()
+                        );
                     }
 
                     Debug.Assert(target is Array);
@@ -163,7 +164,8 @@ namespace System.Runtime.InteropServices
 
         public override int GetHashCode() => _handle.GetHashCode();
 
-        public override bool Equals([NotNullWhen(true)] object? o) => o is GCHandle && _handle == ((GCHandle)o)._handle;
+        public override bool Equals([NotNullWhen(true)] object? o) =>
+            o is GCHandle && _handle == ((GCHandle)o)._handle;
 
         public static bool operator ==(GCHandle a, GCHandle b) => a._handle == b._handle;
 

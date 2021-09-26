@@ -6,13 +6,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Shared.Extensions
 {
     internal static class LanguageVersionExtensions
     {
-        public static bool IsCSharp9OrAbove(this LanguageVersion languageVersion)
-            => languageVersion >= LanguageVersion.CSharp9;
+        public static bool IsCSharp9OrAbove(this LanguageVersion languageVersion) =>
+            languageVersion >= LanguageVersion.CSharp9;
 
-        public static bool IsCSharp10OrAbove(this LanguageVersion languageVersion)
-            => languageVersion >= LanguageVersion.Preview;
+        public static bool IsCSharp10OrAbove(this LanguageVersion languageVersion) =>
+            languageVersion >= LanguageVersion.Preview;
 
-        public static bool HasConstantInterpolatedStrings(this LanguageVersion languageVersion)
-            => languageVersion.IsCSharp10OrAbove();
+        public static bool HasConstantInterpolatedStrings(this LanguageVersion languageVersion) =>
+            languageVersion.IsCSharp10OrAbove();
     }
 }

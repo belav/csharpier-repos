@@ -28,8 +28,15 @@ namespace Microsoft.CodeAnalysis.Text
                 var solution = workspace.CurrentSolution;
 
                 var relatedIds = solution.GetRelatedDocumentIds(documentId);
-                solution = solution.WithDocumentText(relatedIds, text, PreservationMode.PreserveIdentity);
-                return relatedIds.SelectAsArray((id, solution) => solution.GetRequiredDocument(id), solution);
+                solution = solution.WithDocumentText(
+                    relatedIds,
+                    text,
+                    PreservationMode.PreserveIdentity
+                );
+                return relatedIds.SelectAsArray(
+                    (id, solution) => solution.GetRequiredDocument(id),
+                    solution
+                );
             }
 
             return ImmutableArray<Document>.Empty;
@@ -54,7 +61,7 @@ namespace Microsoft.CodeAnalysis.Text
                 // one linked file to another and be surprised if the text is entirely different.
                 var allIds = solution.GetRelatedDocumentIds(id);
                 return solution.WithDocumentText(allIds, text, PreservationMode.PreserveIdentity)
-                               .GetDocument(id);
+                    .GetDocument(id);
             }
 
             return null;
@@ -63,7 +70,9 @@ namespace Microsoft.CodeAnalysis.Text
         /// <summary>
         /// Gets the documents from the corresponding workspace's current solution that are associated with the text container. 
         /// </summary>
-        public static ImmutableArray<Document> GetRelatedDocuments(this SourceTextContainer container)
+        public static ImmutableArray<Document> GetRelatedDocuments(
+            this SourceTextContainer container
+        )
         {
             if (Workspace.TryGetWorkspace(container, out var workspace))
             {
@@ -72,7 +81,10 @@ namespace Microsoft.CodeAnalysis.Text
                 if (documentId != null)
                 {
                     var relatedIds = solution.GetRelatedDocumentIds(documentId);
-                    return relatedIds.SelectAsArray((id, solution) => solution.GetRequiredDocument(id), solution);
+                    return relatedIds.SelectAsArray(
+                        (id, solution) => solution.GetRequiredDocument(id),
+                        solution
+                    );
                 }
             }
 
@@ -101,7 +113,10 @@ namespace Microsoft.CodeAnalysis.Text
         /// with the specified text's container, or the text's container isn't associated with a workspace,
         /// then the method returns false.
         /// </summary>
-        internal static Document? GetDocumentWithFrozenPartialSemantics(this SourceText text, CancellationToken cancellationToken)
+        internal static Document? GetDocumentWithFrozenPartialSemantics(
+            this SourceText text,
+            CancellationToken cancellationToken
+        )
         {
             var document = text.GetOpenDocumentInCurrentContextWithChanges();
             return document?.WithFrozenPartialSemantics(cancellationToken);

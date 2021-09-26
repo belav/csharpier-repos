@@ -142,12 +142,18 @@ public class MonoAOTCompiler : Microsoft.Build.Utilities.Task
 
         if (string.IsNullOrEmpty(CompilerBinaryPath))
         {
-            throw new ArgumentException($"'{nameof(CompilerBinaryPath)}' is required.", nameof(CompilerBinaryPath));
+            throw new ArgumentException(
+                $"'{nameof(CompilerBinaryPath)}' is required.",
+                nameof(CompilerBinaryPath)
+            );
         }
 
         if (!File.Exists(CompilerBinaryPath))
         {
-            throw new ArgumentException($"'{CompilerBinaryPath}' doesn't exist.", nameof(CompilerBinaryPath));
+            throw new ArgumentException(
+                $"'{CompilerBinaryPath}' doesn't exist.",
+                nameof(CompilerBinaryPath)
+            );
         }
 
         if (Assemblies.Length == 0)
@@ -174,7 +180,10 @@ public class MonoAOTCompiler : Microsoft.Build.Utilities.Task
         {
             if (string.IsNullOrEmpty(LLVMPath))
                 // prevent using some random llc/opt from PATH (installed with clang)
-                throw new ArgumentException($"'{nameof(LLVMPath)}' is required when '{nameof(UseLLVM)}' is true.", nameof(LLVMPath));
+                throw new ArgumentException(
+                    $"'{nameof(LLVMPath)}' is required when '{nameof(UseLLVM)}' is true.",
+                    nameof(LLVMPath)
+                );
 
             if (!Directory.Exists(LLVMPath))
             {
@@ -185,29 +194,48 @@ public class MonoAOTCompiler : Microsoft.Build.Utilities.Task
 
         if (!Enum.TryParse(Mode, true, out parsedAotMode))
         {
-            Log.LogError($"Unknown Mode value: {Mode}. '{nameof(Mode)}' must be one of: {string.Join(',', Enum.GetNames(typeof(MonoAotMode)))}");
+            Log.LogError(
+                $"Unknown Mode value: {Mode}. '{nameof(Mode)}' must be one of: {string.Join(',', Enum.GetNames(typeof(MonoAotMode)))}"
+            );
             return false;
         }
 
         switch (OutputType)
         {
-            case "Normal": parsedOutputType = MonoAotOutputType.Normal; break;
-            case "AsmOnly": parsedOutputType = MonoAotOutputType.AsmOnly; break;
+            case "Normal":
+                parsedOutputType = MonoAotOutputType.Normal;
+                break;
+            case "AsmOnly":
+                parsedOutputType = MonoAotOutputType.AsmOnly;
+                break;
             default:
-                throw new ArgumentException($"'{nameof(OutputType)}' must be one of: '{nameof(MonoAotOutputType.Normal)}', '{nameof(MonoAotOutputType.AsmOnly)}'. Received: '{OutputType}'.", nameof(OutputType));
+                throw new ArgumentException(
+                    $"'{nameof(OutputType)}' must be one of: '{nameof(MonoAotOutputType.Normal)}', '{nameof(MonoAotOutputType.AsmOnly)}'. Received: '{OutputType}'.",
+                    nameof(OutputType)
+                );
         }
 
         if (parsedAotMode == MonoAotMode.LLVMOnly && !UseLLVM)
         {
-            throw new ArgumentException($"'{nameof(UseLLVM)}' must be true when '{nameof(Mode)}' is {nameof(MonoAotMode.LLVMOnly)}.", nameof(UseLLVM));
+            throw new ArgumentException(
+                $"'{nameof(UseLLVM)}' must be true when '{nameof(Mode)}' is {nameof(MonoAotMode.LLVMOnly)}.",
+                nameof(UseLLVM)
+            );
         }
 
         switch (AotModulesTableLanguage)
         {
-            case "C": parsedAotModulesTableLanguage = MonoAotModulesTableLanguage.C; break;
-            case "ObjC": parsedAotModulesTableLanguage = MonoAotModulesTableLanguage.ObjC; break;
+            case "C":
+                parsedAotModulesTableLanguage = MonoAotModulesTableLanguage.C;
+                break;
+            case "ObjC":
+                parsedAotModulesTableLanguage = MonoAotModulesTableLanguage.ObjC;
+                break;
             default:
-                throw new ArgumentException($"'{nameof(AotModulesTableLanguage)}' must be one of: '{nameof(MonoAotModulesTableLanguage.C)}', '{nameof(MonoAotModulesTableLanguage.ObjC)}'. Received: '{AotModulesTableLanguage}'.", nameof(AotModulesTableLanguage));
+                throw new ArgumentException(
+                    $"'{nameof(AotModulesTableLanguage)}' must be one of: '{nameof(MonoAotModulesTableLanguage.C)}', '{nameof(MonoAotModulesTableLanguage.ObjC)}'. Received: '{AotModulesTableLanguage}'.",
+                    nameof(AotModulesTableLanguage)
+                );
         }
 
         if (!string.IsNullOrEmpty(AotModulesTablePath))
@@ -229,9 +257,11 @@ public class MonoAOTCompiler : Microsoft.Build.Utilities.Task
         }
         else
         {
-            Parallel.ForEach(Assemblies,
+            Parallel.ForEach(
+                Assemblies,
                 new ParallelOptions { MaxDegreeOfParallelism = Environment.ProcessorCount },
-                assemblyItem => PrecompileLibrary(assemblyItem, monoPaths));
+                assemblyItem => PrecompileLibrary(assemblyItem, monoPaths)
+            );
         }
 
         CompiledAssemblies = compiledAssemblies.ToArray();
@@ -252,7 +282,7 @@ public class MonoAOTCompiler : Microsoft.Build.Utilities.Task
         var a = assemblyItem.GetMetadata("AotArguments");
         if (a != null)
         {
-             aotArgs.AddRange(a.Split(";", StringSplitOptions.RemoveEmptyEntries));
+            aotArgs.AddRange(a.Split(";", StringSplitOptions.RemoveEmptyEntries));
         }
 
         var p = assemblyItem.GetMetadata("ProcessArguments");
@@ -284,7 +314,7 @@ public class MonoAOTCompiler : Microsoft.Build.Utilities.Task
         {
             aotArgs.Add($"dedup-include={assemblyFilename}");
         }
-        else if (!string.IsNullOrEmpty (DedupAssembly))
+        else if (!string.IsNullOrEmpty(DedupAssembly))
         {
             aotArgs.Add("dedup-skip");
         }
@@ -294,7 +324,10 @@ public class MonoAOTCompiler : Microsoft.Build.Utilities.Task
         {
             aotArgs.Add("llvmonly");
 
-            string llvmBitcodeFile = Path.Combine(OutputDir, Path.ChangeExtension(assemblyFilename, ".dll.bc"));
+            string llvmBitcodeFile = Path.Combine(
+                OutputDir,
+                Path.ChangeExtension(assemblyFilename, ".dll.bc")
+            );
             aotAssembly.SetMetadata("LlvmBitcodeFile", llvmBitcodeFile);
 
             if (parsedAotMode == MonoAotMode.AotInterp)
@@ -323,20 +356,29 @@ public class MonoAOTCompiler : Microsoft.Build.Utilities.Task
             {
                 aotArgs.Add("asmonly");
 
-                string assemblerFile = Path.Combine(OutputDir, Path.ChangeExtension(assemblyFilename, ".dll.s"));
+                string assemblerFile = Path.Combine(
+                    OutputDir,
+                    Path.ChangeExtension(assemblyFilename, ".dll.s")
+                );
                 aotArgs.Add($"outfile={assemblerFile}");
                 aotAssembly.SetMetadata("AssemblerFile", assemblerFile);
             }
             else
             {
-                string objectFile = Path.Combine(OutputDir, Path.ChangeExtension(assemblyFilename, ".dll.o"));
+                string objectFile = Path.Combine(
+                    OutputDir,
+                    Path.ChangeExtension(assemblyFilename, ".dll.o")
+                );
                 aotArgs.Add($"outfile={objectFile}");
                 aotAssembly.SetMetadata("ObjectFile", objectFile);
             }
 
             if (UseLLVM)
             {
-                string llvmObjectFile = Path.Combine(OutputDir, Path.ChangeExtension(assemblyFilename, ".dll-llvm.o"));
+                string llvmObjectFile = Path.Combine(
+                    OutputDir,
+                    Path.ChangeExtension(assemblyFilename, ".dll-llvm.o")
+                );
                 aotArgs.Add($"llvm-outfile={llvmObjectFile}");
                 aotAssembly.SetMetadata("LlvmObjectFile", llvmObjectFile);
             }
@@ -396,15 +438,22 @@ public class MonoAOTCompiler : Microsoft.Build.Utilities.Task
 
         var envVariables = new Dictionary<string, string>
         {
-            {"MONO_PATH", paths},
-            {"MONO_ENV_OPTIONS", string.Empty} // we do not want options to be provided out of band to the cross compilers
+            { "MONO_PATH", paths },
+            { "MONO_ENV_OPTIONS", string.Empty } // we do not want options to be provided out of band to the cross compilers
         };
 
         try
         {
             // run the AOT compiler
-            Utils.RunProcess(CompilerBinaryPath, string.Join(" ", processArgs), envVariables, assemblyDir, silent: false,
-                    outputMessageImportance: MessageImportance.Low, debugMessageImportance: MessageImportance.Low);
+            Utils.RunProcess(
+                CompilerBinaryPath,
+                string.Join(" ", processArgs),
+                envVariables,
+                assemblyDir,
+                silent: false,
+                outputMessageImportance: MessageImportance.Low,
+                debugMessageImportance: MessageImportance.Low
+            );
         }
         catch (Exception ex)
         {
@@ -422,7 +471,9 @@ public class MonoAOTCompiler : Microsoft.Build.Utilities.Task
         var symbols = new List<string>();
         foreach (var asm in assemblies)
         {
-            var name = Path.GetFileNameWithoutExtension(asm.ItemSpec).Replace ('.', '_').Replace ('-', '_');
+            var name = Path.GetFileNameWithoutExtension(asm.ItemSpec)
+                .Replace('.', '_')
+                .Replace('-', '_');
             symbols.Add($"mono_aot_module_{name}_info");
         }
 
@@ -450,7 +501,13 @@ public class MonoAOTCompiler : Microsoft.Build.Utilities.Task
                 foreach (var profiler in profilers ?? Enumerable.Empty<string>())
                 {
                     writer.WriteLine($"void mono_profiler_init_{profiler} (const char *desc);");
-                    writer.WriteLine("EMSCRIPTEN_KEEPALIVE void mono_wasm_load_profiler_" + profiler + " (const char *desc) { mono_profiler_init_" + profiler + " (desc); }");
+                    writer.WriteLine(
+                        "EMSCRIPTEN_KEEPALIVE void mono_wasm_load_profiler_"
+                            + profiler
+                            + " (const char *desc) { mono_profiler_init_"
+                            + profiler
+                            + " (desc); }"
+                    );
                 }
 
                 if (parsedAotMode == MonoAotMode.LLVMOnly)

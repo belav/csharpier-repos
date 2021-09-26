@@ -26,7 +26,10 @@ namespace SourceGenerators.Tests
         /// </summary>
         /// <param name="references">Assembly references to include in the project.</param>
         /// <param name="includeBaseReferences">Whether to include references to the BCL assemblies.</param>
-        public static Project CreateTestProject(IEnumerable<Assembly>? references, bool includeBaseReferences = true)
+        public static Project CreateTestProject(
+            IEnumerable<Assembly>? references,
+            bool includeBaseReferences = true
+        )
         {
             string corelib = Assembly.GetAssembly(typeof(object))!.Location;
             string runtimeDir = Path.GetDirectoryName(corelib)!;
@@ -35,8 +38,12 @@ namespace SourceGenerators.Tests
             if (includeBaseReferences)
             {
                 refs.Add(MetadataReference.CreateFromFile(corelib));
-                refs.Add(MetadataReference.CreateFromFile(Path.Combine(runtimeDir, "netstandard.dll")));
-                refs.Add(MetadataReference.CreateFromFile(Path.Combine(runtimeDir, "System.Runtime.dll")));
+                refs.Add(
+                    MetadataReference.CreateFromFile(Path.Combine(runtimeDir, "netstandard.dll"))
+                );
+                refs.Add(
+                    MetadataReference.CreateFromFile(Path.Combine(runtimeDir, "System.Runtime.dll"))
+                );
             }
 
             if (references != null)
@@ -47,11 +54,16 @@ namespace SourceGenerators.Tests
                 }
             }
 
-            return new AdhocWorkspace()
-                        .AddSolution(SolutionInfo.Create(SolutionId.CreateNewId(), VersionStamp.Create()))
-                        .AddProject("Test", "test.dll", "C#")
-                            .WithMetadataReferences(refs)
-                            .WithCompilationOptions(new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary).WithNullableContextOptions(NullableContextOptions.Enable));
+            return new AdhocWorkspace().AddSolution(
+                    SolutionInfo.Create(SolutionId.CreateNewId(), VersionStamp.Create())
+                )
+                .AddProject("Test", "test.dll", "C#")
+                .WithMetadataReferences(refs)
+                .WithCompilationOptions(
+                    new CSharpCompilationOptions(
+                        OutputKind.DynamicallyLinkedLibrary
+                    ).WithNullableContextOptions(NullableContextOptions.Enable)
+                );
         }
 
         public static Task CommitChanges(this Project proj, params string[] ignorables)
@@ -64,7 +76,8 @@ namespace SourceGenerators.Tests
         {
             foreach (Document doc in proj.Documents)
             {
-                SemanticModel? sm = await doc.GetSemanticModelAsync(CancellationToken.None).ConfigureAwait(false);
+                SemanticModel? sm = await doc.GetSemanticModelAsync(CancellationToken.None)
+                    .ConfigureAwait(false);
                 Assert.NotNull(sm);
 
                 foreach (Diagnostic d in sm!.GetDiagnostics())
@@ -76,7 +89,11 @@ namespace SourceGenerators.Tests
             }
         }
 
-        private static Project WithDocuments(this Project project, IEnumerable<string> sources, IEnumerable<string>? sourceNames = null)
+        private static Project WithDocuments(
+            this Project project,
+            IEnumerable<string> sources,
+            IEnumerable<string>? sourceNames = null
+        )
         {
             int count = 0;
             Project result = project;
@@ -146,7 +163,8 @@ namespace SourceGenerators.Tests
             IEnumerable<string> sources,
             AnalyzerConfigOptionsProvider? optionsProvider = null,
             bool includeBaseReferences = true,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Project proj = CreateTestProject(references, includeBaseReferences);
 
@@ -154,9 +172,13 @@ namespace SourceGenerators.Tests
 
             Assert.True(proj.Solution.Workspace.TryApplyChanges(proj.Solution));
 
-            Compilation? comp = await proj!.GetCompilationAsync(CancellationToken.None).ConfigureAwait(false);
+            Compilation? comp = await proj!.GetCompilationAsync(CancellationToken.None)
+                .ConfigureAwait(false);
 
-            CSharpGeneratorDriver cgd = CSharpGeneratorDriver.Create(new[] { generator }, optionsProvider: optionsProvider);
+            CSharpGeneratorDriver cgd = CSharpGeneratorDriver.Create(
+                new[] { generator },
+                optionsProvider: optionsProvider
+            );
             GeneratorDriver gd = cgd.RunGenerators(comp!, cancellationToken);
 
             GeneratorDriverRunResult r = gd.GetRunResult();
@@ -169,7 +191,8 @@ namespace SourceGenerators.Tests
         public static async Task<IList<Diagnostic>> RunAnalyzer(
             DiagnosticAnalyzer analyzer,
             IEnumerable<Assembly> references,
-            IEnumerable<string> sources)
+            IEnumerable<string> sources
+        )
         {
             Project proj = CreateTestProject(references);
 
@@ -180,7 +203,9 @@ namespace SourceGenerators.Tests
             ImmutableArray<DiagnosticAnalyzer> analyzers = ImmutableArray.Create(analyzer);
 
             Compilation? comp = await proj!.GetCompilationAsync().ConfigureAwait(false);
-            return await comp!.WithAnalyzers(analyzers).GetAllDiagnosticsAsync().ConfigureAwait(false);
+            return await comp!.WithAnalyzers(analyzers)
+                .GetAllDiagnosticsAsync()
+                .ConfigureAwait(false);
         }
 
         /// <summary>
@@ -193,7 +218,8 @@ namespace SourceGenerators.Tests
             IEnumerable<string> sources,
             IEnumerable<string>? sourceNames = null,
             string? defaultNamespace = null,
-            string? extraFile = null)
+            string? extraFile = null
+        )
         {
             Project proj = CreateTestProject(references);
 
@@ -212,7 +238,9 @@ namespace SourceGenerators.Tests
             while (true)
             {
                 Compilation? comp = await proj!.GetCompilationAsync().ConfigureAwait(false);
-                ImmutableArray<Diagnostic> diags = await comp!.WithAnalyzers(analyzers).GetAllDiagnosticsAsync().ConfigureAwait(false);
+                ImmutableArray<Diagnostic> diags = await comp!.WithAnalyzers(analyzers)
+                    .GetAllDiagnosticsAsync()
+                    .ConfigureAwait(false);
                 if (diags.IsEmpty)
                 {
                     // no more diagnostics reported by the analyzers
@@ -224,7 +252,12 @@ namespace SourceGenerators.Tests
                 {
                     Document? doc = proj.GetDocument(d.Location.SourceTree);
 
-                    CodeFixContext context = new CodeFixContext(doc!, d, (action, _) => actions.Add(action), CancellationToken.None);
+                    CodeFixContext context = new CodeFixContext(
+                        doc!,
+                        d,
+                        (action, _) => actions.Add(action),
+                        CancellationToken.None
+                    );
                     await fixer.RegisterCodeFixesAsync(context).ConfigureAwait(false);
                 }
 
@@ -234,8 +267,11 @@ namespace SourceGenerators.Tests
                     break;
                 }
 
-                ImmutableArray<CodeActionOperation> operations = await actions[0].GetOperationsAsync(CancellationToken.None).ConfigureAwait(false);
-                Solution solution = operations.OfType<ApplyChangesOperation>().Single().ChangedSolution;
+                ImmutableArray<CodeActionOperation> operations = await actions[
+                    0
+                ].GetOperationsAsync(CancellationToken.None).ConfigureAwait(false);
+                Solution solution =
+                    operations.OfType<ApplyChangesOperation>().Single().ChangedSolution;
                 Project? changedProj = solution.GetProject(proj.Id);
                 if (changedProj != proj)
                 {
@@ -250,7 +286,9 @@ namespace SourceGenerators.Tests
                 List<string> l = sourceNames.ToList();
                 for (int i = 0; i < count; i++)
                 {
-                    SourceText s = await proj.FindDocument(l[i]).GetTextAsync().ConfigureAwait(false);
+                    SourceText s = await proj.FindDocument(l[i])
+                        .GetTextAsync()
+                        .ConfigureAwait(false);
                     results.Add(s.ToString().Replace("\r\n", "\n", StringComparison.Ordinal));
                 }
             }
@@ -258,14 +296,18 @@ namespace SourceGenerators.Tests
             {
                 for (int i = 0; i < count; i++)
                 {
-                    SourceText s = await proj.FindDocument($"src-{i}.cs").GetTextAsync().ConfigureAwait(false);
+                    SourceText s = await proj.FindDocument($"src-{i}.cs")
+                        .GetTextAsync()
+                        .ConfigureAwait(false);
                     results.Add(s.ToString().Replace("\r\n", "\n", StringComparison.Ordinal));
                 }
             }
 
             if (extraFile != null)
             {
-                SourceText s = await proj.FindDocument(extraFile).GetTextAsync().ConfigureAwait(false);
+                SourceText s = await proj.FindDocument(extraFile)
+                    .GetTextAsync()
+                    .ConfigureAwait(false);
                 results.Add(s.ToString().Replace("\r\n", "\n", StringComparison.Ordinal));
             }
 
@@ -287,7 +329,9 @@ namespace SourceGenerators.Tests
         private static async Task<Document> RecreateDocumentAsync(Document document)
         {
             SourceText newText = await document.GetTextAsync().ConfigureAwait(false);
-            return document.WithText(SourceText.From(newText.ToString(), newText.Encoding, newText.ChecksumAlgorithm));
+            return document.WithText(
+                SourceText.From(newText.ToString(), newText.Encoding, newText.ChecksumAlgorithm)
+            );
         }
     }
 }

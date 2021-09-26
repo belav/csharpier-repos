@@ -19,10 +19,10 @@ namespace Microsoft.AspNetCore.Identity.Test
     /// </summary>
     /// <typeparam name="TUser">The type of the user.</typeparam>
     /// <typeparam name="TRole">The type of the role.</typeparam>
-    public abstract class IdentitySpecificationTestBase<TUser, TRole> : IdentitySpecificationTestBase<TUser, TRole, string>
+    public abstract class IdentitySpecificationTestBase<TUser, TRole>
+        : IdentitySpecificationTestBase<TUser, TRole, string>
         where TUser : class
-        where TRole : class
-    { }
+        where TRole : class { }
 
     /// <summary>
     /// Base class for tests that exercise basic identity functionality that all stores should support.
@@ -30,7 +30,8 @@ namespace Microsoft.AspNetCore.Identity.Test
     /// <typeparam name="TUser">The type of the user.</typeparam>
     /// <typeparam name="TRole">The type of the role.</typeparam>
     /// <typeparam name="TKey">The primary key type.</typeparam>
-    public abstract class IdentitySpecificationTestBase<TUser, TRole, TKey> : UserManagerSpecificationTestBase<TUser, TKey>
+    public abstract class IdentitySpecificationTestBase<TUser, TRole, TKey>
+        : UserManagerSpecificationTestBase<TUser, TKey>
         where TUser : class
         where TRole : class
         where TKey : IEquatable<TKey>
@@ -44,19 +45,26 @@ namespace Microsoft.AspNetCore.Identity.Test
         {
             services.AddHttpContextAccessor();
             services.AddSingleton<IDataProtectionProvider, EphemeralDataProtectionProvider>();
-            services.AddIdentity<TUser, TRole>(options =>
-            {
-                options.Password.RequireDigit = false;
-                options.Password.RequireLowercase = false;
-                options.Password.RequireNonAlphanumeric = false;
-                options.Password.RequireUppercase = false;
-                options.User.AllowedUserNameCharacters = null;
-            }).AddDefaultTokenProviders();
+            services.AddIdentity<TUser, TRole>(
+                    options =>
+                    {
+                        options.Password.RequireDigit = false;
+                        options.Password.RequireLowercase = false;
+                        options.Password.RequireNonAlphanumeric = false;
+                        options.Password.RequireUppercase = false;
+                        options.User.AllowedUserNameCharacters = null;
+                    }
+                )
+                .AddDefaultTokenProviders();
             AddUserStore(services, context);
             AddRoleStore(services, context);
             services.AddLogging();
-            services.AddSingleton<ILogger<UserManager<TUser>>>(new TestLogger<UserManager<TUser>>());
-            services.AddSingleton<ILogger<RoleManager<TRole>>>(new TestLogger<RoleManager<TRole>>());
+            services.AddSingleton<ILogger<UserManager<TUser>>>(
+                new TestLogger<UserManager<TUser>>()
+            );
+            services.AddSingleton<ILogger<RoleManager<TRole>>>(
+                new TestLogger<RoleManager<TRole>>()
+            );
         }
 
         /// <summary>
@@ -70,7 +78,9 @@ namespace Microsoft.AspNetCore.Identity.Test
             var builder = base.SetupBuilder(services, context);
             builder.AddRoles<TRole>();
             AddRoleStore(services, context);
-            services.AddSingleton<ILogger<RoleManager<TRole>>>(new TestLogger<RoleManager<TRole>>());
+            services.AddSingleton<ILogger<RoleManager<TRole>>>(
+                new TestLogger<RoleManager<TRole>>()
+            );
             return builder;
         }
 
@@ -80,7 +90,10 @@ namespace Microsoft.AspNetCore.Identity.Test
         /// <param name="context">The context that will be passed into the store, typically a db context.</param>
         /// <param name="services">The service collection to use, optional.</param>
         /// <returns></returns>
-        protected virtual RoleManager<TRole> CreateRoleManager(object context = null, IServiceCollection services = null)
+        protected virtual RoleManager<TRole> CreateRoleManager(
+            object context = null,
+            IServiceCollection services = null
+        )
         {
             if (services == null)
             {
@@ -107,7 +120,10 @@ namespace Microsoft.AspNetCore.Identity.Test
         /// <param name="roleNamePrefix">Optional name prefix, name will be randomized.</param>
         /// <param name="useRoleNamePrefixAsRoleName">If true, the prefix should be used as the rolename without a random pad.</param>
         /// <returns></returns>
-        protected abstract TRole CreateTestRole(string roleNamePrefix = "", bool useRoleNamePrefixAsRoleName = false);
+        protected abstract TRole CreateTestRole(
+            string roleNamePrefix = "",
+            bool useRoleNamePrefixAsRoleName = false
+        );
 
         /// <summary>
         /// Query used to do name equality checks.
@@ -121,7 +137,9 @@ namespace Microsoft.AspNetCore.Identity.Test
         /// </summary>
         /// <param name="roleName">The role name to match.</param>
         /// <returns>The query to use.</returns>
-        protected abstract Expression<Func<TRole, bool>> RoleNameStartsWithPredicate(string roleName);
+        protected abstract Expression<Func<TRole, bool>> RoleNameStartsWithPredicate(
+            string roleName
+        );
 
         /// <summary>
         /// Test.
@@ -138,12 +156,22 @@ namespace Microsoft.AspNetCore.Identity.Test
             Assert.True(await manager.RoleExistsAsync(roleName));
         }
 
-        private class AlwaysBadValidator : IUserValidator<TUser>, IRoleValidator<TRole>,
-            IPasswordValidator<TUser>
+        private class AlwaysBadValidator
+            : IUserValidator<TUser>,
+              IRoleValidator<TRole>,
+              IPasswordValidator<TUser>
         {
-            public static readonly IdentityError ErrorMessage = new IdentityError { Description = "I'm Bad.", Code = "BadValidator" };
+            public static readonly IdentityError ErrorMessage = new IdentityError
+            {
+                Description = "I'm Bad.",
+                Code = "BadValidator"
+            };
 
-            public Task<IdentityResult> ValidateAsync(UserManager<TUser> manager, TUser user, string password)
+            public Task<IdentityResult> ValidateAsync(
+                UserManager<TUser> manager,
+                TUser user,
+                string password
+            )
             {
                 return Task.FromResult(IdentityResult.Failed(ErrorMessage));
             }
@@ -170,9 +198,14 @@ namespace Microsoft.AspNetCore.Identity.Test
             manager.RoleValidators.Clear();
             manager.RoleValidators.Add(new AlwaysBadValidator());
             var role = CreateTestRole("blocked");
-            IdentityResultAssert.IsFailure(await manager.CreateAsync(role),
-                AlwaysBadValidator.ErrorMessage);
-            IdentityResultAssert.VerifyLogMessage(manager.Logger, $"Role {await manager.GetRoleIdAsync(role) ?? NullValue} validation failed: {AlwaysBadValidator.ErrorMessage.Code}.");
+            IdentityResultAssert.IsFailure(
+                await manager.CreateAsync(role),
+                AlwaysBadValidator.ErrorMessage
+            );
+            IdentityResultAssert.VerifyLogMessage(
+                manager.Logger,
+                $"Role {await manager.GetRoleIdAsync(role) ?? NullValue} validation failed: {AlwaysBadValidator.ErrorMessage.Code}."
+            );
         }
 
         /// <summary>
@@ -189,7 +222,10 @@ namespace Microsoft.AspNetCore.Identity.Test
             var role = CreateTestRole("blocked");
             var result = await manager.CreateAsync(role);
             IdentityResultAssert.IsFailure(result, AlwaysBadValidator.ErrorMessage);
-            IdentityResultAssert.VerifyLogMessage(manager.Logger, $"Role {await manager.GetRoleIdAsync(role) ?? NullValue} validation failed: {AlwaysBadValidator.ErrorMessage.Code};{AlwaysBadValidator.ErrorMessage.Code}.");
+            IdentityResultAssert.VerifyLogMessage(
+                manager.Logger,
+                $"Role {await manager.GetRoleIdAsync(role) ?? NullValue} validation failed: {AlwaysBadValidator.ErrorMessage.Code};{AlwaysBadValidator.ErrorMessage.Code}."
+            );
             Assert.Equal(2, result.Errors.Count());
         }
 
@@ -207,7 +243,10 @@ namespace Microsoft.AspNetCore.Identity.Test
             manager.RoleValidators.Clear();
             manager.RoleValidators.Add(new AlwaysBadValidator());
             IdentityResultAssert.IsFailure(await manager.UpdateAsync(role), error);
-            IdentityResultAssert.VerifyLogMessage(manager.Logger, $"Role {await manager.GetRoleIdAsync(role) ?? NullValue} validation failed: {AlwaysBadValidator.ErrorMessage.Code}.");
+            IdentityResultAssert.VerifyLogMessage(
+                manager.Logger,
+                $"Role {await manager.GetRoleIdAsync(role) ?? NullValue} validation failed: {AlwaysBadValidator.ErrorMessage.Code}."
+            );
         }
 
         /// <summary>
@@ -330,11 +369,12 @@ namespace Microsoft.AspNetCore.Identity.Test
                 {
                     IdentityResultAssert.IsSuccess(await manager.CreateAsync(r));
                 }
-                Expression<Func<TRole, bool>> func = RoleNameStartsWithPredicate("CanQuerableRolesTest");
+                Expression<Func<TRole, bool>> func = RoleNameStartsWithPredicate(
+                    "CanQuerableRolesTest"
+                );
                 Assert.Equal(roles.Count, manager.Roles.Count(func));
                 func = RoleNameEqualsPredicate("bogus");
                 Assert.Null(manager.Roles.FirstOrDefault(func));
-
             }
         }
 
@@ -370,7 +410,10 @@ namespace Microsoft.AspNetCore.Identity.Test
             IdentityResultAssert.IsSuccess(await roleManager.CreateAsync(role));
             TUser[] users =
             {
-                CreateTestUser("1"),CreateTestUser("2"),CreateTestUser("3"),CreateTestUser("4"),
+                CreateTestUser("1"),
+                CreateTestUser("2"),
+                CreateTestUser("3"),
+                CreateTestUser("4"),
             };
             foreach (var u in users)
             {
@@ -401,8 +444,12 @@ namespace Microsoft.AspNetCore.Identity.Test
                 IdentityResultAssert.IsSuccess(await roleManager.CreateAsync(r));
                 foreach (var u in users)
                 {
-                    IdentityResultAssert.IsSuccess(await userManager.AddToRoleAsync(u, await roleManager.GetRoleNameAsync(r)));
-                    Assert.True(await userManager.IsInRoleAsync(u, await roleManager.GetRoleNameAsync(r)));
+                    IdentityResultAssert.IsSuccess(
+                        await userManager.AddToRoleAsync(u, await roleManager.GetRoleNameAsync(r))
+                    );
+                    Assert.True(
+                        await userManager.IsInRoleAsync(u, await roleManager.GetRoleNameAsync(r))
+                    );
                 }
             }
 
@@ -434,11 +481,22 @@ namespace Microsoft.AspNetCore.Identity.Test
             foreach (var r in roles)
             {
                 IdentityResultAssert.IsSuccess(await roleManager.CreateAsync(r));
-                IdentityResultAssert.IsSuccess(await userManager.AddToRoleAsync(user, await roleManager.GetRoleNameAsync(r)));
-                Assert.True(await userManager.IsInRoleAsync(user, await roleManager.GetRoleNameAsync(r)));
+                IdentityResultAssert.IsSuccess(
+                    await userManager.AddToRoleAsync(user, await roleManager.GetRoleNameAsync(r))
+                );
+                Assert.True(
+                    await userManager.IsInRoleAsync(user, await roleManager.GetRoleNameAsync(r))
+                );
             }
-            IdentityResultAssert.IsSuccess(await userManager.RemoveFromRoleAsync(user, await roleManager.GetRoleNameAsync(roles[2])));
-            Assert.False(await userManager.IsInRoleAsync(user, await roleManager.GetRoleNameAsync(roles[2])));
+            IdentityResultAssert.IsSuccess(
+                await userManager.RemoveFromRoleAsync(
+                    user,
+                    await roleManager.GetRoleNameAsync(roles[2])
+                )
+            );
+            Assert.False(
+                await userManager.IsInRoleAsync(user, await roleManager.GetRoleNameAsync(roles[2]))
+            );
         }
 
         /// <summary>
@@ -488,7 +546,10 @@ namespace Microsoft.AspNetCore.Identity.Test
             IdentityResultAssert.IsSuccess(await roleMgr.CreateAsync(role));
             var result = await userMgr.RemoveFromRoleAsync(user, roleName);
             IdentityResultAssert.IsFailure(result, _errorDescriber.UserNotInRole(roleName));
-            IdentityResultAssert.VerifyLogMessage(userMgr.Logger, $"User is not in role {roleName}.");
+            IdentityResultAssert.VerifyLogMessage(
+                userMgr.Logger,
+                $"User is not in role {roleName}."
+            );
         }
 
         /// <summary>
@@ -508,8 +569,14 @@ namespace Microsoft.AspNetCore.Identity.Test
             IdentityResultAssert.IsSuccess(await roleMgr.CreateAsync(role));
             IdentityResultAssert.IsSuccess(await userMgr.AddToRoleAsync(user, roleName));
             Assert.True(await userMgr.IsInRoleAsync(user, roleName));
-            IdentityResultAssert.IsFailure(await userMgr.AddToRoleAsync(user, roleName), _errorDescriber.UserAlreadyInRole(roleName));
-            IdentityResultAssert.VerifyLogMessage(userMgr.Logger, $"User is already in role {roleName}.");
+            IdentityResultAssert.IsFailure(
+                await userMgr.AddToRoleAsync(user, roleName),
+                _errorDescriber.UserAlreadyInRole(roleName)
+            );
+            IdentityResultAssert.VerifyLogMessage(
+                userMgr.Logger,
+                $"User is already in role {roleName}."
+            );
         }
 
         /// <summary>
@@ -528,7 +595,9 @@ namespace Microsoft.AspNetCore.Identity.Test
             IdentityResultAssert.IsSuccess(await userMgr.CreateAsync(user));
             IdentityResultAssert.IsSuccess(await roleMgr.CreateAsync(role));
             Assert.False(await userMgr.IsInRoleAsync(user, roleName));
-            IdentityResultAssert.IsSuccess(await userMgr.AddToRolesAsync(user, new[] { roleName, roleName }));
+            IdentityResultAssert.IsSuccess(
+                await userMgr.AddToRolesAsync(user, new[] { roleName, roleName })
+            );
             Assert.True(await userMgr.IsInRoleAsync(user, roleName));
         }
 
@@ -557,7 +626,10 @@ namespace Microsoft.AspNetCore.Identity.Test
             var roleName = "findRoleTest" + Guid.NewGuid().ToString();
             var role = CreateTestRole(roleName, useRoleNamePrefixAsRoleName: true);
             IdentityResultAssert.IsSuccess(await roleMgr.CreateAsync(role));
-            Assert.Equal(roleName, await roleMgr.GetRoleNameAsync(await roleMgr.FindByNameAsync(roleName)));
+            Assert.Equal(
+                roleName,
+                await roleMgr.GetRoleNameAsync(await roleMgr.FindByNameAsync(roleName))
+            );
         }
 
         /// <summary>
@@ -586,13 +658,20 @@ namespace Microsoft.AspNetCore.Identity.Test
 
                 if ((i % 2) == 0)
                 {
-                    IdentityResultAssert.IsSuccess(await manager.AddToRolesAsync(user, roleNameList));
+                    IdentityResultAssert.IsSuccess(
+                        await manager.AddToRolesAsync(user, roleNameList)
+                    );
                 }
             }
 
             foreach (var role in roles)
             {
-                Assert.Equal(3, (await manager.GetUsersInRoleAsync(await roleManager.GetRoleNameAsync(role))).Count);
+                Assert.Equal(
+                    3,
+                    (
+                        await manager.GetUsersInRoleAsync(await roleManager.GetRoleNameAsync(role))
+                    ).Count
+                );
             }
 
             Assert.Equal(0, (await manager.GetUsersInRoleAsync("123456")).Count);

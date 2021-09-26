@@ -9,7 +9,7 @@ namespace System.Net.Http.Functional.Tests
 {
     public class HttpMethodTest
     {
-        public static IEnumerable<object[]> StaticHttpMethods { get;  }
+        public static IEnumerable<object[]> StaticHttpMethods { get; }
 
         static HttpMethodTest()
         {
@@ -46,13 +46,21 @@ namespace System.Net.Http.Functional.Tests
             new HttpMethod("custom");
 
             // Note that '!' is the first ASCII char after CTLs and '~' is the last character before DEL char.
-            new HttpMethod("validtoken!#$%&'*+-.0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz^_`|~");
+            new HttpMethod(
+                "validtoken!#$%&'*+-.0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz^_`|~"
+            );
         }
 
         [Fact]
         public void Ctor_NullMethod_Exception()
         {
-            AssertExtensions.Throws<ArgumentException>("method", () => { new HttpMethod(null); } );
+            AssertExtensions.Throws<ArgumentException>(
+                "method",
+                () =>
+                {
+                    new HttpMethod(null);
+                }
+            );
         }
 
         [Theory]
@@ -71,7 +79,12 @@ namespace System.Net.Http.Functional.Tests
         [InlineData(']')]
         public void Ctor_SeparatorInMethod_Exception(char separator)
         {
-            Assert.Throws<FormatException>(() => { new HttpMethod("Get" + separator); } );
+            Assert.Throws<FormatException>(
+                () =>
+                {
+                    new HttpMethod("Get" + separator);
+                }
+            );
         }
 
         [Fact]
@@ -108,7 +121,9 @@ namespace System.Net.Http.Functional.Tests
         [InlineData("Get")]
         [InlineData("CUSTOM")]
         [InlineData("cUsToM")]
-        public void GetHashCode_CustomStringMethod_SameAsStringToUpperInvariantHashCode(string input)
+        public void GetHashCode_CustomStringMethod_SameAsStringToUpperInvariantHashCode(
+            string input
+        )
         {
             HttpMethod method = new HttpMethod(input);
             Assert.Equal(input.ToUpperInvariant().GetHashCode(), method.GetHashCode());
@@ -116,7 +131,9 @@ namespace System.Net.Http.Functional.Tests
 
         [Theory]
         [MemberData(nameof(StaticHttpMethods))]
-        public void GetHashCode_StaticMethods_SameAsStringToUpperInvariantHashCode(HttpMethod method)
+        public void GetHashCode_StaticMethods_SameAsStringToUpperInvariantHashCode(
+            HttpMethod method
+        )
         {
             Assert.Equal(method.ToString().ToUpperInvariant().GetHashCode(), method.GetHashCode());
         }

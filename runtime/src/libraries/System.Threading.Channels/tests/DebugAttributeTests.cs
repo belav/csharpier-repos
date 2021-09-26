@@ -17,7 +17,9 @@ namespace System.Threading.Channels.Tests
             yield return new object[] { c1.Reader };
             yield return new object[] { c1.Writer };
 
-            var c2 = Channel.CreateUnbounded<int>(new UnboundedChannelOptions() { SingleReader = true });
+            var c2 = Channel.CreateUnbounded<int>(
+                new UnboundedChannelOptions() { SingleReader = true }
+            );
             yield return new object[] { c2 };
             yield return new object[] { c2.Reader };
             yield return new object[] { c2.Writer };
@@ -40,8 +42,9 @@ namespace System.Threading.Channels.Tests
         public void TestDequeueClass()
         {
             var c = Channel.CreateBounded<int>(10);
-            DebuggerAttributes.ValidateDebuggerDisplayReferences(DebuggerAttributes.GetFieldValue(c, "_items"));
+            DebuggerAttributes.ValidateDebuggerDisplayReferences(
+                DebuggerAttributes.GetFieldValue(c, "_items")
+            );
         }
-
     }
 }

@@ -15,14 +15,16 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         public void CopyConstructor_CopiesAllProperties()
         {
             // Arrange
-            var parameter = new ParameterModel(typeof(TestController).GetMethod("Edit").GetParameters()[0],
-                                               new List<object>() { new FromBodyAttribute() });
+            var parameter = new ParameterModel(
+                typeof(TestController).GetMethod("Edit").GetParameters()[0],
+                new List<object>() { new FromBodyAttribute() }
+            );
 
-            parameter.Action = new ActionModel(typeof(TestController).GetMethod("Edit"), new List<object>());
-            parameter.BindingInfo = new BindingInfo()
-            {
-                BindingSource = BindingSource.Body
-            };
+            parameter.Action = new ActionModel(
+                typeof(TestController).GetMethod("Edit"),
+                new List<object>()
+            );
+            parameter.BindingInfo = new BindingInfo() { BindingSource = BindingSource.Body };
 
             parameter.ParameterName = "id";
             parameter.Properties.Add(new KeyValuePair<object, object>("test key", "test value"));
@@ -49,15 +51,19 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
                     // Ensure non-default value
                     Assert.NotEmpty((IEnumerable<object>)value1);
                 }
-                else if (typeof(IDictionary<object, object>).IsAssignableFrom(property.PropertyType))
+                else if (
+                    typeof(IDictionary<object, object>).IsAssignableFrom(property.PropertyType)
+                )
                 {
                     Assert.Equal(value1, value2);
 
                     // Ensure non-default value
                     Assert.NotEmpty((IDictionary<object, object>)value1);
                 }
-                else if (property.PropertyType.GetTypeInfo().IsValueType ||
-                    Nullable.GetUnderlyingType(property.PropertyType) != null)
+                else if (
+                    property.PropertyType.GetTypeInfo().IsValueType
+                    || Nullable.GetUnderlyingType(property.PropertyType) != null
+                )
                 {
                     Assert.Equal(value1, value2);
 
@@ -81,9 +87,7 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
 
         private class TestController
         {
-            public void Edit(int id)
-            {
-            }
+            public void Edit(int id) { }
         }
     }
 }

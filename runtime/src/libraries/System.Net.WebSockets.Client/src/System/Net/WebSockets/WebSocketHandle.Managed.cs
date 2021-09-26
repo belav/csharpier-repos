@@ -26,7 +26,8 @@ namespace System.Net.WebSockets
         public WebSocket? WebSocket { get; private set; }
         public WebSocketState State => WebSocket?.State ?? _state;
 
-        public static ClientWebSocketOptions CreateDefaultOptions() => new ClientWebSocketOptions() { Proxy = DefaultWebProxy.Instance };
+        public static ClientWebSocketOptions CreateDefaultOptions() =>
+            new ClientWebSocketOptions() { Proxy = DefaultWebProxy.Instance };
 
         public void Dispose()
         {
@@ -40,7 +41,11 @@ namespace System.Net.WebSockets
             WebSocket?.Abort();
         }
 
-        public async Task ConnectAsync(Uri uri, CancellationToken cancellationToken, ClientWebSocketOptions options)
+        public async Task ConnectAsync(
+            Uri uri,
+            CancellationToken cancellationToken,
+            ClientWebSocketOptions options
+        )
         {
             HttpResponseMessage? response = null;
             SocketsHttpHandler? handler = null;
@@ -57,18 +62,21 @@ namespace System.Net.WebSockets
                 }
 
                 // Create the security key and expected response, then build all of the request headers
-                KeyValuePair<string, string> secKeyAndSecWebSocketAccept = CreateSecKeyAndSecWebSocketAccept();
+                KeyValuePair<string, string> secKeyAndSecWebSocketAccept =
+                    CreateSecKeyAndSecWebSocketAccept();
                 AddWebSocketHeaders(request, secKeyAndSecWebSocketAccept.Key, options);
 
                 // Create the handler for this request and populate it with all of the options.
                 // Try to use a shared handler rather than creating a new one just for this request, if
                 // the options are compatible.
-                if (options.Credentials == null &&
-                    !options.UseDefaultCredentials &&
-                    options.Proxy == null &&
-                    options.Cookies == null &&
-                    options.RemoteCertificateValidationCallback == null &&
-                    options._clientCertificates?.Count == 0)
+                if (
+                    options.Credentials == null
+                    && !options.UseDefaultCredentials
+                    && options.Proxy == null
+                    && options.Cookies == null
+                    && options.RemoteCertificateValidationCallback == null
+                    && options._clientCertificates?.Count == 0
+                )
                 {
                     disposeHandler = false;
                     handler = s_defaultHandler;
@@ -80,7 +88,9 @@ namespace System.Net.WebSockets
                             UseProxy = false,
                             UseCookies = false,
                         };
-                        if (Interlocked.CompareExchange(ref s_defaultHandler, handler, null) != null)
+                        if (
+                            Interlocked.CompareExchange(ref s_defaultHandler, handler, null) != null
+                        )
                         {
                             handler.Dispose();
                             handler = s_defaultHandler;
@@ -93,7 +103,8 @@ namespace System.Net.WebSockets
                     handler.PooledConnectionLifetime = TimeSpan.Zero;
                     handler.CookieContainer = options.Cookies;
                     handler.UseCookies = options.Cookies != null;
-                    handler.SslOptions.RemoteCertificateValidationCallback = options.RemoteCertificateValidationCallback;
+                    handler.SslOptions.RemoteCertificateValidationCallback =
+                        options.RemoteCertificateValidationCallback;
 
                     if (options.UseDefaultCredentials)
                     {
@@ -126,9 +137,11 @@ namespace System.Net.WebSockets
                 CancellationTokenSource externalAndAbortCancellation;
                 if (cancellationToken.CanBeCanceled) // avoid allocating linked source if external token is not cancelable
                 {
-                    linkedCancellation =
-                        externalAndAbortCancellation =
-                        CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, _abortSource.Token);
+                    linkedCancellation = externalAndAbortCancellation =
+                        CancellationTokenSource.CreateLinkedTokenSource(
+                            cancellationToken,
+                            _abortSource.Token
+                        );
                 }
                 else
                 {
@@ -138,25 +151,41 @@ namespace System.Net.WebSockets
 
                 using (linkedCancellation)
                 {
-                    response = await new HttpMessageInvoker(handler).SendAsync(request, externalAndAbortCancellation.Token).ConfigureAwait(false);
+                    response = await new HttpMessageInvoker(handler).SendAsync(
+                            request,
+                            externalAndAbortCancellation.Token
+                        )
+                        .ConfigureAwait(false);
                     externalAndAbortCancellation.Token.ThrowIfCancellationRequested(); // poll in case sends/receives in request/response didn't observe cancellation
                 }
 
                 if (response.StatusCode != HttpStatusCode.SwitchingProtocols)
                 {
-                    throw new WebSocketException(WebSocketError.NotAWebSocket, SR.Format(SR.net_WebSockets_Connect101Expected, (int)response.StatusCode));
+                    throw new WebSocketException(
+                        WebSocketError.NotAWebSocket,
+                        SR.Format(SR.net_WebSockets_Connect101Expected, (int)response.StatusCode)
+                    );
                 }
 
                 // The Connection, Upgrade, and SecWebSocketAccept headers are required and with specific values.
                 ValidateHeader(response.Headers, HttpKnownHeaderNames.Connection, "Upgrade");
                 ValidateHeader(response.Headers, HttpKnownHeaderNames.Upgrade, "websocket");
-                ValidateHeader(response.Headers, HttpKnownHeaderNames.SecWebSocketAccept, secKeyAndSecWebSocketAccept.Value);
+                ValidateHeader(
+                    response.Headers,
+                    HttpKnownHeaderNames.SecWebSocketAccept,
+                    secKeyAndSecWebSocketAccept.Value
+                );
 
                 // The SecWebSocketProtocol header is optional.  We should only get it with a non-empty value if we requested subprotocols,
                 // and then it must only be one of the ones we requested.  If we got a subprotocol other than one we requested (or if we
                 // already got one in a previous header), fail. Otherwise, track which one we got.
                 string? subprotocol = null;
-                if (response.Headers.TryGetValues(HttpKnownHeaderNames.SecWebSocketProtocol, out IEnumerable<string>? subprotocolEnumerableValues))
+                if (
+                    response.Headers.TryGetValues(
+                        HttpKnownHeaderNames.SecWebSocketProtocol,
+                        out IEnumerable<string>? subprotocolEnumerableValues
+                    )
+                )
                 {
                     Debug.Assert(subprotocolEnumerableValues is string[]);
                     string[] subprotocolArray = (string[])subprotocolEnumerableValues;
@@ -166,7 +195,12 @@ namespace System.Net.WebSockets
                         {
                             foreach (string requestedProtocol in options._requestedSubProtocols)
                             {
-                                if (requestedProtocol.Equals(subprotocolArray[0], StringComparison.OrdinalIgnoreCase))
+                                if (
+                                    requestedProtocol.Equals(
+                                        subprotocolArray[0],
+                                        StringComparison.OrdinalIgnoreCase
+                                    )
+                                )
                                 {
                                     subprotocol = requestedProtocol;
                                     break;
@@ -178,7 +212,12 @@ namespace System.Net.WebSockets
                         {
                             throw new WebSocketException(
                                 WebSocketError.UnsupportedProtocol,
-                                SR.Format(SR.net_WebSockets_AcceptUnsupportedProtocol, string.Join(", ", options.RequestedSubProtocols), string.Join(", ", subprotocolArray)));
+                                SR.Format(
+                                    SR.net_WebSockets_AcceptUnsupportedProtocol,
+                                    string.Join(", ", options.RequestedSubProtocols),
+                                    string.Join(", ", subprotocolArray)
+                                )
+                            );
                         }
                     }
                 }
@@ -196,7 +235,8 @@ namespace System.Net.WebSockets
                     connectedStream,
                     isServer: false,
                     subprotocol,
-                    options.KeepAliveInterval);
+                    options.KeepAliveInterval
+                );
             }
             catch (Exception exc)
             {
@@ -208,13 +248,22 @@ namespace System.Net.WebSockets
                 Abort();
                 response?.Dispose();
 
-                if (exc is WebSocketException ||
-                    (exc is OperationCanceledException && cancellationToken.IsCancellationRequested))
+                if (
+                    exc is WebSocketException
+                    || (
+                        exc is OperationCanceledException
+                        && cancellationToken.IsCancellationRequested
+                    )
+                )
                 {
                     throw;
                 }
 
-                throw new WebSocketException(WebSocketError.Faulted, SR.net_webstatus_ConnectFailure, exc);
+                throw new WebSocketException(
+                    WebSocketError.Faulted,
+                    SR.net_webstatus_ConnectFailure,
+                    exc
+                );
             }
             finally
             {
@@ -230,15 +279,25 @@ namespace System.Net.WebSockets
         /// <param name="request">The request to which the headers should be added.</param>
         /// <param name="secKey">The generated security key to send in the Sec-WebSocket-Key header.</param>
         /// <param name="options">The options controlling the request.</param>
-        private static void AddWebSocketHeaders(HttpRequestMessage request, string secKey, ClientWebSocketOptions options)
+        private static void AddWebSocketHeaders(
+            HttpRequestMessage request,
+            string secKey,
+            ClientWebSocketOptions options
+        )
         {
-            request.Headers.TryAddWithoutValidation(HttpKnownHeaderNames.Connection, HttpKnownHeaderNames.Upgrade);
+            request.Headers.TryAddWithoutValidation(
+                HttpKnownHeaderNames.Connection,
+                HttpKnownHeaderNames.Upgrade
+            );
             request.Headers.TryAddWithoutValidation(HttpKnownHeaderNames.Upgrade, "websocket");
             request.Headers.TryAddWithoutValidation(HttpKnownHeaderNames.SecWebSocketVersion, "13");
             request.Headers.TryAddWithoutValidation(HttpKnownHeaderNames.SecWebSocketKey, secKey);
             if (options._requestedSubProtocols?.Count > 0)
             {
-                request.Headers.TryAddWithoutValidation(HttpKnownHeaderNames.SecWebSocketProtocol, string.Join(", ", options.RequestedSubProtocols));
+                request.Headers.TryAddWithoutValidation(
+                    HttpKnownHeaderNames.SecWebSocketProtocol,
+                    string.Join(", ", options.RequestedSubProtocols)
+                );
             }
         }
 
@@ -253,46 +312,103 @@ namespace System.Net.WebSockets
             // GUID appended by the server as part of the security key response.  Defined in the RFC.
             ReadOnlySpan<byte> wsServerGuidBytes = new byte[]
             {
-                (byte)'2', (byte)'5', (byte)'8', (byte)'E', (byte)'A', (byte)'F', (byte)'A', (byte)'5', (byte)'-',
-                (byte)'E', (byte)'9', (byte)'1', (byte)'4', (byte)'-',
-                (byte)'4', (byte)'7', (byte)'D', (byte)'A', (byte)'-',
-                (byte)'9', (byte)'5', (byte)'C', (byte)'A', (byte)'-',
-                (byte)'C', (byte)'5', (byte)'A', (byte)'B', (byte)'0', (byte)'D', (byte)'C', (byte)'8', (byte)'5', (byte)'B', (byte)'1', (byte)'1'
+                (byte)'2',
+                (byte)'5',
+                (byte)'8',
+                (byte)'E',
+                (byte)'A',
+                (byte)'F',
+                (byte)'A',
+                (byte)'5',
+                (byte)'-',
+                (byte)'E',
+                (byte)'9',
+                (byte)'1',
+                (byte)'4',
+                (byte)'-',
+                (byte)'4',
+                (byte)'7',
+                (byte)'D',
+                (byte)'A',
+                (byte)'-',
+                (byte)'9',
+                (byte)'5',
+                (byte)'C',
+                (byte)'A',
+                (byte)'-',
+                (byte)'C',
+                (byte)'5',
+                (byte)'A',
+                (byte)'B',
+                (byte)'0',
+                (byte)'D',
+                (byte)'C',
+                (byte)'8',
+                (byte)'5',
+                (byte)'B',
+                (byte)'1',
+                (byte)'1'
             };
 
-            Span<byte> bytes = stackalloc byte[24 /* Base64 guid length */ + wsServerGuidBytes.Length];
+            Span<byte> bytes =
+                stackalloc byte[
+                    24 /* Base64 guid length */
+                        + wsServerGuidBytes.Length
+                ];
 
             // Base64-encode a new Guid's bytes to get the security key
             bool success = Guid.NewGuid().TryWriteBytes(bytes);
             Debug.Assert(success);
-            string secKey = Convert.ToBase64String(bytes.Slice(0, 16 /*sizeof(Guid)*/));
+            string secKey = Convert.ToBase64String(
+                bytes.Slice(
+                    0,
+                    16 /*sizeof(Guid)*/
+                )
+            );
 
             // Get the corresponding ASCII bytes for seckey+wsServerGuidBytes
-            for (int i = 0; i < secKey.Length; i++) bytes[i] = (byte)secKey[i];
+            for (int i = 0; i < secKey.Length; i++)
+                bytes[i] = (byte)secKey[i];
             wsServerGuidBytes.CopyTo(bytes.Slice(secKey.Length));
 
             // Hash the seckey+wsServerGuidBytes bytes
             SHA1.TryHashData(bytes, bytes, out int bytesWritten);
-            Debug.Assert(bytesWritten == 20 /* SHA1 hash length */);
+            Debug.Assert(
+                bytesWritten == 20 /* SHA1 hash length */
+            );
 
             // Return the security key + the base64 encoded hashed bytes
             return new KeyValuePair<string, string>(
                 secKey,
-                Convert.ToBase64String(bytes.Slice(0, bytesWritten)));
+                Convert.ToBase64String(bytes.Slice(0, bytesWritten))
+            );
         }
 
         private static void ValidateHeader(HttpHeaders headers, string name, string expectedValue)
         {
             if (!headers.TryGetValues(name, out IEnumerable<string>? values))
             {
-                throw new WebSocketException(WebSocketError.Faulted, SR.Format(SR.net_WebSockets_MissingResponseHeader, name));
+                throw new WebSocketException(
+                    WebSocketError.Faulted,
+                    SR.Format(SR.net_WebSockets_MissingResponseHeader, name)
+                );
             }
 
             Debug.Assert(values is string[]);
             string[] array = (string[])values;
-            if (array.Length != 1 || !string.Equals(array[0], expectedValue, StringComparison.OrdinalIgnoreCase))
+            if (
+                array.Length != 1
+                || !string.Equals(array[0], expectedValue, StringComparison.OrdinalIgnoreCase)
+            )
             {
-                throw new WebSocketException(WebSocketError.HeaderError, SR.Format(SR.net_WebSockets_InvalidResponseHeader, name, string.Join(", ", array)));
+                throw new WebSocketException(
+                    WebSocketError.HeaderError,
+                    SR.Format(
+                        SR.net_WebSockets_InvalidResponseHeader,
+                        name,
+                        string.Join(", ", array)
+                    )
+                );
             }
         }
 
@@ -300,7 +416,11 @@ namespace System.Net.WebSockets
         private sealed class DefaultWebProxy : IWebProxy
         {
             public static DefaultWebProxy Instance { get; } = new DefaultWebProxy();
-            public ICredentials? Credentials { get => throw new NotSupportedException(); set => throw new NotSupportedException(); }
+            public ICredentials? Credentials
+            {
+                get => throw new NotSupportedException();
+                set => throw new NotSupportedException();
+            }
             public Uri? GetProxy(Uri destination) => throw new NotSupportedException();
             public bool IsBypassed(Uri host) => throw new NotSupportedException();
         }

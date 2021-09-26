@@ -19,12 +19,14 @@ namespace System.Web.Http.Hosting
             // Arrange
             HttpRequestMessage request = null;
             var cancellationToken = default(CancellationToken);
-            HttpMessageHandler innerHandler = new LambdaHttpMessageHandler((r, c) =>
-            {
-                request = r;
-                cancellationToken = c;
-                return Task.FromResult<HttpResponseMessage>(null);
-            });
+            HttpMessageHandler innerHandler = new LambdaHttpMessageHandler(
+                (r, c) =>
+                {
+                    request = r;
+                    cancellationToken = c;
+                    return Task.FromResult<HttpResponseMessage>(null);
+                }
+            );
             HttpMessageHandler handler = CreateProductUnderTest(innerHandler);
             var expectedCancellationToken = new CancellationToken(true);
 
@@ -53,7 +55,8 @@ namespace System.Web.Http.Hosting
                 await Assert.ThrowsArgumentAsync(
                     () => handler.SendAsync(request, CancellationToken.None),
                     "request",
-                    "The request must have a request context.");
+                    "The request must have a request context."
+                );
             }
         }
 
@@ -63,32 +66,32 @@ namespace System.Web.Http.Hosting
             // Arrange
             var requestContextMock = new Mock<HttpRequestContext>(MockBehavior.Strict);
             var sequence = new MockSequence();
-            var initialPrincipal = new GenericPrincipal(new GenericIdentity("generic user"), new[] { "generic role" });
+            var initialPrincipal = new GenericPrincipal(
+                new GenericIdentity("generic user"),
+                new[] { "generic role" }
+            );
             IPrincipal requestContextPrincipal = null;
-            requestContextMock
-                .InSequence(sequence)
+            requestContextMock.InSequence(sequence)
                 .SetupGet(c => c.Principal)
                 .Returns(initialPrincipal);
-            requestContextMock
-                .InSequence(sequence)
+            requestContextMock.InSequence(sequence)
                 .SetupSet(c => c.Principal = It.IsAny<IPrincipal>())
                 .Callback<IPrincipal>(value => requestContextPrincipal = value);
 
             // SendAsync also restores the old principal.
-            requestContextMock
-                .InSequence(sequence)
+            requestContextMock.InSequence(sequence)
                 .SetupGet(c => c.Principal)
                 .Returns(requestContextPrincipal);
-            requestContextMock
-                .InSequence(sequence)
-                .SetupSet(c => c.Principal = initialPrincipal);
+            requestContextMock.InSequence(sequence).SetupSet(c => c.Principal = initialPrincipal);
 
             IPrincipal principalBeforeInnerHandler = null;
-            HttpMessageHandler inner = new LambdaHttpMessageHandler((ignore1, ignore2) =>
-            {
-                principalBeforeInnerHandler = requestContextPrincipal;
-                return Task.FromResult<HttpResponseMessage>(null);
-            });
+            HttpMessageHandler inner = new LambdaHttpMessageHandler(
+                (ignore1, ignore2) =>
+                {
+                    principalBeforeInnerHandler = requestContextPrincipal;
+                    return Task.FromResult<HttpResponseMessage>(null);
+                }
+            );
             HttpMessageHandler handler = CreateProductUnderTest(inner);
 
             using (var request = new HttpRequestMessage())
@@ -114,7 +117,9 @@ namespace System.Web.Http.Hosting
             return new DummyHttpMessageHandler();
         }
 
-        private static SuppressHostPrincipalMessageHandler CreateProductUnderTest(HttpMessageHandler innerHandler)
+        private static SuppressHostPrincipalMessageHandler CreateProductUnderTest(
+            HttpMessageHandler innerHandler
+        )
         {
             SuppressHostPrincipalMessageHandler handler = new SuppressHostPrincipalMessageHandler();
             handler.InnerHandler = innerHandler;
@@ -130,8 +135,10 @@ namespace System.Web.Http.Hosting
 
         private class DummyHttpMessageHandler : HttpMessageHandler
         {
-            protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request,
-                CancellationToken cancellationToken)
+            protected override Task<HttpResponseMessage> SendAsync(
+                HttpRequestMessage request,
+                CancellationToken cancellationToken
+            )
             {
                 throw new NotImplementedException();
             }
@@ -139,10 +146,15 @@ namespace System.Web.Http.Hosting
 
         private class LambdaHttpMessageHandler : HttpMessageHandler
         {
-            private readonly Func<HttpRequestMessage, CancellationToken, Task<HttpResponseMessage>> _sendAsync;
+            private readonly Func<
+                HttpRequestMessage,
+                CancellationToken,
+                Task<HttpResponseMessage>
+            > _sendAsync;
 
-            public LambdaHttpMessageHandler(Func<HttpRequestMessage, CancellationToken,
-                Task<HttpResponseMessage>> sendAsync)
+            public LambdaHttpMessageHandler(
+                Func<HttpRequestMessage, CancellationToken, Task<HttpResponseMessage>> sendAsync
+            )
             {
                 if (sendAsync == null)
                 {
@@ -152,8 +164,10 @@ namespace System.Web.Http.Hosting
                 _sendAsync = sendAsync;
             }
 
-            protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request,
-                CancellationToken cancellationToken)
+            protected override Task<HttpResponseMessage> SendAsync(
+                HttpRequestMessage request,
+                CancellationToken cancellationToken
+            )
             {
                 return _sendAsync.Invoke(request, cancellationToken);
             }

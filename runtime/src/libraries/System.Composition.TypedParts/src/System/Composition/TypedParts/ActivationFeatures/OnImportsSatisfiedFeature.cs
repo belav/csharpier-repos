@@ -21,7 +21,8 @@ namespace System.Composition.TypedParts.ActivationFeatures
 
         public OnImportsSatisfiedFeature(AttributedModelProvider attributeContext)
         {
-            if (attributeContext == null) throw new ArgumentNullException(nameof(attributeContext));
+            if (attributeContext == null)
+                throw new ArgumentNullException(nameof(attributeContext));
             _attributeContext = attributeContext;
         }
 
@@ -29,26 +30,44 @@ namespace System.Composition.TypedParts.ActivationFeatures
             TypeInfo partType,
             CompositeActivator activator,
             IDictionary<string, object> partMetadata,
-            IEnumerable<CompositionDependency> dependencies)
+            IEnumerable<CompositionDependency> dependencies
+        )
         {
             var result = activator;
 
             var partTypeAsType = partType.AsType();
             var importsSatisfiedMethods = partTypeAsType.GetRuntimeMethods()
-                .Where(mi => _attributeContext.GetDeclaredAttribute<OnImportsSatisfiedAttribute>(mi.DeclaringType, mi) != null);
+                .Where(
+                    mi =>
+                        _attributeContext.GetDeclaredAttribute<OnImportsSatisfiedAttribute>(
+                            mi.DeclaringType,
+                            mi
+                        ) != null
+                );
 
             foreach (var m in importsSatisfiedMethods)
             {
-                if (!(m.IsPublic || m.IsAssembly) | m.IsStatic || m.ReturnType != typeof(void) ||
-                    m.IsGenericMethodDefinition || m.GetParameters().Length != 0)
+                if (
+                    !(m.IsPublic || m.IsAssembly) | m.IsStatic
+                    || m.ReturnType != typeof(void)
+                    || m.IsGenericMethodDefinition
+                    || m.GetParameters().Length != 0
+                )
                 {
-                    string message = SR.Format(SR.OnImportsSatisfiedFeature_AttributeError, partType, m.Name);
+                    string message = SR.Format(
+                        SR.OnImportsSatisfiedFeature_AttributeError,
+                        partType,
+                        m.Name
+                    );
                     throw new CompositionFailedException(message);
                 }
 
                 var ois = Expression.Parameter(typeof(object), "ois");
                 var call = Expression.Lambda<Action<object>>(
-                    Expression.Call(Expression.Convert(ois, partType.AsType()), m), ois).Compile();
+                        Expression.Call(Expression.Convert(ois, partType.AsType()), m),
+                        ois
+                    )
+                    .Compile();
 
                 var prev = result;
                 result = (c, o) =>

@@ -17,7 +17,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
         public DictionaryJumpTable(
             int defaultDestination,
             int exitDestination,
-            (string text, int destination)[] entries)
+            (string text, int destination)[] entries
+        )
         {
             _defaultDestination = defaultDestination;
             _exitDestination = exitDestination;
@@ -60,7 +61,6 @@ namespace Microsoft.AspNetCore.Routing.Matching
             builder.Append(_defaultDestination);
 
             builder.Append(" }");
-
 
             return builder.ToString();
         }

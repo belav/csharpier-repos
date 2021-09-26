@@ -28,41 +28,65 @@ namespace Microsoft.AspNetCore.Builder
         /// <param name="builder">The <see cref="IApplicationBuilder"/>.</param>
         /// <param name="pathPrefix">The <see cref="PathString"/> that indicates the prefix for the Blazor WebAssembly application.</param>
         /// <returns>The <see cref="IApplicationBuilder"/></returns>
-        public static IApplicationBuilder UseBlazorFrameworkFiles(this IApplicationBuilder builder, PathString pathPrefix)
+        public static IApplicationBuilder UseBlazorFrameworkFiles(
+            this IApplicationBuilder builder,
+            PathString pathPrefix
+        )
         {
             if (builder is null)
             {
                 throw new ArgumentNullException(nameof(builder));
             }
 
-            var webHostEnvironment = builder.ApplicationServices.GetRequiredService<IWebHostEnvironment>();
+            var webHostEnvironment =
+                builder.ApplicationServices.GetRequiredService<IWebHostEnvironment>();
 
             var options = CreateStaticFilesOptions(webHostEnvironment.WebRootFileProvider);
 
-            builder.MapWhen(ctx => ctx.Request.Path.StartsWithSegments(pathPrefix, out var rest) && rest.StartsWithSegments("/_framework") &&
-            !rest.StartsWithSegments("/_framework/blazor.server.js"),
-            subBuilder =>
-            {
-                subBuilder.Use(async (context, next) =>
+            builder.MapWhen(
+                ctx =>
+                    ctx.Request.Path.StartsWithSegments(pathPrefix, out var rest)
+                    && rest.StartsWithSegments("/_framework")
+                    && !rest.StartsWithSegments("/_framework/blazor.server.js"),
+                subBuilder =>
                 {
-                    context.Response.Headers.Append("Blazor-Environment", webHostEnvironment.EnvironmentName);
+                    subBuilder.Use(
+                        async (context, next) =>
+                        {
+                            context.Response.Headers.Append(
+                                "Blazor-Environment",
+                                webHostEnvironment.EnvironmentName
+                            );
 
-                    // DOTNET_MODIFIABLE_ASSEMBLIES is used by the runtime to initialize hot-reload specific environment variables and is configured
-                    // by the launching process (dotnet-watch / Visual Studio).
-                    // In Development, we'll transmit the environment variable to WebAssembly as a HTTP header. The bootstrapping code will read the header
-                    // and configure it as env variable for the wasm app.
-                    if (webHostEnvironment.IsDevelopment() &&  Environment.GetEnvironmentVariable("DOTNET_MODIFIABLE_ASSEMBLIES") is not null)
-                    {
-                        context.Response.Headers.Append("DOTNET-MODIFIABLE-ASSEMBLIES", Environment.GetEnvironmentVariable("DOTNET_MODIFIABLE_ASSEMBLIES"));
-                    }
+                            // DOTNET_MODIFIABLE_ASSEMBLIES is used by the runtime to initialize hot-reload specific environment variables and is configured
+                            // by the launching process (dotnet-watch / Visual Studio).
+                            // In Development, we'll transmit the environment variable to WebAssembly as a HTTP header. The bootstrapping code will read the header
+                            // and configure it as env variable for the wasm app.
+                            if (
+                                webHostEnvironment.IsDevelopment()
+                                && Environment.GetEnvironmentVariable(
+                                    "DOTNET_MODIFIABLE_ASSEMBLIES"
+                                )
+                                    is not null
+                            )
+                            {
+                                context.Response.Headers.Append(
+                                    "DOTNET-MODIFIABLE-ASSEMBLIES",
+                                    Environment.GetEnvironmentVariable(
+                                        "DOTNET_MODIFIABLE_ASSEMBLIES"
+                                    )
+                                );
+                            }
 
-                    await next();
-                });
+                            await next();
+                        }
+                    );
 
-                subBuilder.UseMiddleware<ContentEncodingNegotiator>();
+                    subBuilder.UseMiddleware<ContentEncodingNegotiator>();
 
-                subBuilder.UseStaticFiles(options);
-            });
+                    subBuilder.UseStaticFiles(options);
+                }
+            );
 
             return builder;
         }
@@ -72,8 +96,9 @@ namespace Microsoft.AspNetCore.Builder
         /// </summary>
         /// <param name="applicationBuilder">The <see cref="IApplicationBuilder"/>.</param>
         /// <returns>The <see cref="IApplicationBuilder"/></returns>
-        public static IApplicationBuilder UseBlazorFrameworkFiles(this IApplicationBuilder applicationBuilder) =>
-            UseBlazorFrameworkFiles(applicationBuilder, default);
+        public static IApplicationBuilder UseBlazorFrameworkFiles(
+            this IApplicationBuilder applicationBuilder
+        ) => UseBlazorFrameworkFiles(applicationBuilder, default);
 
         private static StaticFileOptions CreateStaticFilesOptions(IFileProvider webRootFileProvider)
         {
@@ -110,7 +135,13 @@ namespace Microsoft.AspNetCore.Builder
                     // When we revisit this, we should consider calculating the original content type and storing it
                     // in the request along with the original target path so that we don't have to calculate it here.
                     var originalPath = Path.GetFileNameWithoutExtension(requestPath.Value);
-                    if (originalPath != null && contentTypeProvider.TryGetContentType(originalPath, out var originalContentType))
+                    if (
+                        originalPath != null
+                        && contentTypeProvider.TryGetContentType(
+                            originalPath,
+                            out var originalContentType
+                        )
+                    )
                     {
                         fileContext.Context.Response.ContentType = originalContentType;
                     }
@@ -120,7 +151,11 @@ namespace Microsoft.AspNetCore.Builder
             return options;
         }
 
-        private static void AddMapping(FileExtensionContentTypeProvider provider, string name, string mimeType)
+        private static void AddMapping(
+            FileExtensionContentTypeProvider provider,
+            string name,
+            string mimeType
+        )
         {
             if (!provider.Mappings.ContainsKey(name))
             {

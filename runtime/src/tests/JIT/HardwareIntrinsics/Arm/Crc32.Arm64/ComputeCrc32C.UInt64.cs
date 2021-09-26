@@ -131,11 +131,18 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            var result = typeof(Crc32.Arm64).GetMethod(nameof(Crc32.Arm64.ComputeCrc32C), new Type[] { typeof(UInt32), typeof(UInt64) })
-                                     .Invoke(null, new object[] {
-                                        Unsafe.ReadUnaligned<UInt32>(ref Unsafe.As<UInt32, byte>(ref _data1)),
-                                        Unsafe.ReadUnaligned<UInt64>(ref Unsafe.As<UInt64, byte>(ref _data2))
-                                     });
+            var result = typeof(Crc32.Arm64).GetMethod(
+                    nameof(Crc32.Arm64.ComputeCrc32C),
+                    new Type[] { typeof(UInt32), typeof(UInt64) }
+                )
+                .Invoke(
+                    null,
+                    new object[]
+                    {
+                        Unsafe.ReadUnaligned<UInt32>(ref Unsafe.As<UInt32, byte>(ref _data1)),
+                        Unsafe.ReadUnaligned<UInt64>(ref Unsafe.As<UInt64, byte>(ref _data2))
+                    }
+                );
 
             ValidateResult(_data1, _data2, (UInt32)result);
         }
@@ -144,10 +151,7 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClsVarScenario));
 
-            var result = Crc32.Arm64.ComputeCrc32C(
-                _clsVar1,
-                _clsVar2
-            );
+            var result = Crc32.Arm64.ComputeCrc32C(_clsVar1, _clsVar2);
 
             ValidateResult(_clsVar1, _clsVar2, result);
         }
@@ -220,15 +224,23 @@ namespace JIT.HardwareIntrinsics.Arm
             }
         }
 
-        private void ValidateResult(UInt32 left, UInt64 right, UInt32 result, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            UInt32 left,
+            UInt64 right,
+            UInt32 result,
+            [CallerMemberName] string method = ""
+        )
         {
             var isUnexpectedResult = false;
 
-            uint expectedResult = 0x6295C71A; isUnexpectedResult = (expectedResult != result);
+            uint expectedResult = 0x6295C71A;
+            isUnexpectedResult = (expectedResult != result);
 
             if (isUnexpectedResult)
             {
-                TestLibrary.TestFramework.LogInformation($"{nameof(Crc32.Arm64)}.{nameof(Crc32.Arm64.ComputeCrc32C)}<UInt32>(UInt32, UInt64): ComputeCrc32C failed:");
+                TestLibrary.TestFramework.LogInformation(
+                    $"{nameof(Crc32.Arm64)}.{nameof(Crc32.Arm64.ComputeCrc32C)}<UInt32>(UInt32, UInt64): ComputeCrc32C failed:"
+                );
                 TestLibrary.TestFramework.LogInformation($"    left: {left}");
                 TestLibrary.TestFramework.LogInformation($"   right: {right}");
                 TestLibrary.TestFramework.LogInformation($"  result: {result}");

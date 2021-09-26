@@ -103,7 +103,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         ///     The same builder instance if the configuration was applied,
         ///     <see langword="null" /> otherwise.
         /// </returns>
-        IConventionDbFunctionBuilder? HasStoreType(string? storeType, bool fromDataAnnotation = false);
+        IConventionDbFunctionBuilder? HasStoreType(
+            string? storeType,
+            bool fromDataAnnotation = false
+        );
 
         /// <summary>
         ///     Returns a value indicating whether the given store type can be set for the database function.
@@ -122,7 +125,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         ///     The same builder instance if the configuration was applied,
         ///     <see langword="null" /> otherwise.
         /// </returns>
-        IConventionDbFunctionBuilder? HasTypeMapping(RelationalTypeMapping? typeMapping, bool fromDataAnnotation = false);
+        IConventionDbFunctionBuilder? HasTypeMapping(
+            RelationalTypeMapping? typeMapping,
+            bool fromDataAnnotation = false
+        );
 
         /// <summary>
         ///     Returns a value indicating whether the given return type mapping can be set for the database function.
@@ -151,7 +157,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// </returns>
         IConventionDbFunctionBuilder? HasTranslation(
             Func<IReadOnlyList<SqlExpression>, SqlExpression>? translation,
-            bool fromDataAnnotation = false);
+            bool fromDataAnnotation = false
+        );
 
         /// <summary>
         ///     Returns a value indicating whether the given translation can be set for the database function.
@@ -161,7 +168,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <returns> <see langword="true" /> if the given translation can be set for the database function. </returns>
         bool CanSetTranslation(
             Func<IReadOnlyList<SqlExpression>, SqlExpression>? translation,
-            bool fromDataAnnotation = false);
+            bool fromDataAnnotation = false
+        );
 
         /// <summary>
         ///     Returns an object that can be used to configure a parameter with the given name.
@@ -169,6 +177,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <param name="name"> The parameter name. </param>
         /// <param name="fromDataAnnotation"> Indicates whether the configuration was specified using a data annotation. </param>
         /// <returns> The builder to use for further parameter configuration. </returns>
-        IConventionDbFunctionParameterBuilder HasParameter(string name, bool fromDataAnnotation = false);
+        IConventionDbFunctionParameterBuilder HasParameter(
+            string name,
+            bool fromDataAnnotation = false
+        );
     }
 }

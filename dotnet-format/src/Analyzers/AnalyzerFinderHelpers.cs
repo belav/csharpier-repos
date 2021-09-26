@@ -14,21 +14,34 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
     {
         public static AnalyzersAndFixers LoadAnalyzersAndFixers(IEnumerable<Assembly> assemblies)
         {
-            var types = assemblies
-                .SelectMany(assembly => assembly.GetTypes()
-                .Where(type => !type.GetTypeInfo().IsInterface &&
-                            !type.GetTypeInfo().IsAbstract &&
-                            !type.GetTypeInfo().ContainsGenericParameters));
+            var types = assemblies.SelectMany(
+                assembly =>
+                    assembly.GetTypes()
+                        .Where(
+                            type =>
+                                !type.GetTypeInfo().IsInterface
+                                && !type.GetTypeInfo().IsAbstract
+                                && !type.GetTypeInfo().ContainsGenericParameters
+                        )
+            );
 
-            var codeFixProviders = types
-                .Where(t => typeof(CodeFixProvider).IsAssignableFrom(t))
-                .Select(type => type.TryCreateInstance<CodeFixProvider>(out var instance) ? instance : null)
+            var codeFixProviders = types.Where(t => typeof(CodeFixProvider).IsAssignableFrom(t))
+                .Select(
+                    type =>
+                        type.TryCreateInstance<CodeFixProvider>(out var instance) ? instance : null
+                )
                 .OfType<CodeFixProvider>()
                 .ToImmutableArray();
 
-            var diagnosticAnalyzers = types
-                .Where(t => typeof(DiagnosticAnalyzer).IsAssignableFrom(t))
-                .Select(type => type.TryCreateInstance<DiagnosticAnalyzer>(out var instance) ? instance : null)
+            var diagnosticAnalyzers = types.Where(
+                    t => typeof(DiagnosticAnalyzer).IsAssignableFrom(t)
+                )
+                .Select(
+                    type =>
+                        type.TryCreateInstance<DiagnosticAnalyzer>(out var instance)
+                            ? instance
+                            : null
+                )
                 .OfType<DiagnosticAnalyzer>()
                 .ToImmutableArray();
 

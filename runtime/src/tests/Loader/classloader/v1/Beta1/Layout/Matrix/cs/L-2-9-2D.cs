@@ -3,10 +3,10 @@
 
 using System;
 
-interface A{
-
-  //////////////////////////////
-  // Instance Methods
-int MethPubInst();
+interface A
+{
+    //////////////////////////////
+    // Instance Methods
+    int MethPubInst();
 }
 

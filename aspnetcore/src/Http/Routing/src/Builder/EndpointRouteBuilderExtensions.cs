@@ -33,7 +33,8 @@ namespace Microsoft.AspNetCore.Builder
         public static IEndpointConventionBuilder MapGet(
             this IEndpointRouteBuilder endpoints,
             string pattern,
-            RequestDelegate requestDelegate)
+            RequestDelegate requestDelegate
+        )
         {
             return MapMethods(endpoints, pattern, GetVerb, requestDelegate);
         }
@@ -49,7 +50,8 @@ namespace Microsoft.AspNetCore.Builder
         public static IEndpointConventionBuilder MapPost(
             this IEndpointRouteBuilder endpoints,
             string pattern,
-            RequestDelegate requestDelegate)
+            RequestDelegate requestDelegate
+        )
         {
             return MapMethods(endpoints, pattern, PostVerb, requestDelegate);
         }
@@ -65,7 +67,8 @@ namespace Microsoft.AspNetCore.Builder
         public static IEndpointConventionBuilder MapPut(
             this IEndpointRouteBuilder endpoints,
             string pattern,
-            RequestDelegate requestDelegate)
+            RequestDelegate requestDelegate
+        )
         {
             return MapMethods(endpoints, pattern, PutVerb, requestDelegate);
         }
@@ -81,7 +84,8 @@ namespace Microsoft.AspNetCore.Builder
         public static IEndpointConventionBuilder MapDelete(
             this IEndpointRouteBuilder endpoints,
             string pattern,
-            RequestDelegate requestDelegate)
+            RequestDelegate requestDelegate
+        )
         {
             return MapMethods(endpoints, pattern, DeleteVerb, requestDelegate);
         }
@@ -96,10 +100,11 @@ namespace Microsoft.AspNetCore.Builder
         /// <param name="httpMethods">HTTP methods that the endpoint will match.</param>
         /// <returns>A <see cref="IEndpointConventionBuilder"/> that can be used to further customize the endpoint.</returns>
         public static IEndpointConventionBuilder MapMethods(
-           this IEndpointRouteBuilder endpoints,
-           string pattern,
-           IEnumerable<string> httpMethods,
-           RequestDelegate requestDelegate)
+            this IEndpointRouteBuilder endpoints,
+            string pattern,
+            IEnumerable<string> httpMethods,
+            RequestDelegate requestDelegate
+        )
         {
             if (httpMethods == null)
             {
@@ -123,7 +128,8 @@ namespace Microsoft.AspNetCore.Builder
         public static IEndpointConventionBuilder Map(
             this IEndpointRouteBuilder endpoints,
             string pattern,
-            RequestDelegate requestDelegate)
+            RequestDelegate requestDelegate
+        )
         {
             return Map(endpoints, RoutePatternFactory.Parse(pattern), requestDelegate);
         }
@@ -139,7 +145,8 @@ namespace Microsoft.AspNetCore.Builder
         public static IEndpointConventionBuilder Map(
             this IEndpointRouteBuilder endpoints,
             RoutePattern pattern,
-            RequestDelegate requestDelegate)
+            RequestDelegate requestDelegate
+        )
         {
             if (endpoints == null)
             {
@@ -158,10 +165,7 @@ namespace Microsoft.AspNetCore.Builder
 
             const int defaultOrder = 0;
 
-            var builder = new RouteEndpointBuilder(
-                requestDelegate,
-                pattern,
-                defaultOrder)
+            var builder = new RouteEndpointBuilder(requestDelegate, pattern, defaultOrder)
             {
                 DisplayName = pattern.RawText ?? pattern.DebuggerToString(),
             };
@@ -178,7 +182,8 @@ namespace Microsoft.AspNetCore.Builder
                 }
             }
 
-            var dataSource = endpoints.DataSources.OfType<ModelEndpointDataSource>().FirstOrDefault();
+            var dataSource = endpoints.DataSources.OfType<ModelEndpointDataSource>()
+                .FirstOrDefault();
             if (dataSource == null)
             {
                 dataSource = new ModelEndpointDataSource();

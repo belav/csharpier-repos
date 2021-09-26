@@ -9,12 +9,18 @@ internal static partial class Interop
 {
     internal static partial class Kernel32
     {
-        [DllImport(Libraries.Kernel32, EntryPoint = "MapViewOfFile", CharSet = CharSet.Unicode, SetLastError = true)]
+        [DllImport(
+            Libraries.Kernel32,
+            EntryPoint = "MapViewOfFile",
+            CharSet = CharSet.Unicode,
+            SetLastError = true
+        )]
         internal static extern SafeMemoryMappedViewHandle MapViewOfFile(
             SafeMemoryMappedFileHandle hFileMappingObject,
             int dwDesiredAccess,
             int dwFileOffsetHigh,
             int dwFileOffsetLow,
-            UIntPtr dwNumberOfBytesToMap);
+            UIntPtr dwNumberOfBytesToMap
+        );
     }
 }

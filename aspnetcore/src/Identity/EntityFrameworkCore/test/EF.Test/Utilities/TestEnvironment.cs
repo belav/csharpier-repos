@@ -12,8 +12,9 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test.Utilities
 
         static TestEnvironment()
         {
-            var configBuilder = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
+            var configBuilder = new ConfigurationBuilder().SetBasePath(
+                    Directory.GetCurrentDirectory()
+                )
                 .AddJsonFile("config.json", optional: true)
                 .AddJsonFile("config.test.json", optional: true)
                 .AddEnvironmentVariables();

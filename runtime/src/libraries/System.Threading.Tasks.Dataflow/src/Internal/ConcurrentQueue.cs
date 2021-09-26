@@ -53,7 +53,7 @@ namespace System.Threading.Tasks.Dataflow.Internal.Collections
         /// <param name="collection">A collection from which to copy elements.</param>
         private void InitializeFromCollection(IEnumerable<T> collection)
         {
-            Segment localTail = new Segment(0, this);//use this local variable to avoid the extra volatile read/write. this is safe because it is only called from ctor
+            Segment localTail = new Segment(0, this); //use this local variable to avoid the extra volatile read/write. this is safe because it is only called from ctor
             _head = localTail;
 
             int index = 0;
@@ -147,7 +147,6 @@ namespace System.Threading.Tasks.Dataflow.Internal.Collections
             get { return false; }
         }
 
-
         /// <summary>
         /// Gets an object that can be used to synchronize access to the <see
         /// cref="System.Collections.ICollection"/>. This property is not supported.
@@ -155,10 +154,7 @@ namespace System.Threading.Tasks.Dataflow.Internal.Collections
         /// <exception cref="System.NotSupportedException">The SyncRoot property is not supported.</exception>
         object ICollection.SyncRoot
         {
-            get
-            {
-                throw new NotSupportedException(SR.ConcurrentCollection_SyncRoot_NotSupported);
-            }
+            get { throw new NotSupportedException(SR.ConcurrentCollection_SyncRoot_NotSupported); }
         }
 
         /// <summary>
@@ -276,8 +272,10 @@ namespace System.Threading.Tasks.Dataflow.Internal.Collections
             try
             {
                 //store head and tail positions in buffer,
-                Segment head, tail;
-                int headLow, tailHigh;
+                Segment head,
+                    tail;
+                int headLow,
+                    tailHigh;
                 GetHeadTailPositions(out head, out tail, out headLow, out tailHigh);
 
                 if (head == tail)
@@ -297,6 +295,7 @@ namespace System.Threading.Tasks.Dataflow.Internal.Collections
                     tail.AddToList(list, 0, tailHigh);
                 }
             }
+
             finally
             {
                 // This Decrement must happen after copying is over.
@@ -312,8 +311,12 @@ namespace System.Threading.Tasks.Dataflow.Internal.Collections
         /// <param name="tail">return the tail segment</param>
         /// <param name="headLow">return the head offset, value range [0, SEGMENT_SIZE]</param>
         /// <param name="tailHigh">return the tail offset, value range [-1, SEGMENT_SIZE-1]</param>
-        private void GetHeadTailPositions(out Segment head, out Segment tail,
-            out int headLow, out int tailHigh)
+        private void GetHeadTailPositions(
+            out Segment head,
+            out Segment tail,
+            out int headLow,
+            out int tailHigh
+        )
         {
             head = _head;
             tail = _tail;
@@ -325,11 +328,14 @@ namespace System.Threading.Tasks.Dataflow.Internal.Collections
             //This ensures that any update order by other methods can be tolerated.
             while (
                 //if head and tail changed, retry
-                head != _head || tail != _tail
+                head != _head
+                || tail != _tail
                 //if low and high pointers, retry
-                || headLow != head.Low || tailHigh != tail.High
+                || headLow != head.Low
+                || tailHigh != tail.High
                 //if head jumps ahead of tail because of concurrent grow and dequeue, retry
-                || head._index > tail._index)
+                || head._index > tail._index
+            )
             {
                 spin.SpinOnce();
                 head = _head;
@@ -338,7 +344,6 @@ namespace System.Threading.Tasks.Dataflow.Internal.Collections
                 tailHigh = tail.High;
             }
         }
-
 
         /// <summary>
         /// Gets the number of elements contained in the <see cref="ConcurrentQueue{T}"/>.
@@ -354,8 +359,10 @@ namespace System.Threading.Tasks.Dataflow.Internal.Collections
             get
             {
                 //store head and tail positions in buffer,
-                Segment head, tail;
-                int headLow, tailHigh;
+                Segment head,
+                    tail;
+                int headLow,
+                    tailHigh;
                 GetHeadTailPositions(out head, out tail, out headLow, out tailHigh);
 
                 if (head == tail)
@@ -376,7 +383,6 @@ namespace System.Threading.Tasks.Dataflow.Internal.Collections
                 return count;
             }
         }
-
 
         /// <summary>
         /// Copies the <see cref="ConcurrentQueue{T}"/> elements to an existing one-dimensional <see
@@ -412,7 +418,6 @@ namespace System.Threading.Tasks.Dataflow.Internal.Collections
             ToList().CopyTo(array, index);
         }
 
-
         /// <summary>
         /// Returns an enumerator that iterates through the <see
         /// cref="ConcurrentQueue{T}"/>.
@@ -436,8 +441,10 @@ namespace System.Threading.Tasks.Dataflow.Internal.Collections
             // A design flaw here: if a Thread.Abort() happens, we cannot decrement _numSnapshotTakers. But we cannot
             // wrap the following with a try/finally block, otherwise the decrement will happen before the yield return
             // statements in the GetEnumerator (head, tail, headLow, tailHigh) method.
-            Segment head, tail;
-            int headLow, tailHigh;
+            Segment head,
+                tail;
+            int headLow,
+                tailHigh;
             GetHeadTailPositions(out head, out tail, out headLow, out tailHigh);
 
             //If we put yield-return here, the iterator will be lazily evaluated. As a result a snapshot of
@@ -518,6 +525,7 @@ namespace System.Threading.Tasks.Dataflow.Internal.Collections
                     }
                 }
             }
+
             finally
             {
                 // This Decrement must happen after the enumeration is over.
@@ -543,7 +551,6 @@ namespace System.Threading.Tasks.Dataflow.Internal.Collections
                 spin.SpinOnce();
             }
         }
-
 
         /// <summary>
         /// Attempts to remove and return the object at the beginning of the <see
@@ -595,7 +602,6 @@ namespace System.Threading.Tasks.Dataflow.Internal.Collections
             Interlocked.Decrement(ref _numSnapshotTakers);
             return false;
         }
-
 
         /// <summary>
         /// private class for ConcurrentQueue.
@@ -663,7 +669,6 @@ namespace System.Threading.Tasks.Dataflow.Internal.Collections
                 get { return _next; }
             }
 
-
             /// <summary>
             /// return true if the current segment is empty (doesn't have any element available to dequeue,
             /// false otherwise
@@ -712,12 +717,11 @@ namespace System.Threading.Tasks.Dataflow.Internal.Collections
             internal void Grow()
             {
                 //no CAS is needed, since there is no contention (other threads are blocked, busy waiting)
-                Segment newSegment = new Segment(_index + 1, _source);  //_index is Int64, we don't need to worry about overflow
+                Segment newSegment = new Segment(_index + 1, _source); //_index is Int64, we don't need to worry about overflow
                 _next = newSegment;
                 Debug.Assert(_source._tail == this);
                 _source._tail = _next;
             }
-
 
             /// <summary>
             /// Try to append an element at the end of this segment.
@@ -747,8 +751,8 @@ namespace System.Threading.Tasks.Dataflow.Internal.Collections
                 //We need do Interlocked.Increment and value/state update in a finally block to ensure that they run
                 //without interruption. This is to prevent anything from happening between them, and another dequeue
                 //thread maybe spinning forever to wait for _state[] to be true;
-                try
-                { }
+                try { }
+
                 finally
                 {
                     newhigh = Interlocked.Increment(ref _high);
@@ -771,7 +775,6 @@ namespace System.Threading.Tasks.Dataflow.Internal.Collections
                 return newhigh <= SEGMENT_SIZE - 1;
             }
 
-
             /// <summary>
             /// try to remove an element from the head of current segment
             /// </summary>
@@ -780,7 +783,8 @@ namespace System.Threading.Tasks.Dataflow.Internal.Collections
             internal bool TryRemove(out T result)
             {
                 SpinWait spin = default;
-                int lowLocal = Low, highLocal = High;
+                int lowLocal = Low,
+                    highLocal = High;
                 while (lowLocal <= highLocal)
                 {
                     //try to update _low
@@ -828,9 +832,10 @@ namespace System.Threading.Tasks.Dataflow.Internal.Collections
                     {
                         //CAS failed due to contention: spin briefly and retry
                         spin.SpinOnce();
-                        lowLocal = Low; highLocal = High;
+                        lowLocal = Low;
+                        highLocal = High;
                     }
-                }//end of while
+                } //end of while
                 result = default(T);
                 return false;
             }
@@ -881,10 +886,7 @@ namespace System.Threading.Tasks.Dataflow.Internal.Collections
             /// </summary>
             internal int Low
             {
-                get
-                {
-                    return Math.Min(_low, SEGMENT_SIZE);
-                }
+                get { return Math.Min(_low, SEGMENT_SIZE); }
             }
 
             /// <summary>
@@ -901,7 +903,7 @@ namespace System.Threading.Tasks.Dataflow.Internal.Collections
                 }
             }
         }
-    }//end of class Segment
+    } //end of class Segment
 
     /// <summary>
     /// A wrapper struct for volatile bool, please note the copy of the struct it self will not be volatile

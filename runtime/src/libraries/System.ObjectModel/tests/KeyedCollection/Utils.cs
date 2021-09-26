@@ -9,8 +9,7 @@ using Xunit;
 
 namespace System.Collections.ObjectModel.Tests
 {
-    public class BadKey<T> : IComparable<BadKey<T>>,
-                             IEquatable<BadKey<T>>
+    public class BadKey<T> : IComparable<BadKey<T>>, IEquatable<BadKey<T>>
     {
         private readonly T _key;
 
@@ -86,8 +85,7 @@ namespace System.Collections.ObjectModel.Tests
         }
     }
 
-    public class BadKeyComparer<T> : IEqualityComparer<BadKey<T>>
-        where T : IEquatable<T>
+    public class BadKeyComparer<T> : IEqualityComparer<BadKey<T>> where T : IEquatable<T>
     {
         /// <summary>
         ///     Determines whether the specified objects are equal.
@@ -146,47 +144,39 @@ namespace System.Collections.ObjectModel.Tests
         int numItems,
         out TKey[] keys,
         out TValue[] items,
-        out TValue[] itemsWithKeys);
+        out TValue[] itemsWithKeys
+    );
 
     public static class Helper
     {
-        public static IDictionary<TKey, TValue> GetDictionary
-            <TKey, TValue>(
-            this KeyedCollection<TKey, TValue> collection)
+        public static IDictionary<TKey, TValue> GetDictionary<TKey, TValue>(
+            this KeyedCollection<TKey, TValue> collection
+        )
         {
             if (collection == null)
             {
                 throw new ArgumentNullException(nameof(collection));
             }
-            MethodInfo propGet =
-                typeof (KeyedCollection<TKey, TValue>).GetTypeInfo()
-                                                      .DeclaredProperties
-                                                      .Where(
-                                                          f =>
-                                                          f.Name
-                                                          == "Dictionary")
-                                                      .Select(
-                                                          f =>
-                                                          f.GetMethod)
-                                                      .Where(
-                                                          gm =>
-                                                          gm != null)
-                                                      .FirstOrDefault(
-                                                          gm =>
-                                                          gm.IsFamily);
+            MethodInfo propGet = typeof(KeyedCollection<TKey, TValue>).GetTypeInfo()
+                .DeclaredProperties.Where(f => f.Name == "Dictionary")
+                .Select(f => f.GetMethod)
+                .Where(gm => gm != null)
+                .FirstOrDefault(gm => gm.IsFamily);
             if (propGet == null)
             {
                 throw new InvalidOperationException(
-                    "Could not get dictionary property from KeyedCollection");
+                    "Could not get dictionary property from KeyedCollection"
+                );
             }
             object obj = propGet.Invoke(collection, new object[0]);
-            return (IDictionary<TKey, TValue>) obj;
+            return (IDictionary<TKey, TValue>)obj;
         }
 
         public static Func<IKeyedItem<T1, T2>> Bind<T1, T2>(
             this KeyedCollectionGetKeyedValue<T1, T2> function,
             Func<T2> val1,
-            Func<T2, T1> val2)
+            Func<T2, T1> val2
+        )
         {
             return () => function(val1, val2);
         }
@@ -195,12 +185,14 @@ namespace System.Collections.ObjectModel.Tests
             this KeyedCollection<TKey, TValue> collection,
             TKey[] expectedKeys,
             TValue[] expectedItems,
-            TValue[] expectedItemsWithKeys)
+            TValue[] expectedItemsWithKeys
+        )
         {
             if (expectedItemsWithKeys.Length != expectedKeys.Length)
             {
                 throw new ArgumentException(
-                    "Expected Keys length and Expected Items length must be the same");
+                    "Expected Keys length and Expected Items length must be the same"
+                );
             }
 
             Assert.Equal(expectedItems.Length, collection.Count);
@@ -215,20 +207,14 @@ namespace System.Collections.ObjectModel.Tests
             // use key indexer
             for (var i = 0; i < expectedItemsWithKeys.Length; ++i)
             {
-                Assert.Equal(
-                    expectedItemsWithKeys[i],
-                    collection[expectedKeys[i]]);
+                Assert.Equal(expectedItemsWithKeys[i], collection[expectedKeys[i]]);
             }
 
             // check that all keys are contained
-            Assert.DoesNotContain(
-                expectedKeys,
-                key => !collection.Contains(key));
+            Assert.DoesNotContain(expectedKeys, key => !collection.Contains(key));
 
             // check that all values are contained
-            Assert.DoesNotContain(
-                expectedItems,
-                item => !collection.Contains(item));
+            Assert.DoesNotContain(expectedItems, item => !collection.Contains(item));
         }
 
         public static void AddItems<TKey, TValue>(
@@ -238,7 +224,8 @@ namespace System.Collections.ObjectModel.Tests
             int numItems,
             out TKey[] keys,
             out TValue[] items,
-            out TValue[] itemsWithKeys)
+            out TValue[] itemsWithKeys
+        )
         {
             items = new TValue[numItems];
             keys = new TKey[numItems];
@@ -272,7 +259,8 @@ namespace System.Collections.ObjectModel.Tests
             int numItems,
             out TKey[] keys,
             out TValue[] items,
-            out TValue[] itemsWithKeys)
+            out TValue[] itemsWithKeys
+        )
         {
             items = new TValue[numItems];
             keys = new TKey[numItems];
@@ -306,7 +294,8 @@ namespace System.Collections.ObjectModel.Tests
             int numItems,
             out TKey[] keys,
             out TValue[] items,
-            out TValue[] itemsWithKeys)
+            out TValue[] itemsWithKeys
+        )
         {
             items = new TValue[numItems];
             keys = new TKey[numItems];
@@ -318,7 +307,7 @@ namespace System.Collections.ObjectModel.Tests
                 TValue item = generateItem();
                 TKey key = getKey(item);
 
-                ((IList) collection).Insert(collection.Count, item);
+                ((IList)collection).Insert(collection.Count, item);
                 items[i] = item;
 
                 if (null != key)
@@ -340,7 +329,8 @@ namespace System.Collections.ObjectModel.Tests
             int numItems,
             out TKey[] keys,
             out TValue[] items,
-            out TValue[] itemsWithKeys)
+            out TValue[] itemsWithKeys
+        )
         {
             items = new TValue[numItems];
             keys = new TKey[numItems];
@@ -352,7 +342,7 @@ namespace System.Collections.ObjectModel.Tests
                 TValue item = generateItem();
                 TKey key = getKey(item);
 
-                ((IList) collection).Add(item);
+                ((IList)collection).Add(item);
                 items[i] = item;
 
                 if (null != key)
@@ -407,10 +397,10 @@ namespace System.Collections.ObjectModel.Tests
         TValue Item { get; }
     }
 
-    public class KeyedItem<TKey, TValue> :
-        IComparable<KeyedItem<TKey, TValue>>, IKeyedItem<TKey, TValue>,
-        IEquatable<KeyedItem<TKey, TValue>>
-        where TValue : IComparable<TValue>
+    public class KeyedItem<TKey, TValue>
+        : IComparable<KeyedItem<TKey, TValue>>,
+          IKeyedItem<TKey, TValue>,
+          IEquatable<KeyedItem<TKey, TValue>> where TValue : IComparable<TValue>
     {
         private readonly TValue _item;
 
@@ -500,13 +490,11 @@ namespace System.Collections.ObjectModel.Tests
         }
     }
 
-    public class TestKeyedCollection<TKey, TValue> :
-        KeyedCollection<TKey, TValue>
+    public class TestKeyedCollection<TKey, TValue> : KeyedCollection<TKey, TValue>
     {
         private readonly Func<TValue, TKey> _getKey;
 
-        public TestKeyedCollection(Func<TValue, TKey> getKey)
-            : base(null, 32)
+        public TestKeyedCollection(Func<TValue, TKey> getKey) : base(null, 32)
         {
             if (getKey == null)
             {
@@ -515,9 +503,8 @@ namespace System.Collections.ObjectModel.Tests
             _getKey = getKey;
         }
 
-        public TestKeyedCollection(
-            Func<TValue, TKey> getKey,
-            IEqualityComparer<TKey> comp) : base(comp, 32)
+        public TestKeyedCollection(Func<TValue, TKey> getKey, IEqualityComparer<TKey> comp)
+            : base(comp, 32)
         {
             if (getKey == null)
             {
@@ -537,39 +524,30 @@ namespace System.Collections.ObjectModel.Tests
         }
     }
 
-    public class TestKeyedCollectionOfIKeyedItem<TKey, TValue> :
-        KeyedCollection<TKey, IKeyedItem<TKey, TValue>>
-        where TKey : IEquatable<TKey>
+    public class TestKeyedCollectionOfIKeyedItem<TKey, TValue>
+        : KeyedCollection<TKey, IKeyedItem<TKey, TValue>> where TKey : IEquatable<TKey>
     {
-        public TestKeyedCollectionOfIKeyedItem(
-            int collectionDictionaryThreshold = 32)
-            : base(null, collectionDictionaryThreshold)
-        {
-        }
+        public TestKeyedCollectionOfIKeyedItem(int collectionDictionaryThreshold = 32)
+            : base(null, collectionDictionaryThreshold) { }
 
         public TestKeyedCollectionOfIKeyedItem(
             IEqualityComparer<TKey> comp,
-            int collectionDictionaryThreshold = 32)
-            : base(comp, collectionDictionaryThreshold)
-        {
-        }
+            int collectionDictionaryThreshold = 32
+        ) : base(comp, collectionDictionaryThreshold) { }
 
-        protected override TKey GetKeyForItem(
-            IKeyedItem<TKey, TValue> item)
+        protected override TKey GetKeyForItem(IKeyedItem<TKey, TValue> item)
         {
             return item.Key;
         }
 
-        public void MyChangeItemKey(
-            IKeyedItem<TKey, TValue> item,
-            TKey newKey)
+        public void MyChangeItemKey(IKeyedItem<TKey, TValue> item, TKey newKey)
         {
             ChangeItemKey(item, newKey);
         }
     }
 
-    public delegate IKeyedItem<TKey, TValue>
-        KeyedCollectionGetKeyedValue<TKey, TValue>(
+    public delegate IKeyedItem<TKey, TValue> KeyedCollectionGetKeyedValue<TKey, TValue>(
         Func<TValue> getValue,
-        Func<TValue, TKey> getKeyForItem);
+        Func<TValue, TKey> getKeyForItem
+    );
 }

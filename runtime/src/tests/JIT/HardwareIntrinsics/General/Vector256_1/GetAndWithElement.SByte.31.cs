@@ -42,7 +42,8 @@ namespace JIT.HardwareIntrinsics.General
     {
         private static readonly int LargestVectorSize = 32;
 
-        private static readonly int ElementCount = Unsafe.SizeOf<Vector256<SByte>>() / sizeof(SByte);
+        private static readonly int ElementCount =
+            Unsafe.SizeOf<Vector256<SByte>>() / sizeof(SByte);
 
         public bool Succeeded { get; set; } = true;
 
@@ -57,7 +58,40 @@ namespace JIT.HardwareIntrinsics.General
                 values[i] = TestLibrary.Generator.GetSByte();
             }
 
-            Vector256<SByte> value = Vector256.Create(values[0], values[1], values[2], values[3], values[4], values[5], values[6], values[7], values[8], values[9], values[10], values[11], values[12], values[13], values[14], values[15], values[16], values[17], values[18], values[19], values[20], values[21], values[22], values[23], values[24], values[25], values[26], values[27], values[28], values[29], values[30], values[31]);
+            Vector256<SByte> value = Vector256.Create(
+                values[0],
+                values[1],
+                values[2],
+                values[3],
+                values[4],
+                values[5],
+                values[6],
+                values[7],
+                values[8],
+                values[9],
+                values[10],
+                values[11],
+                values[12],
+                values[13],
+                values[14],
+                values[15],
+                values[16],
+                values[17],
+                values[18],
+                values[19],
+                values[20],
+                values[21],
+                values[22],
+                values[23],
+                values[24],
+                values[25],
+                values[26],
+                values[27],
+                values[28],
+                values[29],
+                values[30],
+                values[31]
+            );
 
             bool succeeded = !expectedOutOfRangeException;
 
@@ -73,7 +107,9 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"Vector256<SByte.GetElement({imm}): {nameof(RunBasicScenario)} failed to throw ArgumentOutOfRangeException.");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector256<SByte.GetElement({imm}): {nameof(RunBasicScenario)} failed to throw ArgumentOutOfRangeException."
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;
@@ -95,7 +131,9 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"Vector256<SByte.WithElement({imm}): {nameof(RunBasicScenario)} failed to throw ArgumentOutOfRangeException.");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector256<SByte.WithElement({imm}): {nameof(RunBasicScenario)} failed to throw ArgumentOutOfRangeException."
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;
@@ -113,27 +151,61 @@ namespace JIT.HardwareIntrinsics.General
                 values[i] = TestLibrary.Generator.GetSByte();
             }
 
-            Vector256<SByte> value = Vector256.Create(values[0], values[1], values[2], values[3], values[4], values[5], values[6], values[7], values[8], values[9], values[10], values[11], values[12], values[13], values[14], values[15], values[16], values[17], values[18], values[19], values[20], values[21], values[22], values[23], values[24], values[25], values[26], values[27], values[28], values[29], values[30], values[31]);
+            Vector256<SByte> value = Vector256.Create(
+                values[0],
+                values[1],
+                values[2],
+                values[3],
+                values[4],
+                values[5],
+                values[6],
+                values[7],
+                values[8],
+                values[9],
+                values[10],
+                values[11],
+                values[12],
+                values[13],
+                values[14],
+                values[15],
+                values[16],
+                values[17],
+                values[18],
+                values[19],
+                values[20],
+                values[21],
+                values[22],
+                values[23],
+                values[24],
+                values[25],
+                values[26],
+                values[27],
+                values[28],
+                values[29],
+                values[30],
+                values[31]
+            );
 
             bool succeeded = !expectedOutOfRangeException;
 
             try
             {
-                object result = typeof(Vector256)
-                                    .GetMethod(nameof(Vector256.GetElement))
-                                    .MakeGenericMethod(typeof(SByte))
-                                    .Invoke(null, new object[] { value, imm });
+                object result = typeof(Vector256).GetMethod(nameof(Vector256.GetElement))
+                    .MakeGenericMethod(typeof(SByte))
+                    .Invoke(null, new object[] { value, imm });
                 ValidateGetResult((SByte)(result), values);
             }
             catch (TargetInvocationException e)
             {
-                succeeded = expectedOutOfRangeException
-                          && e.InnerException is ArgumentOutOfRangeException;
+                succeeded =
+                    expectedOutOfRangeException && e.InnerException is ArgumentOutOfRangeException;
             }
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"Vector256<SByte.GetElement({imm}): {nameof(RunReflectionScenario)} failed to throw ArgumentOutOfRangeException.");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector256<SByte.GetElement({imm}): {nameof(RunReflectionScenario)} failed to throw ArgumentOutOfRangeException."
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;
@@ -145,21 +217,22 @@ namespace JIT.HardwareIntrinsics.General
 
             try
             {
-                object result2 = typeof(Vector256)
-                                    .GetMethod(nameof(Vector256.WithElement))
-                                    .MakeGenericMethod(typeof(SByte))
-                                    .Invoke(null, new object[] { value, imm, insertedValue });
+                object result2 = typeof(Vector256).GetMethod(nameof(Vector256.WithElement))
+                    .MakeGenericMethod(typeof(SByte))
+                    .Invoke(null, new object[] { value, imm, insertedValue });
                 ValidateWithResult((Vector256<SByte>)(result2), values, insertedValue);
             }
             catch (TargetInvocationException e)
             {
-                succeeded = expectedOutOfRangeException
-                          && e.InnerException is ArgumentOutOfRangeException;
+                succeeded =
+                    expectedOutOfRangeException && e.InnerException is ArgumentOutOfRangeException;
             }
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"Vector256<SByte.WithElement({imm}): {nameof(RunReflectionScenario)} failed to throw ArgumentOutOfRangeException.");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector256<SByte.WithElement({imm}): {nameof(RunReflectionScenario)} failed to throw ArgumentOutOfRangeException."
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;
@@ -175,27 +248,45 @@ namespace JIT.HardwareIntrinsics.General
             RunReflectionScenario(31 + ElementCount, expectedOutOfRangeException: true);
         }
 
-        private void ValidateGetResult(SByte result, SByte[] values, [CallerMemberName] string method = "")
+        private void ValidateGetResult(
+            SByte result,
+            SByte[] values,
+            [CallerMemberName] string method = ""
+        )
         {
             if (result != values[31])
             {
                 Succeeded = false;
 
-                TestLibrary.TestFramework.LogInformation($"Vector256<SByte.GetElement(31): {method} failed:");
-                TestLibrary.TestFramework.LogInformation($"   value: ({string.Join(", ", values)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector256<SByte.GetElement(31): {method} failed:"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"   value: ({string.Join(", ", values)})"
+                );
                 TestLibrary.TestFramework.LogInformation($"  result: ({result})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
             }
         }
 
-        private void ValidateWithResult(Vector256<SByte> result, SByte[] values, SByte insertedValue, [CallerMemberName] string method = "")
+        private void ValidateWithResult(
+            Vector256<SByte> result,
+            SByte[] values,
+            SByte insertedValue,
+            [CallerMemberName] string method = ""
+        )
         {
             SByte[] resultElements = new SByte[ElementCount];
             Unsafe.WriteUnaligned(ref Unsafe.As<SByte, byte>(ref resultElements[0]), result);
             ValidateWithResult(resultElements, values, insertedValue, method);
         }
 
-        private void ValidateWithResult(SByte[] result, SByte[] values, SByte insertedValue, [CallerMemberName] string method = "")
+        private void ValidateWithResult(
+            SByte[] result,
+            SByte[] values,
+            SByte insertedValue,
+            [CallerMemberName] string method = ""
+        )
         {
             bool succeeded = true;
 
@@ -215,10 +306,16 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"Vector256<SByte.WithElement(31): {method} failed:");
-                TestLibrary.TestFramework.LogInformation($"   value: ({string.Join(", ", values)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector256<SByte.WithElement(31): {method} failed:"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"   value: ({string.Join(", ", values)})"
+                );
                 TestLibrary.TestFramework.LogInformation($"  insert: insertedValue");
-                TestLibrary.TestFramework.LogInformation($"  result: ({string.Join(", ", result)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"  result: ({string.Join(", ", result)})"
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

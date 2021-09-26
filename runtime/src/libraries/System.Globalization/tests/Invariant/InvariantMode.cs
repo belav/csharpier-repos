@@ -22,7 +22,14 @@ namespace System.Globalization.Tests
             yield return new object[] { "" };
         }
 
-        private static readonly string[] s_cultureNames = new string[] { "en-US", "ja-JP", "fr-FR", "tr-TR", "" };
+        private static readonly string[] s_cultureNames = new string[]
+        {
+            "en-US",
+            "ja-JP",
+            "fr-FR",
+            "tr-TR",
+            ""
+        };
 
         public static IEnumerable<object[]> IndexOf_TestData()
         {
@@ -36,14 +43,54 @@ namespace System.Globalization.Tests
             yield return new object[] { "Hello", "h", 0, 5, CompareOptions.OrdinalIgnoreCase, 0 };
 
             // Long strings
-            yield return new object[] { new string('b', 100) + new string('a', 5555), "aaaaaaaaaaaaaaa", 0, 5655, CompareOptions.None, 100 };
-            yield return new object[] { new string('b', 101) + new string('a', 5555), new string('a', 5000), 0, 5656, CompareOptions.None, 101 };
-            yield return new object[] { new string('a', 5555), new string('a', 5000) + "b", 0, 5555, CompareOptions.None, -1 };
+            yield return new object[]
+            {
+                new string('b', 100) + new string('a', 5555),
+                "aaaaaaaaaaaaaaa",
+                0,
+                5655,
+                CompareOptions.None,
+                100
+            };
+            yield return new object[]
+            {
+                new string('b', 101) + new string('a', 5555),
+                new string('a', 5000),
+                0,
+                5656,
+                CompareOptions.None,
+                101
+            };
+            yield return new object[]
+            {
+                new string('a', 5555),
+                new string('a', 5000) + "b",
+                0,
+                5555,
+                CompareOptions.None,
+                -1
+            };
 
             // Hungarian
-            yield return new object[] { "foobardzsdzs", "rddzs", 0, 12, CompareOptions.Ordinal, -1 };
+            yield return new object[]
+            {
+                "foobardzsdzs",
+                "rddzs",
+                0,
+                12,
+                CompareOptions.Ordinal,
+                -1
+            };
             yield return new object[] { "foobardzsdzs", "rddzs", 0, 12, CompareOptions.None, -1 };
-            yield return new object[] { "foobardzsdzs", "rddzs", 0, 12, CompareOptions.Ordinal, -1 };
+            yield return new object[]
+            {
+                "foobardzsdzs",
+                "rddzs",
+                0,
+                12,
+                CompareOptions.Ordinal,
+                -1
+            };
 
             // Turkish
             yield return new object[] { "Hi", "I", 0, 2, CompareOptions.None, -1 };
@@ -55,21 +102,93 @@ namespace System.Globalization.Tests
 
             // Unicode
             yield return new object[] { "Hi", "\u0130", 0, 2, CompareOptions.None, -1 };
-            yield return new object[] { "Exhibit \u00C0", "A\u0300", 0, 9, CompareOptions.None, -1 };
-            yield return new object[] { "Exhibit \u00C0", "A\u0300", 0, 9, CompareOptions.Ordinal, -1 };
-            yield return new object[] { "Exhibit \u00C0", "a\u0300", 0, 9, CompareOptions.None, -1 };
-            yield return new object[] { "Exhibit \u00C0", "a\u0300", 0, 9, CompareOptions.Ordinal, -1 };
-            yield return new object[] { "Exhibit \u00C0", "a\u0300", 0, 9, CompareOptions.IgnoreCase, -1 };
-            yield return new object[] { "Exhibit \u00C0", "a\u0300", 0, 9, CompareOptions.OrdinalIgnoreCase, -1 };
-            yield return new object[] { "FooBar", "Foo\u0400Bar", 0, 6, CompareOptions.Ordinal, -1 };
-            yield return new object[] { "TestFooBA\u0300R", "FooB\u00C0R", 0, 11, CompareOptions.IgnoreNonSpace, -1 };
+            yield return new object[]
+            {
+                "Exhibit \u00C0",
+                "A\u0300",
+                0,
+                9,
+                CompareOptions.None,
+                -1
+            };
+            yield return new object[]
+            {
+                "Exhibit \u00C0",
+                "A\u0300",
+                0,
+                9,
+                CompareOptions.Ordinal,
+                -1
+            };
+            yield return new object[]
+            {
+                "Exhibit \u00C0",
+                "a\u0300",
+                0,
+                9,
+                CompareOptions.None,
+                -1
+            };
+            yield return new object[]
+            {
+                "Exhibit \u00C0",
+                "a\u0300",
+                0,
+                9,
+                CompareOptions.Ordinal,
+                -1
+            };
+            yield return new object[]
+            {
+                "Exhibit \u00C0",
+                "a\u0300",
+                0,
+                9,
+                CompareOptions.IgnoreCase,
+                -1
+            };
+            yield return new object[]
+            {
+                "Exhibit \u00C0",
+                "a\u0300",
+                0,
+                9,
+                CompareOptions.OrdinalIgnoreCase,
+                -1
+            };
+            yield return new object[]
+            {
+                "FooBar",
+                "Foo\u0400Bar",
+                0,
+                6,
+                CompareOptions.Ordinal,
+                -1
+            };
+            yield return new object[]
+            {
+                "TestFooBA\u0300R",
+                "FooB\u00C0R",
+                0,
+                11,
+                CompareOptions.IgnoreNonSpace,
+                -1
+            };
 
             // Weightless characters
             yield return new object[] { "", "\u200d", 0, 0, CompareOptions.None, -1 };
             yield return new object[] { "hello", "\u200d", 0, 5, CompareOptions.IgnoreCase, -1 };
 
             // Ignore symbols
-            yield return new object[] { "More Test's", "Tests", 0, 11, CompareOptions.IgnoreSymbols, -1 };
+            yield return new object[]
+            {
+                "More Test's",
+                "Tests",
+                0,
+                11,
+                CompareOptions.IgnoreSymbols,
+                -1
+            };
             yield return new object[] { "More Test's", "Tests", 0, 11, CompareOptions.None, -1 };
             yield return new object[] { "cbabababdbaba", "ab", 0, 13, CompareOptions.None, 2 };
 
@@ -142,14 +261,54 @@ namespace System.Globalization.Tests
             yield return new object[] { "Hello", "h", 4, 5, CompareOptions.OrdinalIgnoreCase, 0 };
 
             // Long strings
-            yield return new object[] { new string('a', 5555) + new string('b', 100), "aaaaaaaaaaaaaaa", 5654, 5655, CompareOptions.None, 5540 };
-            yield return new object[] { new string('b', 101) + new string('a', 5555), new string('a', 5000), 5655, 5656, CompareOptions.None, 656 };
-            yield return new object[] { new string('a', 5555), new string('a', 5000) + "b", 5554, 5555, CompareOptions.None, -1 };
+            yield return new object[]
+            {
+                new string('a', 5555) + new string('b', 100),
+                "aaaaaaaaaaaaaaa",
+                5654,
+                5655,
+                CompareOptions.None,
+                5540
+            };
+            yield return new object[]
+            {
+                new string('b', 101) + new string('a', 5555),
+                new string('a', 5000),
+                5655,
+                5656,
+                CompareOptions.None,
+                656
+            };
+            yield return new object[]
+            {
+                new string('a', 5555),
+                new string('a', 5000) + "b",
+                5554,
+                5555,
+                CompareOptions.None,
+                -1
+            };
 
             // Hungarian
-            yield return new object[] { "foobardzsdzs", "rddzs", 11, 12, CompareOptions.Ordinal, -1 };
+            yield return new object[]
+            {
+                "foobardzsdzs",
+                "rddzs",
+                11,
+                12,
+                CompareOptions.Ordinal,
+                -1
+            };
             yield return new object[] { "foobardzsdzs", "rddzs", 11, 12, CompareOptions.None, -1 };
-            yield return new object[] { "foobardzsdzs", "rddzs", 11, 12, CompareOptions.Ordinal, -1 };
+            yield return new object[]
+            {
+                "foobardzsdzs",
+                "rddzs",
+                11,
+                12,
+                CompareOptions.Ordinal,
+                -1
+            };
 
             // Turkish
             yield return new object[] { "Hi", "I", 1, 2, CompareOptions.None, -1 };
@@ -163,14 +322,78 @@ namespace System.Globalization.Tests
             yield return new object[] { "Hi", "\u0130", 1, 2, CompareOptions.IgnoreCase, -1 };
 
             // Unicode
-            yield return new object[] { "Exhibit \u00C0", "A\u0300", 8, 9, CompareOptions.None, -1 };
-            yield return new object[] { "Exhibit \u00C0", "A\u0300", 8, 9, CompareOptions.Ordinal, -1 };
-            yield return new object[] { "Exhibit \u00C0", "a\u0300", 8, 9, CompareOptions.None, -1 };
-            yield return new object[] { "Exhibit \u00C0", "a\u0300", 8, 9, CompareOptions.IgnoreCase, -1 };
-            yield return new object[] { "Exhibit \u00C0", "a\u0300", 8, 9, CompareOptions.OrdinalIgnoreCase, -1 };
-            yield return new object[] { "Exhibit \u00C0", "a\u0300", 8, 9, CompareOptions.Ordinal, -1 };
-            yield return new object[] { "FooBar", "Foo\u0400Bar", 5, 6, CompareOptions.Ordinal, -1 };
-            yield return new object[] { "TestFooBA\u0300R", "FooB\u00C0R", 10, 11, CompareOptions.IgnoreNonSpace, -1 };
+            yield return new object[]
+            {
+                "Exhibit \u00C0",
+                "A\u0300",
+                8,
+                9,
+                CompareOptions.None,
+                -1
+            };
+            yield return new object[]
+            {
+                "Exhibit \u00C0",
+                "A\u0300",
+                8,
+                9,
+                CompareOptions.Ordinal,
+                -1
+            };
+            yield return new object[]
+            {
+                "Exhibit \u00C0",
+                "a\u0300",
+                8,
+                9,
+                CompareOptions.None,
+                -1
+            };
+            yield return new object[]
+            {
+                "Exhibit \u00C0",
+                "a\u0300",
+                8,
+                9,
+                CompareOptions.IgnoreCase,
+                -1
+            };
+            yield return new object[]
+            {
+                "Exhibit \u00C0",
+                "a\u0300",
+                8,
+                9,
+                CompareOptions.OrdinalIgnoreCase,
+                -1
+            };
+            yield return new object[]
+            {
+                "Exhibit \u00C0",
+                "a\u0300",
+                8,
+                9,
+                CompareOptions.Ordinal,
+                -1
+            };
+            yield return new object[]
+            {
+                "FooBar",
+                "Foo\u0400Bar",
+                5,
+                6,
+                CompareOptions.Ordinal,
+                -1
+            };
+            yield return new object[]
+            {
+                "TestFooBA\u0300R",
+                "FooB\u00C0R",
+                10,
+                11,
+                CompareOptions.IgnoreNonSpace,
+                -1
+            };
 
             // Weightless characters
             yield return new object[] { "", "\u200d", 0, 0, CompareOptions.None, -1 };
@@ -178,7 +401,15 @@ namespace System.Globalization.Tests
             yield return new object[] { "hello", "\u200d", 4, 5, CompareOptions.IgnoreCase, -1 };
 
             // Ignore symbols
-            yield return new object[] { "More Test's", "Tests", 10, 11, CompareOptions.IgnoreSymbols, -1 };
+            yield return new object[]
+            {
+                "More Test's",
+                "Tests",
+                10,
+                11,
+                CompareOptions.IgnoreSymbols,
+                -1
+            };
             yield return new object[] { "More Test's", "Tests", 10, 11, CompareOptions.None, -1 };
             yield return new object[] { "cbabababdbaba", "ab", 12, 13, CompareOptions.None, 10 };
 
@@ -196,9 +427,27 @@ namespace System.Globalization.Tests
             yield return new object[] { "hello", "", (CompareOptions)(-1), true };
 
             // Long strings
-            yield return new object[] { new string('a', 5555), "aaaaaaaaaaaaaaa", CompareOptions.None, true };
-            yield return new object[] { new string('a', 5555), new string('a', 5000), CompareOptions.None, true };
-            yield return new object[] { new string('a', 5555), new string('a', 5000) + "b", CompareOptions.None, false };
+            yield return new object[]
+            {
+                new string('a', 5555),
+                "aaaaaaaaaaaaaaa",
+                CompareOptions.None,
+                true
+            };
+            yield return new object[]
+            {
+                new string('a', 5555),
+                new string('a', 5000),
+                CompareOptions.None,
+                true
+            };
+            yield return new object[]
+            {
+                new string('a', 5555),
+                new string('a', 5000) + "b",
+                CompareOptions.None,
+                false
+            };
 
             // Hungarian
             yield return new object[] { "dzsdzsfoobar", "ddzsf", CompareOptions.None, false };
@@ -214,14 +463,44 @@ namespace System.Globalization.Tests
             // Unicode
             yield return new object[] { "\u00C0nimal", "A\u0300", CompareOptions.None, false };
             yield return new object[] { "\u00C0nimal", "A\u0300", CompareOptions.Ordinal, false };
-            yield return new object[] { "\u00C0nimal", "a\u0300", CompareOptions.IgnoreCase, false };
-            yield return new object[] { "\u00C0nimal", "a\u0300", CompareOptions.OrdinalIgnoreCase, false };
+            yield return new object[]
+            {
+                "\u00C0nimal",
+                "a\u0300",
+                CompareOptions.IgnoreCase,
+                false
+            };
+            yield return new object[]
+            {
+                "\u00C0nimal",
+                "a\u0300",
+                CompareOptions.OrdinalIgnoreCase,
+                false
+            };
             yield return new object[] { "FooBar", "Foo\u0400Bar", CompareOptions.Ordinal, false };
-            yield return new object[] { "FooBA\u0300R", "FooB\u00C0R", CompareOptions.IgnoreNonSpace, false };
+            yield return new object[]
+            {
+                "FooBA\u0300R",
+                "FooB\u00C0R",
+                CompareOptions.IgnoreNonSpace,
+                false
+            };
 
             // Ignore symbols
-            yield return new object[] { "Test's can be interesting", "Tests", CompareOptions.IgnoreSymbols, false };
-            yield return new object[] { "Test's can be interesting", "Tests", CompareOptions.None, false };
+            yield return new object[]
+            {
+                "Test's can be interesting",
+                "Tests",
+                CompareOptions.IgnoreSymbols,
+                false
+            };
+            yield return new object[]
+            {
+                "Test's can be interesting",
+                "Tests",
+                CompareOptions.None,
+                false
+            };
 
             // Platform differences
             yield return new object[] { "dzsdzsfoobar", "ddzsf", CompareOptions.None, false };
@@ -237,9 +516,27 @@ namespace System.Globalization.Tests
             yield return new object[] { "hello", "", (CompareOptions)(-1), true };
 
             // Long strings
-            yield return new object[] { new string('a', 5555), "aaaaaaaaaaaaaaa", CompareOptions.None, true };
-            yield return new object[] { new string('a', 5555), new string('a', 5000), CompareOptions.None, true };
-            yield return new object[] { new string('a', 5555), new string('a', 5000) + "b", CompareOptions.None, false };
+            yield return new object[]
+            {
+                new string('a', 5555),
+                "aaaaaaaaaaaaaaa",
+                CompareOptions.None,
+                true
+            };
+            yield return new object[]
+            {
+                new string('a', 5555),
+                new string('a', 5000),
+                CompareOptions.None,
+                true
+            };
+            yield return new object[]
+            {
+                new string('a', 5555),
+                new string('a', 5000) + "b",
+                CompareOptions.None,
+                false
+            };
 
             // Hungarian
             yield return new object[] { "foobardzsdzs", "rddzs", CompareOptions.Ordinal, false };
@@ -253,18 +550,48 @@ namespace System.Globalization.Tests
 
             // Unicode
             yield return new object[] { "Exhibit \u00C0", "A\u0300", CompareOptions.None, false };
-            yield return new object[] { "Exhibit \u00C0", "A\u0300", CompareOptions.Ordinal, false };
-            yield return new object[] { "Exhibit \u00C0", "a\u0300", CompareOptions.IgnoreCase, false };
-            yield return new object[] { "Exhibit \u00C0", "a\u0300", CompareOptions.OrdinalIgnoreCase, false };
+            yield return new object[]
+            {
+                "Exhibit \u00C0",
+                "A\u0300",
+                CompareOptions.Ordinal,
+                false
+            };
+            yield return new object[]
+            {
+                "Exhibit \u00C0",
+                "a\u0300",
+                CompareOptions.IgnoreCase,
+                false
+            };
+            yield return new object[]
+            {
+                "Exhibit \u00C0",
+                "a\u0300",
+                CompareOptions.OrdinalIgnoreCase,
+                false
+            };
             yield return new object[] { "FooBar", "Foo\u0400Bar", CompareOptions.Ordinal, false };
-            yield return new object[] { "FooBA\u0300R", "FooB\u00C0R", CompareOptions.IgnoreNonSpace, false };
+            yield return new object[]
+            {
+                "FooBA\u0300R",
+                "FooB\u00C0R",
+                CompareOptions.IgnoreNonSpace,
+                false
+            };
 
             // Weightless characters
             yield return new object[] { "", "\u200d", CompareOptions.None, false };
             yield return new object[] { "", "\u200d", CompareOptions.IgnoreCase, false };
 
             // Ignore symbols
-            yield return new object[] { "More Test's", "Tests", CompareOptions.IgnoreSymbols, false };
+            yield return new object[]
+            {
+                "More Test's",
+                "Tests",
+                CompareOptions.IgnoreSymbols,
+                false
+            };
             yield return new object[] { "More Test's", "Tests", CompareOptions.None, false };
 
             // Platform differences
@@ -273,31 +600,88 @@ namespace System.Globalization.Tests
 
         public static IEnumerable<object[]> Compare_TestData()
         {
-            CompareOptions ignoreKanaIgnoreWidthIgnoreCase = CompareOptions.IgnoreKanaType | CompareOptions.IgnoreWidth | CompareOptions.IgnoreCase;
+            CompareOptions ignoreKanaIgnoreWidthIgnoreCase =
+                CompareOptions.IgnoreKanaType
+                | CompareOptions.IgnoreWidth
+                | CompareOptions.IgnoreCase;
             yield return new object[] { "\u3042", "\u30A2", ignoreKanaIgnoreWidthIgnoreCase, -1 };
             yield return new object[] { "\u3042", "\uFF71", ignoreKanaIgnoreWidthIgnoreCase, -1 };
 
-            yield return new object[] { "\u304D\u3083", "\u30AD\u30E3", ignoreKanaIgnoreWidthIgnoreCase, -1 };
-            yield return new object[] { "\u304D\u3083", "\u30AD\u3083", ignoreKanaIgnoreWidthIgnoreCase, -1 };
-            yield return new object[] { "\u304D \u3083", "\u30AD\u3083", ignoreKanaIgnoreWidthIgnoreCase, -1 };
+            yield return new object[]
+            {
+                "\u304D\u3083",
+                "\u30AD\u30E3",
+                ignoreKanaIgnoreWidthIgnoreCase,
+                -1
+            };
+            yield return new object[]
+            {
+                "\u304D\u3083",
+                "\u30AD\u3083",
+                ignoreKanaIgnoreWidthIgnoreCase,
+                -1
+            };
+            yield return new object[]
+            {
+                "\u304D \u3083",
+                "\u30AD\u3083",
+                ignoreKanaIgnoreWidthIgnoreCase,
+                -1
+            };
             yield return new object[] { "\u3044", "I", ignoreKanaIgnoreWidthIgnoreCase, 1 };
 
             yield return new object[] { "a", "A", ignoreKanaIgnoreWidthIgnoreCase, 0 };
             yield return new object[] { "a", "\uFF41", ignoreKanaIgnoreWidthIgnoreCase, -1 };
-            yield return new object[] { "ABCDE", "\uFF21\uFF22\uFF23\uFF24\uFF25", ignoreKanaIgnoreWidthIgnoreCase, -1 };
-            yield return new object[] { "ABCDE", "\uFF21\uFF22\uFF23D\uFF25", ignoreKanaIgnoreWidthIgnoreCase, -1 };
-            yield return new object[] { "ABCDE", "a\uFF22\uFF23D\uFF25", ignoreKanaIgnoreWidthIgnoreCase, -1 };
-            yield return new object[] { "ABCDE", "\uFF41\uFF42\uFF23D\uFF25", ignoreKanaIgnoreWidthIgnoreCase, -1 };
+            yield return new object[]
+            {
+                "ABCDE",
+                "\uFF21\uFF22\uFF23\uFF24\uFF25",
+                ignoreKanaIgnoreWidthIgnoreCase,
+                -1
+            };
+            yield return new object[]
+            {
+                "ABCDE",
+                "\uFF21\uFF22\uFF23D\uFF25",
+                ignoreKanaIgnoreWidthIgnoreCase,
+                -1
+            };
+            yield return new object[]
+            {
+                "ABCDE",
+                "a\uFF22\uFF23D\uFF25",
+                ignoreKanaIgnoreWidthIgnoreCase,
+                -1
+            };
+            yield return new object[]
+            {
+                "ABCDE",
+                "\uFF41\uFF42\uFF23D\uFF25",
+                ignoreKanaIgnoreWidthIgnoreCase,
+                -1
+            };
 
             yield return new object[] { "\u6FA4", "\u6CA2", ignoreKanaIgnoreWidthIgnoreCase, 1 };
 
-            yield return new object[] { "\u3070\u3073\u3076\u3079\u307C", "\u30D0\u30D3\u30D6\u30D9\u30DC", ignoreKanaIgnoreWidthIgnoreCase, -1 };
+            yield return new object[]
+            {
+                "\u3070\u3073\u3076\u3079\u307C",
+                "\u30D0\u30D3\u30D6\u30D9\u30DC",
+                ignoreKanaIgnoreWidthIgnoreCase,
+                -1
+            };
 
             yield return new object[] { "ABDDE", "D", ignoreKanaIgnoreWidthIgnoreCase, -1 };
             yield return new object[] { "ABCDE", "\uFF43D", ignoreKanaIgnoreWidthIgnoreCase, -1 };
             yield return new object[] { "ABCDE", "c", ignoreKanaIgnoreWidthIgnoreCase, -1 };
             yield return new object[] { "\u3060", "\u305F", ignoreKanaIgnoreWidthIgnoreCase, 1 };
-            yield return new object[] { "\u3060", "\uFF80\uFF9E", ignoreKanaIgnoreWidthIgnoreCase, -1 };
+            yield return new object[]
+            {
+                "\u3060",
+                "\uFF80\uFF9E",
+                ignoreKanaIgnoreWidthIgnoreCase,
+                -1
+            };
             yield return new object[] { "\u3060", "\u30C0", ignoreKanaIgnoreWidthIgnoreCase, -1 };
 
             yield return new object[] { "\u3042", "\u30A1", CompareOptions.None, -1 };
@@ -322,7 +706,13 @@ namespace System.Globalization.Tests
             yield return new object[] { "\u00C0", "A\u0300", CompareOptions.None, 1 };
             yield return new object[] { "\u00C0", "A\u0300", CompareOptions.Ordinal, 1 };
             yield return new object[] { "FooBar", "Foo\u0400Bar", CompareOptions.Ordinal, -1 };
-            yield return new object[] { "FooBA\u0300R", "FooB\u00C0R", CompareOptions.IgnoreNonSpace, -1 };
+            yield return new object[]
+            {
+                "FooBA\u0300R",
+                "FooB\u00C0R",
+                CompareOptions.IgnoreNonSpace,
+                -1
+            };
 
             yield return new object[] { "Test's", "Tests", CompareOptions.IgnoreSymbols, -1 };
             yield return new object[] { "Test's", "Tests", CompareOptions.StringSort, -1 };
@@ -330,7 +720,15 @@ namespace System.Globalization.Tests
             // Spanish
             yield return new object[] { "llegar", "lugar", CompareOptions.None, -1 };
 
-            yield return new object[] { "\u3042", "\u30A1", CompareOptions.IgnoreKanaType | CompareOptions.IgnoreWidth | CompareOptions.IgnoreCase, -1 };
+            yield return new object[]
+            {
+                "\u3042",
+                "\u30A1",
+                CompareOptions.IgnoreKanaType
+                    | CompareOptions.IgnoreWidth
+                    | CompareOptions.IgnoreCase,
+                -1
+            };
         }
 
         public static IEnumerable<object[]> ToLower_TestData()
@@ -350,10 +748,25 @@ namespace System.Globalization.Tests
             yield return new object[] { "HelloWor!ld123", "hellowor!ld123", true };
             yield return new object[] { "Hello\n\0World\u0009!", "hello\n\0world\t!", true };
 
-            yield return new object[] { "THIS IS A LONGER TEST CASE", "this is a longer test case", true };
-            yield return new object[] { "this Is A LONGER mIXEd casE test case", "this is a longer mixed case test case", true };
+            yield return new object[]
+            {
+                "THIS IS A LONGER TEST CASE",
+                "this is a longer test case",
+                true
+            };
+            yield return new object[]
+            {
+                "this Is A LONGER mIXEd casE test case",
+                "this is a longer mixed case test case",
+                true
+            };
 
-            yield return new object[] { "THIS \t hAs \t SOMe \t tabs", "this \t has \t some \t tabs", true };
+            yield return new object[]
+            {
+                "THIS \t hAs \t SOMe \t tabs",
+                "this \t has \t some \t tabs",
+                true
+            };
             yield return new object[] { "EMBEDDED\0NuLL\0Byte\0", "embedded\0null\0byte\0", true };
 
             // LATIN CAPITAL LETTER O WITH ACUTE, which has a lower case variant.
@@ -376,7 +789,7 @@ namespace System.Globalization.Tests
 
         public static IEnumerable<object[]> ToUpper_TestData()
         {
-            yield return new object[] { "", "" , true};
+            yield return new object[] { "", "", true };
 
             yield return new object[] { "a", "A", true };
             yield return new object[] { "abc", "ABC", true };
@@ -391,9 +804,24 @@ namespace System.Globalization.Tests
             yield return new object[] { "HELLOWOR!LD123", "HELLOWOR!LD123", true };
             yield return new object[] { "Hello\n\0World\u0009!", "HELLO\n\0WORLD\t!", true };
 
-            yield return new object[] { "this is a longer test case", "THIS IS A LONGER TEST CASE", true };
-            yield return new object[] { "this Is A LONGER mIXEd casE test case", "THIS IS A LONGER MIXED CASE TEST CASE", true };
-            yield return new object[] { "this \t HaS \t somE \t TABS", "THIS \t HAS \t SOME \t TABS", true };
+            yield return new object[]
+            {
+                "this is a longer test case",
+                "THIS IS A LONGER TEST CASE",
+                true
+            };
+            yield return new object[]
+            {
+                "this Is A LONGER mIXEd casE test case",
+                "THIS IS A LONGER MIXED CASE TEST CASE",
+                true
+            };
+            yield return new object[]
+            {
+                "this \t HaS \t somE \t TABS",
+                "THIS \t HAS \t SOME \t TABS",
+                true
+            };
 
             yield return new object[] { "embedded\0NuLL\0Byte\0", "EMBEDDED\0NULL\0BYTE\0", true };
 
@@ -431,14 +859,56 @@ namespace System.Globalization.Tests
             yield return new object[] { "\u0061\u0101\u0062", 0, 3, "xn--ab-dla" };
             yield return new object[] { "\u0061\u0062\u0101", 0, 3, "xn--ab-ela" };
 
-            yield return new object[] { "\uD800\uDF00\uD800\uDF01\uD800\uDF02", 0, 6, "xn--097ccd" }; // Surrogate pairs
-            yield return new object[] { "\uD800\uDF00\u0061\uD800\uDF01\u0042\uD800\uDF02", 0, 8, "xn--ab-ic6nfag" }; // Surrogate pairs separated by ASCII
-            yield return new object[] { "\uD800\uDF00\u0101\uD800\uDF01\u305D\uD800\uDF02", 0, 8, "xn--yda263v6b6kfag" }; // Surrogate pairs separated by non-ASCII
-            yield return new object[] { "\uD800\uDF00\u0101\uD800\uDF01\u0061\uD800\uDF02", 0, 8, "xn--a-nha4529qfag" }; // Surrogate pairs separated by ASCII and non-ASCII
+            yield return new object[]
+            {
+                "\uD800\uDF00\uD800\uDF01\uD800\uDF02",
+                0,
+                6,
+                "xn--097ccd"
+            }; // Surrogate pairs
+            yield return new object[]
+            {
+                "\uD800\uDF00\u0061\uD800\uDF01\u0042\uD800\uDF02",
+                0,
+                8,
+                "xn--ab-ic6nfag"
+            }; // Surrogate pairs separated by ASCII
+            yield return new object[]
+            {
+                "\uD800\uDF00\u0101\uD800\uDF01\u305D\uD800\uDF02",
+                0,
+                8,
+                "xn--yda263v6b6kfag"
+            }; // Surrogate pairs separated by non-ASCII
+            yield return new object[]
+            {
+                "\uD800\uDF00\u0101\uD800\uDF01\u0061\uD800\uDF02",
+                0,
+                8,
+                "xn--a-nha4529qfag"
+            }; // Surrogate pairs separated by ASCII and non-ASCII
             yield return new object[] { "\u0061\u0062\u0063", 0, 3, "\u0061\u0062\u0063" }; // ASCII only code points
-            yield return new object[] { "\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067", 0, 7, "xn--d9juau41awczczp" }; // Non-ASCII only code points
-            yield return new object[] { "\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0", 0, 9, "xn--de-jg4avhby1noc0d" }; // ASCII and non-ASCII code points
-            yield return new object[] { "\u0061\u0062\u0063.\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067.\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0", 0, 21, "abc.xn--d9juau41awczczp.xn--de-jg4avhby1noc0d" }; // Fully qualified domain name
+            yield return new object[]
+            {
+                "\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067",
+                0,
+                7,
+                "xn--d9juau41awczczp"
+            }; // Non-ASCII only code points
+            yield return new object[]
+            {
+                "\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0",
+                0,
+                9,
+                "xn--de-jg4avhby1noc0d"
+            }; // ASCII and non-ASCII code points
+            yield return new object[]
+            {
+                "\u0061\u0062\u0063.\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067.\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0",
+                0,
+                21,
+                "abc.xn--d9juau41awczczp.xn--de-jg4avhby1noc0d"
+            }; // Fully qualified domain name
 
             // Embedded domain name conversion (NLS + only)(Priority 1)
             // Per the spec [7], "The index and count parameters (when provided) allow the
@@ -447,13 +917,55 @@ namespace System.Globalization.Tests
             // label, not the whole input string (if the input string contains more
             // character than the substring to convert)."
             // Fully Qualified Domain Name (Label1.Label2.Label3)
-            yield return new object[] { "\u0061\u0062\u0063.\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067.\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0", 0, 21, "abc.xn--d9juau41awczczp.xn--de-jg4avhby1noc0d" };
-            yield return new object[] { "\u0061\u0062\u0063.\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067.\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0", 0, 11, "abc.xn--d9juau41awczczp" };
-            yield return new object[] { "\u0061\u0062\u0063.\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067.\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0", 0, 12, "abc.xn--d9juau41awczczp." };
-            yield return new object[] { "\u0061\u0062\u0063.\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067.\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0", 4, 17, "xn--d9juau41awczczp.xn--de-jg4avhby1noc0d" };
-            yield return new object[] { "\u0061\u0062\u0063.\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067.\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0", 4, 7, "xn--d9juau41awczczp" };
-            yield return new object[] { "\u0061\u0062\u0063.\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067.\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0", 4, 8, "xn--d9juau41awczczp." };
-            yield return new object[] { "\u0061\u0062\u0063.\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067.\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0", 12, 9, "xn--de-jg4avhby1noc0d" };
+            yield return new object[]
+            {
+                "\u0061\u0062\u0063.\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067.\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0",
+                0,
+                21,
+                "abc.xn--d9juau41awczczp.xn--de-jg4avhby1noc0d"
+            };
+            yield return new object[]
+            {
+                "\u0061\u0062\u0063.\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067.\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0",
+                0,
+                11,
+                "abc.xn--d9juau41awczczp"
+            };
+            yield return new object[]
+            {
+                "\u0061\u0062\u0063.\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067.\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0",
+                0,
+                12,
+                "abc.xn--d9juau41awczczp."
+            };
+            yield return new object[]
+            {
+                "\u0061\u0062\u0063.\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067.\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0",
+                4,
+                17,
+                "xn--d9juau41awczczp.xn--de-jg4avhby1noc0d"
+            };
+            yield return new object[]
+            {
+                "\u0061\u0062\u0063.\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067.\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0",
+                4,
+                7,
+                "xn--d9juau41awczczp"
+            };
+            yield return new object[]
+            {
+                "\u0061\u0062\u0063.\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067.\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0",
+                4,
+                8,
+                "xn--d9juau41awczczp."
+            };
+            yield return new object[]
+            {
+                "\u0061\u0062\u0063.\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067.\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0",
+                12,
+                9,
+                "xn--de-jg4avhby1noc0d"
+            };
         }
 
         public static IEnumerable<object[]> GetUnicode_TestData()
@@ -463,16 +975,58 @@ namespace System.Globalization.Tests
 
             yield return new object[] { "xn--aa-cla", 0, 10, "\u0101\u0061a" };
             yield return new object[] { "xn--ab-dla", 0, 10, "\u0061\u0101\u0062" };
-            yield return new object[] { "xn--ab-ela", 0, 10, "\u0061\u0062\u0101"  };
+            yield return new object[] { "xn--ab-ela", 0, 10, "\u0061\u0062\u0101" };
 
-            yield return new object[] { "xn--097ccd", 0, 10, "\uD800\uDF00\uD800\uDF01\uD800\uDF02" }; // Surrogate pairs
-            yield return new object[] { "xn--ab-ic6nfag", 0, 14, "\uD800\uDF00\u0061\uD800\uDF01b\uD800\uDF02" }; // Surrogate pairs separated by ASCII
-            yield return new object[] { "xn--yda263v6b6kfag", 0, 18, "\uD800\uDF00\u0101\uD800\uDF01\u305D\uD800\uDF02" }; // Surrogate pairs separated by non-ASCII
-            yield return new object[] { "xn--a-nha4529qfag", 0, 17, "\uD800\uDF00\u0101\uD800\uDF01\u0061\uD800\uDF02" }; // Surrogate pairs separated by ASCII and non-ASCII
+            yield return new object[]
+            {
+                "xn--097ccd",
+                0,
+                10,
+                "\uD800\uDF00\uD800\uDF01\uD800\uDF02"
+            }; // Surrogate pairs
+            yield return new object[]
+            {
+                "xn--ab-ic6nfag",
+                0,
+                14,
+                "\uD800\uDF00\u0061\uD800\uDF01b\uD800\uDF02"
+            }; // Surrogate pairs separated by ASCII
+            yield return new object[]
+            {
+                "xn--yda263v6b6kfag",
+                0,
+                18,
+                "\uD800\uDF00\u0101\uD800\uDF01\u305D\uD800\uDF02"
+            }; // Surrogate pairs separated by non-ASCII
+            yield return new object[]
+            {
+                "xn--a-nha4529qfag",
+                0,
+                17,
+                "\uD800\uDF00\u0101\uD800\uDF01\u0061\uD800\uDF02"
+            }; // Surrogate pairs separated by ASCII and non-ASCII
             yield return new object[] { "\u0061\u0062\u0063", 0, 3, "\u0061\u0062\u0063" }; // ASCII only code points
-            yield return new object[] { "xn--d9juau41awczczp", 0, 19, "\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067" }; // Non-ASCII only code points
-            yield return new object[] { "xn--de-jg4avhby1noc0d", 0, 21, "\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0" }; // ASCII and non-ASCII code points
-            yield return new object[] { "abc.xn--d9juau41awczczp.xn--de-jg4avhby1noc0d", 0, 45, "\u0061\u0062\u0063.\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067.\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0" }; // Fully qualified domain name
+            yield return new object[]
+            {
+                "xn--d9juau41awczczp",
+                0,
+                19,
+                "\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067"
+            }; // Non-ASCII only code points
+            yield return new object[]
+            {
+                "xn--de-jg4avhby1noc0d",
+                0,
+                21,
+                "\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0"
+            }; // ASCII and non-ASCII code points
+            yield return new object[]
+            {
+                "abc.xn--d9juau41awczczp.xn--de-jg4avhby1noc0d",
+                0,
+                45,
+                "\u0061\u0062\u0063.\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067.\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0"
+            }; // Fully qualified domain name
 
             // Embedded domain name conversion (NLS + only)(Priority 1)
             // Per the spec [7], "The index and count parameters (when provided) allow the
@@ -481,13 +1035,55 @@ namespace System.Globalization.Tests
             // label, not the whole input string (if the input string contains more
             // character than the substring to convert)."
             // Fully Qualified Domain Name (Label1.Label2.Label3)
-            yield return new object[] { "abc.xn--d9juau41awczczp.xn--de-jg4avhby1noc0d", 0, 45, "\u0061\u0062\u0063.\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067.\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0" };
-            yield return new object[] { "abc.xn--d9juau41awczczp", 0, 23, "\u0061\u0062\u0063.\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067" };
-            yield return new object[] { "abc.xn--d9juau41awczczp.", 0, 24, "\u0061\u0062\u0063.\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067." };
-            yield return new object[] { "xn--d9juau41awczczp.xn--de-jg4avhby1noc0d", 0, 41, "\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067.\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0" };
-            yield return new object[] { "xn--d9juau41awczczp", 0, 19, "\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067" };
-            yield return new object[] { "xn--d9juau41awczczp.", 0, 20, "\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067." };
-            yield return new object[] { "xn--de-jg4avhby1noc0d", 0, 21, "\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0" };
+            yield return new object[]
+            {
+                "abc.xn--d9juau41awczczp.xn--de-jg4avhby1noc0d",
+                0,
+                45,
+                "\u0061\u0062\u0063.\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067.\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0"
+            };
+            yield return new object[]
+            {
+                "abc.xn--d9juau41awczczp",
+                0,
+                23,
+                "\u0061\u0062\u0063.\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067"
+            };
+            yield return new object[]
+            {
+                "abc.xn--d9juau41awczczp.",
+                0,
+                24,
+                "\u0061\u0062\u0063.\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067."
+            };
+            yield return new object[]
+            {
+                "xn--d9juau41awczczp.xn--de-jg4avhby1noc0d",
+                0,
+                41,
+                "\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067.\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0"
+            };
+            yield return new object[]
+            {
+                "xn--d9juau41awczczp",
+                0,
+                19,
+                "\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067"
+            };
+            yield return new object[]
+            {
+                "xn--d9juau41awczczp.",
+                0,
+                20,
+                "\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067."
+            };
+            yield return new object[]
+            {
+                "xn--de-jg4avhby1noc0d",
+                0,
+                21,
+                "\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0"
+            };
         }
 
         [Fact]
@@ -506,48 +1102,137 @@ namespace System.Globalization.Tests
             // DateTimeInfo
             //
 
-            Assert.Equal(CultureInfo.InvariantCulture.DateTimeFormat.AbbreviatedDayNames, ci.DateTimeFormat.AbbreviatedDayNames);
-            Assert.Equal(CultureInfo.InvariantCulture.DateTimeFormat.AbbreviatedMonthGenitiveNames, ci.DateTimeFormat.AbbreviatedMonthGenitiveNames);
-            Assert.Equal(CultureInfo.InvariantCulture.DateTimeFormat.AbbreviatedMonthNames, ci.DateTimeFormat.AbbreviatedMonthNames);
-            Assert.Equal(CultureInfo.InvariantCulture.DateTimeFormat.AMDesignator, ci.DateTimeFormat.AMDesignator);
+            Assert.Equal(
+                CultureInfo.InvariantCulture.DateTimeFormat.AbbreviatedDayNames,
+                ci.DateTimeFormat.AbbreviatedDayNames
+            );
+            Assert.Equal(
+                CultureInfo.InvariantCulture.DateTimeFormat.AbbreviatedMonthGenitiveNames,
+                ci.DateTimeFormat.AbbreviatedMonthGenitiveNames
+            );
+            Assert.Equal(
+                CultureInfo.InvariantCulture.DateTimeFormat.AbbreviatedMonthNames,
+                ci.DateTimeFormat.AbbreviatedMonthNames
+            );
+            Assert.Equal(
+                CultureInfo.InvariantCulture.DateTimeFormat.AMDesignator,
+                ci.DateTimeFormat.AMDesignator
+            );
             Assert.True(ci.DateTimeFormat.Calendar is GregorianCalendar);
-            Assert.Equal(CultureInfo.InvariantCulture.DateTimeFormat.CalendarWeekRule, ci.DateTimeFormat.CalendarWeekRule);
-            Assert.Equal(CultureInfo.InvariantCulture.DateTimeFormat.DateSeparator, ci.DateTimeFormat.DateSeparator);
-            Assert.Equal(CultureInfo.InvariantCulture.DateTimeFormat.DayNames, ci.DateTimeFormat.DayNames);
-            Assert.Equal(CultureInfo.InvariantCulture.DateTimeFormat.FirstDayOfWeek, ci.DateTimeFormat.FirstDayOfWeek);
+            Assert.Equal(
+                CultureInfo.InvariantCulture.DateTimeFormat.CalendarWeekRule,
+                ci.DateTimeFormat.CalendarWeekRule
+            );
+            Assert.Equal(
+                CultureInfo.InvariantCulture.DateTimeFormat.DateSeparator,
+                ci.DateTimeFormat.DateSeparator
+            );
+            Assert.Equal(
+                CultureInfo.InvariantCulture.DateTimeFormat.DayNames,
+                ci.DateTimeFormat.DayNames
+            );
+            Assert.Equal(
+                CultureInfo.InvariantCulture.DateTimeFormat.FirstDayOfWeek,
+                ci.DateTimeFormat.FirstDayOfWeek
+            );
 
             for (DayOfWeek dow = DayOfWeek.Sunday; dow < DayOfWeek.Saturday; dow++)
-                Assert.Equal(CultureInfo.InvariantCulture.DateTimeFormat.GetAbbreviatedDayName(dow), ci.DateTimeFormat.GetAbbreviatedDayName(dow));
-            Assert.Equal(CultureInfo.InvariantCulture.DateTimeFormat.GetAbbreviatedEraName(1), ci.DateTimeFormat.GetAbbreviatedEraName(1));
+                Assert.Equal(
+                    CultureInfo.InvariantCulture.DateTimeFormat.GetAbbreviatedDayName(dow),
+                    ci.DateTimeFormat.GetAbbreviatedDayName(dow)
+                );
+            Assert.Equal(
+                CultureInfo.InvariantCulture.DateTimeFormat.GetAbbreviatedEraName(1),
+                ci.DateTimeFormat.GetAbbreviatedEraName(1)
+            );
 
             for (int i = 1; i <= 12; i++)
-                Assert.Equal(CultureInfo.InvariantCulture.DateTimeFormat.GetAbbreviatedMonthName(i), ci.DateTimeFormat.GetAbbreviatedMonthName(i));
+                Assert.Equal(
+                    CultureInfo.InvariantCulture.DateTimeFormat.GetAbbreviatedMonthName(i),
+                    ci.DateTimeFormat.GetAbbreviatedMonthName(i)
+                );
 
-            Assert.Equal(CultureInfo.InvariantCulture.DateTimeFormat.GetAllDateTimePatterns(), ci.DateTimeFormat.GetAllDateTimePatterns());
+            Assert.Equal(
+                CultureInfo.InvariantCulture.DateTimeFormat.GetAllDateTimePatterns(),
+                ci.DateTimeFormat.GetAllDateTimePatterns()
+            );
 
             for (DayOfWeek dow = DayOfWeek.Sunday; dow < DayOfWeek.Saturday; dow++)
-                Assert.Equal(CultureInfo.InvariantCulture.DateTimeFormat.GetDayName(dow), ci.DateTimeFormat.GetDayName(dow));
+                Assert.Equal(
+                    CultureInfo.InvariantCulture.DateTimeFormat.GetDayName(dow),
+                    ci.DateTimeFormat.GetDayName(dow)
+                );
 
-            Assert.Equal(CultureInfo.InvariantCulture.DateTimeFormat.GetEra(CultureInfo.InvariantCulture.DateTimeFormat.GetEraName(1)), ci.DateTimeFormat.GetEra(ci.DateTimeFormat.GetEraName(1)));
+            Assert.Equal(
+                CultureInfo.InvariantCulture.DateTimeFormat.GetEra(
+                    CultureInfo.InvariantCulture.DateTimeFormat.GetEraName(1)
+                ),
+                ci.DateTimeFormat.GetEra(ci.DateTimeFormat.GetEraName(1))
+            );
 
             for (int i = 1; i <= 12; i++)
-                Assert.Equal(CultureInfo.InvariantCulture.DateTimeFormat.GetMonthName(i), ci.DateTimeFormat.GetMonthName(i));
+                Assert.Equal(
+                    CultureInfo.InvariantCulture.DateTimeFormat.GetMonthName(i),
+                    ci.DateTimeFormat.GetMonthName(i)
+                );
             for (DayOfWeek dow = DayOfWeek.Sunday; dow < DayOfWeek.Saturday; dow++)
-                Assert.Equal(CultureInfo.InvariantCulture.DateTimeFormat.GetShortestDayName(dow), ci.DateTimeFormat.GetShortestDayName(dow));
+                Assert.Equal(
+                    CultureInfo.InvariantCulture.DateTimeFormat.GetShortestDayName(dow),
+                    ci.DateTimeFormat.GetShortestDayName(dow)
+                );
 
-            Assert.Equal(CultureInfo.InvariantCulture.DateTimeFormat.LongDatePattern, ci.DateTimeFormat.LongDatePattern);
-            Assert.Equal(CultureInfo.InvariantCulture.DateTimeFormat.LongTimePattern, ci.DateTimeFormat.LongTimePattern);
-            Assert.Equal(CultureInfo.InvariantCulture.DateTimeFormat.MonthDayPattern, ci.DateTimeFormat.MonthDayPattern);
-            Assert.Equal(CultureInfo.InvariantCulture.DateTimeFormat.MonthGenitiveNames, ci.DateTimeFormat.MonthGenitiveNames);
-            Assert.Equal(CultureInfo.InvariantCulture.DateTimeFormat.MonthNames, ci.DateTimeFormat.MonthNames);
-            Assert.Equal(CultureInfo.InvariantCulture.DateTimeFormat.NativeCalendarName, ci.DateTimeFormat.NativeCalendarName);
-            Assert.Equal(CultureInfo.InvariantCulture.DateTimeFormat.PMDesignator, ci.DateTimeFormat.PMDesignator);
-            Assert.Equal(CultureInfo.InvariantCulture.DateTimeFormat.RFC1123Pattern, ci.DateTimeFormat.RFC1123Pattern);
-            Assert.Equal(CultureInfo.InvariantCulture.DateTimeFormat.ShortDatePattern, ci.DateTimeFormat.ShortDatePattern);
-            Assert.Equal(CultureInfo.InvariantCulture.DateTimeFormat.ShortestDayNames, ci.DateTimeFormat.ShortestDayNames);
-            Assert.Equal(CultureInfo.InvariantCulture.DateTimeFormat.ShortTimePattern, ci.DateTimeFormat.ShortTimePattern);
-            Assert.Equal(CultureInfo.InvariantCulture.DateTimeFormat.TimeSeparator, ci.DateTimeFormat.TimeSeparator);
-            Assert.Equal(CultureInfo.InvariantCulture.DateTimeFormat.YearMonthPattern, ci.DateTimeFormat.YearMonthPattern);
+            Assert.Equal(
+                CultureInfo.InvariantCulture.DateTimeFormat.LongDatePattern,
+                ci.DateTimeFormat.LongDatePattern
+            );
+            Assert.Equal(
+                CultureInfo.InvariantCulture.DateTimeFormat.LongTimePattern,
+                ci.DateTimeFormat.LongTimePattern
+            );
+            Assert.Equal(
+                CultureInfo.InvariantCulture.DateTimeFormat.MonthDayPattern,
+                ci.DateTimeFormat.MonthDayPattern
+            );
+            Assert.Equal(
+                CultureInfo.InvariantCulture.DateTimeFormat.MonthGenitiveNames,
+                ci.DateTimeFormat.MonthGenitiveNames
+            );
+            Assert.Equal(
+                CultureInfo.InvariantCulture.DateTimeFormat.MonthNames,
+                ci.DateTimeFormat.MonthNames
+            );
+            Assert.Equal(
+                CultureInfo.InvariantCulture.DateTimeFormat.NativeCalendarName,
+                ci.DateTimeFormat.NativeCalendarName
+            );
+            Assert.Equal(
+                CultureInfo.InvariantCulture.DateTimeFormat.PMDesignator,
+                ci.DateTimeFormat.PMDesignator
+            );
+            Assert.Equal(
+                CultureInfo.InvariantCulture.DateTimeFormat.RFC1123Pattern,
+                ci.DateTimeFormat.RFC1123Pattern
+            );
+            Assert.Equal(
+                CultureInfo.InvariantCulture.DateTimeFormat.ShortDatePattern,
+                ci.DateTimeFormat.ShortDatePattern
+            );
+            Assert.Equal(
+                CultureInfo.InvariantCulture.DateTimeFormat.ShortestDayNames,
+                ci.DateTimeFormat.ShortestDayNames
+            );
+            Assert.Equal(
+                CultureInfo.InvariantCulture.DateTimeFormat.ShortTimePattern,
+                ci.DateTimeFormat.ShortTimePattern
+            );
+            Assert.Equal(
+                CultureInfo.InvariantCulture.DateTimeFormat.TimeSeparator,
+                ci.DateTimeFormat.TimeSeparator
+            );
+            Assert.Equal(
+                CultureInfo.InvariantCulture.DateTimeFormat.YearMonthPattern,
+                ci.DateTimeFormat.YearMonthPattern
+            );
 
             //
             // Culture data
@@ -555,11 +1240,17 @@ namespace System.Globalization.Tests
 
             Assert.True(ci.Calendar is GregorianCalendar);
 
-            CultureTypes ct = ci.Name == "" ? CultureInfo.InvariantCulture.CultureTypes : CultureInfo.InvariantCulture.CultureTypes | CultureTypes.UserCustomCulture;
+            CultureTypes ct =
+                ci.Name == ""
+                    ? CultureInfo.InvariantCulture.CultureTypes
+                    : CultureInfo.InvariantCulture.CultureTypes | CultureTypes.UserCustomCulture;
             Assert.Equal(ct, ci.CultureTypes);
             Assert.Equal(CultureInfo.InvariantCulture.NativeName, ci.DisplayName);
             Assert.Equal(CultureInfo.InvariantCulture.EnglishName, ci.EnglishName);
-            Assert.Equal(CultureInfo.InvariantCulture.GetConsoleFallbackUICulture(), ci.GetConsoleFallbackUICulture());
+            Assert.Equal(
+                CultureInfo.InvariantCulture.GetConsoleFallbackUICulture(),
+                ci.GetConsoleFallbackUICulture()
+            );
             Assert.Equal(cultureName, ci.IetfLanguageTag);
             Assert.Equal(CultureInfo.InvariantCulture.IsNeutralCulture, ci.IsNeutralCulture);
             Assert.Equal(CultureInfo.InvariantCulture.KeyboardLayoutId, ci.KeyboardLayoutId);
@@ -569,9 +1260,18 @@ namespace System.Globalization.Tests
             Assert.Equal(1, ci.OptionalCalendars.Length);
             Assert.True(ci.OptionalCalendars[0] is GregorianCalendar);
             Assert.Equal(CultureInfo.InvariantCulture.Parent, ci.Parent);
-            Assert.Equal(CultureInfo.InvariantCulture.ThreeLetterISOLanguageName, ci.ThreeLetterISOLanguageName);
-            Assert.Equal(CultureInfo.InvariantCulture.ThreeLetterWindowsLanguageName, ci.ThreeLetterWindowsLanguageName);
-            Assert.Equal(CultureInfo.InvariantCulture.TwoLetterISOLanguageName, ci.TwoLetterISOLanguageName);
+            Assert.Equal(
+                CultureInfo.InvariantCulture.ThreeLetterISOLanguageName,
+                ci.ThreeLetterISOLanguageName
+            );
+            Assert.Equal(
+                CultureInfo.InvariantCulture.ThreeLetterWindowsLanguageName,
+                ci.ThreeLetterWindowsLanguageName
+            );
+            Assert.Equal(
+                CultureInfo.InvariantCulture.TwoLetterISOLanguageName,
+                ci.TwoLetterISOLanguageName
+            );
             Assert.Equal(ci.Name == "" ? false : true, ci.UseUserOverride);
 
             //
@@ -588,52 +1288,153 @@ namespace System.Globalization.Tests
             // NumberFormatInfo
             //
 
-            Assert.Equal(CultureInfo.InvariantCulture.NumberFormat.CurrencyDecimalDigits, ci.NumberFormat.CurrencyDecimalDigits);
-            Assert.Equal(CultureInfo.InvariantCulture.NumberFormat.CurrencyDecimalSeparator, ci.NumberFormat.CurrencyDecimalSeparator);
-            Assert.Equal(CultureInfo.InvariantCulture.NumberFormat.CurrencyGroupSeparator, ci.NumberFormat.CurrencyGroupSeparator);
-            Assert.Equal(CultureInfo.InvariantCulture.NumberFormat.CurrencyGroupSizes, ci.NumberFormat.CurrencyGroupSizes);
-            Assert.Equal(CultureInfo.InvariantCulture.NumberFormat.CurrencyNegativePattern, ci.NumberFormat.CurrencyNegativePattern);
-            Assert.Equal(CultureInfo.InvariantCulture.NumberFormat.CurrencyPositivePattern, ci.NumberFormat.CurrencyPositivePattern);
-            Assert.Equal(CultureInfo.InvariantCulture.NumberFormat.CurrencySymbol, ci.NumberFormat.CurrencySymbol);
-            Assert.Equal(CultureInfo.InvariantCulture.NumberFormat.DigitSubstitution, ci.NumberFormat.DigitSubstitution);
-            Assert.Equal(CultureInfo.InvariantCulture.NumberFormat.NaNSymbol, ci.NumberFormat.NaNSymbol);
-            Assert.Equal(CultureInfo.InvariantCulture.NumberFormat.NativeDigits, ci.NumberFormat.NativeDigits);
-            Assert.Equal(CultureInfo.InvariantCulture.NumberFormat.NegativeInfinitySymbol, ci.NumberFormat.NegativeInfinitySymbol);
-            Assert.Equal(CultureInfo.InvariantCulture.NumberFormat.NegativeSign, ci.NumberFormat.NegativeSign);
-            Assert.Equal(CultureInfo.InvariantCulture.NumberFormat.NumberDecimalDigits, ci.NumberFormat.NumberDecimalDigits);
-            Assert.Equal(CultureInfo.InvariantCulture.NumberFormat.NumberDecimalSeparator, ci.NumberFormat.NumberDecimalSeparator);
-            Assert.Equal(CultureInfo.InvariantCulture.NumberFormat.NumberGroupSeparator, ci.NumberFormat.NumberGroupSeparator);
-            Assert.Equal(CultureInfo.InvariantCulture.NumberFormat.NumberGroupSizes, ci.NumberFormat.NumberGroupSizes);
-            Assert.Equal(CultureInfo.InvariantCulture.NumberFormat.NumberNegativePattern, ci.NumberFormat.NumberNegativePattern);
-            Assert.Equal(CultureInfo.InvariantCulture.NumberFormat.PercentDecimalDigits, ci.NumberFormat.PercentDecimalDigits);
-            Assert.Equal(CultureInfo.InvariantCulture.NumberFormat.PercentDecimalSeparator, ci.NumberFormat.PercentDecimalSeparator);
-            Assert.Equal(CultureInfo.InvariantCulture.NumberFormat.PercentGroupSeparator, ci.NumberFormat.PercentGroupSeparator);
-            Assert.Equal(CultureInfo.InvariantCulture.NumberFormat.PercentGroupSizes, ci.NumberFormat.PercentGroupSizes);
-            Assert.Equal(CultureInfo.InvariantCulture.NumberFormat.PercentNegativePattern, ci.NumberFormat.PercentNegativePattern);
-            Assert.Equal(CultureInfo.InvariantCulture.NumberFormat.PercentPositivePattern, ci.NumberFormat.PercentPositivePattern);
-            Assert.Equal(CultureInfo.InvariantCulture.NumberFormat.PercentSymbol, ci.NumberFormat.PercentSymbol);
-            Assert.Equal(CultureInfo.InvariantCulture.NumberFormat.PerMilleSymbol, ci.NumberFormat.PerMilleSymbol);
-            Assert.Equal(CultureInfo.InvariantCulture.NumberFormat.PositiveInfinitySymbol, ci.NumberFormat.PositiveInfinitySymbol);
-            Assert.Equal(CultureInfo.InvariantCulture.NumberFormat.PositiveSign, ci.NumberFormat.PositiveSign);
+            Assert.Equal(
+                CultureInfo.InvariantCulture.NumberFormat.CurrencyDecimalDigits,
+                ci.NumberFormat.CurrencyDecimalDigits
+            );
+            Assert.Equal(
+                CultureInfo.InvariantCulture.NumberFormat.CurrencyDecimalSeparator,
+                ci.NumberFormat.CurrencyDecimalSeparator
+            );
+            Assert.Equal(
+                CultureInfo.InvariantCulture.NumberFormat.CurrencyGroupSeparator,
+                ci.NumberFormat.CurrencyGroupSeparator
+            );
+            Assert.Equal(
+                CultureInfo.InvariantCulture.NumberFormat.CurrencyGroupSizes,
+                ci.NumberFormat.CurrencyGroupSizes
+            );
+            Assert.Equal(
+                CultureInfo.InvariantCulture.NumberFormat.CurrencyNegativePattern,
+                ci.NumberFormat.CurrencyNegativePattern
+            );
+            Assert.Equal(
+                CultureInfo.InvariantCulture.NumberFormat.CurrencyPositivePattern,
+                ci.NumberFormat.CurrencyPositivePattern
+            );
+            Assert.Equal(
+                CultureInfo.InvariantCulture.NumberFormat.CurrencySymbol,
+                ci.NumberFormat.CurrencySymbol
+            );
+            Assert.Equal(
+                CultureInfo.InvariantCulture.NumberFormat.DigitSubstitution,
+                ci.NumberFormat.DigitSubstitution
+            );
+            Assert.Equal(
+                CultureInfo.InvariantCulture.NumberFormat.NaNSymbol,
+                ci.NumberFormat.NaNSymbol
+            );
+            Assert.Equal(
+                CultureInfo.InvariantCulture.NumberFormat.NativeDigits,
+                ci.NumberFormat.NativeDigits
+            );
+            Assert.Equal(
+                CultureInfo.InvariantCulture.NumberFormat.NegativeInfinitySymbol,
+                ci.NumberFormat.NegativeInfinitySymbol
+            );
+            Assert.Equal(
+                CultureInfo.InvariantCulture.NumberFormat.NegativeSign,
+                ci.NumberFormat.NegativeSign
+            );
+            Assert.Equal(
+                CultureInfo.InvariantCulture.NumberFormat.NumberDecimalDigits,
+                ci.NumberFormat.NumberDecimalDigits
+            );
+            Assert.Equal(
+                CultureInfo.InvariantCulture.NumberFormat.NumberDecimalSeparator,
+                ci.NumberFormat.NumberDecimalSeparator
+            );
+            Assert.Equal(
+                CultureInfo.InvariantCulture.NumberFormat.NumberGroupSeparator,
+                ci.NumberFormat.NumberGroupSeparator
+            );
+            Assert.Equal(
+                CultureInfo.InvariantCulture.NumberFormat.NumberGroupSizes,
+                ci.NumberFormat.NumberGroupSizes
+            );
+            Assert.Equal(
+                CultureInfo.InvariantCulture.NumberFormat.NumberNegativePattern,
+                ci.NumberFormat.NumberNegativePattern
+            );
+            Assert.Equal(
+                CultureInfo.InvariantCulture.NumberFormat.PercentDecimalDigits,
+                ci.NumberFormat.PercentDecimalDigits
+            );
+            Assert.Equal(
+                CultureInfo.InvariantCulture.NumberFormat.PercentDecimalSeparator,
+                ci.NumberFormat.PercentDecimalSeparator
+            );
+            Assert.Equal(
+                CultureInfo.InvariantCulture.NumberFormat.PercentGroupSeparator,
+                ci.NumberFormat.PercentGroupSeparator
+            );
+            Assert.Equal(
+                CultureInfo.InvariantCulture.NumberFormat.PercentGroupSizes,
+                ci.NumberFormat.PercentGroupSizes
+            );
+            Assert.Equal(
+                CultureInfo.InvariantCulture.NumberFormat.PercentNegativePattern,
+                ci.NumberFormat.PercentNegativePattern
+            );
+            Assert.Equal(
+                CultureInfo.InvariantCulture.NumberFormat.PercentPositivePattern,
+                ci.NumberFormat.PercentPositivePattern
+            );
+            Assert.Equal(
+                CultureInfo.InvariantCulture.NumberFormat.PercentSymbol,
+                ci.NumberFormat.PercentSymbol
+            );
+            Assert.Equal(
+                CultureInfo.InvariantCulture.NumberFormat.PerMilleSymbol,
+                ci.NumberFormat.PerMilleSymbol
+            );
+            Assert.Equal(
+                CultureInfo.InvariantCulture.NumberFormat.PositiveInfinitySymbol,
+                ci.NumberFormat.PositiveInfinitySymbol
+            );
+            Assert.Equal(
+                CultureInfo.InvariantCulture.NumberFormat.PositiveSign,
+                ci.NumberFormat.PositiveSign
+            );
 
             //
             // TextInfo
             //
 
-            Assert.Equal(CultureInfo.InvariantCulture.TextInfo.ANSICodePage, ci.TextInfo.ANSICodePage);
+            Assert.Equal(
+                CultureInfo.InvariantCulture.TextInfo.ANSICodePage,
+                ci.TextInfo.ANSICodePage
+            );
             Assert.Equal(cultureName, ci.TextInfo.CultureName);
-            Assert.Equal(CultureInfo.InvariantCulture.TextInfo.EBCDICCodePage, ci.TextInfo.EBCDICCodePage);
-            Assert.Equal(CultureInfo.InvariantCulture.TextInfo.IsRightToLeft, ci.TextInfo.IsRightToLeft);
+            Assert.Equal(
+                CultureInfo.InvariantCulture.TextInfo.EBCDICCodePage,
+                ci.TextInfo.EBCDICCodePage
+            );
+            Assert.Equal(
+                CultureInfo.InvariantCulture.TextInfo.IsRightToLeft,
+                ci.TextInfo.IsRightToLeft
+            );
             Assert.Equal(ci.Name == "" ? 0x7F : 0x1000, ci.TextInfo.LCID);
-            Assert.Equal(CultureInfo.InvariantCulture.TextInfo.ListSeparator, ci.TextInfo.ListSeparator);
-            Assert.Equal(CultureInfo.InvariantCulture.TextInfo.MacCodePage, ci.TextInfo.MacCodePage);
-            Assert.Equal(CultureInfo.InvariantCulture.TextInfo.OEMCodePage, ci.TextInfo.OEMCodePage);
+            Assert.Equal(
+                CultureInfo.InvariantCulture.TextInfo.ListSeparator,
+                ci.TextInfo.ListSeparator
+            );
+            Assert.Equal(
+                CultureInfo.InvariantCulture.TextInfo.MacCodePage,
+                ci.TextInfo.MacCodePage
+            );
+            Assert.Equal(
+                CultureInfo.InvariantCulture.TextInfo.OEMCodePage,
+                ci.TextInfo.OEMCodePage
+            );
 
             //
             // CompareInfo
             //
             Assert.Equal(ci.Name == "" ? 0x7F : 0x1000, ci.CompareInfo.LCID);
-            Assert.True(cultureName.Equals(ci.CompareInfo.Name, StringComparison.OrdinalIgnoreCase));
+            Assert.True(
+                cultureName.Equals(ci.CompareInfo.Name, StringComparison.OrdinalIgnoreCase)
+            );
         }
 
         [Theory]
@@ -649,24 +1450,40 @@ namespace System.Globalization.Tests
             ci.DateTimeFormat.Calendar = calendar;
             Assert.Equal(calendar, ci.DateTimeFormat.Calendar);
 
-            Assert.Throws<ArgumentOutOfRangeException>(() => ci.DateTimeFormat.Calendar = new TaiwanCalendar());
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => ci.DateTimeFormat.Calendar = new TaiwanCalendar()
+            );
         }
 
         [Fact]
         public void TestEnum()
         {
-            Assert.Equal(new CultureInfo[1] { CultureInfo.InvariantCulture }, CultureInfo.GetCultures(CultureTypes.AllCultures));
+            Assert.Equal(
+                new CultureInfo[1] { CultureInfo.InvariantCulture },
+                CultureInfo.GetCultures(CultureTypes.AllCultures)
+            );
         }
 
         [Theory]
         [MemberData(nameof(Cultures_TestData))]
         public void TestSortVersion(string cultureName)
         {
-            SortVersion version = new SortVersion(0, new Guid(0, 0, 0, 0, 0, 0, 0,
-                                                            (byte)(0x7F >> 24),
-                                                            (byte)((0x7F & 0x00FF0000) >> 16),
-                                                            (byte)((0x7F & 0x0000FF00) >> 8),
-                                                            (byte)(0x7F & 0xFF)));
+            SortVersion version = new SortVersion(
+                0,
+                new Guid(
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    (byte)(0x7F >> 24),
+                    (byte)((0x7F & 0x00FF0000) >> 16),
+                    (byte)((0x7F & 0x0000FF00) >> 8),
+                    (byte)(0x7F & 0xFF)
+                )
+            );
             Assert.Equal(version, new CultureInfo(cultureName).CompareInfo.Version);
         }
 
@@ -679,8 +1496,14 @@ namespace System.Globalization.Tests
         {
             using BoundedMemory<char> boundedMemory = BoundedMemory.Allocate<char>(0); // AV if dereferenced
             boundedMemory.MakeReadonly();
-            ReadOnlySpan<char> dummySpan = MemoryMarshal.CreateReadOnlySpan(ref MemoryMarshal.GetReference(boundedMemory.Span), inputLength);
-            Assert.Equal(expectedSortKeyLength, CultureInfo.InvariantCulture.CompareInfo.GetSortKeyLength(dummySpan));
+            ReadOnlySpan<char> dummySpan = MemoryMarshal.CreateReadOnlySpan(
+                ref MemoryMarshal.GetReference(boundedMemory.Span),
+                inputLength
+            );
+            Assert.Equal(
+                expectedSortKeyLength,
+                CultureInfo.InvariantCulture.CompareInfo.GetSortKeyLength(dummySpan)
+            );
         }
 
         [Theory]
@@ -691,11 +1514,17 @@ namespace System.Globalization.Tests
             using BoundedMemory<char> boundedMemory = BoundedMemory.Allocate<char>(0); // AV if dereferenced
             boundedMemory.MakeReadonly();
 
-            Assert.Throws<ArgumentException>("source", () =>
-            {
-                ReadOnlySpan<char> dummySpan = MemoryMarshal.CreateReadOnlySpan(ref MemoryMarshal.GetReference(boundedMemory.Span), inputLength);
-                CultureInfo.InvariantCulture.CompareInfo.GetSortKeyLength(dummySpan);
-            });
+            Assert.Throws<ArgumentException>(
+                "source",
+                () =>
+                {
+                    ReadOnlySpan<char> dummySpan = MemoryMarshal.CreateReadOnlySpan(
+                        ref MemoryMarshal.GetReference(boundedMemory.Span),
+                        inputLength
+                    );
+                    CultureInfo.InvariantCulture.CompareInfo.GetSortKeyLength(dummySpan);
+                }
+            );
         }
 
         [Theory]
@@ -705,7 +1534,11 @@ namespace System.Globalization.Tests
         [InlineData("Hello", CompareOptions.IgnoreCase | CompareOptions.IgnoreWidth, "HELLO")]
         [InlineData("Hell\u00F6", CompareOptions.None, "Hell\u00F6")] // U+00F6 = LATIN SMALL LETTER O WITH DIAERESIS
         [InlineData("Hell\u00F6", CompareOptions.IgnoreCase, "HELL\u00F6")] // note the final "o with diaeresis" isn't capitalized
-        public unsafe void TestSortKey_FromSpan(string input, CompareOptions options, string expected)
+        public unsafe void TestSortKey_FromSpan(
+            string input,
+            CompareOptions options,
+            string expected
+        )
         {
             byte[] expectedOutputBytes = GetExpectedInvariantOrdinalSortKey(expected);
 
@@ -713,20 +1546,33 @@ namespace System.Globalization.Tests
 
             // First, validate that too short a buffer throws
 
-            Assert.Throws<ArgumentException>("destination", () => compareInfo.GetSortKey(input, new byte[expectedOutputBytes.Length - 1], options));
+            Assert.Throws<ArgumentException>(
+                "destination",
+                () =>
+                    compareInfo.GetSortKey(input, new byte[expectedOutputBytes.Length - 1], options)
+            );
 
             // Next, validate that using a properly-sized buffer succeeds
             // We'll use BoundedMemory to check for buffer overruns
 
-            using BoundedMemory<char> boundedInputMemory = BoundedMemory.AllocateFromExistingData<char>(input);
+            using BoundedMemory<char> boundedInputMemory =
+                BoundedMemory.AllocateFromExistingData<char>(input);
             boundedInputMemory.MakeReadonly();
             ReadOnlySpan<char> boundedInputSpan = boundedInputMemory.Span;
 
-            using BoundedMemory<byte> boundedOutputMemory = BoundedMemory.Allocate<byte>(expectedOutputBytes.Length);
+            using BoundedMemory<byte> boundedOutputMemory = BoundedMemory.Allocate<byte>(
+                expectedOutputBytes.Length
+            );
             Span<byte> boundedOutputSpan = boundedOutputMemory.Span;
 
-            Assert.Equal(expectedOutputBytes.Length, compareInfo.GetSortKey(boundedInputSpan, boundedOutputSpan, options));
-            Assert.Equal(expectedOutputBytes, boundedOutputSpan[0..expectedOutputBytes.Length].ToArray());
+            Assert.Equal(
+                expectedOutputBytes.Length,
+                compareInfo.GetSortKey(boundedInputSpan, boundedOutputSpan, options)
+            );
+            Assert.Equal(
+                expectedOutputBytes,
+                boundedOutputSpan[0..expectedOutputBytes.Length].ToArray()
+            );
 
             // Now try it once more, passing a larger span where the last byte points to unallocated memory.
             // If GetSortKey attempts to write beyond the number of bytes we expect, the unit test will AV.
@@ -735,9 +1581,18 @@ namespace System.Globalization.Tests
 
             fixed (byte* pBoundedOutputSpan = boundedOutputSpan)
             {
-                boundedOutputSpan = new Span<byte>(pBoundedOutputSpan, boundedOutputSpan.Length + 1); // last byte is unallocated memory
-                Assert.Equal(expectedOutputBytes.Length, compareInfo.GetSortKey(boundedInputSpan, boundedOutputSpan, options));
-                Assert.Equal(expectedOutputBytes, boundedOutputSpan[0..expectedOutputBytes.Length].ToArray());
+                boundedOutputSpan = new Span<byte>(
+                    pBoundedOutputSpan,
+                    boundedOutputSpan.Length + 1
+                ); // last byte is unallocated memory
+                Assert.Equal(
+                    expectedOutputBytes.Length,
+                    compareInfo.GetSortKey(boundedInputSpan, boundedOutputSpan, options)
+                );
+                Assert.Equal(
+                    expectedOutputBytes,
+                    boundedOutputSpan[0..expectedOutputBytes.Length].ToArray()
+                );
             }
         }
 
@@ -775,7 +1630,7 @@ namespace System.Globalization.Tests
 
         private static StringComparison GetStringComparison(CompareOptions options)
         {
-            StringComparison sc = (StringComparison) 0;
+            StringComparison sc = (StringComparison)0;
 
             if ((options & CompareOptions.IgnoreCase) != 0)
                 sc |= StringComparison.CurrentCultureIgnoreCase;
@@ -796,7 +1651,14 @@ namespace System.Globalization.Tests
 
         [Theory]
         [MemberData(nameof(IndexOf_TestData))]
-        public void TestIndexOf(string source, string value, int startIndex, int count, CompareOptions options, int result)
+        public void TestIndexOf(
+            string source,
+            string value,
+            int startIndex,
+            int count,
+            CompareOptions options,
+            int result
+        )
         {
             foreach (string cul in s_cultureNames)
             {
@@ -805,18 +1667,34 @@ namespace System.Globalization.Tests
             }
 
             // static test helper method to avoid mutating input args when called in a loop
-            static void TestCore(CompareInfo compareInfo, string source, string value, int startIndex, int count, CompareOptions options, int result)
+            static void TestCore(
+                CompareInfo compareInfo,
+                string source,
+                string value,
+                int startIndex,
+                int count,
+                CompareOptions options,
+                int result
+            )
             {
-                Assert.Equal(result, compareInfo.IndexOf(source, value, startIndex, count, options));
-                Assert.Equal(result, source.IndexOf(value, startIndex, count, GetStringComparison(options)));
+                Assert.Equal(
+                    result,
+                    compareInfo.IndexOf(source, value, startIndex, count, options)
+                );
+                Assert.Equal(
+                    result,
+                    source.IndexOf(value, startIndex, count, GetStringComparison(options))
+                );
 
                 // Span versions - using BoundedMemory to check for buffer overruns
 
-                using BoundedMemory<char> sourceBoundedMemory = BoundedMemory.AllocateFromExistingData<char>(source.AsSpan(startIndex, count));
+                using BoundedMemory<char> sourceBoundedMemory =
+                    BoundedMemory.AllocateFromExistingData<char>(source.AsSpan(startIndex, count));
                 sourceBoundedMemory.MakeReadonly();
                 ReadOnlySpan<char> sourceBoundedSpan = sourceBoundedMemory.Span;
 
-                using BoundedMemory<char> valueBoundedMemory = BoundedMemory.AllocateFromExistingData<char>(value);
+                using BoundedMemory<char> valueBoundedMemory =
+                    BoundedMemory.AllocateFromExistingData<char>(value);
                 valueBoundedMemory.MakeReadonly();
                 ReadOnlySpan<char> valueBoundedSpan = valueBoundedMemory.Span;
 
@@ -824,12 +1702,29 @@ namespace System.Globalization.Tests
                 if (offsetResult >= 0)
                 {
                     offsetResult -= startIndex; // account for span slicing
-                    Assert.True(offsetResult >= 0, "Shouldn't have made an affirmative result go negative.");
+                    Assert.True(
+                        offsetResult >= 0,
+                        "Shouldn't have made an affirmative result go negative."
+                    );
                 }
 
-                Assert.Equal(offsetResult, sourceBoundedSpan.IndexOf(valueBoundedSpan, GetStringComparison(options)));
-                Assert.Equal(offsetResult, compareInfo.IndexOf(sourceBoundedSpan, valueBoundedSpan, options));
-                Assert.Equal(offsetResult, compareInfo.IndexOf(sourceBoundedSpan, valueBoundedSpan, options, out int matchLength));
+                Assert.Equal(
+                    offsetResult,
+                    sourceBoundedSpan.IndexOf(valueBoundedSpan, GetStringComparison(options))
+                );
+                Assert.Equal(
+                    offsetResult,
+                    compareInfo.IndexOf(sourceBoundedSpan, valueBoundedSpan, options)
+                );
+                Assert.Equal(
+                    offsetResult,
+                    compareInfo.IndexOf(
+                        sourceBoundedSpan,
+                        valueBoundedSpan,
+                        options,
+                        out int matchLength
+                    )
+                );
                 if (offsetResult >= 0)
                 {
                     Assert.Equal(valueBoundedSpan.Length, matchLength); // Invariant mode should perform non-linguistic comparisons
@@ -843,7 +1738,14 @@ namespace System.Globalization.Tests
 
         [Theory]
         [MemberData(nameof(LastIndexOf_TestData))]
-        public void TestLastIndexOf(string source, string value, int startIndex, int count, CompareOptions options, int result)
+        public void TestLastIndexOf(
+            string source,
+            string value,
+            int startIndex,
+            int count,
+            CompareOptions options,
+            int result
+        )
         {
             foreach (string cul in s_cultureNames)
             {
@@ -852,10 +1754,24 @@ namespace System.Globalization.Tests
             }
 
             // static test helper method to avoid mutating input args when called in a loop
-            static void TestCore(CompareInfo compareInfo, string source, string value, int startIndex, int count, CompareOptions options, int result)
+            static void TestCore(
+                CompareInfo compareInfo,
+                string source,
+                string value,
+                int startIndex,
+                int count,
+                CompareOptions options,
+                int result
+            )
             {
-                Assert.Equal(result, compareInfo.LastIndexOf(source, value, startIndex, count, options));
-                Assert.Equal(result, source.LastIndexOf(value, startIndex, count, GetStringComparison(options)));
+                Assert.Equal(
+                    result,
+                    compareInfo.LastIndexOf(source, value, startIndex, count, options)
+                );
+                Assert.Equal(
+                    result,
+                    source.LastIndexOf(value, startIndex, count, GetStringComparison(options))
+                );
 
                 // Filter differences betweeen string-based and Span-based LastIndexOf
                 // - Empty value handling - https://github.com/dotnet/runtime/issues/13382
@@ -873,23 +1789,44 @@ namespace System.Globalization.Tests
 
                 // Span versions - using BoundedMemory to check for buffer overruns
 
-                using BoundedMemory<char> sourceBoundedMemory = BoundedMemory.AllocateFromExistingData<char>(source.AsSpan(leftStartIndex, count));
+                using BoundedMemory<char> sourceBoundedMemory =
+                    BoundedMemory.AllocateFromExistingData<char>(
+                        source.AsSpan(leftStartIndex, count)
+                    );
                 sourceBoundedMemory.MakeReadonly();
                 ReadOnlySpan<char> sourceBoundedSpan = sourceBoundedMemory.Span;
 
-                using BoundedMemory<char> valueBoundedMemory = BoundedMemory.AllocateFromExistingData<char>(value);
+                using BoundedMemory<char> valueBoundedMemory =
+                    BoundedMemory.AllocateFromExistingData<char>(value);
                 valueBoundedMemory.MakeReadonly();
                 ReadOnlySpan<char> valueBoundedSpan = valueBoundedMemory.Span;
 
                 if (result >= 0)
                 {
                     result -= leftStartIndex; // account for span slicing
-                    Assert.True(result >= 0, "Shouldn't have made an affirmative result go negative.");
+                    Assert.True(
+                        result >= 0,
+                        "Shouldn't have made an affirmative result go negative."
+                    );
                 }
 
-                Assert.Equal(result, sourceBoundedSpan.LastIndexOf(valueBoundedSpan, GetStringComparison(options)));
-                Assert.Equal(result, compareInfo.LastIndexOf(sourceBoundedSpan, valueBoundedSpan, options));
-                Assert.Equal(result, compareInfo.LastIndexOf(sourceBoundedSpan, valueBoundedSpan, options, out int matchLength));
+                Assert.Equal(
+                    result,
+                    sourceBoundedSpan.LastIndexOf(valueBoundedSpan, GetStringComparison(options))
+                );
+                Assert.Equal(
+                    result,
+                    compareInfo.LastIndexOf(sourceBoundedSpan, valueBoundedSpan, options)
+                );
+                Assert.Equal(
+                    result,
+                    compareInfo.LastIndexOf(
+                        sourceBoundedSpan,
+                        valueBoundedSpan,
+                        options,
+                        out int matchLength
+                    )
+                );
                 if (result >= 0)
                 {
                     Assert.Equal(valueBoundedSpan.Length, matchLength); // Invariant mode should perform non-linguistic comparisons
@@ -914,17 +1851,33 @@ namespace System.Globalization.Tests
 
                 // Span versions - using BoundedMemory to check for buffer overruns
 
-                using BoundedMemory<char> sourceBoundedMemory = BoundedMemory.AllocateFromExistingData<char>(source);
+                using BoundedMemory<char> sourceBoundedMemory =
+                    BoundedMemory.AllocateFromExistingData<char>(source);
                 sourceBoundedMemory.MakeReadonly();
                 ReadOnlySpan<char> sourceBoundedSpan = sourceBoundedMemory.Span;
 
-                using BoundedMemory<char> valueBoundedMemory = BoundedMemory.AllocateFromExistingData<char>(value);
+                using BoundedMemory<char> valueBoundedMemory =
+                    BoundedMemory.AllocateFromExistingData<char>(value);
                 valueBoundedMemory.MakeReadonly();
                 ReadOnlySpan<char> valueBoundedSpan = valueBoundedMemory.Span;
 
-                Assert.Equal(result, sourceBoundedSpan.StartsWith(valueBoundedSpan, GetStringComparison(options)));
-                Assert.Equal(result, compareInfo.IsPrefix(sourceBoundedSpan, valueBoundedSpan, options));
-                Assert.Equal(result, compareInfo.IsPrefix(sourceBoundedSpan, valueBoundedSpan, options, out int matchLength));
+                Assert.Equal(
+                    result,
+                    sourceBoundedSpan.StartsWith(valueBoundedSpan, GetStringComparison(options))
+                );
+                Assert.Equal(
+                    result,
+                    compareInfo.IsPrefix(sourceBoundedSpan, valueBoundedSpan, options)
+                );
+                Assert.Equal(
+                    result,
+                    compareInfo.IsPrefix(
+                        sourceBoundedSpan,
+                        valueBoundedSpan,
+                        options,
+                        out int matchLength
+                    )
+                );
                 if (result)
                 {
                     Assert.Equal(valueBoundedSpan.Length, matchLength); // Invariant mode should perform non-linguistic comparisons
@@ -949,17 +1902,33 @@ namespace System.Globalization.Tests
 
                 // Span versions - using BoundedMemory to check for buffer overruns
 
-                using BoundedMemory<char> sourceBoundedMemory = BoundedMemory.AllocateFromExistingData<char>(source);
+                using BoundedMemory<char> sourceBoundedMemory =
+                    BoundedMemory.AllocateFromExistingData<char>(source);
                 sourceBoundedMemory.MakeReadonly();
                 ReadOnlySpan<char> sourceBoundedSpan = sourceBoundedMemory.Span;
 
-                using BoundedMemory<char> valueBoundedMemory = BoundedMemory.AllocateFromExistingData<char>(value);
+                using BoundedMemory<char> valueBoundedMemory =
+                    BoundedMemory.AllocateFromExistingData<char>(value);
                 valueBoundedMemory.MakeReadonly();
                 ReadOnlySpan<char> valueBoundedSpan = valueBoundedMemory.Span;
 
-                Assert.Equal(result, sourceBoundedSpan.EndsWith(valueBoundedSpan, GetStringComparison(options)));
-                Assert.Equal(result, compareInfo.IsSuffix(sourceBoundedSpan, valueBoundedSpan, options));
-                Assert.Equal(result, compareInfo.IsSuffix(sourceBoundedSpan, valueBoundedSpan, options, out int matchLength));
+                Assert.Equal(
+                    result,
+                    sourceBoundedSpan.EndsWith(valueBoundedSpan, GetStringComparison(options))
+                );
+                Assert.Equal(
+                    result,
+                    compareInfo.IsSuffix(sourceBoundedSpan, valueBoundedSpan, options)
+                );
+                Assert.Equal(
+                    result,
+                    compareInfo.IsSuffix(
+                        sourceBoundedSpan,
+                        valueBoundedSpan,
+                        options,
+                        out int matchLength
+                    )
+                );
                 if (result)
                 {
                     Assert.Equal(valueBoundedSpan.Length, matchLength); // Invariant mode should perform non-linguistic comparisons
@@ -994,7 +1963,8 @@ namespace System.Globalization.Tests
         {
             foreach (string cul in s_cultureNames)
             {
-                int res = CultureInfo.GetCultureInfo(cul).CompareInfo.Compare(source, value, options);
+                int res = CultureInfo.GetCultureInfo(cul)
+                    .CompareInfo.Compare(source, value, options);
                 Assert.Equal(result, Math.Sign(res));
 
                 res = string.Compare(source, value, GetStringComparison(options));
@@ -1002,15 +1972,18 @@ namespace System.Globalization.Tests
 
                 // Span versions - using BoundedMemory to check for buffer overruns
 
-                using BoundedMemory<char> sourceBoundedMemory = BoundedMemory.AllocateFromExistingData<char>(source);
+                using BoundedMemory<char> sourceBoundedMemory =
+                    BoundedMemory.AllocateFromExistingData<char>(source);
                 sourceBoundedMemory.MakeReadonly();
                 ReadOnlySpan<char> sourceBoundedSpan = sourceBoundedMemory.Span;
 
-                using BoundedMemory<char> valueBoundedMemory = BoundedMemory.AllocateFromExistingData<char>(value);
+                using BoundedMemory<char> valueBoundedMemory =
+                    BoundedMemory.AllocateFromExistingData<char>(value);
                 valueBoundedMemory.MakeReadonly();
                 ReadOnlySpan<char> valueBoundedSpan = valueBoundedMemory.Span;
 
-                res = CultureInfo.GetCultureInfo(cul).CompareInfo.Compare(sourceBoundedSpan, valueBoundedSpan, options);
+                res = CultureInfo.GetCultureInfo(cul)
+                    .CompareInfo.Compare(sourceBoundedSpan, valueBoundedSpan, options);
                 Assert.Equal(result, Math.Sign(res));
 
                 res = sourceBoundedSpan.CompareTo(valueBoundedSpan, GetStringComparison(options));
@@ -1018,14 +1991,18 @@ namespace System.Globalization.Tests
             }
         }
 
-
         [Theory]
         [MemberData(nameof(ToLower_TestData))]
         public void TestToLower(string upper, string lower, bool result)
         {
             foreach (string cul in s_cultureNames)
             {
-                Assert.Equal(result, CultureInfo.GetCultureInfo(cul).TextInfo.ToLower(upper).Equals(lower, StringComparison.Ordinal));
+                Assert.Equal(
+                    result,
+                    CultureInfo.GetCultureInfo(cul)
+                        .TextInfo.ToLower(upper)
+                        .Equals(lower, StringComparison.Ordinal)
+                );
                 Assert.Equal(result, upper.ToLower().Equals(lower, StringComparison.Ordinal));
             }
         }
@@ -1036,7 +2013,12 @@ namespace System.Globalization.Tests
         {
             foreach (string cul in s_cultureNames)
             {
-                Assert.Equal(result, CultureInfo.GetCultureInfo(cul).TextInfo.ToUpper(lower).Equals(upper, StringComparison.Ordinal));
+                Assert.Equal(
+                    result,
+                    CultureInfo.GetCultureInfo(cul)
+                        .TextInfo.ToUpper(lower)
+                        .Equals(upper, StringComparison.Ordinal)
+                );
                 Assert.Equal(result, lower.ToUpper().Equals(upper, StringComparison.Ordinal));
             }
         }
@@ -1096,10 +2078,16 @@ namespace System.Globalization.Tests
         [Fact]
         public void TestHashing()
         {
-            StringComparer cultureComparer = StringComparer.Create(CultureInfo.GetCultureInfo("tr-TR"), true);
+            StringComparer cultureComparer = StringComparer.Create(
+                CultureInfo.GetCultureInfo("tr-TR"),
+                true
+            );
             StringComparer ordinalComparer = StringComparer.OrdinalIgnoreCase;
             string turkishString = "i\u0130";
-            Assert.Equal(ordinalComparer.GetHashCode(turkishString), cultureComparer.GetHashCode(turkishString));
+            Assert.Equal(
+                ordinalComparer.GetHashCode(turkishString),
+                cultureComparer.GetHashCode(turkishString)
+            );
         }
 
         [Theory]
@@ -1115,16 +2103,25 @@ namespace System.Globalization.Tests
             Rune originalRune = new Rune(original);
 
             Assert.Equal(expectedToUpper, Rune.ToUpperInvariant(originalRune).Value);
-            Assert.Equal(expectedToUpper, Rune.ToUpper(originalRune, CultureInfo.GetCultureInfo("tr-TR")).Value);
+            Assert.Equal(
+                expectedToUpper,
+                Rune.ToUpper(originalRune, CultureInfo.GetCultureInfo("tr-TR")).Value
+            );
 
             Assert.Equal(expectedToLower, Rune.ToLowerInvariant(originalRune).Value);
-            Assert.Equal(expectedToLower, Rune.ToLower(originalRune, CultureInfo.GetCultureInfo("tr-TR")).Value);
+            Assert.Equal(
+                expectedToLower,
+                Rune.ToLower(originalRune, CultureInfo.GetCultureInfo("tr-TR")).Value
+            );
         }
 
         [Fact]
         public void TestGetCultureInfo_PredefinedOnly_ReturnsSame()
         {
-            Assert.Equal(CultureInfo.GetCultureInfo("en-US"), CultureInfo.GetCultureInfo("en-US", predefinedOnly: true));
+            Assert.Equal(
+                CultureInfo.GetCultureInfo("en-US"),
+                CultureInfo.GetCultureInfo("en-US", predefinedOnly: true)
+            );
         }
 
         private static byte[] GetExpectedInvariantOrdinalSortKey(ReadOnlySpan<char> input)

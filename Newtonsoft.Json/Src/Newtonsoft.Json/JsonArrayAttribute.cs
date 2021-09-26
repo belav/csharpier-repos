@@ -48,9 +48,7 @@ namespace Newtonsoft.Json
         /// <summary>
         /// Initializes a new instance of the <see cref="JsonArrayAttribute"/> class.
         /// </summary>
-        public JsonArrayAttribute()
-        {
-        }
+        public JsonArrayAttribute() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JsonObjectAttribute"/> class with a flag indicating whether the array can contain null items.
@@ -65,9 +63,6 @@ namespace Newtonsoft.Json
         /// Initializes a new instance of the <see cref="JsonArrayAttribute"/> class with the specified container Id.
         /// </summary>
         /// <param name="id">The container Id.</param>
-        public JsonArrayAttribute(string id)
-            : base(id)
-        {
-        }
+        public JsonArrayAttribute(string id) : base(id) { }
     }
 }

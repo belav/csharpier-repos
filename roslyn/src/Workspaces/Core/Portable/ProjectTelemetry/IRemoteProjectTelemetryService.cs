@@ -19,25 +19,35 @@ namespace Microsoft.CodeAnalysis.ProjectTelemetry
     {
         internal interface ICallback
         {
-            ValueTask ReportProjectTelemetryDataAsync(RemoteServiceCallbackId callbackId, ProjectTelemetryData data, CancellationToken cancellationToken);
+            ValueTask ReportProjectTelemetryDataAsync(
+                RemoteServiceCallbackId callbackId,
+                ProjectTelemetryData data,
+                CancellationToken cancellationToken
+            );
         }
 
-        ValueTask ComputeProjectTelemetryAsync(RemoteServiceCallbackId callbackId, CancellationToken cancellation);
+        ValueTask ComputeProjectTelemetryAsync(
+            RemoteServiceCallbackId callbackId,
+            CancellationToken cancellation
+        );
     }
 
     [ExportRemoteServiceCallbackDispatcher(typeof(IRemoteProjectTelemetryService)), Shared]
-    internal sealed class RemoteProjectTelemetryServiceCallbackDispatcher : RemoteServiceCallbackDispatcher, IRemoteProjectTelemetryService.ICallback
+    internal sealed class RemoteProjectTelemetryServiceCallbackDispatcher
+        : RemoteServiceCallbackDispatcher,
+          IRemoteProjectTelemetryService.ICallback
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public RemoteProjectTelemetryServiceCallbackDispatcher()
-        {
-        }
+        public RemoteProjectTelemetryServiceCallbackDispatcher() { }
 
-        private IProjectTelemetryListener GetLogService(RemoteServiceCallbackId callbackId)
-            => (IProjectTelemetryListener)GetCallback(callbackId);
+        private IProjectTelemetryListener GetLogService(RemoteServiceCallbackId callbackId) =>
+            (IProjectTelemetryListener)GetCallback(callbackId);
 
-        public ValueTask ReportProjectTelemetryDataAsync(RemoteServiceCallbackId callbackId, ProjectTelemetryData data, CancellationToken cancellationToken)
-            => GetLogService(callbackId).ReportProjectTelemetryDataAsync(data, cancellationToken);
+        public ValueTask ReportProjectTelemetryDataAsync(
+            RemoteServiceCallbackId callbackId,
+            ProjectTelemetryData data,
+            CancellationToken cancellationToken
+        ) => GetLogService(callbackId).ReportProjectTelemetryDataAsync(data, cancellationToken);
     }
 }

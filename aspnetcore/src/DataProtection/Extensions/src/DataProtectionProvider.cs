@@ -30,8 +30,12 @@ namespace Microsoft.AspNetCore.DataProtection
 
             return CreateProvider(
                 keyDirectory: null,
-                setupAction: builder => { builder.SetApplicationName(applicationName); },
-                certificate: null);
+                setupAction: builder =>
+                {
+                    builder.SetApplicationName(applicationName);
+                },
+                certificate: null
+            );
         }
 
         /// <summary>
@@ -59,7 +63,8 @@ namespace Microsoft.AspNetCore.DataProtection
         /// system. See <see cref="IDataProtectionBuilder"/> for more information.</param>
         public static IDataProtectionProvider Create(
             DirectoryInfo keyDirectory,
-            Action<IDataProtectionBuilder> setupAction)
+            Action<IDataProtectionBuilder> setupAction
+        )
         {
             if (keyDirectory == null)
             {
@@ -80,7 +85,10 @@ namespace Microsoft.AspNetCore.DataProtection
         /// <param name="applicationName">An identifier that uniquely discriminates this application from all other
         /// applications on the machine.</param>
         /// <param name="certificate">The <see cref="X509Certificate2"/> to be used for encryption.</param>
-        public static IDataProtectionProvider Create(string applicationName, X509Certificate2 certificate)
+        public static IDataProtectionProvider Create(
+            string applicationName,
+            X509Certificate2 certificate
+        )
         {
             if (string.IsNullOrEmpty(applicationName))
             {
@@ -93,8 +101,12 @@ namespace Microsoft.AspNetCore.DataProtection
 
             return CreateProvider(
                 keyDirectory: null,
-                setupAction: builder => { builder.SetApplicationName(applicationName); },
-                certificate: certificate);
+                setupAction: builder =>
+                {
+                    builder.SetApplicationName(applicationName);
+                },
+                certificate: certificate
+            );
         }
 
         /// <summary>
@@ -106,7 +118,8 @@ namespace Microsoft.AspNetCore.DataProtection
         /// <param name="certificate">The <see cref="X509Certificate2"/> to be used for encryption.</param>
         public static IDataProtectionProvider Create(
             DirectoryInfo keyDirectory,
-            X509Certificate2 certificate)
+            X509Certificate2 certificate
+        )
         {
             if (keyDirectory == null)
             {
@@ -117,7 +130,11 @@ namespace Microsoft.AspNetCore.DataProtection
                 throw new ArgumentNullException(nameof(certificate));
             }
 
-            return CreateProvider(keyDirectory, setupAction: builder => { }, certificate: certificate);
+            return CreateProvider(
+                keyDirectory,
+                setupAction: builder => { },
+                certificate: certificate
+            );
         }
 
         /// <summary>
@@ -132,7 +149,8 @@ namespace Microsoft.AspNetCore.DataProtection
         public static IDataProtectionProvider Create(
             DirectoryInfo keyDirectory,
             Action<IDataProtectionBuilder> setupAction,
-            X509Certificate2 certificate)
+            X509Certificate2 certificate
+        )
         {
             if (keyDirectory == null)
             {
@@ -153,7 +171,8 @@ namespace Microsoft.AspNetCore.DataProtection
         internal static IDataProtectionProvider CreateProvider(
             DirectoryInfo? keyDirectory,
             Action<IDataProtectionBuilder> setupAction,
-            X509Certificate2? certificate)
+            X509Certificate2? certificate
+        )
         {
             // build the service collection
             var serviceCollection = new ServiceCollection();
@@ -172,7 +191,8 @@ namespace Microsoft.AspNetCore.DataProtection
             setupAction(builder);
 
             // extract the provider instance from the service collection
-            return serviceCollection.BuildServiceProvider().GetRequiredService<IDataProtectionProvider>();
+            return serviceCollection.BuildServiceProvider()
+                .GetRequiredService<IDataProtectionProvider>();
         }
     }
 }

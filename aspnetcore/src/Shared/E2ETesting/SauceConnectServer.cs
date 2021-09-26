@@ -46,10 +46,7 @@ namespace Microsoft.AspNetCore.E2ETesting
             _diagnosticsMessageSink = diagnosticsMessageSink;
         }
 
-        private void Initialize(
-            Process process,
-            string sentinelPath,
-            Process sentinelProcess)
+        private void Initialize(Process process, string sentinelPath, Process sentinelProcess)
         {
             _process = process;
             _sentinelPath = sentinelPath;
@@ -69,6 +66,7 @@ namespace Microsoft.AspNetCore.E2ETesting
                     await InitializeInstance(output);
                 }
             }
+
             finally
             {
                 _semaphore.Release();
@@ -80,11 +78,12 @@ namespace Microsoft.AspNetCore.E2ETesting
             var psi = new ProcessStartInfo
             {
                 FileName = "npm",
-                Arguments = "run sauce --" +
-                    $" --sauce-user {E2ETestOptions.Instance.Sauce.Username}" +
-                    $" --sauce-key {E2ETestOptions.Instance.Sauce.AccessKey}" +
-                    $" --sauce-tunnel {E2ETestOptions.Instance.Sauce.TunnelIdentifier}" +
-                    $" --use-hostname {E2ETestOptions.Instance.Sauce.HostName}",
+                Arguments =
+                    "run sauce --"
+                    + $" --sauce-user {E2ETestOptions.Instance.Sauce.Username}"
+                    + $" --sauce-key {E2ETestOptions.Instance.Sauce.AccessKey}"
+                    + $" --sauce-tunnel {E2ETestOptions.Instance.Sauce.TunnelIdentifier}"
+                    + $" --use-hostname {E2ETestOptions.Instance.Sauce.HostName}",
                 RedirectStandardOutput = true,
                 RedirectStandardError = true,
             };
@@ -100,7 +99,9 @@ namespace Microsoft.AspNetCore.E2ETesting
             var trackingFolder = GetProcessTrackingFolder();
             if (!Directory.Exists(trackingFolder))
             {
-                throw new InvalidOperationException($"Invalid tracking folder. Set the 'SauceConnectProcessTrackingFolder' MSBuild property to a valid folder.");
+                throw new InvalidOperationException(
+                    $"Invalid tracking folder. Set the 'SauceConnectProcessTrackingFolder' MSBuild property to a valid folder."
+                );
             }
 
             Process process = null;
@@ -130,7 +131,8 @@ namespace Microsoft.AspNetCore.E2ETesting
             process.BeginErrorReadLine();
 
             // The Sauce connect server has to be up for the entirety of the tests and is only shutdown when the application (i.e. the test) exits.
-            AppDomain.CurrentDomain.ProcessExit += (sender, args) => ProcessCleanup(process, pidFilePath);
+            AppDomain.CurrentDomain.ProcessExit += (sender, args) =>
+                ProcessCleanup(process, pidFilePath);
 
             // Log
             void LogOutput(object sender, DataReceivedEventArgs e)
@@ -145,10 +147,7 @@ namespace Microsoft.AspNetCore.E2ETesting
             }
 
             var uri = new UriBuilder("http", E2ETestOptions.Instance.Sauce.HostName, 4445).Uri;
-            var httpClient = new HttpClient
-            {
-                Timeout = TimeSpan.FromSeconds(1),
-            };
+            var httpClient = new HttpClient { Timeout = TimeSpan.FromSeconds(1), };
 
             var retries = 0;
             do
@@ -164,12 +163,8 @@ namespace Microsoft.AspNetCore.E2ETesting
                         return;
                     }
                 }
-                catch (OperationCanceledException)
-                {
-                }
-                catch (HttpRequestException)
-                {
-                }
+                catch (OperationCanceledException) { }
+                catch (HttpRequestException) { }
 
                 retries++;
             } while (retries < 30);
@@ -177,8 +172,11 @@ namespace Microsoft.AspNetCore.E2ETesting
             // Make output null so that we stop logging to it.
             output = null;
             logOutput.CompleteAdding();
-            var exitCodeString = process.HasExited ? process.ExitCode.ToString(CultureInfo.InvariantCulture) : "Process has not yet exited.";
-            var message = $@"Failed to launch the server.
+            var exitCodeString = process.HasExited
+                ? process.ExitCode.ToString(CultureInfo.InvariantCulture)
+                : "Process has not yet exited.";
+            var message =
+                $@"Failed to launch the server.
 ExitCode: {exitCodeString}
 Captured output lines:
 {string.Join(Environment.NewLine, logOutput.GetConsumingEnumerable())}.";
@@ -188,16 +186,21 @@ Captured output lines:
             throw new InvalidOperationException(message);
         }
 
-        private static Process StartSentinelProcess(Process process, string sentinelFile, int timeout)
+        private static Process StartSentinelProcess(
+            Process process,
+            string sentinelFile,
+            int timeout
+        )
         {
             // This sentinel process will start and will kill any rouge sauce connect server that wasn't torn down via normal means.
             var psi = new ProcessStartInfo
             {
                 FileName = "powershell",
-                Arguments = $"-NoProfile -NonInteractive -Command \"Start-Sleep {timeout}; " +
-                $"if(Test-Path {sentinelFile}){{ " +
-                $"Write-Output 'Stopping process {process.Id}'; Stop-Process {process.Id}; }}" +
-                $"else{{ Write-Output 'Sentinel file {sentinelFile} not found.'}}",
+                Arguments =
+                    $"-NoProfile -NonInteractive -Command \"Start-Sleep {timeout}; "
+                    + $"if(Test-Path {sentinelFile}){{ "
+                    + $"Write-Output 'Stopping process {process.Id}'; Stop-Process {process.Id}; }}"
+                    + $"else{{ Write-Output 'Sentinel file {sentinelFile} not found.'}}",
             };
 
             return Process.Start(psi);
@@ -230,19 +233,28 @@ Captured output lines:
             }
         }
 
-        private static async Task<string> WriteTrackingFileAsync(ITestOutputHelper output, string trackingFolder, Process process)
+        private static async Task<string> WriteTrackingFileAsync(
+            ITestOutputHelper output,
+            string trackingFolder,
+            Process process
+        )
         {
             var pidFile = Path.Combine(trackingFolder, $"{process.Id}.{Guid.NewGuid()}.pid");
             for (var i = 0; i < 3; i++)
             {
                 try
                 {
-                    await File.WriteAllTextAsync(pidFile, process.Id.ToString(CultureInfo.InvariantCulture));
+                    await File.WriteAllTextAsync(
+                        pidFile,
+                        process.Id.ToString(CultureInfo.InvariantCulture)
+                    );
                     return pidFile;
                 }
                 catch
                 {
-                    output.WriteLine($"Can't write file to process tracking folder: {trackingFolder}");
+                    output.WriteLine(
+                        $"Can't write file to process tracking folder: {trackingFolder}"
+                    );
                 }
             }
 
@@ -250,9 +262,10 @@ Captured output lines:
         }
 
         private static string GetProcessTrackingFolder() =>
-            typeof(SauceConnectServer).Assembly
-                .GetCustomAttributes<AssemblyMetadataAttribute>()
-                .Single(a => a.Key == "Microsoft.AspNetCore.Testing.SauceConnect.ProcessTracking").Value;
+            typeof(SauceConnectServer).Assembly.GetCustomAttributes<AssemblyMetadataAttribute>()
+                .Single(
+                    a => a.Key == "Microsoft.AspNetCore.Testing.SauceConnect.ProcessTracking"
+                ).Value;
 
         public void Dispose()
         {

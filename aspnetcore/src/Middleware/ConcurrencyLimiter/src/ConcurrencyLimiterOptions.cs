@@ -15,9 +15,10 @@ namespace Microsoft.AspNetCore.ConcurrencyLimiter
         /// A <see cref="RequestDelegate"/> that handles requests rejected by this middleware.
         /// If it doesn't modify the response, an empty 503 response will be written.
         /// </summary>
-        public RequestDelegate OnRejected { get; set; } = context =>
-        {
-            return Task.CompletedTask;
-        };
+        public RequestDelegate OnRejected { get; set; } =
+            context =>
+            {
+                return Task.CompletedTask;
+            };
     }
 }

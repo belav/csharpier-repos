@@ -27,7 +27,10 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
             private ISymbol _currentContainingSymbol;
             private IOperation _currentRootOperation;
             private CancellationToken _cancellationToken;
-            private PooledDictionary<IAssignmentOperation, PooledHashSet<(ISymbol, IOperation)>> _pendingWritesMap;
+            private PooledDictionary<
+                IAssignmentOperation,
+                PooledHashSet<(ISymbol, IOperation)>
+            > _pendingWritesMap;
 
             private static readonly ObjectPool<Walker> s_visitorPool = new(() => new Walker());
             private Walker() { }
@@ -36,27 +39,37 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                 ISymbol containingSymbol,
                 IEnumerable<IOperation> operations,
                 AnalysisData analysisData,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
                 var visitor = s_visitorPool.Allocate();
                 try
                 {
                     visitor.Visit(containingSymbol, operations, analysisData, cancellationToken);
                 }
+
                 finally
                 {
                     s_visitorPool.Free(visitor);
                 }
             }
 
-            private void Visit(ISymbol containingSymbol, IEnumerable<IOperation> operations, AnalysisData analysisData, CancellationToken cancellationToken)
+            private void Visit(
+                ISymbol containingSymbol,
+                IEnumerable<IOperation> operations,
+                AnalysisData analysisData,
+                CancellationToken cancellationToken
+            )
             {
                 Debug.Assert(_currentContainingSymbol == null);
                 Debug.Assert(_currentAnalysisData == null);
                 Debug.Assert(_currentRootOperation == null);
                 Debug.Assert(_pendingWritesMap == null);
 
-                _pendingWritesMap = PooledDictionary<IAssignmentOperation, PooledHashSet<(ISymbol, IOperation)>>.GetInstance();
+                _pendingWritesMap = PooledDictionary<
+                    IAssignmentOperation,
+                    PooledHashSet<(ISymbol, IOperation)>
+                >.GetInstance();
                 try
                 {
                     _currentContainingSymbol = containingSymbol;
@@ -71,6 +84,7 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                         Visit(operation);
                     }
                 }
+
                 finally
                 {
                     _currentContainingSymbol = null;
@@ -88,22 +102,34 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                 }
             }
 
-            private void OnReadReferenceFound(ISymbol symbol)
-                => _currentAnalysisData.OnReadReferenceFound(symbol);
+            private void OnReadReferenceFound(ISymbol symbol) =>
+                _currentAnalysisData.OnReadReferenceFound(symbol);
 
-            private void OnWriteReferenceFound(ISymbol symbol, IOperation operation, ValueUsageInfo valueUsageInfo)
+            private void OnWriteReferenceFound(
+                ISymbol symbol,
+                IOperation operation,
+                ValueUsageInfo valueUsageInfo
+            )
             {
                 // maybeWritten == 'ref' argument.
                 var isRef = valueUsageInfo == ValueUsageInfo.ReadableWritableReference;
-                _currentAnalysisData.OnWriteReferenceFound(symbol, operation, maybeWritten: isRef, isRef);
+                _currentAnalysisData.OnWriteReferenceFound(
+                    symbol,
+                    operation,
+                    maybeWritten: isRef,
+                    isRef
+                );
                 ProcessPossibleDelegateCreationAssignment(symbol, operation);
             }
 
-            private void OnLValueCaptureFound(ISymbol symbol, IOperation operation, CaptureId captureId)
-                => _currentAnalysisData.OnLValueCaptureFound(symbol, operation, captureId);
+            private void OnLValueCaptureFound(
+                ISymbol symbol,
+                IOperation operation,
+                CaptureId captureId
+            ) => _currentAnalysisData.OnLValueCaptureFound(symbol, operation, captureId);
 
-            private void OnLValueDereferenceFound(CaptureId captureId)
-                 => _currentAnalysisData.OnLValueDereferenceFound(captureId);
+            private void OnLValueDereferenceFound(CaptureId captureId) =>
+                _currentAnalysisData.OnLValueDereferenceFound(captureId);
 
             private void OnReferenceFound(ISymbol symbol, IOperation operation)
             {
@@ -128,8 +154,10 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
 
                 if (isReadFrom)
                 {
-                    if (operation.Parent is IFlowCaptureOperation flowCapture &&
-                        _currentAnalysisData.IsLValueFlowCapture(flowCapture.Id))
+                    if (
+                        operation.Parent is IFlowCaptureOperation flowCapture
+                        && _currentAnalysisData.IsLValueFlowCapture(flowCapture.Id)
+                    )
                     {
                         OnLValueCaptureFound(symbol, operation, flowCapture.Id);
 
@@ -150,8 +178,10 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                     OnWriteReferenceFound(symbol, operation, valueUsageInfo);
                 }
 
-                if (operation.Parent is IIncrementOrDecrementOperation &&
-                    operation.Parent.Parent?.Kind != OperationKind.ExpressionStatement)
+                if (
+                    operation.Parent is IIncrementOrDecrementOperation
+                    && operation.Parent.Parent?.Kind != OperationKind.ExpressionStatement
+                )
                 {
                     OnReadReferenceFound(symbol);
                 }
@@ -159,17 +189,23 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
 
             private bool MakePendingWrite(IOperation operation, ISymbol symbolOpt)
             {
-                Debug.Assert(symbolOpt != null || operation.Kind == OperationKind.FlowCaptureReference);
+                Debug.Assert(
+                    symbolOpt != null || operation.Kind == OperationKind.FlowCaptureReference
+                );
 
-                if (operation.Parent is IAssignmentOperation assignmentOperation &&
-                    assignmentOperation.Target == operation)
+                if (
+                    operation.Parent is IAssignmentOperation assignmentOperation
+                    && assignmentOperation.Target == operation
+                )
                 {
                     var set = PooledHashSet<(ISymbol, IOperation)>.GetInstance();
                     set.Add((symbolOpt, operation));
                     _pendingWritesMap.Add(assignmentOperation, set);
                     return true;
                 }
-                else if (operation.IsInLeftOfDeconstructionAssignment(out var deconstructionAssignment))
+                else if (
+                    operation.IsInLeftOfDeconstructionAssignment(out var deconstructionAssignment)
+                )
                 {
                     if (!_pendingWritesMap.TryGetValue(deconstructionAssignment, out var set))
                     {
@@ -188,8 +224,9 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
             {
                 if (_pendingWritesMap.TryGetValue(operation, out var pendingWrites))
                 {
-                    var isUsedCompountAssignment = operation.IsAnyCompoundAssignment() &&
-                        operation.Parent?.Kind != OperationKind.ExpressionStatement;
+                    var isUsedCompountAssignment =
+                        operation.IsAnyCompoundAssignment()
+                        && operation.Parent?.Kind != OperationKind.ExpressionStatement;
 
                     foreach (var (symbolOpt, write) in pendingWrites)
                     {
@@ -208,7 +245,9 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                             Debug.Assert(symbolOpt == null);
 
                             var captureReference = (IFlowCaptureReferenceOperation)write;
-                            Debug.Assert(_currentAnalysisData.IsLValueFlowCapture(captureReference.Id));
+                            Debug.Assert(
+                                _currentAnalysisData.IsLValueFlowCapture(captureReference.Id)
+                            );
 
                             OnLValueDereferenceFound(captureReference.Id);
                         }
@@ -236,7 +275,9 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                 ProcessPendingWritesForAssignmentTarget(operation);
             }
 
-            public override void VisitDeconstructionAssignment(IDeconstructionAssignmentOperation operation)
+            public override void VisitDeconstructionAssignment(
+                IDeconstructionAssignmentOperation operation
+            )
             {
                 base.VisitDeconstructionAssignment(operation);
                 ProcessPendingWritesForAssignmentTarget(operation);
@@ -254,15 +295,19 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                 OnReferenceFound(operation.Local, operation);
             }
 
-            public override void VisitParameterReference(IParameterReferenceOperation operation)
-                => OnReferenceFound(operation.Parameter, operation);
+            public override void VisitParameterReference(IParameterReferenceOperation operation) =>
+                OnReferenceFound(operation.Parameter, operation);
 
             public override void VisitVariableDeclarator(IVariableDeclaratorOperation operation)
             {
                 var variableInitializer = operation.GetVariableInitializer();
-                if (variableInitializer != null ||
-                    operation.Parent is IForEachLoopOperation forEachLoop && forEachLoop.LoopControlVariable == operation ||
-                    operation.Parent is ICatchClauseOperation catchClause && catchClause.ExceptionDeclarationOrExpression == operation)
+                if (
+                    variableInitializer != null
+                    || operation.Parent is IForEachLoopOperation forEachLoop
+                        && forEachLoop.LoopControlVariable == operation
+                    || operation.Parent is ICatchClauseOperation catchClause
+                        && catchClause.ExceptionDeclarationOrExpression == operation
+                )
                 {
                     OnWriteReferenceFound(operation.Symbol, operation, ValueUsageInfo.Write);
                 }
@@ -274,8 +319,10 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
             {
                 base.VisitFlowCaptureReference(operation);
 
-                if (_currentAnalysisData.IsLValueFlowCapture(operation.Id) &&
-                    !MakePendingWrite(operation, symbolOpt: null))
+                if (
+                    _currentAnalysisData.IsLValueFlowCapture(operation.Id)
+                    && !MakePendingWrite(operation, symbolOpt: null)
+                )
                 {
                     OnLValueDereferenceFound(operation.Id);
                 }
@@ -305,7 +352,6 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                         {
                             _currentAnalysisData.ResetState();
                         }
-
                         break;
 
                     case MethodKind.LocalFunction:
@@ -318,13 +364,19 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
             {
                 Debug.Assert(localFunction.IsLocalFunction());
 
-                var newAnalysisData = _currentAnalysisData.AnalyzeLocalFunctionInvocation(localFunction, _cancellationToken);
+                var newAnalysisData = _currentAnalysisData.AnalyzeLocalFunctionInvocation(
+                    localFunction,
+                    _cancellationToken
+                );
                 _currentAnalysisData.SetCurrentBlockAnalysisDataFrom(newAnalysisData);
             }
 
             private void AnalyzeLambdaInvocation(IFlowAnonymousFunctionOperation lambda)
             {
-                var newAnalysisData = _currentAnalysisData.AnalyzeLambdaInvocation(lambda, _cancellationToken);
+                var newAnalysisData = _currentAnalysisData.AnalyzeLambdaInvocation(
+                    lambda,
+                    _cancellationToken
+                );
                 _currentAnalysisData.SetCurrentBlockAnalysisDataFrom(newAnalysisData);
             }
 
@@ -332,8 +384,10 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
             {
                 base.VisitArgument(operation);
 
-                if (_currentAnalysisData.IsTrackingDelegateCreationTargets &&
-                    operation.Value.Type.IsDelegateType())
+                if (
+                    _currentAnalysisData.IsTrackingDelegateCreationTargets
+                    && operation.Value.Type.IsDelegateType()
+                )
                 {
                     // Delegate argument might be captured and invoked multiple times.
                     // So, conservatively reset the state.
@@ -365,7 +419,9 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                 base.VisitAnonymousFunction(operation);
             }
 
-            public override void VisitFlowAnonymousFunction(IFlowAnonymousFunctionOperation operation)
+            public override void VisitFlowAnonymousFunction(
+                IFlowAnonymousFunctionOperation operation
+            )
             {
                 // Skip visiting if we are not analyzing an invocation of this lambda.
                 // This will only happen if the operation is not the current root operation.
@@ -379,8 +435,10 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
 
             private void ProcessPossibleDelegateCreationAssignment(ISymbol symbol, IOperation write)
             {
-                if (!_currentAnalysisData.IsTrackingDelegateCreationTargets ||
-                    symbol.GetSymbolType()?.TypeKind != TypeKind.Delegate)
+                if (
+                    !_currentAnalysisData.IsTrackingDelegateCreationTargets
+                    || symbol.GetSymbolType()?.TypeKind != TypeKind.Delegate
+                )
                 {
                     return;
                 }
@@ -417,7 +475,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                             continue;
 
                         case OperationKind.DelegateCreation:
-                            currentOperation = ((IDelegateCreationOperation)currentOperation).Target;
+                            currentOperation =
+                                ((IDelegateCreationOperation)currentOperation).Target;
                             continue;
 
                         case OperationKind.AnonymousFunction:
@@ -427,14 +486,20 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                             throw ExceptionUtilities.Unreachable;
 
                         case OperationKind.FlowAnonymousFunction:
-                            _currentAnalysisData.SetLambdaTargetForDelegate(write, (IFlowAnonymousFunctionOperation)currentOperation);
+                            _currentAnalysisData.SetLambdaTargetForDelegate(
+                                write,
+                                (IFlowAnonymousFunctionOperation)currentOperation
+                            );
                             return;
 
                         case OperationKind.MethodReference:
                             var methodReference = (IMethodReferenceOperation)currentOperation;
                             if (methodReference.Method.IsLocalFunction())
                             {
-                                _currentAnalysisData.SetLocalFunctionTargetForDelegate(write, methodReference);
+                                _currentAnalysisData.SetLocalFunctionTargetForDelegate(
+                                    write,
+                                    methodReference
+                                );
                             }
                             else
                             {
@@ -445,12 +510,18 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
 
                         case OperationKind.LocalReference:
                             var localReference = (ILocalReferenceOperation)currentOperation;
-                            _currentAnalysisData.SetTargetsFromSymbolForDelegate(write, localReference.Local);
+                            _currentAnalysisData.SetTargetsFromSymbolForDelegate(
+                                write,
+                                localReference.Local
+                            );
                             return;
 
                         case OperationKind.ParameterReference:
                             var parameterReference = (IParameterReferenceOperation)currentOperation;
-                            _currentAnalysisData.SetTargetsFromSymbolForDelegate(write, parameterReference.Parameter);
+                            _currentAnalysisData.SetTargetsFromSymbolForDelegate(
+                                write,
+                                parameterReference.Parameter
+                            );
                             return;
 
                         case OperationKind.Literal:
@@ -477,7 +548,12 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                 }
 
                 ProcessPossibleDelegateCreation(creation: operation, write: operation);
-                if (!_currentAnalysisData.TryGetDelegateInvocationTargets(operation, out var targets))
+                if (
+                    !_currentAnalysisData.TryGetDelegateInvocationTargets(
+                        operation,
+                        out var targets
+                    )
+                )
                 {
                     // Failed to identify targets, so conservatively reset the state.
                     _currentAnalysisData.ResetState();
@@ -500,16 +576,24 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                     default:
                         // Multiple potential lambda/local function targets.
                         // Analyze each one, merging the outputs from all.
-                        var savedCurrentAnalysisData = _currentAnalysisData.CreateBlockAnalysisData();
-                        savedCurrentAnalysisData.SetAnalysisDataFrom(_currentAnalysisData.CurrentBlockAnalysisData);
+                        var savedCurrentAnalysisData =
+                            _currentAnalysisData.CreateBlockAnalysisData();
+                        savedCurrentAnalysisData.SetAnalysisDataFrom(
+                            _currentAnalysisData.CurrentBlockAnalysisData
+                        );
 
                         var mergedAnalysisData = _currentAnalysisData.CreateBlockAnalysisData();
                         foreach (var target in targets)
                         {
-                            _currentAnalysisData.SetCurrentBlockAnalysisDataFrom(savedCurrentAnalysisData);
+                            _currentAnalysisData.SetCurrentBlockAnalysisDataFrom(
+                                savedCurrentAnalysisData
+                            );
                             AnalyzeDelegateInvocation(target);
-                            mergedAnalysisData = BasicBlockAnalysisData.Merge(mergedAnalysisData,
-                                _currentAnalysisData.CurrentBlockAnalysisData, _currentAnalysisData.TrackAllocatedBlockAnalysisData);
+                            mergedAnalysisData = BasicBlockAnalysisData.Merge(
+                                mergedAnalysisData,
+                                _currentAnalysisData.CurrentBlockAnalysisData,
+                                _currentAnalysisData.TrackAllocatedBlockAnalysisData
+                            );
                         }
 
                         _currentAnalysisData.SetCurrentBlockAnalysisDataFrom(mergedAnalysisData);
@@ -528,7 +612,9 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                             break;
 
                         case OperationKind.MethodReference:
-                            AnalyzeLocalFunctionInvocation(((IMethodReferenceOperation)target).Method);
+                            AnalyzeLocalFunctionInvocation(
+                                ((IMethodReferenceOperation)target).Method
+                            );
                             break;
 
                         default:

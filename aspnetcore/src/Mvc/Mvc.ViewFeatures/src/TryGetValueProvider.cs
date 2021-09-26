@@ -17,11 +17,13 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
     {
         private static readonly Dictionary<Type, TryGetValueDelegate> _tryGetValueDelegateCache =
             new Dictionary<Type, TryGetValueDelegate>();
-        private static readonly ReaderWriterLockSlim _tryGetValueDelegateCacheLock = new ReaderWriterLockSlim();
+        private static readonly ReaderWriterLockSlim _tryGetValueDelegateCacheLock =
+            new ReaderWriterLockSlim();
 
         // Information about private static method declared below.
         private static readonly MethodInfo _strongTryGetValueImplInfo =
-            typeof(TryGetValueProvider).GetTypeInfo().GetDeclaredMethod(nameof(StrongTryGetValueImpl));
+            typeof(TryGetValueProvider).GetTypeInfo()
+                .GetDeclaredMethod(nameof(StrongTryGetValueImpl));
 
         /// <summary>
         /// Returns a <see cref="TryGetValueDelegate"/> for the specified <see cref="IDictionary{TKey, TValue}"/> type.
@@ -46,12 +48,16 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                     return result;
                 }
             }
+
             finally
             {
                 _tryGetValueDelegateCacheLock.ExitReadLock();
             }
 
-            var dictionaryType = ClosedGenericMatcher.ExtractGenericInterface(targetType, typeof(IDictionary<,>));
+            var dictionaryType = ClosedGenericMatcher.ExtractGenericInterface(
+                targetType,
+                typeof(IDictionary<, >)
+            );
 
             // Just wrap a call to the underlying IDictionary<TKey, TValue>.TryGetValue() where string can be cast to
             // TKey.
@@ -63,8 +69,13 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 
                 if (keyType.IsAssignableFrom(typeof(string)))
                 {
-                    var implementationMethod = _strongTryGetValueImplInfo.MakeGenericMethod(keyType, returnType);
-                    result = (TryGetValueDelegate)implementationMethod.CreateDelegate(typeof(TryGetValueDelegate));
+                    var implementationMethod = _strongTryGetValueImplInfo.MakeGenericMethod(
+                        keyType,
+                        returnType
+                    );
+                    result = (TryGetValueDelegate)implementationMethod.CreateDelegate(
+                        typeof(TryGetValueDelegate)
+                    );
                 }
             }
 
@@ -79,6 +90,7 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             {
                 _tryGetValueDelegateCache[targetType] = result;
             }
+
             finally
             {
                 _tryGetValueDelegateCacheLock.ExitWriteLock();
@@ -87,7 +99,11 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             return result;
         }
 
-        private static bool StrongTryGetValueImpl<TKey, TValue>(object dictionary, string key, out object value)
+        private static bool StrongTryGetValueImpl<TKey, TValue>(
+            object dictionary,
+            string key,
+            out object value
+        )
         {
             var strongDict = (IDictionary<TKey, TValue>)dictionary;
 
@@ -97,7 +113,11 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             return success;
         }
 
-        private static bool TryGetValueFromNonGenericDictionary(object dictionary, string key, out object value)
+        private static bool TryGetValueFromNonGenericDictionary(
+            object dictionary,
+            string key,
+            out object value
+        )
         {
             var weakDict = (IDictionary)dictionary;
 

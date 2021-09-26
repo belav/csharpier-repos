@@ -32,8 +32,10 @@ namespace Microsoft.AspNetCore.Mvc
 {
     public class ViewComponentResultTest
     {
-        private readonly ITempDataDictionary _tempDataDictionary =
-            new TempDataDictionary(new DefaultHttpContext(), Mock.Of<ITempDataProvider>());
+        private readonly ITempDataDictionary _tempDataDictionary = new TempDataDictionary(
+            new DefaultHttpContext(),
+            Mock.Of<ITempDataProvider>()
+        );
 
         [Fact]
         public void Model_ExposesViewDataModel()
@@ -56,16 +58,22 @@ namespace Microsoft.AspNetCore.Mvc
         public async Task ExecuteResultAsync_Throws_IfServicesNotRegistered()
         {
             // Arrange
-            var actionContext = new ActionContext(new DefaultHttpContext() { RequestServices = Mock.Of<IServiceProvider>(), }, new RouteData(), new ActionDescriptor());
+            var actionContext = new ActionContext(
+                new DefaultHttpContext() { RequestServices = Mock.Of<IServiceProvider>(), },
+                new RouteData(),
+                new ActionDescriptor()
+            );
             var expected =
-                $"Unable to find the required services. Please add all the required services by calling " +
-                $"'IServiceCollection.AddControllersWithViews()' inside the call to 'ConfigureServices(...)' " +
-                $"in the application startup code.";
+                $"Unable to find the required services. Please add all the required services by calling "
+                + $"'IServiceCollection.AddControllersWithViews()' inside the call to 'ConfigureServices(...)' "
+                + $"in the application startup code.";
 
             var viewResult = new ViewComponentResult();
 
             // Act
-            var ex = await Assert.ThrowsAsync<InvalidOperationException>(() => viewResult.ExecuteResultAsync(actionContext));
+            var ex = await Assert.ThrowsAsync<InvalidOperationException>(
+                () => viewResult.ExecuteResultAsync(actionContext)
+            );
 
             // Assert
             Assert.Equal(expected, ex.Message);
@@ -105,19 +113,17 @@ namespace Microsoft.AspNetCore.Mvc
         {
             // Arrange
             var expected =
-                "Either the 'ViewComponentName' or 'ViewComponentType' " +
-                "property must be set in order to invoke a view component.";
+                "Either the 'ViewComponentName' or 'ViewComponentType' "
+                + "property must be set in order to invoke a view component.";
 
             var actionContext = CreateActionContext();
 
-            var viewComponentResult = new ViewComponentResult
-            {
-                TempData = _tempDataDictionary,
-            };
+            var viewComponentResult = new ViewComponentResult { TempData = _tempDataDictionary, };
 
             // Act and Assert
             var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-                () => viewComponentResult.ExecuteResultAsync(actionContext));
+                () => viewComponentResult.ExecuteResultAsync(actionContext)
+            );
             Assert.Equal(expected, exception.Message);
         }
 
@@ -125,10 +131,11 @@ namespace Microsoft.AspNetCore.Mvc
         public async Task ExecuteResultAsync_Throws_IfViewComponentCouldNotBeFound_ByName()
         {
             // Arrange
-            var expected = "A view component named 'Text' could not be found. A view component must be " +
-                "a public non-abstract class, not contain any generic parameters, and either be decorated " +
-                "with 'ViewComponentAttribute' or have a class name ending with the 'ViewComponent' suffix. " +
-                "A view component must not be decorated with 'NonViewComponentAttribute'.";
+            var expected =
+                "A view component named 'Text' could not be found. A view component must be "
+                + "a public non-abstract class, not contain any generic parameters, and either be decorated "
+                + "with 'ViewComponentAttribute' or have a class name ending with the 'ViewComponent' suffix. "
+                + "A view component must not be decorated with 'NonViewComponentAttribute'.";
 
             var actionContext = CreateActionContext();
 
@@ -140,7 +147,8 @@ namespace Microsoft.AspNetCore.Mvc
 
             // Act and Assert
             var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-                () => viewComponentResult.ExecuteResultAsync(actionContext));
+                () => viewComponentResult.ExecuteResultAsync(actionContext)
+            );
             Assert.Equal(expected, exception.Message);
         }
 
@@ -148,15 +156,18 @@ namespace Microsoft.AspNetCore.Mvc
         public async Task ExecuteResultAsync_Throws_IfViewComponentCouldNotBeFound_ByType()
         {
             // Arrange
-            var expected = $"A view component named '{typeof(TextViewComponent).FullName}' could not be found. " +
-                "A view component must be a public non-abstract class, not contain any generic parameters, and either be decorated " +
-                "with 'ViewComponentAttribute' or have a class name ending with the 'ViewComponent' suffix. " +
-                "A view component must not be decorated with 'NonViewComponentAttribute'.";
+            var expected =
+                $"A view component named '{typeof(TextViewComponent).FullName}' could not be found. "
+                + "A view component must be a public non-abstract class, not contain any generic parameters, and either be decorated "
+                + "with 'ViewComponentAttribute' or have a class name ending with the 'ViewComponent' suffix. "
+                + "A view component must not be decorated with 'NonViewComponentAttribute'.";
 
             var actionContext = CreateActionContext();
-            var services = CreateServices(diagnosticListener: null, context: actionContext.HttpContext);
+            var services = CreateServices(
+                diagnosticListener: null,
+                context: actionContext.HttpContext
+            );
             services.AddSingleton<IViewComponentSelector>();
-
 
             var viewComponentResult = new ViewComponentResult
             {
@@ -166,7 +177,8 @@ namespace Microsoft.AspNetCore.Mvc
 
             // Act and Assert
             var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-                () => viewComponentResult.ExecuteResultAsync(actionContext));
+                () => viewComponentResult.ExecuteResultAsync(actionContext)
+            );
             Assert.Equal(expected, exception.Message);
         }
 
@@ -236,7 +248,9 @@ namespace Microsoft.AspNetCore.Mvc
         public async Task ExecuteResultAsync_ExecutesAsyncViewComponent()
         {
             // Arrange
-            var methodInfo = typeof(AsyncTextViewComponent).GetMethod(nameof(AsyncTextViewComponent.InvokeAsync));
+            var methodInfo = typeof(AsyncTextViewComponent).GetMethod(
+                nameof(AsyncTextViewComponent.InvokeAsync)
+            );
             var descriptor = new ViewComponentDescriptor()
             {
                 FullName = "Full.Name.AsyncText",
@@ -411,18 +425,30 @@ namespace Microsoft.AspNetCore.Mvc
                 MethodInfo = methodInfo,
                 Parameters = methodInfo.GetParameters(),
             };
-            var result = Task.FromResult<IHtmlContent>(new HtmlContentBuilder().AppendHtml(expected));
+            var result = Task.FromResult<IHtmlContent>(
+                new HtmlContentBuilder().AppendHtml(expected)
+            );
 
-            var helper = Mock.Of<IViewComponentHelper>(h => h.InvokeAsync(It.IsAny<Type>(), It.IsAny<object>()) == result);
+            var helper = Mock.Of<IViewComponentHelper>(
+                h => h.InvokeAsync(It.IsAny<Type>(), It.IsAny<object>()) == result
+            );
 
             var httpContext = new DefaultHttpContext();
-            var services = CreateServices(diagnosticListener: null, httpContext, new[] { descriptor });
+            var services = CreateServices(
+                diagnosticListener: null,
+                httpContext,
+                new[] { descriptor }
+            );
             services.AddSingleton<IViewComponentHelper>(helper);
 
             httpContext.RequestServices = services.BuildServiceProvider();
             httpContext.Response.Body = new MemoryStream();
 
-            var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
+            var actionContext = new ActionContext(
+                httpContext,
+                new RouteData(),
+                new ActionDescriptor()
+            );
 
             var viewComponentResult = new ViewComponentResult()
             {
@@ -453,18 +479,30 @@ namespace Microsoft.AspNetCore.Mvc
                 MethodInfo = methodInfo,
                 Parameters = methodInfo.GetParameters(),
             };
-            var result = Task.FromResult<IHtmlContent>(new HtmlContentBuilder().AppendHtml(expected));
+            var result = Task.FromResult<IHtmlContent>(
+                new HtmlContentBuilder().AppendHtml(expected)
+            );
 
-            var helper = Mock.Of<IViewComponentHelper>(h => h.InvokeAsync(It.IsAny<Type>(), It.IsAny<object>()) == result);
+            var helper = Mock.Of<IViewComponentHelper>(
+                h => h.InvokeAsync(It.IsAny<Type>(), It.IsAny<object>()) == result
+            );
 
             var httpContext = new DefaultHttpContext();
-            var services = CreateServices(diagnosticListener: null, httpContext, new[] { descriptor });
+            var services = CreateServices(
+                diagnosticListener: null,
+                httpContext,
+                new[] { descriptor }
+            );
             services.AddSingleton<IViewComponentHelper>(helper);
 
             httpContext.RequestServices = services.BuildServiceProvider();
             httpContext.Response.Body = new MemoryStream();
 
-            var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
+            var actionContext = new ActionContext(
+                httpContext,
+                new RouteData(),
+                new ActionDescriptor()
+            );
 
             var viewComponentResult = new ViewComponentResult()
             {
@@ -518,20 +556,14 @@ namespace Microsoft.AspNetCore.Mvc
             {
                 return new TheoryData<string, string>
                 {
+                    { null, "text/html; charset=utf-8" },
+                    { "text/foo", "text/foo" },
+                    { "text/foo;p1=p1-value", "text/foo; p1=p1-value" },
                     {
-                        null,
-                        "text/html; charset=utf-8"
-                    },
-                    {
-                        "text/foo",
-                        "text/foo"
-                    },
-                    {
-                        "text/foo;p1=p1-value",
-                        "text/foo; p1=p1-value"
-                    },
-                    {
-                        new MediaTypeHeaderValue("text/foo") { Encoding = Encoding.ASCII }.ToString(),
+                        new MediaTypeHeaderValue("text/foo")
+                        {
+                            Encoding = Encoding.ASCII
+                        }.ToString(),
                         "text/foo; charset=us-ascii"
                     }
                 };
@@ -542,7 +574,8 @@ namespace Microsoft.AspNetCore.Mvc
         [MemberData(nameof(ViewComponentResultContentTypeData))]
         public async Task ViewComponentResult_SetsContentTypeHeader(
             string contentType,
-            string expectedContentType)
+            string expectedContentType
+        )
         {
             // Arrange
             var methodInfo = typeof(TextViewComponent).GetMethod(nameof(TextViewComponent.Invoke));
@@ -578,7 +611,10 @@ namespace Microsoft.AspNetCore.Mvc
             // Since we do not have access to the new instance created within the view executor,
             // check if at least the content is the same.
             var contentTypeAfterViewResultExecution = contentType?.ToString();
-            MediaTypeAssert.Equal(contentTypeBeforeViewResultExecution, contentTypeAfterViewResultExecution);
+            MediaTypeAssert.Equal(
+                contentTypeBeforeViewResultExecution,
+                contentTypeAfterViewResultExecution
+            );
         }
 
         [Fact]
@@ -604,7 +640,10 @@ namespace Microsoft.AspNetCore.Mvc
             {
                 Arguments = new { name = "World!" },
                 ViewComponentName = "Text",
-                ContentType = new MediaTypeHeaderValue("text/html") { Encoding = Encoding.UTF8 }.ToString(),
+                ContentType = new MediaTypeHeaderValue("text/html")
+                {
+                    Encoding = Encoding.UTF8
+                }.ToString(),
                 TempData = _tempDataDictionary,
             };
 
@@ -618,10 +657,14 @@ namespace Microsoft.AspNetCore.Mvc
         [Theory]
         [InlineData("text/foo", "text/foo; charset=utf-8")]
         [InlineData("text/foo; p1=p1-value", "text/foo; p1=p1-value; charset=utf-8")]
-        [InlineData("text/foo; p1=p1-value; charset=us-ascii", "text/foo; p1=p1-value; charset=us-ascii")]
+        [InlineData(
+            "text/foo; p1=p1-value; charset=us-ascii",
+            "text/foo; p1=p1-value; charset=us-ascii"
+        )]
         public async Task ViewComponentResult_NoContentTypeSet_PreservesResponseContentType(
             string responseContentType,
-            string expectedContentType)
+            string expectedContentType
+        )
         {
             // Arrange
             var methodInfo = typeof(TextViewComponent).GetMethod(nameof(TextViewComponent.Invoke));
@@ -655,7 +698,8 @@ namespace Microsoft.AspNetCore.Mvc
         private IServiceCollection CreateServices(
             object diagnosticListener,
             HttpContext context,
-            params ViewComponentDescriptor[] descriptors)
+            params ViewComponentDescriptor[] descriptors
+        )
         {
             var httpContext = new DefaultHttpContext();
             var diagnosticSource = new DiagnosticListener("Microsoft.AspNetCore");
@@ -670,12 +714,20 @@ namespace Microsoft.AspNetCore.Mvc
             services.AddSingleton(Options.Create(new MvcViewOptions()));
             services.AddTransient<IViewComponentHelper, DefaultViewComponentHelper>();
             services.AddSingleton<IViewComponentSelector, DefaultViewComponentSelector>();
-            services.AddSingleton<IViewComponentDescriptorCollectionProvider, DefaultViewComponentDescriptorCollectionProvider>();
-            services.AddSingleton<IViewComponentInvokerFactory, DefaultViewComponentInvokerFactory>();
+            services.AddSingleton<
+                IViewComponentDescriptorCollectionProvider,
+                DefaultViewComponentDescriptorCollectionProvider
+            >();
+            services.AddSingleton<
+                IViewComponentInvokerFactory,
+                DefaultViewComponentInvokerFactory
+            >();
             services.AddSingleton<ITypeActivatorCache, TypeActivatorCache>();
             services.AddSingleton<IViewComponentActivator, DefaultViewComponentActivator>();
             services.AddSingleton<IViewComponentFactory, DefaultViewComponentFactory>();
-            services.AddSingleton<IViewComponentDescriptorProvider>(new FixedSetViewComponentDescriptorProvider(descriptors));
+            services.AddSingleton<IViewComponentDescriptorProvider>(
+                new FixedSetViewComponentDescriptorProvider(descriptors)
+            );
             services.AddSingleton<IModelMetadataProvider, EmptyModelMetadataProvider>();
             services.AddSingleton<ILoggerFactory>(NullLoggerFactory.Instance);
             services.AddSingleton<ITempDataDictionaryFactory, TempDataDictionaryFactory>();
@@ -683,13 +735,22 @@ namespace Microsoft.AspNetCore.Mvc
             services.AddSingleton<TempDataSerializer, DefaultTempDataSerializer>();
             services.AddSingleton<HtmlEncoder, HtmlTestEncoder>();
             services.AddSingleton<IViewBufferScope, TestViewBufferScope>();
-            services.AddSingleton<IActionResultExecutor<ViewComponentResult>, ViewComponentResultExecutor>();
-            services.AddSingleton<IHttpResponseStreamWriterFactory, TestHttpResponseStreamWriterFactory>();
+            services.AddSingleton<
+                IActionResultExecutor<ViewComponentResult>,
+                ViewComponentResultExecutor
+            >();
+            services.AddSingleton<
+                IHttpResponseStreamWriterFactory,
+                TestHttpResponseStreamWriterFactory
+            >();
 
             return services;
         }
 
-        private HttpContext CreateHttpContext(object diagnosticListener, params ViewComponentDescriptor[] descriptors)
+        private HttpContext CreateHttpContext(
+            object diagnosticListener,
+            params ViewComponentDescriptor[] descriptors
+        )
         {
             var httpContext = new DefaultHttpContext();
             var services = CreateServices(diagnosticListener, httpContext, descriptors);
@@ -700,9 +761,16 @@ namespace Microsoft.AspNetCore.Mvc
             return httpContext;
         }
 
-        private ActionContext CreateActionContext(object diagnosticListener, params ViewComponentDescriptor[] descriptors)
+        private ActionContext CreateActionContext(
+            object diagnosticListener,
+            params ViewComponentDescriptor[] descriptors
+        )
         {
-            return new ActionContext(CreateHttpContext(diagnosticListener, descriptors), new RouteData(), new ActionDescriptor());
+            return new ActionContext(
+                CreateHttpContext(diagnosticListener, descriptors),
+                new RouteData(),
+                new ActionDescriptor()
+            );
         }
 
         private ActionContext CreateActionContext(params ViewComponentDescriptor[] descriptors)
@@ -714,7 +782,9 @@ namespace Microsoft.AspNetCore.Mvc
         {
             private readonly ViewComponentDescriptor[] _descriptors;
 
-            public FixedSetViewComponentDescriptorProvider(params ViewComponentDescriptor[] descriptors)
+            public FixedSetViewComponentDescriptorProvider(
+                params ViewComponentDescriptor[] descriptors
+            )
             {
                 _descriptors = descriptors ?? new ViewComponentDescriptor[0];
             }

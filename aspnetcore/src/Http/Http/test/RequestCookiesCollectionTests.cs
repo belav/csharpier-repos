@@ -30,9 +30,16 @@ namespace Microsoft.AspNetCore.Http.Tests
         [InlineData("ke%23y%2C=val%5Eue", "ke#y,", "val^ue")]
         [InlineData("base64=QUI%2BREU%2FRw%3D%3D", "base64", "QUI+REU/Rw==")]
         [InlineData("base64=QUI+REU/Rw==", "base64", "QUI+REU/Rw==")]
-        public void AppContextSwitchUnEscapesKeysAndValues(string input, string expectedKey, string expectedValue)
+        public void AppContextSwitchUnEscapesKeysAndValues(
+            string input,
+            string expectedKey,
+            string expectedValue
+        )
         {
-            var cookies = RequestCookieCollection.ParseInternal(new StringValues(input), enableCookieNameEncoding: true);
+            var cookies = RequestCookieCollection.ParseInternal(
+                new StringValues(input),
+                enableCookieNameEncoding: true
+            );
 
             Assert.Equal(1, cookies.Count);
             Assert.Equal(expectedKey, cookies.Keys.Single());

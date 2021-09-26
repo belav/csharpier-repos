@@ -27,7 +27,7 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             public readonly MethodWithGCInfo Method;
 
             public bool IsNull => (MethodIndex < 0);
-            
+
             public EntryPoint(int methodIndex, MethodWithGCInfo method)
             {
                 MethodIndex = methodIndex;
@@ -35,12 +35,11 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             }
         }
 
-        public MethodEntryPointTableNode(EcmaModule module, TargetDetails target)
-            : base(target)
+        public MethodEntryPointTableNode(EcmaModule module, TargetDetails target) : base(target)
         {
             _module = module;
         }
-        
+
         public override void AppendMangledName(NameMangler nameMangler, Utf8StringBuilder sb)
         {
             sb.Append(nameMangler.CompilationUnitPrefix);
@@ -52,19 +51,31 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         {
             if (relocsOnly)
             {
-                return new ObjectData(Array.Empty<byte>(), Array.Empty<Relocation>(), 1, Array.Empty<ISymbolDefinitionNode>());
+                return new ObjectData(
+                    Array.Empty<byte>(),
+                    Array.Empty<Relocation>(),
+                    1,
+                    Array.Empty<ISymbolDefinitionNode>()
+                );
             }
 
             List<EntryPoint> ridToEntryPoint = new List<EntryPoint>();
 
-            foreach (MethodWithGCInfo method in factory.EnumerateCompiledMethods(_module, CompiledMethodCategory.NonInstantiated))
+            foreach (
+                MethodWithGCInfo method in factory.EnumerateCompiledMethods(
+                    _module,
+                    CompiledMethodCategory.NonInstantiated
+                )
+            )
             {
                 Debug.Assert(method.Method is EcmaMethod);
                 EcmaMethod ecmaMethod = (EcmaMethod)method.Method;
                 Debug.Assert(ecmaMethod.Module == _module);
 
                 // Strip away the token type bits, keep just the low 24 bits RID
-                uint rid = SignatureBuilder.RidFromToken((mdToken)MetadataTokens.GetToken(ecmaMethod.Handle));
+                uint rid = SignatureBuilder.RidFromToken(
+                    (mdToken)MetadataTokens.GetToken(ecmaMethod.Handle)
+                );
                 Debug.Assert(rid != 0);
                 rid--;
 
@@ -83,7 +94,9 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             VertexArray vertexArray = new VertexArray(arraySection);
             arraySection.Place(vertexArray);
 
-            Dictionary<byte[], BlobVertex> uniqueFixups = new Dictionary<byte[], BlobVertex>(ByteArrayComparer.Instance);
+            Dictionary<byte[], BlobVertex> uniqueFixups = new Dictionary<byte[], BlobVertex>(
+                ByteArrayComparer.Instance
+            );
 
             for (int rid = 0; rid < ridToEntryPoint.Count; rid++)
             {
@@ -98,7 +111,10 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                         fixupBlobVertex = new BlobVertex(fixups);
                         uniqueFixups.Add(fixups, fixupBlobVertex);
                     }
-                    EntryPointVertex entryPointVertex = new EntryPointVertex((uint)entryPoint.MethodIndex, fixupBlobVertex);
+                    EntryPointVertex entryPointVertex = new EntryPointVertex(
+                        (uint)entryPoint.MethodIndex,
+                        fixupBlobVertex
+                    );
                     vertexArray.Set(rid, entryPointVertex);
                 }
             }
@@ -111,13 +127,15 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 data: arrayContent.ToArray(),
                 relocs: null,
                 alignment: 8,
-                definedSymbols: new ISymbolDefinitionNode[] { this });
+                definedSymbols: new ISymbolDefinitionNode[] { this }
+            );
         }
 
         public override int CompareToImpl(ISortableNode other, CompilerComparer comparer)
         {
             MethodEntryPointTableNode otherMethodEntryPointTable = (MethodEntryPointTableNode)other;
-            return _module.Assembly.GetName().Name.CompareTo(otherMethodEntryPointTable._module.Assembly.GetName().Name);
+            return _module.Assembly.GetName()
+                .Name.CompareTo(otherMethodEntryPointTable._module.Assembly.GetName().Name);
         }
 
         protected internal override int Phase => (int)ObjectNodePhase.Ordered;

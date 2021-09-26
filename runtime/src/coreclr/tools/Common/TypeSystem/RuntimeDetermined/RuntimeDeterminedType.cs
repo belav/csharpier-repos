@@ -30,7 +30,10 @@ namespace Internal.TypeSystem
         private DefType _rawCanonType;
         private GenericParameterDesc _runtimeDeterminedDetailsType;
 
-        public RuntimeDeterminedType(DefType rawCanonType, GenericParameterDesc runtimeDeterminedDetailsType)
+        public RuntimeDeterminedType(
+            DefType rawCanonType,
+            GenericParameterDesc runtimeDeterminedDetailsType
+        )
         {
             _rawCanonType = rawCanonType;
             _runtimeDeterminedDetailsType = runtimeDeterminedDetailsType;
@@ -41,10 +44,7 @@ namespace Internal.TypeSystem
         /// </summary>
         public GenericParameterDesc RuntimeDeterminedDetailsType
         {
-            get
-            {
-                return _runtimeDeterminedDetailsType;
-            }
+            get { return _runtimeDeterminedDetailsType; }
         }
 
         /// <summary>
@@ -52,57 +52,43 @@ namespace Internal.TypeSystem
         /// </summary>
         public DefType CanonicalType
         {
-            get
-            {
-                return _rawCanonType;
-            }
+            get { return _rawCanonType; }
         }
 
         public override TypeSystemContext Context
         {
-            get
-            {
-                return _rawCanonType.Context;
-            }
+            get { return _rawCanonType.Context; }
         }
 
         public override bool IsRuntimeDeterminedSubtype
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         public override DefType BaseType
         {
-            get
-            {
-                return _rawCanonType.BaseType;
-            }
+            get { return _rawCanonType.BaseType; }
         }
 
         public override Instantiation Instantiation
         {
-            get
-            {
-                return _rawCanonType.Instantiation;
-            }
+            get { return _rawCanonType.Instantiation; }
         }
 
         public override string Name
         {
-            get
-            {
-                return _rawCanonType.Name;
-            }
+            get { return _rawCanonType.Name; }
         }
 
         public override string Namespace
         {
             get
             {
-                return String.Concat(_runtimeDeterminedDetailsType.Name, "_", _rawCanonType.Namespace);
+                return String.Concat(
+                    _runtimeDeterminedDetailsType.Name,
+                    "_",
+                    _rawCanonType.Namespace
+                );
             }
         }
 
@@ -110,16 +96,26 @@ namespace Internal.TypeSystem
         {
             foreach (var method in _rawCanonType.GetMethods())
             {
-                yield return Context.GetMethodForRuntimeDeterminedType(method.GetTypicalMethodDefinition(), this);
+                yield return Context.GetMethodForRuntimeDeterminedType(
+                    method.GetTypicalMethodDefinition(),
+                    this
+                );
             }
         }
 
-        public override MethodDesc GetMethod(string name, MethodSignature signature, Instantiation substitution)
+        public override MethodDesc GetMethod(
+            string name,
+            MethodSignature signature,
+            Instantiation substitution
+        )
         {
             MethodDesc method = _rawCanonType.GetMethod(name, signature, substitution);
             if (method == null)
                 return null;
-            return Context.GetMethodForRuntimeDeterminedType(method.GetTypicalMethodDefinition(), this);
+            return Context.GetMethodForRuntimeDeterminedType(
+                method.GetTypicalMethodDefinition(),
+                this
+            );
         }
 
         protected override TypeFlags ComputeTypeFlags(TypeFlags mask)
@@ -151,7 +147,10 @@ namespace Internal.TypeSystem
             // TODO: this is needed because NameMangler calls it to see if we're dealing with genericness. Revise?
             if (_rawCanonType.HasInstantiation)
             {
-                return Context.GetRuntimeDeterminedType((DefType)_rawCanonType.GetTypeDefinition(), _runtimeDeterminedDetailsType);
+                return Context.GetRuntimeDeterminedType(
+                    (DefType)_rawCanonType.GetTypeDefinition(),
+                    _runtimeDeterminedDetailsType
+                );
             }
 
             return this;
@@ -172,7 +171,10 @@ namespace Internal.TypeSystem
             return false;
         }
 
-        public override TypeDesc GetNonRuntimeDeterminedTypeFromRuntimeDeterminedSubtypeViaSubstitution(Instantiation typeInstantiation, Instantiation methodInstantiation)
+        public override TypeDesc GetNonRuntimeDeterminedTypeFromRuntimeDeterminedSubtypeViaSubstitution(
+            Instantiation typeInstantiation,
+            Instantiation methodInstantiation
+        )
         {
             if (_runtimeDeterminedDetailsType.Kind == GenericParameterKind.Type)
             {

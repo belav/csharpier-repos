@@ -21,15 +21,18 @@ namespace Microsoft.CodeAnalysis.CSharp.QuickInfo
     internal class CSharpSyntacticQuickInfoProvider : CommonQuickInfoProvider
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public CSharpSyntacticQuickInfoProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public CSharpSyntacticQuickInfoProvider() { }
 
         protected override async Task<QuickInfoItem?> BuildQuickInfoAsync(
             Document document,
             SyntaxToken token,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             if (token.Kind() != SyntaxKind.CloseBraceToken)
             {
@@ -37,15 +40,22 @@ namespace Microsoft.CodeAnalysis.CSharp.QuickInfo
             }
 
             // Don't show for interpolations
-            if (token.Parent.IsKind(SyntaxKind.Interpolation, out InterpolationSyntax? interpolation) &&
-                interpolation.CloseBraceToken == token)
+            if (
+                token.Parent.IsKind(
+                    SyntaxKind.Interpolation,
+                    out InterpolationSyntax? interpolation
+                )
+                && interpolation.CloseBraceToken == token
+            )
             {
                 return null;
             }
 
             // Now check if we can find an open brace.
             var parent = token.Parent!;
-            var openBrace = parent.ChildNodesAndTokens().FirstOrDefault(n => n.Kind() == SyntaxKind.OpenBraceToken).AsToken();
+            var openBrace = parent.ChildNodesAndTokens()
+                .FirstOrDefault(n => n.Kind() == SyntaxKind.OpenBraceToken)
+                .AsToken();
             if (openBrace.Kind() != SyntaxKind.OpenBraceToken)
             {
                 return null;
@@ -78,12 +88,19 @@ namespace Microsoft.CodeAnalysis.CSharp.QuickInfo
         {
             var parent = node.Parent;
             return node.IsKind(SyntaxKind.Block)
-                && (parent.IsKind(SyntaxKind.Block)
+                && (
+                    parent.IsKind(SyntaxKind.Block)
                     || parent.IsKind(SyntaxKind.SwitchSection)
-                    || parent.IsKind(SyntaxKind.GlobalStatement));
+                    || parent.IsKind(SyntaxKind.GlobalStatement)
+                );
         }
 
-        private static void MarkInterestedSpanNearbyScopeBlock(SyntaxNode block, SyntaxToken openBrace, ref int spanStart, ref int spanEnd)
+        private static void MarkInterestedSpanNearbyScopeBlock(
+            SyntaxNode block,
+            SyntaxToken openBrace,
+            ref int spanStart,
+            ref int spanEnd
+        )
         {
             var searchListAbove = openBrace.LeadingTrivia.Reverse();
             if (TryFindFurthestNearbyComment(ref searchListAbove, out var nearbyComment))
@@ -101,8 +118,10 @@ namespace Microsoft.CodeAnalysis.CSharp.QuickInfo
             }
         }
 
-        private static bool TryFindFurthestNearbyComment<T>(ref T triviaSearchList, out SyntaxTrivia nearbyTrivia)
-            where T : IEnumerable<SyntaxTrivia>
+        private static bool TryFindFurthestNearbyComment<T>(
+            ref T triviaSearchList,
+            out SyntaxTrivia nearbyTrivia
+        ) where T : IEnumerable<SyntaxTrivia>
         {
             nearbyTrivia = default;
 
@@ -112,7 +131,10 @@ namespace Microsoft.CodeAnalysis.CSharp.QuickInfo
                 {
                     nearbyTrivia = trivia;
                 }
-                else if (!trivia.IsKind(SyntaxKind.WhitespaceTrivia) && !trivia.IsKind(SyntaxKind.EndOfLineTrivia))
+                else if (
+                    !trivia.IsKind(SyntaxKind.WhitespaceTrivia)
+                    && !trivia.IsKind(SyntaxKind.EndOfLineTrivia)
+                )
                 {
                     break;
                 }

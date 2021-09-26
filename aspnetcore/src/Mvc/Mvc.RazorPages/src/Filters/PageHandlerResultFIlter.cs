@@ -14,7 +14,10 @@ namespace Microsoft.AspNetCore.Mvc.Filters
         /// </remarks>
         public int Order => int.MinValue;
 
-        public Task OnResultExecutionAsync(ResultExecutingContext context, ResultExecutionDelegate next)
+        public Task OnResultExecutionAsync(
+            ResultExecutingContext context,
+            ResultExecutionDelegate next
+        )
         {
             if (context == null)
             {
@@ -29,9 +32,12 @@ namespace Microsoft.AspNetCore.Mvc.Filters
             var handler = context.Controller;
             if (handler == null)
             {
-                throw new InvalidOperationException(Resources.FormatPropertyOfTypeCannotBeNull(
-                    nameof(context.Controller),
-                    nameof(ResultExecutingContext)));
+                throw new InvalidOperationException(
+                    Resources.FormatPropertyOfTypeCannotBeNull(
+                        nameof(context.Controller),
+                        nameof(ResultExecutingContext)
+                    )
+                );
             }
 
             if (handler is IAsyncResultFilter asyncResultFilter)
@@ -49,9 +55,10 @@ namespace Microsoft.AspNetCore.Mvc.Filters
         }
 
         private static async Task ExecuteSyncFilter(
-            ResultExecutingContext context, 
-            ResultExecutionDelegate next, 
-            IResultFilter resultFilter)
+            ResultExecutingContext context,
+            ResultExecutionDelegate next,
+            IResultFilter resultFilter
+        )
         {
             resultFilter.OnResultExecuting(context);
             if (!context.Cancel)

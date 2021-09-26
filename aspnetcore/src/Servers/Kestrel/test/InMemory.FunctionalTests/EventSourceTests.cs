@@ -29,7 +29,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
 {
     public class EventSourceTests : LoggedTest
     {
-        private static readonly X509Certificate2 _x509Certificate2 = TestResources.GetTestCertificate();
+        private static readonly X509Certificate2 _x509Certificate2 =
+            TestResources.GetTestCertificate();
 
         // To log all KestrelEventSource events, add `_listener = new TestEventListener(Logger);` to the start of the test method.
         // We could always construct TestEventListener with the test logger, but other concurrent tests could make this noisy.
@@ -45,19 +46,23 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
             var requestIds = new string[requestsToSend];
             var requestsReceived = 0;
 
-            await using (var server = new TestServer(async context =>
-            {
-                connectionId = context.Features.Get<IHttpConnectionFeature>().ConnectionId;
-                requestIds[requestsReceived++] = context.TraceIdentifier;
+            await using (
+                var server = new TestServer(
+                    async context =>
+                    {
+                        connectionId = context.Features.Get<IHttpConnectionFeature>().ConnectionId;
+                        requestIds[requestsReceived++] = context.TraceIdentifier;
 
-                var upgradeFeature = context.Features.Get<IHttpUpgradeFeature>();
+                        var upgradeFeature = context.Features.Get<IHttpUpgradeFeature>();
 
-                if (upgradeFeature.IsUpgradableRequest)
-                {
-                    await upgradeFeature.UpgradeAsync();
-                }
-            },
-            new TestServiceContext(LoggerFactory)))
+                        if (upgradeFeature.IsUpgradableRequest)
+                        {
+                            await upgradeFeature.UpgradeAsync();
+                        }
+                    },
+                    new TestServiceContext(LoggerFactory)
+                )
+            )
             {
                 port = server.Port;
 
@@ -69,27 +74,36 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                     $"Date: {server.Context.DateHeaderValue}",
                     "Content-Length: 0",
                     "",
-                    "");
+                    ""
+                );
 
                 await connection.SendEmptyGetWithUpgrade();
-                await connection.ReceiveEnd("HTTP/1.1 101 Switching Protocols",
+                await connection.ReceiveEnd(
+                    "HTTP/1.1 101 Switching Protocols",
                     "Connection: Upgrade",
                     $"Date: {server.Context.DateHeaderValue}",
                     "",
-                    "");
+                    ""
+                );
             }
 
             Assert.NotNull(connectionId);
             Assert.Equal(2, requestsReceived);
 
             // Other tests executing in parallel may log events.
-            var events = _listener.EventData.Where(e => e != null && GetProperty(e, "connectionId") == connectionId).ToList();
+            var events = _listener.EventData.Where(
+                    e => e != null && GetProperty(e, "connectionId") == connectionId
+                )
+                .ToList();
             var eventIndex = 0;
 
             var connectionStart = events[eventIndex++];
             Assert.Equal("ConnectionStart", connectionStart.EventName);
             Assert.Equal(1, connectionStart.EventId);
-            Assert.All(new[] { "connectionId", "remoteEndPoint", "localEndPoint" }, p => Assert.Contains(p, connectionStart.PayloadNames));
+            Assert.All(
+                new[] { "connectionId", "remoteEndPoint", "localEndPoint" },
+                p => Assert.Contains(p, connectionStart.PayloadNames)
+            );
             Assert.Equal($"127.0.0.1:{port}", GetProperty(connectionStart, "localEndPoint"));
             Assert.Same(KestrelEventSource.Log, connectionStart.EventSource);
             Assert.NotEqual(Guid.Empty, connectionStart.ActivityId);
@@ -97,7 +111,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
             var firstRequestStart = events[eventIndex++];
             Assert.Equal("RequestStart", firstRequestStart.EventName);
             Assert.Equal(3, firstRequestStart.EventId);
-            Assert.All(new[] { "connectionId", "requestId" }, p => Assert.Contains(p, firstRequestStart.PayloadNames));
+            Assert.All(
+                new[] { "connectionId", "requestId" },
+                p => Assert.Contains(p, firstRequestStart.PayloadNames)
+            );
             Assert.Equal(requestIds[0], GetProperty(firstRequestStart, "requestId"));
             Assert.Same(KestrelEventSource.Log, firstRequestStart.EventSource);
             Assert.NotEqual(Guid.Empty, firstRequestStart.ActivityId);
@@ -106,7 +123,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
             var firstRequestStop = events[eventIndex++];
             Assert.Equal("RequestStop", firstRequestStop.EventName);
             Assert.Equal(4, firstRequestStop.EventId);
-            Assert.All(new[] { "connectionId", "requestId" }, p => Assert.Contains(p, firstRequestStop.PayloadNames));
+            Assert.All(
+                new[] { "connectionId", "requestId" },
+                p => Assert.Contains(p, firstRequestStop.PayloadNames)
+            );
             Assert.Same(KestrelEventSource.Log, firstRequestStop.EventSource);
             Assert.Equal(requestIds[0], GetProperty(firstRequestStop, "requestId"));
             Assert.Equal(firstRequestStart.ActivityId, firstRequestStop.ActivityId);
@@ -115,7 +135,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
             var secondRequestStart = events[eventIndex++];
             Assert.Equal("RequestStart", secondRequestStart.EventName);
             Assert.Equal(3, secondRequestStart.EventId);
-            Assert.All(new[] { "connectionId", "requestId" }, p => Assert.Contains(p, secondRequestStart.PayloadNames));
+            Assert.All(
+                new[] { "connectionId", "requestId" },
+                p => Assert.Contains(p, secondRequestStart.PayloadNames)
+            );
             Assert.Equal(requestIds[1], GetProperty(secondRequestStart, "requestId"));
             Assert.Same(KestrelEventSource.Log, secondRequestStart.EventSource);
             Assert.NotEqual(Guid.Empty, secondRequestStart.ActivityId);
@@ -124,7 +147,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
             var secondRequestStop = events[eventIndex++];
             Assert.Equal("RequestStop", secondRequestStop.EventName);
             Assert.Equal(4, secondRequestStop.EventId);
-            Assert.All(new[] { "connectionId", "requestId" }, p => Assert.Contains(p, secondRequestStop.PayloadNames));
+            Assert.All(
+                new[] { "connectionId", "requestId" },
+                p => Assert.Contains(p, secondRequestStop.PayloadNames)
+            );
             Assert.Same(KestrelEventSource.Log, secondRequestStop.EventSource);
             Assert.Equal(requestIds[1], GetProperty(secondRequestStop, "requestId"));
             Assert.Equal(secondRequestStart.ActivityId, secondRequestStop.ActivityId);
@@ -133,7 +159,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
             var connectionStop = events[eventIndex++];
             Assert.Equal("ConnectionStop", connectionStop.EventName);
             Assert.Equal(2, connectionStop.EventId);
-            Assert.All(new[] { "connectionId" }, p => Assert.Contains(p, connectionStop.PayloadNames));
+            Assert.All(
+                new[] { "connectionId" },
+                p => Assert.Contains(p, connectionStop.PayloadNames)
+            );
             Assert.Same(KestrelEventSource.Log, connectionStop.EventSource);
             Assert.Equal(connectionStart.ActivityId, connectionStop.ActivityId);
             Assert.Equal(Guid.Empty, connectionStop.RelatedActivityId);
@@ -142,7 +171,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
         }
 
         [ConditionalFact]
-        [OSSkipCondition(OperatingSystems.MacOSX, SkipReason = "Missing SslStream ALPN support: https://github.com/dotnet/runtime/issues/27727")]
+        [OSSkipCondition(
+            OperatingSystems.MacOSX,
+            SkipReason = "Missing SslStream ALPN support: https://github.com/dotnet/runtime/issues/27727"
+        )]
         [MinimumOSVersion(OperatingSystems.Windows, WindowsVersions.Win10)]
         public async Task Http2_EmitsStartAndStopEventsWithActivityIds()
         {
@@ -153,18 +185,22 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
             var requestIds = new string[requestsToSend];
             var requestsReceived = 0;
 
-            await using (var server = new TestServer(context =>
-            {
-                connectionId = context.Features.Get<IHttpConnectionFeature>().ConnectionId;
-                requestIds[requestsReceived++] = context.TraceIdentifier;
-                return Task.CompletedTask;
-            },
-            new TestServiceContext(LoggerFactory),
-            listenOptions =>
-            {
-                listenOptions.UseHttps(_x509Certificate2);
-                listenOptions.Protocols = HttpProtocols.Http2;
-            }))
+            await using (
+                var server = new TestServer(
+                    context =>
+                    {
+                        connectionId = context.Features.Get<IHttpConnectionFeature>().ConnectionId;
+                        requestIds[requestsReceived++] = context.TraceIdentifier;
+                        return Task.CompletedTask;
+                    },
+                    new TestServiceContext(LoggerFactory),
+                    listenOptions =>
+                    {
+                        listenOptions.UseHttps(_x509Certificate2);
+                        listenOptions.Protocols = HttpProtocols.Http2;
+                    }
+                )
+            )
             {
                 port = server.Port;
 
@@ -208,13 +244,19 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
             Assert.Equal(2, requestsReceived);
 
             // Other tests executing in parallel may log events.
-            var events = _listener.EventData.Where(e => e != null && GetProperty(e, "connectionId") == connectionId).ToList();
+            var events = _listener.EventData.Where(
+                    e => e != null && GetProperty(e, "connectionId") == connectionId
+                )
+                .ToList();
             var eventIndex = 0;
 
             var connectionStart = events[eventIndex++];
             Assert.Equal("ConnectionStart", connectionStart.EventName);
             Assert.Equal(1, connectionStart.EventId);
-            Assert.All(new[] { "connectionId", "remoteEndPoint", "localEndPoint" }, p => Assert.Contains(p, connectionStart.PayloadNames));
+            Assert.All(
+                new[] { "connectionId", "remoteEndPoint", "localEndPoint" },
+                p => Assert.Contains(p, connectionStart.PayloadNames)
+            );
             Assert.Same(KestrelEventSource.Log, connectionStart.EventSource);
             Assert.Equal($"127.0.0.1:{port}", GetProperty(connectionStart, "localEndPoint"));
             Assert.NotEqual(Guid.Empty, connectionStart.ActivityId);
@@ -222,7 +264,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
             var tlsHandshakeStart = events[eventIndex++];
             Assert.Equal("TlsHandshakeStart", tlsHandshakeStart.EventName);
             Assert.Equal(8, tlsHandshakeStart.EventId);
-            Assert.All(new[] { "connectionId", "sslProtocols" }, p => Assert.Contains(p, tlsHandshakeStart.PayloadNames));
+            Assert.All(
+                new[] { "connectionId", "sslProtocols" },
+                p => Assert.Contains(p, tlsHandshakeStart.PayloadNames)
+            );
             Assert.Same(KestrelEventSource.Log, tlsHandshakeStart.EventSource);
             Assert.NotEqual(Guid.Empty, tlsHandshakeStart.ActivityId);
             Assert.Equal(connectionStart.ActivityId, tlsHandshakeStart.RelatedActivityId);
@@ -230,7 +275,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
             var tlsHandshakeStop = events[eventIndex++];
             Assert.Equal("TlsHandshakeStop", tlsHandshakeStop.EventName);
             Assert.Equal(9, tlsHandshakeStop.EventId);
-            Assert.All(new[] { "connectionId", "sslProtocols", "applicationProtocol", "hostName" }, p => Assert.Contains(p, tlsHandshakeStop.PayloadNames));
+            Assert.All(
+                new[] { "connectionId", "sslProtocols", "applicationProtocol", "hostName" },
+                p => Assert.Contains(p, tlsHandshakeStop.PayloadNames)
+            );
             Assert.Equal("h2", GetProperty(tlsHandshakeStop, "applicationProtocol"));
             Assert.Same(KestrelEventSource.Log, tlsHandshakeStop.EventSource);
             Assert.Equal(tlsHandshakeStart.ActivityId, tlsHandshakeStop.ActivityId);
@@ -241,7 +289,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                 var requestStart = events[eventIndex++];
                 Assert.Equal("RequestStart", requestStart.EventName);
                 Assert.Equal(3, requestStart.EventId);
-                Assert.All(new[] { "connectionId", "requestId" }, p => Assert.Contains(p, requestStart.PayloadNames));
+                Assert.All(
+                    new[] { "connectionId", "requestId" },
+                    p => Assert.Contains(p, requestStart.PayloadNames)
+                );
                 Assert.Equal(requestIds[i], GetProperty(requestStart, "requestId"));
                 Assert.Same(KestrelEventSource.Log, requestStart.EventSource);
                 Assert.NotEqual(Guid.Empty, requestStart.ActivityId);
@@ -250,7 +301,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                 var requestStop = events[eventIndex++];
                 Assert.Equal("RequestStop", requestStop.EventName);
                 Assert.Equal(4, requestStop.EventId);
-                Assert.All(new[] { "connectionId", "requestId" }, p => Assert.Contains(p, requestStop.PayloadNames));
+                Assert.All(
+                    new[] { "connectionId", "requestId" },
+                    p => Assert.Contains(p, requestStop.PayloadNames)
+                );
                 Assert.Same(KestrelEventSource.Log, requestStop.EventSource);
                 Assert.Equal(requestIds[i], GetProperty(requestStop, "requestId"));
                 Assert.Equal(requestStart.ActivityId, requestStop.ActivityId);
@@ -260,7 +314,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
             var connectionStop = events[eventIndex++];
             Assert.Equal("ConnectionStop", connectionStop.EventName);
             Assert.Equal(2, connectionStop.EventId);
-            Assert.All(new[] { "connectionId" }, p => Assert.Contains(p, connectionStop.PayloadNames));
+            Assert.All(
+                new[] { "connectionId" },
+                p => Assert.Contains(p, connectionStop.PayloadNames)
+            );
             Assert.Same(KestrelEventSource.Log, connectionStop.EventSource);
             Assert.Equal(connectionStart.ActivityId, connectionStop.ActivityId);
             Assert.Equal(Guid.Empty, connectionStop.RelatedActivityId);
@@ -269,26 +326,37 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
         }
 
         [ConditionalFact]
-        [MinimumOSVersion(OperatingSystems.Windows, WindowsVersions.Win8, SkipReason = "SslStream.AuthenticateAsServerAsync() doesn't throw on Win 7 when the client tries SSL 2.0.")]
+        [MinimumOSVersion(
+            OperatingSystems.Windows,
+            WindowsVersions.Win8,
+            SkipReason = "SslStream.AuthenticateAsServerAsync() doesn't throw on Win 7 when the client tries SSL 2.0."
+        )]
         public async Task TlsHandshakeFailure_EmitsStartAndStopEventsWithActivityIds()
         {
             int port;
             string connectionId = null;
 
-            await using (var server = new TestServer(context => Task.CompletedTask, new TestServiceContext(LoggerFactory),
-            listenOptions =>
-            {
-                listenOptions.Use(next =>
-                {
-                    return connectionContext =>
+            await using (
+                var server = new TestServer(
+                    context => Task.CompletedTask,
+                    new TestServiceContext(LoggerFactory),
+                    listenOptions =>
                     {
-                        connectionId = connectionContext.ConnectionId;
-                        return next(connectionContext);
-                    };
-                });
+                        listenOptions.Use(
+                            next =>
+                            {
+                                return connectionContext =>
+                                {
+                                    connectionId = connectionContext.ConnectionId;
+                                    return next(connectionContext);
+                                };
+                            }
+                        );
 
-                listenOptions.UseHttps(_x509Certificate2);
-            }))
+                        listenOptions.UseHttps(_x509Certificate2);
+                    }
+                )
+            )
             {
                 port = server.Port;
 
@@ -298,7 +366,6 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                 var clientAuthOptions = new SslClientAuthenticationOptions
                 {
                     TargetHost = "localhost",
-
                     // Only enabling SslProtocols.Ssl2 should cause a handshake failure on most platforms.
 #pragma warning disable CS0618 // Type or member is obsolete
                     EnabledSslProtocols = SslProtocols.Ssl2,
@@ -306,19 +373,27 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                 };
 
                 using var handshakeCts = new CancellationTokenSource(TestConstants.DefaultTimeout);
-                await Assert.ThrowsAnyAsync<Exception>(() => sslStream.AuthenticateAsClientAsync(clientAuthOptions, handshakeCts.Token));
+                await Assert.ThrowsAnyAsync<Exception>(
+                    () => sslStream.AuthenticateAsClientAsync(clientAuthOptions, handshakeCts.Token)
+                );
             }
 
             Assert.NotNull(connectionId);
 
             // Other tests executing in parallel may log events.
-            var events = _listener.EventData.Where(e => e != null && GetProperty(e, "connectionId") == connectionId).ToList();
+            var events = _listener.EventData.Where(
+                    e => e != null && GetProperty(e, "connectionId") == connectionId
+                )
+                .ToList();
             var eventIndex = 0;
 
             var connectionStart = events[eventIndex++];
             Assert.Equal("ConnectionStart", connectionStart.EventName);
             Assert.Equal(1, connectionStart.EventId);
-            Assert.All(new[] { "connectionId", "remoteEndPoint", "localEndPoint" }, p => Assert.Contains(p, connectionStart.PayloadNames));
+            Assert.All(
+                new[] { "connectionId", "remoteEndPoint", "localEndPoint" },
+                p => Assert.Contains(p, connectionStart.PayloadNames)
+            );
             Assert.Equal($"127.0.0.1:{port}", GetProperty(connectionStart, "localEndPoint"));
             Assert.Same(KestrelEventSource.Log, connectionStart.EventSource);
             Assert.NotEqual(Guid.Empty, connectionStart.ActivityId);
@@ -326,7 +401,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
             var tlsHandshakeStart = events[eventIndex++];
             Assert.Equal("TlsHandshakeStart", tlsHandshakeStart.EventName);
             Assert.Equal(8, tlsHandshakeStart.EventId);
-            Assert.All(new[] { "connectionId", "sslProtocols" }, p => Assert.Contains(p, tlsHandshakeStart.PayloadNames));
+            Assert.All(
+                new[] { "connectionId", "sslProtocols" },
+                p => Assert.Contains(p, tlsHandshakeStart.PayloadNames)
+            );
             Assert.Same(KestrelEventSource.Log, tlsHandshakeStart.EventSource);
             Assert.NotEqual(Guid.Empty, tlsHandshakeStart.ActivityId);
             Assert.Equal(connectionStart.ActivityId, tlsHandshakeStart.RelatedActivityId);
@@ -334,7 +412,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
             var tlsHandshakeFailed = events[eventIndex++];
             Assert.Equal("TlsHandshakeFailed", tlsHandshakeFailed.EventName);
             Assert.Equal(10, tlsHandshakeFailed.EventId);
-            Assert.All(new[] { "connectionId" }, p => Assert.Contains(p, tlsHandshakeFailed.PayloadNames));
+            Assert.All(
+                new[] { "connectionId" },
+                p => Assert.Contains(p, tlsHandshakeFailed.PayloadNames)
+            );
             Assert.Same(KestrelEventSource.Log, tlsHandshakeFailed.EventSource);
             Assert.Equal(tlsHandshakeStart.ActivityId, tlsHandshakeFailed.ActivityId);
             Assert.Equal(Guid.Empty, tlsHandshakeFailed.RelatedActivityId);
@@ -342,7 +423,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
             var tlsHandshakeStop = events[eventIndex++];
             Assert.Equal("TlsHandshakeStop", tlsHandshakeStop.EventName);
             Assert.Equal(9, tlsHandshakeStop.EventId);
-            Assert.All(new[] { "connectionId", "sslProtocols", "applicationProtocol", "hostName" }, p => Assert.Contains(p, tlsHandshakeStop.PayloadNames));
+            Assert.All(
+                new[] { "connectionId", "sslProtocols", "applicationProtocol", "hostName" },
+                p => Assert.Contains(p, tlsHandshakeStop.PayloadNames)
+            );
             Assert.Same(KestrelEventSource.Log, tlsHandshakeStop.EventSource);
             Assert.Equal(tlsHandshakeStart.ActivityId, tlsHandshakeStop.ActivityId);
             Assert.Equal(Guid.Empty, tlsHandshakeStop.RelatedActivityId);
@@ -350,7 +434,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
             var connectionStop = events[eventIndex++];
             Assert.Equal("ConnectionStop", connectionStop.EventName);
             Assert.Equal(2, connectionStop.EventId);
-            Assert.All(new[] { "connectionId" }, p => Assert.Contains(p, connectionStop.PayloadNames));
+            Assert.All(
+                new[] { "connectionId" },
+                p => Assert.Contains(p, connectionStop.PayloadNames)
+            );
             Assert.Same(KestrelEventSource.Log, connectionStop.EventSource);
             Assert.Equal(connectionStart.ActivityId, connectionStop.ActivityId);
             Assert.Equal(Guid.Empty, connectionStop.RelatedActivityId);
@@ -366,23 +453,36 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
 
             var serviceContext = new TestServiceContext(LoggerFactory);
 
-            await using (var server = new TestServer(context => Task.CompletedTask, serviceContext,
-            listenOptions =>
-            {
-                listenOptions.Use(next =>
-                {
-                    return connectionContext =>
+            await using (
+                var server = new TestServer(
+                    context => Task.CompletedTask,
+                    serviceContext,
+                    listenOptions =>
                     {
-                        connectionId = connectionContext.ConnectionId;
-                        return next(connectionContext);
-                    };
-                });
+                        listenOptions.Use(
+                            next =>
+                            {
+                                return connectionContext =>
+                                {
+                                    connectionId = connectionContext.ConnectionId;
+                                    return next(connectionContext);
+                                };
+                            }
+                        );
 
-                listenOptions.Use(next =>
-                {
-                    return new ConnectionLimitMiddleware<ConnectionContext>(c => next(c), connectionLimit: 0, serviceContext.Log).OnConnectionAsync;
-                });
-            }))
+                        listenOptions.Use(
+                            next =>
+                            {
+                                return new ConnectionLimitMiddleware<ConnectionContext>(
+                                    c => next(c),
+                                    connectionLimit: 0,
+                                    serviceContext.Log
+                                ).OnConnectionAsync;
+                            }
+                        );
+                    }
+                )
+            )
             {
                 port = server.Port;
 
@@ -393,13 +493,19 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
             Assert.NotNull(connectionId);
 
             // Other tests executing in parallel may log events.
-            var events = _listener.EventData.Where(e => e != null && GetProperty(e, "connectionId") == connectionId).ToList();
+            var events = _listener.EventData.Where(
+                    e => e != null && GetProperty(e, "connectionId") == connectionId
+                )
+                .ToList();
             var eventIndex = 0;
 
             var connectionStart = events[eventIndex++];
             Assert.Equal("ConnectionStart", connectionStart.EventName);
             Assert.Equal(1, connectionStart.EventId);
-            Assert.All(new[] { "connectionId", "remoteEndPoint", "localEndPoint" }, p => Assert.Contains(p, connectionStart.PayloadNames));
+            Assert.All(
+                new[] { "connectionId", "remoteEndPoint", "localEndPoint" },
+                p => Assert.Contains(p, connectionStart.PayloadNames)
+            );
             Assert.Equal($"127.0.0.1:{port}", GetProperty(connectionStart, "localEndPoint"));
             Assert.Same(KestrelEventSource.Log, connectionStart.EventSource);
             Assert.NotEqual(Guid.Empty, connectionStart.ActivityId);
@@ -407,7 +513,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
             var connectionRejected = events[eventIndex++];
             Assert.Equal("ConnectionRejected", connectionRejected.EventName);
             Assert.Equal(5, connectionRejected.EventId);
-            Assert.All(new[] { "connectionId" }, p => Assert.Contains(p, connectionRejected.PayloadNames));
+            Assert.All(
+                new[] { "connectionId" },
+                p => Assert.Contains(p, connectionRejected.PayloadNames)
+            );
             Assert.Same(KestrelEventSource.Log, connectionRejected.EventSource);
             Assert.Equal(connectionStart.ActivityId, connectionRejected.ActivityId);
             Assert.Equal(Guid.Empty, connectionRejected.RelatedActivityId);
@@ -415,7 +524,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
             var connectionStop = events[eventIndex++];
             Assert.Equal("ConnectionStop", connectionStop.EventName);
             Assert.Equal(2, connectionStop.EventId);
-            Assert.All(new[] { "connectionId" }, p => Assert.Contains(p, connectionStop.PayloadNames));
+            Assert.All(
+                new[] { "connectionId" },
+                p => Assert.Contains(p, connectionStop.PayloadNames)
+            );
             Assert.Same(KestrelEventSource.Log, connectionStop.EventSource);
             Assert.Equal(connectionStart.ActivityId, connectionStop.ActivityId);
             Assert.Equal(Guid.Empty, connectionStop.RelatedActivityId);
@@ -427,7 +539,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
 
         private class TestEventListener : EventListener
         {
-            private readonly ConcurrentQueue<EventSnapshot> _events = new ConcurrentQueue<EventSnapshot>();
+            private readonly ConcurrentQueue<EventSnapshot> _events =
+                new ConcurrentQueue<EventSnapshot>();
             private readonly ILogger _logger;
 
             private readonly object _disposeLock = new object();
@@ -438,8 +551,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                 EnableEvents(KestrelEventSource.Log, EventLevel.Verbose);
             }
 
-            public TestEventListener(ILogger logger)
-                : this()
+            public TestEventListener(ILogger logger) : this()
             {
                 _logger = logger;
             }
@@ -464,10 +576,13 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         return;
                     }
 
-                    _logger?.LogInformation("{event}", JsonSerializer.Serialize(eventData, new JsonSerializerOptions
-                    {
-                        WriteIndented = true
-                    }));
+                    _logger?.LogInformation(
+                        "{event}",
+                        JsonSerializer.Serialize(
+                            eventData,
+                            new JsonSerializerOptions { WriteIndented = true }
+                        )
+                    );
 
                     // EventWrittenEventArgs.ActivityId sometimes falls back to EventSource.CurrentThreadActivityId,
                     // so we need to take a snapshot to verify the ActivityId later on a different thread.
@@ -500,7 +615,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
 
                 for (int i = 0; i < eventWrittenEventArgs.PayloadNames.Count; i++)
                 {
-                    Payload[eventWrittenEventArgs.PayloadNames[i]] = eventWrittenEventArgs.Payload[i] as string;
+                    Payload[eventWrittenEventArgs.PayloadNames[i]] =
+                        eventWrittenEventArgs.Payload[i] as string;
                 }
             }
 

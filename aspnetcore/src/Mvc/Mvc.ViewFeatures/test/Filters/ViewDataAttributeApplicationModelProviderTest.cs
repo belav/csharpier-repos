@@ -42,21 +42,27 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters
 
             // Assert
             var controller = Assert.Single(context.Result.Controllers);
-            Assert.IsType<ControllerViewDataAttributeFilterFactory>(Assert.Single(controller.Filters));
+            Assert.IsType<ControllerViewDataAttributeFilterFactory>(
+                Assert.Single(controller.Filters)
+            );
         }
 
         [Fact]
         public void InitializeFilterFactory_WithExpectedPropertyHelpers_ForViewDataAttributeProperties()
         {
             // Arrange
-            var expected = typeof(TestController_OneViewDataProperty).GetProperty(nameof(TestController_OneViewDataProperty.Test2));
+            var expected = typeof(TestController_OneViewDataProperty).GetProperty(
+                nameof(TestController_OneViewDataProperty.Test2)
+            );
             var provider = new ViewDataAttributeApplicationModelProvider();
             var context = GetContext(typeof(TestController_OneViewDataProperty));
 
             // Act
             provider.OnProvidersExecuting(context);
             var controller = context.Result.Controllers.SingleOrDefault();
-            var filter = Assert.IsType<ControllerViewDataAttributeFilterFactory>(Assert.Single(controller.Filters));
+            var filter = Assert.IsType<ControllerViewDataAttributeFilterFactory>(
+                Assert.Single(controller.Filters)
+            );
 
             // Assert
             Assert.NotNull(filter);
@@ -69,7 +75,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters
         {
             var defaultProvider = new DefaultApplicationModelProvider(
                 Options.Create(new MvcOptions()),
-                new EmptyModelMetadataProvider());
+                new EmptyModelMetadataProvider()
+            );
 
             var context = new ApplicationModelProviderContext(new[] { type.GetTypeInfo() });
             defaultProvider.OnProvidersExecuting(context);

@@ -11,7 +11,7 @@ internal class BufferState
     internal const int InUse = 1;
 
     private int currentState;
-    
+
     internal BufferState()
     {
         this.currentState = Idle;
@@ -21,26 +21,27 @@ internal class BufferState
     {
         get { return this.currentState == Idle; }
     }
-    
+
     internal bool EnterInUseState()
     {
         return this.TransitionState(Idle, InUse);
     }
-    
+
     internal bool EnterIdleState()
     {
         return this.TransitionState(InUse, Idle);
     }
-    
+
     private bool TransitionState(int expectedCurrentState, int desiredState)
     {
-        if (Interlocked.CompareExchange(ref this.currentState,
-                                        desiredState,
-                                        expectedCurrentState) == expectedCurrentState)
+        if (
+            Interlocked.CompareExchange(ref this.currentState, desiredState, expectedCurrentState)
+            == expectedCurrentState
+        )
         {
             return true;
         }
-        
+
         return false;
     }
 }
@@ -54,21 +55,17 @@ class Program
     {
         this.forceUpload = false;
         this.currentState = new BufferState();
-        while(!this.currentState.EnterInUseState())
+        while (!this.currentState.EnterInUseState())
         {
             Console.WriteLine("Failed to enterInUseState");
         }
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    public void ThrowIfDisposed()
-    {
-    }
+    public void ThrowIfDisposed() { }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    public void QueueCurrentBufferForUploadAndSetNewBuffer()
-    {
-    }
+    public void QueueCurrentBufferForUploadAndSetNewBuffer() { }
 
     public void Test()
     {
@@ -82,6 +79,7 @@ class Program
                 this.QueueCurrentBufferForUploadAndSetNewBuffer();
             }
         }
+
         finally
         {
             // Always transition back to the idle state.

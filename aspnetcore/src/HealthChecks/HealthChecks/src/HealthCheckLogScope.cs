@@ -19,7 +19,10 @@ namespace Microsoft.Extensions.Diagnostics.HealthChecks
             {
                 if (index == 0)
                 {
-                    return new KeyValuePair<string, object>(nameof(HealthCheckName), HealthCheckName);
+                    return new KeyValuePair<string, object>(
+                        nameof(HealthCheckName),
+                        HealthCheckName
+                    );
                 }
 
                 throw new ArgumentOutOfRangeException(nameof(index));
@@ -35,7 +38,9 @@ namespace Microsoft.Extensions.Diagnostics.HealthChecks
             HealthCheckName = healthCheckName;
         }
 
-        IEnumerator<KeyValuePair<string, object>> IEnumerable<KeyValuePair<string, object>>.GetEnumerator()
+        IEnumerator<KeyValuePair<string, object>> IEnumerable<
+            KeyValuePair<string, object>
+        >.GetEnumerator()
         {
             yield return new KeyValuePair<string, object>(nameof(HealthCheckName), HealthCheckName);
         }

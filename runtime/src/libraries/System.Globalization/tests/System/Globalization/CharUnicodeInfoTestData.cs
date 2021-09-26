@@ -9,20 +9,25 @@ namespace System.Globalization.Tests
 {
     public static class CharUnicodeInfoTestData
     {
-        private static readonly Lazy<List<CharUnicodeInfoTestCase>> s_testCases = new Lazy<List<CharUnicodeInfoTestCase>>(() =>
-        {
-            List<CharUnicodeInfoTestCase> testCases = new List<CharUnicodeInfoTestCase>();
-            string fileName = "UnicodeData.txt";
-            Stream stream = typeof(CharUnicodeInfoTestData).GetTypeInfo().Assembly.GetManifestResourceStream(fileName);
-            using (StreamReader reader = new StreamReader(stream))
+        private static readonly Lazy<List<CharUnicodeInfoTestCase>> s_testCases = new Lazy<
+            List<CharUnicodeInfoTestCase>
+        >(
+            () =>
             {
-                while (!reader.EndOfStream)
+                List<CharUnicodeInfoTestCase> testCases = new List<CharUnicodeInfoTestCase>();
+                string fileName = "UnicodeData.txt";
+                Stream stream = typeof(CharUnicodeInfoTestData).GetTypeInfo()
+                    .Assembly.GetManifestResourceStream(fileName);
+                using (StreamReader reader = new StreamReader(stream))
                 {
-                    Parse(testCases, reader.ReadLine());
+                    while (!reader.EndOfStream)
+                    {
+                        Parse(testCases, reader.ReadLine());
+                    }
                 }
+                return testCases;
             }
-            return testCases;
-        });
+        );
 
         public static List<CharUnicodeInfoTestCase> TestCases => s_testCases.Value;
 
@@ -55,7 +60,11 @@ namespace System.Globalization.Tests
             else if (charName.EndsWith("Last>"))
             {
                 // Assumes that we have already found a range start
-                for (int rangeCodePoint = s_rangeMinCodePoint + 1; rangeCodePoint < codePoint; rangeCodePoint++)
+                for (
+                    int rangeCodePoint = s_rangeMinCodePoint + 1;
+                    rangeCodePoint < codePoint;
+                    rangeCodePoint++
+                )
                 {
                     // Assumes that all code points in the range have the same numeric value
                     // and general category
@@ -64,7 +73,10 @@ namespace System.Globalization.Tests
             }
         }
 
-        private static Dictionary<string, UnicodeCategory> s_unicodeCategories = new Dictionary<string, UnicodeCategory>
+        private static Dictionary<string, UnicodeCategory> s_unicodeCategories = new Dictionary<
+            string,
+            UnicodeCategory
+        >
         {
             ["Pe"] = UnicodeCategory.ClosePunctuation,
             ["Pc"] = UnicodeCategory.ConnectorPunctuation,
@@ -99,19 +111,29 @@ namespace System.Globalization.Tests
             ["Lu"] = UnicodeCategory.UppercaseLetter
         };
 
-        private static void Parse(List<CharUnicodeInfoTestCase> testCases, int codePoint, string charCategoryString, string numericValueString)
+        private static void Parse(
+            List<CharUnicodeInfoTestCase> testCases,
+            int codePoint,
+            string charCategoryString,
+            string numericValueString
+        )
         {
-            string codeValueRepresentation = codePoint > char.MaxValue ? char.ConvertFromUtf32(codePoint) : ((char)codePoint).ToString();
+            string codeValueRepresentation =
+                codePoint > char.MaxValue
+                    ? char.ConvertFromUtf32(codePoint)
+                    : ((char)codePoint).ToString();
             double numericValue = ParseNumericValueString(numericValueString);
             UnicodeCategory generalCategory = s_unicodeCategories[charCategoryString];
 
-            testCases.Add(new CharUnicodeInfoTestCase()
-            {
-                Utf32CodeValue = codeValueRepresentation,
-                GeneralCategory = generalCategory,
-                NumericValue = numericValue,
-                CodePoint = codePoint
-            });
+            testCases.Add(
+                new CharUnicodeInfoTestCase()
+                {
+                    Utf32CodeValue = codeValueRepresentation,
+                    GeneralCategory = generalCategory,
+                    NumericValue = numericValue,
+                    CodePoint = codePoint
+                }
+            );
         }
 
         private static double ParseNumericValueString(string numericValueString)

@@ -22,7 +22,7 @@ namespace Microsoft.CodeAnalysis.Formatting
     //        1. use AAL (TPL Dataflow) in .NET 4.5 to run things concurrently in sequential order
     //           * this has a problem of the new TPL lib being not released yet and possibility of not using all cores.
     //
-    //        2. create dependency graph between operations, and format them in topological order and 
+    //        2. create dependency graph between operations, and format them in topological order and
     //           run chunks that don't have dependency in parallel (kirill's idea)
     //           * this requires defining dependencies on each operations. can't use dependency between tokens since
     //             that would create too big graph. key for this approach is how to reduce size of graph.
@@ -44,22 +44,23 @@ namespace Microsoft.CodeAnalysis.Formatting
             AnalyzerConfigOptions options,
             IEnumerable<AbstractFormattingRule> formattingRules,
             SyntaxToken token1,
-            SyntaxToken token2)
+            SyntaxToken token2
+        )
             : this(
-                  treeData,
-                  options,
-                  new ChainedFormattingRules(formattingRules, options),
-                  token1,
-                  token2)
-        {
-        }
+                treeData,
+                options,
+                new ChainedFormattingRules(formattingRules, options),
+                token1,
+                token2
+            ) { }
 
         internal AbstractFormatEngine(
             TreeData treeData,
             AnalyzerConfigOptions options,
             ChainedFormattingRules formattingRules,
             SyntaxToken token1,
-            SyntaxToken token2)
+            SyntaxToken token2
+        )
         {
             Contract.ThrowIfNull(options);
             Contract.ThrowIfNull(treeData);
@@ -91,7 +92,12 @@ namespace Microsoft.CodeAnalysis.Formatting
                 // setup environment
                 var nodeOperations = CreateNodeOperations(cancellationToken);
 
-                var tokenStream = new TokenStream(this.TreeData, this.Options, this.SpanToFormat, CreateTriviaFactory());
+                var tokenStream = new TokenStream(
+                    this.TreeData,
+                    this.Options,
+                    this.SpanToFormat,
+                    CreateTriviaFactory()
+                );
                 var tokenOperation = CreateTokenOperation(tokenStream, cancellationToken);
 
                 // initialize context
@@ -99,14 +105,15 @@ namespace Microsoft.CodeAnalysis.Formatting
 
                 // start anchor task that will be used later
                 cancellationToken.ThrowIfCancellationRequested();
-                var anchorContext = nodeOperations.AnchorIndentationOperations.Do(context.AddAnchorIndentationOperation);
+                var anchorContext = nodeOperations.AnchorIndentationOperations.Do(
+                    context.AddAnchorIndentationOperation
+                );
 
                 BuildContext(context, nodeOperations, cancellationToken);
 
                 ApplyBeginningOfTreeTriviaOperation(context, cancellationToken);
 
-                ApplyTokenOperations(context, nodeOperations,
-                    tokenOperation, cancellationToken);
+                ApplyTokenOperations(context, nodeOperations, tokenOperation, cancellationToken);
 
                 ApplyTriviaOperations(context, cancellationToken);
 
@@ -116,7 +123,10 @@ namespace Microsoft.CodeAnalysis.Formatting
             }
         }
 
-        protected virtual FormattingContext CreateFormattingContext(TokenStream tokenStream, CancellationToken cancellationToken)
+        protected virtual FormattingContext CreateFormattingContext(
+            TokenStream tokenStream,
+            CancellationToken cancellationToken
+        )
         {
             // initialize context
             var context = new FormattingContext(this, tokenStream);
@@ -134,7 +144,9 @@ namespace Microsoft.CodeAnalysis.Formatting
             using (Logger.LogBlock(FunctionId.Formatting_IterateNodes, cancellationToken))
             {
                 const int magicLengthToNodesRatio = 5;
-                var result = new SegmentedList<SyntaxNode>(Math.Max(this.SpanToFormat.Length / magicLengthToNodesRatio, 4));
+                var result = new SegmentedList<SyntaxNode>(
+                    Math.Max(this.SpanToFormat.Length / magicLengthToNodesRatio, 4)
+                );
 
                 foreach (var node in _commonRoot.DescendantNodesAndSelf(this.SpanToFormat))
                 {
@@ -150,21 +162,35 @@ namespace Microsoft.CodeAnalysis.Formatting
             List<IndentBlockOperation> indentBlockOperation;
             using (Logger.LogBlock(FunctionId.Formatting_CollectIndentBlock, cancellationToken))
             {
-                indentBlockOperation = AddOperations<IndentBlockOperation>(nodeIterator, (l, n) => _formattingRules.AddIndentBlockOperations(l, n), cancellationToken);
+                indentBlockOperation = AddOperations<IndentBlockOperation>(
+                    nodeIterator,
+                    (l, n) => _formattingRules.AddIndentBlockOperations(l, n),
+                    cancellationToken
+                );
             }
 
             cancellationToken.ThrowIfCancellationRequested();
             List<SuppressOperation> suppressOperation;
-            using (Logger.LogBlock(FunctionId.Formatting_CollectSuppressOperation, cancellationToken))
+            using (
+                Logger.LogBlock(FunctionId.Formatting_CollectSuppressOperation, cancellationToken)
+            )
             {
-                suppressOperation = AddOperations<SuppressOperation>(nodeIterator, (l, n) => _formattingRules.AddSuppressOperations(l, n), cancellationToken);
+                suppressOperation = AddOperations<SuppressOperation>(
+                    nodeIterator,
+                    (l, n) => _formattingRules.AddSuppressOperations(l, n),
+                    cancellationToken
+                );
             }
 
             cancellationToken.ThrowIfCancellationRequested();
             List<AlignTokensOperation> alignmentOperation;
             using (Logger.LogBlock(FunctionId.Formatting_CollectAlignOperation, cancellationToken))
             {
-                var operations = AddOperations<AlignTokensOperation>(nodeIterator, (l, n) => _formattingRules.AddAlignTokensOperations(l, n), cancellationToken);
+                var operations = AddOperations<AlignTokensOperation>(
+                    nodeIterator,
+                    (l, n) => _formattingRules.AddAlignTokensOperations(l, n),
+                    cancellationToken
+                );
 
                 // make sure we order align operation from left to right
                 operations.Sort((o1, o2) => o1.BaseToken.Span.CompareTo(o2.BaseToken.Span));
@@ -176,13 +202,26 @@ namespace Microsoft.CodeAnalysis.Formatting
             List<AnchorIndentationOperation> anchorIndentationOperations;
             using (Logger.LogBlock(FunctionId.Formatting_CollectAnchorOperation, cancellationToken))
             {
-                anchorIndentationOperations = AddOperations<AnchorIndentationOperation>(nodeIterator, (l, n) => _formattingRules.AddAnchorIndentationOperations(l, n), cancellationToken);
+                anchorIndentationOperations = AddOperations<AnchorIndentationOperation>(
+                    nodeIterator,
+                    (l, n) => _formattingRules.AddAnchorIndentationOperations(l, n),
+                    cancellationToken
+                );
             }
 
-            return new NodeOperations(indentBlockOperation, suppressOperation, anchorIndentationOperations, alignmentOperation);
+            return new NodeOperations(
+                indentBlockOperation,
+                suppressOperation,
+                anchorIndentationOperations,
+                alignmentOperation
+            );
         }
 
-        private static List<T> AddOperations<T>(SegmentedList<SyntaxNode> nodes, Action<List<T>, SyntaxNode> addOperations, CancellationToken cancellationToken)
+        private static List<T> AddOperations<T>(
+            SegmentedList<SyntaxNode> nodes,
+            Action<List<T>, SyntaxNode> addOperations,
+            CancellationToken cancellationToken
+        )
         {
             var operations = new List<T>();
             var list = new List<T>();
@@ -202,7 +241,8 @@ namespace Microsoft.CodeAnalysis.Formatting
 
         private SegmentedArray<TokenPairWithOperations> CreateTokenOperation(
             TokenStream tokenStream,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -215,10 +255,21 @@ namespace Microsoft.CodeAnalysis.Formatting
                 {
                     cancellationToken.ThrowIfCancellationRequested();
 
-                    var spaceOperation = _formattingRules.GetAdjustSpacesOperation(currentToken, nextToken);
-                    var lineOperation = _formattingRules.GetAdjustNewLinesOperation(currentToken, nextToken);
+                    var spaceOperation = _formattingRules.GetAdjustSpacesOperation(
+                        currentToken,
+                        nextToken
+                    );
+                    var lineOperation = _formattingRules.GetAdjustNewLinesOperation(
+                        currentToken,
+                        nextToken
+                    );
 
-                    list[index] = new TokenPairWithOperations(tokenStream, index, spaceOperation, lineOperation);
+                    list[index] = new TokenPairWithOperations(
+                        tokenStream,
+                        index,
+                        spaceOperation,
+                        lineOperation
+                    );
                 }
 
                 return list;
@@ -229,7 +280,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             FormattingContext context,
             NodeOperations nodeOperations,
             SegmentedArray<TokenPairWithOperations> tokenOperations,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var applier = new OperationApplier(context, _formattingRules);
             ApplySpaceAndWrappingOperations(context, tokenOperations, applier, cancellationToken);
@@ -240,7 +292,9 @@ namespace Microsoft.CodeAnalysis.Formatting
         }
 
         private void ApplyBeginningOfTreeTriviaOperation(
-            FormattingContext context, CancellationToken cancellationToken)
+            FormattingContext context,
+            CancellationToken cancellationToken
+        )
         {
             if (!context.TokenStream.FormatBeginningOfTree)
             {
@@ -248,45 +302,69 @@ namespace Microsoft.CodeAnalysis.Formatting
             }
 
             // remove all leading indentation
-            var triviaInfo = context.TokenStream.GetTriviaDataAtBeginningOfTree().WithIndentation(0, context, _formattingRules, cancellationToken);
+            var triviaInfo = context.TokenStream.GetTriviaDataAtBeginningOfTree()
+                .WithIndentation(0, context, _formattingRules, cancellationToken);
 
-            triviaInfo.Format(context, _formattingRules, BeginningOfTreeTriviaInfoApplier, cancellationToken);
+            triviaInfo.Format(
+                context,
+                _formattingRules,
+                BeginningOfTreeTriviaInfoApplier,
+                cancellationToken
+            );
 
             return;
 
             // local functions
-            static void BeginningOfTreeTriviaInfoApplier(int i, TokenStream ts, TriviaData info)
-                => ts.ApplyBeginningOfTreeChange(info);
+            static void BeginningOfTreeTriviaInfoApplier(int i, TokenStream ts, TriviaData info) =>
+                ts.ApplyBeginningOfTreeChange(info);
         }
 
         private void ApplyEndOfTreeTriviaOperation(
-            FormattingContext context, CancellationToken cancellationToken)
+            FormattingContext context,
+            CancellationToken cancellationToken
+        )
         {
             if (!context.TokenStream.FormatEndOfTree)
             {
                 return;
             }
 
-            if (context.IsFormattingDisabled(new TextSpan(context.TokenStream.LastTokenInStream.Token.SpanStart, 0)))
+            if (
+                context.IsFormattingDisabled(
+                    new TextSpan(context.TokenStream.LastTokenInStream.Token.SpanStart, 0)
+                )
+            )
             {
                 // Formatting is suppressed in the document, and not restored before the end
                 return;
             }
 
             // remove all trailing indentation
-            var triviaInfo = context.TokenStream.GetTriviaDataAtEndOfTree().WithIndentation(0, context, _formattingRules, cancellationToken);
+            var triviaInfo = context.TokenStream.GetTriviaDataAtEndOfTree()
+                .WithIndentation(0, context, _formattingRules, cancellationToken);
 
-            triviaInfo.Format(context, _formattingRules, EndOfTreeTriviaInfoApplier, cancellationToken);
+            triviaInfo.Format(
+                context,
+                _formattingRules,
+                EndOfTreeTriviaInfoApplier,
+                cancellationToken
+            );
 
             return;
 
             // local functions
-            static void EndOfTreeTriviaInfoApplier(int i, TokenStream ts, TriviaData info)
-                => ts.ApplyEndOfTreeChange(info);
+            static void EndOfTreeTriviaInfoApplier(int i, TokenStream ts, TriviaData info) =>
+                ts.ApplyEndOfTreeChange(info);
         }
 
-        [PerformanceSensitive("https://github.com/dotnet/roslyn/issues/30819", AllowCaptures = false)]
-        private void ApplyTriviaOperations(FormattingContext context, CancellationToken cancellationToken)
+        [PerformanceSensitive(
+            "https://github.com/dotnet/roslyn/issues/30819",
+            AllowCaptures = false
+        )]
+        private void ApplyTriviaOperations(
+            FormattingContext context,
+            CancellationToken cancellationToken
+        )
         {
             for (var i = 0; i < context.TokenStream.TokenCount - 1; i++)
             {
@@ -298,10 +376,15 @@ namespace Microsoft.CodeAnalysis.Formatting
 
             // local functions
 
-            static void RegularApplier(int tokenPairIndex, TokenStream ts, TriviaData info)
-                => ts.ApplyChange(tokenPairIndex, info);
+            static void RegularApplier(int tokenPairIndex, TokenStream ts, TriviaData info) =>
+                ts.ApplyChange(tokenPairIndex, info);
 
-            static void TriviaFormatter(int tokenPairIndex, FormattingContext ctx, ChainedFormattingRules formattingRules, CancellationToken ct)
+            static void TriviaFormatter(
+                int tokenPairIndex,
+                FormattingContext ctx,
+                ChainedFormattingRules formattingRules,
+                CancellationToken ct
+            )
             {
                 if (ctx.IsFormattingDisabled(tokenPairIndex))
                 {
@@ -314,20 +397,29 @@ namespace Microsoft.CodeAnalysis.Formatting
                     formattingRules,
                     (tokenPairIndex1, ts, info) => RegularApplier(tokenPairIndex1, ts, info),
                     ct,
-                    tokenPairIndex);
+                    tokenPairIndex
+                );
             }
         }
 
         private TextSpan GetSpanToFormat()
         {
-            var startPosition = this.TreeData.IsFirstToken(_token1) ? this.TreeData.StartPosition : _token1.SpanStart;
-            var endPosition = this.TreeData.IsLastToken(_token2) ? this.TreeData.EndPosition : _token2.Span.End;
+            var startPosition = this.TreeData.IsFirstToken(_token1)
+                ? this.TreeData.StartPosition
+                : _token1.SpanStart;
+            var endPosition = this.TreeData.IsLastToken(_token2)
+                ? this.TreeData.EndPosition
+                : _token2.Span.End;
 
             return TextSpan.FromBounds(startPosition, endPosition);
         }
 
         private static void ApplySpecialOperations(
-            FormattingContext context, NodeOperations nodeOperationsCollector, OperationApplier applier, CancellationToken cancellationToken)
+            FormattingContext context,
+            NodeOperations nodeOperationsCollector,
+            OperationApplier applier,
+            CancellationToken cancellationToken
+        )
         {
             // apply alignment operation
             using (Logger.LogBlock(FunctionId.Formatting_CollectAlignOperation, cancellationToken))
@@ -339,18 +431,32 @@ namespace Microsoft.CodeAnalysis.Formatting
                 var previousChangesMap = new Dictionary<SyntaxToken, int>();
                 var alignmentOperations = nodeOperationsCollector.AlignmentOperation;
 
-                alignmentOperations.Do(operation =>
-                {
-                    cancellationToken.ThrowIfCancellationRequested();
-                    applier.ApplyAlignment(operation, previousChangesMap, cancellationToken);
-                });
+                alignmentOperations.Do(
+                    operation =>
+                    {
+                        cancellationToken.ThrowIfCancellationRequested();
+                        applier.ApplyAlignment(operation, previousChangesMap, cancellationToken);
+                    }
+                );
 
                 // go through all relative indent block operation, and see whether it is affected by previous operations
-                context.GetAllRelativeIndentBlockOperations().Do(o =>
-                {
-                    cancellationToken.ThrowIfCancellationRequested();
-                    applier.ApplyBaseTokenIndentationChangesFromTo(FindCorrectBaseTokenOfRelativeIndentBlockOperation(o, context.TokenStream), o.StartToken, o.EndToken, previousChangesMap, cancellationToken);
-                });
+                context.GetAllRelativeIndentBlockOperations()
+                    .Do(
+                        o =>
+                        {
+                            cancellationToken.ThrowIfCancellationRequested();
+                            applier.ApplyBaseTokenIndentationChangesFromTo(
+                                FindCorrectBaseTokenOfRelativeIndentBlockOperation(
+                                    o,
+                                    context.TokenStream
+                                ),
+                                o.StartToken,
+                                o.EndToken,
+                                previousChangesMap,
+                                cancellationToken
+                            );
+                        }
+                    );
             }
         }
 
@@ -358,7 +464,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             FormattingContext context,
             SegmentedArray<TokenPairWithOperations> tokenOperations,
             OperationApplier applier,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             using (Logger.LogBlock(FunctionId.Formatting_ApplyAnchorOperation, cancellationToken))
             {
@@ -373,15 +480,31 @@ namespace Microsoft.CodeAnalysis.Formatting
                     }
 
                     var pairIndex = p.PairIndex;
-                    applier.ApplyAnchorIndentation(pairIndex, previousChangesMap, cancellationToken);
+                    applier.ApplyAnchorIndentation(
+                        pairIndex,
+                        previousChangesMap,
+                        cancellationToken
+                    );
                 }
 
                 // go through all relative indent block operation, and see whether it is affected by the anchor operation
-                context.GetAllRelativeIndentBlockOperations().Do(o =>
-                {
-                    cancellationToken.ThrowIfCancellationRequested();
-                    applier.ApplyBaseTokenIndentationChangesFromTo(FindCorrectBaseTokenOfRelativeIndentBlockOperation(o, context.TokenStream), o.StartToken, o.EndToken, previousChangesMap, cancellationToken);
-                });
+                context.GetAllRelativeIndentBlockOperations()
+                    .Do(
+                        o =>
+                        {
+                            cancellationToken.ThrowIfCancellationRequested();
+                            applier.ApplyBaseTokenIndentationChangesFromTo(
+                                FindCorrectBaseTokenOfRelativeIndentBlockOperation(
+                                    o,
+                                    context.TokenStream
+                                ),
+                                o.StartToken,
+                                o.EndToken,
+                                previousChangesMap,
+                                cancellationToken
+                            );
+                        }
+                    );
             }
         }
 
@@ -394,14 +517,17 @@ namespace Microsoft.CodeAnalysis.Formatting
 
             if (pair.LineOperation.Option == AdjustNewLinesOption.ForceLinesIfOnSingleLine)
             {
-                return !pair.TokenStream.TwoTokensOriginallyOnSameLine(pair.Token1, pair.Token2) &&
-                        pair.TokenStream.GetTriviaData(pair.PairIndex).SecondTokenIsFirstTokenOnLine;
+                return !pair.TokenStream.TwoTokensOriginallyOnSameLine(pair.Token1, pair.Token2)
+                    && pair.TokenStream.GetTriviaData(pair.PairIndex).SecondTokenIsFirstTokenOnLine;
             }
 
             return false;
         }
 
-        private static SyntaxToken FindCorrectBaseTokenOfRelativeIndentBlockOperation(IndentBlockOperation operation, TokenStream tokenStream)
+        private static SyntaxToken FindCorrectBaseTokenOfRelativeIndentBlockOperation(
+            IndentBlockOperation operation,
+            TokenStream tokenStream
+        )
         {
             if (operation.Option.IsOn(IndentBlockOption.RelativeToFirstTokenOnBaseTokenLine))
             {
@@ -415,14 +541,20 @@ namespace Microsoft.CodeAnalysis.Formatting
             FormattingContext context,
             SegmentedArray<TokenPairWithOperations> tokenOperations,
             OperationApplier applier,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             using (Logger.LogBlock(FunctionId.Formatting_ApplySpaceAndLine, cancellationToken))
             {
                 // go through each token pairs and apply operations
                 foreach (var operationPair in tokenOperations)
                 {
-                    ApplySpaceAndWrappingOperationsBody(context, operationPair, applier, cancellationToken);
+                    ApplySpaceAndWrappingOperationsBody(
+                        context,
+                        operationPair,
+                        applier,
+                        cancellationToken
+                    );
                 }
             }
         }
@@ -431,7 +563,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             FormattingContext context,
             TokenPairWithOperations operation,
             OperationApplier applier,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var token1 = operation.Token1;
             var token2 = operation.Token2;
@@ -454,7 +587,13 @@ namespace Microsoft.CodeAnalysis.Formatting
                     // are conflicting each other by forcing new lines and removing new lines.
                     //
                     // if wrapping operation applied, no need to run any other operation
-                    if (applier.Apply(operation.LineOperation, operation.PairIndex, cancellationToken))
+                    if (
+                        applier.Apply(
+                            operation.LineOperation,
+                            operation.PairIndex,
+                            cancellationToken
+                        )
+                    )
                     {
                         return;
                     }
@@ -473,13 +612,17 @@ namespace Microsoft.CodeAnalysis.Formatting
         private static void BuildContext(
             FormattingContext context,
             NodeOperations nodeOperations,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             // add scope operation (run each kind sequentially)
             using (Logger.LogBlock(FunctionId.Formatting_BuildContext, cancellationToken))
             {
                 cancellationToken.ThrowIfCancellationRequested();
-                context.AddIndentBlockOperations(nodeOperations.IndentBlockOperation, cancellationToken);
+                context.AddIndentBlockOperations(
+                    nodeOperations.IndentBlockOperation,
+                    cancellationToken
+                );
                 context.AddSuppressOperations(nodeOperations.SuppressOperation, cancellationToken);
             }
         }
@@ -489,10 +632,12 @@ namespace Microsoft.CodeAnalysis.Formatting
         /// </summary>
         private string FormatSummary()
         {
-            return string.Format("({0}) ({1} - {2})",
+            return string.Format(
+                "({0}) ({1} - {2})",
                 this.SpanToFormat,
                 _token1.ToString().Replace("\r\n", "\\r\\n"),
-                _token2.ToString().Replace("\r\n", "\\r\\n"));
+                _token2.ToString().Replace("\r\n", "\\r\\n")
+            );
         }
     }
 }

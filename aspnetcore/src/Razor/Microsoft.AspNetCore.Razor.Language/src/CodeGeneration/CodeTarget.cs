@@ -7,7 +7,10 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
 {
     public abstract class CodeTarget
     {
-        public static CodeTarget CreateDefault(RazorCodeDocument codeDocument, RazorCodeGenerationOptions options)
+        public static CodeTarget CreateDefault(
+            RazorCodeDocument codeDocument,
+            RazorCodeGenerationOptions options
+        )
         {
             if (codeDocument == null)
             {
@@ -25,7 +28,8 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
         public static CodeTarget CreateDefault(
             RazorCodeDocument codeDocument,
             RazorCodeGenerationOptions options,
-            Action<CodeTargetBuilder> configure)
+            Action<CodeTargetBuilder> configure
+        )
         {
             if (codeDocument == null)
             {
@@ -58,8 +62,9 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
 
         public static CodeTarget CreateEmpty(
             RazorCodeDocument codeDocument,
-            RazorCodeGenerationOptions options, 
-            Action<CodeTargetBuilder> configure)
+            RazorCodeGenerationOptions options,
+            Action<CodeTargetBuilder> configure
+        )
         {
             if (codeDocument == null)
             {
@@ -76,20 +81,16 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
             return builder.Build();
         }
 
-        internal static void AddDesignTimeDefaults(CodeTargetBuilder builder)
-        {
+        internal static void AddDesignTimeDefaults(CodeTargetBuilder builder) { }
 
-        }
-
-        internal static void AddRuntimeDefaults(CodeTargetBuilder builder)
-        {
-
-        }
+        internal static void AddRuntimeDefaults(CodeTargetBuilder builder) { }
 
         public abstract IntermediateNodeWriter CreateNodeWriter();
 
-        public abstract TExtension GetExtension<TExtension>() where TExtension : class, ICodeTargetExtension;
+        public abstract TExtension GetExtension<TExtension>()
+            where TExtension : class, ICodeTargetExtension;
 
-        public abstract bool HasExtension<TExtension>() where TExtension : class, ICodeTargetExtension;
+        public abstract bool HasExtension<TExtension>()
+            where TExtension : class, ICodeTargetExtension;
     }
 }

@@ -507,7 +507,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             Assert.Equal(0, converter(null));
         }
 
-        private static readonly NumberToStringConverter<sbyte?> _nullableSbyteToNaturalString = new();
+        private static readonly NumberToStringConverter<sbyte?> _nullableSbyteToNaturalString =
+            new();
 
         [ConditionalFact]
         public void Can_convert_nullable_sbytes_to_natural_strings()
@@ -568,9 +569,12 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 CoreStrings.ConverterBadType(
                     typeof(StringNumberConverter<Guid, string, Guid>).ShortDisplayName(),
                     "Guid",
-                    "'int', 'long', 'short', 'byte', 'uint', 'ulong', 'ushort', 'sbyte', 'decimal', 'float', 'double'"),
+                    "'int', 'long', 'short', 'byte', 'uint', 'ulong', 'ushort', 'sbyte', 'decimal', 'float', 'double'"
+                ),
                 Assert.Throws<InvalidOperationException>(
-                    () => new NumberToStringConverter<Guid>()).Message);
+                    () => new NumberToStringConverter<Guid>()
+                ).Message
+            );
         }
     }
 }

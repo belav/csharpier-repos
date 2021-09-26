@@ -25,8 +25,8 @@ namespace Microsoft.CodeAnalysis.CodeStyle
             var diagnostic = context.Diagnostics[0];
             var cancellationToken = context.CancellationToken;
 
-            var codeFixes = await ComputeCodeActionsAsync(
-                document, diagnostic, cancellationToken).ConfigureAwait(false);
+            var codeFixes = await ComputeCodeActionsAsync(document, diagnostic, cancellationToken)
+                .ConfigureAwait(false);
             context.RegisterFixes(codeFixes, context.Diagnostics);
         }
 
@@ -44,11 +44,15 @@ namespace Microsoft.CodeAnalysis.CodeStyle
 
             public sealed override ImmutableArray<string> FixableDiagnosticIds { get; }
 
-            public sealed override Task RegisterCodeFixesAsync(CodeFixContext context)
-                => _codeStyleProvider.RegisterCodeFixesAsync(context);
+            public sealed override Task RegisterCodeFixesAsync(CodeFixContext context) =>
+                _codeStyleProvider.RegisterCodeFixesAsync(context);
 
-            protected sealed override Task FixAllAsync(Document document, ImmutableArray<Diagnostic> diagnostics, SyntaxEditor editor, CancellationToken cancellationToken)
-                => _codeStyleProvider.FixAllAsync(document, diagnostics, editor, cancellationToken);
+            protected sealed override Task FixAllAsync(
+                Document document,
+                ImmutableArray<Diagnostic> diagnostics,
+                SyntaxEditor editor,
+                CancellationToken cancellationToken
+            ) => _codeStyleProvider.FixAllAsync(document, diagnostics, editor, cancellationToken);
         }
     }
 }

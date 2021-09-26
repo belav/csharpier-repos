@@ -8,7 +8,11 @@ namespace Microsoft.Extensions.Caching.StackExchangeRedis
 {
     internal static class RedisExtensions
     {
-        internal static RedisValue[] HashMemberGet(this IDatabase cache, string key, params string[] members)
+        internal static RedisValue[] HashMemberGet(
+            this IDatabase cache,
+            string key,
+            params string[] members
+        )
         {
             // TODO: Error checking?
             return cache.HashGet(key, GetRedisMembers(members));
@@ -17,7 +21,8 @@ namespace Microsoft.Extensions.Caching.StackExchangeRedis
         internal static async Task<RedisValue[]> HashMemberGetAsync(
             this IDatabase cache,
             string key,
-            params string[] members)
+            params string[] members
+        )
         {
             // TODO: Error checking?
             return await cache.HashGetAsync(key, GetRedisMembers(members)).ConfigureAwait(false);

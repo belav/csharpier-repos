@@ -20,7 +20,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
     /// </summary>
     /// <typeparam name="TLeftEntity"> One of the entity types in this relationship. </typeparam>
     /// <typeparam name="TRightEntity"> One of the entity types in this relationship. </typeparam>
-    public class CollectionCollectionBuilder<TLeftEntity, TRightEntity> : CollectionCollectionBuilder
+    public class CollectionCollectionBuilder<TLeftEntity, TRightEntity>
+        : CollectionCollectionBuilder
         where TLeftEntity : class
         where TRightEntity : class
     {
@@ -35,10 +36,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             IMutableEntityType leftEntityType,
             IMutableEntityType rightEntityType,
             IMutableSkipNavigation leftNavigation,
-            IMutableSkipNavigation rightNavigation)
-            : base(leftEntityType, rightEntityType, leftNavigation, rightNavigation)
-        {
-        }
+            IMutableSkipNavigation rightNavigation
+        ) : base(leftEntityType, rightEntityType, leftNavigation, rightNavigation) { }
 
         /// <summary>
         ///     Configures the join entity type implementing the many-to-many relationship.
@@ -46,13 +45,21 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <param name="configureJoinEntityType"> The configuration of the join entity type. </param>
         /// <returns> The builder for the originating entity type so that multiple configuration calls can be chained. </returns>
         public new virtual EntityTypeBuilder<TRightEntity> UsingEntity(
-            Action<EntityTypeBuilder> configureJoinEntityType)
+            Action<EntityTypeBuilder> configureJoinEntityType
+        )
         {
-            Check.DebugAssert(LeftNavigation.JoinEntityType != null, "LeftNavigation.JoinEntityType is null");
-            Check.DebugAssert(RightNavigation.JoinEntityType != null, "RightNavigation.JoinEntityType is null");
+            Check.DebugAssert(
+                LeftNavigation.JoinEntityType != null,
+                "LeftNavigation.JoinEntityType is null"
+            );
+            Check.DebugAssert(
+                RightNavigation.JoinEntityType != null,
+                "RightNavigation.JoinEntityType is null"
+            );
             Check.DebugAssert(
                 LeftNavigation.JoinEntityType == RightNavigation.JoinEntityType,
-                "LeftNavigation.JoinEntityType != RightNavigation.JoinEntityType");
+                "LeftNavigation.JoinEntityType != RightNavigation.JoinEntityType"
+            );
 
             var joinEntityTypeBuilder = new EntityTypeBuilder(LeftNavigation.JoinEntityType);
             configureJoinEntityType(joinEntityTypeBuilder);
@@ -68,21 +75,30 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <typeparam name="TJoinEntity"> The CLR type of the join entity. </typeparam>
         /// <returns> The builder for the join type. </returns>
         public virtual EntityTypeBuilder<TJoinEntity> UsingEntity<TJoinEntity>(
-            Func<EntityTypeBuilder<TJoinEntity>, ReferenceCollectionBuilder<TLeftEntity, TJoinEntity>> configureRight,
-            Func<EntityTypeBuilder<TJoinEntity>, ReferenceCollectionBuilder<TRightEntity, TJoinEntity>> configureLeft)
-            where TJoinEntity : class
+            Func<
+                EntityTypeBuilder<TJoinEntity>,
+                ReferenceCollectionBuilder<TLeftEntity, TJoinEntity>
+            > configureRight,
+            Func<
+                EntityTypeBuilder<TJoinEntity>,
+                ReferenceCollectionBuilder<TRightEntity, TJoinEntity>
+            > configureLeft
+        ) where TJoinEntity : class
         {
             Check.NotNull(configureRight, nameof(configureRight));
             Check.NotNull(configureLeft, nameof(configureLeft));
 
-            var existingJoinEntityType = (EntityType?)
-                (LeftNavigation.ForeignKey?.DeclaringEntityType
-                    ?? RightNavigation.ForeignKey?.DeclaringEntityType);
+            var existingJoinEntityType = (EntityType?)(
+                LeftNavigation.ForeignKey?.DeclaringEntityType
+                ?? RightNavigation.ForeignKey?.DeclaringEntityType
+            );
             EntityType? joinEntityType = null;
             if (existingJoinEntityType != null)
             {
-                if (existingJoinEntityType.ClrType == typeof(TJoinEntity)
-                    && !existingJoinEntityType.HasSharedClrType)
+                if (
+                    existingJoinEntityType.ClrType == typeof(TJoinEntity)
+                    && !existingJoinEntityType.HasSharedClrType
+                )
                 {
                     joinEntityType = existingJoinEntityType;
                 }
@@ -94,7 +110,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
 
             if (joinEntityType == null)
             {
-                joinEntityType = ModelBuilder.Entity(typeof(TJoinEntity), ConfigurationSource.Explicit)!.Metadata;
+                joinEntityType =
+                    ModelBuilder.Entity(
+                        typeof(TJoinEntity),
+                        ConfigurationSource.Explicit
+                    )!.Metadata;
             }
 
             var entityTypeBuilder = new EntityTypeBuilder<TJoinEntity>(joinEntityType);
@@ -117,22 +137,35 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <returns> The builder for the join entity type. </returns>
         public virtual EntityTypeBuilder<TJoinEntity> UsingEntity<TJoinEntity>(
             string joinEntityName,
-            Func<EntityTypeBuilder<TJoinEntity>, ReferenceCollectionBuilder<TLeftEntity, TJoinEntity>> configureRight,
-            Func<EntityTypeBuilder<TJoinEntity>, ReferenceCollectionBuilder<TRightEntity, TJoinEntity>> configureLeft)
-            where TJoinEntity : class
+            Func<
+                EntityTypeBuilder<TJoinEntity>,
+                ReferenceCollectionBuilder<TLeftEntity, TJoinEntity>
+            > configureRight,
+            Func<
+                EntityTypeBuilder<TJoinEntity>,
+                ReferenceCollectionBuilder<TRightEntity, TJoinEntity>
+            > configureLeft
+        ) where TJoinEntity : class
         {
             Check.NotEmpty(joinEntityName, nameof(joinEntityName));
             Check.NotNull(configureRight, nameof(configureRight));
             Check.NotNull(configureLeft, nameof(configureLeft));
 
-            var existingJoinEntityType = (EntityType?)
-                (LeftNavigation.ForeignKey?.DeclaringEntityType
-                    ?? RightNavigation.ForeignKey?.DeclaringEntityType);
+            var existingJoinEntityType = (EntityType?)(
+                LeftNavigation.ForeignKey?.DeclaringEntityType
+                ?? RightNavigation.ForeignKey?.DeclaringEntityType
+            );
             EntityType? joinEntityType = null;
             if (existingJoinEntityType != null)
             {
-                if (existingJoinEntityType.ClrType == typeof(TJoinEntity)
-                    && string.Equals(existingJoinEntityType.Name, joinEntityName, StringComparison.Ordinal))
+                if (
+                    existingJoinEntityType.ClrType == typeof(TJoinEntity)
+                    && string.Equals(
+                        existingJoinEntityType.Name,
+                        joinEntityName,
+                        StringComparison.Ordinal
+                    )
+                )
                 {
                     joinEntityType = existingJoinEntityType;
                 }
@@ -153,11 +186,17 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
                 {
                     if (!ModelBuilder.Metadata.IsShared(typeof(TJoinEntity)))
                     {
-                        throw new InvalidOperationException(CoreStrings.TypeNotMarkedAsShared(typeof(TJoinEntity).DisplayName()));
+                        throw new InvalidOperationException(
+                            CoreStrings.TypeNotMarkedAsShared(typeof(TJoinEntity).DisplayName())
+                        );
                     }
 
-                    joinEntityType = ModelBuilder.SharedTypeEntity(joinEntityName, typeof(TJoinEntity), ConfigurationSource.Explicit)!
-                        .Metadata;
+                    joinEntityType =
+                        ModelBuilder.SharedTypeEntity(
+                            joinEntityName,
+                            typeof(TJoinEntity),
+                            ConfigurationSource.Explicit
+                        )!.Metadata;
                 }
             }
 
@@ -180,10 +219,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <typeparam name="TJoinEntity"> The CLR type of the join entity. </typeparam>
         /// <returns> The builder for the originating entity type so that multiple configuration calls can be chained. </returns>
         public virtual EntityTypeBuilder<TRightEntity> UsingEntity<TJoinEntity>(
-            Func<EntityTypeBuilder<TJoinEntity>, ReferenceCollectionBuilder<TLeftEntity, TJoinEntity>> configureRight,
-            Func<EntityTypeBuilder<TJoinEntity>, ReferenceCollectionBuilder<TRightEntity, TJoinEntity>> configureLeft,
-            Action<EntityTypeBuilder<TJoinEntity>> configureJoinEntityType)
-            where TJoinEntity : class
+            Func<
+                EntityTypeBuilder<TJoinEntity>,
+                ReferenceCollectionBuilder<TLeftEntity, TJoinEntity>
+            > configureRight,
+            Func<
+                EntityTypeBuilder<TJoinEntity>,
+                ReferenceCollectionBuilder<TRightEntity, TJoinEntity>
+            > configureLeft,
+            Action<EntityTypeBuilder<TJoinEntity>> configureJoinEntityType
+        ) where TJoinEntity : class
         {
             Check.NotNull(configureRight, nameof(configureRight));
             Check.NotNull(configureLeft, nameof(configureLeft));
@@ -205,10 +250,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <returns> The builder for the originating entity type so that multiple configuration calls can be chained. </returns>
         public virtual EntityTypeBuilder<TRightEntity> UsingEntity<TJoinEntity>(
             string joinEntityName,
-            Func<EntityTypeBuilder<TJoinEntity>, ReferenceCollectionBuilder<TLeftEntity, TJoinEntity>> configureRight,
-            Func<EntityTypeBuilder<TJoinEntity>, ReferenceCollectionBuilder<TRightEntity, TJoinEntity>> configureLeft,
-            Action<EntityTypeBuilder<TJoinEntity>> configureJoinEntityType)
-            where TJoinEntity : class
+            Func<
+                EntityTypeBuilder<TJoinEntity>,
+                ReferenceCollectionBuilder<TLeftEntity, TJoinEntity>
+            > configureRight,
+            Func<
+                EntityTypeBuilder<TJoinEntity>,
+                ReferenceCollectionBuilder<TRightEntity, TJoinEntity>
+            > configureLeft,
+            Action<EntityTypeBuilder<TJoinEntity>> configureJoinEntityType
+        ) where TJoinEntity : class
         {
             Check.NotEmpty(joinEntityName, nameof(joinEntityName));
             Check.NotNull(configureRight, nameof(configureRight));

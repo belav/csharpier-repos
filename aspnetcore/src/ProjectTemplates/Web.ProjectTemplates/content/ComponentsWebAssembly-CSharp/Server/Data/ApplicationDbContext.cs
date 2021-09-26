@@ -14,8 +14,7 @@ namespace ComponentsWebAssembly_CSharp.Server.Data
     {
         public ApplicationDbContext(
             DbContextOptions options,
-            IOptions<OperationalStoreOptions> operationalStoreOptions) : base(options, operationalStoreOptions)
-        {
-        }
+            IOptions<OperationalStoreOptions> operationalStoreOptions
+        ) : base(options, operationalStoreOptions) { }
     }
 }

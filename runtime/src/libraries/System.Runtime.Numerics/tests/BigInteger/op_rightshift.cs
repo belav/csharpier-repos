@@ -145,7 +145,9 @@ namespace System.Numerics.Tests
             for (int i = 0; i < s_samples; i++)
             {
                 tempByteArray1 = GetRandomPosByteArray(s_random, 100);
-                tempByteArray2 = BitConverter.GetBytes(s_random.Next(8 * tempByteArray1.Length, 1000));
+                tempByteArray2 = BitConverter.GetBytes(
+                    s_random.Next(8 * tempByteArray1.Length, 1000)
+                );
                 if (!BitConverter.IsLittleEndian)
                 {
                     Array.Reverse(tempByteArray2);
@@ -157,7 +159,9 @@ namespace System.Numerics.Tests
             for (int i = 0; i < s_samples; i++)
             {
                 tempByteArray1 = GetRandomNegByteArray(s_random, 100);
-                tempByteArray2 = BitConverter.GetBytes(s_random.Next(8 * tempByteArray1.Length, 1000));
+                tempByteArray2 = BitConverter.GetBytes(
+                    s_random.Next(8 * tempByteArray1.Length, 1000)
+                );
                 if (!BitConverter.IsLittleEndian)
                 {
                     Array.Reverse(tempByteArray2);

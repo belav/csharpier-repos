@@ -25,9 +25,7 @@ namespace Microsoft.CodeAnalysis.CodeFixes.FullyQualify
         private const int TypeWeight = 1;
         private const int NamespaceWithErrorsWeight = 2;
 
-        protected AbstractFullyQualifyCodeFixProvider()
-        {
-        }
+        protected AbstractFullyQualifyCodeFixProvider() { }
 
         public override FixAllProvider? GetFixAllProvider()
         {
@@ -38,7 +36,12 @@ namespace Microsoft.CodeAnalysis.CodeFixes.FullyQualify
 
         protected abstract bool IgnoreCase { get; }
         protected abstract bool CanFullyQualify(Diagnostic diagnostic, ref SyntaxNode node);
-        protected abstract Task<SyntaxNode> ReplaceNodeAsync(SyntaxNode node, string containerName, bool resultingSymbolIsType, CancellationToken cancellationToken);
+        protected abstract Task<SyntaxNode> ReplaceNodeAsync(
+            SyntaxNode node,
+            string containerName,
+            bool resultingSymbolIsType,
+            CancellationToken cancellationToken
+        );
 
         public sealed override async Task RegisterCodeFixesAsync(CodeFixContext context)
         {
@@ -49,8 +52,11 @@ namespace Microsoft.CodeAnalysis.CodeFixes.FullyQualify
 
             var project = document.Project;
             var diagnostic = diagnostics.First();
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
-            var node = root.FindToken(span.Start).GetAncestors<SyntaxNode>().First(n => n.Span.Contains(span));
+            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
+            var node = root.FindToken(span.Start)
+                .GetAncestors<SyntaxNode>()
+                .First(n => n.Span.Contains(span));
 
             using (Logger.LogBlock(FunctionId.Refactoring_FullyQualify, cancellationToken))
             {
@@ -60,33 +66,57 @@ namespace Microsoft.CodeAnalysis.CodeFixes.FullyQualify
                     return;
                 }
 
-                var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+                var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken)
+                    .ConfigureAwait(false);
 
-                var matchingTypes = await GetMatchingTypesAsync(project, semanticModel, node, cancellationToken).ConfigureAwait(false);
-                var matchingNamespaces = await GetMatchingNamespacesAsync(project, semanticModel, node, cancellationToken).ConfigureAwait(false);
+                var matchingTypes = await GetMatchingTypesAsync(
+                        project,
+                        semanticModel,
+                        node,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
+                var matchingNamespaces = await GetMatchingNamespacesAsync(
+                        project,
+                        semanticModel,
+                        node,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 if (matchingTypes.IsEmpty && matchingNamespaces.IsEmpty)
                 {
                     return;
                 }
 
-                var matchingTypeContainers = FilterAndSort(GetContainers(matchingTypes, semanticModel.Compilation));
-                var matchingNamespaceContainers = FilterAndSort(GetContainers(matchingNamespaces, semanticModel.Compilation));
+                var matchingTypeContainers = FilterAndSort(
+                    GetContainers(matchingTypes, semanticModel.Compilation)
+                );
+                var matchingNamespaceContainers = FilterAndSort(
+                    GetContainers(matchingNamespaces, semanticModel.Compilation)
+                );
 
-                var proposedContainers =
-                    matchingTypeContainers.Concat(matchingNamespaceContainers)
-                                          .Distinct()
-                                          .Take(MaxResults);
+                var proposedContainers = matchingTypeContainers.Concat(matchingNamespaceContainers)
+                    .Distinct()
+                    .Take(MaxResults);
 
-                var codeActions = CreateActions(document, node, semanticModel, proposedContainers).ToImmutableArray();
+                var codeActions = CreateActions(document, node, semanticModel, proposedContainers)
+                    .ToImmutableArray();
 
                 if (codeActions.Length > 1)
                 {
                     // Wrap the spell checking actions into a single top level suggestion
                     // so as to not clutter the list.
-                    context.RegisterCodeFix(new GroupingCodeAction(
-                        string.Format(FeaturesResources.Fully_qualify_0, GetNodeName(document, node)),
-                        codeActions), context.Diagnostics);
+                    context.RegisterCodeFix(
+                        new GroupingCodeAction(
+                            string.Format(
+                                FeaturesResources.Fully_qualify_0,
+                                GetNodeName(document, node)
+                            ),
+                            codeActions
+                        ),
+                        context.Diagnostics
+                    );
                 }
                 else
                 {
@@ -96,8 +126,11 @@ namespace Microsoft.CodeAnalysis.CodeFixes.FullyQualify
         }
 
         private IEnumerable<CodeAction> CreateActions(
-            Document document, SyntaxNode node, SemanticModel semanticModel,
-            IEnumerable<SymbolResult> proposedContainers)
+            Document document,
+            SyntaxNode node,
+            SemanticModel semanticModel,
+            IEnumerable<SymbolResult> proposedContainers
+        )
         {
             foreach (var symbolResult in proposedContainers)
             {
@@ -120,7 +153,15 @@ namespace Microsoft.CodeAnalysis.CodeFixes.FullyQualify
 
                 var codeAction = new MyCodeAction(
                     $"{containerName}.{memberName}",
-                    c => ProcessNodeAsync(document, node, containerName, symbolResult.OriginalSymbol, c));
+                    c =>
+                        ProcessNodeAsync(
+                            document,
+                            node,
+                            containerName,
+                            symbolResult.OriginalSymbol,
+                            c
+                        )
+                );
 
                 yield return codeAction;
             }
@@ -131,20 +172,42 @@ namespace Microsoft.CodeAnalysis.CodeFixes.FullyQualify
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
             syntaxFacts.GetNameAndArityOfSimpleName(node, out var name, out _);
 
-            Contract.ThrowIfNull(name, "node isn't a SimpleNameSyntax? CanFullyQualify should have returned false.");
+            Contract.ThrowIfNull(
+                name,
+                "node isn't a SimpleNameSyntax? CanFullyQualify should have returned false."
+            );
             return name;
         }
 
-        private async Task<Document> ProcessNodeAsync(Document document, SyntaxNode node, string containerName, INamespaceOrTypeSymbol? originalSymbol, CancellationToken cancellationToken)
+        private async Task<Document> ProcessNodeAsync(
+            Document document,
+            SyntaxNode node,
+            string containerName,
+            INamespaceOrTypeSymbol? originalSymbol,
+            CancellationToken cancellationToken
+        )
         {
-            Contract.ThrowIfNull(originalSymbol, "Original symbol information missing. Haven't called GetContainers?");
+            Contract.ThrowIfNull(
+                originalSymbol,
+                "Original symbol information missing. Haven't called GetContainers?"
+            );
 
-            var newRoot = await ReplaceNodeAsync(node, containerName, originalSymbol.IsType, cancellationToken).ConfigureAwait(false);
+            var newRoot = await ReplaceNodeAsync(
+                    node,
+                    containerName,
+                    originalSymbol.IsType,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             return document.WithSyntaxRoot(newRoot);
         }
 
         private async Task<ImmutableArray<SymbolResult>> GetMatchingTypesAsync(
-            Project project, SemanticModel semanticModel, SyntaxNode node, CancellationToken cancellationToken)
+            Project project,
+            SemanticModel semanticModel,
+            SyntaxNode node,
+            CancellationToken cancellationToken
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -154,22 +217,39 @@ namespace Microsoft.CodeAnalysis.CodeFixes.FullyQualify
             var looksGeneric = syntaxFacts.LooksGeneric(node);
 
             var symbols = await DeclarationFinder.FindAllDeclarationsWithNormalQueryAsync(
-                project, SearchQuery.Create(name, IgnoreCase),
-                SymbolFilter.Type, cancellationToken).ConfigureAwait(false);
+                    project,
+                    SearchQuery.Create(name, IgnoreCase),
+                    SymbolFilter.Type,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             // also lookup type symbols with the "Attribute" suffix.
             var inAttributeContext = syntaxFacts.IsAttributeName(node);
             if (inAttributeContext)
             {
-                var attributeSymbols = await DeclarationFinder.FindAllDeclarationsWithNormalQueryAsync(
-                    project, SearchQuery.Create(name + "Attribute", IgnoreCase),
-                    SymbolFilter.Type, cancellationToken).ConfigureAwait(false);
+                var attributeSymbols =
+                    await DeclarationFinder.FindAllDeclarationsWithNormalQueryAsync(
+                            project,
+                            SearchQuery.Create(name + "Attribute", IgnoreCase),
+                            SymbolFilter.Type,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
                 symbols = symbols.Concat(attributeSymbols);
             }
 
-            var validSymbols = symbols
-                .OfType<INamedTypeSymbol>()
-                .Where(s => IsValidNamedTypeSearchResult(semanticModel, arity, inAttributeContext, looksGeneric, s))
+            var validSymbols = symbols.OfType<INamedTypeSymbol>()
+                .Where(
+                    s =>
+                        IsValidNamedTypeSearchResult(
+                            semanticModel,
+                            arity,
+                            inAttributeContext,
+                            looksGeneric,
+                            s
+                        )
+                )
                 .ToImmutableArray();
 
             // Check what the current node binds to.  If it binds to any symbols, but with
@@ -179,19 +259,24 @@ namespace Microsoft.CodeAnalysis.CodeFixes.FullyQualify
             if (currentSymbolInfo.CandidateReason == CandidateReason.WrongArity)
             {
                 validSymbols = validSymbols.WhereAsArray(
-                    s => !currentSymbolInfo.CandidateSymbols.Contains(s));
+                    s => !currentSymbolInfo.CandidateSymbols.Contains(s)
+                );
             }
 
             return validSymbols.SelectAsArray(s => new SymbolResult(s, weight: TypeWeight));
         }
 
         private static bool IsValidNamedTypeSearchResult(
-            SemanticModel semanticModel, int arity, bool inAttributeContext,
-            bool looksGeneric, INamedTypeSymbol searchResult)
+            SemanticModel semanticModel,
+            int arity,
+            bool inAttributeContext,
+            bool looksGeneric,
+            INamedTypeSymbol searchResult
+        )
         {
             if (arity != 0 && searchResult.GetArity() != arity)
             {
-                // If the user supplied type arguments, then the search result has to match the 
+                // If the user supplied type arguments, then the search result has to match the
                 // number provided.
                 return false;
             }
@@ -225,15 +310,16 @@ namespace Microsoft.CodeAnalysis.CodeFixes.FullyQualify
         private static bool HasValidContainer(ISymbol symbol)
         {
             var container = symbol.ContainingSymbol;
-            return container is INamespaceSymbol ||
-                   (container is INamedTypeSymbol parentType && !parentType.IsGenericType);
+            return container is INamespaceSymbol
+                || (container is INamedTypeSymbol parentType && !parentType.IsGenericType);
         }
 
         private async Task<ImmutableArray<SymbolResult>> GetMatchingNamespacesAsync(
             Project project,
             SemanticModel semanticModel,
             SyntaxNode simpleName,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var syntaxFacts = project.LanguageServices.GetRequiredService<ISyntaxFactsService>();
             if (syntaxFacts.IsAttributeName(simpleName))
@@ -248,8 +334,12 @@ namespace Microsoft.CodeAnalysis.CodeFixes.FullyQualify
             }
 
             var symbols = await DeclarationFinder.FindAllDeclarationsWithNormalQueryAsync(
-                project, SearchQuery.Create(name, IgnoreCase),
-                SymbolFilter.Namespace, cancellationToken).ConfigureAwait(false);
+                    project,
+                    SearchQuery.Create(name, IgnoreCase),
+                    SymbolFilter.Namespace,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             // There might be multiple namespaces that this name will resolve successfully in.
             // Some of them may be 'better' results than others.  For example, say you have
@@ -268,16 +358,30 @@ namespace Microsoft.CodeAnalysis.CodeFixes.FullyQualify
                 isAttributeName = syntaxFacts.IsAttributeName(rightSide);
             }
 
-            var namespaces = symbols
-                .OfType<INamespaceSymbol>()
-                .Where(n => !n.IsGlobalNamespace && HasAccessibleTypes(n, semanticModel, cancellationToken))
-                .Select(n => new SymbolResult(n,
-                    BindsWithoutErrors(n, rightName, isAttributeName) ? NamespaceWithNoErrorsWeight : NamespaceWithErrorsWeight));
+            var namespaces = symbols.OfType<INamespaceSymbol>()
+                .Where(
+                    n =>
+                        !n.IsGlobalNamespace
+                        && HasAccessibleTypes(n, semanticModel, cancellationToken)
+                )
+                .Select(
+                    n =>
+                        new SymbolResult(
+                            n,
+                            BindsWithoutErrors(n, rightName, isAttributeName)
+                              ? NamespaceWithNoErrorsWeight
+                              : NamespaceWithErrorsWeight
+                        )
+                );
 
             return namespaces.ToImmutableArray();
         }
 
-        private bool BindsWithoutErrors(INamespaceSymbol ns, string? rightName, bool isAttributeName)
+        private bool BindsWithoutErrors(
+            INamespaceSymbol ns,
+            string? rightName,
+            bool isAttributeName
+        )
         {
             // If there was no name on the right, then this binds without any problems.
             if (rightName == null)
@@ -301,15 +405,25 @@ namespace Microsoft.CodeAnalysis.CodeFixes.FullyQualify
             return BindsWithoutErrors(ns, rightName + "Attribute", isAttributeName: false);
         }
 
-        private static bool HasAccessibleTypes(INamespaceSymbol @namespace, SemanticModel model, CancellationToken cancellationToken)
-            => Enumerable.Any(@namespace.GetAllTypes(cancellationToken), t => t.IsAccessibleWithin(model.Compilation.Assembly));
+        private static bool HasAccessibleTypes(
+            INamespaceSymbol @namespace,
+            SemanticModel model,
+            CancellationToken cancellationToken
+        ) =>
+            Enumerable.Any(
+                @namespace.GetAllTypes(cancellationToken),
+                t => t.IsAccessibleWithin(model.Compilation.Assembly)
+            );
 
         private static IEnumerable<SymbolResult> GetContainers(
-            ImmutableArray<SymbolResult> symbols, Compilation compilation)
+            ImmutableArray<SymbolResult> symbols,
+            Compilation compilation
+        )
         {
             foreach (var symbolResult in symbols)
             {
-                var containingSymbol = symbolResult.Symbol.ContainingSymbol as INamespaceOrTypeSymbol;
+                var containingSymbol =
+                    symbolResult.Symbol.ContainingSymbol as INamespaceOrTypeSymbol;
                 if (containingSymbol is INamespaceSymbol namespaceSymbol)
                 {
                     containingSymbol = compilation.GetCompilationNamespace(namespaceSymbol);
@@ -322,25 +436,27 @@ namespace Microsoft.CodeAnalysis.CodeFixes.FullyQualify
             }
         }
 
-        private static IEnumerable<SymbolResult> FilterAndSort(IEnumerable<SymbolResult> symbols)
-            => symbols.Distinct()
-               .Where(n => n.Symbol is INamedTypeSymbol || !((INamespaceSymbol)n.Symbol).IsGlobalNamespace)
-               .Order();
+        private static IEnumerable<SymbolResult> FilterAndSort(IEnumerable<SymbolResult> symbols) =>
+            symbols.Distinct()
+                .Where(
+                    n =>
+                        n.Symbol is INamedTypeSymbol
+                        || !((INamespaceSymbol)n.Symbol).IsGlobalNamespace
+                )
+                .Order();
 
         private class MyCodeAction : CodeAction.DocumentChangeAction
         {
-            public MyCodeAction(string title, Func<CancellationToken, Task<Document>> createChangedDocument)
-                : base(title, createChangedDocument, equivalenceKey: title)
-            {
-            }
+            public MyCodeAction(
+                string title,
+                Func<CancellationToken, Task<Document>> createChangedDocument
+            ) : base(title, createChangedDocument, equivalenceKey: title) { }
         }
 
         private class GroupingCodeAction : CodeAction.CodeActionWithNestedActions
         {
             public GroupingCodeAction(string title, ImmutableArray<CodeAction> nestedActions)
-                : base(title, nestedActions, isInlinable: true)
-            {
-            }
+                : base(title, nestedActions, isInlinable: true) { }
         }
     }
 }

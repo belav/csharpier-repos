@@ -16,12 +16,18 @@ internal class Program
 
     private static int Main()
     {
-        DynamicMethod method = new DynamicMethod("GetField",
-            typeof(string), new Type[0], typeof(Host));
+        DynamicMethod method = new DynamicMethod(
+            "GetField",
+            typeof(string),
+            new Type[0],
+            typeof(Host)
+        );
 
         ILGenerator il = method.GetILGenerator();
-        il.Emit(OpCodes.Ldsfld, typeof(Host).GetField(
-            "s_field", BindingFlags.Static | BindingFlags.NonPublic));
+        il.Emit(
+            OpCodes.Ldsfld,
+            typeof(Host).GetField("s_field", BindingFlags.Static | BindingFlags.NonPublic)
+        );
         il.Emit(OpCodes.Ret);
 
         Getter g = (Getter)method.CreateDelegate(typeof(Getter));

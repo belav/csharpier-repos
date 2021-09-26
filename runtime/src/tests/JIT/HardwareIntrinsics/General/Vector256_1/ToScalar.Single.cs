@@ -38,7 +38,8 @@ namespace JIT.HardwareIntrinsics.General
     {
         private static readonly int LargestVectorSize = 32;
 
-        private static readonly int ElementCount = Unsafe.SizeOf<Vector256<Single>>() / sizeof(Single);
+        private static readonly int ElementCount =
+            Unsafe.SizeOf<Vector256<Single>>() / sizeof(Single);
 
         public bool Succeeded { get; set; } = true;
 
@@ -53,7 +54,16 @@ namespace JIT.HardwareIntrinsics.General
                 values[i] = TestLibrary.Generator.GetSingle();
             }
 
-            Vector256<Single> value = Vector256.Create(values[0], values[1], values[2], values[3], values[4], values[5], values[6], values[7]);
+            Vector256<Single> value = Vector256.Create(
+                values[0],
+                values[1],
+                values[2],
+                values[3],
+                values[4],
+                values[5],
+                values[6],
+                values[7]
+            );
 
             Single result = value.ToScalar();
             ValidateResult(result, values);
@@ -70,22 +80,38 @@ namespace JIT.HardwareIntrinsics.General
                 values[i] = TestLibrary.Generator.GetSingle();
             }
 
-            Vector256<Single> value = Vector256.Create(values[0], values[1], values[2], values[3], values[4], values[5], values[6], values[7]);
+            Vector256<Single> value = Vector256.Create(
+                values[0],
+                values[1],
+                values[2],
+                values[3],
+                values[4],
+                values[5],
+                values[6],
+                values[7]
+            );
 
-            object result = typeof(Vector256)
-                                .GetMethod(nameof(Vector256.ToScalar))
-                                .MakeGenericMethod(typeof(Single))
-                                .Invoke(null, new object[] { value });
+            object result = typeof(Vector256).GetMethod(nameof(Vector256.ToScalar))
+                .MakeGenericMethod(typeof(Single))
+                .Invoke(null, new object[] { value });
 
             ValidateResult((Single)(result), values);
         }
 
-        private void ValidateResult(Single result, Single[] values, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            Single result,
+            Single[] values,
+            [CallerMemberName] string method = ""
+        )
         {
             if (result != values[0])
             {
-                TestLibrary.TestFramework.LogInformation($"Vector256<Single>.ToScalar(): {method} failed:");
-                TestLibrary.TestFramework.LogInformation($"  values: ({string.Join(", ", values)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector256<Single>.ToScalar(): {method} failed:"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"  values: ({string.Join(", ", values)})"
+                );
                 TestLibrary.TestFramework.LogInformation($"  result: {result}");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 

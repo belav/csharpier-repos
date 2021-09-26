@@ -22,7 +22,9 @@ namespace Microsoft.AspNetCore.Internal
         {
             if (reader.TokenType != JsonTokenType.StartObject)
             {
-                throw new InvalidDataException($"Unexpected JSON Token Type '{reader.GetTokenString()}'. Expected a JSON Object.");
+                throw new InvalidDataException(
+                    $"Unexpected JSON Token Type '{reader.GetTokenString()}'. Expected a JSON Object."
+                );
             }
         }
 
@@ -53,7 +55,9 @@ namespace Microsoft.AspNetCore.Internal
         {
             if (reader.TokenType != JsonTokenType.StartArray)
             {
-                throw new InvalidDataException($"Unexpected JSON Token Type '{reader.GetTokenString()}'. Expected a JSON Array.");
+                throw new InvalidDataException(
+                    $"Unexpected JSON Token Type '{reader.GetTokenString()}'. Expected a JSON Array."
+                );
             }
         }
 
@@ -65,7 +69,10 @@ namespace Microsoft.AspNetCore.Internal
             {
                 JsonTokenType.False => false,
                 JsonTokenType.True => true,
-                _ => throw new InvalidDataException($"Expected '{propertyName}' to be true or false."),
+                _
+                  => throw new InvalidDataException(
+                      $"Expected '{propertyName}' to be true or false."
+                  ),
             };
         }
 
@@ -75,7 +82,9 @@ namespace Microsoft.AspNetCore.Internal
 
             if (reader.TokenType != JsonTokenType.String)
             {
-                throw new InvalidDataException($"Expected '{propertyName}' to be of type {JsonTokenType.String}.");
+                throw new InvalidDataException(
+                    $"Expected '{propertyName}' to be of type {JsonTokenType.String}."
+                );
             }
 
             return reader.GetString()!;
@@ -92,7 +101,9 @@ namespace Microsoft.AspNetCore.Internal
 
             if (reader.TokenType != JsonTokenType.Number)
             {
-                throw new InvalidDataException($"Expected '{propertyName}' to be of type {JsonTokenType.Number}.");
+                throw new InvalidDataException(
+                    $"Expected '{propertyName}' to be of type {JsonTokenType.Number}."
+                );
             }
 
             return reader.GetInt32();

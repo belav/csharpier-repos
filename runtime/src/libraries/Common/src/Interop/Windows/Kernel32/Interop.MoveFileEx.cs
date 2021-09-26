@@ -15,7 +15,13 @@ internal static partial class Interop
         /// <summary>
         /// WARNING: This method does not implicitly handle long paths. Use MoveFile.
         /// </summary>
-        [DllImport(Libraries.Kernel32, EntryPoint = "MoveFileExW", SetLastError = true, CharSet = CharSet.Unicode, BestFitMapping = false)]
+        [DllImport(
+            Libraries.Kernel32,
+            EntryPoint = "MoveFileExW",
+            SetLastError = true,
+            CharSet = CharSet.Unicode,
+            BestFitMapping = false
+        )]
         private static extern bool MoveFileExPrivate(string src, string dst, uint flags);
 
         /// <summary>

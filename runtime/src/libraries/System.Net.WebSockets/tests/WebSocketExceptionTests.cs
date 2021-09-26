@@ -10,7 +10,8 @@ namespace System.Net.WebSockets.Tests
 {
     public sealed partial class WebSocketExceptionTests
     {
-        public static object[][] ErrorData = {
+        public static object[][] ErrorData =
+        {
             new object[] { WebSocketError.Success },
             new object[] { WebSocketError.InvalidMessageType },
             new object[] { WebSocketError.Faulted },
@@ -23,13 +24,16 @@ namespace System.Net.WebSockets.Tests
             new object[] { WebSocketError.InvalidState },
         };
 
-        public static object[][] NativeErrorData = {
+        public static object[][] NativeErrorData =
+        {
             new object[] { 0, WebSocketError.Success, unchecked((int)0x80004005) },
-            new object[] { -2147467259, WebSocketError.NativeError, -2147467259},
+            new object[] { -2147467259, WebSocketError.NativeError, -2147467259 },
         };
 
-        public static object[][] UnrelatedErrorData =
-            ErrorData.SelectMany(wse => NativeErrorData.Select(ne => new object[] { wse[0], ne[0], ne[2] })).ToArray();
+        public static object[][] UnrelatedErrorData = ErrorData.SelectMany(
+                wse => NativeErrorData.Select(ne => new object[] { wse[0], ne[0], ne[2] })
+            )
+            .ToArray();
 
         [Fact]
         public void ConstructorTests_Parameterless_Success()
@@ -83,7 +87,11 @@ namespace System.Net.WebSockets.Tests
         }
 
         [Theory, MemberData(nameof(NativeErrorData))]
-        public void ConstructorTests_NativeError_Success(int nativeError, WebSocketError webSocketError, int expectedHResult)
+        public void ConstructorTests_NativeError_Success(
+            int nativeError,
+            WebSocketError webSocketError,
+            int expectedHResult
+        )
         {
             var wse = new WebSocketException(nativeError);
             Assert.Equal(expectedHResult, wse.HResult);
@@ -93,7 +101,11 @@ namespace System.Net.WebSockets.Tests
         }
 
         [Theory, MemberData(nameof(NativeErrorData))]
-        public void ConstructorTests_NativeError_Message_Success(int nativeError, WebSocketError webSocketError, int expectedHResult)
+        public void ConstructorTests_NativeError_Message_Success(
+            int nativeError,
+            WebSocketError webSocketError,
+            int expectedHResult
+        )
         {
             const string Message = "Message";
             var wse = new WebSocketException(nativeError, Message);
@@ -104,7 +116,11 @@ namespace System.Net.WebSockets.Tests
         }
 
         [Theory, MemberData(nameof(NativeErrorData))]
-        public void ConstructorTests_NativeError_Exception_Success(int nativeError, WebSocketError webSocketError, int expectedHResult)
+        public void ConstructorTests_NativeError_Exception_Success(
+            int nativeError,
+            WebSocketError webSocketError,
+            int expectedHResult
+        )
         {
             var inner = new Exception();
             var wse = new WebSocketException(nativeError, inner);
@@ -115,7 +131,11 @@ namespace System.Net.WebSockets.Tests
         }
 
         [Theory, MemberData(nameof(UnrelatedErrorData))]
-        public void ConstructorTests_WebSocketError_NativeError_Success(int nativeError, WebSocketError error, int expectedHResult)
+        public void ConstructorTests_WebSocketError_NativeError_Success(
+            int nativeError,
+            WebSocketError error,
+            int expectedHResult
+        )
         {
             var wse = new WebSocketException(error, nativeError);
             Assert.Equal(expectedHResult, wse.HResult);
@@ -125,7 +145,11 @@ namespace System.Net.WebSockets.Tests
         }
 
         [Theory, MemberData(nameof(UnrelatedErrorData))]
-        public void ConstructorTests_WebSocketError_NativeError_Message_Success(int nativeError, WebSocketError error, int expectedHResult)
+        public void ConstructorTests_WebSocketError_NativeError_Message_Success(
+            int nativeError,
+            WebSocketError error,
+            int expectedHResult
+        )
         {
             const string Message = "Message";
             var wse = new WebSocketException(error, nativeError, Message);
@@ -136,7 +160,11 @@ namespace System.Net.WebSockets.Tests
         }
 
         [Theory, MemberData(nameof(UnrelatedErrorData))]
-        public void ConstructorTests_WebSocketError_NativeError_Exception_Success(int nativeError, WebSocketError error, int expectedHResult)
+        public void ConstructorTests_WebSocketError_NativeError_Exception_Success(
+            int nativeError,
+            WebSocketError error,
+            int expectedHResult
+        )
         {
             var inner = new Exception();
             var wse = new WebSocketException(error, nativeError, inner);
@@ -147,7 +175,11 @@ namespace System.Net.WebSockets.Tests
         }
 
         [Theory, MemberData(nameof(UnrelatedErrorData))]
-        public void ConstructorTests_WebSocketError_NativeError_Message_Exception_Success(int nativeError, WebSocketError error, int expectedHResult)
+        public void ConstructorTests_WebSocketError_NativeError_Message_Exception_Success(
+            int nativeError,
+            WebSocketError error,
+            int expectedHResult
+        )
         {
             const string Message = "Message";
             var inner = new Exception();

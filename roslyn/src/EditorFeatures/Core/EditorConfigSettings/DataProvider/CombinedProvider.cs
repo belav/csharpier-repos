@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.DataProvider
         {
             foreach (var provider in _providers)
             {
-                sourceText = await provider.GetChangedEditorConfigAsync(sourceText).ConfigureAwait(false);
+                sourceText = await provider.GetChangedEditorConfigAsync(sourceText)
+                    .ConfigureAwait(false);
             }
 
             return sourceText;

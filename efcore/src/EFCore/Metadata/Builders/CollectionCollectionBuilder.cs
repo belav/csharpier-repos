@@ -32,12 +32,19 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             IMutableEntityType leftEntityType,
             IMutableEntityType rightEntityType,
             IMutableSkipNavigation leftNavigation,
-            IMutableSkipNavigation rightNavigation)
+            IMutableSkipNavigation rightNavigation
+        )
         {
             Check.DebugAssert(((IConventionEntityType)leftEntityType).IsInModel, "Not in model");
             Check.DebugAssert(((IConventionEntityType)rightEntityType).IsInModel, "Not in model");
-            Check.DebugAssert(((IConventionSkipNavigation)leftNavigation).IsInModel, "Not in model");
-            Check.DebugAssert(((IConventionSkipNavigation)rightNavigation).IsInModel, "Not in model");
+            Check.DebugAssert(
+                ((IConventionSkipNavigation)leftNavigation).IsInModel,
+                "Not in model"
+            );
+            Check.DebugAssert(
+                ((IConventionSkipNavigation)rightNavigation).IsInModel,
+                "Not in model"
+            );
 
             LeftEntityType = leftEntityType;
             RightEntityType = rightEntityType;
@@ -80,8 +87,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         [EntityFrameworkInternal]
-        protected virtual InternalModelBuilder ModelBuilder
-            => ((EntityType)LeftEntityType).Model.Builder;
+        protected virtual InternalModelBuilder ModelBuilder =>
+            ((EntityType)LeftEntityType).Model.Builder;
 
         /// <summary>
         ///     Configures the join entity type implementing the many-to-many relationship.
@@ -89,13 +96,21 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <param name="configureJoinEntityType"> The configuration of the join entity type. </param>
         /// <returns> The builder for the originating entity type so that multiple configuration calls can be chained. </returns>
         public virtual EntityTypeBuilder UsingEntity(
-            Action<EntityTypeBuilder> configureJoinEntityType)
+            Action<EntityTypeBuilder> configureJoinEntityType
+        )
         {
-            Check.DebugAssert(LeftNavigation.JoinEntityType != null, "LeftNavigation.JoinEntityType is null");
-            Check.DebugAssert(RightNavigation.JoinEntityType != null, "RightNavigation.JoinEntityType is null");
+            Check.DebugAssert(
+                LeftNavigation.JoinEntityType != null,
+                "LeftNavigation.JoinEntityType is null"
+            );
+            Check.DebugAssert(
+                RightNavigation.JoinEntityType != null,
+                "RightNavigation.JoinEntityType is null"
+            );
             Check.DebugAssert(
                 LeftNavigation.JoinEntityType == RightNavigation.JoinEntityType,
-                "LeftNavigation.JoinEntityType != RightNavigation.JoinEntityType");
+                "LeftNavigation.JoinEntityType != RightNavigation.JoinEntityType"
+            );
 
             var joinEntityTypeBuilder = new EntityTypeBuilder(LeftNavigation.JoinEntityType);
             configureJoinEntityType(joinEntityTypeBuilder);
@@ -113,20 +128,24 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         public virtual EntityTypeBuilder UsingEntity(
             Type joinEntityType,
             Func<EntityTypeBuilder, ReferenceCollectionBuilder> configureRight,
-            Func<EntityTypeBuilder, ReferenceCollectionBuilder> configureLeft)
+            Func<EntityTypeBuilder, ReferenceCollectionBuilder> configureLeft
+        )
         {
             Check.NotNull(joinEntityType, nameof(joinEntityType));
             Check.NotNull(configureRight, nameof(configureRight));
             Check.NotNull(configureLeft, nameof(configureLeft));
 
-            var existingJoinEntityType = (EntityType?)
-                (LeftNavigation.ForeignKey?.DeclaringEntityType
-                    ?? RightNavigation.ForeignKey?.DeclaringEntityType);
+            var existingJoinEntityType = (EntityType?)(
+                LeftNavigation.ForeignKey?.DeclaringEntityType
+                ?? RightNavigation.ForeignKey?.DeclaringEntityType
+            );
             EntityType? newJoinEntityType = null;
             if (existingJoinEntityType != null)
             {
-                if (existingJoinEntityType.ClrType == joinEntityType
-                    && !existingJoinEntityType.HasSharedClrType)
+                if (
+                    existingJoinEntityType.ClrType == joinEntityType
+                    && !existingJoinEntityType.HasSharedClrType
+                )
                 {
                     newJoinEntityType = existingJoinEntityType;
                 }
@@ -138,7 +157,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
 
             if (newJoinEntityType == null)
             {
-                newJoinEntityType = ModelBuilder.Entity(joinEntityType, ConfigurationSource.Explicit)!.Metadata;
+                newJoinEntityType =
+                    ModelBuilder.Entity(joinEntityType, ConfigurationSource.Explicit)!.Metadata;
             }
 
             var entityTypeBuilder = new EntityTypeBuilder(newJoinEntityType);
@@ -163,21 +183,29 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             string joinEntityName,
             Type joinEntityType,
             Func<EntityTypeBuilder, ReferenceCollectionBuilder> configureRight,
-            Func<EntityTypeBuilder, ReferenceCollectionBuilder> configureLeft)
+            Func<EntityTypeBuilder, ReferenceCollectionBuilder> configureLeft
+        )
         {
             Check.NotEmpty(joinEntityName, nameof(joinEntityName));
             Check.NotNull(joinEntityType, nameof(joinEntityType));
             Check.NotNull(configureRight, nameof(configureRight));
             Check.NotNull(configureLeft, nameof(configureLeft));
 
-            var existingJoinEntityType = (EntityType?)
-                (LeftNavigation.ForeignKey?.DeclaringEntityType
-                    ?? RightNavigation.ForeignKey?.DeclaringEntityType);
+            var existingJoinEntityType = (EntityType?)(
+                LeftNavigation.ForeignKey?.DeclaringEntityType
+                ?? RightNavigation.ForeignKey?.DeclaringEntityType
+            );
             EntityType? newJoinEntityType = null;
             if (existingJoinEntityType != null)
             {
-                if (existingJoinEntityType.ClrType == joinEntityType
-                    && string.Equals(existingJoinEntityType.Name, joinEntityName, StringComparison.Ordinal))
+                if (
+                    existingJoinEntityType.ClrType == joinEntityType
+                    && string.Equals(
+                        existingJoinEntityType.Name,
+                        joinEntityName,
+                        StringComparison.Ordinal
+                    )
+                )
                 {
                     newJoinEntityType = existingJoinEntityType;
                 }
@@ -198,11 +226,17 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
                 {
                     if (!ModelBuilder.Metadata.IsShared(joinEntityType))
                     {
-                        throw new InvalidOperationException(CoreStrings.TypeNotMarkedAsShared(joinEntityType.DisplayName()));
+                        throw new InvalidOperationException(
+                            CoreStrings.TypeNotMarkedAsShared(joinEntityType.DisplayName())
+                        );
                     }
 
-                    newJoinEntityType = ModelBuilder.SharedTypeEntity(joinEntityName, joinEntityType, ConfigurationSource.Explicit)!
-                        .Metadata;
+                    newJoinEntityType =
+                        ModelBuilder.SharedTypeEntity(
+                            joinEntityName,
+                            joinEntityType,
+                            ConfigurationSource.Explicit
+                        )!.Metadata;
                 }
             }
 
@@ -228,7 +262,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             Type joinEntityType,
             Func<EntityTypeBuilder, ReferenceCollectionBuilder> configureRight,
             Func<EntityTypeBuilder, ReferenceCollectionBuilder> configureLeft,
-            Action<EntityTypeBuilder> configureJoinEntityType)
+            Action<EntityTypeBuilder> configureJoinEntityType
+        )
         {
             Check.NotNull(joinEntityType, nameof(joinEntityType));
             Check.NotNull(configureRight, nameof(configureRight));
@@ -255,7 +290,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             Type joinEntityType,
             Func<EntityTypeBuilder, ReferenceCollectionBuilder> configureRight,
             Func<EntityTypeBuilder, ReferenceCollectionBuilder> configureLeft,
-            Action<EntityTypeBuilder> configureJoinEntityType)
+            Action<EntityTypeBuilder> configureJoinEntityType
+        )
         {
             Check.NotEmpty(joinEntityName, nameof(joinEntityName));
             Check.NotNull(joinEntityType, nameof(joinEntityType));
@@ -263,7 +299,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             Check.NotNull(configureLeft, nameof(configureLeft));
             Check.NotNull(configureJoinEntityType, nameof(configureJoinEntityType));
 
-            var entityTypeBuilder = UsingEntity(joinEntityName, joinEntityType, configureRight, configureLeft);
+            var entityTypeBuilder = UsingEntity(
+                joinEntityName,
+                joinEntityType,
+                configureRight,
+                configureLeft
+            );
             configureJoinEntityType(entityTypeBuilder);
 
             return new EntityTypeBuilder(RightEntityType);
@@ -276,15 +317,27 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         [EntityFrameworkInternal]
-        protected virtual void Using(IMutableForeignKey rightForeignKey, IMutableForeignKey leftForeignKey)
+        protected virtual void Using(
+            IMutableForeignKey rightForeignKey,
+            IMutableForeignKey leftForeignKey
+        )
         {
             var leftBuilder = ((SkipNavigation)LeftNavigation).Builder;
             var rightBuilder = ((SkipNavigation)RightNavigation).Builder;
 
-            leftBuilder = leftBuilder.HasInverse(rightBuilder.Metadata, ConfigurationSource.Explicit)!;
+            leftBuilder = leftBuilder.HasInverse(
+                rightBuilder.Metadata,
+                ConfigurationSource.Explicit
+            )!;
 
-            leftBuilder = leftBuilder.HasForeignKey((ForeignKey)leftForeignKey, ConfigurationSource.Explicit)!;
-            rightBuilder = rightBuilder.HasForeignKey((ForeignKey)rightForeignKey, ConfigurationSource.Explicit)!;
+            leftBuilder = leftBuilder.HasForeignKey(
+                (ForeignKey)leftForeignKey,
+                ConfigurationSource.Explicit
+            )!;
+            rightBuilder = rightBuilder.HasForeignKey(
+                (ForeignKey)rightForeignKey,
+                ConfigurationSource.Explicit
+            )!;
 
             LeftNavigation = leftBuilder.Metadata;
             RightNavigation = rightBuilder.Metadata;
@@ -294,21 +347,17 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
 
         /// <inheritdoc />
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public override string? ToString()
-            => base.ToString();
+        public override string? ToString() => base.ToString();
 
         /// <inheritdoc />
         [EditorBrowsable(EditorBrowsableState.Never)]
         // ReSharper disable once BaseObjectEqualsIsObjectEquals
-        public override bool Equals(object? obj)
-            => base.Equals(obj);
+        public override bool Equals(object? obj) => base.Equals(obj);
 
         /// <inheritdoc />
         [EditorBrowsable(EditorBrowsableState.Never)]
         // ReSharper disable once BaseObjectGetHashCodeCallInGetHashCode
-        public override int GetHashCode()
-            => base.GetHashCode();
-
+        public override int GetHashCode() => base.GetHashCode();
         #endregion
     }
 }

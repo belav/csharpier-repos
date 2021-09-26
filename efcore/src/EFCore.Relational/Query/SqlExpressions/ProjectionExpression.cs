@@ -39,12 +39,10 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         public SqlExpression Expression { get; }
 
         /// <inheritdoc />
-        public override Type Type
-            => Expression.Type;
+        public override Type Type => Expression.Type;
 
         /// <inheritdoc />
-        public override ExpressionType NodeType
-            => ExpressionType.Extension;
+        public override ExpressionType NodeType => ExpressionType.Extension;
 
         /// <inheritdoc />
         protected override Expression VisitChildren(ExpressionVisitor visitor)
@@ -64,9 +62,7 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         {
             Check.NotNull(expression, nameof(expression));
 
-            return expression != Expression
-                ? new ProjectionExpression(expression, Alias)
-                : this;
+            return expression != Expression ? new ProjectionExpression(expression, Alias) : this;
         }
 
         /// <inheritdoc />
@@ -75,26 +71,29 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
             Check.NotNull(expressionPrinter, nameof(expressionPrinter));
 
             expressionPrinter.Visit(Expression);
-            if (Alias != string.Empty
-                && !(Expression is ColumnExpression column
-                    && column.Name == Alias))
+            if (
+                Alias != string.Empty
+                && !(Expression is ColumnExpression column && column.Name == Alias)
+            )
             {
                 expressionPrinter.Append(" AS " + Alias);
             }
         }
 
         /// <inheritdoc />
-        public override bool Equals(object? obj)
-            => obj != null
-                && (ReferenceEquals(this, obj)
-                    || obj is ProjectionExpression projectionExpression
-                    && Equals(projectionExpression));
+        public override bool Equals(object? obj) =>
+            obj != null
+            && (
+                ReferenceEquals(this, obj)
+                || obj is ProjectionExpression projectionExpression && Equals(projectionExpression)
+            );
 
-        private bool Equals(ProjectionExpression projectionExpression)
-            => Alias == projectionExpression.Alias && Expression.Equals(projectionExpression.Expression);
+        private bool Equals(ProjectionExpression projectionExpression) =>
+            Alias == projectionExpression.Alias
+            && Expression.Equals(projectionExpression.Expression);
 
         /// <inheritdoc />
-        public override int GetHashCode()
-            => HashCode.Combine(base.GetHashCode(), Alias, Expression);
+        public override int GetHashCode() =>
+            HashCode.Combine(base.GetHashCode(), Alias, Expression);
     }
 }

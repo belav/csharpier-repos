@@ -25,7 +25,11 @@ namespace BasicWebSite.Controllers
             {
                 ("John", "Doe", 6.022_140_857_747_474e23),
                 ("John", "Smith", 100_000_000_000),
-                ("Someone", "Nice", (decimal)1.618_033_988_749_894_848_204_586_834_365_638_117_720_309_179M),
+                (
+                    "Someone",
+                    "Nice",
+                    (decimal)1.618_033_988_749_894_848_204_586_834_365_638_117_720_309_179M
+                ),
             };
 
             return View(people);
@@ -52,7 +56,10 @@ namespace BasicWebSite.Controllers
 
         public IActionResult RedirectToRouteActionAsMethodAction()
         {
-            return RedirectToRoute("ActionAsMethod", new { action = "ActionReturningTask", controller = "Home" });
+            return RedirectToRoute(
+                "ActionAsMethod",
+                new { action = "ActionReturningTask", controller = "Home" }
+            );
         }
 
         public IActionResult RedirectToRouteUsingRouteName()
@@ -80,23 +87,17 @@ namespace BasicWebSite.Controllers
 
         public IActionResult JsonHelperInView()
         {
-            Person person = new Person
-            {
-                id = 9000,
-                FullName = "John <b>Smith</b>"
-            };
+            Person person = new Person { id = 9000, FullName = "John <b>Smith</b>" };
 
             return View(person);
         }
 
         public IActionResult JsonHelperWithSettingsInView(bool snakeCase)
         {
-            var person = new Person
-            {
-                id = 9000,
-                FullName = "John <b>Smith</b>"
-            };
-            ViewData["naming"] = snakeCase ? (NamingStrategy)new SnakeCaseNamingStrategy() : new DefaultNamingStrategy();
+            var person = new Person { id = 9000, FullName = "John <b>Smith</b>" };
+            ViewData["naming"] = snakeCase
+                ? (NamingStrategy)new SnakeCaseNamingStrategy()
+                : new DefaultNamingStrategy();
 
             return View(person);
         }
@@ -129,14 +130,15 @@ namespace BasicWebSite.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetAssemblyPartData([FromServices] ApplicationPartManager applicationPartManager)
+        public IActionResult GetAssemblyPartData(
+            [FromServices] ApplicationPartManager applicationPartManager
+        )
         {
             // Ensures that the entry assembly part is marked correctly.
-            var assemblyPartMetadata = applicationPartManager
-                .ApplicationParts
-                .OfType<AssemblyPart>()
-                .Select(part => part.Name)
-                .ToArray();
+            var assemblyPartMetadata =
+                applicationPartManager.ApplicationParts.OfType<AssemblyPart>()
+                    .Select(part => part.Name)
+                    .ToArray();
 
             return Ok(assemblyPartMetadata);
         }

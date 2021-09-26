@@ -42,8 +42,7 @@ namespace Microsoft.AspNetCore.WebUtilities
                 throw new ArgumentNullException(nameof(value));
             }
 
-            return AddQueryString(
-                uri, new[] { new KeyValuePair<string, string?>(name, value) });
+            return AddQueryString(uri, new[] { new KeyValuePair<string, string?>(name, value) });
         }
 
         /// <summary>
@@ -77,7 +76,10 @@ namespace Microsoft.AspNetCore.WebUtilities
         /// <returns>The combined result.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="uri"/> is <c>null</c>.</exception>
         /// <exception cref="ArgumentNullException"><paramref name="queryString"/> is <c>null</c>.</exception>
-        public static string AddQueryString(string uri, IEnumerable<KeyValuePair<string, StringValues>> queryString)
+        public static string AddQueryString(
+            string uri,
+            IEnumerable<KeyValuePair<string, StringValues>> queryString
+        )
         {
             if (uri == null)
             {
@@ -89,7 +91,13 @@ namespace Microsoft.AspNetCore.WebUtilities
                 throw new ArgumentNullException(nameof(queryString));
             }
 
-            return AddQueryString(uri, queryString.SelectMany(kvp => kvp.Value, (kvp, v) => KeyValuePair.Create<string, string?>(kvp.Key, v)));
+            return AddQueryString(
+                uri,
+                queryString.SelectMany(
+                    kvp => kvp.Value,
+                    (kvp, v) => KeyValuePair.Create<string, string?>(kvp.Key, v)
+                )
+            );
         }
 
         /// <summary>
@@ -102,7 +110,8 @@ namespace Microsoft.AspNetCore.WebUtilities
         /// <exception cref="ArgumentNullException"><paramref name="queryString"/> is <c>null</c>.</exception>
         public static string AddQueryString(
             string uri,
-            IEnumerable<KeyValuePair<string, string?>> queryString)
+            IEnumerable<KeyValuePair<string, string?>> queryString
+        )
         {
             if (uri == null)
             {
@@ -204,10 +213,14 @@ namespace Microsoft.AspNetCore.WebUtilities
                         ++scanIndex;
                     }
                     string name = queryString.Substring(scanIndex, equalIndex - scanIndex);
-                    string value = queryString.Substring(equalIndex + 1, delimiterIndex - equalIndex - 1);
+                    string value = queryString.Substring(
+                        equalIndex + 1,
+                        delimiterIndex - equalIndex - 1
+                    );
                     accumulator.Append(
                         Uri.UnescapeDataString(name.Replace('+', ' ')),
-                        Uri.UnescapeDataString(value.Replace('+', ' ')));
+                        Uri.UnescapeDataString(value.Replace('+', ' '))
+                    );
                     equalIndex = queryString.IndexOf('=', delimiterIndex);
                     if (equalIndex == -1)
                     {
@@ -218,7 +231,10 @@ namespace Microsoft.AspNetCore.WebUtilities
                 {
                     if (delimiterIndex > scanIndex)
                     {
-                        accumulator.Append(queryString.Substring(scanIndex, delimiterIndex - scanIndex), string.Empty);
+                        accumulator.Append(
+                            queryString.Substring(scanIndex, delimiterIndex - scanIndex),
+                            string.Empty
+                        );
                     }
                 }
                 scanIndex = delimiterIndex + 1;

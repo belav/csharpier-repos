@@ -20,9 +20,7 @@ namespace Microsoft.EntityFrameworkCore
         /// <param name="modelBuilder"> The model builder. </param>
         /// <param name="name"> The default container name. </param>
         /// <returns> The same builder instance so that multiple calls can be chained. </returns>
-        public static ModelBuilder HasDefaultContainer(
-            this ModelBuilder modelBuilder,
-            string? name)
+        public static ModelBuilder HasDefaultContainer(this ModelBuilder modelBuilder, string? name)
         {
             Check.NotNull(modelBuilder, nameof(modelBuilder));
             Check.NullButNotEmpty(name, nameof(name));
@@ -46,7 +44,8 @@ namespace Microsoft.EntityFrameworkCore
         public static IConventionModelBuilder? HasDefaultContainer(
             this IConventionModelBuilder modelBuilder,
             string? name,
-            bool fromDataAnnotation = false)
+            bool fromDataAnnotation = false
+        )
         {
             if (!modelBuilder.CanSetDefaultContainer(name, fromDataAnnotation))
             {
@@ -68,12 +67,17 @@ namespace Microsoft.EntityFrameworkCore
         public static bool CanSetDefaultContainer(
             this IConventionModelBuilder modelBuilder,
             string? name,
-            bool fromDataAnnotation = false)
+            bool fromDataAnnotation = false
+        )
         {
             Check.NotNull(modelBuilder, nameof(modelBuilder));
             Check.NullButNotEmpty(name, nameof(name));
 
-            return modelBuilder.CanSetAnnotation(CosmosAnnotationNames.ContainerName, name, fromDataAnnotation);
+            return modelBuilder.CanSetAnnotation(
+                CosmosAnnotationNames.ContainerName,
+                name,
+                fromDataAnnotation
+            );
         }
     }
 }

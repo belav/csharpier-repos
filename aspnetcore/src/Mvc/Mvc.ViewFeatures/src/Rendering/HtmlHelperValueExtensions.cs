@@ -52,7 +52,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         /// </remarks>
         public static string ValueFor<TModel, TResult>(
             this IHtmlHelper<TModel> htmlHelper,
-            Expression<Func<TModel, TResult>> expression)
+            Expression<Func<TModel, TResult>> expression
+        )
         {
             if (htmlHelper == null)
             {

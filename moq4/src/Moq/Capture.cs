@@ -7,12 +7,12 @@ using System.Linq.Expressions;
 
 namespace Moq
 {
-	/// <summary>
+    /// <summary>
 	/// Allows to create parameter captures in setup expressions.
 	/// </summary>
-	public static class Capture
-	{
-		/// <summary>
+    public static class Capture
+    {
+        /// <summary>
 		/// Creates a parameter capture that will store values in a collection.
 		/// </summary>
 		/// <typeparam name="T">The captured object type</typeparam>
@@ -28,13 +28,13 @@ namespace Moq
 		/// Assert.Equal("Hello!", parameters.Single());
 		/// </code>
 		/// </example>
-		public static T In<T>(ICollection<T> collection)
-		{
-			var match = new CaptureMatch<T>(collection.Add);
-			return With(match);
-		}
+        public static T In<T>(ICollection<T> collection)
+        {
+            var match = new CaptureMatch<T>(collection.Add);
+            return With(match);
+        }
 
-		/// <summary>
+        /// <summary>
 		/// Creates a parameter capture that will store specific values in a collection.
 		/// </summary>
 		/// <typeparam name="T">The captured object type</typeparam>
@@ -51,13 +51,13 @@ namespace Moq
 		/// Assert.Equal("Hello!", parameters.Single());
 		/// </code>
 		/// </example>
-		public static T In<T>(IList<T> collection, Expression<Func<T, bool>> predicate)
-		{
-			var match = new CaptureMatch<T>(collection.Add, predicate);
-			return With(match);
-		}
+        public static T In<T>(IList<T> collection, Expression<Func<T, bool>> predicate)
+        {
+            var match = new CaptureMatch<T>(collection.Add, predicate);
+            return With(match);
+        }
 
-		/// <summary>
+        /// <summary>
 		/// Creates a parameter capture using specified <see cref="CaptureMatch{T}"/>.
 		/// </summary>
 		/// <typeparam name="T">The captured object type</typeparam>
@@ -73,10 +73,10 @@ namespace Moq
 		/// Assert.Equal("Hello!", capturedValue);
 		/// </code>
 		/// </example>
-		public static T With<T>(CaptureMatch<T> match)
-		{
-			Match.Register(match);
-			return default(T);
-		}
-	}
+        public static T With<T>(CaptureMatch<T> match)
+        {
+            Match.Register(match);
+            return default(T);
+        }
+    }
 }

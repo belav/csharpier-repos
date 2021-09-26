@@ -26,7 +26,7 @@ namespace Microsoft.EntityFrameworkCore
         /// </summary>
         /// <param name="database"> The facade from <see cref="DbContext.Database" />. </param>
         /// <returns> <see langword="true" /> if SQLite is being used; <see langword="false" /> otherwise. </returns>
-        public static bool IsSqlite(this DatabaseFacade database)
-            => database.ProviderName == typeof(SqliteOptionsExtension).Assembly.GetName().Name;
+        public static bool IsSqlite(this DatabaseFacade database) =>
+            database.ProviderName == typeof(SqliteOptionsExtension).Assembly.GetName().Name;
     }
 }

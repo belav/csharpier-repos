@@ -26,21 +26,22 @@ namespace System.CommandLine.Hosting
             IHostEnvironment environment,
             IHostApplicationLifetime applicationLifetime,
             InvocationContext context = null,
-            ILoggerFactory loggerFactory = null)
+            ILoggerFactory loggerFactory = null
+        )
         {
             Options = options?.Value ?? throw new ArgumentNullException(nameof(options));
-            Environment = environment
-                ?? throw new ArgumentNullException(nameof(environment));
-            ApplicationLifetime = applicationLifetime
-                ?? throw new ArgumentNullException(nameof(applicationLifetime));
+            Environment = environment ?? throw new ArgumentNullException(nameof(environment));
+            ApplicationLifetime =
+                applicationLifetime ?? throw new ArgumentNullException(nameof(applicationLifetime));
 
             // if InvocationLifetime is added outside of a System.CommandLine
             // invocation pipeline context will be null.
             // Use default cancellation token instead, and become a noop lifetime.
             invokeCancelToken = context?.GetCancellationToken() ?? default;
 
-            Logger = (loggerFactory ?? NullLoggerFactory.Instance)
-                .CreateLogger("Microsoft.Hosting.Lifetime");
+            Logger = (loggerFactory ?? NullLoggerFactory.Instance).CreateLogger(
+                "Microsoft.Hosting.Lifetime"
+            );
         }
 
         public InvocationLifetimeOptions Options { get; }
@@ -52,20 +53,29 @@ namespace System.CommandLine.Hosting
         {
             if (!Options.SuppressStatusMessages)
             {
-                appStartedReg = ApplicationLifetime.ApplicationStarted.Register(state =>
-                {
-                    ((InvocationLifetime)state).OnApplicationStarted();
-                }, this);
-                appStoppingReg = ApplicationLifetime.ApplicationStopping.Register(state =>
-                {
-                    ((InvocationLifetime)state).OnApplicationStopping();
-                }, this);
+                appStartedReg = ApplicationLifetime.ApplicationStarted.Register(
+                    state =>
+                    {
+                        ((InvocationLifetime)state).OnApplicationStarted();
+                    },
+                    this
+                );
+                appStoppingReg = ApplicationLifetime.ApplicationStopping.Register(
+                    state =>
+                    {
+                        ((InvocationLifetime)state).OnApplicationStopping();
+                    },
+                    this
+                );
             }
 
-            invokeCancelReg = invokeCancelToken.Register(state =>
-            {
-                ((InvocationLifetime)state).OnInvocationCancelled();
-            }, this);
+            invokeCancelReg = invokeCancelToken.Register(
+                state =>
+                {
+                    ((InvocationLifetime)state).OnInvocationCancelled();
+                },
+                this
+            );
 
             return Task.CompletedTask;
         }

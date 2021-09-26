@@ -18,8 +18,6 @@ namespace Microsoft.AspNetCore.Mvc
         /// <summary>
         /// Creates a new instance of <see cref="UnsupportedMediaTypeResult"/>.
         /// </summary>
-        public UnsupportedMediaTypeResult() : base(DefaultStatusCode)
-        {
-        }
+        public UnsupportedMediaTypeResult() : base(DefaultStatusCode) { }
     }
 }

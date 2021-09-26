@@ -33,8 +33,7 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests
 
             void ResponseFactory(VirtualResponse htmlResponse)
             {
-                htmlResponse
-                    .Address(response.RequestMessage.RequestUri)
+                htmlResponse.Address(response.RequestMessage.RequestUri)
                     .Status(response.StatusCode);
 
                 MapHeaders(response.Headers);
@@ -42,7 +41,8 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests
 
                 htmlResponse.Content(content);
 
-                void MapHeaders(HttpHeaders headers){
+                void MapHeaders(HttpHeaders headers)
+                {
                     foreach (var header in headers)
                     {
                         foreach (var value in header.Value)

@@ -28,33 +28,44 @@ namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
     internal class ExecuteInInteractiveCommandHandler
         : ICommandHandler<ExecuteInInteractiveCommandArgs>
     {
-        private readonly IEnumerable<Lazy<IExecuteInInteractiveCommandHandler, ContentTypeMetadata>> _executeInInteractiveHandlers;
+        private readonly IEnumerable<
+            Lazy<IExecuteInInteractiveCommandHandler, ContentTypeMetadata>
+        > _executeInInteractiveHandlers;
 
         public string DisplayName => EditorFeaturesResources.Execute_In_Interactive;
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public ExecuteInInteractiveCommandHandler(
-            [ImportMany] IEnumerable<Lazy<IExecuteInInteractiveCommandHandler, ContentTypeMetadata>> executeInInteractiveHandlers)
+            [ImportMany]
+                IEnumerable<
+                Lazy<IExecuteInInteractiveCommandHandler, ContentTypeMetadata>
+            > executeInInteractiveHandlers
+        )
         {
             _executeInInteractiveHandlers = executeInInteractiveHandlers;
         }
 
         private Lazy<IExecuteInInteractiveCommandHandler> GetCommandHandler(ITextBuffer textBuffer)
         {
-            return _executeInInteractiveHandlers
-                .Where(handler => handler.Metadata.ContentTypes.Any(textBuffer.ContentType.IsOfType))
+            return _executeInInteractiveHandlers.Where(
+                    handler => handler.Metadata.ContentTypes.Any(textBuffer.ContentType.IsOfType)
+                )
                 .SingleOrDefault();
         }
 
-        bool ICommandHandler<ExecuteInInteractiveCommandArgs>.ExecuteCommand(ExecuteInInteractiveCommandArgs args, CommandExecutionContext context)
-            => GetCommandHandler(args.SubjectBuffer)?.Value.ExecuteCommand(args, context) ?? false;
+        bool ICommandHandler<ExecuteInInteractiveCommandArgs>.ExecuteCommand(
+            ExecuteInInteractiveCommandArgs args,
+            CommandExecutionContext context
+        ) => GetCommandHandler(args.SubjectBuffer)?.Value.ExecuteCommand(args, context) ?? false;
 
-        CommandState ICommandHandler<ExecuteInInteractiveCommandArgs>.GetCommandState(ExecuteInInteractiveCommandArgs args)
+        CommandState ICommandHandler<ExecuteInInteractiveCommandArgs>.GetCommandState(
+            ExecuteInInteractiveCommandArgs args
+        )
         {
             return GetCommandHandler(args.SubjectBuffer) == null
-                ? CommandState.Unavailable
-                : CommandState.Available;
+              ? CommandState.Unavailable
+              : CommandState.Available;
         }
     }
 }

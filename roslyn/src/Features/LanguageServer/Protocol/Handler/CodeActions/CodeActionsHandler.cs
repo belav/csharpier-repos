@@ -34,16 +34,22 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
         public CodeActionsHandler(
             CodeActionsCache codeActionsCache,
             ICodeFixService codeFixService,
-            ICodeRefactoringService codeRefactoringService)
+            ICodeRefactoringService codeRefactoringService
+        )
         {
             _codeActionsCache = codeActionsCache;
             _codeFixService = codeFixService;
             _codeRefactoringService = codeRefactoringService;
         }
 
-        public TextDocumentIdentifier? GetTextDocumentIdentifier(CodeActionParams request) => request.TextDocument;
+        public TextDocumentIdentifier? GetTextDocumentIdentifier(CodeActionParams request) =>
+            request.TextDocument;
 
-        public async Task<LSP.VSCodeAction[]> HandleRequestAsync(LSP.CodeActionParams request, RequestContext context, CancellationToken cancellationToken)
+        public async Task<LSP.VSCodeAction[]> HandleRequestAsync(
+            LSP.CodeActionParams request,
+            RequestContext context,
+            CancellationToken cancellationToken
+        )
         {
             var document = context.Document;
             if (document == null)
@@ -52,23 +58,28 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             }
 
             var codeActions = await CodeActionHelpers.GetVSCodeActionsAsync(
-                request, _codeActionsCache, document, _codeFixService, _codeRefactoringService, cancellationToken).ConfigureAwait(false);
+                    request,
+                    _codeActionsCache,
+                    document,
+                    _codeFixService,
+                    _codeRefactoringService,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             return codeActions;
         }
 
-        internal TestAccessor GetTestAccessor()
-            => new TestAccessor(this);
+        internal TestAccessor GetTestAccessor() => new TestAccessor(this);
 
         internal readonly struct TestAccessor
         {
             private readonly CodeActionsHandler _codeActionsHandler;
 
-            public TestAccessor(CodeActionsHandler codeActionsHandler)
-                => _codeActionsHandler = codeActionsHandler;
+            public TestAccessor(CodeActionsHandler codeActionsHandler) =>
+                _codeActionsHandler = codeActionsHandler;
 
-            public CodeActionsCache GetCache()
-                => _codeActionsHandler._codeActionsCache;
+            public CodeActionsCache GetCache() => _codeActionsHandler._codeActionsCache;
         }
     }
 }

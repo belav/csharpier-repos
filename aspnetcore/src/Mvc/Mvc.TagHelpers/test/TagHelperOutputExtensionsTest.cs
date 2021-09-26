@@ -26,19 +26,13 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                     string,
                     TagHelperAttributeList,
                     TagHelperAttributeList,
-                    IEnumerable<TagHelperAttribute>>
+                    IEnumerable<TagHelperAttribute>
+                >
                 {
                     {
                         "first",
-                        new TagHelperAttributeList
-                        {
-                            { "second", "B" },
-                        },
-                        new TagHelperAttributeList
-                        {
-                            { "first", "A" },
-                            { "second", "B" }
-                        },
+                        new TagHelperAttributeList { { "second", "B" }, },
+                        new TagHelperAttributeList { { "first", "A" }, { "second", "B" } },
                         new[]
                         {
                             new TagHelperAttribute("first", "A"),
@@ -47,10 +41,7 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                     },
                     {
                         "second",
-                        new TagHelperAttributeList
-                        {
-                            { "first", "A" },
-                        },
+                        new TagHelperAttributeList { { "first", "A" }, },
                         new TagHelperAttributeList
                         {
                             { "second", "B" },
@@ -66,10 +57,7 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                     },
                     {
                         "second",
-                        new TagHelperAttributeList
-                        {
-                            { "first", "A" },
-                        },
+                        new TagHelperAttributeList { { "first", "A" }, },
                         new TagHelperAttributeList
                         {
                             { "second", "B" },
@@ -85,15 +73,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                     },
                     {
                         "dynamic",
-                        new TagHelperAttributeList
-                        {
-                            { "first", "A" },
-                            { "second", "B" },
-                        },
-                        new TagHelperAttributeList
-                        {
-                            { "dynamic", "value" },
-                        },
+                        new TagHelperAttributeList { { "first", "A" }, { "second", "B" }, },
+                        new TagHelperAttributeList { { "dynamic", "value" }, },
                         new[]
                         {
                             new TagHelperAttribute("first", "A"),
@@ -107,12 +88,9 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                         {
                             { "first", "A" },
                             { "dynamic", "value" },
-                            { "secondDynamic", "another value"}
+                            { "secondDynamic", "another value" }
                         },
-                        new TagHelperAttributeList
-                        {
-                            { "second", "B" }
-                        },
+                        new TagHelperAttributeList { { "second", "B" } },
                         new[]
                         {
                             new TagHelperAttribute("first", "A"),
@@ -127,13 +105,9 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                         {
                             { "first", "A" },
                             { "dynamic", "value" },
-                            { "secondDynamic", "another value"}
+                            { "secondDynamic", "another value" }
                         },
-                        new TagHelperAttributeList
-                        {
-                            { "first", "A" },
-                            { "second", "B" }
-                        },
+                        new TagHelperAttributeList { { "first", "A" }, { "second", "B" } },
                         new[]
                         {
                             new TagHelperAttribute("first", "A"),
@@ -148,7 +122,7 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                         {
                             { "first", "A" },
                             { "dynamic", "value" },
-                            { "secondDynamic", "another value"}
+                            { "secondDynamic", "another value" }
                         },
                         new TagHelperAttributeList
                         {
@@ -170,7 +144,7 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                         {
                             { "third", "C" },
                             { "dynamic", "value" },
-                            { "secondDynamic", "another value"}
+                            { "secondDynamic", "another value" }
                         },
                         new TagHelperAttributeList
                         {
@@ -192,12 +166,12 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                         {
                             { "third", "C" },
                             { "dynamic", "value" },
-                            { "secondDynamic", "another value"}
+                            { "secondDynamic", "another value" }
                         },
                         new TagHelperAttributeList
                         {
                             { "first", "A" },
-                            { "secondDynamic", "another value"},
+                            { "secondDynamic", "another value" },
                             { "second", "B" },
                             { "third", "C" },
                         },
@@ -215,12 +189,12 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                         {
                             { "third", "C" },
                             { "dynamic", "value" },
-                            { "secondDynamic", "another value"}
+                            { "secondDynamic", "another value" }
                         },
                         new TagHelperAttributeList
                         {
                             { "first", "A" },
-                            { "secondDynamic", "another value"},
+                            { "secondDynamic", "another value" },
                             { "first", "Second first" },
                             { "second", "B" },
                             { "third", "C" },
@@ -278,10 +252,7 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                     },
                     {
                         "first",
-                        new TagHelperAttributeList
-                        {
-                            { "third", "D" },
-                        },
+                        new TagHelperAttributeList { { "third", "D" }, },
                         new TagHelperAttributeList
                         {
                             { "first", "A" },
@@ -333,25 +304,32 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             string attributeNameToCopy,
             TagHelperAttributeList outputAttributes,
             TagHelperAttributeList allAttributes,
-            IEnumerable<TagHelperAttribute> expectedAttributes)
+            IEnumerable<TagHelperAttribute> expectedAttributes
+        )
         {
             // Arrange
             var output = new TagHelperOutput(
                 tagName: "p",
                 attributes: new TagHelperAttributeList(outputAttributes),
-                getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(
-                    new DefaultTagHelperContent()));
+                getChildContentAsync: (useCachedResult, encoder) =>
+                    Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+            );
             var context = new TagHelperContext(
                 tagName: "p",
                 allAttributes: allAttributes,
                 items: new Dictionary<object, object>(),
-                uniqueId: "test");
+                uniqueId: "test"
+            );
 
             // Act
             output.CopyHtmlAttribute(attributeNameToCopy, context);
 
             // Assert
-            Assert.Equal(expectedAttributes, output.Attributes, CaseSensitiveTagHelperAttributeComparer.Default);
+            Assert.Equal(
+                expectedAttributes,
+                output.Attributes,
+                CaseSensitiveTagHelperAttributeComparer.Default
+            );
         }
 
         public static TheoryData CopyHtmlAttributeData_MultipleAttributesSameName
@@ -359,15 +337,15 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             get
             {
                 // attributeNameToCopy, allAttributes, expectedAttributes
-                return new TheoryData<string, TagHelperAttributeList, IEnumerable<TagHelperAttribute>>
+                return new TheoryData<
+                    string,
+                    TagHelperAttributeList,
+                    IEnumerable<TagHelperAttribute>
+                >
                 {
                     {
                         "hello",
-                        new TagHelperAttributeList
-                        {
-                            { "hello", "world" },
-                            { "hello", "world2" }
-                        },
+                        new TagHelperAttributeList { { "hello", "world" }, { "hello", "world2" } },
                         new[]
                         {
                             new TagHelperAttribute("hello", "world"),
@@ -376,11 +354,7 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                     },
                     {
                         "HELLO",
-                        new TagHelperAttributeList
-                        {
-                            { "hello", "world" },
-                            { "hello", "world2" }
-                        },
+                        new TagHelperAttributeList { { "hello", "world" }, { "hello", "world2" } },
                         new[]
                         {
                             new TagHelperAttribute("hello", "world"),
@@ -389,11 +363,7 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                     },
                     {
                         "hello",
-                        new TagHelperAttributeList
-                        {
-                            { "HelLO", "world" },
-                            { "HELLO", "world2" }
-                        },
+                        new TagHelperAttributeList { { "HelLO", "world" }, { "HELLO", "world2" } },
                         new[]
                         {
                             new TagHelperAttribute("HelLO", "world"),
@@ -402,11 +372,7 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                     },
                     {
                         "hello",
-                        new TagHelperAttributeList
-                        {
-                            { "hello", "world" },
-                            { "HELLO", "world2" }
-                        },
+                        new TagHelperAttributeList { { "hello", "world" }, { "HELLO", "world2" } },
                         new[]
                         {
                             new TagHelperAttribute("hello", "world"),
@@ -415,11 +381,7 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                     },
                     {
                         "HELLO",
-                        new TagHelperAttributeList
-                        {
-                            { "HeLlO", "world" },
-                            { "heLLo", "world2" }
-                        },
+                        new TagHelperAttributeList { { "HeLlO", "world" }, { "heLLo", "world2" } },
                         new[]
                         {
                             new TagHelperAttribute("HeLlO", "world"),
@@ -435,31 +397,41 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         public void CopyHtmlAttribute_CopiesAllOriginalAttributes(
             string attributeNameToCopy,
             TagHelperAttributeList allAttributes,
-            IEnumerable<TagHelperAttribute> expectedAttributes)
+            IEnumerable<TagHelperAttribute> expectedAttributes
+        )
         {
             // Arrange
             var output = new TagHelperOutput(
                 tagName: "p",
                 attributes: new TagHelperAttributeList(),
-                getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(
-                    new DefaultTagHelperContent()));
+                getChildContentAsync: (useCachedResult, encoder) =>
+                    Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+            );
             var context = new TagHelperContext(
                 tagName: "p",
                 allAttributes: allAttributes,
                 items: new Dictionary<object, object>(),
-                uniqueId: "test");
+                uniqueId: "test"
+            );
 
             // Act
             output.CopyHtmlAttribute(attributeNameToCopy, context);
 
             // Assert
-            Assert.Equal(expectedAttributes, output.Attributes, CaseSensitiveTagHelperAttributeComparer.Default);
+            Assert.Equal(
+                expectedAttributes,
+                output.Attributes,
+                CaseSensitiveTagHelperAttributeComparer.Default
+            );
         }
 
         [Theory]
         [InlineData("hello", "world")]
         [InlineData("HeLlO", "wOrLd")]
-        public void CopyHtmlAttribute_CopiesOriginalAttributes(string attributeName, string attributeValue)
+        public void CopyHtmlAttribute_CopiesOriginalAttributes(
+            string attributeName,
+            string attributeValue
+        )
         {
             // Arrange
             var tagHelperOutput = new TagHelperOutput(
@@ -470,15 +442,14 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                     var tagHelperContent = new DefaultTagHelperContent();
                     tagHelperContent.Append("Something");
                     return Task.FromResult<TagHelperContent>(tagHelperContent);
-                });
+                }
+            );
             var tagHelperContext = new TagHelperContext(
                 tagName: "p",
-                allAttributes: new TagHelperAttributeList
-                {
-                    { attributeName, attributeValue }
-                },
+                allAttributes: new TagHelperAttributeList { { attributeName, attributeValue } },
                 items: new Dictionary<object, object>(),
-                uniqueId: "test");
+                uniqueId: "test"
+            );
             var expectedAttribute = new TagHelperAttribute(attributeName, attributeValue);
 
             // Act
@@ -496,25 +467,21 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var attributeName = "hello";
             var tagHelperOutput = new TagHelperOutput(
                 "p",
-                attributes: new TagHelperAttributeList()
-                {
-                    { attributeName, "world2" }
-                },
+                attributes: new TagHelperAttributeList() { { attributeName, "world2" } },
                 getChildContentAsync: (useCachedResult, encoder) =>
                 {
                     var tagHelperContent = new DefaultTagHelperContent();
                     tagHelperContent.Append("Something Else");
                     return Task.FromResult<TagHelperContent>(tagHelperContent);
-                });
+                }
+            );
             var expectedAttribute = new TagHelperAttribute(attributeName, "world2");
             var tagHelperContext = new TagHelperContext(
                 tagName: "p",
-                allAttributes: new TagHelperAttributeList
-                {
-                    { attributeName, "world" }
-                },
+                allAttributes: new TagHelperAttributeList { { attributeName, "world" } },
                 items: new Dictionary<object, object>(),
-                uniqueId: "test");
+                uniqueId: "test"
+            );
 
             // Act
             tagHelperOutput.CopyHtmlAttribute(attributeName, tagHelperContext);
@@ -537,21 +504,21 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                     var tagHelperContent = new DefaultTagHelperContent();
                     tagHelperContent.Append("Something");
                     return Task.FromResult<TagHelperContent>(tagHelperContent);
-                });
+                }
+            );
             var tagHelperContext = new TagHelperContext(
                 tagName: "p",
-                allAttributes: new TagHelperAttributeList
-                {
-                    { "hello", "world" }
-                },
+                allAttributes: new TagHelperAttributeList { { "hello", "world" } },
                 items: new Dictionary<object, object>(),
-                uniqueId: "test");
+                uniqueId: "test"
+            );
 
             // Act & Assert
             ExceptionAssert.ThrowsArgument(
                 () => tagHelperOutput.CopyHtmlAttribute(invalidAttributeName, tagHelperContext),
                 "attributeName",
-                "The attribute 'hello2' does not exist in the TagHelperContext.");
+                "The attribute 'hello2' does not exist in the TagHelperContext."
+            );
         }
 
         [Fact]
@@ -565,13 +532,15 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                     { "route-Hello", "World" },
                     { "Route-I", "Am" }
                 },
-                getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(
-                    new DefaultTagHelperContent()));
+                getChildContentAsync: (useCachedResult, encoder) =>
+                    Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+            );
             var expectedAttribute = new TagHelperAttribute("type", "btn");
             tagHelperOutput.Attributes.Add(expectedAttribute);
 
-            var attributes = tagHelperOutput.Attributes
-                .Where(item => item.Name.StartsWith("route-", StringComparison.OrdinalIgnoreCase))
+            var attributes = tagHelperOutput.Attributes.Where(
+                    item => item.Name.StartsWith("route-", StringComparison.OrdinalIgnoreCase)
+                )
                 .ToList();
 
             // Act
@@ -593,12 +562,14 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                     { "route-Hello", "World" },
                     { "Route-I", "Am" }
                 },
-                getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(
-                    new DefaultTagHelperContent()));
+                getChildContentAsync: (useCachedResult, encoder) =>
+                    Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+            );
             var expectedAttribute = new TagHelperAttribute("type", "btn");
             tagHelperOutput.Attributes.Add(expectedAttribute);
-            var attributes = tagHelperOutput.Attributes
-                .Where(item => item.Name.StartsWith("route-", StringComparison.OrdinalIgnoreCase));
+            var attributes = tagHelperOutput.Attributes.Where(
+                item => item.Name.StartsWith("route-", StringComparison.OrdinalIgnoreCase)
+            );
 
             // Act
             tagHelperOutput.RemoveRange(attributes);
@@ -619,13 +590,15 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                     { "route-Hello", "World" },
                     { "Route-I", "Am" }
                 },
-                getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(
-                    new DefaultTagHelperContent()));
+                getChildContentAsync: (useCachedResult, encoder) =>
+                    Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+            );
             var expectedAttribute = new TagHelperAttribute("type", "btn");
             tagHelperOutput.Attributes.Add(expectedAttribute);
 
-            var attributes = tagHelperOutput.Attributes
-                .Where(item => item.Name.StartsWith("route-", StringComparison.OrdinalIgnoreCase));
+            var attributes = tagHelperOutput.Attributes.Where(
+                item => item.Name.StartsWith("route-", StringComparison.OrdinalIgnoreCase)
+            );
 
             // Act
             tagHelperOutput.RemoveRange(attributes);
@@ -640,82 +613,51 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             get
             {
                 // tagBuilderAttributes, outputAttributes, expectedAttributes
-                return new TheoryData<Dictionary<string, string>, TagHelperAttributeList, TagHelperAttributeList>
+                return new TheoryData<
+                    Dictionary<string, string>,
+                    TagHelperAttributeList,
+                    TagHelperAttributeList
+                >
                 {
                     {
                         new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                         {
                             { "class", "btn" }
                         },
-                        new TagHelperAttributeList
-                        {
-                            { "class", "btn2" },
-                            { "class", "btn3" }
-                        },
-                        new TagHelperAttributeList
-                        {
-                            { "class", "btn2 btn" }
-                        }
+                        new TagHelperAttributeList { { "class", "btn2" }, { "class", "btn3" } },
+                        new TagHelperAttributeList { { "class", "btn2 btn" } }
                     },
                     {
                         new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                         {
                             { "ClAsS", "btn" }
                         },
-                        new TagHelperAttributeList
-                        {
-                            { "class", "btn2" },
-                            { "class", "btn3" }
-                        },
-                        new TagHelperAttributeList
-                        {
-                            { "class", "btn2 btn" }
-                        }
+                        new TagHelperAttributeList { { "class", "btn2" }, { "class", "btn3" } },
+                        new TagHelperAttributeList { { "class", "btn2 btn" } }
                     },
                     {
                         new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                         {
                             { "class", "btn" }
                         },
-                        new TagHelperAttributeList
-                        {
-                            { "clASS", "btn2" },
-                            { "class", "btn3" }
-                        },
-                        new TagHelperAttributeList
-                        {
-                            { "clASS", "btn2 btn" }
-                        }
+                        new TagHelperAttributeList { { "clASS", "btn2" }, { "class", "btn3" } },
+                        new TagHelperAttributeList { { "clASS", "btn2 btn" } }
                     },
                     {
                         new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                         {
                             { "class", "btn" }
                         },
-                        new TagHelperAttributeList
-                        {
-                            { "clASS", "btn2" },
-                            { "CLass", "btn3" }
-                        },
-                        new TagHelperAttributeList
-                        {
-                            { "clASS", "btn2 btn" }
-                        }
+                        new TagHelperAttributeList { { "clASS", "btn2" }, { "CLass", "btn3" } },
+                        new TagHelperAttributeList { { "clASS", "btn2 btn" } }
                     },
                     {
                         new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                         {
                             { "CLASS", "btn" }
                         },
-                        new TagHelperAttributeList
-                        {
-                            { "clASS", "btn2" },
-                            { "CLass", "btn3" }
-                        },
-                        new TagHelperAttributeList
-                        {
-                            { "clASS", "btn2 btn" }
-                        }
+                        new TagHelperAttributeList { { "clASS", "btn2" }, { "CLass", "btn3" } },
+                        new TagHelperAttributeList { { "clASS", "btn2 btn" } }
                     },
                     {
                         new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
@@ -772,14 +714,16 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         public void MergeAttributes_ClearsDuplicateClassNameAttributes(
             Dictionary<string, string> tagBuilderAttributes,
             TagHelperAttributeList outputAttributes,
-            TagHelperAttributeList expectedAttributes)
+            TagHelperAttributeList expectedAttributes
+        )
         {
             // Arrange
             var tagHelperOutput = new TagHelperOutput(
                 "p",
                 outputAttributes,
-                getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(
-                    new DefaultTagHelperContent()));
+                getChildContentAsync: (useCachedResult, encoder) =>
+                    Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+            );
 
             var tagBuilder = new TagBuilder("p");
             foreach (var attr in tagBuilderAttributes)
@@ -794,7 +738,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             Assert.Equal(
                 expectedAttributes,
                 tagHelperOutput.Attributes,
-                CaseSensitiveTagHelperAttributeComparer.Default);
+                CaseSensitiveTagHelperAttributeComparer.Default
+            );
         }
 
         [Fact]
@@ -804,8 +749,9 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var tagHelperOutput = new TagHelperOutput(
                 tagName: "p",
                 attributes: new TagHelperAttributeList(),
-                getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(
-                    new DefaultTagHelperContent()));
+                getChildContentAsync: (useCachedResult, encoder) =>
+                    Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+            );
             var expectedAttribute = new TagHelperAttribute("type", "btn");
             tagHelperOutput.Attributes.Add(expectedAttribute);
 
@@ -827,8 +773,9 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var tagHelperOutput = new TagHelperOutput(
                 tagName: "p",
                 attributes: new TagHelperAttributeList(),
-                getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(
-                    new DefaultTagHelperContent()));
+                getChildContentAsync: (useCachedResult, encoder) =>
+                    Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+            );
             tagHelperOutput.Attributes.Add("class", "Hello");
 
             var tagBuilder = new TagBuilder("p");
@@ -841,7 +788,11 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
 
             // Assert
             var attribute = Assert.Single(tagHelperOutput.Attributes);
-            Assert.Equal(expectedAttribute, attribute, CaseSensitiveTagHelperAttributeComparer.Default);
+            Assert.Equal(
+                expectedAttribute,
+                attribute,
+                CaseSensitiveTagHelperAttributeComparer.Default
+            );
         }
 
         [Theory]
@@ -849,14 +800,17 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         [InlineData("ClaSS", "class")]
         [InlineData("ClaSS", "cLaSs")]
         public void MergeAttributes_AppendsClass_TagHelperOutputAttributeValues_IgnoresCase(
-            string originalName, string updateName)
+            string originalName,
+            string updateName
+        )
         {
             // Arrange
             var tagHelperOutput = new TagHelperOutput(
                 tagName: "p",
                 attributes: new TagHelperAttributeList(),
-                getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(
-                    new DefaultTagHelperContent()));
+                getChildContentAsync: (useCachedResult, encoder) =>
+                    Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+            );
             tagHelperOutput.Attributes.Add(originalName, "Hello");
 
             var tagBuilder = new TagBuilder("p");
@@ -870,7 +824,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             Assert.Equal(
                 new TagHelperAttribute(originalName, "Hello btn"),
                 attribute,
-                CaseSensitiveTagHelperAttributeComparer.Default);
+                CaseSensitiveTagHelperAttributeComparer.Default
+            );
         }
 
         [Fact]
@@ -880,8 +835,9 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var tagHelperOutput = new TagHelperOutput(
                 tagName: "p",
                 attributes: new TagHelperAttributeList(),
-                getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(
-                    new DefaultTagHelperContent()));
+                getChildContentAsync: (useCachedResult, encoder) =>
+                    Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+            );
 
             var tagBuilder = new TagBuilder("p");
             var expectedAttribute = new TagHelperAttribute("visible", "val < 3");
@@ -902,8 +858,9 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var tagHelperOutput = new TagHelperOutput(
                 tagName: "p",
                 attributes: new TagHelperAttributeList(),
-                getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(
-                    new DefaultTagHelperContent()));
+                getChildContentAsync: (useCachedResult, encoder) =>
+                    Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+            );
 
             var tagBuilder = new TagBuilder("p");
             var expectedAttribute1 = new TagHelperAttribute("class", "btn");
@@ -916,9 +873,15 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
 
             // Assert
             Assert.Equal(2, tagHelperOutput.Attributes.Count);
-            var attribute = Assert.Single(tagHelperOutput.Attributes, attr => attr.Name.Equals("class"));
+            var attribute = Assert.Single(
+                tagHelperOutput.Attributes,
+                attr => attr.Name.Equals("class")
+            );
             Assert.Equal(expectedAttribute1.Value, attribute.Value);
-            attribute = Assert.Single(tagHelperOutput.Attributes, attr => attr.Name.Equals("class2"));
+            attribute = Assert.Single(
+                tagHelperOutput.Attributes,
+                attr => attr.Name.Equals("class2")
+            );
             Assert.Equal(expectedAttribute2.Value, attribute.Value);
         }
 
@@ -929,8 +892,9 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var tagHelperOutput = new TagHelperOutput(
                 tagName: "p",
                 attributes: new TagHelperAttributeList(),
-                getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(
-                    new DefaultTagHelperContent()));
+                getChildContentAsync: (useCachedResult, encoder) =>
+                    Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+            );
             var expectedAttribute = new TagHelperAttribute("class", "btn");
             tagHelperOutput.Attributes.Add(expectedAttribute);
 
@@ -951,8 +915,9 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var tagHelperOutput = new TagHelperOutput(
                 tagName: "p",
                 attributes: new TagHelperAttributeList(),
-                getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(
-                    new DefaultTagHelperContent()));
+                getChildContentAsync: (useCachedResult, encoder) =>
+                    Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+            );
             var expectedOutputAttribute = new TagHelperAttribute("class", "btn");
             tagHelperOutput.Attributes.Add(expectedOutputAttribute);
 
@@ -965,7 +930,10 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
 
             // Assert
             Assert.Equal(2, tagHelperOutput.Attributes.Count);
-            var attribute = Assert.Single(tagHelperOutput.Attributes, attr => attr.Name.Equals("class"));
+            var attribute = Assert.Single(
+                tagHelperOutput.Attributes,
+                attr => attr.Name.Equals("class")
+            );
             Assert.Equal(expectedOutputAttribute.Value, attribute.Value);
             attribute = Assert.Single(tagHelperOutput.Attributes, attr => attr.Name.Equals("for"));
             Assert.Equal(expectedBuilderAttribute.Value, attribute.Value);
@@ -981,14 +949,18 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var tagHelperOutput = new TagHelperOutput(
                 tagName: "p",
                 attributes: new TagHelperAttributeList(),
-                getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(
-                    new DefaultTagHelperContent()));
+                getChildContentAsync: (useCachedResult, encoder) =>
+                    Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+            );
 
             // Act
             tagHelperOutput.AddClass("btn", htmlEncoder);
 
             // Assert
-            var classAttribute = Assert.Single(tagHelperOutput.Attributes, attr => attr.Name.Equals("class"));
+            var classAttribute = Assert.Single(
+                tagHelperOutput.Attributes,
+                attr => attr.Name.Equals("class")
+            );
             Assert.Equal(expectedValue, HtmlContentUtilities.HtmlContentToString(classAttribute));
         }
 
@@ -1002,15 +974,19 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var tagHelperOutput = new TagHelperOutput(
                 tagName: "p",
                 attributes: new TagHelperAttributeList(),
-                getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(
-                    new DefaultTagHelperContent()));
+                getChildContentAsync: (useCachedResult, encoder) =>
+                    Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+            );
 
             // Act
             tagHelperOutput.AddClass("btn", htmlEncoder);
             tagHelperOutput.AddClass("btn-primary", htmlEncoder);
 
             // Assert
-            var classAttribute = Assert.Single(tagHelperOutput.Attributes, attr => attr.Name.Equals("class"));
+            var classAttribute = Assert.Single(
+                tagHelperOutput.Attributes,
+                attr => attr.Name.Equals("class")
+            );
             Assert.Equal(expectedValue, HtmlContentUtilities.HtmlContentToString(classAttribute));
         }
 
@@ -1024,8 +1000,9 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var tagHelperOutput = new TagHelperOutput(
                 tagName: "p",
                 attributes: new TagHelperAttributeList(),
-                getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(
-                    new DefaultTagHelperContent()));
+                getChildContentAsync: (useCachedResult, encoder) =>
+                    Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+            );
 
             tagHelperOutput.AddClass("btn", htmlEncoder);
             tagHelperOutput.AddClass("btn-success", htmlEncoder);
@@ -1036,7 +1013,10 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             tagHelperOutput.RemoveClass("btn-primary", htmlEncoder);
 
             // Assert
-            var classAttribute = Assert.Single(tagHelperOutput.Attributes, attr => attr.Name.Equals("class"));
+            var classAttribute = Assert.Single(
+                tagHelperOutput.Attributes,
+                attr => attr.Name.Equals("class")
+            );
             Assert.Equal(expectedValue, HtmlContentUtilities.HtmlContentToString(classAttribute));
         }
 
@@ -1045,18 +1025,27 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         {
             // Arrange
             var classValue = "btn btn-success";
-            var expected = new ArgumentException(Resources.ArgumentCannotContainHtmlSpace, nameof(classValue)).Message;
+            var expected =
+                new ArgumentException(
+                    Resources.ArgumentCannotContainHtmlSpace,
+                    nameof(classValue)
+                ).Message;
             var htmlEncoder = new HtmlTestEncoder();
 
             var tagHelperOutput = new TagHelperOutput(
                 tagName: "p",
                 attributes: new TagHelperAttributeList(),
-                getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(
-                    new DefaultTagHelperContent()));
+                getChildContentAsync: (useCachedResult, encoder) =>
+                    Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+            );
 
             // Act and Assert
-            var exceptionAdd = Assert.Throws<ArgumentException>(() => tagHelperOutput.AddClass(classValue, htmlEncoder));
-            var exceptionRemove = Assert.Throws<ArgumentException>(() => tagHelperOutput.RemoveClass(classValue, htmlEncoder));
+            var exceptionAdd = Assert.Throws<ArgumentException>(
+                () => tagHelperOutput.AddClass(classValue, htmlEncoder)
+            );
+            var exceptionRemove = Assert.Throws<ArgumentException>(
+                () => tagHelperOutput.RemoveClass(classValue, htmlEncoder)
+            );
             Assert.Equal(expected, exceptionAdd.Message);
             Assert.Equal(expected, exceptionRemove.Message);
         }
@@ -1070,10 +1059,14 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var tagHelperOutput = new TagHelperOutput(
                 tagName: "p",
                 attributes: new TagHelperAttributeList(),
-                getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(
-                    new DefaultTagHelperContent()));
+                getChildContentAsync: (useCachedResult, encoder) =>
+                    Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+            );
 
-            tagHelperOutput.Attributes.SetAttribute("class", new HtmlString("HtmlEncode[[btn]] HtmlEncode[[btn]]"));
+            tagHelperOutput.Attributes.SetAttribute(
+                "class",
+                new HtmlString("HtmlEncode[[btn]] HtmlEncode[[btn]]")
+            );
 
             // Act
             tagHelperOutput.RemoveClass("btn", htmlEncoder);
@@ -1093,16 +1086,23 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var tagHelperOutput = new TagHelperOutput(
                 tagName: "p",
                 attributes: new TagHelperAttributeList(),
-                getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(
-                    new DefaultTagHelperContent()));
+                getChildContentAsync: (useCachedResult, encoder) =>
+                    Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+            );
 
-            tagHelperOutput.Attributes.SetAttribute("class", new HtmlString("HtmlEncode[[btn]] HtmlEncode[[btn-primary]] HtmlEncode[[btn]]"));
+            tagHelperOutput.Attributes.SetAttribute(
+                "class",
+                new HtmlString("HtmlEncode[[btn]] HtmlEncode[[btn-primary]] HtmlEncode[[btn]]")
+            );
 
             // Act
             tagHelperOutput.RemoveClass("btn", htmlEncoder);
 
             // Assert
-            var classAttribute = Assert.Single(tagHelperOutput.Attributes, attr => attr.Name.Equals("class"));
+            var classAttribute = Assert.Single(
+                tagHelperOutput.Attributes,
+                attr => attr.Name.Equals("class")
+            );
             Assert.Equal(expectedValue, HtmlContentUtilities.HtmlContentToString(classAttribute));
         }
 
@@ -1114,8 +1114,9 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var tagHelperOutput = new TagHelperOutput(
                 tagName: "p",
                 attributes: new TagHelperAttributeList(),
-                getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(
-                    new DefaultTagHelperContent()));
+                getChildContentAsync: (useCachedResult, encoder) =>
+                    Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+            );
 
             tagHelperOutput.Attributes.SetAttribute("class", new HtmlString("HtmlEncode[[btn]]"));
 
@@ -1137,16 +1138,23 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var tagHelperOutput = new TagHelperOutput(
                 tagName: "p",
                 attributes: new TagHelperAttributeList(),
-                getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(
-                    new DefaultTagHelperContent()));
+                getChildContentAsync: (useCachedResult, encoder) =>
+                    Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+            );
 
-            tagHelperOutput.Attributes.SetAttribute("class", new HtmlString("HtmlEncode[[btn]] HtmlEncode[[btn-primary]]"));
+            tagHelperOutput.Attributes.SetAttribute(
+                "class",
+                new HtmlString("HtmlEncode[[btn]] HtmlEncode[[btn-primary]]")
+            );
 
             // Act
             tagHelperOutput.RemoveClass("btn-primary", htmlEncoder);
 
             // Assert
-            var classAttribute = Assert.Single(tagHelperOutput.Attributes, attr => attr.Name.Equals("class"));
+            var classAttribute = Assert.Single(
+                tagHelperOutput.Attributes,
+                attr => attr.Name.Equals("class")
+            );
             Assert.Equal(expectedValue, HtmlContentUtilities.HtmlContentToString(classAttribute));
         }
     }

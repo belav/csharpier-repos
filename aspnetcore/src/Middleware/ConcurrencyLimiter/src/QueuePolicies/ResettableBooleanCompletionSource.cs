@@ -35,6 +35,7 @@ namespace Microsoft.AspNetCore.ConcurrencyLimiter
             {
                 return _valueTaskSource.GetResult(token);
             }
+
             finally
             {
                 if (isValid)
@@ -50,7 +51,12 @@ namespace Microsoft.AspNetCore.ConcurrencyLimiter
             return _valueTaskSource.GetStatus(token);
         }
 
-        void IValueTaskSource<bool>.OnCompleted(Action<object?> continuation, object? state, short token, ValueTaskSourceOnCompletedFlags flags)
+        void IValueTaskSource<bool>.OnCompleted(
+            Action<object?> continuation,
+            object? state,
+            short token,
+            ValueTaskSourceOnCompletedFlags flags
+        )
         {
             _valueTaskSource.OnCompleted(continuation, state, token, flags);
         }

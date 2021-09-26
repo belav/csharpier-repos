@@ -20,13 +20,13 @@ using Microsoft.CodeAnalysis.Text;
 namespace Microsoft.CodeAnalysis.SimplifyTypeNames
 {
     internal abstract partial class AbstractSimplifyTypeNamesCodeFixProvider<TSyntaxKind>
-        : SyntaxEditorBasedCodeFixProvider
-        where TSyntaxKind : struct
+        : SyntaxEditorBasedCodeFixProvider where TSyntaxKind : struct
     {
         private readonly SimplifyTypeNamesDiagnosticAnalyzerBase<TSyntaxKind> _analyzer;
 
         protected AbstractSimplifyTypeNamesCodeFixProvider(
-            SimplifyTypeNamesDiagnosticAnalyzerBase<TSyntaxKind> analyzer)
+            SimplifyTypeNamesDiagnosticAnalyzerBase<TSyntaxKind> analyzer
+        )
         {
             _analyzer = analyzer;
         }
@@ -38,13 +38,18 @@ namespace Microsoft.CodeAnalysis.SimplifyTypeNames
             ImmutableArray.Create(
                 IDEDiagnosticIds.SimplifyNamesDiagnosticId,
                 IDEDiagnosticIds.SimplifyMemberAccessDiagnosticId,
-                IDEDiagnosticIds.PreferBuiltInOrFrameworkTypeDiagnosticId);
+                IDEDiagnosticIds.PreferBuiltInOrFrameworkTypeDiagnosticId
+            );
 
         internal sealed override CodeFixCategory CodeFixCategory => CodeFixCategory.CodeStyle;
 
         private (SyntaxNode, string diagnosticId) GetNodeToSimplify(
-            SyntaxNode root, SemanticModel model, TextSpan span,
-            OptionSet optionSet, CancellationToken cancellationToken)
+            SyntaxNode root,
+            SemanticModel model,
+            TextSpan span,
+            OptionSet optionSet,
+            CancellationToken cancellationToken
+        )
         {
             var token = root.FindToken(span.Start, findInsideTrivia: true);
             if (!token.Span.IntersectsWith(span))
@@ -56,7 +61,17 @@ namespace Microsoft.CodeAnalysis.SimplifyTypeNames
             string topmostDiagnosticId = null;
             foreach (var node in token.GetAncestors<SyntaxNode>())
             {
-                if (node.Span.IntersectsWith(span) && CanSimplifyTypeNameExpression(model, node, optionSet, span, out var diagnosticId, cancellationToken))
+                if (
+                    node.Span.IntersectsWith(span)
+                    && CanSimplifyTypeNameExpression(
+                        model,
+                        node,
+                        optionSet,
+                        span,
+                        out var diagnosticId,
+                        cancellationToken
+                    )
+                )
                 {
                     // keep overwriting the best simplifiable node as long as we keep finding them.
                     topmostSimplifiableNode = node;
@@ -80,52 +95,86 @@ namespace Microsoft.CodeAnalysis.SimplifyTypeNames
             var cancellationToken = context.CancellationToken;
 
             var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
-            var model = await document.GetSemanticModelAsync(cancellationToken).ConfigureAwait(false);
-            var documentOptions = await document.GetOptionsAsync(cancellationToken).ConfigureAwait(false);
+            var model = await document.GetSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
+            var documentOptions = await document.GetOptionsAsync(cancellationToken)
+                .ConfigureAwait(false);
 
             var (node, diagnosticId) = GetNodeToSimplify(
-                root, model, span, documentOptions, cancellationToken);
+                root,
+                model,
+                span,
+                documentOptions,
+                cancellationToken
+            );
             if (node == null)
                 return;
 
             var syntaxFacts = document.GetLanguageService<ISyntaxFactsService>();
             var title = GetTitle(diagnosticId, syntaxFacts.ConvertToSingleLine(node).ToString());
 
-            context.RegisterCodeFix(new MyCodeAction(
-                title,
-                c => FixAsync(context.Document, context.Diagnostics[0], c),
-                diagnosticId), context.Diagnostics);
+            context.RegisterCodeFix(
+                new MyCodeAction(
+                    title,
+                    c => FixAsync(context.Document, context.Diagnostics[0], c),
+                    diagnosticId
+                ),
+                context.Diagnostics
+            );
         }
 
         protected override async Task FixAllAsync(
-            Document document, ImmutableArray<Diagnostic> diagnostics,
-            SyntaxEditor editor, CancellationToken cancellationToken)
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            SyntaxEditor editor,
+            CancellationToken cancellationToken
+        )
         {
             var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
-            var model = await document.GetSemanticModelAsync(cancellationToken).ConfigureAwait(false);
-            var documentOptions = await document.GetOptionsAsync(cancellationToken).ConfigureAwait(false);
+            var model = await document.GetSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
+            var documentOptions = await document.GetOptionsAsync(cancellationToken)
+                .ConfigureAwait(false);
 
             foreach (var diagnostic in diagnostics)
             {
                 var (node, _) = GetNodeToSimplify(
-                    root, model, diagnostic.Location.SourceSpan,
-                    documentOptions, cancellationToken);
+                    root,
+                    model,
+                    diagnostic.Location.SourceSpan,
+                    documentOptions,
+                    cancellationToken
+                );
 
                 if (node == null)
                     return;
 
-                editor.ReplaceNode(
-                    node,
-                    (current, _) => AddSimplificationAnnotationTo(current));
+                editor.ReplaceNode(node, (current, _) => AddSimplificationAnnotationTo(current));
             }
         }
 
-        private bool CanSimplifyTypeNameExpression(SemanticModel model, SyntaxNode node, OptionSet optionSet, TextSpan span, out string diagnosticId, CancellationToken cancellationToken)
+        private bool CanSimplifyTypeNameExpression(
+            SemanticModel model,
+            SyntaxNode node,
+            OptionSet optionSet,
+            TextSpan span,
+            out string diagnosticId,
+            CancellationToken cancellationToken
+        )
         {
             diagnosticId = null;
-            if (!_analyzer.IsCandidate(node) ||
-                !_analyzer.CanSimplifyTypeNameExpression(
-                    model, node, optionSet, out var issueSpan, out diagnosticId, out _, cancellationToken))
+            if (
+                !_analyzer.IsCandidate(node)
+                || !_analyzer.CanSimplifyTypeNameExpression(
+                    model,
+                    node,
+                    optionSet,
+                    out var issueSpan,
+                    out diagnosticId,
+                    out _,
+                    cancellationToken
+                )
+            )
             {
                 return false;
             }
@@ -136,10 +185,10 @@ namespace Microsoft.CodeAnalysis.SimplifyTypeNames
         private class MyCodeAction : CodeAction.DocumentChangeAction
         {
             public MyCodeAction(
-                string title, Func<CancellationToken, Task<Document>> createChangedDocument, string equivalenceKey)
-                : base(title, createChangedDocument, equivalenceKey)
-            {
-            }
+                string title,
+                Func<CancellationToken, Task<Document>> createChangedDocument,
+                string equivalenceKey
+            ) : base(title, createChangedDocument, equivalenceKey) { }
         }
     }
 }

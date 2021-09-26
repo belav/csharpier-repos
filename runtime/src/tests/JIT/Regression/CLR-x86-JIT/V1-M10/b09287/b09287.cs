@@ -14,15 +14,10 @@ namespace Default
     {
         public static int Main(String[] argv)
         {
-
             Console.WriteLine("Entering Hello world");
-
 
             Console.WriteLine("Done");
             return 100;
-
         } // main
-
     } // Spin
-
 }

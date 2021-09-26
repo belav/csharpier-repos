@@ -21,28 +21,38 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.GoToAdjacentMember
         protected abstract string LanguageName { get; }
         protected abstract ParseOptions DefaultParseOptions { get; }
 
-        protected async Task AssertNavigatedAsync(string code, bool next, SourceCodeKind? sourceCodeKind = null)
+        protected async Task AssertNavigatedAsync(
+            string code,
+            bool next,
+            SourceCodeKind? sourceCodeKind = null
+        )
         {
-            var kinds = sourceCodeKind != null
-                ? SpecializedCollections.SingletonEnumerable(sourceCodeKind.Value)
-                : new[] { SourceCodeKind.Regular, SourceCodeKind.Script };
+            var kinds =
+                sourceCodeKind != null
+                    ? SpecializedCollections.SingletonEnumerable(sourceCodeKind.Value)
+                    : new[] { SourceCodeKind.Regular, SourceCodeKind.Script };
 
             foreach (var kind in kinds)
             {
-                using (var workspace = TestWorkspace.Create(
-                    LanguageName,
-                    compilationOptions: null,
-                    parseOptions: DefaultParseOptions.WithKind(kind),
-                    content: code))
+                using (
+                    var workspace = TestWorkspace.Create(
+                        LanguageName,
+                        compilationOptions: null,
+                        parseOptions: DefaultParseOptions.WithKind(kind),
+                        content: code
+                    )
+                )
                 {
                     var hostDocument = workspace.DocumentWithCursor;
                     var document = workspace.CurrentSolution.GetDocument(hostDocument.Id);
                     Assert.Empty((await document.GetSyntaxTreeAsync()).GetDiagnostics());
-                    var targetPosition = await GoToAdjacentMemberCommandHandler.GetTargetPositionAsync(
-                        document,
-                        hostDocument.CursorPosition.Value,
-                        next,
-                        CancellationToken.None);
+                    var targetPosition =
+                        await GoToAdjacentMemberCommandHandler.GetTargetPositionAsync(
+                            document,
+                            hostDocument.CursorPosition.Value,
+                            next,
+                            CancellationToken.None
+                        );
 
                     Assert.NotNull(targetPosition);
                     Assert.Equal(hostDocument.SelectedSpans.Single().Start, targetPosition.Value);
@@ -52,11 +62,14 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.GoToAdjacentMember
 
         protected async Task<int?> GetTargetPositionAsync(string code, bool next)
         {
-            using (var workspace = TestWorkspace.Create(
-                LanguageName,
-                compilationOptions: null,
-                parseOptions: DefaultParseOptions,
-                content: code))
+            using (
+                var workspace = TestWorkspace.Create(
+                    LanguageName,
+                    compilationOptions: null,
+                    parseOptions: DefaultParseOptions,
+                    content: code
+                )
+            )
             {
                 var hostDocument = workspace.DocumentWithCursor;
                 var document = workspace.CurrentSolution.GetDocument(hostDocument.Id);
@@ -66,7 +79,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.GoToAdjacentMember
                     document,
                     hostDocument.CursorPosition.Value,
                     next,
-                    CancellationToken.None);
+                    CancellationToken.None
+                );
             }
         }
     }

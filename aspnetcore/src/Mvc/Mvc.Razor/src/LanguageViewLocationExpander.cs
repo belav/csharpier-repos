@@ -27,10 +27,7 @@ namespace Microsoft.AspNetCore.Mvc.Razor
         /// <summary>
         /// Instantiates a new <see cref="LanguageViewLocationExpander"/> instance.
         /// </summary>
-        public LanguageViewLocationExpander()
-            : this(LanguageViewLocationExpanderFormat.Suffix)
-        {
-        }
+        public LanguageViewLocationExpander() : this(LanguageViewLocationExpanderFormat.Suffix) { }
 
         /// <summary>
         /// Instantiates a new <see cref="LanguageViewLocationExpander"/> instance.
@@ -56,7 +53,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
         /// <inheritdoc />
         public virtual IEnumerable<string> ExpandViewLocations(
             ViewLocationExpanderContext context,
-            IEnumerable<string> viewLocations)
+            IEnumerable<string> viewLocations
+        )
         {
             if (context == null)
             {
@@ -88,7 +86,10 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             return viewLocations;
         }
 
-        private IEnumerable<string> ExpandViewLocationsCore(IEnumerable<string> viewLocations, CultureInfo cultureInfo)
+        private IEnumerable<string> ExpandViewLocationsCore(
+            IEnumerable<string> viewLocations,
+            CultureInfo cultureInfo
+        )
         {
             foreach (var location in viewLocations)
             {

@@ -21,8 +21,11 @@ namespace Microsoft.AspNetCore.Http
         /// <param name="options">Options for reading the form.</param>
         /// <param name="cancellationToken"></param>
         /// <returns>The parsed form.</returns>
-        public static Task<IFormCollection> ReadFormAsync(this HttpRequest request, FormOptions options,
-            CancellationToken cancellationToken = new CancellationToken())
+        public static Task<IFormCollection> ReadFormAsync(
+            this HttpRequest request,
+            FormOptions options,
+            CancellationToken cancellationToken = new CancellationToken()
+        )
         {
             if (request == null)
             {
@@ -35,7 +38,9 @@ namespace Microsoft.AspNetCore.Http
 
             if (!request.HasFormContentType)
             {
-                throw new InvalidOperationException("Incorrect Content-Type: " + request.ContentType);
+                throw new InvalidOperationException(
+                    "Incorrect Content-Type: " + request.ContentType
+                );
             }
 
             var features = request.HttpContext.Features;

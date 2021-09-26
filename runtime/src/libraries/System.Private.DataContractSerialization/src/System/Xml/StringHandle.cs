@@ -22,11 +22,7 @@ namespace System.Xml
         private int _key;
         private int _offset;
         private int _length;
-        private static readonly string[] s_constStrings = {
-                                            "type",
-                                            "root",
-                                            "item"
-                                       };
+        private static readonly string[] s_constStrings = { "type", "root", "item" };
 
         public StringHandle(XmlBufferReader bufferReader)
         {
@@ -88,11 +84,11 @@ namespace System.Xml
                         return false;
                     byte[] buffer = _bufferReader.Buffer;
                     int offset = _offset;
-                    return buffer[offset + 0] == 'x' &&
-                           buffer[offset + 1] == 'm' &&
-                           buffer[offset + 2] == 'l' &&
-                           buffer[offset + 3] == 'n' &&
-                           buffer[offset + 4] == 's';
+                    return buffer[offset + 0] == 'x'
+                        && buffer[offset + 1] == 'm'
+                        && buffer[offset + 2] == 'l'
+                        && buffer[offset + 3] == 'n'
+                        && buffer[offset + 4] == 's';
                 }
                 return Equals2("xmlns");
             }
@@ -111,7 +107,10 @@ namespace System.Xml
                 return _bufferReader.GetString(_offset, _length, nameTable);
             if (type == StringHandleType.Dictionary)
                 return nameTable.Add(_bufferReader.GetDictionaryString(_key).Value);
-            DiagnosticUtility.DebugAssert(type == StringHandleType.ConstString, "Should be ConstString");
+            DiagnosticUtility.DebugAssert(
+                type == StringHandleType.ConstString,
+                "Should be ConstString"
+            );
             //If not Utf8 then the StringHandleType is ConstString
             return nameTable.Add(s_constStrings[_key]);
         }
@@ -123,7 +122,10 @@ namespace System.Xml
                 return _bufferReader.GetString(_offset, _length);
             if (type == StringHandleType.Dictionary)
                 return _bufferReader.GetDictionaryString(_key).Value;
-            DiagnosticUtility.DebugAssert(type == StringHandleType.ConstString, "Should be ConstString");
+            DiagnosticUtility.DebugAssert(
+                type == StringHandleType.ConstString,
+                "Should be ConstString"
+            );
             //If not Utf8 then the StringHandleType is ConstString
             return s_constStrings[_key];
         }
@@ -154,7 +156,9 @@ namespace System.Xml
             else
             {
                 DiagnosticUtility.DebugAssert(type == StringHandleType.EscapedUTF8, "");
-                byte[] buffer = XmlConverter.ToBytes(_bufferReader.GetEscapedString(_offset, _length));
+                byte[] buffer = XmlConverter.ToBytes(
+                    _bufferReader.GetEscapedString(_offset, _length)
+                );
                 offset = 0;
                 length = buffer.Length;
                 return buffer;
@@ -188,8 +192,15 @@ namespace System.Xml
             if (type == StringHandleType.Dictionary)
                 return _bufferReader.Equals2(_key, key2, bufferReader2);
             if (type == StringHandleType.UTF8)
-                return _bufferReader.Equals2(_offset, _length, bufferReader2.GetDictionaryString(key2).Value);
-            DiagnosticUtility.DebugAssert(type == StringHandleType.EscapedUTF8 || type == StringHandleType.ConstString, "");
+                return _bufferReader.Equals2(
+                    _offset,
+                    _length,
+                    bufferReader2.GetDictionaryString(key2).Value
+                );
+            DiagnosticUtility.DebugAssert(
+                type == StringHandleType.EscapedUTF8 || type == StringHandleType.ConstString,
+                ""
+            );
             return GetString() == _bufferReader.GetDictionaryString(key2).Value;
         }
 
@@ -200,7 +211,10 @@ namespace System.Xml
                 return _bufferReader.Equals2(_key, xmlString2);
             if (type == StringHandleType.UTF8)
                 return _bufferReader.Equals2(_offset, _length, xmlString2.ToUTF8());
-            DiagnosticUtility.DebugAssert(type == StringHandleType.EscapedUTF8 || type == StringHandleType.ConstString, "");
+            DiagnosticUtility.DebugAssert(
+                type == StringHandleType.EscapedUTF8 || type == StringHandleType.ConstString,
+                ""
+            );
             return GetString() == xmlString2.Value;
         }
 
@@ -219,10 +233,17 @@ namespace System.Xml
         {
             StringHandleType type = _type;
             if (type == StringHandleType.Dictionary)
-                return bufferReader2.Equals2(offset2, length2, _bufferReader.GetDictionaryString(_key).Value);
+                return bufferReader2.Equals2(
+                    offset2,
+                    length2,
+                    _bufferReader.GetDictionaryString(_key).Value
+                );
             if (type == StringHandleType.UTF8)
                 return _bufferReader.Equals2(_offset, _length, bufferReader2, offset2, length2);
-            DiagnosticUtility.DebugAssert(type == StringHandleType.EscapedUTF8 || type == StringHandleType.ConstString, "");
+            DiagnosticUtility.DebugAssert(
+                type == StringHandleType.EscapedUTF8 || type == StringHandleType.ConstString,
+                ""
+            );
             return GetString() == _bufferReader.GetString(offset2, length2);
         }
 
@@ -235,7 +256,10 @@ namespace System.Xml
                 return Equals2(other._key, other._bufferReader);
             if (type == StringHandleType.UTF8)
                 return Equals2(other._offset, other._length, other._bufferReader);
-            DiagnosticUtility.DebugAssert(type == StringHandleType.EscapedUTF8 || type == StringHandleType.ConstString, "");
+            DiagnosticUtility.DebugAssert(
+                type == StringHandleType.EscapedUTF8 || type == StringHandleType.ConstString,
+                ""
+            );
             return Equals2(other.GetString());
         }
 

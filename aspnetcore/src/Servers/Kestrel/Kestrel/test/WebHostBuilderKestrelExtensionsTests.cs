@@ -18,18 +18,20 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
         public void ApplicationServicesNotNullAfterUseKestrelWithoutOptions()
         {
             // Arrange
-            var hostBuilder = new WebHostBuilder()
-                .UseKestrel()
-                .Configure(app => { });
+            var hostBuilder = new WebHostBuilder().UseKestrel().Configure(app => { });
 
-            hostBuilder.ConfigureServices(services =>
-            {
-                services.Configure<KestrelServerOptions>(options =>
+            hostBuilder.ConfigureServices(
+                services =>
                 {
-                    // Assert
-                    Assert.NotNull(options.ApplicationServices);
-                });
-            });
+                    services.Configure<KestrelServerOptions>(
+                        options =>
+                        {
+                            // Assert
+                            Assert.NotNull(options.ApplicationServices);
+                        }
+                    );
+                }
+            );
 
             // Act
             hostBuilder.Build();
@@ -39,12 +41,13 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
         public void ApplicationServicesNotNullDuringUseKestrelWithOptions()
         {
             // Arrange
-            var hostBuilder = new WebHostBuilder()
-                .UseKestrel(options =>
-                {
-                    // Assert
-                    Assert.NotNull(options.ApplicationServices);
-                })
+            var hostBuilder = new WebHostBuilder().UseKestrel(
+                    options =>
+                    {
+                        // Assert
+                        Assert.NotNull(options.ApplicationServices);
+                    }
+                )
                 .Configure(app => { });
 
             // Act
@@ -54,60 +57,57 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
         [Fact]
         public void SocketTransportIsTheDefault()
         {
-            var hostBuilder = new WebHostBuilder()
-                .UseKestrel()
-                .Configure(app => { });
+            var hostBuilder = new WebHostBuilder().UseKestrel().Configure(app => { });
 
-            Assert.IsType<SocketTransportFactory>(hostBuilder.Build().Services.GetService<IConnectionListenerFactory>());
+            Assert.IsType<SocketTransportFactory>(
+                hostBuilder.Build().Services.GetService<IConnectionListenerFactory>()
+            );
         }
 
         [Fact]
         public void LibuvTransportCanBeManuallySelectedIndependentOfOrder()
         {
 #pragma warning disable CS0618
-            var hostBuilder = new WebHostBuilder()
-                .UseKestrel()
-                .UseLibuv()
-                .Configure(app => { });
+            var hostBuilder = new WebHostBuilder().UseKestrel().UseLibuv().Configure(app => { });
 #pragma warning restore CS0618
 
-            Assert.IsType<LibuvTransportFactory>(hostBuilder.Build().Services.GetService<IConnectionListenerFactory>());
+            Assert.IsType<LibuvTransportFactory>(
+                hostBuilder.Build().Services.GetService<IConnectionListenerFactory>()
+            );
 
 #pragma warning disable CS0618
-            var hostBuilderReversed = new WebHostBuilder()
-                .UseLibuv()
+            var hostBuilderReversed = new WebHostBuilder().UseLibuv()
                 .UseKestrel()
                 .Configure(app => { });
 #pragma warning restore CS0618
 
-            Assert.IsType<LibuvTransportFactory>(hostBuilderReversed.Build().Services.GetService<IConnectionListenerFactory>());
+            Assert.IsType<LibuvTransportFactory>(
+                hostBuilderReversed.Build().Services.GetService<IConnectionListenerFactory>()
+            );
         }
 
         [Fact]
         public void SocketsTransportCanBeManuallySelectedIndependentOfOrder()
         {
-            var hostBuilder = new WebHostBuilder()
-                .UseKestrel()
-                .UseSockets()
-                .Configure(app => { });
+            var hostBuilder = new WebHostBuilder().UseKestrel().UseSockets().Configure(app => { });
 
-            Assert.IsType<SocketTransportFactory>(hostBuilder.Build().Services.GetService<IConnectionListenerFactory>());
+            Assert.IsType<SocketTransportFactory>(
+                hostBuilder.Build().Services.GetService<IConnectionListenerFactory>()
+            );
 
-            var hostBuilderReversed = new WebHostBuilder()
-                .UseSockets()
+            var hostBuilderReversed = new WebHostBuilder().UseSockets()
                 .UseKestrel()
                 .Configure(app => { });
 
-            Assert.IsType<SocketTransportFactory>(hostBuilderReversed.Build().Services.GetService<IConnectionListenerFactory>());
+            Assert.IsType<SocketTransportFactory>(
+                hostBuilderReversed.Build().Services.GetService<IConnectionListenerFactory>()
+            );
         }
 
         [Fact]
         public void ServerIsKestrelServerImpl()
         {
-            var hostBuilder = new WebHostBuilder()
-                .UseSockets()
-                .UseKestrel()
-                .Configure(app => { });
+            var hostBuilder = new WebHostBuilder().UseSockets().UseKestrel().Configure(app => { });
 
             Assert.IsType<KestrelServerImpl>(hostBuilder.Build().Services.GetService<IServer>());
         }

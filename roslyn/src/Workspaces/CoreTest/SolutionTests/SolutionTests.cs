@@ -43,7 +43,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
     {
 #nullable enable
         private static readonly MetadataReference s_mscorlib = TestMetadata.Net451.mscorlib;
-        private static readonly DocumentId s_unrelatedDocumentId = DocumentId.CreateNewId(ProjectId.CreateNewId());
+        private static readonly DocumentId s_unrelatedDocumentId = DocumentId.CreateNewId(
+            ProjectId.CreateNewId()
+        );
 
         private static Workspace CreateWorkspaceWithProjectAndDocuments()
         {
@@ -51,11 +53,28 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             var workspace = CreateWorkspace();
 
-            Assert.True(workspace.TryApplyChanges(workspace.CurrentSolution
-                .AddProject(projectId, "proj1", "proj1.dll", LanguageNames.CSharp)
-                .AddDocument(DocumentId.CreateNewId(projectId), "goo.cs", "public class Goo { }")
-                .AddAdditionalDocument(DocumentId.CreateNewId(projectId), "add.txt", "text")
-                .AddAnalyzerConfigDocument(DocumentId.CreateNewId(projectId), "editorcfg", SourceText.From("config"), filePath: "/a/b")));
+            Assert.True(
+                workspace.TryApplyChanges(
+                    workspace.CurrentSolution.AddProject(
+                            projectId,
+                            "proj1",
+                            "proj1.dll",
+                            LanguageNames.CSharp
+                        )
+                        .AddDocument(
+                            DocumentId.CreateNewId(projectId),
+                            "goo.cs",
+                            "public class Goo { }"
+                        )
+                        .AddAdditionalDocument(DocumentId.CreateNewId(projectId), "add.txt", "text")
+                        .AddAnalyzerConfigDocument(
+                            DocumentId.CreateNewId(projectId),
+                            "editorcfg",
+                            SourceText.From("config"),
+                            filePath: "/a/b"
+                        )
+                )
+            );
 
             return workspace;
         }
@@ -66,8 +85,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         }
 
         // Returns an enumerable that can only be enumerated once.
-        private static IEnumerable<T> OnceEnumerable<T>(params T[] items)
-            => OnceEnumerableImpl(new StrongBox<int>(), items);
+        private static IEnumerable<T> OnceEnumerable<T>(params T[] items) =>
+            OnceEnumerableImpl(new StrongBox<int>(), items);
 
         private static IEnumerable<T> OnceEnumerableImpl<T>(StrongBox<int> counter, T[] items)
         {
@@ -86,7 +105,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
             using var workspace = CreateWorkspace();
             var solution = workspace.CurrentSolution;
             Assert.Throws<ArgumentNullException>(() => solution.RemoveDocument(null!));
-            Assert.Throws<InvalidOperationException>(() => solution.RemoveDocument(s_unrelatedDocumentId));
+            Assert.Throws<InvalidOperationException>(
+                () => solution.RemoveDocument(s_unrelatedDocumentId)
+            );
         }
 
         [Fact]
@@ -95,8 +116,12 @@ namespace Microsoft.CodeAnalysis.UnitTests
             using var workspace = CreateWorkspace();
             var solution = workspace.CurrentSolution;
             Assert.Throws<ArgumentNullException>(() => solution.RemoveDocuments(default));
-            Assert.Throws<InvalidOperationException>(() => solution.RemoveDocuments(ImmutableArray.Create(s_unrelatedDocumentId)));
-            Assert.Throws<ArgumentNullException>(() => solution.RemoveDocuments(ImmutableArray.Create((DocumentId)null!)));
+            Assert.Throws<InvalidOperationException>(
+                () => solution.RemoveDocuments(ImmutableArray.Create(s_unrelatedDocumentId))
+            );
+            Assert.Throws<ArgumentNullException>(
+                () => solution.RemoveDocuments(ImmutableArray.Create((DocumentId)null!))
+            );
         }
 
         [Fact]
@@ -105,7 +130,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
             using var workspace = CreateWorkspace();
             var solution = workspace.CurrentSolution;
             Assert.Throws<ArgumentNullException>(() => solution.RemoveAdditionalDocument(null!));
-            Assert.Throws<InvalidOperationException>(() => solution.RemoveAdditionalDocument(s_unrelatedDocumentId));
+            Assert.Throws<InvalidOperationException>(
+                () => solution.RemoveAdditionalDocument(s_unrelatedDocumentId)
+            );
         }
 
         [Fact]
@@ -114,8 +141,13 @@ namespace Microsoft.CodeAnalysis.UnitTests
             using var workspace = CreateWorkspace();
             var solution = workspace.CurrentSolution;
             Assert.Throws<ArgumentNullException>(() => solution.RemoveAdditionalDocuments(default));
-            Assert.Throws<InvalidOperationException>(() => solution.RemoveAdditionalDocuments(ImmutableArray.Create(s_unrelatedDocumentId)));
-            Assert.Throws<ArgumentNullException>(() => solution.RemoveAdditionalDocuments(ImmutableArray.Create((DocumentId)null!)));
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    solution.RemoveAdditionalDocuments(ImmutableArray.Create(s_unrelatedDocumentId))
+            );
+            Assert.Throws<ArgumentNullException>(
+                () => solution.RemoveAdditionalDocuments(ImmutableArray.Create((DocumentId)null!))
+            );
         }
 
         [Fact]
@@ -123,8 +155,12 @@ namespace Microsoft.CodeAnalysis.UnitTests
         {
             using var workspace = CreateWorkspace();
             var solution = workspace.CurrentSolution;
-            Assert.Throws<ArgumentNullException>(() => solution.RemoveAnalyzerConfigDocument(null!));
-            Assert.Throws<InvalidOperationException>(() => solution.RemoveAnalyzerConfigDocument(s_unrelatedDocumentId));
+            Assert.Throws<ArgumentNullException>(
+                () => solution.RemoveAnalyzerConfigDocument(null!)
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => solution.RemoveAnalyzerConfigDocument(s_unrelatedDocumentId)
+            );
         }
 
         [Fact]
@@ -132,9 +168,19 @@ namespace Microsoft.CodeAnalysis.UnitTests
         {
             using var workspace = CreateWorkspace();
             var solution = workspace.CurrentSolution;
-            Assert.Throws<ArgumentNullException>(() => solution.RemoveAnalyzerConfigDocuments(default));
-            Assert.Throws<InvalidOperationException>(() => solution.RemoveAnalyzerConfigDocuments(ImmutableArray.Create(s_unrelatedDocumentId)));
-            Assert.Throws<ArgumentNullException>(() => solution.RemoveAnalyzerConfigDocuments(ImmutableArray.Create((DocumentId)null!)));
+            Assert.Throws<ArgumentNullException>(
+                () => solution.RemoveAnalyzerConfigDocuments(default)
+            );
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    solution.RemoveAnalyzerConfigDocuments(
+                        ImmutableArray.Create(s_unrelatedDocumentId)
+                    )
+            );
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                    solution.RemoveAnalyzerConfigDocuments(ImmutableArray.Create((DocumentId)null!))
+            );
         }
 
         [Fact]
@@ -151,10 +197,14 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var newSolution2 = newSolution1.WithDocumentName(documentId, name);
             Assert.Same(newSolution1, newSolution2);
 
-            Assert.Throws<ArgumentNullException>(() => solution.WithDocumentName(documentId, name: null!));
+            Assert.Throws<ArgumentNullException>(
+                () => solution.WithDocumentName(documentId, name: null!)
+            );
 
             Assert.Throws<ArgumentNullException>(() => solution.WithDocumentName(null!, name));
-            Assert.Throws<InvalidOperationException>(() => solution.WithDocumentName(s_unrelatedDocumentId, name));
+            Assert.Throws<InvalidOperationException>(
+                () => solution.WithDocumentName(s_unrelatedDocumentId, name)
+            );
         }
 
         [Fact]
@@ -175,16 +225,25 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var newSolution3 = solution.WithDocumentFolders(documentId, new string[0]);
             Assert.Equal(new string[0], newSolution3.GetDocument(documentId)!.Folders);
 
-            var newSolution4 = solution.WithDocumentFolders(documentId, ImmutableArray<string>.Empty);
+            var newSolution4 = solution.WithDocumentFolders(
+                documentId,
+                ImmutableArray<string>.Empty
+            );
             Assert.Same(newSolution3, newSolution4);
 
             var newSolution5 = solution.WithDocumentFolders(documentId, null);
             Assert.Same(newSolution3, newSolution5);
 
-            Assert.Throws<ArgumentNullException>(() => solution.WithDocumentFolders(documentId, folders: new string[] { null! }));
+            Assert.Throws<ArgumentNullException>(
+                () => solution.WithDocumentFolders(documentId, folders: new string[] { null! })
+            );
 
-            Assert.Throws<ArgumentNullException>(() => solution.WithDocumentFolders(null!, folders));
-            Assert.Throws<InvalidOperationException>(() => solution.WithDocumentFolders(s_unrelatedDocumentId, folders));
+            Assert.Throws<ArgumentNullException>(
+                () => solution.WithDocumentFolders(null!, folders)
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => solution.WithDocumentFolders(s_unrelatedDocumentId, folders)
+            );
         }
 
         [Fact]
@@ -210,10 +269,14 @@ namespace Microsoft.CodeAnalysis.UnitTests
             Assert.Empty(newSolution3.GetDocumentIdsWithFilePath(""));
 
             // TODO: https://github.com/dotnet/roslyn/issues/37125
-            Assert.Throws<ArgumentNullException>(() => solution.WithDocumentFilePath(documentId, filePath: null!));
+            Assert.Throws<ArgumentNullException>(
+                () => solution.WithDocumentFilePath(documentId, filePath: null!)
+            );
 
             Assert.Throws<ArgumentNullException>(() => solution.WithDocumentFilePath(null!, path));
-            Assert.Throws<InvalidOperationException>(() => solution.WithDocumentFilePath(s_unrelatedDocumentId, path));
+            Assert.Throws<InvalidOperationException>(
+                () => solution.WithDocumentFilePath(s_unrelatedDocumentId, path)
+            );
         }
 
         [Fact]
@@ -223,15 +286,34 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var solution = workspace.CurrentSolution;
             var documentId = solution.Projects.Single().DocumentIds.Single();
 
-            Assert.Same(solution, solution.WithDocumentSourceCodeKind(documentId, SourceCodeKind.Regular));
+            Assert.Same(
+                solution,
+                solution.WithDocumentSourceCodeKind(documentId, SourceCodeKind.Regular)
+            );
 
-            var newSolution1 = solution.WithDocumentSourceCodeKind(documentId, SourceCodeKind.Script);
-            Assert.Equal(SourceCodeKind.Script, newSolution1.GetDocument(documentId)!.SourceCodeKind);
+            var newSolution1 = solution.WithDocumentSourceCodeKind(
+                documentId,
+                SourceCodeKind.Script
+            );
+            Assert.Equal(
+                SourceCodeKind.Script,
+                newSolution1.GetDocument(documentId)!.SourceCodeKind
+            );
 
-            Assert.Throws<ArgumentOutOfRangeException>(() => solution.WithDocumentSourceCodeKind(documentId, (SourceCodeKind)(-1)));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => solution.WithDocumentSourceCodeKind(documentId, (SourceCodeKind)(-1))
+            );
 
-            Assert.Throws<ArgumentNullException>(() => solution.WithDocumentSourceCodeKind(null!, SourceCodeKind.Script));
-            Assert.Throws<InvalidOperationException>(() => solution.WithDocumentSourceCodeKind(s_unrelatedDocumentId, SourceCodeKind.Script));
+            Assert.Throws<ArgumentNullException>(
+                () => solution.WithDocumentSourceCodeKind(null!, SourceCodeKind.Script)
+            );
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    solution.WithDocumentSourceCodeKind(
+                        s_unrelatedDocumentId,
+                        SourceCodeKind.Script
+                    )
+            );
         }
 
         [Fact, Obsolete]
@@ -241,8 +323,14 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var solution = workspace.CurrentSolution;
             var documentId = solution.Projects.Single().DocumentIds.Single();
 
-            var newSolution = solution.WithDocumentSourceCodeKind(documentId, SourceCodeKind.Interactive);
-            Assert.Equal(SourceCodeKind.Script, newSolution.GetDocument(documentId)!.SourceCodeKind);
+            var newSolution = solution.WithDocumentSourceCodeKind(
+                documentId,
+                SourceCodeKind.Interactive
+            );
+            Assert.Equal(
+                SourceCodeKind.Script,
+                newSolution.GetDocument(documentId)!.SourceCodeKind
+            );
         }
 
         [Fact]
@@ -253,7 +341,11 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var documentId = solution.Projects.Single().DocumentIds.Single();
             var root = CS.SyntaxFactory.ParseSyntaxTree("class NewClass {}").GetRoot();
 
-            var newSolution1 = solution.WithDocumentSyntaxRoot(documentId, root, PreservationMode.PreserveIdentity);
+            var newSolution1 = solution.WithDocumentSyntaxRoot(
+                documentId,
+                root,
+                PreservationMode.PreserveIdentity
+            );
             Assert.True(newSolution1.GetDocument(documentId)!.TryGetSyntaxRoot(out var actualRoot));
             Assert.Equal(root.ToString(), actualRoot!.ToString());
 
@@ -263,10 +355,16 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var newSolution2 = newSolution1.WithDocumentSyntaxRoot(documentId, actualRoot);
             Assert.Same(newSolution1, newSolution2);
 
-            Assert.Throws<ArgumentOutOfRangeException>(() => solution.WithDocumentSyntaxRoot(documentId, root, (PreservationMode)(-1)));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => solution.WithDocumentSyntaxRoot(documentId, root, (PreservationMode)(-1))
+            );
 
-            Assert.Throws<ArgumentNullException>(() => solution.WithDocumentSyntaxRoot(null!, root));
-            Assert.Throws<InvalidOperationException>(() => solution.WithDocumentSyntaxRoot(s_unrelatedDocumentId, root));
+            Assert.Throws<ArgumentNullException>(
+                () => solution.WithDocumentSyntaxRoot(null!, root)
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => solution.WithDocumentSyntaxRoot(s_unrelatedDocumentId, root)
+            );
         }
 
         [Fact]
@@ -276,16 +374,26 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var projectId = ProjectId.CreateNewId();
 
             using var workspace = CreateWorkspace();
-            var solution = workspace.CurrentSolution
-                            .AddProject(projectId, "goo", "goo.dll", LanguageNames.CSharp)
-                            .AddDocument(DocumentId.CreateNewId(projectId), "goo.cs", "public class Goo { }")
-                            .AddAnalyzerConfigDocument(DocumentId.CreateNewId(projectId), "editorcfg", SourceText.From("config"));
+            var solution = workspace.CurrentSolution.AddProject(
+                    projectId,
+                    "goo",
+                    "goo.dll",
+                    LanguageNames.CSharp
+                )
+                .AddDocument(DocumentId.CreateNewId(projectId), "goo.cs", "public class Goo { }")
+                .AddAnalyzerConfigDocument(
+                    DocumentId.CreateNewId(projectId),
+                    "editorcfg",
+                    SourceText.From("config")
+                );
 
             var project = solution.GetProject(projectId)!;
             var compilation = (await project.GetCompilationAsync())!;
             var tree = compilation.SyntaxTrees.Single();
             var provider = compilation.Options.SyntaxTreeOptionsProvider!;
-            Assert.Throws<ArgumentException>(() => provider.TryGetDiagnosticValue(tree, "CA1234", CancellationToken.None, out _));
+            Assert.Throws<ArgumentException>(
+                () => provider.TryGetDiagnosticValue(tree, "CA1234", CancellationToken.None, out _)
+            );
         }
 
         [Fact]
@@ -296,18 +404,49 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var documentId = solution.Projects.Single().DocumentIds.Single();
             var text = SourceText.From("new text");
 
-            var newSolution1 = solution.WithDocumentText(documentId, text, PreservationMode.PreserveIdentity);
+            var newSolution1 = solution.WithDocumentText(
+                documentId,
+                text,
+                PreservationMode.PreserveIdentity
+            );
             Assert.True(newSolution1.GetDocument(documentId)!.TryGetText(out var actualText));
             Assert.Same(text, actualText);
 
-            var newSolution2 = newSolution1.WithDocumentText(documentId, text, PreservationMode.PreserveIdentity);
+            var newSolution2 = newSolution1.WithDocumentText(
+                documentId,
+                text,
+                PreservationMode.PreserveIdentity
+            );
             Assert.Same(newSolution1, newSolution2);
 
-            Assert.Throws<ArgumentNullException>(() => solution.WithDocumentText(documentId, (SourceText)null!, PreservationMode.PreserveIdentity));
-            Assert.Throws<ArgumentOutOfRangeException>(() => solution.WithDocumentText(documentId, text, (PreservationMode)(-1)));
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                    solution.WithDocumentText(
+                        documentId,
+                        (SourceText)null!,
+                        PreservationMode.PreserveIdentity
+                    )
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => solution.WithDocumentText(documentId, text, (PreservationMode)(-1))
+            );
 
-            Assert.Throws<ArgumentNullException>(() => solution.WithDocumentText((DocumentId)null!, text, PreservationMode.PreserveIdentity));
-            Assert.Throws<InvalidOperationException>(() => solution.WithDocumentText(s_unrelatedDocumentId, text, PreservationMode.PreserveIdentity));
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                    solution.WithDocumentText(
+                        (DocumentId)null!,
+                        text,
+                        PreservationMode.PreserveIdentity
+                    )
+            );
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    solution.WithDocumentText(
+                        s_unrelatedDocumentId,
+                        text,
+                        PreservationMode.PreserveIdentity
+                    )
+            );
         }
 
         [Fact]
@@ -316,22 +455,58 @@ namespace Microsoft.CodeAnalysis.UnitTests
             using var workspace = CreateWorkspaceWithProjectAndDocuments();
             var solution = workspace.CurrentSolution;
             var documentId = solution.Projects.Single().DocumentIds.Single();
-            var textAndVersion = TextAndVersion.Create(SourceText.From("new text"), VersionStamp.Default);
+            var textAndVersion = TextAndVersion.Create(
+                SourceText.From("new text"),
+                VersionStamp.Default
+            );
 
-            var newSolution1 = solution.WithDocumentText(documentId, textAndVersion, PreservationMode.PreserveIdentity);
+            var newSolution1 = solution.WithDocumentText(
+                documentId,
+                textAndVersion,
+                PreservationMode.PreserveIdentity
+            );
             Assert.True(newSolution1.GetDocument(documentId)!.TryGetText(out var actualText));
-            Assert.True(newSolution1.GetDocument(documentId)!.TryGetTextVersion(out var actualVersion));
+            Assert.True(
+                newSolution1.GetDocument(documentId)!.TryGetTextVersion(out var actualVersion)
+            );
             Assert.Same(textAndVersion.Text, actualText);
             Assert.Equal(textAndVersion.Version, actualVersion);
 
-            var newSolution2 = newSolution1.WithDocumentText(documentId, textAndVersion, PreservationMode.PreserveIdentity);
+            var newSolution2 = newSolution1.WithDocumentText(
+                documentId,
+                textAndVersion,
+                PreservationMode.PreserveIdentity
+            );
             Assert.Same(newSolution1, newSolution2);
 
-            Assert.Throws<ArgumentNullException>(() => solution.WithDocumentText(documentId, (SourceText)null!, PreservationMode.PreserveIdentity));
-            Assert.Throws<ArgumentOutOfRangeException>(() => solution.WithDocumentText(documentId, textAndVersion, (PreservationMode)(-1)));
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                    solution.WithDocumentText(
+                        documentId,
+                        (SourceText)null!,
+                        PreservationMode.PreserveIdentity
+                    )
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => solution.WithDocumentText(documentId, textAndVersion, (PreservationMode)(-1))
+            );
 
-            Assert.Throws<ArgumentNullException>(() => solution.WithDocumentText((DocumentId)null!, textAndVersion, PreservationMode.PreserveIdentity));
-            Assert.Throws<InvalidOperationException>(() => solution.WithDocumentText(s_unrelatedDocumentId, textAndVersion, PreservationMode.PreserveIdentity));
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                    solution.WithDocumentText(
+                        (DocumentId)null!,
+                        textAndVersion,
+                        PreservationMode.PreserveIdentity
+                    )
+            );
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    solution.WithDocumentText(
+                        s_unrelatedDocumentId,
+                        textAndVersion,
+                        PreservationMode.PreserveIdentity
+                    )
+            );
         }
 
         [Fact]
@@ -342,20 +517,47 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var documentId = solution.Projects.Single().DocumentIds.Single();
             var text = SourceText.From("new text");
 
-            var newSolution1 = solution.WithDocumentText(new[] { documentId }, text, PreservationMode.PreserveIdentity);
+            var newSolution1 = solution.WithDocumentText(
+                new[] { documentId },
+                text,
+                PreservationMode.PreserveIdentity
+            );
             Assert.True(newSolution1.GetDocument(documentId)!.TryGetText(out var actualText));
             Assert.Same(text, actualText);
 
-            var newSolution2 = newSolution1.WithDocumentText(new[] { documentId }, text, PreservationMode.PreserveIdentity);
+            var newSolution2 = newSolution1.WithDocumentText(
+                new[] { documentId },
+                text,
+                PreservationMode.PreserveIdentity
+            );
             Assert.Same(newSolution1, newSolution2);
 
             // documents not in solution are skipped: https://github.com/dotnet/roslyn/issues/42029
             Assert.Same(solution, solution.WithDocumentText(new DocumentId[] { null! }, text));
-            Assert.Same(solution, solution.WithDocumentText(new DocumentId[] { s_unrelatedDocumentId }, text));
+            Assert.Same(
+                solution,
+                solution.WithDocumentText(new DocumentId[] { s_unrelatedDocumentId }, text)
+            );
 
-            Assert.Throws<ArgumentNullException>(() => solution.WithDocumentText((DocumentId[])null!, text, PreservationMode.PreserveIdentity));
-            Assert.Throws<ArgumentNullException>(() => solution.WithDocumentText(new[] { documentId }, null!, PreservationMode.PreserveIdentity));
-            Assert.Throws<ArgumentOutOfRangeException>(() => solution.WithDocumentText(new[] { documentId }, text, (PreservationMode)(-1)));
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                    solution.WithDocumentText(
+                        (DocumentId[])null!,
+                        text,
+                        PreservationMode.PreserveIdentity
+                    )
+            );
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                    solution.WithDocumentText(
+                        new[] { documentId },
+                        null!,
+                        PreservationMode.PreserveIdentity
+                    )
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => solution.WithDocumentText(new[] { documentId }, text, (PreservationMode)(-1))
+            );
         }
 
         [Fact]
@@ -366,18 +568,51 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var documentId = solution.Projects.Single().AdditionalDocumentIds.Single();
             var text = SourceText.From("new text");
 
-            var newSolution1 = solution.WithAdditionalDocumentText(documentId, text, PreservationMode.PreserveIdentity);
-            Assert.True(newSolution1.GetAdditionalDocument(documentId)!.TryGetText(out var actualText));
+            var newSolution1 = solution.WithAdditionalDocumentText(
+                documentId,
+                text,
+                PreservationMode.PreserveIdentity
+            );
+            Assert.True(
+                newSolution1.GetAdditionalDocument(documentId)!.TryGetText(out var actualText)
+            );
             Assert.Same(text, actualText);
 
-            var newSolution2 = newSolution1.WithAdditionalDocumentText(documentId, text, PreservationMode.PreserveIdentity);
+            var newSolution2 = newSolution1.WithAdditionalDocumentText(
+                documentId,
+                text,
+                PreservationMode.PreserveIdentity
+            );
             Assert.Same(newSolution1, newSolution2);
 
-            Assert.Throws<ArgumentNullException>(() => solution.WithAdditionalDocumentText(documentId, (SourceText)null!, PreservationMode.PreserveIdentity));
-            Assert.Throws<ArgumentOutOfRangeException>(() => solution.WithAdditionalDocumentText(documentId, text, (PreservationMode)(-1)));
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                    solution.WithAdditionalDocumentText(
+                        documentId,
+                        (SourceText)null!,
+                        PreservationMode.PreserveIdentity
+                    )
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => solution.WithAdditionalDocumentText(documentId, text, (PreservationMode)(-1))
+            );
 
-            Assert.Throws<ArgumentNullException>(() => solution.WithAdditionalDocumentText((DocumentId)null!, text, PreservationMode.PreserveIdentity));
-            Assert.Throws<InvalidOperationException>(() => solution.WithAdditionalDocumentText(s_unrelatedDocumentId, text, PreservationMode.PreserveIdentity));
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                    solution.WithAdditionalDocumentText(
+                        (DocumentId)null!,
+                        text,
+                        PreservationMode.PreserveIdentity
+                    )
+            );
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    solution.WithAdditionalDocumentText(
+                        s_unrelatedDocumentId,
+                        text,
+                        PreservationMode.PreserveIdentity
+                    )
+            );
         }
 
         [Fact]
@@ -386,22 +621,67 @@ namespace Microsoft.CodeAnalysis.UnitTests
             using var workspace = CreateWorkspaceWithProjectAndDocuments();
             var solution = workspace.CurrentSolution;
             var documentId = solution.Projects.Single().AdditionalDocumentIds.Single();
-            var textAndVersion = TextAndVersion.Create(SourceText.From("new text"), VersionStamp.Default);
+            var textAndVersion = TextAndVersion.Create(
+                SourceText.From("new text"),
+                VersionStamp.Default
+            );
 
-            var newSolution1 = solution.WithAdditionalDocumentText(documentId, textAndVersion, PreservationMode.PreserveIdentity);
-            Assert.True(newSolution1.GetAdditionalDocument(documentId)!.TryGetText(out var actualText));
-            Assert.True(newSolution1.GetAdditionalDocument(documentId)!.TryGetTextVersion(out var actualVersion));
+            var newSolution1 = solution.WithAdditionalDocumentText(
+                documentId,
+                textAndVersion,
+                PreservationMode.PreserveIdentity
+            );
+            Assert.True(
+                newSolution1.GetAdditionalDocument(documentId)!.TryGetText(out var actualText)
+            );
+            Assert.True(
+                newSolution1.GetAdditionalDocument(documentId)!.TryGetTextVersion(
+                    out var actualVersion
+                )
+            );
             Assert.Same(textAndVersion.Text, actualText);
             Assert.Equal(textAndVersion.Version, actualVersion);
 
-            var newSolution2 = newSolution1.WithAdditionalDocumentText(documentId, textAndVersion, PreservationMode.PreserveIdentity);
+            var newSolution2 = newSolution1.WithAdditionalDocumentText(
+                documentId,
+                textAndVersion,
+                PreservationMode.PreserveIdentity
+            );
             Assert.Same(newSolution1, newSolution2);
 
-            Assert.Throws<ArgumentNullException>(() => solution.WithAdditionalDocumentText(documentId, (SourceText)null!, PreservationMode.PreserveIdentity));
-            Assert.Throws<ArgumentOutOfRangeException>(() => solution.WithAdditionalDocumentText(documentId, textAndVersion, (PreservationMode)(-1)));
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                    solution.WithAdditionalDocumentText(
+                        documentId,
+                        (SourceText)null!,
+                        PreservationMode.PreserveIdentity
+                    )
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () =>
+                    solution.WithAdditionalDocumentText(
+                        documentId,
+                        textAndVersion,
+                        (PreservationMode)(-1)
+                    )
+            );
 
-            Assert.Throws<ArgumentNullException>(() => solution.WithAdditionalDocumentText((DocumentId)null!, textAndVersion, PreservationMode.PreserveIdentity));
-            Assert.Throws<InvalidOperationException>(() => solution.WithAdditionalDocumentText(s_unrelatedDocumentId, textAndVersion, PreservationMode.PreserveIdentity));
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                    solution.WithAdditionalDocumentText(
+                        (DocumentId)null!,
+                        textAndVersion,
+                        PreservationMode.PreserveIdentity
+                    )
+            );
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    solution.WithAdditionalDocumentText(
+                        s_unrelatedDocumentId,
+                        textAndVersion,
+                        PreservationMode.PreserveIdentity
+                    )
+            );
         }
 
         [Fact]
@@ -412,18 +692,56 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var documentId = solution.Projects.Single().AnalyzerConfigDocumentIds.Single();
             var text = SourceText.From("new text");
 
-            var newSolution1 = solution.WithAnalyzerConfigDocumentText(documentId, text, PreservationMode.PreserveIdentity);
-            Assert.True(newSolution1.GetAnalyzerConfigDocument(documentId)!.TryGetText(out var actualText));
+            var newSolution1 = solution.WithAnalyzerConfigDocumentText(
+                documentId,
+                text,
+                PreservationMode.PreserveIdentity
+            );
+            Assert.True(
+                newSolution1.GetAnalyzerConfigDocument(documentId)!.TryGetText(out var actualText)
+            );
             Assert.Same(text, actualText);
 
-            var newSolution2 = newSolution1.WithAnalyzerConfigDocumentText(documentId, text, PreservationMode.PreserveIdentity);
+            var newSolution2 = newSolution1.WithAnalyzerConfigDocumentText(
+                documentId,
+                text,
+                PreservationMode.PreserveIdentity
+            );
             Assert.Same(newSolution1, newSolution2);
 
-            Assert.Throws<ArgumentNullException>(() => solution.WithAnalyzerConfigDocumentText(documentId, (SourceText)null!, PreservationMode.PreserveIdentity));
-            Assert.Throws<ArgumentOutOfRangeException>(() => solution.WithAnalyzerConfigDocumentText(documentId, text, (PreservationMode)(-1)));
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                    solution.WithAnalyzerConfigDocumentText(
+                        documentId,
+                        (SourceText)null!,
+                        PreservationMode.PreserveIdentity
+                    )
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () =>
+                    solution.WithAnalyzerConfigDocumentText(
+                        documentId,
+                        text,
+                        (PreservationMode)(-1)
+                    )
+            );
 
-            Assert.Throws<ArgumentNullException>(() => solution.WithAnalyzerConfigDocumentText((DocumentId)null!, text, PreservationMode.PreserveIdentity));
-            Assert.Throws<InvalidOperationException>(() => solution.WithAnalyzerConfigDocumentText(s_unrelatedDocumentId, text, PreservationMode.PreserveIdentity));
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                    solution.WithAnalyzerConfigDocumentText(
+                        (DocumentId)null!,
+                        text,
+                        PreservationMode.PreserveIdentity
+                    )
+            );
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    solution.WithAnalyzerConfigDocumentText(
+                        s_unrelatedDocumentId,
+                        text,
+                        PreservationMode.PreserveIdentity
+                    )
+            );
         }
 
         [Fact]
@@ -432,22 +750,67 @@ namespace Microsoft.CodeAnalysis.UnitTests
             using var workspace = CreateWorkspaceWithProjectAndDocuments();
             var solution = workspace.CurrentSolution;
             var documentId = solution.Projects.Single().AnalyzerConfigDocumentIds.Single();
-            var textAndVersion = TextAndVersion.Create(SourceText.From("new text"), VersionStamp.Default);
+            var textAndVersion = TextAndVersion.Create(
+                SourceText.From("new text"),
+                VersionStamp.Default
+            );
 
-            var newSolution1 = solution.WithAnalyzerConfigDocumentText(documentId, textAndVersion, PreservationMode.PreserveIdentity);
-            Assert.True(newSolution1.GetAnalyzerConfigDocument(documentId)!.TryGetText(out var actualText));
-            Assert.True(newSolution1.GetAnalyzerConfigDocument(documentId)!.TryGetTextVersion(out var actualVersion));
+            var newSolution1 = solution.WithAnalyzerConfigDocumentText(
+                documentId,
+                textAndVersion,
+                PreservationMode.PreserveIdentity
+            );
+            Assert.True(
+                newSolution1.GetAnalyzerConfigDocument(documentId)!.TryGetText(out var actualText)
+            );
+            Assert.True(
+                newSolution1.GetAnalyzerConfigDocument(documentId)!.TryGetTextVersion(
+                    out var actualVersion
+                )
+            );
             Assert.Same(textAndVersion.Text, actualText);
             Assert.Equal(textAndVersion.Version, actualVersion);
 
-            var newSolution2 = newSolution1.WithAnalyzerConfigDocumentText(documentId, textAndVersion, PreservationMode.PreserveIdentity);
+            var newSolution2 = newSolution1.WithAnalyzerConfigDocumentText(
+                documentId,
+                textAndVersion,
+                PreservationMode.PreserveIdentity
+            );
             Assert.Same(newSolution1, newSolution2);
 
-            Assert.Throws<ArgumentNullException>(() => solution.WithAnalyzerConfigDocumentText(documentId, (SourceText)null!, PreservationMode.PreserveIdentity));
-            Assert.Throws<ArgumentOutOfRangeException>(() => solution.WithAnalyzerConfigDocumentText(documentId, textAndVersion, (PreservationMode)(-1)));
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                    solution.WithAnalyzerConfigDocumentText(
+                        documentId,
+                        (SourceText)null!,
+                        PreservationMode.PreserveIdentity
+                    )
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () =>
+                    solution.WithAnalyzerConfigDocumentText(
+                        documentId,
+                        textAndVersion,
+                        (PreservationMode)(-1)
+                    )
+            );
 
-            Assert.Throws<ArgumentNullException>(() => solution.WithAnalyzerConfigDocumentText((DocumentId)null!, textAndVersion, PreservationMode.PreserveIdentity));
-            Assert.Throws<InvalidOperationException>(() => solution.WithAnalyzerConfigDocumentText(s_unrelatedDocumentId, textAndVersion, PreservationMode.PreserveIdentity));
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                    solution.WithAnalyzerConfigDocumentText(
+                        (DocumentId)null!,
+                        textAndVersion,
+                        PreservationMode.PreserveIdentity
+                    )
+            );
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    solution.WithAnalyzerConfigDocumentText(
+                        s_unrelatedDocumentId,
+                        textAndVersion,
+                        PreservationMode.PreserveIdentity
+                    )
+            );
         }
 
         [Fact]
@@ -458,18 +821,53 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var documentId = solution.Projects.Single().DocumentIds.Single();
             var loader = new TestTextLoader("new text");
 
-            var newSolution1 = solution.WithDocumentTextLoader(documentId, loader, PreservationMode.PreserveIdentity);
-            Assert.Equal("new text", newSolution1.GetDocument(documentId)!.GetTextSynchronously(CancellationToken.None).ToString());
+            var newSolution1 = solution.WithDocumentTextLoader(
+                documentId,
+                loader,
+                PreservationMode.PreserveIdentity
+            );
+            Assert.Equal(
+                "new text",
+                newSolution1.GetDocument(documentId)!.GetTextSynchronously(CancellationToken.None)
+                    .ToString()
+            );
 
             // Reusal is not currently implemented: https://github.com/dotnet/roslyn/issues/42028
-            var newSolution2 = solution.WithDocumentTextLoader(documentId, loader, PreservationMode.PreserveIdentity);
+            var newSolution2 = solution.WithDocumentTextLoader(
+                documentId,
+                loader,
+                PreservationMode.PreserveIdentity
+            );
             Assert.NotSame(newSolution1, newSolution2);
 
-            Assert.Throws<ArgumentNullException>(() => solution.WithDocumentTextLoader(documentId, null!, PreservationMode.PreserveIdentity));
-            Assert.Throws<ArgumentOutOfRangeException>(() => solution.WithDocumentTextLoader(documentId, loader, (PreservationMode)(-1)));
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                    solution.WithDocumentTextLoader(
+                        documentId,
+                        null!,
+                        PreservationMode.PreserveIdentity
+                    )
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => solution.WithDocumentTextLoader(documentId, loader, (PreservationMode)(-1))
+            );
 
-            Assert.Throws<ArgumentNullException>(() => solution.WithDocumentTextLoader(null!, loader, PreservationMode.PreserveIdentity));
-            Assert.Throws<InvalidOperationException>(() => solution.WithDocumentTextLoader(s_unrelatedDocumentId, loader, PreservationMode.PreserveIdentity));
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                    solution.WithDocumentTextLoader(
+                        null!,
+                        loader,
+                        PreservationMode.PreserveIdentity
+                    )
+            );
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    solution.WithDocumentTextLoader(
+                        s_unrelatedDocumentId,
+                        loader,
+                        PreservationMode.PreserveIdentity
+                    )
+            );
         }
 
         [Fact]
@@ -480,18 +878,60 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var documentId = solution.Projects.Single().AdditionalDocumentIds.Single();
             var loader = new TestTextLoader("new text");
 
-            var newSolution1 = solution.WithAdditionalDocumentTextLoader(documentId, loader, PreservationMode.PreserveIdentity);
-            Assert.Equal("new text", newSolution1.GetAdditionalDocument(documentId)!.GetTextSynchronously(CancellationToken.None).ToString());
+            var newSolution1 = solution.WithAdditionalDocumentTextLoader(
+                documentId,
+                loader,
+                PreservationMode.PreserveIdentity
+            );
+            Assert.Equal(
+                "new text",
+                newSolution1.GetAdditionalDocument(documentId)!.GetTextSynchronously(
+                        CancellationToken.None
+                    )
+                    .ToString()
+            );
 
             // Reusal is not currently implemented: https://github.com/dotnet/roslyn/issues/42028
-            var newSolution2 = solution.WithAdditionalDocumentTextLoader(documentId, loader, PreservationMode.PreserveIdentity);
+            var newSolution2 = solution.WithAdditionalDocumentTextLoader(
+                documentId,
+                loader,
+                PreservationMode.PreserveIdentity
+            );
             Assert.NotSame(newSolution1, newSolution2);
 
-            Assert.Throws<ArgumentNullException>(() => solution.WithAdditionalDocumentTextLoader(documentId, null!, PreservationMode.PreserveIdentity));
-            Assert.Throws<ArgumentOutOfRangeException>(() => solution.WithAdditionalDocumentTextLoader(documentId, loader, (PreservationMode)(-1)));
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                    solution.WithAdditionalDocumentTextLoader(
+                        documentId,
+                        null!,
+                        PreservationMode.PreserveIdentity
+                    )
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () =>
+                    solution.WithAdditionalDocumentTextLoader(
+                        documentId,
+                        loader,
+                        (PreservationMode)(-1)
+                    )
+            );
 
-            Assert.Throws<ArgumentNullException>(() => solution.WithAdditionalDocumentTextLoader(null!, loader, PreservationMode.PreserveIdentity));
-            Assert.Throws<InvalidOperationException>(() => solution.WithAdditionalDocumentTextLoader(s_unrelatedDocumentId, loader, PreservationMode.PreserveIdentity));
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                    solution.WithAdditionalDocumentTextLoader(
+                        null!,
+                        loader,
+                        PreservationMode.PreserveIdentity
+                    )
+            );
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    solution.WithAdditionalDocumentTextLoader(
+                        s_unrelatedDocumentId,
+                        loader,
+                        PreservationMode.PreserveIdentity
+                    )
+            );
         }
 
         [Fact]
@@ -502,18 +942,60 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var documentId = solution.Projects.Single().AnalyzerConfigDocumentIds.Single();
             var loader = new TestTextLoader("new text");
 
-            var newSolution1 = solution.WithAnalyzerConfigDocumentTextLoader(documentId, loader, PreservationMode.PreserveIdentity);
-            Assert.Equal("new text", newSolution1.GetAnalyzerConfigDocument(documentId)!.GetTextSynchronously(CancellationToken.None).ToString());
+            var newSolution1 = solution.WithAnalyzerConfigDocumentTextLoader(
+                documentId,
+                loader,
+                PreservationMode.PreserveIdentity
+            );
+            Assert.Equal(
+                "new text",
+                newSolution1.GetAnalyzerConfigDocument(documentId)!.GetTextSynchronously(
+                        CancellationToken.None
+                    )
+                    .ToString()
+            );
 
             // Reusal is not currently implemented: https://github.com/dotnet/roslyn/issues/42028
-            var newSolution2 = solution.WithAnalyzerConfigDocumentTextLoader(documentId, loader, PreservationMode.PreserveIdentity);
+            var newSolution2 = solution.WithAnalyzerConfigDocumentTextLoader(
+                documentId,
+                loader,
+                PreservationMode.PreserveIdentity
+            );
             Assert.NotSame(newSolution1, newSolution2);
 
-            Assert.Throws<ArgumentNullException>(() => solution.WithAnalyzerConfigDocumentTextLoader(documentId, null!, PreservationMode.PreserveIdentity));
-            Assert.Throws<ArgumentOutOfRangeException>(() => solution.WithAnalyzerConfigDocumentTextLoader(documentId, loader, (PreservationMode)(-1)));
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                    solution.WithAnalyzerConfigDocumentTextLoader(
+                        documentId,
+                        null!,
+                        PreservationMode.PreserveIdentity
+                    )
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () =>
+                    solution.WithAnalyzerConfigDocumentTextLoader(
+                        documentId,
+                        loader,
+                        (PreservationMode)(-1)
+                    )
+            );
 
-            Assert.Throws<ArgumentNullException>(() => solution.WithAnalyzerConfigDocumentTextLoader(null!, loader, PreservationMode.PreserveIdentity));
-            Assert.Throws<InvalidOperationException>(() => solution.WithAnalyzerConfigDocumentTextLoader(s_unrelatedDocumentId, loader, PreservationMode.PreserveIdentity));
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                    solution.WithAnalyzerConfigDocumentTextLoader(
+                        null!,
+                        loader,
+                        PreservationMode.PreserveIdentity
+                    )
+            );
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    solution.WithAnalyzerConfigDocumentTextLoader(
+                        s_unrelatedDocumentId,
+                        loader,
+                        PreservationMode.PreserveIdentity
+                    )
+            );
         }
 
         [Fact]
@@ -522,8 +1004,12 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var projectId = ProjectId.CreateNewId();
 
             using var workspace = CreateWorkspace();
-            var solution = workspace.CurrentSolution
-                .AddProject(projectId, "proj1", "proj1.dll", LanguageNames.CSharp);
+            var solution = workspace.CurrentSolution.AddProject(
+                projectId,
+                "proj1",
+                "proj1.dll",
+                LanguageNames.CSharp
+            );
 
             // any character is allowed
             var assemblyName = "\0<>a/b/*.dll";
@@ -533,9 +1019,17 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             Assert.Same(newSolution, newSolution.WithProjectAssemblyName(projectId, assemblyName));
 
-            Assert.Throws<ArgumentNullException>("assemblyName", () => solution.WithProjectAssemblyName(projectId, null!));
-            Assert.Throws<ArgumentNullException>("projectId", () => solution.WithProjectAssemblyName(null!, "x.dll"));
-            Assert.Throws<InvalidOperationException>(() => solution.WithProjectAssemblyName(ProjectId.CreateNewId(), "x.dll"));
+            Assert.Throws<ArgumentNullException>(
+                "assemblyName",
+                () => solution.WithProjectAssemblyName(projectId, null!)
+            );
+            Assert.Throws<ArgumentNullException>(
+                "projectId",
+                () => solution.WithProjectAssemblyName(null!, "x.dll")
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => solution.WithProjectAssemblyName(ProjectId.CreateNewId(), "x.dll")
+            );
         }
 
         [Fact]
@@ -544,8 +1038,12 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var projectId = ProjectId.CreateNewId();
 
             using var workspace = CreateWorkspace();
-            var solution = workspace.CurrentSolution
-                .AddProject(projectId, "proj1", "proj1.dll", LanguageNames.CSharp);
+            var solution = workspace.CurrentSolution.AddProject(
+                projectId,
+                "proj1",
+                "proj1.dll",
+                LanguageNames.CSharp
+            );
 
             // any character is allowed
             var path = "\0<>a/b/*.dll";
@@ -555,10 +1053,16 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 (s, value) => s.WithProjectOutputFilePath(projectId, value),
                 s => s.GetProject(projectId)!.OutputFilePath,
                 (string?)path,
-                defaultThrows: false);
+                defaultThrows: false
+            );
 
-            Assert.Throws<ArgumentNullException>("projectId", () => solution.WithProjectOutputFilePath(null!, "x.dll"));
-            Assert.Throws<InvalidOperationException>(() => solution.WithProjectOutputFilePath(ProjectId.CreateNewId(), "x.dll"));
+            Assert.Throws<ArgumentNullException>(
+                "projectId",
+                () => solution.WithProjectOutputFilePath(null!, "x.dll")
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => solution.WithProjectOutputFilePath(ProjectId.CreateNewId(), "x.dll")
+            );
         }
 
         [Fact]
@@ -567,8 +1071,12 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var projectId = ProjectId.CreateNewId();
 
             using var workspace = CreateWorkspace();
-            var solution = workspace.CurrentSolution
-                            .AddProject(projectId, "proj1", "proj1.dll", LanguageNames.CSharp);
+            var solution = workspace.CurrentSolution.AddProject(
+                projectId,
+                "proj1",
+                "proj1.dll",
+                LanguageNames.CSharp
+            );
 
             // any character is allowed
             var path = "\0<>a/b/*.dll";
@@ -578,10 +1086,16 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 (s, value) => s.WithProjectOutputRefFilePath(projectId, value),
                 s => s.GetProject(projectId)!.OutputRefFilePath,
                 (string?)path,
-                defaultThrows: false);
+                defaultThrows: false
+            );
 
-            Assert.Throws<ArgumentNullException>("projectId", () => solution.WithProjectOutputRefFilePath(null!, "x.dll"));
-            Assert.Throws<InvalidOperationException>(() => solution.WithProjectOutputRefFilePath(ProjectId.CreateNewId(), "x.dll"));
+            Assert.Throws<ArgumentNullException>(
+                "projectId",
+                () => solution.WithProjectOutputRefFilePath(null!, "x.dll")
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => solution.WithProjectOutputRefFilePath(ProjectId.CreateNewId(), "x.dll")
+            );
         }
 
         [Fact]
@@ -590,8 +1104,12 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var projectId = ProjectId.CreateNewId();
 
             using var workspace = CreateWorkspace();
-            var solution = workspace.CurrentSolution
-                            .AddProject(projectId, "proj1", "proj1.dll", LanguageNames.CSharp);
+            var solution = workspace.CurrentSolution.AddProject(
+                projectId,
+                "proj1",
+                "proj1.dll",
+                LanguageNames.CSharp
+            );
 
             // any character is allowed
             var path = "\0<>a/b/*.dll";
@@ -601,10 +1119,24 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 (s, value) => s.WithProjectCompilationOutputInfo(projectId, value),
                 s => s.GetProject(projectId)!.CompilationOutputInfo,
                 new CompilationOutputInfo(path),
-                defaultThrows: false);
+                defaultThrows: false
+            );
 
-            Assert.Throws<ArgumentNullException>("projectId", () => solution.WithProjectCompilationOutputInfo(null!, new CompilationOutputInfo("x.dll")));
-            Assert.Throws<InvalidOperationException>(() => solution.WithProjectCompilationOutputInfo(ProjectId.CreateNewId(), new CompilationOutputInfo("x.dll")));
+            Assert.Throws<ArgumentNullException>(
+                "projectId",
+                () =>
+                    solution.WithProjectCompilationOutputInfo(
+                        null!,
+                        new CompilationOutputInfo("x.dll")
+                    )
+            );
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    solution.WithProjectCompilationOutputInfo(
+                        ProjectId.CreateNewId(),
+                        new CompilationOutputInfo("x.dll")
+                    )
+            );
         }
 
         [Fact]
@@ -613,8 +1145,12 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var projectId = ProjectId.CreateNewId();
 
             using var workspace = CreateWorkspace();
-            var solution = workspace.CurrentSolution
-                            .AddProject(projectId, "proj1", "proj1.dll", LanguageNames.CSharp);
+            var solution = workspace.CurrentSolution.AddProject(
+                projectId,
+                "proj1",
+                "proj1.dll",
+                LanguageNames.CSharp
+            );
 
             // any character is allowed
             var defaultNamespace = "\0<>a/b/*";
@@ -624,10 +1160,16 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 (s, value) => s.WithProjectDefaultNamespace(projectId, value),
                 s => s.GetProject(projectId)!.DefaultNamespace,
                 (string?)defaultNamespace,
-                defaultThrows: false);
+                defaultThrows: false
+            );
 
-            Assert.Throws<ArgumentNullException>("projectId", () => solution.WithProjectDefaultNamespace(null!, "x"));
-            Assert.Throws<InvalidOperationException>(() => solution.WithProjectDefaultNamespace(ProjectId.CreateNewId(), "x"));
+            Assert.Throws<ArgumentNullException>(
+                "projectId",
+                () => solution.WithProjectDefaultNamespace(null!, "x")
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => solution.WithProjectDefaultNamespace(ProjectId.CreateNewId(), "x")
+            );
         }
 
         [Fact]
@@ -636,8 +1178,12 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var projectId = ProjectId.CreateNewId();
 
             using var workspace = CreateWorkspace();
-            var solution = workspace.CurrentSolution
-                            .AddProject(projectId, "proj1", "proj1.dll", LanguageNames.CSharp);
+            var solution = workspace.CurrentSolution.AddProject(
+                projectId,
+                "proj1",
+                "proj1.dll",
+                LanguageNames.CSharp
+            );
 
             // any character is allowed
             var projectName = "\0<>a/b/*";
@@ -647,10 +1193,16 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 (s, value) => s.WithProjectName(projectId, value),
                 s => s.GetProject(projectId)!.Name,
                 projectName,
-                defaultThrows: true);
+                defaultThrows: true
+            );
 
-            Assert.Throws<ArgumentNullException>("projectId", () => solution.WithProjectName(null!, "x"));
-            Assert.Throws<InvalidOperationException>(() => solution.WithProjectName(ProjectId.CreateNewId(), "x"));
+            Assert.Throws<ArgumentNullException>(
+                "projectId",
+                () => solution.WithProjectName(null!, "x")
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => solution.WithProjectName(ProjectId.CreateNewId(), "x")
+            );
         }
 
         [Fact]
@@ -659,8 +1211,12 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var projectId = ProjectId.CreateNewId();
 
             using var workspace = CreateWorkspace();
-            var solution = workspace.CurrentSolution
-                            .AddProject(projectId, "proj1", "proj1.dll", LanguageNames.CSharp);
+            var solution = workspace.CurrentSolution.AddProject(
+                projectId,
+                "proj1",
+                "proj1.dll",
+                LanguageNames.CSharp
+            );
 
             // any character is allowed
             var path = "\0<>a/b/*.csproj";
@@ -670,10 +1226,16 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 (s, value) => s.WithProjectFilePath(projectId, value),
                 s => s.GetProject(projectId)!.FilePath,
                 (string?)path,
-                defaultThrows: false);
+                defaultThrows: false
+            );
 
-            Assert.Throws<ArgumentNullException>("projectId", () => solution.WithProjectFilePath(null!, "x"));
-            Assert.Throws<InvalidOperationException>(() => solution.WithProjectFilePath(ProjectId.CreateNewId(), "x"));
+            Assert.Throws<ArgumentNullException>(
+                "projectId",
+                () => solution.WithProjectFilePath(null!, "x")
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => solution.WithProjectFilePath(ProjectId.CreateNewId(), "x")
+            );
         }
 
         [Fact]
@@ -682,38 +1244,58 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var projectId = ProjectId.CreateNewId();
 
             using var workspace = CreateWorkspace();
-            var solution = workspace.CurrentSolution
-                            .AddProject(projectId, "proj1", "proj1.dll", LanguageNames.CSharp);
+            var solution = workspace.CurrentSolution.AddProject(
+                projectId,
+                "proj1",
+                "proj1.dll",
+                LanguageNames.CSharp
+            );
 
             var options = new CSharpCompilationOptions(OutputKind.NetModule);
 
-            Assert.Throws<ArgumentNullException>("projectId", () => solution.WithProjectCompilationOptions(null!, options));
-            Assert.Throws<InvalidOperationException>(() => solution.WithProjectCompilationOptions(ProjectId.CreateNewId(), options));
+            Assert.Throws<ArgumentNullException>(
+                "projectId",
+                () => solution.WithProjectCompilationOptions(null!, options)
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => solution.WithProjectCompilationOptions(ProjectId.CreateNewId(), options)
+            );
         }
 
         [Theory]
         [CombinatorialData]
-        public void WithProjectCompilationOptionsReplacesSyntaxTreeOptionProvider([CombinatorialValues(LanguageNames.CSharp, LanguageNames.VisualBasic)] string languageName)
+        public void WithProjectCompilationOptionsReplacesSyntaxTreeOptionProvider(
+            [CombinatorialValues(LanguageNames.CSharp, LanguageNames.VisualBasic)]
+                string languageName
+        )
         {
             var projectId = ProjectId.CreateNewId();
 
             using var workspace = CreateWorkspace();
 
-            var solution = workspace.CurrentSolution
-                .AddProject(projectId, "proj1", "proj1.dll", languageName);
+            var solution = workspace.CurrentSolution.AddProject(
+                projectId,
+                "proj1",
+                "proj1.dll",
+                languageName
+            );
 
             // We always have a non-null SyntaxTreeOptionsProvider for C# and VB projects
-            var originalSyntaxTreeOptionsProvider = solution.Projects.Single().CompilationOptions!.SyntaxTreeOptionsProvider;
+            var originalSyntaxTreeOptionsProvider =
+                solution.Projects.Single().CompilationOptions!.SyntaxTreeOptionsProvider;
             Assert.NotNull(originalSyntaxTreeOptionsProvider);
 
-            var defaultOptions = solution.Projects.Single().LanguageServices.GetRequiredService<ICompilationFactoryService>().GetDefaultCompilationOptions();
+            var defaultOptions = solution.Projects.Single()
+                .LanguageServices.GetRequiredService<ICompilationFactoryService>()
+                .GetDefaultCompilationOptions();
             Assert.Null(defaultOptions.SyntaxTreeOptionsProvider);
 
             solution = solution.WithProjectCompilationOptions(projectId, defaultOptions);
 
             // The CompilationOptions we replaced with didn't have a SyntaxTreeOptionsProvider, but we would have placed it
             // back. The SyntaxTreeOptionsProvider should behave the same as the prior one and thus should be equal.
-            var newSyntaxTreeOptionsProvider = solution.Projects.Single().CompilationOptions!.SyntaxTreeOptionsProvider;
+            var newSyntaxTreeOptionsProvider =
+                solution.Projects.Single().CompilationOptions!.SyntaxTreeOptionsProvider;
             Assert.NotNull(newSyntaxTreeOptionsProvider);
             Assert.Equal(originalSyntaxTreeOptionsProvider, newSyntaxTreeOptionsProvider);
         }
@@ -724,8 +1306,12 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var projectId = ProjectId.CreateNewId();
 
             using var workspace = CreateWorkspace();
-            var solution = workspace.CurrentSolution
-                            .AddProject(projectId, "proj1", "proj1.dll", LanguageNames.CSharp);
+            var solution = workspace.CurrentSolution.AddProject(
+                projectId,
+                "proj1",
+                "proj1.dll",
+                LanguageNames.CSharp
+            );
 
             var options = new CSharpParseOptions(CS.LanguageVersion.CSharp1);
 
@@ -734,10 +1320,16 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 (s, value) => s.WithProjectParseOptions(projectId, value),
                 s => s.GetProject(projectId)!.ParseOptions!,
                 (ParseOptions)options,
-                defaultThrows: true);
+                defaultThrows: true
+            );
 
-            Assert.Throws<ArgumentNullException>("projectId", () => solution.WithProjectParseOptions(null!, options));
-            Assert.Throws<InvalidOperationException>(() => solution.WithProjectParseOptions(ProjectId.CreateNewId(), options));
+            Assert.Throws<ArgumentNullException>(
+                "projectId",
+                () => solution.WithProjectParseOptions(null!, options)
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => solution.WithProjectParseOptions(ProjectId.CreateNewId(), options)
+            );
         }
 
         [Fact]
@@ -751,26 +1343,47 @@ namespace Microsoft.CodeAnalysis.UnitTests
             solution = solution.AddProject(projectId2, "proj2", "proj2.dll", LanguageNames.CSharp);
             var projectRef = new ProjectReference(projectId2);
 
-            SolutionTestHelpers.TestListProperty(solution,
+            SolutionTestHelpers.TestListProperty(
+                solution,
                 (old, value) => old.WithProjectReferences(projectId, value),
                 opt => opt.GetProject(projectId)!.AllProjectReferences,
                 projectRef,
-                allowDuplicates: false);
+                allowDuplicates: false
+            );
 
-            var projectRefs = (IEnumerable<ProjectReference>)ImmutableArray.Create(
-                new ProjectReference(projectId2),
-                new ProjectReference(projectId2, ImmutableArray.Create("alias")),
-                new ProjectReference(projectId2, embedInteropTypes: true));
+            var projectRefs =
+                (IEnumerable<ProjectReference>)ImmutableArray.Create(
+                    new ProjectReference(projectId2),
+                    new ProjectReference(projectId2, ImmutableArray.Create("alias")),
+                    new ProjectReference(projectId2, embedInteropTypes: true)
+                );
 
             var solution2 = solution.WithProjectReferences(projectId, projectRefs);
             Assert.Same(projectRefs, solution2.GetProject(projectId)!.AllProjectReferences);
 
-            Assert.Throws<ArgumentNullException>("projectId", () => solution.WithProjectReferences(null!, new[] { projectRef }));
-            Assert.Throws<InvalidOperationException>(() => solution.WithProjectReferences(ProjectId.CreateNewId(), new[] { projectRef }));
+            Assert.Throws<ArgumentNullException>(
+                "projectId",
+                () => solution.WithProjectReferences(null!, new[] { projectRef })
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => solution.WithProjectReferences(ProjectId.CreateNewId(), new[] { projectRef })
+            );
 
             // cycles:
-            Assert.Throws<InvalidOperationException>(() => solution2.WithProjectReferences(projectId2, new[] { new ProjectReference(projectId) }));
-            Assert.Throws<InvalidOperationException>(() => solution.WithProjectReferences(projectId, new[] { new ProjectReference(projectId) }));
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    solution2.WithProjectReferences(
+                        projectId2,
+                        new[] { new ProjectReference(projectId) }
+                    )
+            );
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    solution.WithProjectReferences(
+                        projectId,
+                        new[] { new ProjectReference(projectId) }
+                    )
+            );
         }
 
         [Fact]
@@ -782,7 +1395,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var projectId = solution.Projects.Single().Id;
             var externalProjectRef = new ProjectReference(ProjectId.CreateNewId());
 
-            var projectRefs = (IEnumerable<ProjectReference>)ImmutableArray.Create(externalProjectRef);
+            var projectRefs =
+                (IEnumerable<ProjectReference>)ImmutableArray.Create(externalProjectRef);
             var newSolution1 = solution.WithProjectReferences(projectId, projectRefs);
             Assert.Same(projectRefs, newSolution1.GetProject(projectId)!.AllProjectReferences);
 
@@ -799,8 +1413,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var projectId2 = ProjectId.CreateNewId();
             var projectId3 = ProjectId.CreateNewId();
 
-            solution = solution
-                .AddProject(projectId2, "proj2", "proj2.dll", LanguageNames.CSharp)
+            solution = solution.AddProject(projectId2, "proj2", "proj2.dll", LanguageNames.CSharp)
                 .AddProject(projectId3, "proj3", "proj3.dll", LanguageNames.CSharp);
 
             var projectRef2 = new ProjectReference(projectId2);
@@ -809,27 +1422,65 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             solution = solution.AddProjectReference(projectId3, projectRef2);
 
-            var solution2 = solution.AddProjectReferences(projectId, EmptyEnumerable<ProjectReference>());
+            var solution2 = solution.AddProjectReferences(
+                projectId,
+                EmptyEnumerable<ProjectReference>()
+            );
             Assert.Same(solution, solution2);
 
             var e = OnceEnumerable(projectRef2, externalProjectRef);
 
             var solution3 = solution.AddProjectReferences(projectId, e);
-            AssertEx.Equal(new[] { projectRef2 }, solution3.GetProject(projectId)!.ProjectReferences);
-            AssertEx.Equal(new[] { projectRef2, externalProjectRef }, solution3.GetProject(projectId)!.AllProjectReferences);
+            AssertEx.Equal(
+                new[] { projectRef2 },
+                solution3.GetProject(projectId)!.ProjectReferences
+            );
+            AssertEx.Equal(
+                new[] { projectRef2, externalProjectRef },
+                solution3.GetProject(projectId)!.AllProjectReferences
+            );
 
-            Assert.Throws<ArgumentNullException>("projectId", () => solution.AddProjectReferences(null!, new[] { projectRef2 }));
-            Assert.Throws<ArgumentNullException>("projectReferences", () => solution.AddProjectReferences(projectId, null!));
-            Assert.Throws<ArgumentNullException>("projectReferences[0]", () => solution.AddProjectReferences(projectId, new ProjectReference[] { null! }));
-            Assert.Throws<ArgumentException>("projectReferences[1]", () => solution.AddProjectReferences(projectId, new[] { projectRef2, projectRef2 }));
-            Assert.Throws<ArgumentException>("projectReferences[1]", () => solution.AddProjectReferences(projectId, new[] { new ProjectReference(projectId2), new ProjectReference(projectId2) }));
+            Assert.Throws<ArgumentNullException>(
+                "projectId",
+                () => solution.AddProjectReferences(null!, new[] { projectRef2 })
+            );
+            Assert.Throws<ArgumentNullException>(
+                "projectReferences",
+                () => solution.AddProjectReferences(projectId, null!)
+            );
+            Assert.Throws<ArgumentNullException>(
+                "projectReferences[0]",
+                () => solution.AddProjectReferences(projectId, new ProjectReference[] { null! })
+            );
+            Assert.Throws<ArgumentException>(
+                "projectReferences[1]",
+                () => solution.AddProjectReferences(projectId, new[] { projectRef2, projectRef2 })
+            );
+            Assert.Throws<ArgumentException>(
+                "projectReferences[1]",
+                () =>
+                    solution.AddProjectReferences(
+                        projectId,
+                        new[] { new ProjectReference(projectId2), new ProjectReference(projectId2) }
+                    )
+            );
 
             // dup:
-            Assert.Throws<InvalidOperationException>(() => solution.AddProjectReferences(projectId3, new[] { projectRef2 }));
+            Assert.Throws<InvalidOperationException>(
+                () => solution.AddProjectReferences(projectId3, new[] { projectRef2 })
+            );
 
             // cycles:
-            Assert.Throws<InvalidOperationException>(() => solution3.AddProjectReferences(projectId2, new[] { projectRef3 }));
-            Assert.Throws<InvalidOperationException>(() => solution3.AddProjectReferences(projectId, new[] { new ProjectReference(projectId) }));
+            Assert.Throws<InvalidOperationException>(
+                () => solution3.AddProjectReferences(projectId2, new[] { projectRef3 })
+            );
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    solution3.AddProjectReferences(
+                        projectId,
+                        new[] { new ProjectReference(projectId) }
+                    )
+            );
         }
 
         [Fact]
@@ -844,27 +1495,51 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var projectRef2 = new ProjectReference(projectId2);
             var externalProjectRef = new ProjectReference(ProjectId.CreateNewId());
 
-            solution = solution.WithProjectReferences(projectId, new[] { projectRef2, externalProjectRef });
+            solution = solution.WithProjectReferences(
+                projectId,
+                new[] { projectRef2, externalProjectRef }
+            );
 
             // remove reference to a project that's not part of the solution:
             var solution2 = solution.RemoveProjectReference(projectId, externalProjectRef);
-            AssertEx.Equal(new[] { projectRef2 }, solution2.GetProject(projectId)!.AllProjectReferences);
+            AssertEx.Equal(
+                new[] { projectRef2 },
+                solution2.GetProject(projectId)!.AllProjectReferences
+            );
 
             // remove reference to a project that's part of the solution:
             var solution3 = solution.RemoveProjectReference(projectId, projectRef2);
-            AssertEx.Equal(new[] { externalProjectRef }, solution3.GetProject(projectId)!.AllProjectReferences);
+            AssertEx.Equal(
+                new[] { externalProjectRef },
+                solution3.GetProject(projectId)!.AllProjectReferences
+            );
 
             var solution4 = solution3.RemoveProjectReference(projectId, externalProjectRef);
             Assert.Empty(solution4.GetProject(projectId)!.AllProjectReferences);
 
-            Assert.Throws<ArgumentNullException>("projectId", () => solution.RemoveProjectReference(null!, projectRef2));
-            Assert.Throws<ArgumentNullException>("projectReference", () => solution.RemoveProjectReference(projectId, null!));
+            Assert.Throws<ArgumentNullException>(
+                "projectId",
+                () => solution.RemoveProjectReference(null!, projectRef2)
+            );
+            Assert.Throws<ArgumentNullException>(
+                "projectReference",
+                () => solution.RemoveProjectReference(projectId, null!)
+            );
 
             // removing a reference that's not in the list:
-            Assert.Throws<ArgumentException>("projectReference", () => solution.RemoveProjectReference(projectId, new ProjectReference(ProjectId.CreateNewId())));
+            Assert.Throws<ArgumentException>(
+                "projectReference",
+                () =>
+                    solution.RemoveProjectReference(
+                        projectId,
+                        new ProjectReference(ProjectId.CreateNewId())
+                    )
+            );
 
             // project not in solution:
-            Assert.Throws<InvalidOperationException>(() => solution.RemoveProjectReference(ProjectId.CreateNewId(), projectRef2));
+            Assert.Throws<InvalidOperationException>(
+                () => solution.RemoveProjectReference(ProjectId.CreateNewId(), projectRef2)
+            );
         }
 
         [Fact]
@@ -878,29 +1553,103 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var submissionId2 = ProjectId.CreateNewId();
             var submissionId3 = ProjectId.CreateNewId();
 
-            solution = solution
-                .AddProject(projectId0, "non-submission", "non-submission.dll", LanguageNames.CSharp)
-                .AddProject(ProjectInfo.Create(submissionId1, VersionStamp.Default, name: "submission1", assemblyName: "submission1.dll", LanguageNames.CSharp, isSubmission: true))
-                .AddProject(ProjectInfo.Create(submissionId2, VersionStamp.Default, name: "submission2", assemblyName: "submission2.dll", LanguageNames.CSharp, isSubmission: true))
-                .AddProject(ProjectInfo.Create(submissionId3, VersionStamp.Default, name: "submission3", assemblyName: "submission3.dll", LanguageNames.CSharp, isSubmission: true))
+            solution = solution.AddProject(
+                    projectId0,
+                    "non-submission",
+                    "non-submission.dll",
+                    LanguageNames.CSharp
+                )
+                .AddProject(
+                    ProjectInfo.Create(
+                        submissionId1,
+                        VersionStamp.Default,
+                        name: "submission1",
+                        assemblyName: "submission1.dll",
+                        LanguageNames.CSharp,
+                        isSubmission: true
+                    )
+                )
+                .AddProject(
+                    ProjectInfo.Create(
+                        submissionId2,
+                        VersionStamp.Default,
+                        name: "submission2",
+                        assemblyName: "submission2.dll",
+                        LanguageNames.CSharp,
+                        isSubmission: true
+                    )
+                )
+                .AddProject(
+                    ProjectInfo.Create(
+                        submissionId3,
+                        VersionStamp.Default,
+                        name: "submission3",
+                        assemblyName: "submission3.dll",
+                        LanguageNames.CSharp,
+                        isSubmission: true
+                    )
+                )
                 .AddProjectReference(submissionId2, new ProjectReference(submissionId1))
-                .WithProjectReferences(submissionId2, new[] { new ProjectReference(submissionId1) });
+                .WithProjectReferences(
+                    submissionId2,
+                    new[] { new ProjectReference(submissionId1) }
+                );
 
             // submission may be referenced from multiple submissions (forming a tree):
-            _ = solution.AddProjectReferences(submissionId3, new[] { new ProjectReference(submissionId1) });
-            _ = solution.WithProjectReferences(submissionId3, new[] { new ProjectReference(submissionId1) });
+            _ = solution.AddProjectReferences(
+                submissionId3,
+                new[] { new ProjectReference(submissionId1) }
+            );
+            _ = solution.WithProjectReferences(
+                submissionId3,
+                new[] { new ProjectReference(submissionId1) }
+            );
 
             // submission may reference a non-submission project:
-            _ = solution.AddProjectReferences(submissionId3, new[] { new ProjectReference(projectId0) });
-            _ = solution.WithProjectReferences(submissionId3, new[] { new ProjectReference(projectId0) });
+            _ = solution.AddProjectReferences(
+                submissionId3,
+                new[] { new ProjectReference(projectId0) }
+            );
+            _ = solution.WithProjectReferences(
+                submissionId3,
+                new[] { new ProjectReference(projectId0) }
+            );
 
             // submission can't reference multiple submissions:
-            Assert.Throws<InvalidOperationException>(() => solution.AddProjectReferences(submissionId2, new[] { new ProjectReference(submissionId3) }));
-            Assert.Throws<InvalidOperationException>(() => solution.WithProjectReferences(submissionId1, new[] { new ProjectReference(submissionId2), new ProjectReference(submissionId3) }));
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    solution.AddProjectReferences(
+                        submissionId2,
+                        new[] { new ProjectReference(submissionId3) }
+                    )
+            );
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    solution.WithProjectReferences(
+                        submissionId1,
+                        new[]
+                        {
+                            new ProjectReference(submissionId2),
+                            new ProjectReference(submissionId3)
+                        }
+                    )
+            );
 
             // non-submission project can't reference a submission:
-            Assert.Throws<InvalidOperationException>(() => solution.AddProjectReferences(projectId0, new[] { new ProjectReference(submissionId1) }));
-            Assert.Throws<InvalidOperationException>(() => solution.WithProjectReferences(projectId0, new[] { new ProjectReference(submissionId1) }));
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    solution.AddProjectReferences(
+                        projectId0,
+                        new[] { new ProjectReference(submissionId1) }
+                    )
+            );
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    solution.WithProjectReferences(
+                        projectId0,
+                        new[] { new ProjectReference(submissionId1) }
+                    )
+            );
         }
 
         [Fact]
@@ -911,14 +1660,25 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var projectId = solution.Projects.Single().Id;
             var metadataRef = (MetadataReference)new TestMetadataReference();
 
-            SolutionTestHelpers.TestListProperty(solution,
+            SolutionTestHelpers.TestListProperty(
+                solution,
                 (old, value) => old.WithProjectMetadataReferences(projectId, value),
                 opt => opt.GetProject(projectId)!.MetadataReferences,
                 metadataRef,
-                allowDuplicates: false);
+                allowDuplicates: false
+            );
 
-            Assert.Throws<ArgumentNullException>("projectId", () => solution.WithProjectMetadataReferences(null!, new[] { metadataRef }));
-            Assert.Throws<InvalidOperationException>(() => solution.WithProjectMetadataReferences(ProjectId.CreateNewId(), new[] { metadataRef }));
+            Assert.Throws<ArgumentNullException>(
+                "projectId",
+                () => solution.WithProjectMetadataReferences(null!, new[] { metadataRef })
+            );
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    solution.WithProjectMetadataReferences(
+                        ProjectId.CreateNewId(),
+                        new[] { metadataRef }
+                    )
+            );
         }
 
         [Fact]
@@ -928,22 +1688,46 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var solution = workspace.CurrentSolution;
             var projectId = solution.Projects.Single().Id;
 
-            var solution2 = solution.AddMetadataReferences(projectId, EmptyEnumerable<MetadataReference>());
+            var solution2 = solution.AddMetadataReferences(
+                projectId,
+                EmptyEnumerable<MetadataReference>()
+            );
             Assert.Same(solution, solution2);
 
             var metadataRef1 = new TestMetadataReference();
             var metadataRef2 = new TestMetadataReference();
 
-            var solution3 = solution.AddMetadataReferences(projectId, OnceEnumerable(metadataRef1, metadataRef2));
-            AssertEx.Equal(new[] { metadataRef1, metadataRef2 }, solution3.GetProject(projectId)!.MetadataReferences);
+            var solution3 = solution.AddMetadataReferences(
+                projectId,
+                OnceEnumerable(metadataRef1, metadataRef2)
+            );
+            AssertEx.Equal(
+                new[] { metadataRef1, metadataRef2 },
+                solution3.GetProject(projectId)!.MetadataReferences
+            );
 
-            Assert.Throws<ArgumentNullException>("projectId", () => solution.AddMetadataReferences(null!, new[] { metadataRef1 }));
-            Assert.Throws<ArgumentNullException>("metadataReferences", () => solution.AddMetadataReferences(projectId, null!));
-            Assert.Throws<ArgumentNullException>("metadataReferences[0]", () => solution.AddMetadataReferences(projectId, new MetadataReference[] { null! }));
-            Assert.Throws<ArgumentException>("metadataReferences[1]", () => solution.AddMetadataReferences(projectId, new[] { metadataRef1, metadataRef1 }));
+            Assert.Throws<ArgumentNullException>(
+                "projectId",
+                () => solution.AddMetadataReferences(null!, new[] { metadataRef1 })
+            );
+            Assert.Throws<ArgumentNullException>(
+                "metadataReferences",
+                () => solution.AddMetadataReferences(projectId, null!)
+            );
+            Assert.Throws<ArgumentNullException>(
+                "metadataReferences[0]",
+                () => solution.AddMetadataReferences(projectId, new MetadataReference[] { null! })
+            );
+            Assert.Throws<ArgumentException>(
+                "metadataReferences[1]",
+                () =>
+                    solution.AddMetadataReferences(projectId, new[] { metadataRef1, metadataRef1 })
+            );
 
             // dup:
-            Assert.Throws<InvalidOperationException>(() => solution3.AddMetadataReferences(projectId, new[] { metadataRef1 }));
+            Assert.Throws<InvalidOperationException>(
+                () => solution3.AddMetadataReferences(projectId, new[] { metadataRef1 })
+            );
         }
 
         [Fact]
@@ -955,22 +1739,38 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var metadataRef1 = new TestMetadataReference();
             var metadataRef2 = new TestMetadataReference();
 
-            solution = solution.WithProjectMetadataReferences(projectId, new[] { metadataRef1, metadataRef2 });
+            solution = solution.WithProjectMetadataReferences(
+                projectId,
+                new[] { metadataRef1, metadataRef2 }
+            );
 
             var solution2 = solution.RemoveMetadataReference(projectId, metadataRef1);
-            AssertEx.Equal(new[] { metadataRef2 }, solution2.GetProject(projectId)!.MetadataReferences);
+            AssertEx.Equal(
+                new[] { metadataRef2 },
+                solution2.GetProject(projectId)!.MetadataReferences
+            );
 
             var solution3 = solution2.RemoveMetadataReference(projectId, metadataRef2);
             Assert.Empty(solution3.GetProject(projectId)!.MetadataReferences);
 
-            Assert.Throws<ArgumentNullException>("projectId", () => solution.RemoveMetadataReference(null!, metadataRef1));
-            Assert.Throws<ArgumentNullException>("metadataReference", () => solution.RemoveMetadataReference(projectId, null!));
+            Assert.Throws<ArgumentNullException>(
+                "projectId",
+                () => solution.RemoveMetadataReference(null!, metadataRef1)
+            );
+            Assert.Throws<ArgumentNullException>(
+                "metadataReference",
+                () => solution.RemoveMetadataReference(projectId, null!)
+            );
 
             // removing a reference that's not in the list:
-            Assert.Throws<InvalidOperationException>(() => solution.RemoveMetadataReference(projectId, new TestMetadataReference()));
+            Assert.Throws<InvalidOperationException>(
+                () => solution.RemoveMetadataReference(projectId, new TestMetadataReference())
+            );
 
             // project not in solution:
-            Assert.Throws<InvalidOperationException>(() => solution.RemoveMetadataReference(ProjectId.CreateNewId(), metadataRef1));
+            Assert.Throws<InvalidOperationException>(
+                () => solution.RemoveMetadataReference(ProjectId.CreateNewId(), metadataRef1)
+            );
         }
 
         [Fact]
@@ -981,14 +1781,25 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var projectId = solution.Projects.Single().Id;
             var analyzerRef = (AnalyzerReference)new TestAnalyzerReference();
 
-            SolutionTestHelpers.TestListProperty(solution,
+            SolutionTestHelpers.TestListProperty(
+                solution,
                 (old, value) => old.WithProjectAnalyzerReferences(projectId, value),
                 opt => opt.GetProject(projectId)!.AnalyzerReferences,
                 analyzerRef,
-                allowDuplicates: false);
+                allowDuplicates: false
+            );
 
-            Assert.Throws<ArgumentNullException>("projectId", () => solution.WithProjectAnalyzerReferences(null!, new[] { analyzerRef }));
-            Assert.Throws<InvalidOperationException>(() => solution.WithProjectAnalyzerReferences(ProjectId.CreateNewId(), new[] { analyzerRef }));
+            Assert.Throws<ArgumentNullException>(
+                "projectId",
+                () => solution.WithProjectAnalyzerReferences(null!, new[] { analyzerRef })
+            );
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    solution.WithProjectAnalyzerReferences(
+                        ProjectId.CreateNewId(),
+                        new[] { analyzerRef }
+                    )
+            );
         }
 
         [Fact]
@@ -998,25 +1809,49 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var solution = workspace.CurrentSolution;
             var projectId = solution.Projects.Single().Id;
 
-            var solution2 = solution.AddAnalyzerReferences(projectId, EmptyEnumerable<AnalyzerReference>());
+            var solution2 = solution.AddAnalyzerReferences(
+                projectId,
+                EmptyEnumerable<AnalyzerReference>()
+            );
             Assert.Same(solution, solution2);
 
             var analyzerRef1 = new TestAnalyzerReference();
             var analyzerRef2 = new TestAnalyzerReference();
 
-            var solution3 = solution.AddAnalyzerReferences(projectId, OnceEnumerable(analyzerRef1, analyzerRef2));
-            AssertEx.Equal(new[] { analyzerRef1, analyzerRef2 }, solution3.GetProject(projectId)!.AnalyzerReferences);
+            var solution3 = solution.AddAnalyzerReferences(
+                projectId,
+                OnceEnumerable(analyzerRef1, analyzerRef2)
+            );
+            AssertEx.Equal(
+                new[] { analyzerRef1, analyzerRef2 },
+                solution3.GetProject(projectId)!.AnalyzerReferences
+            );
 
             var solution4 = solution3.AddAnalyzerReferences(projectId, new AnalyzerReference[0]);
 
             Assert.Same(solution, solution2);
-            Assert.Throws<ArgumentNullException>("projectId", () => solution.AddAnalyzerReferences(null!, new[] { analyzerRef1 }));
-            Assert.Throws<ArgumentNullException>("analyzerReferences", () => solution.AddAnalyzerReferences(projectId, null!));
-            Assert.Throws<ArgumentNullException>("analyzerReferences[0]", () => solution.AddAnalyzerReferences(projectId, new AnalyzerReference[] { null! }));
-            Assert.Throws<ArgumentException>("analyzerReferences[1]", () => solution.AddAnalyzerReferences(projectId, new[] { analyzerRef1, analyzerRef1 }));
+            Assert.Throws<ArgumentNullException>(
+                "projectId",
+                () => solution.AddAnalyzerReferences(null!, new[] { analyzerRef1 })
+            );
+            Assert.Throws<ArgumentNullException>(
+                "analyzerReferences",
+                () => solution.AddAnalyzerReferences(projectId, null!)
+            );
+            Assert.Throws<ArgumentNullException>(
+                "analyzerReferences[0]",
+                () => solution.AddAnalyzerReferences(projectId, new AnalyzerReference[] { null! })
+            );
+            Assert.Throws<ArgumentException>(
+                "analyzerReferences[1]",
+                () =>
+                    solution.AddAnalyzerReferences(projectId, new[] { analyzerRef1, analyzerRef1 })
+            );
 
             // dup:
-            Assert.Throws<InvalidOperationException>(() => solution3.AddAnalyzerReferences(projectId, new[] { analyzerRef1 }));
+            Assert.Throws<InvalidOperationException>(
+                () => solution3.AddAnalyzerReferences(projectId, new[] { analyzerRef1 })
+            );
         }
 
         [Fact]
@@ -1028,22 +1863,38 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var analyzerRef1 = new TestAnalyzerReference();
             var analyzerRef2 = new TestAnalyzerReference();
 
-            solution = solution.WithProjectAnalyzerReferences(projectId, new[] { analyzerRef1, analyzerRef2 });
+            solution = solution.WithProjectAnalyzerReferences(
+                projectId,
+                new[] { analyzerRef1, analyzerRef2 }
+            );
 
             var solution2 = solution.RemoveAnalyzerReference(projectId, analyzerRef1);
-            AssertEx.Equal(new[] { analyzerRef2 }, solution2.GetProject(projectId)!.AnalyzerReferences);
+            AssertEx.Equal(
+                new[] { analyzerRef2 },
+                solution2.GetProject(projectId)!.AnalyzerReferences
+            );
 
             var solution3 = solution2.RemoveAnalyzerReference(projectId, analyzerRef2);
             Assert.Empty(solution3.GetProject(projectId)!.AnalyzerReferences);
 
-            Assert.Throws<ArgumentNullException>("projectId", () => solution.RemoveAnalyzerReference(null!, analyzerRef1));
-            Assert.Throws<ArgumentNullException>("analyzerReference", () => solution.RemoveAnalyzerReference(projectId, null!));
+            Assert.Throws<ArgumentNullException>(
+                "projectId",
+                () => solution.RemoveAnalyzerReference(null!, analyzerRef1)
+            );
+            Assert.Throws<ArgumentNullException>(
+                "analyzerReference",
+                () => solution.RemoveAnalyzerReference(projectId, null!)
+            );
 
             // removing a reference that's not in the list:
-            Assert.Throws<InvalidOperationException>(() => solution.RemoveAnalyzerReference(projectId, new TestAnalyzerReference()));
+            Assert.Throws<InvalidOperationException>(
+                () => solution.RemoveAnalyzerReference(projectId, new TestAnalyzerReference())
+            );
 
             // project not in solution:
-            Assert.Throws<InvalidOperationException>(() => solution.RemoveAnalyzerReference(ProjectId.CreateNewId(), analyzerRef1));
+            Assert.Throws<InvalidOperationException>(
+                () => solution.RemoveAnalyzerReference(ProjectId.CreateNewId(), analyzerRef1)
+            );
         }
 
         [Fact]
@@ -1053,11 +1904,13 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var solution = workspace.CurrentSolution;
             var analyzerRef = (AnalyzerReference)new TestAnalyzerReference();
 
-            SolutionTestHelpers.TestListProperty(solution,
+            SolutionTestHelpers.TestListProperty(
+                solution,
                 (old, value) => old.WithAnalyzerReferences(value),
                 opt => opt.AnalyzerReferences,
                 analyzerRef,
-                allowDuplicates: false);
+                allowDuplicates: false
+            );
         }
 
         [Fact]
@@ -1072,18 +1925,31 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var analyzerRef1 = new TestAnalyzerReference();
             var analyzerRef2 = new TestAnalyzerReference();
 
-            var solution3 = solution.AddAnalyzerReferences(OnceEnumerable(analyzerRef1, analyzerRef2));
+            var solution3 = solution.AddAnalyzerReferences(
+                OnceEnumerable(analyzerRef1, analyzerRef2)
+            );
             AssertEx.Equal(new[] { analyzerRef1, analyzerRef2 }, solution3.AnalyzerReferences);
 
             var solution4 = solution3.AddAnalyzerReferences(new AnalyzerReference[0]);
 
             Assert.Same(solution, solution2);
-            Assert.Throws<ArgumentNullException>("analyzerReferences", () => solution.AddAnalyzerReferences(null!));
-            Assert.Throws<ArgumentNullException>("analyzerReferences[0]", () => solution.AddAnalyzerReferences(new AnalyzerReference[] { null! }));
-            Assert.Throws<ArgumentException>("analyzerReferences[1]", () => solution.AddAnalyzerReferences(new[] { analyzerRef1, analyzerRef1 }));
+            Assert.Throws<ArgumentNullException>(
+                "analyzerReferences",
+                () => solution.AddAnalyzerReferences(null!)
+            );
+            Assert.Throws<ArgumentNullException>(
+                "analyzerReferences[0]",
+                () => solution.AddAnalyzerReferences(new AnalyzerReference[] { null! })
+            );
+            Assert.Throws<ArgumentException>(
+                "analyzerReferences[1]",
+                () => solution.AddAnalyzerReferences(new[] { analyzerRef1, analyzerRef1 })
+            );
 
             // dup:
-            Assert.Throws<InvalidOperationException>(() => solution3.AddAnalyzerReferences(new[] { analyzerRef1 }));
+            Assert.Throws<InvalidOperationException>(
+                () => solution3.AddAnalyzerReferences(new[] { analyzerRef1 })
+            );
         }
 
         [Fact]
@@ -1102,10 +1968,15 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var solution3 = solution2.RemoveAnalyzerReference(analyzerRef2);
             Assert.Empty(solution3.AnalyzerReferences);
 
-            Assert.Throws<ArgumentNullException>("analyzerReference", () => solution.RemoveAnalyzerReference(null!));
+            Assert.Throws<ArgumentNullException>(
+                "analyzerReference",
+                () => solution.RemoveAnalyzerReference(null!)
+            );
 
             // removing a reference that's not in the list:
-            Assert.Throws<InvalidOperationException>(() => solution.RemoveAnalyzerReference(new TestAnalyzerReference()));
+            Assert.Throws<InvalidOperationException>(
+                () => solution.RemoveAnalyzerReference(new TestAnalyzerReference())
+            );
         }
 
 #nullable disable
@@ -1154,20 +2025,30 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var did = DocumentId.CreateNewId(pid);
 
             using var workspace = CreateWorkspace();
-            var solution = workspace.CurrentSolution
-                .AddProject(pid, "goo", "goo.dll", LanguageNames.CSharp)
+            var solution = workspace.CurrentSolution.AddProject(
+                    pid,
+                    "goo",
+                    "goo.dll",
+                    LanguageNames.CSharp
+                )
                 .AddDocument(did, "goo.cs", "public class Goo { }");
 
             // verify project & document
             Assert.NotNull(pid);
             var project = solution.GetProject(pid);
             Assert.NotNull(project);
-            Assert.True(solution.ContainsProject(pid), "Solution was expected to have project " + pid);
+            Assert.True(
+                solution.ContainsProject(pid),
+                "Solution was expected to have project " + pid
+            );
             Assert.True(project.HasDocuments, "Project was expected to have documents");
             Assert.Equal(project, solution.GetProject(pid));
             Assert.NotNull(did);
             var document = solution.GetDocument(did);
-            Assert.True(project.ContainsDocument(did), "Project was expected to have document " + did);
+            Assert.True(
+                project.ContainsDocument(did),
+                "Project was expected to have document " + did
+            );
             Assert.Equal(document, project.GetDocument(did));
             Assert.Equal(document, solution.GetDocument(did));
             var semantics = await document.GetSemanticModelAsync();
@@ -1184,7 +2065,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
             Assert.NotNull(project2);
             Assert.NotNull(did2);
             var document2 = solution.GetDocument(did2);
-            Assert.True(project2.ContainsDocument(did2), "Project was expected to have document " + did2);
+            Assert.True(
+                project2.ContainsDocument(did2),
+                "Project was expected to have document " + did2
+            );
             Assert.Equal(document2, project2.GetDocument(did2));
             Assert.Equal(document2, solution.GetDocument(did2));
 
@@ -1200,9 +2084,13 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var documentInfo2 = DocumentInfo.Create(DocumentId.CreateNewId(projectId), "file2.cs");
 
             using var workspace = CreateWorkspace();
-            var solution = workspace.CurrentSolution
-                            .AddProject(projectId, "goo", "goo.dll", LanguageNames.CSharp)
-                            .AddDocuments(ImmutableArray.Create(documentInfo1, documentInfo2));
+            var solution = workspace.CurrentSolution.AddProject(
+                    projectId,
+                    "goo",
+                    "goo.dll",
+                    LanguageNames.CSharp
+                )
+                .AddDocuments(ImmutableArray.Create(documentInfo1, documentInfo2));
 
             var project = Assert.Single(solution.Projects);
 
@@ -1224,10 +2112,14 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var documentInfo2 = DocumentInfo.Create(DocumentId.CreateNewId(projectId2), "file2.cs");
 
             using var workspace = CreateWorkspace();
-            var solution = workspace.CurrentSolution
-                            .AddProject(projectId1, "project1", "project1.dll", LanguageNames.CSharp)
-                            .AddProject(projectId2, "project2", "project2.dll", LanguageNames.CSharp)
-                            .AddDocuments(ImmutableArray.Create(documentInfo1, documentInfo2));
+            var solution = workspace.CurrentSolution.AddProject(
+                    projectId1,
+                    "project1",
+                    "project1.dll",
+                    LanguageNames.CSharp
+                )
+                .AddProject(projectId2, "project2", "project2.dll", LanguageNames.CSharp)
+                .AddDocuments(ImmutableArray.Create(documentInfo1, documentInfo2));
 
             var project1 = solution.GetProject(projectId1);
             var project2 = solution.GetProject(projectId2);
@@ -1252,10 +2144,16 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             // We're only adding the first project, but not the second one
             using var workspace = CreateWorkspace();
-            var solution = workspace.CurrentSolution
-                            .AddProject(projectId1, "project1", "project1.dll", LanguageNames.CSharp);
+            var solution = workspace.CurrentSolution.AddProject(
+                projectId1,
+                "project1",
+                "project1.dll",
+                LanguageNames.CSharp
+            );
 
-            Assert.ThrowsAny<InvalidOperationException>(() => solution.AddDocuments(ImmutableArray.Create(documentInfo1, documentInfo2)));
+            Assert.ThrowsAny<InvalidOperationException>(
+                () => solution.AddDocuments(ImmutableArray.Create(documentInfo1, documentInfo2))
+            );
         }
 
         [Fact]
@@ -1276,11 +2174,17 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var documentInfo2 = DocumentInfo.Create(DocumentId.CreateNewId(projectId), "file2.cs");
 
             using var workspace = CreateWorkspace();
-            var solution = workspace.CurrentSolution
-                            .AddProject(projectId, "project1", "project1.dll", LanguageNames.CSharp)
-                            .AddDocuments(ImmutableArray.Create(documentInfo1, documentInfo2));
+            var solution = workspace.CurrentSolution.AddProject(
+                    projectId,
+                    "project1",
+                    "project1.dll",
+                    LanguageNames.CSharp
+                )
+                .AddDocuments(ImmutableArray.Create(documentInfo1, documentInfo2));
 
-            solution = solution.RemoveDocuments(ImmutableArray.Create(documentInfo1.Id, documentInfo2.Id));
+            solution = solution.RemoveDocuments(
+                ImmutableArray.Create(documentInfo1.Id, documentInfo2.Id)
+            );
 
             var finalProject = solution.Projects.Single();
             Assert.Empty(finalProject.Documents);
@@ -1297,14 +2201,20 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var documentInfo2 = DocumentInfo.Create(DocumentId.CreateNewId(projectId2), "file2.cs");
 
             using var workspace = CreateWorkspace();
-            var solution = workspace.CurrentSolution
-                            .AddProject(projectId1, "project1", "project1.dll", LanguageNames.CSharp)
-                            .AddProject(projectId2, "project2", "project2.dll", LanguageNames.CSharp)
-                            .AddDocuments(ImmutableArray.Create(documentInfo1, documentInfo2));
+            var solution = workspace.CurrentSolution.AddProject(
+                    projectId1,
+                    "project1",
+                    "project1.dll",
+                    LanguageNames.CSharp
+                )
+                .AddProject(projectId2, "project2", "project2.dll", LanguageNames.CSharp)
+                .AddDocuments(ImmutableArray.Create(documentInfo1, documentInfo2));
 
             Assert.All(solution.Projects, p => Assert.Single(p.Documents));
 
-            solution = solution.RemoveDocuments(ImmutableArray.Create(documentInfo1.Id, documentInfo2.Id));
+            solution = solution.RemoveDocuments(
+                ImmutableArray.Create(documentInfo1.Id, documentInfo2.Id)
+            );
 
             Assert.All(solution.Projects, p => Assert.Empty(p.Documents));
         }
@@ -1318,14 +2228,22 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var documentInfo1 = DocumentInfo.Create(DocumentId.CreateNewId(projectId1), "file1.cs");
 
             using var workspace = CreateWorkspace();
-            var solution = workspace.CurrentSolution
-                            .AddProject(projectId1, "project1", "project1.dll", LanguageNames.CSharp)
-                            .AddProject(projectId2, "project2", "project2.dll", LanguageNames.CSharp)
-                            .AddDocument(documentInfo1);
+            var solution = workspace.CurrentSolution.AddProject(
+                    projectId1,
+                    "project1",
+                    "project1.dll",
+                    LanguageNames.CSharp
+                )
+                .AddProject(projectId2, "project2", "project2.dll", LanguageNames.CSharp)
+                .AddDocument(documentInfo1);
 
             // This should throw if we're removing one document from the wrong project. Right now we don't test the RemoveDocument
             // API due to https://github.com/dotnet/roslyn/issues/41211.
-            Assert.Throws<ArgumentException>(() => solution.GetProject(projectId2).RemoveDocuments(ImmutableArray.Create(documentInfo1.Id)));
+            Assert.Throws<ArgumentException>(
+                () =>
+                    solution.GetProject(projectId2)
+                        .RemoveDocuments(ImmutableArray.Create(documentInfo1.Id))
+            );
         }
 
         [Fact]
@@ -1334,17 +2252,28 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var projectId1 = ProjectId.CreateNewId();
             var projectId2 = ProjectId.CreateNewId();
 
-            var documentInfo1 = DocumentInfo.Create(DocumentId.CreateNewId(projectId1), "file1.txt");
+            var documentInfo1 = DocumentInfo.Create(
+                DocumentId.CreateNewId(projectId1),
+                "file1.txt"
+            );
 
             using var workspace = CreateWorkspace();
-            var solution = workspace.CurrentSolution
-                            .AddProject(projectId1, "project1", "project1.dll", LanguageNames.CSharp)
-                            .AddProject(projectId2, "project2", "project2.dll", LanguageNames.CSharp)
-                            .AddAdditionalDocument(documentInfo1);
+            var solution = workspace.CurrentSolution.AddProject(
+                    projectId1,
+                    "project1",
+                    "project1.dll",
+                    LanguageNames.CSharp
+                )
+                .AddProject(projectId2, "project2", "project2.dll", LanguageNames.CSharp)
+                .AddAdditionalDocument(documentInfo1);
 
             // This should throw if we're removing one document from the wrong project. Right now we don't test the RemoveAdditionalDocument
             // API due to https://github.com/dotnet/roslyn/issues/41211.
-            Assert.Throws<ArgumentException>(() => solution.GetProject(projectId2).RemoveAdditionalDocuments(ImmutableArray.Create(documentInfo1.Id)));
+            Assert.Throws<ArgumentException>(
+                () =>
+                    solution.GetProject(projectId2)
+                        .RemoveAdditionalDocuments(ImmutableArray.Create(documentInfo1.Id))
+            );
         }
 
         [Fact]
@@ -1353,17 +2282,28 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var projectId1 = ProjectId.CreateNewId();
             var projectId2 = ProjectId.CreateNewId();
 
-            var documentInfo1 = DocumentInfo.Create(DocumentId.CreateNewId(projectId1), ".editorconfig");
+            var documentInfo1 = DocumentInfo.Create(
+                DocumentId.CreateNewId(projectId1),
+                ".editorconfig"
+            );
 
             using var workspace = CreateWorkspace();
-            var solution = workspace.CurrentSolution
-                            .AddProject(projectId1, "project1", "project1.dll", LanguageNames.CSharp)
-                            .AddProject(projectId2, "project2", "project2.dll", LanguageNames.CSharp)
-                            .AddAnalyzerConfigDocuments(ImmutableArray.Create(documentInfo1));
+            var solution = workspace.CurrentSolution.AddProject(
+                    projectId1,
+                    "project1",
+                    "project1.dll",
+                    LanguageNames.CSharp
+                )
+                .AddProject(projectId2, "project2", "project2.dll", LanguageNames.CSharp)
+                .AddAnalyzerConfigDocuments(ImmutableArray.Create(documentInfo1));
 
             // This should throw if we're removing one document from the wrong project. Right now we don't test the RemoveAdditionalDocument
             // API due to https://github.com/dotnet/roslyn/issues/41211.
-            Assert.Throws<ArgumentException>(() => solution.GetProject(projectId2).RemoveAnalyzerConfigDocuments(ImmutableArray.Create(documentInfo1.Id)));
+            Assert.Throws<ArgumentException>(
+                () =>
+                    solution.GetProject(projectId2)
+                        .RemoveAnalyzerConfigDocuments(ImmutableArray.Create(documentInfo1.Id))
+            );
         }
 
         [Fact]
@@ -1371,11 +2311,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
         {
             using var workspace = CreateWorkspace();
 
-            var solution = workspace.CurrentSolution
-                .AddProject("goo", "goo.dll", LanguageNames.CSharp)
-                .AddMetadataReference(s_mscorlib)
-                .AddDocument("goo.cs", "public class Goo { }")
-                .Project.Solution;
+            var solution =
+                workspace.CurrentSolution.AddProject("goo", "goo.dll", LanguageNames.CSharp)
+                    .AddMetadataReference(s_mscorlib)
+                    .AddDocument("goo.cs", "public class Goo { }").Project.Solution;
 
             await ValidateSolutionAndCompilationsAsync(solution);
         }
@@ -1390,8 +2329,12 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var doc1 = DocumentId.CreateNewId(pm1);
             var doc2 = DocumentId.CreateNewId(pm2);
 
-            var solution = workspace.CurrentSolution
-                .AddProject(pm1, "goo", "goo.dll", LanguageNames.CSharp)
+            var solution = workspace.CurrentSolution.AddProject(
+                    pm1,
+                    "goo",
+                    "goo.dll",
+                    LanguageNames.CSharp
+                )
                 .AddProject(pm2, "bar", "bar.dll", LanguageNames.CSharp)
                 .AddProjectReference(pm2, new ProjectReference(pm1))
                 .AddDocument(doc1, "goo.cs", "public class Goo { }")
@@ -1407,14 +2350,22 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var pm2 = ProjectId.CreateNewId();
             using var workspace = CreateWorkspace();
 
-            var solution = workspace.CurrentSolution
-                .AddProject(pm1, "goo", "goo.dll", LanguageNames.CSharp)
+            var solution = workspace.CurrentSolution.AddProject(
+                    pm1,
+                    "goo",
+                    "goo.dll",
+                    LanguageNames.CSharp
+                )
                 .AddMetadataReference(pm1, s_mscorlib)
                 .AddProject(pm2, "bar", "bar.dll", LanguageNames.VisualBasic)
                 .AddMetadataReference(pm2, s_mscorlib)
                 .AddProjectReference(pm2, new ProjectReference(pm1))
                 .AddDocument(DocumentId.CreateNewId(pm1), "goo.cs", "public class X { }")
-                .AddDocument(DocumentId.CreateNewId(pm2), "bar.vb", "Public Class Y\r\nInherits X\r\nEnd Class");
+                .AddDocument(
+                    DocumentId.CreateNewId(pm2),
+                    "bar.vb",
+                    "Public Class Y\r\nInherits X\r\nEnd Class"
+                );
 
             await ValidateSolutionAndCompilationsAsync(solution);
         }
@@ -1423,7 +2374,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
         {
             foreach (var project in solution.Projects)
             {
-                Assert.True(solution.ContainsProject(project.Id), "Solution was expected to have project " + project.Id);
+                Assert.True(
+                    solution.ContainsProject(project.Id),
+                    "Solution was expected to have project " + project.Id
+                );
                 Assert.Equal(project, solution.GetProject(project.Id));
 
                 // these won't always be unique in real-world but should be for these tests
@@ -1438,7 +2392,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 // check that all known metadata references are present in the compilation
                 foreach (var meta in project.MetadataReferences)
                 {
-                    Assert.True(compilation.References.Contains(meta), "Compilation references were expected to contain " + meta);
+                    Assert.True(
+                        compilation.References.Contains(meta),
+                        "Compilation references were expected to contain " + meta
+                    );
                 }
 
                 // check that all project-to-project reference metadata is present in the compilation
@@ -1446,15 +2403,22 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 {
                     if (solution.ContainsProject(referenced.ProjectId))
                     {
-                        var referencedMetadata = await solution.State.GetMetadataReferenceAsync(referenced, solution.GetProjectState(project.Id), CancellationToken.None);
+                        var referencedMetadata = await solution.State.GetMetadataReferenceAsync(
+                            referenced,
+                            solution.GetProjectState(project.Id),
+                            CancellationToken.None
+                        );
                         Assert.NotNull(referencedMetadata);
                         if (referencedMetadata is CompilationReference compilationReference)
                         {
-                            compilation.References.Single(r =>
-                            {
-                                var cr = r as CompilationReference;
-                                return cr != null && cr.Compilation == compilationReference.Compilation;
-                            });
+                            compilation.References.Single(
+                                r =>
+                                {
+                                    var cr = r as CompilationReference;
+                                    return cr != null
+                                        && cr.Compilation == compilationReference.Compilation;
+                                }
+                            );
                         }
                     }
                 }
@@ -1466,7 +2430,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
                 foreach (var doc in docs)
                 {
-                    Assert.True(trees.Contains(await doc.GetSyntaxTreeAsync()), "trees list was expected to contain the syntax tree of doc");
+                    Assert.True(
+                        trees.Contains(await doc.GetSyntaxTreeAsync()),
+                        "trees list was expected to contain the syntax tree of doc"
+                    );
                 }
             }
         }
@@ -1512,10 +2479,18 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var projectIds = Enumerable.Range(0, 5).Select(i => ProjectId.CreateNewId()).ToArray();
             for (var i = 0; i < projectIds.Length; i++)
             {
-                solution = solution.AddProject(projectIds[i], i.ToString(), i.ToString(), LanguageNames.CSharp);
+                solution = solution.AddProject(
+                    projectIds[i],
+                    i.ToString(),
+                    i.ToString(),
+                    LanguageNames.CSharp
+                );
                 if (i >= 1)
                 {
-                    solution = solution.AddProjectReference(projectIds[i], new ProjectReference(projectIds[i - 1]));
+                    solution = solution.AddProjectReference(
+                        projectIds[i],
+                        new ProjectReference(projectIds[i - 1])
+                    );
                 }
             }
 
@@ -1534,14 +2509,21 @@ namespace Microsoft.CodeAnalysis.UnitTests
             solution = solution.AddMetadataReference(project1, s_mscorlib);
 
             solution = solution.AddMetadataReference(project1, mefReference);
-            var assemblyReference = (IAssemblySymbol)solution.GetProject(project1).GetCompilationAsync().Result.GetAssemblyOrModuleSymbol(mefReference);
-            var namespacesAndTypes = assemblyReference.GlobalNamespace.GetAllNamespacesAndTypes(CancellationToken.None);
-            var foundSymbol = from symbol in namespacesAndTypes
-                              where symbol.Name.Equals("Enumerable")
-                              select symbol;
+            var assemblyReference = (IAssemblySymbol)solution.GetProject(project1)
+                .GetCompilationAsync()
+                .Result.GetAssemblyOrModuleSymbol(mefReference);
+            var namespacesAndTypes = assemblyReference.GlobalNamespace.GetAllNamespacesAndTypes(
+                CancellationToken.None
+            );
+            var foundSymbol =
+                from symbol in namespacesAndTypes
+                where symbol.Name.Equals("Enumerable")
+                select symbol;
             Assert.Equal(1, foundSymbol.Count());
             solution = solution.RemoveMetadataReference(project1, mefReference);
-            assemblyReference = (IAssemblySymbol)solution.GetProject(project1).GetCompilationAsync().Result.GetAssemblyOrModuleSymbol(mefReference);
+            assemblyReference = (IAssemblySymbol)solution.GetProject(project1)
+                .GetCompilationAsync()
+                .Result.GetAssemblyOrModuleSymbol(mefReference);
             Assert.Null(assemblyReference);
 
             await ValidateSolutionAndCompilationsAsync(solution);
@@ -1551,15 +2533,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
         {
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics
             {
-                get
-                {
-                    throw new NotImplementedException();
-                }
+                get { throw new NotImplementedException(); }
             }
 
-            public override void Initialize(AnalysisContext analysisContext)
-            {
-            }
+            public override void Initialize(AnalysisContext analysisContext) { }
         }
 
         [Fact]
@@ -1599,7 +2576,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
             // Test AddAnalyzers
             analyzerReference = new AnalyzerImageReference(ImmutableArray.Create(analyzer));
             DiagnosticAnalyzer secondAnalyzer = new MockDiagnosticAnalyzer();
-            var secondAnalyzerReference = new AnalyzerImageReference(ImmutableArray.Create(secondAnalyzer));
+            var secondAnalyzerReference = new AnalyzerImageReference(
+                ImmutableArray.Create(secondAnalyzer)
+            );
             var analyzerReferences = new[] { analyzerReference, secondAnalyzerReference };
             solution = solution.AddAnalyzerReferences(project1, analyzerReferences);
             actualAnalyzerReferences = solution.Projects.Single().AnalyzerReferences;
@@ -1666,8 +2645,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var pid = ProjectId.CreateNewId();
             var pid2 = ProjectId.CreateNewId();
             sol = sol.AddProject(pid, "goo", "goo.dll", LanguageNames.CSharp)
-                   .AddProject(pid2, "bar", "bar.dll", LanguageNames.CSharp)
-                   .AddProjectReference(pid2, new ProjectReference(pid));
+                .AddProject(pid2, "bar", "bar.dll", LanguageNames.CSharp)
+                .AddProjectReference(pid2, new ProjectReference(pid));
 
             Assert.Equal(2, sol.Projects.Count());
 
@@ -1678,7 +2657,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
             Assert.False(sol2.ContainsProject(pid));
             Assert.True(sol2.ContainsProject(pid2), "sol2 was expected to contain project " + pid2);
             Assert.Equal(1, sol2.Projects.Count());
-            Assert.True(sol2.GetProject(pid2).AllProjectReferences.Any(r => r.ProjectId == pid), "sol2 project pid2 was expected to contain project reference " + pid);
+            Assert.True(
+                sol2.GetProject(pid2).AllProjectReferences.Any(r => r.ProjectId == pid),
+                "sol2 project pid2 was expected to contain project reference " + pid
+            );
 
             await ValidateSolutionAndCompilationsAsync(sol2);
         }
@@ -1692,8 +2674,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var pid = ProjectId.CreateNewId();
             var pid2 = ProjectId.CreateNewId();
             sol = sol.AddProject(pid, "goo", "goo.dll", LanguageNames.CSharp)
-                   .AddProject(pid2, "bar", "bar.dll", LanguageNames.CSharp)
-                   .AddProjectReference(pid2, new ProjectReference(pid));
+                .AddProject(pid2, "bar", "bar.dll", LanguageNames.CSharp)
+                .AddProjectReference(pid2, new ProjectReference(pid));
 
             Assert.Equal(2, sol.Projects.Count());
 
@@ -1703,7 +2685,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
             Assert.False(sol2.ContainsProject(pid));
             Assert.True(sol2.ContainsProject(pid2), "sol2 was expected to contain project " + pid2);
             Assert.Equal(1, sol2.Projects.Count());
-            Assert.True(sol2.GetProject(pid2).AllProjectReferences.Any(r => r.ProjectId == pid), "sol2 pid2 was expected to contain " + pid);
+            Assert.True(
+                sol2.GetProject(pid2).AllProjectReferences.Any(r => r.ProjectId == pid),
+                "sol2 pid2 was expected to contain " + pid
+            );
 
             var sol3 = sol2.AddProject(pid, "goo", "goo.dll", LanguageNames.CSharp);
 
@@ -1723,9 +2708,13 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var did = DocumentId.CreateNewId(pid);
 
             using var workspace = CreateWorkspace();
-            var sol = workspace.CurrentSolution
-                            .AddProject(pid, "goo", "goo.dll", LanguageNames.CSharp)
-                            .AddDocument(did, "goo.cs", text);
+            var sol = workspace.CurrentSolution.AddProject(
+                    pid,
+                    "goo",
+                    "goo.dll",
+                    LanguageNames.CSharp
+                )
+                .AddDocument(did, "goo.cs", text);
 
             var document = sol.GetDocument(did);
             Assert.False(document.TryGetSyntaxRoot(out _));
@@ -1744,8 +2733,12 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var projectId = ProjectId.CreateNewId();
             var documentId = DocumentId.CreateNewId(projectId);
             using var workspace = CreateWorkspace();
-            var solution1 = workspace.CurrentSolution
-                .AddProject(projectId, "ProjectName", "AssemblyName", LanguageNames.CSharp)
+            var solution1 = workspace.CurrentSolution.AddProject(
+                    projectId,
+                    "ProjectName",
+                    "AssemblyName",
+                    LanguageNames.CSharp
+                )
                 .AddDocument(documentId, "DocumentName", SourceText.From("class Class{}"));
 
             var document = solution1.GetDocument(documentId);
@@ -1767,9 +2760,13 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var did = DocumentId.CreateNewId(pid);
 
             using var workspace = CreateWorkspace();
-            var sol = workspace.CurrentSolution
-                            .AddProject(pid, "goo", "goo.dll", LanguageNames.CSharp)
-                            .AddDocument(did, "goo.cs", text);
+            var sol = workspace.CurrentSolution.AddProject(
+                    pid,
+                    "goo",
+                    "goo.dll",
+                    LanguageNames.CSharp
+                )
+                .AddDocument(did, "goo.cs", text);
 
             var document = sol.GetDocument(did);
             var tree = document.GetSyntaxTreeAsync().Result;
@@ -1806,9 +2803,18 @@ namespace Microsoft.CodeAnalysis.UnitTests
             const string NewFilePath = @"Z:\NewFilePath.cs";
 
             using var workspace = CreateWorkspace();
-            var solution = workspace.CurrentSolution
-                            .AddProject(projectId, "goo", "goo.dll", LanguageNames.CSharp)
-                            .AddDocument(documentId, "OldFilePath.cs", "public class Goo { }", filePath: OldFilePath);
+            var solution = workspace.CurrentSolution.AddProject(
+                    projectId,
+                    "goo",
+                    "goo.dll",
+                    LanguageNames.CSharp
+                )
+                .AddDocument(
+                    documentId,
+                    "OldFilePath.cs",
+                    "public class Goo { }",
+                    filePath: OldFilePath
+                );
 
             // scope so later asserts don't accidentally use oldDocument
             {
@@ -1833,8 +2839,12 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var did = DocumentId.CreateNewId(pid);
 
             using var workspace = CreateWorkspaceWithRecoverableSyntaxTreesAndWeakCompilations();
-            var sol = workspace.CurrentSolution
-                .AddProject(pid, "goo", "goo.dll", LanguageNames.CSharp)
+            var sol = workspace.CurrentSolution.AddProject(
+                    pid,
+                    "goo",
+                    "goo.dll",
+                    LanguageNames.CSharp
+                )
                 .AddDocument(did, "goo.cs", "public class Goo { }");
 
             var observedRoot = GetObservedSyntaxTreeRoot(sol, did);
@@ -1862,7 +2872,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var did = DocumentId.CreateNewId(pid);
 
             sol = sol.AddProject(pid, "goo", "goo.dll", LanguageNames.CSharp)
-                     .AddDocument(did, "x", new FileTextLoader(file.Path, Encoding.UTF8));
+                .AddDocument(did, "x", new FileTextLoader(file.Path, Encoding.UTF8));
 
             var observedText = GetObservedText(sol, did, text1);
 
@@ -1887,9 +2897,13 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             var text = "public class C {}";
             using var workspace = CreateWorkspace();
-            var sol = workspace.CurrentSolution
-                                    .AddProject(pid, "goo", "goo.dll", LanguageNames.CSharp)
-                                    .AddDocument(did, "goo.cs", text);
+            var sol = workspace.CurrentSolution.AddProject(
+                    pid,
+                    "goo",
+                    "goo.dll",
+                    LanguageNames.CSharp
+                )
+                .AddDocument(did, "goo.cs", text);
 
             var doc = sol.GetDocument(did);
 
@@ -1909,9 +2923,13 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var file = Temp.CreateFile().WriteAllText(text, Encoding.UTF8);
 
             using var workspace = CreateWorkspace();
-            var sol = workspace.CurrentSolution
-                                    .AddProject(pid, "goo", "goo.dll", LanguageNames.CSharp)
-                                    .AddDocument(did, "x", new FileTextLoader(file.Path, Encoding.UTF8));
+            var sol = workspace.CurrentSolution.AddProject(
+                    pid,
+                    "goo",
+                    "goo.dll",
+                    LanguageNames.CSharp
+                )
+                .AddDocument(did, "x", new FileTextLoader(file.Path, Encoding.UTF8));
 
             var doc = sol.GetDocument(did);
 
@@ -1930,9 +2948,13 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             var text = "public class C {}";
             using var workspace = CreateWorkspaceWithRecoverableSyntaxTreesAndWeakCompilations();
-            var sol = workspace.CurrentSolution
-                                    .AddProject(pid, "goo", "goo.dll", LanguageNames.CSharp)
-                                    .AddDocument(did, "goo.cs", text);
+            var sol = workspace.CurrentSolution.AddProject(
+                    pid,
+                    "goo",
+                    "goo.dll",
+                    LanguageNames.CSharp
+                )
+                .AddDocument(did, "goo.cs", text);
 
             // observe the text and then wait for the references to be GC'd
             var observed = GetObservedText(sol, did, text);
@@ -1954,9 +2976,13 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             var text = "public class C {}";
             using var workspace = CreateWorkspace();
-            var sol = workspace.CurrentSolution
-                                    .AddProject(pid, "goo", "goo.dll", LanguageNames.CSharp)
-                                    .AddDocument(did, "goo.cs", text);
+            var sol = workspace.CurrentSolution.AddProject(
+                    pid,
+                    "goo",
+                    "goo.dll",
+                    LanguageNames.CSharp
+                )
+                .AddDocument(did, "goo.cs", text);
 
             var doc = sol.GetDocument(did);
 
@@ -1976,9 +3002,13 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var file = Temp.CreateFile().WriteAllText(text, Encoding.UTF8);
 
             using var workspace = CreateWorkspace();
-            var sol = workspace.CurrentSolution
-                                    .AddProject(pid, "goo", "goo.dll", LanguageNames.CSharp)
-                                    .AddDocument(did, "x", new FileTextLoader(file.Path, Encoding.UTF8));
+            var sol = workspace.CurrentSolution.AddProject(
+                    pid,
+                    "goo",
+                    "goo.dll",
+                    LanguageNames.CSharp
+                )
+                .AddDocument(did, "x", new FileTextLoader(file.Path, Encoding.UTF8));
 
             var doc = sol.GetDocument(did);
             var docTree = doc.GetSyntaxTreeAsync().Result;
@@ -1993,13 +3023,18 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var pid = ProjectId.CreateNewId();
             var did = DocumentId.CreateNewId(pid);
 
-            var tree = CSharp.SyntaxFactory.ParseSyntaxTree("public class C {}").GetRoot(CancellationToken.None);
+            var tree = CSharp.SyntaxFactory.ParseSyntaxTree("public class C {}")
+                .GetRoot(CancellationToken.None);
             tree = tree.WithAdditionalAnnotations(new SyntaxAnnotation("test"));
 
             using var workspace = CreateWorkspace();
-            var sol = workspace.CurrentSolution
-                                    .AddProject(pid, "goo", "goo.dll", LanguageNames.CSharp)
-                                    .AddDocument(did, "x", tree);
+            var sol = workspace.CurrentSolution.AddProject(
+                    pid,
+                    "goo",
+                    "goo.dll",
+                    LanguageNames.CSharp
+                )
+                .AddDocument(did, "x", tree);
 
             var doc = sol.GetDocument(did);
             var docTree = doc.GetSyntaxRootAsync().Result;
@@ -2017,9 +3052,13 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             var text = "public class C {}";
             using var workspace = CreateWorkspace();
-            var sol = workspace.CurrentSolution
-                                    .AddProject(pid, "goo", "goo.dll", LanguageNames.CSharp)
-                                    .AddDocument(did, "goo.cs", text);
+            var sol = workspace.CurrentSolution.AddProject(
+                    pid,
+                    "goo",
+                    "goo.dll",
+                    LanguageNames.CSharp
+                )
+                .AddDocument(did, "goo.cs", text);
 
             var doc = sol.GetDocument(did);
 
@@ -2038,9 +3077,13 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var text = "public class C {}";
 
             using var workspace = CreateWorkspaceWithRecoverableSyntaxTreesAndWeakCompilations();
-            var sol = workspace.CurrentSolution
-                                    .AddProject(pid, "goo", "goo.dll", LanguageNames.CSharp)
-                                    .AddDocument(did, "goo.cs", text);
+            var sol = workspace.CurrentSolution.AddProject(
+                    pid,
+                    "goo",
+                    "goo.dll",
+                    LanguageNames.CSharp
+                )
+                .AddDocument(did, "goo.cs", text);
 
             // observe the syntax tree root and wait for the references to be GC'd
             var observed = GetObservedSyntaxTreeRoot(sol, did);
@@ -2062,9 +3105,13 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             var text = "public class C {}";
             using var workspace = CreateWorkspace();
-            var sol = workspace.CurrentSolution
-                                    .AddProject(pid, "goo", "goo.dll", LanguageNames.CSharp)
-                                    .AddDocument(did, "goo.cs", text);
+            var sol = workspace.CurrentSolution.AddProject(
+                    pid,
+                    "goo",
+                    "goo.dll",
+                    LanguageNames.CSharp
+                )
+                .AddDocument(did, "goo.cs", text);
 
             var proj = sol.GetProject(pid);
 
@@ -2082,9 +3129,13 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             var text = "public class C {}";
             using var workspace = CreateWorkspace();
-            var sol = workspace.CurrentSolution
-                                    .AddProject(pid, "goo", "goo.dll", LanguageNames.CSharp)
-                                    .AddDocument(did, "goo.cs", text);
+            var sol = workspace.CurrentSolution.AddProject(
+                    pid,
+                    "goo",
+                    "goo.dll",
+                    LanguageNames.CSharp
+                )
+                .AddDocument(did, "goo.cs", text);
 
             var doc = sol.GetDocument(did);
 
@@ -2101,9 +3152,13 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             var text = "public class C {}";
             using var workspace = CreateWorkspaceWithRecoverableSyntaxTreesAndWeakCompilations();
-            var sol = workspace.CurrentSolution
-                                    .AddProject(pid, "goo", "goo.dll", LanguageNames.CSharp)
-                                    .AddDocument(did, "goo.cs", text);
+            var sol = workspace.CurrentSolution.AddProject(
+                    pid,
+                    "goo",
+                    "goo.dll",
+                    LanguageNames.CSharp
+                )
+                .AddDocument(did, "goo.cs", text);
 
             // observe the text and then wait for the references to be GC'd
             var observed = GetObservedText(sol, did, text);
@@ -2111,7 +3166,11 @@ namespace Microsoft.CodeAnalysis.UnitTests
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private static ObjectReference<SourceText> GetObservedText(Solution solution, DocumentId documentId, string expectedText = null)
+        private static ObjectReference<SourceText> GetObservedText(
+            Solution solution,
+            DocumentId documentId,
+            string expectedText = null
+        )
         {
             var observedText = solution.GetDocument(documentId).GetTextAsync().Result;
 
@@ -2132,9 +3191,13 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             var text = "public class C {}";
             using var workspace = CreateWorkspaceWithRecoverableSyntaxTreesAndWeakCompilations();
-            var sol = workspace.CurrentSolution
-                                    .AddProject(pid, "goo", "goo.dll", LanguageNames.CSharp)
-                                    .AddDocument(did, "goo.cs", text);
+            var sol = workspace.CurrentSolution.AddProject(
+                    pid,
+                    "goo",
+                    "goo.dll",
+                    LanguageNames.CSharp
+                )
+                .AddDocument(did, "goo.cs", text);
 
             // observe the text and then wait for the references to be GC'd
             var observed = GetObservedTextAsync(sol, did, text);
@@ -2142,7 +3205,11 @@ namespace Microsoft.CodeAnalysis.UnitTests
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private static ObjectReference<SourceText> GetObservedTextAsync(Solution solution, DocumentId documentId, string expectedText = null)
+        private static ObjectReference<SourceText> GetObservedTextAsync(
+            Solution solution,
+            DocumentId documentId,
+            string expectedText = null
+        )
         {
             var observedText = solution.GetDocument(documentId).GetTextAsync().Result;
 
@@ -2164,9 +3231,13 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var text = "public class C {}";
 
             using var workspace = CreateWorkspaceWithRecoverableSyntaxTreesAndWeakCompilations();
-            var sol = workspace.CurrentSolution
-                                    .AddProject(pid, "goo", "goo.dll", LanguageNames.CSharp)
-                                    .AddDocument(did, "goo.cs", text);
+            var sol = workspace.CurrentSolution.AddProject(
+                    pid,
+                    "goo",
+                    "goo.dll",
+                    LanguageNames.CSharp
+                )
+                .AddDocument(did, "goo.cs", text);
 
             // get it async and wait for it to get GC'd
             var observed = GetObservedSyntaxTreeRoot(sol, did);
@@ -2174,7 +3245,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private static ObjectReference<SyntaxNode> GetObservedSyntaxTreeRoot(Solution solution, DocumentId documentId)
+        private static ObjectReference<SyntaxNode> GetObservedSyntaxTreeRoot(
+            Solution solution,
+            DocumentId documentId
+        )
         {
             var observedTree = solution.GetDocument(documentId).GetSyntaxRootAsync().Result;
             return new ObjectReference<SyntaxNode>(observedTree);
@@ -2190,9 +3264,13 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var text = "public class C {}";
 
             using var workspace = CreateWorkspaceWithRecoverableSyntaxTreesAndWeakCompilations();
-            var sol = workspace.CurrentSolution
-                                    .AddProject(pid, "goo", "goo.dll", LanguageNames.CSharp)
-                                    .AddDocument(did, "goo.cs", text);
+            var sol = workspace.CurrentSolution.AddProject(
+                    pid,
+                    "goo",
+                    "goo.dll",
+                    LanguageNames.CSharp
+                )
+                .AddDocument(did, "goo.cs", text);
 
             // get it async and wait for it to get GC'd
             var observed = GetObservedSyntaxTreeRootAsync(sol, did);
@@ -2200,7 +3278,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private static ObjectReference<SyntaxNode> GetObservedSyntaxTreeRootAsync(Solution solution, DocumentId documentId)
+        private static ObjectReference<SyntaxNode> GetObservedSyntaxTreeRootAsync(
+            Solution solution,
+            DocumentId documentId
+        )
         {
             var observedTree = solution.GetDocument(documentId).GetSyntaxRootAsync().Result;
             return new ObjectReference<SyntaxNode>(observedTree);
@@ -2214,7 +3295,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var pid = ProjectId.CreateNewId();
             var did = DocumentId.CreateNewId(pid);
 
-            var text = @"public class C {
+            var text =
+                @"public class C {
     public void Method1() {}
     public void Method2() {}
     public void Method3() {}
@@ -2224,9 +3306,13 @@ namespace Microsoft.CodeAnalysis.UnitTests
 }";
 
             using var workspace = CreateWorkspaceWithRecoverableSyntaxTreesAndWeakCompilations();
-            var sol = workspace.CurrentSolution
-                                    .AddProject(pid, "goo", "goo.dll", LanguageNames.CSharp)
-                                    .AddDocument(did, "goo.cs", text);
+            var sol = workspace.CurrentSolution.AddProject(
+                    pid,
+                    "goo",
+                    "goo.dll",
+                    LanguageNames.CSharp
+                )
+                .AddDocument(did, "goo.cs", text);
 
             TestRecoverableSyntaxTree(sol, did);
         }
@@ -2238,7 +3324,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var pid = ProjectId.CreateNewId();
             var did = DocumentId.CreateNewId(pid);
 
-            var text = @"Public Class C
+            var text =
+                @"Public Class C
     Sub Method1()
     End Sub
     Sub Method2()
@@ -2254,9 +3341,13 @@ namespace Microsoft.CodeAnalysis.UnitTests
 End Class";
 
             using var workspace = CreateWorkspaceWithRecoverableSyntaxTreesAndWeakCompilations();
-            var sol = workspace.CurrentSolution
-                                    .AddProject(pid, "goo", "goo.dll", LanguageNames.VisualBasic)
-                                    .AddDocument(did, "goo.vb", text);
+            var sol = workspace.CurrentSolution.AddProject(
+                    pid,
+                    "goo",
+                    "goo.dll",
+                    LanguageNames.VisualBasic
+                )
+                .AddDocument(did, "goo.vb", text);
 
             TestRecoverableSyntaxTree(sol, did);
         }
@@ -2279,8 +3370,14 @@ End Class";
             Assert.Equal(tree, root.SyntaxTree);
 
             // reset the syntax root, to make it 'refactored' by adding an attribute
-            var newRoot = doc.GetSyntaxRootAsync().Result.WithAdditionalAnnotations(SyntaxAnnotation.ElasticAnnotation);
-            var doc2 = doc.Project.Solution.WithDocumentSyntaxRoot(doc.Id, newRoot, PreservationMode.PreserveValue).GetDocument(doc.Id);
+            var newRoot = doc.GetSyntaxRootAsync()
+                .Result.WithAdditionalAnnotations(SyntaxAnnotation.ElasticAnnotation);
+            var doc2 = doc.Project.Solution.WithDocumentSyntaxRoot(
+                    doc.Id,
+                    newRoot,
+                    PreservationMode.PreserveValue
+                )
+                .GetDocument(doc.Id);
 
             // get it async and wait for it to get GC'd
             var observed2 = GetObservedSyntaxTreeRootAsync(doc2.Project.Solution, did);
@@ -2305,9 +3402,13 @@ End Class";
 
             var text = "public class C {}";
             using var workspace = CreateWorkspaceWithRecoverableSyntaxTreesAndWeakCompilations();
-            var sol = workspace.CurrentSolution
-                                    .AddProject(pid, "goo", "goo.dll", LanguageNames.CSharp)
-                                    .AddDocument(did, "goo.cs", text);
+            var sol = workspace.CurrentSolution.AddProject(
+                    pid,
+                    "goo",
+                    "goo.dll",
+                    LanguageNames.CSharp
+                )
+                .AddDocument(did, "goo.cs", text);
 
             // get it async and wait for it to get GC'd
             var observed = GetObservedCompilationAsync(sol, pid);
@@ -2315,7 +3416,10 @@ End Class";
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private static ObjectReference<Compilation> GetObservedCompilationAsync(Solution solution, ProjectId projectId)
+        private static ObjectReference<Compilation> GetObservedCompilationAsync(
+            Solution solution,
+            ProjectId projectId
+        )
         {
             var observed = solution.GetProject(projectId).GetCompilationAsync().Result;
             return new ObjectReference<Compilation>(observed);
@@ -2330,9 +3434,13 @@ End Class";
 
             var text = "public class C {}";
             using var workspace = CreateWorkspaceWithRecoverableSyntaxTreesAndWeakCompilations();
-            var sol = workspace.CurrentSolution
-                                    .AddProject(pid, "goo", "goo.dll", LanguageNames.CSharp)
-                                    .AddDocument(did, "goo.cs", text);
+            var sol = workspace.CurrentSolution.AddProject(
+                    pid,
+                    "goo",
+                    "goo.dll",
+                    LanguageNames.CSharp
+                )
+                .AddDocument(did, "goo.cs", text);
 
             // get it async and wait for it to get GC'd
             var observed = GetObservedCompilation(sol, pid);
@@ -2340,7 +3448,10 @@ End Class";
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private static ObjectReference<Compilation> GetObservedCompilation(Solution solution, ProjectId projectId)
+        private static ObjectReference<Compilation> GetObservedCompilation(
+            Solution solution,
+            ProjectId projectId
+        )
         {
             var observed = solution.GetProject(projectId).GetCompilationAsync().Result;
             return new ObjectReference<Compilation>(observed);
@@ -2349,18 +3460,19 @@ End Class";
         [Fact]
         public void TestWorkspaceLanguageServiceOverride()
         {
-            var hostServices = FeaturesTestCompositions.Features.AddParts(new[]
-            {
-                typeof(TestLanguageServiceA),
-                typeof(TestLanguageServiceB),
-            }).GetHostServices();
+            var hostServices = FeaturesTestCompositions.Features.AddParts(
+                    new[] { typeof(TestLanguageServiceA), typeof(TestLanguageServiceB), }
+                )
+                .GetHostServices();
 
             var ws = new AdhocWorkspace(hostServices, ServiceLayer.Host);
-            var service = ws.Services.GetLanguageServices(LanguageNames.CSharp).GetService<ITestLanguageService>();
+            var service = ws.Services.GetLanguageServices(LanguageNames.CSharp)
+                .GetService<ITestLanguageService>();
             Assert.NotNull(service as TestLanguageServiceA);
 
             var ws2 = new AdhocWorkspace(hostServices, "Quasimodo");
-            var service2 = ws2.Services.GetLanguageServices(LanguageNames.CSharp).GetService<ITestLanguageService>();
+            var service2 = ws2.Services.GetLanguageServices(LanguageNames.CSharp)
+                .GetService<ITestLanguageService>();
             Assert.NotNull(service2 as TestLanguageServiceB);
         }
 
@@ -2395,24 +3507,32 @@ End Class";
         {
         }
 
-        [ExportLanguageService(typeof(ITestLanguageService), LanguageNames.CSharp, ServiceLayer.Default), Shared, PartNotDiscoverable]
+        [
+            ExportLanguageService(
+                typeof(ITestLanguageService),
+                LanguageNames.CSharp,
+                ServiceLayer.Default
+            ),
+            Shared,
+            PartNotDiscoverable
+        ]
         private class TestLanguageServiceA : ITestLanguageService
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public TestLanguageServiceA()
-            {
-            }
+            public TestLanguageServiceA() { }
         }
 
-        [ExportLanguageService(typeof(ITestLanguageService), LanguageNames.CSharp, "Quasimodo"), Shared, PartNotDiscoverable]
+        [
+            ExportLanguageService(typeof(ITestLanguageService), LanguageNames.CSharp, "Quasimodo"),
+            Shared,
+            PartNotDiscoverable
+        ]
         private class TestLanguageServiceB : ITestLanguageService
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public TestLanguageServiceB()
-            {
-            }
+            public TestLanguageServiceB() { }
         }
 
         [Fact]
@@ -2432,20 +3552,28 @@ End Class";
             var did = DocumentId.CreateNewId(pid);
 
             solution = solution.AddProject(pid, "goo", "goo", LanguageNames.CSharp)
-                               .AddDocument(did, "x", new FileTextLoader(@"C:\doesnotexist.cs", Encoding.UTF8))
-                               .WithDocumentFilePath(did, "document path");
+                .AddDocument(did, "x", new FileTextLoader(@"C:\doesnotexist.cs", Encoding.UTF8))
+                .WithDocumentFilePath(did, "document path");
 
             var doc = solution.GetDocument(did);
             var text = await doc.GetTextAsync().ConfigureAwait(false);
 
-            var diagnostic = await doc.State.GetLoadDiagnosticAsync(CancellationToken.None).ConfigureAwait(false);
+            var diagnostic = await doc.State.GetLoadDiagnosticAsync(CancellationToken.None)
+                .ConfigureAwait(false);
 
-            Assert.Equal(@"C:\doesnotexist.cs: (0,0)-(0,0)", diagnostic.Location.GetLineSpan().ToString());
+            Assert.Equal(
+                @"C:\doesnotexist.cs: (0,0)-(0,0)",
+                diagnostic.Location.GetLineSpan().ToString()
+            );
             Assert.Equal(WorkspaceDiagnosticKind.Failure, diagnosticFromEvent.Kind);
             Assert.Equal("", text.ToString());
 
             // Verify invariant: The compilation is guaranteed to have a syntax tree for each document of the project (even if the contnet fails to load).
-            var compilation = await solution.State.GetCompilationAsync(doc.Project.State, CancellationToken.None).ConfigureAwait(false);
+            var compilation = await solution.State.GetCompilationAsync(
+                    doc.Project.State,
+                    CancellationToken.None
+                )
+                .ConfigureAwait(false);
             var syntaxTree = compilation.SyntaxTrees.Single();
             Assert.Equal("", syntaxTree.ToString());
         }
@@ -2460,27 +3588,35 @@ End Class";
             var did2 = DocumentId.CreateNewId(pid2);
             var did3 = DocumentId.CreateNewId(pid3);
 
-            var text1 = @"
+            var text1 =
+                @"
 Public Class A
 End Class";
 
-            var text2 = @"
+            var text2 =
+                @"
 Public Class B
 End Class
 ";
 
-            var text3 = @"
+            var text3 =
+                @"
 public class C : B {
 }
 ";
 
-            var text4 = @"
+            var text4 =
+                @"
 public class C : A {
 }
 ";
 
-            var solution = new AdhocWorkspace().CurrentSolution
-                .AddProject(pid1, "GooA", "Goo.dll", LanguageNames.VisualBasic)
+            var solution = new AdhocWorkspace().CurrentSolution.AddProject(
+                    pid1,
+                    "GooA",
+                    "Goo.dll",
+                    LanguageNames.VisualBasic
+                )
                 .AddDocument(did1, "A.vb", text1)
                 .AddMetadataReference(pid1, s_mscorlib)
                 .AddProject(pid2, "GooB", "Goo2.dll", LanguageNames.VisualBasic)
@@ -2513,13 +3649,19 @@ public class C : A {
         {
             var ws = new AdhocWorkspace();
             var proj = ws.AddProject("proj", LanguageNames.CSharp);
-            var doc = ws.AddDocument(proj.Id, "a.cs", SourceText.From("public class c { }", Encoding.UTF32));
+            var doc = ws.AddDocument(
+                proj.Id,
+                "a.cs",
+                SourceText.From("public class c { }", Encoding.UTF32)
+            );
 
             Assert.Equal(Encoding.UTF32, doc.GetTextAsync().Result.Encoding);
 
             // updating root doesn't change original encoding
             var root = doc.GetSyntaxRootAsync().Result;
-            var newRoot = root.WithLeadingTrivia(root.GetLeadingTrivia().Add(CS.SyntaxFactory.Whitespace("    ")));
+            var newRoot = root.WithLeadingTrivia(
+                root.GetLeadingTrivia().Add(CS.SyntaxFactory.Whitespace("    "))
+            );
             var newDoc = doc.WithSyntaxRoot(newRoot);
 
             Assert.Equal(Encoding.UTF32, newDoc.GetTextAsync().Result.Encoding);
@@ -2537,7 +3679,9 @@ public class C : A {
                     "VisualBasicProject",
                     "VisualBasicProject",
                     LanguageNames.VisualBasic,
-                    projectReferences: new[] { new ProjectReference(project1.Id) }));
+                    projectReferences: new[] { new ProjectReference(project1.Id) }
+                )
+            );
 
             // Nothing should have incomplete references, and everything should build
             Assert.True(project1.HasSuccessfullyLoadedAsync().Result);
@@ -2559,7 +3703,9 @@ public class C : A {
                     "VisualBasicProject",
                     "VisualBasicProject",
                     LanguageNames.VisualBasic,
-                    projectReferences: new[] { new ProjectReference(project1.Id) }));
+                    projectReferences: new[] { new ProjectReference(project1.Id) }
+                )
+            );
 
             Assert.True(project1.HasSuccessfullyLoadedAsync().Result);
             Assert.False(project2.HasSuccessfullyLoadedAsync().Result);
@@ -2579,12 +3725,15 @@ public class C : A {
                     "VisualBasicProject",
                     "VisualBasicProject",
                     LanguageNames.VisualBasic,
-                    projectReferences: new[] { new ProjectReference(project1.Id) }));
+                    projectReferences: new[] { new ProjectReference(project1.Id) }
+                )
+            );
 
             var document = workspace.AddDocument(project2.Id, "Test.cs", SourceText.From(""));
 
             // Nothing should have incomplete references, and everything should build
-            var frozenSolution = document.WithFrozenPartialSemantics(CancellationToken.None).Project.Solution;
+            var frozenSolution =
+                document.WithFrozenPartialSemantics(CancellationToken.None).Project.Solution;
 
             Assert.True(frozenSolution.GetProject(project1.Id).HasSuccessfullyLoadedAsync().Result);
             Assert.True(frozenSolution.GetProject(project2.Id).HasSuccessfullyLoadedAsync().Result);
@@ -2593,7 +3742,14 @@ public class C : A {
         [Fact]
         public void TestProjectCompletenessWithMultipleProjects()
         {
-            GetMultipleProjects(out var csBrokenProject, out var vbNormalProject, out var dependsOnBrokenProject, out var dependsOnVbNormalProject, out var transitivelyDependsOnBrokenProjects, out var transitivelyDependsOnNormalProjects);
+            GetMultipleProjects(
+                out var csBrokenProject,
+                out var vbNormalProject,
+                out var dependsOnBrokenProject,
+                out var dependsOnVbNormalProject,
+                out var transitivelyDependsOnBrokenProjects,
+                out var transitivelyDependsOnNormalProjects
+            );
 
             // check flag for a broken project itself
             Assert.False(csBrokenProject.HasSuccessfullyLoadedAsync().Result);
@@ -2622,22 +3778,38 @@ public class C : A {
             // set max file length to 1 bytes
             var maxLength = 1;
             var workspace = new AdhocWorkspace();
-            workspace.TryApplyChanges(workspace.CurrentSolution.WithOptions(workspace.Options
-                .WithChangedOption(FileTextLoaderOptions.FileLengthThreshold, maxLength)));
+            workspace.TryApplyChanges(
+                workspace.CurrentSolution.WithOptions(
+                    workspace.Options.WithChangedOption(
+                        FileTextLoaderOptions.FileLengthThreshold,
+                        maxLength
+                    )
+                )
+            );
 
             using var root = new TempRoot();
-            var file = root.CreateFile(prefix: "massiveFile", extension: ".cs").WriteAllText("hello");
+            var file = root.CreateFile(prefix: "massiveFile", extension: ".cs")
+                .WriteAllText("hello");
 
             var loader = new FileTextLoader(file.Path, Encoding.UTF8);
             var textLength = FileUtilities.GetFileLength(file.Path);
 
-            var expected = string.Format(WorkspacesResources.File_0_size_of_1_exceeds_maximum_allowed_size_of_2, file.Path, textLength, maxLength);
+            var expected = string.Format(
+                WorkspacesResources.File_0_size_of_1_exceeds_maximum_allowed_size_of_2,
+                file.Path,
+                textLength,
+                maxLength
+            );
             var exceptionThrown = false;
 
             try
             {
                 // test async one
-                var unused = await loader.LoadTextAndVersionAsync(workspace, DocumentId.CreateNewId(ProjectId.CreateNewId()), CancellationToken.None);
+                var unused = await loader.LoadTextAndVersionAsync(
+                    workspace,
+                    DocumentId.CreateNewId(ProjectId.CreateNewId()),
+                    CancellationToken.None
+                );
             }
             catch (InvalidDataException ex)
             {
@@ -2651,7 +3823,11 @@ public class C : A {
             try
             {
                 // test sync one
-                var unused = loader.LoadTextAndVersionSynchronously(workspace, DocumentId.CreateNewId(ProjectId.CreateNewId()), CancellationToken.None);
+                var unused = loader.LoadTextAndVersionSynchronously(
+                    workspace,
+                    DocumentId.CreateNewId(ProjectId.CreateNewId()),
+                    CancellationToken.None
+                );
             }
             catch (InvalidDataException ex)
             {
@@ -2674,16 +3850,28 @@ public class C : A {
             var factory = dummyProject.LanguageServices.SyntaxTreeFactory;
 
             // create the origin tree
-            var strongTree = factory.ParseSyntaxTree("dummy", dummyProject.ParseOptions, SourceText.From("// emtpy"), CancellationToken.None);
+            var strongTree = factory.ParseSyntaxTree(
+                "dummy",
+                dummyProject.ParseOptions,
+                SourceText.From("// emtpy"),
+                CancellationToken.None
+            );
 
             // create recoverable tree off the original tree
             var recoverableTree = factory.CreateRecoverableTree(
                 dummyProject.Id,
                 strongTree.FilePath,
                 strongTree.Options,
-                new ConstantValueSource<TextAndVersion>(TextAndVersion.Create(strongTree.GetText(), VersionStamp.Create(), strongTree.FilePath)),
+                new ConstantValueSource<TextAndVersion>(
+                    TextAndVersion.Create(
+                        strongTree.GetText(),
+                        VersionStamp.Create(),
+                        strongTree.FilePath
+                    )
+                ),
                 strongTree.GetText().Encoding,
-                strongTree.GetRoot());
+                strongTree.GetRoot()
+            );
 
             // create new tree before it ever getting root node
             var newTree = recoverableTree.WithFilePath("different/dummy");
@@ -2700,10 +3888,13 @@ public class C : A {
             var pid = ProjectId.CreateNewId();
 
             VersionStamp GetVersion() => solution.GetProject(pid).Version;
-            ImmutableArray<DocumentId> GetDocumentIds() => solution.GetProject(pid).DocumentIds.ToImmutableArray();
+            ImmutableArray<DocumentId> GetDocumentIds() =>
+                solution.GetProject(pid).DocumentIds.ToImmutableArray();
             ImmutableArray<SyntaxTree> GetSyntaxTrees()
             {
-                return solution.GetProject(pid).GetCompilationAsync().Result.SyntaxTrees.ToImmutableArray();
+                return solution.GetProject(pid)
+                    .GetCompilationAsync()
+                    .Result.SyntaxTrees.ToImmutableArray();
             }
 
             solution = solution.AddProject(pid, "test", "test.dll", LanguageNames.CSharp);
@@ -2730,7 +3921,10 @@ public class C : A {
 
             var oldVersion = GetVersion();
 
-            solution = solution.WithProjectDocumentsOrder(pid, ImmutableList.CreateRange(new[] { did5, did4, did3, did2, did1 }));
+            solution = solution.WithProjectDocumentsOrder(
+                pid,
+                ImmutableList.CreateRange(new[] { did5, did4, did3, did2, did1 })
+            );
 
             var newVersion = GetVersion();
 
@@ -2755,7 +3949,10 @@ public class C : A {
             Assert.Equal("test2.cs", syntaxTrees[3].FilePath, StringComparer.OrdinalIgnoreCase);
             Assert.Equal("test1.cs", syntaxTrees[4].FilePath, StringComparer.OrdinalIgnoreCase);
 
-            solution = solution.WithProjectDocumentsOrder(pid, ImmutableList.CreateRange(new[] { did5, did4, did3, did2, did1 }));
+            solution = solution.WithProjectDocumentsOrder(
+                pid,
+                ImmutableList.CreateRange(new[] { did5, did4, did3, did2, did1 })
+            );
 
             var newSameVersion = GetVersion();
 
@@ -2794,15 +3991,38 @@ public class C : A {
 
             solution = solution.RemoveDocument(did5);
 
-            Assert.Throws<ArgumentException>(() => solution = solution.WithProjectDocumentsOrder(pid, ImmutableList.Create<DocumentId>()));
-            Assert.Throws<ArgumentNullException>(() => solution = solution.WithProjectDocumentsOrder(pid, null));
-            Assert.Throws<InvalidOperationException>(() => solution = solution.WithProjectDocumentsOrder(pid, ImmutableList.CreateRange(new[] { did5, did3, did2, did1 })));
-            Assert.Throws<ArgumentException>(() => solution = solution.WithProjectDocumentsOrder(pid, ImmutableList.CreateRange(new[] { did3, did2, did1 })));
+            Assert.Throws<ArgumentException>(
+                () =>
+                    solution = solution.WithProjectDocumentsOrder(
+                        pid,
+                        ImmutableList.Create<DocumentId>()
+                    )
+            );
+            Assert.Throws<ArgumentNullException>(
+                () => solution = solution.WithProjectDocumentsOrder(pid, null)
+            );
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    solution = solution.WithProjectDocumentsOrder(
+                        pid,
+                        ImmutableList.CreateRange(new[] { did5, did3, did2, did1 })
+                    )
+            );
+            Assert.Throws<ArgumentException>(
+                () =>
+                    solution = solution.WithProjectDocumentsOrder(
+                        pid,
+                        ImmutableList.CreateRange(new[] { did3, did2, did1 })
+                    )
+            );
         }
 
         [Theory]
         [CombinatorialData]
-        public async Task TestAddingEditorConfigFileWithDiagnosticSeverity([CombinatorialValues(LanguageNames.CSharp, LanguageNames.VisualBasic)] string languageName)
+        public async Task TestAddingEditorConfigFileWithDiagnosticSeverity(
+            [CombinatorialValues(LanguageNames.CSharp, LanguageNames.VisualBasic)]
+                string languageName
+        )
         {
             using var workspace = CreateWorkspace();
             var solution = workspace.CurrentSolution;
@@ -2811,18 +4031,35 @@ public class C : A {
             var sourceDocumentId = DocumentId.CreateNewId(projectId);
 
             solution = solution.AddProject(projectId, "Test", "Test.dll", languageName);
-            solution = solution.AddDocument(sourceDocumentId, "Test" + extension, "", filePath: @"Z:\Test" + extension);
+            solution = solution.AddDocument(
+                sourceDocumentId,
+                "Test" + extension,
+                "",
+                filePath: @"Z:\Test" + extension
+            );
 
-            var originalSyntaxTree = await solution.GetDocument(sourceDocumentId).GetSyntaxTreeAsync();
+            var originalSyntaxTree = await solution.GetDocument(sourceDocumentId)
+                .GetSyntaxTreeAsync();
             var originalCompilation = await solution.GetProject(projectId).GetCompilationAsync();
 
             var editorConfigDocumentId = DocumentId.CreateNewId(projectId);
-            solution = solution.AddAnalyzerConfigDocuments(ImmutableArray.Create(
-                DocumentInfo.Create(
-                    editorConfigDocumentId,
-                    ".editorconfig",
-                    filePath: @"Z:\.editorconfig",
-                    loader: TextLoader.From(TextAndVersion.Create(SourceText.From("[*.*]\r\n\r\ndotnet_diagnostic.CA1234.severity = error"), VersionStamp.Default)))));
+            solution = solution.AddAnalyzerConfigDocuments(
+                ImmutableArray.Create(
+                    DocumentInfo.Create(
+                        editorConfigDocumentId,
+                        ".editorconfig",
+                        filePath: @"Z:\.editorconfig",
+                        loader: TextLoader.From(
+                            TextAndVersion.Create(
+                                SourceText.From(
+                                    "[*.*]\r\n\r\ndotnet_diagnostic.CA1234.severity = error"
+                                ),
+                                VersionStamp.Default
+                            )
+                        )
+                    )
+                )
+            );
 
             var newSyntaxTree = await solution.GetDocument(sourceDocumentId).GetSyntaxTreeAsync();
             var project = solution.GetProject(projectId);
@@ -2833,13 +4070,23 @@ public class C : A {
             Assert.NotEqual(originalCompilation.Options, newCompilation.Options);
 
             var provider = project.CompilationOptions.SyntaxTreeOptionsProvider;
-            Assert.True(provider.TryGetDiagnosticValue(newSyntaxTree, "CA1234", CancellationToken.None, out var severity));
+            Assert.True(
+                provider.TryGetDiagnosticValue(
+                    newSyntaxTree,
+                    "CA1234",
+                    CancellationToken.None,
+                    out var severity
+                )
+            );
             Assert.Equal(ReportDiagnostic.Error, severity);
         }
 
         [Theory]
         [CombinatorialData]
-        public async Task TestAddingAndRemovingEditorConfigFileWithDiagnosticSeverity([CombinatorialValues(LanguageNames.CSharp, LanguageNames.VisualBasic)] string languageName)
+        public async Task TestAddingAndRemovingEditorConfigFileWithDiagnosticSeverity(
+            [CombinatorialValues(LanguageNames.CSharp, LanguageNames.VisualBasic)]
+                string languageName
+        )
         {
             using var workspace = CreateWorkspace();
             var solution = workspace.CurrentSolution;
@@ -2848,31 +4095,63 @@ public class C : A {
             var sourceDocumentId = DocumentId.CreateNewId(projectId);
 
             solution = solution.AddProject(projectId, "Test", "Test.dll", languageName);
-            solution = solution.AddDocument(sourceDocumentId, "Test" + extension, "", filePath: @"Z:\Test" + extension);
+            solution = solution.AddDocument(
+                sourceDocumentId,
+                "Test" + extension,
+                "",
+                filePath: @"Z:\Test" + extension
+            );
 
             var editorConfigDocumentId = DocumentId.CreateNewId(projectId);
-            solution = solution.AddAnalyzerConfigDocuments(ImmutableArray.Create(
-                DocumentInfo.Create(
-                    editorConfigDocumentId,
-                    ".editorconfig",
-                    filePath: @"Z:\.editorconfig",
-                    loader: TextLoader.From(TextAndVersion.Create(SourceText.From("[*.*]\r\n\r\ndotnet_diagnostic.CA1234.severity = error"), VersionStamp.Default)))));
+            solution = solution.AddAnalyzerConfigDocuments(
+                ImmutableArray.Create(
+                    DocumentInfo.Create(
+                        editorConfigDocumentId,
+                        ".editorconfig",
+                        filePath: @"Z:\.editorconfig",
+                        loader: TextLoader.From(
+                            TextAndVersion.Create(
+                                SourceText.From(
+                                    "[*.*]\r\n\r\ndotnet_diagnostic.CA1234.severity = error"
+                                ),
+                                VersionStamp.Default
+                            )
+                        )
+                    )
+                )
+            );
 
-            var syntaxTreeAfterAddingEditorConfig = await solution.GetDocument(sourceDocumentId).GetSyntaxTreeAsync();
+            var syntaxTreeAfterAddingEditorConfig = await solution.GetDocument(sourceDocumentId)
+                .GetSyntaxTreeAsync();
 
             var project = solution.GetProject(projectId);
 
             var provider = project.CompilationOptions.SyntaxTreeOptionsProvider;
-            Assert.True(provider.TryGetDiagnosticValue(syntaxTreeAfterAddingEditorConfig, "CA1234", CancellationToken.None, out var severity));
+            Assert.True(
+                provider.TryGetDiagnosticValue(
+                    syntaxTreeAfterAddingEditorConfig,
+                    "CA1234",
+                    CancellationToken.None,
+                    out var severity
+                )
+            );
             Assert.Equal(ReportDiagnostic.Error, severity);
 
             solution = solution.RemoveAnalyzerConfigDocument(editorConfigDocumentId);
             project = solution.GetProject(projectId);
 
-            var syntaxTreeAfterRemovingEditorConfig = await solution.GetDocument(sourceDocumentId).GetSyntaxTreeAsync();
+            var syntaxTreeAfterRemovingEditorConfig = await solution.GetDocument(sourceDocumentId)
+                .GetSyntaxTreeAsync();
 
             provider = project.CompilationOptions.SyntaxTreeOptionsProvider;
-            Assert.False(provider.TryGetDiagnosticValue(syntaxTreeAfterAddingEditorConfig, "CA1234", CancellationToken.None, out _));
+            Assert.False(
+                provider.TryGetDiagnosticValue(
+                    syntaxTreeAfterAddingEditorConfig,
+                    "CA1234",
+                    CancellationToken.None,
+                    out _
+                )
+            );
 
             var finalCompilation = await project.GetCompilationAsync();
 
@@ -2881,44 +4160,94 @@ public class C : A {
 
         [Theory]
         [CombinatorialData]
-        public async Task TestChangingAnEditorConfigFile([CombinatorialValues(LanguageNames.CSharp, LanguageNames.VisualBasic)] string languageName, bool useRecoverableTrees)
+        public async Task TestChangingAnEditorConfigFile(
+            [CombinatorialValues(LanguageNames.CSharp, LanguageNames.VisualBasic)]
+                string languageName,
+            bool useRecoverableTrees
+        )
         {
-            using var workspace = useRecoverableTrees ? CreateWorkspaceWithRecoverableSyntaxTreesAndWeakCompilations() : CreateWorkspace();
+            using var workspace = useRecoverableTrees
+                ? CreateWorkspaceWithRecoverableSyntaxTreesAndWeakCompilations()
+                : CreateWorkspace();
             var solution = workspace.CurrentSolution;
             var extension = languageName == LanguageNames.CSharp ? ".cs" : ".vb";
             var projectId = ProjectId.CreateNewId();
             var sourceDocumentId = DocumentId.CreateNewId(projectId);
 
             solution = solution.AddProject(projectId, "Test", "Test.dll", languageName);
-            solution = solution.AddDocument(sourceDocumentId, "Test" + extension, "", filePath: @"Z:\Test" + extension);
+            solution = solution.AddDocument(
+                sourceDocumentId,
+                "Test" + extension,
+                "",
+                filePath: @"Z:\Test" + extension
+            );
 
             var editorConfigDocumentId = DocumentId.CreateNewId(projectId);
-            solution = solution.AddAnalyzerConfigDocuments(ImmutableArray.Create(
-                DocumentInfo.Create(
-                    editorConfigDocumentId,
-                    ".editorconfig",
-                    filePath: @"Z:\.editorconfig",
-                    loader: TextLoader.From(TextAndVersion.Create(SourceText.From("[*.*]\r\n\r\ndotnet_diagnostic.CA1234.severity = error"), VersionStamp.Default)))));
+            solution = solution.AddAnalyzerConfigDocuments(
+                ImmutableArray.Create(
+                    DocumentInfo.Create(
+                        editorConfigDocumentId,
+                        ".editorconfig",
+                        filePath: @"Z:\.editorconfig",
+                        loader: TextLoader.From(
+                            TextAndVersion.Create(
+                                SourceText.From(
+                                    "[*.*]\r\n\r\ndotnet_diagnostic.CA1234.severity = error"
+                                ),
+                                VersionStamp.Default
+                            )
+                        )
+                    )
+                )
+            );
 
-            var syntaxTreeBeforeEditorConfigChange = await solution.GetDocument(sourceDocumentId).GetSyntaxTreeAsync();
+            var syntaxTreeBeforeEditorConfigChange = await solution.GetDocument(sourceDocumentId)
+                .GetSyntaxTreeAsync();
 
             var project = solution.GetProject(projectId);
             var provider = project.CompilationOptions.SyntaxTreeOptionsProvider;
-            Assert.Equal(provider, (await project.GetCompilationAsync()).Options.SyntaxTreeOptionsProvider);
-            Assert.True(provider.TryGetDiagnosticValue(syntaxTreeBeforeEditorConfigChange, "CA1234", CancellationToken.None, out var severity));
+            Assert.Equal(
+                provider,
+                (await project.GetCompilationAsync()).Options.SyntaxTreeOptionsProvider
+            );
+            Assert.True(
+                provider.TryGetDiagnosticValue(
+                    syntaxTreeBeforeEditorConfigChange,
+                    "CA1234",
+                    CancellationToken.None,
+                    out var severity
+                )
+            );
             Assert.Equal(ReportDiagnostic.Error, severity);
 
             solution = solution.WithAnalyzerConfigDocumentTextLoader(
                 editorConfigDocumentId,
-                TextLoader.From(TextAndVersion.Create(SourceText.From("[*.*]\r\n\r\ndotnet_diagnostic.CA6789.severity = error"), VersionStamp.Default)),
-                PreservationMode.PreserveValue);
+                TextLoader.From(
+                    TextAndVersion.Create(
+                        SourceText.From("[*.*]\r\n\r\ndotnet_diagnostic.CA6789.severity = error"),
+                        VersionStamp.Default
+                    )
+                ),
+                PreservationMode.PreserveValue
+            );
 
-            var syntaxTreeAfterEditorConfigChange = await solution.GetDocument(sourceDocumentId).GetSyntaxTreeAsync();
+            var syntaxTreeAfterEditorConfigChange = await solution.GetDocument(sourceDocumentId)
+                .GetSyntaxTreeAsync();
 
             project = solution.GetProject(projectId);
             provider = project.CompilationOptions.SyntaxTreeOptionsProvider;
-            Assert.Equal(provider, (await project.GetCompilationAsync()).Options.SyntaxTreeOptionsProvider);
-            Assert.True(provider.TryGetDiagnosticValue(syntaxTreeBeforeEditorConfigChange, "CA6789", CancellationToken.None, out severity));
+            Assert.Equal(
+                provider,
+                (await project.GetCompilationAsync()).Options.SyntaxTreeOptionsProvider
+            );
+            Assert.True(
+                provider.TryGetDiagnosticValue(
+                    syntaxTreeBeforeEditorConfigChange,
+                    "CA6789",
+                    CancellationToken.None,
+                    out severity
+                )
+            );
             Assert.Equal(ReportDiagnostic.Error, severity);
 
             var finalCompilation = await project.GetCompilationAsync();
@@ -2935,25 +4264,46 @@ public class C : A {
             var sourceDocumentId = DocumentId.CreateNewId(projectId);
 
             solution = solution.AddProject(projectId, "Test", "Test.dll", LanguageNames.CSharp);
-            solution = solution.AddDocument(sourceDocumentId, "Test.cs", "", filePath: @"Z:\Test.cs");
+            solution = solution.AddDocument(
+                sourceDocumentId,
+                "Test.cs",
+                "",
+                filePath: @"Z:\Test.cs"
+            );
 
-            var originalProvider = solution.GetProject(projectId).CompilationOptions.SyntaxTreeOptionsProvider;
+            var originalProvider =
+                solution.GetProject(projectId).CompilationOptions.SyntaxTreeOptionsProvider;
             Assert.False(originalProvider.TryGetGlobalDiagnosticValue("CA1234", default, out _));
 
             var editorConfigDocumentId = DocumentId.CreateNewId(projectId);
-            solution = solution.AddAnalyzerConfigDocuments(ImmutableArray.Create(
-                DocumentInfo.Create(
-                    editorConfigDocumentId,
-                    ".globalconfig",
-                    filePath: @"Z:\.globalconfig",
-                    loader: TextLoader.From(TextAndVersion.Create(SourceText.From("is_global = true\r\n\r\ndotnet_diagnostic.CA1234.severity = error"), VersionStamp.Default)))));
+            solution = solution.AddAnalyzerConfigDocuments(
+                ImmutableArray.Create(
+                    DocumentInfo.Create(
+                        editorConfigDocumentId,
+                        ".globalconfig",
+                        filePath: @"Z:\.globalconfig",
+                        loader: TextLoader.From(
+                            TextAndVersion.Create(
+                                SourceText.From(
+                                    "is_global = true\r\n\r\ndotnet_diagnostic.CA1234.severity = error"
+                                ),
+                                VersionStamp.Default
+                            )
+                        )
+                    )
+                )
+            );
 
-            var newProvider = solution.GetProject(projectId).CompilationOptions.SyntaxTreeOptionsProvider;
-            Assert.True(newProvider.TryGetGlobalDiagnosticValue("CA1234", default, out var severity));
+            var newProvider =
+                solution.GetProject(projectId).CompilationOptions.SyntaxTreeOptionsProvider;
+            Assert.True(
+                newProvider.TryGetGlobalDiagnosticValue("CA1234", default, out var severity)
+            );
             Assert.Equal(ReportDiagnostic.Error, severity);
 
             solution = solution.RemoveAnalyzerConfigDocument(editorConfigDocumentId);
-            var finalProvider = solution.GetProject(projectId).CompilationOptions.SyntaxTreeOptionsProvider;
+            var finalProvider =
+                solution.GetProject(projectId).CompilationOptions.SyntaxTreeOptionsProvider;
             Assert.False(finalProvider.TryGetGlobalDiagnosticValue("CA1234", default, out _));
         }
 
@@ -2968,8 +4318,14 @@ public class C : A {
 
             solution = solution.AddProject(projectId, "Test", "Test.dll", LanguageNames.CSharp)
                 .WithProjectMetadataReferences(projectId, new[] { TestMetadata.Net451.mscorlib })
-                .WithProjectCompilationOptions(projectId, new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary).WithNullableContextOptions(NullableContextOptions.Enable));
-            var src = @"
+                .WithProjectCompilationOptions(
+                    projectId,
+                    new CSharpCompilationOptions(
+                        OutputKind.DynamicallyLinkedLibrary
+                    ).WithNullableContextOptions(NullableContextOptions.Enable)
+                );
+            var src =
+                @"
 class C
 {
     void M(C? c)
@@ -2977,9 +4333,15 @@ class C
         _ = c.ToString();   // warning CS8602: Dereference of a possibly null reference.
     }
 }";
-            solution = solution.AddDocument(sourceDocumentId, "Test.cs", src, filePath: @"Z:\Test.cs");
+            solution = solution.AddDocument(
+                sourceDocumentId,
+                "Test.cs",
+                src,
+                filePath: @"Z:\Test.cs"
+            );
 
-            var originalSyntaxTree = await solution.GetDocument(sourceDocumentId).GetSyntaxTreeAsync();
+            var originalSyntaxTree = await solution.GetDocument(sourceDocumentId)
+                .GetSyntaxTreeAsync();
             var originalCompilation = await solution.GetProject(projectId).GetCompilationAsync();
 
             // warning CS8602: Dereference of a possibly null reference.
@@ -2988,12 +4350,21 @@ class C
             Assert.Equal("CS8602", diagnostic.Id);
 
             var editorConfigDocumentId = DocumentId.CreateNewId(projectId);
-            solution = solution.AddAnalyzerConfigDocuments(ImmutableArray.Create(
-                DocumentInfo.Create(
-                    editorConfigDocumentId,
-                    ".editorconfig",
-                    filePath: @"Z:\.editorconfig",
-                    loader: TextLoader.From(TextAndVersion.Create(SourceText.From("[*.*]\r\n\r\ngenerated_code = true"), VersionStamp.Default)))));
+            solution = solution.AddAnalyzerConfigDocuments(
+                ImmutableArray.Create(
+                    DocumentInfo.Create(
+                        editorConfigDocumentId,
+                        ".editorconfig",
+                        filePath: @"Z:\.editorconfig",
+                        loader: TextLoader.From(
+                            TextAndVersion.Create(
+                                SourceText.From("[*.*]\r\n\r\ngenerated_code = true"),
+                                VersionStamp.Default
+                            )
+                        )
+                    )
+                )
+            );
 
             var newSyntaxTree = await solution.GetDocument(sourceDocumentId).GetSyntaxTreeAsync();
             var newCompilation = await solution.GetProject(projectId).GetCompilationAsync();
@@ -3012,12 +4383,19 @@ class C
         [Fact]
         public void NoCompilationProjectsHaveNullSyntaxTreesAndSemanticModels()
         {
-            using var workspace = CreateWorkspace(new[] { typeof(NoCompilationLanguageServiceFactory) });
+            using var workspace = CreateWorkspace(
+                new[] { typeof(NoCompilationLanguageServiceFactory) }
+            );
             var solution = workspace.CurrentSolution;
             var projectId = ProjectId.CreateNewId();
             var documentId = DocumentId.CreateNewId(projectId);
 
-            solution = solution.AddProject(projectId, "Test", "Test.dll", NoCompilationConstants.LanguageName);
+            solution = solution.AddProject(
+                projectId,
+                "Test",
+                "Test.dll",
+                NoCompilationConstants.LanguageName
+            );
             solution = solution.AddDocument(documentId, "Test.cs", "", filePath: @"Z:\Test.txt");
 
             var document = solution.GetDocument(documentId)!;
@@ -3033,12 +4411,19 @@ class C
         [Fact]
         public void ChangingFilePathOfFileInNoCompilationProjectWorks()
         {
-            using var workspace = CreateWorkspace(new[] { typeof(NoCompilationLanguageServiceFactory) });
+            using var workspace = CreateWorkspace(
+                new[] { typeof(NoCompilationLanguageServiceFactory) }
+            );
             var solution = workspace.CurrentSolution;
             var projectId = ProjectId.CreateNewId();
             var documentId = DocumentId.CreateNewId(projectId);
 
-            solution = solution.AddProject(projectId, "Test", "Test.dll", NoCompilationConstants.LanguageName);
+            solution = solution.AddProject(
+                projectId,
+                "Test",
+                "Test.dll",
+                NoCompilationConstants.LanguageName
+            );
             solution = solution.AddDocument(documentId, "Test.cs", "", filePath: @"Z:\Test.txt");
 
             Assert.Null(solution.GetDocument(documentId)!.GetSyntaxTreeAsync().Result);
@@ -3058,13 +4443,30 @@ class C
 
             const string editorConfigFilePath = @"Z:\.editorconfig";
 
-            var projectInfo =
-                ProjectInfo.Create(projectId, VersionStamp.Default, "Test", "Test", LanguageNames.CSharp)
-                    .WithAnalyzerConfigDocuments(new[] { DocumentInfo.Create(editorConfigDocumentId, ".editorconfig", filePath: editorConfigFilePath) });
+            var projectInfo = ProjectInfo.Create(
+                    projectId,
+                    VersionStamp.Default,
+                    "Test",
+                    "Test",
+                    LanguageNames.CSharp
+                )
+                .WithAnalyzerConfigDocuments(
+                    new[]
+                    {
+                        DocumentInfo.Create(
+                            editorConfigDocumentId,
+                            ".editorconfig",
+                            filePath: editorConfigFilePath
+                        )
+                    }
+                );
 
             solution = solution.AddProject(projectInfo);
 
-            Assert.Equal(editorConfigDocumentId, Assert.Single(solution.GetDocumentIdsWithFilePath(editorConfigFilePath)));
+            Assert.Equal(
+                editorConfigDocumentId,
+                Assert.Single(solution.GetDocumentIdsWithFilePath(editorConfigFilePath))
+            );
 
             solution = solution.RemoveProject(projectId);
 
@@ -3077,17 +4479,21 @@ class C
             out Project dependsOnBrokenProject,
             out Project dependsOnVbNormalProject,
             out Project transitivelyDependsOnBrokenProjects,
-            out Project transitivelyDependsOnNormalProjects)
+            out Project transitivelyDependsOnNormalProjects
+        )
         {
             var workspace = new AdhocWorkspace();
 
             csBrokenProject = workspace.AddProject(
                 ProjectInfo.Create(
-                    ProjectId.CreateNewId(),
-                    VersionStamp.Create(),
-                    "CSharpProject",
-                    "CSharpProject",
-                    LanguageNames.CSharp).WithHasAllInformation(hasAllInformation: false));
+                        ProjectId.CreateNewId(),
+                        VersionStamp.Create(),
+                        "CSharpProject",
+                        "CSharpProject",
+                        LanguageNames.CSharp
+                    )
+                    .WithHasAllInformation(hasAllInformation: false)
+            );
 
             vbNormalProject = workspace.AddProject(
                 ProjectInfo.Create(
@@ -3095,7 +4501,9 @@ class C
                     VersionStamp.Create(),
                     "VisualBasicProject",
                     "VisualBasicProject",
-                    LanguageNames.VisualBasic));
+                    LanguageNames.VisualBasic
+                )
+            );
 
             dependsOnBrokenProject = workspace.AddProject(
                 ProjectInfo.Create(
@@ -3104,7 +4512,13 @@ class C
                     "VisualBasicProject",
                     "VisualBasicProject",
                     LanguageNames.VisualBasic,
-                    projectReferences: new[] { new ProjectReference(csBrokenProject.Id), new ProjectReference(vbNormalProject.Id) }));
+                    projectReferences: new[]
+                    {
+                        new ProjectReference(csBrokenProject.Id),
+                        new ProjectReference(vbNormalProject.Id)
+                    }
+                )
+            );
 
             dependsOnVbNormalProject = workspace.AddProject(
                 ProjectInfo.Create(
@@ -3113,7 +4527,9 @@ class C
                     "CSharpProject",
                     "CSharpProject",
                     LanguageNames.CSharp,
-                    projectReferences: new[] { new ProjectReference(vbNormalProject.Id) }));
+                    projectReferences: new[] { new ProjectReference(vbNormalProject.Id) }
+                )
+            );
 
             transitivelyDependsOnBrokenProjects = workspace.AddProject(
                 ProjectInfo.Create(
@@ -3122,7 +4538,9 @@ class C
                     "CSharpProject",
                     "CSharpProject",
                     LanguageNames.CSharp,
-                    projectReferences: new[] { new ProjectReference(dependsOnBrokenProject.Id) }));
+                    projectReferences: new[] { new ProjectReference(dependsOnBrokenProject.Id) }
+                )
+            );
 
             transitivelyDependsOnNormalProjects = workspace.AddProject(
                 ProjectInfo.Create(
@@ -3131,7 +4549,9 @@ class C
                     "VisualBasicProject",
                     "VisualBasicProject",
                     LanguageNames.VisualBasic,
-                    projectReferences: new[] { new ProjectReference(dependsOnVbNormalProject.Id) }));
+                    projectReferences: new[] { new ProjectReference(dependsOnVbNormalProject.Id) }
+                )
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.Workspace)]
@@ -3158,7 +4578,10 @@ class C
 
             // Verify option value is preserved on roundtriping the option set (serialize and deserialize).
             var s3 = s2.AddProject("P2", "A2", LanguageNames.CSharp).Solution;
-            var roundTripOptionSet = SerializeAndDeserialize((SerializableOptionSet)s3.Options, optionService);
+            var roundTripOptionSet = SerializeAndDeserialize(
+                (SerializableOptionSet)s3.Options,
+                optionService
+            );
             VerifyOptionSet(roundTripOptionSet);
 
             // Verify option value is preserved on removing a project.
@@ -3173,14 +4596,21 @@ class C
                 Assert.Equal(defaultValue, optionSet.GetOption(option, LanguageNames.VisualBasic));
             }
 
-            static SerializableOptionSet SerializeAndDeserialize(SerializableOptionSet optionSet, IOptionService optionService)
+            static SerializableOptionSet SerializeAndDeserialize(
+                SerializableOptionSet optionSet,
+                IOptionService optionService
+            )
             {
                 using var stream = new MemoryStream();
                 using var writer = new ObjectWriter(stream);
                 optionSet.Serialize(writer, CancellationToken.None);
                 stream.Position = 0;
                 using var reader = ObjectReader.TryGetReader(stream);
-                return SerializableOptionSet.Deserialize(reader, optionService, CancellationToken.None);
+                return SerializableOptionSet.Deserialize(
+                    reader,
+                    optionService,
+                    CancellationToken.None
+                );
             }
         }
 
@@ -3188,18 +4618,25 @@ class C
         [CombinatorialData]
         public async Task TestUpdatedDocumentTextIsObservablyConstantAsync(bool recoverable)
         {
-            using var workspace = recoverable ? CreateWorkspaceWithRecoverableSyntaxTreesAndWeakCompilations() : CreateWorkspace();
+            using var workspace = recoverable
+                ? CreateWorkspaceWithRecoverableSyntaxTreesAndWeakCompilations()
+                : CreateWorkspace();
             var pid = ProjectId.CreateNewId();
             var text = SourceText.From("public class C { }");
             var version = VersionStamp.Create();
-            var docInfo = DocumentInfo.Create(DocumentId.CreateNewId(pid), "c.cs", loader: TextLoader.From(TextAndVersion.Create(text, version)));
+            var docInfo = DocumentInfo.Create(
+                DocumentId.CreateNewId(pid),
+                "c.cs",
+                loader: TextLoader.From(TextAndVersion.Create(text, version))
+            );
             var projInfo = ProjectInfo.Create(
                 pid,
                 version: VersionStamp.Default,
                 name: "TestProject",
                 assemblyName: "TestProject.dll",
                 language: LanguageNames.CSharp,
-                documents: new[] { docInfo });
+                documents: new[] { docInfo }
+            );
 
             var solution = workspace.CurrentSolution.AddProject(projInfo);
             var doc = solution.GetDocument(docInfo.Id);
@@ -3208,7 +4645,8 @@ class C
             var root = await doc.GetSyntaxRootAsync();
             var newRoot = root.WithAdditionalAnnotations(new SyntaxAnnotation());
             Assert.NotSame(root, newRoot);
-            var newDoc = doc.Project.Solution.WithDocumentSyntaxRoot(doc.Id, newRoot).GetDocument(doc.Id);
+            var newDoc = doc.Project.Solution.WithDocumentSyntaxRoot(doc.Id, newRoot)
+                .GetDocument(doc.Id);
             Assert.NotSame(doc, newDoc);
 
             var newDocText = await newDoc.GetTextAsync();

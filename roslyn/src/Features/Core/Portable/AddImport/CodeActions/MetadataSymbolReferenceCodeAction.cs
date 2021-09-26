@@ -15,20 +15,32 @@ namespace Microsoft.CodeAnalysis.AddImport
     {
         private class MetadataSymbolReferenceCodeAction : SymbolReferenceCodeAction
         {
-            public MetadataSymbolReferenceCodeAction(Document originalDocument, AddImportFixData fixData)
-                : base(originalDocument, fixData)
+            public MetadataSymbolReferenceCodeAction(
+                Document originalDocument,
+                AddImportFixData fixData
+            ) : base(originalDocument, fixData)
             {
                 Contract.ThrowIfFalse(fixData.Kind == AddImportFixKind.MetadataSymbol);
             }
 
-            protected override Task<CodeActionOperation?> UpdateProjectAsync(Project project, bool isPreview, CancellationToken cancellationToken)
+            protected override Task<CodeActionOperation?> UpdateProjectAsync(
+                Project project,
+                bool isPreview,
+                CancellationToken cancellationToken
+            )
             {
-                var projectWithReference = project.Solution.GetRequiredProject(FixData.PortableExecutableReferenceProjectId);
-                var reference = projectWithReference.MetadataReferences
-                                                    .OfType<PortableExecutableReference>()
-                                                    .First(pe => pe.FilePath == FixData.PortableExecutableReferenceFilePathToAdd);
+                var projectWithReference = project.Solution.GetRequiredProject(
+                    FixData.PortableExecutableReferenceProjectId
+                );
+                var reference =
+                    projectWithReference.MetadataReferences.OfType<PortableExecutableReference>()
+                        .First(
+                            pe => pe.FilePath == FixData.PortableExecutableReferenceFilePathToAdd
+                        );
 
-                return Task.FromResult<CodeActionOperation?>(new ApplyChangesOperation(project.AddMetadataReference(reference).Solution));
+                return Task.FromResult<CodeActionOperation?>(
+                    new ApplyChangesOperation(project.AddMetadataReference(reference).Solution)
+                );
             }
         }
     }

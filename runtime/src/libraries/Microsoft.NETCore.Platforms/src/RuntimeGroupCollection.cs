@@ -19,9 +19,13 @@ namespace Microsoft.NETCore.Platforms.BuildTasks
         public RuntimeGroupCollection(ICollection<RuntimeGroup> runtimeGroups)
         {
             allRuntimeGroups = runtimeGroups;
-            runtimeGroupsByBaseRID = runtimeGroups.GroupBy(rg => rg.BaseRID).ToDictionary(g => g.Key, g => new List<RuntimeGroup>(g.AsEnumerable()));
+            runtimeGroupsByBaseRID = runtimeGroups.GroupBy(rg => rg.BaseRID)
+                .ToDictionary(g => g.Key, g => new List<RuntimeGroup>(g.AsEnumerable()));
 
-            knownRIDs = new HashSet<RID>(allRuntimeGroups.SelectMany(rg => rg.GetRIDMappings()).Select(mapping => mapping.RuntimeIdentifier));
+            knownRIDs = new HashSet<RID>(
+                allRuntimeGroups.SelectMany(rg => rg.GetRIDMappings())
+                    .Select(mapping => mapping.RuntimeIdentifier)
+            );
         }
 
         /// <summary>
@@ -90,14 +94,23 @@ namespace Microsoft.NETCore.Platforms.BuildTasks
                     void considerCandidate()
                     {
                         // is this a better match?
-                        if (!rid.HasArchitecture || candidate.Architectures.Contains(rid.Architecture))
+                        if (
+                            !rid.HasArchitecture
+                            || candidate.Architectures.Contains(rid.Architecture)
+                        )
                         {
-                            if (!rid.HasQualifier || candidate.AdditionalQualifiers.Contains(rid.Qualifier))
+                            if (
+                                !rid.HasQualifier
+                                || candidate.AdditionalQualifiers.Contains(rid.Qualifier)
+                            )
                             {
                                 // matched on arch and qualifier.
                                 runtimeGroup = candidate;
                             }
-                            else if (rid.HasArchitecture && !runtimeGroup.Architectures.Contains(rid.Architecture))
+                            else if (
+                                rid.HasArchitecture
+                                && !runtimeGroup.Architectures.Contains(rid.Architecture)
+                            )
                             {
                                 // matched only on arch and existing match doesn't match arch
                                 runtimeGroup = candidate;
@@ -113,7 +126,9 @@ namespace Microsoft.NETCore.Platforms.BuildTasks
                 // This is an unknown base RID, we'll need to add a new group.
                 if (string.IsNullOrEmpty(parent))
                 {
-                    throw new InvalidOperationException($"AdditionalRuntimeIdentifier {rid} was specified, which could not be found in any existing {nameof(RuntimeGroup)}, and no {nameof(parent)} was specified.");
+                    throw new InvalidOperationException(
+                        $"AdditionalRuntimeIdentifier {rid} was specified, which could not be found in any existing {nameof(RuntimeGroup)}, and no {nameof(parent)} was specified."
+                    );
                 }
 
                 runtimeGroup = new RuntimeGroup(rid.BaseRID, parent);
@@ -139,7 +154,6 @@ namespace Microsoft.NETCore.Platforms.BuildTasks
                 // This should not introduce any new RuntimeGroups, so we specify parent as null
                 AddRuntimeIdentifier(importedRID, null);
             }
-
         }
 
         private void AddRuntimeGroup(RuntimeGroup runtimeGroup)
@@ -148,12 +162,12 @@ namespace Microsoft.NETCore.Platforms.BuildTasks
 
             if (!runtimeGroupsByBaseRID.TryGetValue(runtimeGroup.BaseRID, out baseRuntimeGroups))
             {
-                runtimeGroupsByBaseRID[runtimeGroup.BaseRID] = baseRuntimeGroups = new List<RuntimeGroup>();
+                runtimeGroupsByBaseRID[runtimeGroup.BaseRID] = baseRuntimeGroups =
+                    new List<RuntimeGroup>();
             }
 
             baseRuntimeGroups.Add(runtimeGroup);
             allRuntimeGroups.Add(runtimeGroup);
         }
-
     }
 }

@@ -17,29 +17,51 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets.SnippetFunctio
 {
     internal sealed class SnippetFunctionSimpleTypeName : AbstractSnippetFunctionSimpleTypeName
     {
-        public SnippetFunctionSimpleTypeName(SnippetExpansionClient snippetExpansionClient, ITextBuffer subjectBuffer, string fieldName, string fullyQualifiedName)
-            : base(snippetExpansionClient, subjectBuffer, fieldName, fullyQualifiedName)
-        {
-        }
+        public SnippetFunctionSimpleTypeName(
+            SnippetExpansionClient snippetExpansionClient,
+            ITextBuffer subjectBuffer,
+            string fieldName,
+            string fullyQualifiedName
+        ) : base(snippetExpansionClient, subjectBuffer, fieldName, fullyQualifiedName) { }
 
-        protected override bool TryGetSimplifiedTypeName(Document documentWithFullyQualifiedTypeName, TextSpan updatedTextSpan, CancellationToken cancellationToken, out string simplifiedTypeName)
+        protected override bool TryGetSimplifiedTypeName(
+            Document documentWithFullyQualifiedTypeName,
+            TextSpan updatedTextSpan,
+            CancellationToken cancellationToken,
+            out string simplifiedTypeName
+        )
         {
             simplifiedTypeName = string.Empty;
 
             var typeAnnotation = new SyntaxAnnotation();
-            var syntaxRoot = documentWithFullyQualifiedTypeName.GetSyntaxRootSynchronously(cancellationToken);
-            var nodeToReplace = syntaxRoot.DescendantNodes().FirstOrDefault(n => n.Span == updatedTextSpan);
+            var syntaxRoot = documentWithFullyQualifiedTypeName.GetSyntaxRootSynchronously(
+                cancellationToken
+            );
+            var nodeToReplace = syntaxRoot.DescendantNodes()
+                .FirstOrDefault(n => n.Span == updatedTextSpan);
 
             if (nodeToReplace == null)
             {
                 return false;
             }
 
-            var updatedRoot = syntaxRoot.ReplaceNode(nodeToReplace, nodeToReplace.WithAdditionalAnnotations(typeAnnotation, Simplifier.Annotation));
-            var documentWithAnnotations = documentWithFullyQualifiedTypeName.WithSyntaxRoot(updatedRoot);
+            var updatedRoot = syntaxRoot.ReplaceNode(
+                nodeToReplace,
+                nodeToReplace.WithAdditionalAnnotations(typeAnnotation, Simplifier.Annotation)
+            );
+            var documentWithAnnotations = documentWithFullyQualifiedTypeName.WithSyntaxRoot(
+                updatedRoot
+            );
 
-            var simplifiedDocument = Simplifier.ReduceAsync(documentWithAnnotations, cancellationToken: cancellationToken).WaitAndGetResult(cancellationToken);
-            simplifiedTypeName = simplifiedDocument.GetSyntaxRootSynchronously(cancellationToken).GetAnnotatedNodesAndTokens(typeAnnotation).Single().ToString();
+            var simplifiedDocument = Simplifier.ReduceAsync(
+                    documentWithAnnotations,
+                    cancellationToken: cancellationToken
+                )
+                .WaitAndGetResult(cancellationToken);
+            simplifiedTypeName = simplifiedDocument.GetSyntaxRootSynchronously(cancellationToken)
+                .GetAnnotatedNodesAndTokens(typeAnnotation)
+                .Single()
+                .ToString();
             return true;
         }
     }

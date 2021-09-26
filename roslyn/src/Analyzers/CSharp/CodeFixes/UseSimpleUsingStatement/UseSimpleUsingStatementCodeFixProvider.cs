@@ -27,14 +27,22 @@ namespace Microsoft.CodeAnalysis.CSharp.UseSimpleUsingStatement
 {
     using static SyntaxFactory;
 
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.UseSimpleUsingStatement), Shared]
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.UseSimpleUsingStatement
+        ),
+        Shared
+    ]
     internal class UseSimpleUsingStatementCodeFixProvider : SyntaxEditorBasedCodeFixProvider
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public UseSimpleUsingStatementCodeFixProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public UseSimpleUsingStatementCodeFixProvider() { }
 
         public override ImmutableArray<string> FixableDiagnosticIds { get; } =
             ImmutableArray.Create(IDEDiagnosticIds.UseSimpleUsingStatementDiagnosticId);
@@ -43,18 +51,25 @@ namespace Microsoft.CodeAnalysis.CSharp.UseSimpleUsingStatement
 
         public override Task RegisterCodeFixesAsync(CodeFixContext context)
         {
-            context.RegisterCodeFix(new MyCodeAction(
-                c => FixAsync(context.Document, context.Diagnostics[0], c)),
-                context.Diagnostics);
+            context.RegisterCodeFix(
+                new MyCodeAction(c => FixAsync(context.Document, context.Diagnostics[0], c)),
+                context.Diagnostics
+            );
 
             return Task.CompletedTask;
         }
 
         protected override Task FixAllAsync(
-            Document document, ImmutableArray<Diagnostic> diagnostics,
-            SyntaxEditor editor, CancellationToken cancellationToken)
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            SyntaxEditor editor,
+            CancellationToken cancellationToken
+        )
         {
-            var topmostUsingStatements = diagnostics.Select(d => (UsingStatementSyntax)d.AdditionalLocations[0].FindNode(cancellationToken)).ToSet();
+            var topmostUsingStatements = diagnostics.Select(
+                    d => (UsingStatementSyntax)d.AdditionalLocations[0].FindNode(cancellationToken)
+                )
+                .ToSet();
             var blocks = topmostUsingStatements.Select(u => (BlockSyntax)u.Parent);
 
             // Process blocks in reverse order so we rewrite from inside-to-outside with nested
@@ -62,7 +77,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseSimpleUsingStatement
             var root = editor.OriginalRoot;
             var updatedRoot = root.ReplaceNodes(
                 blocks.OrderByDescending(b => b.SpanStart),
-                (original, current) => RewriteBlock(original, current, topmostUsingStatements));
+                (original, current) => RewriteBlock(original, current, topmostUsingStatements)
+            );
 
             editor.ReplaceNode(root, updatedRoot);
 
@@ -70,20 +86,27 @@ namespace Microsoft.CodeAnalysis.CSharp.UseSimpleUsingStatement
         }
 
         private static SyntaxNode RewriteBlock(
-            BlockSyntax originalBlock, BlockSyntax currentBlock,
-            ISet<UsingStatementSyntax> topmostUsingStatements)
+            BlockSyntax originalBlock,
+            BlockSyntax currentBlock,
+            ISet<UsingStatementSyntax> topmostUsingStatements
+        )
         {
             if (originalBlock.Statements.Count == currentBlock.Statements.Count)
             {
-                var statementToUpdateIndex = originalBlock.Statements.IndexOf(s => topmostUsingStatements.Contains(s));
+                var statementToUpdateIndex = originalBlock.Statements.IndexOf(
+                    s => topmostUsingStatements.Contains(s)
+                );
                 var statementToUpdate = currentBlock.Statements[statementToUpdateIndex];
 
-                if (statementToUpdate is UsingStatementSyntax usingStatement &&
-                    usingStatement.Declaration != null)
+                if (
+                    statementToUpdate is UsingStatementSyntax usingStatement
+                    && usingStatement.Declaration != null
+                )
                 {
                     var updatedStatements = currentBlock.Statements.ReplaceRange(
                         statementToUpdate,
-                        Expand(usingStatement));
+                        Expand(usingStatement)
+                    );
                     return currentBlock.WithStatements(updatedStatements);
                 }
             }
@@ -100,7 +123,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UseSimpleUsingStatement
             {
                 var lastStatement = result[result.Count - 1];
                 result[result.Count - 1] = lastStatement.WithAppendedTrailingTrivia(
-                    remainingTrivia.Insert(0, CSharpSyntaxFacts.Instance.ElasticCarriageReturnLineFeed));
+                    remainingTrivia.Insert(
+                        0,
+                        CSharpSyntaxFacts.Instance.ElasticCarriageReturnLineFeed
+                    )
+                );
             }
 
             for (int i = 0, n = result.Count; i < n; i++)
@@ -111,7 +138,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UseSimpleUsingStatement
             return result;
         }
 
-        private static SyntaxTriviaList Expand(List<StatementSyntax> result, UsingStatementSyntax usingStatement)
+        private static SyntaxTriviaList Expand(
+            List<StatementSyntax> result,
+            UsingStatementSyntax usingStatement
+        )
         {
             // First, convert the using-statement into a using-declaration.
             result.Add(Convert(usingStatement));
@@ -156,19 +186,23 @@ namespace Microsoft.CodeAnalysis.CSharp.UseSimpleUsingStatement
         private static LocalDeclarationStatementSyntax Convert(UsingStatementSyntax usingStatement)
         {
             return LocalDeclarationStatement(
-                usingStatement.AwaitKeyword,
-                usingStatement.UsingKeyword,
-                modifiers: default,
-                usingStatement.Declaration,
-                Token(SyntaxKind.SemicolonToken)).WithTrailingTrivia(usingStatement.CloseParenToken.TrailingTrivia);
+                    usingStatement.AwaitKeyword,
+                    usingStatement.UsingKeyword,
+                    modifiers: default,
+                    usingStatement.Declaration,
+                    Token(SyntaxKind.SemicolonToken)
+                )
+                .WithTrailingTrivia(usingStatement.CloseParenToken.TrailingTrivia);
         }
 
         private class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
             public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
-                : base(CSharpAnalyzersResources.Use_simple_using_statement, createChangedDocument, CSharpAnalyzersResources.Use_simple_using_statement)
-            {
-            }
+                : base(
+                    CSharpAnalyzersResources.Use_simple_using_statement,
+                    createChangedDocument,
+                    CSharpAnalyzersResources.Use_simple_using_statement
+                ) { }
         }
     }
 }

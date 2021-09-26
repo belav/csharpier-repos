@@ -21,7 +21,13 @@ namespace ConsoleApp2
             try
             {
                 C c = new C();
-                int i1 = 0, i2 = 0, i3 = 0, i4 = 0, i5 = 0, i6 = 0, i7 = 0;
+                int i1 = 0,
+                    i2 = 0,
+                    i3 = 0,
+                    i4 = 0,
+                    i5 = 0,
+                    i6 = 0,
+                    i7 = 0;
                 c.f(i1, i2, i3, i4, i5, i6, i7);
             }
             catch (Exception e)

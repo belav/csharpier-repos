@@ -10,7 +10,11 @@ namespace System.Net.Security
 {
     internal sealed class SslAuthenticationOptions
     {
-        internal SslAuthenticationOptions(SslClientAuthenticationOptions sslClientAuthenticationOptions, RemoteCertificateValidationCallback? remoteCallback, LocalCertSelectionCallback? localCallback)
+        internal SslAuthenticationOptions(
+            SslClientAuthenticationOptions sslClientAuthenticationOptions,
+            RemoteCertificateValidationCallback? remoteCallback,
+            LocalCertSelectionCallback? localCallback
+        )
         {
             Debug.Assert(sslClientAuthenticationOptions.TargetHost != null);
 
@@ -19,7 +23,9 @@ namespace System.Net.Security
             ApplicationProtocols = sslClientAuthenticationOptions.ApplicationProtocols;
             CertValidationDelegate = remoteCallback;
             CheckCertName = true;
-            EnabledSslProtocols = FilterOutIncompatibleSslProtocols(sslClientAuthenticationOptions.EnabledSslProtocols);
+            EnabledSslProtocols = FilterOutIncompatibleSslProtocols(
+                sslClientAuthenticationOptions.EnabledSslProtocols
+            );
             EncryptionPolicy = sslClientAuthenticationOptions.EncryptionPolicy;
             IsServer = false;
             RemoteCertRequired = true;
@@ -27,18 +33,23 @@ namespace System.Net.Security
 
             // Client specific options.
             CertSelectionDelegate = localCallback;
-            CertificateRevocationCheckMode = sslClientAuthenticationOptions.CertificateRevocationCheckMode;
+            CertificateRevocationCheckMode =
+                sslClientAuthenticationOptions.CertificateRevocationCheckMode;
             ClientCertificates = sslClientAuthenticationOptions.ClientCertificates;
             CipherSuitesPolicy = sslClientAuthenticationOptions.CipherSuitesPolicy;
         }
 
-        internal SslAuthenticationOptions(SslServerAuthenticationOptions sslServerAuthenticationOptions)
+        internal SslAuthenticationOptions(
+            SslServerAuthenticationOptions sslServerAuthenticationOptions
+        )
         {
             // Common options.
             AllowRenegotiation = sslServerAuthenticationOptions.AllowRenegotiation;
             ApplicationProtocols = sslServerAuthenticationOptions.ApplicationProtocols;
             CheckCertName = false;
-            EnabledSslProtocols = FilterOutIncompatibleSslProtocols(sslServerAuthenticationOptions.EnabledSslProtocols);
+            EnabledSslProtocols = FilterOutIncompatibleSslProtocols(
+                sslServerAuthenticationOptions.EnabledSslProtocols
+            );
             EncryptionPolicy = sslServerAuthenticationOptions.EncryptionPolicy;
             IsServer = true;
             RemoteCertRequired = sslServerAuthenticationOptions.ClientCertificateRequired;
@@ -50,7 +61,8 @@ namespace System.Net.Security
 
             // Server specific options.
             CipherSuitesPolicy = sslServerAuthenticationOptions.CipherSuitesPolicy;
-            CertificateRevocationCheckMode = sslServerAuthenticationOptions.CertificateRevocationCheckMode;
+            CertificateRevocationCheckMode =
+                sslServerAuthenticationOptions.CertificateRevocationCheckMode;
 
             if (sslServerAuthenticationOptions.ServerCertificateContext != null)
             {
@@ -58,18 +70,26 @@ namespace System.Net.Security
             }
             else if (sslServerAuthenticationOptions.ServerCertificate != null)
             {
-                X509Certificate2? certificateWithKey = sslServerAuthenticationOptions.ServerCertificate as X509Certificate2;
+                X509Certificate2? certificateWithKey =
+                    sslServerAuthenticationOptions.ServerCertificate as X509Certificate2;
 
                 if (certificateWithKey != null && certificateWithKey.HasPrivateKey)
                 {
                     // given cert is X509Certificate2 with key. We can use it directly.
-                    CertificateContext = SslStreamCertificateContext.Create(certificateWithKey, null);
+                    CertificateContext = SslStreamCertificateContext.Create(
+                        certificateWithKey,
+                        null
+                    );
                 }
                 else
                 {
                     // This is legacy fix-up. If the Certificate did not have key, we will search stores and we
                     // will try to find one with matching hash.
-                    certificateWithKey = SecureChannel.FindCertificateWithPrivateKey(this, true, sslServerAuthenticationOptions.ServerCertificate);
+                    certificateWithKey = SecureChannel.FindCertificateWithPrivateKey(
+                        this,
+                        true,
+                        sslServerAuthenticationOptions.ServerCertificate
+                    );
                     if (certificateWithKey == null)
                     {
                         throw new AuthenticationException(SR.net_ssl_io_no_server_cert);
@@ -81,11 +101,16 @@ namespace System.Net.Security
 
             if (sslServerAuthenticationOptions.RemoteCertificateValidationCallback != null)
             {
-                CertValidationDelegate = sslServerAuthenticationOptions.RemoteCertificateValidationCallback;
+                CertValidationDelegate =
+                    sslServerAuthenticationOptions.RemoteCertificateValidationCallback;
             }
         }
 
-        internal SslAuthenticationOptions(ServerOptionsSelectionCallback optionCallback, object? state, RemoteCertificateValidationCallback? remoteCallback)
+        internal SslAuthenticationOptions(
+            ServerOptionsSelectionCallback optionCallback,
+            object? state,
+            RemoteCertificateValidationCallback? remoteCallback
+        )
         {
             CheckCertName = false;
             TargetHost = string.Empty;
@@ -99,17 +124,23 @@ namespace System.Net.Security
         {
             AllowRenegotiation = sslServerAuthenticationOptions.AllowRenegotiation;
             ApplicationProtocols = sslServerAuthenticationOptions.ApplicationProtocols;
-            EnabledSslProtocols = FilterOutIncompatibleSslProtocols(sslServerAuthenticationOptions.EnabledSslProtocols);
+            EnabledSslProtocols = FilterOutIncompatibleSslProtocols(
+                sslServerAuthenticationOptions.EnabledSslProtocols
+            );
             EncryptionPolicy = sslServerAuthenticationOptions.EncryptionPolicy;
             RemoteCertRequired = sslServerAuthenticationOptions.ClientCertificateRequired;
             CipherSuitesPolicy = sslServerAuthenticationOptions.CipherSuitesPolicy;
-            CertificateRevocationCheckMode = sslServerAuthenticationOptions.CertificateRevocationCheckMode;
+            CertificateRevocationCheckMode =
+                sslServerAuthenticationOptions.CertificateRevocationCheckMode;
             if (sslServerAuthenticationOptions.ServerCertificateContext != null)
             {
                 CertificateContext = sslServerAuthenticationOptions.ServerCertificateContext;
             }
-            else if (sslServerAuthenticationOptions.ServerCertificate is X509Certificate2 certificateWithKey &&
-                    certificateWithKey.HasPrivateKey)
+            else if (
+                sslServerAuthenticationOptions.ServerCertificate
+                    is X509Certificate2 certificateWithKey
+                && certificateWithKey.HasPrivateKey
+            )
             {
                 // given cert is X509Certificate2 with key. We can use it directly.
                 CertificateContext = SslStreamCertificateContext.Create(certificateWithKey);
@@ -117,7 +148,8 @@ namespace System.Net.Security
 
             if (sslServerAuthenticationOptions.RemoteCertificateValidationCallback != null)
             {
-                CertValidationDelegate = sslServerAuthenticationOptions.RemoteCertificateValidationCallback;
+                CertValidationDelegate =
+                    sslServerAuthenticationOptions.RemoteCertificateValidationCallback;
             }
         }
 

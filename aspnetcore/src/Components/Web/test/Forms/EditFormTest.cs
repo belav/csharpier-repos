@@ -13,7 +13,6 @@ namespace Microsoft.AspNetCore.Components.Forms
 {
     public class EditFormTest
     {
-
         [Fact]
         public async Task ThrowsIfBothEditContextAndModelAreSupplied()
         {
@@ -28,8 +27,12 @@ namespace Microsoft.AspNetCore.Components.Forms
 
             // Act/Assert
             var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-                () => testRenderer.RenderRootComponentAsync(componentId));
-            Assert.StartsWith($"{nameof(EditForm)} requires a {nameof(EditForm.Model)} parameter, or an {nameof(EditContext)} parameter, but not both.", ex.Message);
+                () => testRenderer.RenderRootComponentAsync(componentId)
+            );
+            Assert.StartsWith(
+                $"{nameof(EditForm)} requires a {nameof(EditForm.Model)} parameter, or an {nameof(EditContext)} parameter, but not both.",
+                ex.Message
+            );
         }
 
         [Fact]
@@ -42,8 +45,12 @@ namespace Microsoft.AspNetCore.Components.Forms
 
             // Act/Assert
             var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-                () => testRenderer.RenderRootComponentAsync(componentId));
-            Assert.StartsWith($"{nameof(EditForm)} requires either a {nameof(EditForm.Model)} parameter, or an {nameof(EditContext)} parameter, please provide one of these.", ex.Message);
+                () => testRenderer.RenderRootComponentAsync(componentId)
+            );
+            Assert.StartsWith(
+                $"{nameof(EditForm)} requires either a {nameof(EditForm.Model)} parameter, or an {nameof(EditContext)} parameter, please provide one of these.",
+                ex.Message
+            );
         }
 
         [Fact]
@@ -51,10 +58,7 @@ namespace Microsoft.AspNetCore.Components.Forms
         {
             // Arrange
             var model = new TestModel();
-            var rootComponent = new TestEditFormHostComponent
-            {
-                Model = model
-            };
+            var rootComponent = new TestEditFormHostComponent { Model = model };
             var editFormComponent = await RenderAndGetTestEditFormComponentAsync(rootComponent);
 
             // Act
@@ -70,10 +74,7 @@ namespace Microsoft.AspNetCore.Components.Forms
         {
             // Arrange
             var editContext = new EditContext(new TestModel());
-            var rootComponent = new TestEditFormHostComponent
-            {
-                EditContext = editContext
-            };
+            var rootComponent = new TestEditFormHostComponent { EditContext = editContext };
             var editFormComponent = await RenderAndGetTestEditFormComponentAsync(rootComponent);
 
             // Act
@@ -83,14 +84,15 @@ namespace Microsoft.AspNetCore.Components.Forms
             Assert.Same(editContext, returnedEditContext);
         }
 
-        private static EditForm FindEditFormComponent(CapturedBatch batch)
-            => batch.ReferenceFrames
-                    .Where(f => f.FrameType == RenderTreeFrameType.Component)
-                    .Select(f => f.Component)
-                    .OfType<EditForm>()
-                    .Single();
+        private static EditForm FindEditFormComponent(CapturedBatch batch) =>
+            batch.ReferenceFrames.Where(f => f.FrameType == RenderTreeFrameType.Component)
+                .Select(f => f.Component)
+                .OfType<EditForm>()
+                .Single();
 
-        private static async Task<EditForm> RenderAndGetTestEditFormComponentAsync(TestEditFormHostComponent hostComponent)
+        private static async Task<EditForm> RenderAndGetTestEditFormComponentAsync(
+            TestEditFormHostComponent hostComponent
+        )
         {
             var testRenderer = new TestRenderer();
             var componentId = testRenderer.AssignRootComponentId(hostComponent);

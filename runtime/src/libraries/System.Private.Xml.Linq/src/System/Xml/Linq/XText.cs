@@ -20,7 +20,8 @@ namespace System.Xml.Linq
         /// <param name="value">The string that contains the value of the text node.</param>
         public XText(string value)
         {
-            if (value == null) throw new ArgumentNullException(nameof(value));
+            if (value == null)
+                throw new ArgumentNullException(nameof(value));
             text = value;
         }
 
@@ -30,7 +31,8 @@ namespace System.Xml.Linq
         /// <param name="other">The text node to copy from.</param>
         public XText(XText other)
         {
-            if (other == null) throw new ArgumentNullException(nameof(other));
+            if (other == null)
+                throw new ArgumentNullException(nameof(other));
             text = other.text;
         }
 
@@ -48,10 +50,7 @@ namespace System.Xml.Linq
         /// </remarks>
         public override XmlNodeType NodeType
         {
-            get
-            {
-                return XmlNodeType.Text;
-            }
+            get { return XmlNodeType.Text; }
         }
 
         /// <summary>
@@ -59,16 +58,15 @@ namespace System.Xml.Linq
         /// </summary>
         public string Value
         {
-            get
-            {
-                return text;
-            }
+            get { return text; }
             set
             {
-                if (value == null) throw new ArgumentNullException(nameof(value));
+                if (value == null)
+                    throw new ArgumentNullException(nameof(value));
                 bool notify = NotifyChanging(this, XObjectChangeEventArgs.Value);
                 text = value;
-                if (notify) NotifyChanged(this, XObjectChangeEventArgs.Value);
+                if (notify)
+                    NotifyChanged(this, XObjectChangeEventArgs.Value);
             }
         }
 
@@ -80,7 +78,8 @@ namespace System.Xml.Linq
         /// </param>
         public override void WriteTo(XmlWriter writer)
         {
-            if (writer == null) throw new ArgumentNullException(nameof(writer));
+            if (writer == null)
+                throw new ArgumentNullException(nameof(writer));
             if (parent is XDocument)
             {
                 writer.WriteWhitespace(text);
@@ -107,9 +106,9 @@ namespace System.Xml.Linq
             if (cancellationToken.IsCancellationRequested)
                 return Task.FromCanceled(cancellationToken);
 
-            return parent is XDocument ?
-                writer.WriteWhitespaceAsync(text) :
-                writer.WriteStringAsync(text);
+            return parent is XDocument
+              ? writer.WriteWhitespaceAsync(text)
+              : writer.WriteStringAsync(text);
         }
 
         internal override void AppendText(StringBuilder sb)

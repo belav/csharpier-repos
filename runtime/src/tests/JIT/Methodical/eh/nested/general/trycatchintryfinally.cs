@@ -31,6 +31,7 @@ public class a
         {
             Console.WriteLine("In outer try");
         }
+
         finally
         {
             Console.WriteLine("In outer finally");

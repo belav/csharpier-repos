@@ -8,10 +8,15 @@ using System.Diagnostics.CodeAnalysis;
 namespace System.Collections.ObjectModel
 {
     [Serializable]
-    [DebuggerTypeProxy(typeof(DictionaryDebugView<,>))]
+    [DebuggerTypeProxy(typeof(DictionaryDebugView<, >))]
     [DebuggerDisplay("Count = {Count}")]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
-    public class ReadOnlyDictionary<TKey, TValue> : IDictionary<TKey, TValue>, IDictionary, IReadOnlyDictionary<TKey, TValue> where TKey : notnull
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
+    public class ReadOnlyDictionary<TKey, TValue>
+        : IDictionary<TKey, TValue>,
+          IDictionary,
+          IReadOnlyDictionary<TKey, TValue> where TKey : notnull
     {
         private readonly IDictionary<TKey, TValue> m_dictionary; // Do not rename (binary serialization)
 
@@ -73,7 +78,10 @@ namespace System.Collections.ObjectModel
             return m_dictionary.Contains(item);
         }
 
-        void ICollection<KeyValuePair<TKey, TValue>>.CopyTo(KeyValuePair<TKey, TValue>[] array, int arrayIndex)
+        void ICollection<KeyValuePair<TKey, TValue>>.CopyTo(
+            KeyValuePair<TKey, TValue>[] array,
+            int arrayIndex
+        )
         {
             m_dictionary.CopyTo(array, arrayIndex);
         }
@@ -189,7 +197,10 @@ namespace System.Collections.ObjectModel
             }
             if (index < 0 || index > array.Length)
             {
-                throw new ArgumentOutOfRangeException(nameof(index), SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(index),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
             }
             if (array.Length - index < Count)
             {
@@ -269,7 +280,10 @@ namespace System.Collections.ObjectModel
 
         [DebuggerTypeProxy(typeof(CollectionDebugView<>))]
         [DebuggerDisplay("Count = {Count}")]
-        public sealed class KeyCollection : ICollection<TKey>, ICollection, IReadOnlyCollection<TKey>
+        public sealed class KeyCollection
+            : ICollection<TKey>,
+              ICollection,
+              IReadOnlyCollection<TKey>
         {
             private readonly ICollection<TKey> _collection;
 
@@ -313,7 +327,11 @@ namespace System.Collections.ObjectModel
 
             void ICollection.CopyTo(Array array, int index)
             {
-                ReadOnlyDictionaryHelpers.CopyToNonGenericICollectionHelper<TKey>(_collection, array, index);
+                ReadOnlyDictionaryHelpers.CopyToNonGenericICollectionHelper<TKey>(
+                    _collection,
+                    array,
+                    index
+                );
             }
 
             bool ICollection.IsSynchronized => false;
@@ -323,7 +341,10 @@ namespace System.Collections.ObjectModel
 
         [DebuggerTypeProxy(typeof(CollectionDebugView<>))]
         [DebuggerDisplay("Count = {Count}")]
-        public sealed class ValueCollection : ICollection<TValue>, ICollection, IReadOnlyCollection<TValue>
+        public sealed class ValueCollection
+            : ICollection<TValue>,
+              ICollection,
+              IReadOnlyCollection<TValue>
         {
             private readonly ICollection<TValue> _collection;
 
@@ -363,7 +384,11 @@ namespace System.Collections.ObjectModel
 
             void ICollection.CopyTo(Array array, int index)
             {
-                ReadOnlyDictionaryHelpers.CopyToNonGenericICollectionHelper<TValue>(_collection, array, index);
+                ReadOnlyDictionaryHelpers.CopyToNonGenericICollectionHelper<TValue>(
+                    _collection,
+                    array,
+                    index
+                );
             }
 
             bool ICollection.IsSynchronized => false;
@@ -376,7 +401,11 @@ namespace System.Collections.ObjectModel
     internal static class ReadOnlyDictionaryHelpers
     {
         // Abstracted away to avoid redundant implementations.
-        internal static void CopyToNonGenericICollectionHelper<T>(ICollection<T> collection, Array array, int index)
+        internal static void CopyToNonGenericICollectionHelper<T>(
+            ICollection<T> collection,
+            Array array,
+            int index
+        )
         {
             if (array == null)
             {
@@ -392,7 +421,10 @@ namespace System.Collections.ObjectModel
             }
             if (index < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(index), SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(index),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
             }
             if (array.Length - index < collection.Count)
             {

@@ -12,11 +12,13 @@ namespace Microsoft.Win32.RegistryTests
         [Fact]
         public void NegativeTests()
         {
-            Assert.Throws<ObjectDisposedException>(() =>
-            {
-                TestRegistryKey.Dispose();
-                TestRegistryKey.GetValue(null);
-            });
+            Assert.Throws<ObjectDisposedException>(
+                () =>
+                {
+                    TestRegistryKey.Dispose();
+                    TestRegistryKey.GetValue(null);
+                }
+            );
         }
 
         [Fact]
@@ -38,7 +40,10 @@ namespace Microsoft.Win32.RegistryTests
             TestRegistryKey.DeleteValue(valueName);
         }
 
-        public static IEnumerable<object[]> TestValueTypes { get { return TestData.TestValueTypes; } }
+        public static IEnumerable<object[]> TestValueTypes
+        {
+            get { return TestData.TestValueTypes; }
+        }
 
         [Theory]
         [MemberData(nameof(TestValueTypes))]

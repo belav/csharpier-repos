@@ -27,8 +27,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Notification
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public VSNotificationServiceFactory(SVsServiceProvider serviceProvider)
-            => _uiShellService = (IVsUIShell)serviceProvider.GetService(typeof(SVsUIShell));
+        public VSNotificationServiceFactory(SVsServiceProvider serviceProvider) =>
+            _uiShellService = (IVsUIShell)serviceProvider.GetService(typeof(SVsUIShell));
 
         public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices)
         {
@@ -52,13 +52,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Notification
             /// </summary>
             public Action<string, string, NotificationSeverity> NotificationCallback { get; set; }
 
-            public VSDialogService(IVsUIShell uiShellService)
-                => _uiShellService = uiShellService;
+            public VSDialogService(IVsUIShell uiShellService) => _uiShellService = uiShellService;
 
             public void SendNotification(
                 string message,
                 string title = null,
-                NotificationSeverity severity = NotificationSeverity.Warning)
+                NotificationSeverity severity = NotificationSeverity.Warning
+            )
             {
                 if (NotificationCallback != null)
                 {
@@ -82,8 +82,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Notification
                             msgdefbtn: OLEMSGDEFBUTTON.OLEMSGDEFBUTTON_FIRST,
                             msgicon: icon,
                             fSysAlert: 0, // Not system modal
-                            pnResult: out var dialogResult);
+                            pnResult: out var dialogResult
+                        );
                     }
+
                     finally
                     {
                         // if ShowMessageBox() throws we need to ensure that the UI isn't forever stuck in a modal state
@@ -92,7 +94,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Notification
                 }
             }
 
-            public bool ConfirmMessageBox(string message, string title = null, NotificationSeverity severity = NotificationSeverity.Warning)
+            public bool ConfirmMessageBox(
+                string message,
+                string title = null,
+                NotificationSeverity severity = NotificationSeverity.Warning
+            )
             {
                 _uiShellService.EnableModeless(0);
                 try
@@ -109,11 +115,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Notification
                         msgdefbtn: OLEMSGDEFBUTTON.OLEMSGDEFBUTTON_FIRST,
                         msgicon: icon,
                         fSysAlert: 0, // Not system modal
-                        pnResult: out var dialogResult);
+                        pnResult: out var dialogResult
+                    );
 
                     // The dialogResult is 6 when the Yes button is clicked.
                     return dialogResult == 6;
                 }
+
                 finally
                 {
                     // if ShowMessageBox() throws we need to ensure that the UI isn't forever stuck in a modal state

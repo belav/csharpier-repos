@@ -15,7 +15,11 @@ namespace System.Diagnostics.Tests
         public static IEnumerable<object[]> EventLogData()
         {
             yield return new object[] { null, string.Empty };
-            yield return new object[] { new EventLog("logName", ".", "EventLogSource"), "EventLogSource" };
+            yield return new object[]
+            {
+                new EventLog("logName", ".", "EventLogSource"),
+                "EventLogSource"
+            };
         }
 
         [Theory]
@@ -107,6 +111,7 @@ namespace System.Diagnostics.Tests
                     ValidateLastEntryMessage(listener, message, source);
                 }
             }
+
             finally
             {
                 EventLog.DeleteEventSource(source);
@@ -116,11 +121,31 @@ namespace System.Diagnostics.Tests
 
         [Trait(XunitConstants.Category, XunitConstants.IgnoreForCI)] // Unreliable Win32 API call
         [ConditionalTheory(typeof(Helpers), nameof(Helpers.IsElevatedAndSupportsEventLogs))]
-        [InlineData(TraceEventType.Information, EventLogEntryType.Information, ushort.MaxValue + 1, ushort.MaxValue)]
-        [InlineData(TraceEventType.Error, EventLogEntryType.Error, ushort.MinValue - 1, ushort.MinValue)]
-        [InlineData(TraceEventType.Warning, EventLogEntryType.Warning, ushort.MinValue, ushort.MinValue)]
+        [InlineData(
+            TraceEventType.Information,
+            EventLogEntryType.Information,
+            ushort.MaxValue + 1,
+            ushort.MaxValue
+        )]
+        [InlineData(
+            TraceEventType.Error,
+            EventLogEntryType.Error,
+            ushort.MinValue - 1,
+            ushort.MinValue
+        )]
+        [InlineData(
+            TraceEventType.Warning,
+            EventLogEntryType.Warning,
+            ushort.MinValue,
+            ushort.MinValue
+        )]
         [InlineData(TraceEventType.Critical, EventLogEntryType.Error, 30, 30)]
-        public void TraceEventTest(TraceEventType eventType, EventLogEntryType expectedType, int id, int expectedId)
+        public void TraceEventTest(
+            TraceEventType eventType,
+            EventLogEntryType expectedType,
+            int id,
+            int expectedId
+        )
         {
             string log = "TraceEvent";
             string source = "Source" + nameof(TraceEventTest);
@@ -131,7 +156,11 @@ namespace System.Diagnostics.Tests
                 {
                     string message = "One simple message to trace";
                     listener.TraceEvent(null, source, eventType, id, message);
-                    EventLogEntry eventLogEntry = ValidateLastEntryMessage(listener, message, source);
+                    EventLogEntry eventLogEntry = ValidateLastEntryMessage(
+                        listener,
+                        message,
+                        source
+                    );
 
                     if (eventLogEntry != null)
                     {
@@ -140,6 +169,7 @@ namespace System.Diagnostics.Tests
                     }
                 }
             }
+
             finally
             {
                 EventLog.DeleteEventSource(source);
@@ -149,8 +179,11 @@ namespace System.Diagnostics.Tests
 
         public static IEnumerable<object[]> GetTraceDataParams_MemberData()
         {
-            yield return new object[] { new object[] { "this is", "an array with", "multiple", "strings" } };
-            yield return new object[] { new object[] { } };
+            yield return new object[]
+            {
+                new object[] { "this is", "an array with", "multiple", "strings" }
+            };
+            yield return new object[] { new object[] {  } };
             yield return new object[] { new object[] { "only one string" } };
             yield return new object[] { null };
             yield return new object[] { new object[] { "one string + null", null } };
@@ -173,6 +206,7 @@ namespace System.Diagnostics.Tests
                     ValidateLastEntryMessage(listener, expectedMessage, source);
                 }
             }
+
             finally
             {
                 EventLog.DeleteEventSource(source);
@@ -182,18 +216,38 @@ namespace System.Diagnostics.Tests
 
         public static IEnumerable<object[]> GetTraceEventFormat_MemberData()
         {
-            yield return new object[] { "This is a format with 1 object {0}", new object[] { 123 } };
-            yield return new object[] { "This is a weird {0}{1}{2} format that has multiple inputs {3}", new object[] { 0, 1, "two", "." } };
-            yield return new object[] { "This is a weird {0}{1}{2} format that but args are null", null };
+            yield return new object[]
+            {
+                "This is a format with 1 object {0}",
+                new object[] { 123 }
+            };
+            yield return new object[]
+            {
+                "This is a weird {0}{1}{2} format that has multiple inputs {3}",
+                new object[] { 0, 1, "two", "." }
+            };
+            yield return new object[]
+            {
+                "This is a weird {0}{1}{2} format that but args are null",
+                null
+            };
             if (!PlatformDetection.IsNetFramework)
             {
                 // .NET Framework doesn't check for args.Length == 0 and if format is not null or empty, it calls string.Format
-                yield return new object[] { "This is a weird {0}{1}{2} format that but args length is 0", new object[] { } };
+                yield return new object[]
+                {
+                    "This is a weird {0}{1}{2} format that but args length is 0",
+                    new object[] {  }
+                };
             }
 
-            yield return new object[] { string.Empty, new object[] { } };
-            yield return new object[] { null, new object[] { } };
-            yield return new object[] { string.Empty, new object[] { 2000, 101, "two", "string is a test." } };
+            yield return new object[] { string.Empty, new object[] {  } };
+            yield return new object[] { null, new object[] {  } };
+            yield return new object[]
+            {
+                string.Empty,
+                new object[] { 2000, 101, "two", "string is a test." }
+            };
             yield return new object[] { null, new object[] { "thanks, 00", "i like it...", 111 } };
         }
 
@@ -209,7 +263,14 @@ namespace System.Diagnostics.Tests
                 EventLog.CreateEventSource(source, log);
                 using (var listener = new EventLogTraceListener(source))
                 {
-                    listener.TraceEvent(null, source, TraceEventType.Information, 1000, format, parameters);
+                    listener.TraceEvent(
+                        null,
+                        source,
+                        TraceEventType.Information,
+                        1000,
+                        format,
+                        parameters
+                    );
 
                     if (parameters == null || parameters.Length == 0)
                     {
@@ -222,7 +283,10 @@ namespace System.Diagnostics.Tests
                         EventLogEntry eventLogEntry = listener.EventLog.Entries.LastOrDefault();
                         if (eventLogEntry != null)
                         {
-                            Assert.All(messages, message => eventLogEntry.Message.Contains(message));
+                            Assert.All(
+                                messages,
+                                message => eventLogEntry.Message.Contains(message)
+                            );
                         }
                     }
                     else if (string.IsNullOrEmpty(format))
@@ -236,16 +300,24 @@ namespace System.Diagnostics.Tests
                         EventLogEntry eventLogEntry = listener.EventLog.Entries.LastOrDefault();
                         if (eventLogEntry != null)
                         {
-                            Assert.All(messages, message => eventLogEntry.Message.Contains(message));
+                            Assert.All(
+                                messages,
+                                message => eventLogEntry.Message.Contains(message)
+                            );
                         }
                     }
                     else
                     {
-                        string expectedMessage = string.Format(CultureInfo.InvariantCulture, format, parameters);
+                        string expectedMessage = string.Format(
+                            CultureInfo.InvariantCulture,
+                            format,
+                            parameters
+                        );
                         ValidateLastEntryMessage(listener, expectedMessage, source);
                     }
                 }
             }
+
             finally
             {
                 EventLog.DeleteEventSource(source);
@@ -265,12 +337,25 @@ namespace System.Diagnostics.Tests
                 using (var listener = new EventLogTraceListener(source))
                 {
                     listener.Filter = new EventTypeFilter(SourceLevels.Critical);
-                    listener.TraceData(null, source, TraceEventType.Information, 12, "string shouldn't be present");
+                    listener.TraceData(
+                        null,
+                        source,
+                        TraceEventType.Information,
+                        12,
+                        "string shouldn't be present"
+                    );
                     EventLogEntry eventLogEntry = listener.EventLog.Entries.LastOrDefault();
                     if (eventLogEntry != null)
                         Assert.DoesNotContain("string shouldn't be present", eventLogEntry.Message);
 
-                    listener.TraceData(null, source, TraceEventType.Information, 12, "string shouldn't be present", "neither should this");
+                    listener.TraceData(
+                        null,
+                        source,
+                        TraceEventType.Information,
+                        12,
+                        "string shouldn't be present",
+                        "neither should this"
+                    );
                     eventLogEntry = listener.EventLog.Entries.LastOrDefault();
                     if (eventLogEntry != null)
                     {
@@ -278,7 +363,15 @@ namespace System.Diagnostics.Tests
                         Assert.DoesNotContain("neither should this", eventLogEntry.Message);
                     }
 
-                    listener.TraceEvent(null, source, TraceEventType.Information, 12, "trace an event casually", "one more", null);
+                    listener.TraceEvent(
+                        null,
+                        source,
+                        TraceEventType.Information,
+                        12,
+                        "trace an event casually",
+                        "one more",
+                        null
+                    );
                     eventLogEntry = listener.EventLog.Entries.LastOrDefault();
                     if (eventLogEntry != null)
                     {
@@ -286,12 +379,19 @@ namespace System.Diagnostics.Tests
                         Assert.DoesNotContain("one more", eventLogEntry.Message);
                     }
 
-                    listener.TraceEvent(null, source, TraceEventType.Information, 12, "i shouldn't be here");
+                    listener.TraceEvent(
+                        null,
+                        source,
+                        TraceEventType.Information,
+                        12,
+                        "i shouldn't be here"
+                    );
                     eventLogEntry = listener.EventLog.Entries.LastOrDefault();
                     if (eventLogEntry != null)
                         Assert.DoesNotContain("i shouldn't be here", eventLogEntry.Message);
                 }
             }
+
             finally
             {
                 EventLog.DeleteEventSource(source);
@@ -318,14 +418,21 @@ namespace System.Diagnostics.Tests
             return sb.ToString();
         }
 
-        private EventLogEntry ValidateLastEntryMessage(EventLogTraceListener listener, string message, string source)
+        private EventLogEntry ValidateLastEntryMessage(
+            EventLogTraceListener listener,
+            string message,
+            string source
+        )
         {
             EventLogEntry eventLogEntry = listener.EventLog.Entries.LastOrDefault();
             if (eventLogEntry != null)
             {
                 Assert.Contains(message, eventLogEntry.Message);
                 Assert.Equal(source, eventLogEntry.Source);
-                Assert.StartsWith(Environment.MachineName.ToLowerInvariant(), eventLogEntry.MachineName.ToLowerInvariant());
+                Assert.StartsWith(
+                    Environment.MachineName.ToLowerInvariant(),
+                    eventLogEntry.MachineName.ToLowerInvariant()
+                );
             }
 
             return eventLogEntry;

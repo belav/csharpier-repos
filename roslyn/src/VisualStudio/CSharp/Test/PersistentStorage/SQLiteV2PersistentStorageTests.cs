@@ -21,8 +21,16 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices
     /// </remarks>
     public class SQLiteV2PersistentStorageTests : AbstractPersistentStorageTests
     {
-        internal override AbstractPersistentStorageService GetStorageService(IMefHostExportProvider exportProvider, IPersistentStorageLocationService locationService, IPersistentStorageFaultInjector? faultInjector)
-            => new SQLitePersistentStorageService(exportProvider.GetExports<SQLiteConnectionPoolService>().Single().Value, locationService, faultInjector);
+        internal override AbstractPersistentStorageService GetStorageService(
+            IMefHostExportProvider exportProvider,
+            IPersistentStorageLocationService locationService,
+            IPersistentStorageFaultInjector? faultInjector
+        ) =>
+            new SQLitePersistentStorageService(
+                exportProvider.GetExports<SQLiteConnectionPoolService>().Single().Value,
+                locationService,
+                faultInjector
+            );
 
         [Fact]
         public async Task TestCrashInNewConnection()
@@ -36,7 +44,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices
                     hitInjector = true;
                     throw new Exception();
                 },
-                onFatalError: e => throw e);
+                onFatalError: e => throw e
+            );
 
             // Because instantiating the connection will fail, we will not get back
             // a working persistent storage.
@@ -73,17 +82,16 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices
 
             public PersistentStorageFaultInjector(
                 Action? onNewConnection = null,
-                Action<Exception>? onFatalError = null)
+                Action<Exception>? onFatalError = null
+            )
             {
                 _onNewConnection = onNewConnection;
                 _onFatalError = onFatalError;
             }
 
-            public void OnNewConnection()
-                => _onNewConnection?.Invoke();
+            public void OnNewConnection() => _onNewConnection?.Invoke();
 
-            public void OnFatalError(Exception ex)
-                => _onFatalError?.Invoke(ex);
+            public void OnFatalError(Exception ex) => _onFatalError?.Invoke(ex);
         }
     }
 }

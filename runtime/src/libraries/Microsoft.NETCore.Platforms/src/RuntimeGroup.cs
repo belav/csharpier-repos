@@ -17,18 +17,29 @@ namespace Microsoft.NETCore.Platforms.BuildTasks
         {
             BaseRID = item.ItemSpec;
             Parent = item.GetString(nameof(Parent));
-            Versions = new HashSet<RuntimeVersion>(item.GetStrings(nameof(Versions)).Select(v => new RuntimeVersion(v)));
+            Versions = new HashSet<RuntimeVersion>(
+                item.GetStrings(nameof(Versions)).Select(v => new RuntimeVersion(v))
+            );
             TreatVersionsAsCompatible = item.GetBoolean(nameof(TreatVersionsAsCompatible), true);
             OmitVersionDelimiter = item.GetBoolean(nameof(OmitVersionDelimiter));
             ApplyVersionsToParent = item.GetBoolean(nameof(ApplyVersionsToParent));
             Architectures = new HashSet<string>(item.GetStrings(nameof(Architectures)));
-            AdditionalQualifiers = new HashSet<string>(item.GetStrings(nameof(AdditionalQualifiers)));
+            AdditionalQualifiers = new HashSet<string>(
+                item.GetStrings(nameof(AdditionalQualifiers))
+            );
             OmitRIDs = new HashSet<string>(item.GetStrings(nameof(OmitRIDs)));
             OmitRIDDefinitions = new HashSet<string>(item.GetStrings(nameof(OmitRIDDefinitions)));
             OmitRIDReferences = new HashSet<string>(item.GetStrings(nameof(OmitRIDReferences)));
         }
 
-        public RuntimeGroup(string baseRID, string parent, bool treatVersionsAsCompatible = true, bool omitVersionDelimiter = false, bool applyVersionsToParent = false, IEnumerable<string> additionalQualifiers = null)
+        public RuntimeGroup(
+            string baseRID,
+            string parent,
+            bool treatVersionsAsCompatible = true,
+            bool omitVersionDelimiter = false,
+            bool applyVersionsToParent = false,
+            IEnumerable<string> additionalQualifiers = null
+        )
         {
             BaseRID = baseRID;
             Parent = parent;
@@ -59,7 +70,10 @@ namespace Microsoft.NETCore.Platforms.BuildTasks
         {
             if (!rid.BaseRID.Equals(BaseRID, StringComparison.Ordinal))
             {
-                throw new ArgumentException($"Cannot apply {nameof(RID)} with {nameof(RID.BaseRID)} {rid.BaseRID} to {nameof(RuntimeGroup)} with {nameof(RuntimeGroup.BaseRID)} {BaseRID}.", nameof(rid));
+                throw new ArgumentException(
+                    $"Cannot apply {nameof(RID)} with {nameof(RID.BaseRID)} {rid.BaseRID} to {nameof(RuntimeGroup)} with {nameof(RuntimeGroup.BaseRID)} {BaseRID}.",
+                    nameof(rid)
+                );
             }
 
             if (rid.HasArchitecture)
@@ -97,8 +111,12 @@ namespace Microsoft.NETCore.Platforms.BuildTasks
             public IEnumerable<RID> Imports { get; }
         }
 
-
-        internal RID CreateRuntime(string baseRid, RuntimeVersion version = null, string architecture = null, string qualifier = null)
+        internal RID CreateRuntime(
+            string baseRid,
+            RuntimeVersion version = null,
+            string architecture = null,
+            string qualifier = null
+        )
         {
             return new RID()
             {
@@ -114,26 +132,26 @@ namespace Microsoft.NETCore.Platforms.BuildTasks
         {
             // base =>
             //      Parent
-            yield return Parent == null ?
-                new RIDMapping(CreateRuntime(BaseRID)) :
-                new RIDMapping(CreateRuntime(BaseRID), new[] { CreateRuntime(Parent) });
+            yield return Parent == null
+                ? new RIDMapping(CreateRuntime(BaseRID))
+                : new RIDMapping(CreateRuntime(BaseRID), new[] { CreateRuntime(Parent) });
 
             foreach (var architecture in Architectures)
             {
                 // base + arch =>
                 //      base,
                 //      parent + arch
-                var imports = new List<RID>()
-                    {
-                        CreateRuntime(BaseRID)
-                    };
+                var imports = new List<RID>() { CreateRuntime(BaseRID) };
 
                 if (!IsNullOrRoot(Parent))
                 {
                     imports.Add(CreateRuntime(Parent, architecture: architecture));
                 }
 
-                yield return new RIDMapping(CreateRuntime(BaseRID, architecture: architecture), imports);
+                yield return new RIDMapping(
+                    CreateRuntime(BaseRID, architecture: architecture),
+                    imports
+                );
             }
 
             RuntimeVersion lastVersion = null;
@@ -142,10 +160,7 @@ namespace Microsoft.NETCore.Platforms.BuildTasks
                 // base + version =>
                 //      base + lastVersion,
                 //      parent + version (optionally)
-                var imports = new List<RID>()
-                    {
-                        CreateRuntime(BaseRID, version: lastVersion)
-                    };
+                var imports = new List<RID>() { CreateRuntime(BaseRID, version: lastVersion) };
 
                 if (ApplyVersionsToParent)
                 {
@@ -161,17 +176,22 @@ namespace Microsoft.NETCore.Platforms.BuildTasks
                     //      base + lastVersion + architecture,
                     //      parent + version + architecture (optionally)
                     var archImports = new List<RID>()
-                        {
-                            CreateRuntime(BaseRID, version: version),
-                            CreateRuntime(BaseRID, version: lastVersion, architecture: architecture)
-                        };
+                    {
+                        CreateRuntime(BaseRID, version: version),
+                        CreateRuntime(BaseRID, version: lastVersion, architecture: architecture)
+                    };
 
                     if (ApplyVersionsToParent)
                     {
-                        archImports.Add(CreateRuntime(Parent, version: version, architecture: architecture));
+                        archImports.Add(
+                            CreateRuntime(Parent, version: version, architecture: architecture)
+                        );
                     }
 
-                    yield return new RIDMapping(CreateRuntime(BaseRID, version: version, architecture: architecture), archImports);
+                    yield return new RIDMapping(
+                        CreateRuntime(BaseRID, version: version, architecture: architecture),
+                        archImports
+                    );
                 }
 
                 if (TreatVersionsAsCompatible)
@@ -185,12 +205,16 @@ namespace Microsoft.NETCore.Platforms.BuildTasks
                 // base + qual =>
                 //      base,
                 //      parent + qual
-                yield return new RIDMapping(CreateRuntime(BaseRID, qualifier: qualifier),
+                yield return new RIDMapping(
+                    CreateRuntime(BaseRID, qualifier: qualifier),
                     new[]
                     {
-                            CreateRuntime(BaseRID),
-                            IsNullOrRoot(Parent) ? CreateRuntime(qualifier) : CreateRuntime(Parent, qualifier:qualifier)
-                    });
+                        CreateRuntime(BaseRID),
+                        IsNullOrRoot(Parent)
+                            ? CreateRuntime(qualifier)
+                            : CreateRuntime(Parent, qualifier: qualifier)
+                    }
+                );
 
                 foreach (var architecture in Architectures)
                 {
@@ -199,17 +223,22 @@ namespace Microsoft.NETCore.Platforms.BuildTasks
                     //      base + arch
                     //      parent + arch + qualifier
                     var imports = new List<RID>()
-                        {
-                            CreateRuntime(BaseRID, qualifier: qualifier),
-                            CreateRuntime(BaseRID, architecture: architecture)
-                        };
+                    {
+                        CreateRuntime(BaseRID, qualifier: qualifier),
+                        CreateRuntime(BaseRID, architecture: architecture)
+                    };
 
                     if (!IsNullOrRoot(Parent))
                     {
-                        imports.Add(CreateRuntime(Parent, architecture: architecture, qualifier: qualifier));
+                        imports.Add(
+                            CreateRuntime(Parent, architecture: architecture, qualifier: qualifier)
+                        );
                     }
 
-                    yield return new RIDMapping(CreateRuntime(BaseRID, architecture: architecture, qualifier: qualifier), imports);
+                    yield return new RIDMapping(
+                        CreateRuntime(BaseRID, architecture: architecture, qualifier: qualifier),
+                        imports
+                    );
                 }
 
                 lastVersion = null;
@@ -220,17 +249,20 @@ namespace Microsoft.NETCore.Platforms.BuildTasks
                     //      base + lastVersion + qualifier
                     //      parent + version + qualifier (optionally)
                     var imports = new List<RID>()
-                        {
-                            CreateRuntime(BaseRID, version: version),
-                            CreateRuntime(BaseRID, version: lastVersion, qualifier: qualifier)
-                        };
+                    {
+                        CreateRuntime(BaseRID, version: version),
+                        CreateRuntime(BaseRID, version: lastVersion, qualifier: qualifier)
+                    };
 
                     if (ApplyVersionsToParent)
                     {
                         imports.Add(CreateRuntime(Parent, version: version, qualifier: qualifier));
                     }
 
-                    yield return new RIDMapping(CreateRuntime(BaseRID, version: version, qualifier: qualifier), imports);
+                    yield return new RIDMapping(
+                        CreateRuntime(BaseRID, version: version, qualifier: qualifier),
+                        imports
+                    );
 
                     foreach (var architecture in Architectures)
                     {
@@ -241,19 +273,39 @@ namespace Microsoft.NETCore.Platforms.BuildTasks
                         //      base + lastVersion + architecture + qualifier,
                         //      parent + version + architecture + qualifier (optionally)
                         var archImports = new List<RID>()
-                            {
-                                CreateRuntime(BaseRID, version: version, qualifier: qualifier),
-                                CreateRuntime(BaseRID, version: version, architecture: architecture),
-                                CreateRuntime(BaseRID, version: version),
-                                CreateRuntime(BaseRID, version: lastVersion, architecture: architecture, qualifier: qualifier)
-                            };
+                        {
+                            CreateRuntime(BaseRID, version: version, qualifier: qualifier),
+                            CreateRuntime(BaseRID, version: version, architecture: architecture),
+                            CreateRuntime(BaseRID, version: version),
+                            CreateRuntime(
+                                BaseRID,
+                                version: lastVersion,
+                                architecture: architecture,
+                                qualifier: qualifier
+                            )
+                        };
 
                         if (ApplyVersionsToParent)
                         {
-                            imports.Add(CreateRuntime(Parent, version: version, architecture: architecture, qualifier: qualifier));
+                            imports.Add(
+                                CreateRuntime(
+                                    Parent,
+                                    version: version,
+                                    architecture: architecture,
+                                    qualifier: qualifier
+                                )
+                            );
                         }
 
-                        yield return new RIDMapping(CreateRuntime(BaseRID, version: version, architecture: architecture, qualifier: qualifier), archImports);
+                        yield return new RIDMapping(
+                            CreateRuntime(
+                                BaseRID,
+                                version: version,
+                                architecture: architecture,
+                                qualifier: qualifier
+                            ),
+                            archImports
+                        );
                     }
 
                     if (TreatVersionsAsCompatible)
@@ -269,7 +321,6 @@ namespace Microsoft.NETCore.Platforms.BuildTasks
             return rid == null || rid == rootRID;
         }
 
-
         public IEnumerable<RuntimeDescription> GetRuntimeDescriptions()
         {
             foreach (var mapping in GetRIDMappings())
@@ -281,10 +332,9 @@ namespace Microsoft.NETCore.Platforms.BuildTasks
                     continue;
                 }
 
-                var imports = mapping.Imports
-                       .Select(i => i.ToString())
-                       .Where(i => !OmitRIDs.Contains(i) && !OmitRIDReferences.Contains(i))
-                       .ToArray();
+                var imports = mapping.Imports.Select(i => i.ToString())
+                    .Where(i => !OmitRIDs.Contains(i) && !OmitRIDReferences.Contains(i))
+                    .ToArray();
 
                 yield return new RuntimeDescription(rid, imports);
             }

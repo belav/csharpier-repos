@@ -4,28 +4,72 @@
 using System;
 namespace PrimitiveVT
 {
-
     unsafe class CallConv1
     {
         static Random rand = new Random();
         VT1A vt1a;
         static VT1A x;
 
-        static int f1(VT1B x, VT1B y) { return x.m + y.m; }
-        VT1B f2a(VT1A x, VT1B y) { VT1B z; z.m = x.m + y.m; return z; }
-        VT1B f2b(VT1A x, VT1B y) { return f2a(x, y); }
-        VT1B f2(VT1A x, VT1B y) { return f2b(x, y); }
-        static int f3(ref VT1B x, VT1B y) { return x.m - y.m; }
-        VT1B f4(VT1A x, VT1B y) { VT1B z; z.m = x.m - y.m; return z; }
-        static int f5(VT1B x, VT1A y) { return x.m * y.m; }
-        int f6(VT1B[] x, VT1B y) { return x[0].m * y.m; }
-        VT1B f7(VT1A x, VT1B y) { return f4(x, y); }
-        float f8(VT1A x, VT1B y) { return x.m / y.m; }
+        static int f1(VT1B x, VT1B y)
+        {
+            return x.m + y.m;
+        }
+        VT1B f2a(VT1A x, VT1B y)
+        {
+            VT1B z;
+            z.m = x.m + y.m;
+            return z;
+        }
+        VT1B f2b(VT1A x, VT1B y)
+        {
+            return f2a(x, y);
+        }
+        VT1B f2(VT1A x, VT1B y)
+        {
+            return f2b(x, y);
+        }
+        static int f3(ref VT1B x, VT1B y)
+        {
+            return x.m - y.m;
+        }
+        VT1B f4(VT1A x, VT1B y)
+        {
+            VT1B z;
+            z.m = x.m - y.m;
+            return z;
+        }
+        static int f5(VT1B x, VT1A y)
+        {
+            return x.m * y.m;
+        }
+        int f6(VT1B[] x, VT1B y)
+        {
+            return x[0].m * y.m;
+        }
+        VT1B f7(VT1A x, VT1B y)
+        {
+            return f4(x, y);
+        }
+        float f8(VT1A x, VT1B y)
+        {
+            return x.m / y.m;
+        }
 
-        static VT1B[,] f9a() { return new VT1B[1, 2]; }
-        static VT1B[,] f9() { return f9a(); }
-        int f10(params VT1B[] args) { int sum = 0; for (int i = 0; i < args.Length; sum += args[i], i++) { }; return sum; }
-
+        static VT1B[,] f9a()
+        {
+            return new VT1B[1, 2];
+        }
+        static VT1B[,] f9()
+        {
+            return f9a();
+        }
+        int f10(params VT1B[] args)
+        {
+            int sum = 0;
+            for (int i = 0; i < args.Length; sum += args[i], i++) { }
+            ;
+            return sum;
+        }
 
         static int Main()
         {
@@ -58,8 +102,19 @@ namespace PrimitiveVT
             yarr[0] = new VT1B(e);
             VT1B y = yarr[0];
             x.m = d;
-            VT1B u = x * y - (new VT1B(f)) + yarr[0] + (VT1B)x + (VT1B)f + y * x + (int)(x / (d % 2 == 0 ? (VT1B)(d / 2) : (VT1B)(d + 1 / 2)));
-            int w = f5((VT1B)x, (VT1A)y) + t.f6(yarr, (VT1B)x) + f1(y, d) + (int)t.f8((VT1A)(VT1B)d, (d % 2 == 0 ? (VT1B)(d / 2) : (VT1B)(d + 1 / 2)));
+            VT1B u =
+                x * y
+                - (new VT1B(f))
+                + yarr[0]
+                + (VT1B)x
+                + (VT1B)f
+                + y * x
+                + (int)(x / (d % 2 == 0 ? (VT1B)(d / 2) : (VT1B)(d + 1 / 2)));
+            int w =
+                f5((VT1B)x, (VT1A)y)
+                + t.f6(yarr, (VT1B)x)
+                + f1(y, d)
+                + (int)t.f8((VT1A)(VT1B)d, (d % 2 == 0 ? (VT1B)(d / 2) : (VT1B)(d + 1 / 2)));
             if (u != w)
             {
                 Console.WriteLine("FAILED, u!=w");
@@ -102,7 +157,9 @@ namespace PrimitiveVT
 
             if ((t.f10(arr[1][0, 0], t.f7((VT1A)(new VT1B(2)), (VT1B)o[0]), 4)) != 6)
             {
-                Console.WriteLine("FAILED (t.f10(arr[1][0,0], t.f7((VT1A)(new VT1B(2)), (VT1B)o[0]), 4))!=6");
+                Console.WriteLine(
+                    "FAILED (t.f10(arr[1][0,0], t.f7((VT1A)(new VT1B(2)), (VT1B)o[0]), 4))!=6"
+                );
                 Console.WriteLine(t.f10(arr[1][0, 0], t.f7((VT1A)(new VT1B(2)), (VT1B)o[0]), 4));
                 return 1;
             }

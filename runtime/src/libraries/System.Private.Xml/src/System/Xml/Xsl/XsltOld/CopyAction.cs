@@ -69,13 +69,15 @@ namespace System.Xml.Xsl.XsltOld
                             break;
                         }
                         frame.State = NamespaceCopy;
-
                         continue;
                     case NamespaceCopy:
                         frame.State = ContentsCopy;
                         if (frame.Node!.NodeType == XPathNodeType.Element)
                         {
-                            processor.PushActionFrame(CopyNamespacesAction.GetAction(), frame.NodeSet);
+                            processor.PushActionFrame(
+                                CopyNamespacesAction.GetAction(),
+                                frame.NodeSet
+                            );
                             break;
                         }
                         continue;
@@ -116,7 +118,6 @@ namespace System.Xml.Xsl.XsltOld
                         Debug.Fail("Invalid CopyAction execution state");
                         break;
                 }
-
                 break;
             }
         }

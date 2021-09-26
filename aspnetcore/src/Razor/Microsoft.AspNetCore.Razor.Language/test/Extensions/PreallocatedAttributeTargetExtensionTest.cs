@@ -30,10 +30,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
             // Assert
             var csharp = context.CodeWriter.GenerateCode();
             Assert.Equal(
-@"private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute MyProp = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute(""Foo"", new global::Microsoft.AspNetCore.Html.HtmlString(""Bar""), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
+                @"private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute MyProp = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute(""Foo"", new global::Microsoft.AspNetCore.Html.HtmlString(""Bar""), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
 ",
                 csharp,
-                ignoreLineEndingDifferences: true);
+                ignoreLineEndingDifferences: true
+            );
         }
 
         [Fact]
@@ -57,10 +58,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
             // Assert
             var csharp = context.CodeWriter.GenerateCode();
             Assert.Equal(
-@"private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute _tagHelper1 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute(""Foo"");
+                @"private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute _tagHelper1 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute(""Foo"");
 ",
                 csharp,
-                ignoreLineEndingDifferences: true);
+                ignoreLineEndingDifferences: true
+            );
         }
 
         [Fact]
@@ -84,10 +86,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
             // Assert
             var csharp = context.CodeWriter.GenerateCode();
             Assert.Equal(
-@"__tagHelperExecutionContext.AddHtmlAttribute(_tagHelper1);
+                @"__tagHelperExecutionContext.AddHtmlAttribute(_tagHelper1);
 ",
                 csharp,
-                ignoreLineEndingDifferences: true);
+                ignoreLineEndingDifferences: true
+            );
         }
 
         [Fact]
@@ -96,7 +99,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
             // Arrange
             var extension = new PreallocatedAttributeTargetExtension();
             var context = TestCodeRenderingContext.CreateRuntime();
-            
+
             var node = new PreallocatedTagHelperPropertyValueIntermediateNode()
             {
                 AttributeName = "Foo",
@@ -111,10 +114,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
             // Assert
             var csharp = context.CodeWriter.GenerateCode();
             Assert.Equal(
-@"private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute _tagHelper1 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute(""Foo"", ""Bar"", global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
+                @"private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute _tagHelper1 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute(""Foo"", ""Bar"", global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
 ",
                 csharp,
-                ignoreLineEndingDifferences: true);
+                ignoreLineEndingDifferences: true
+            );
         }
 
         [Fact]
@@ -124,14 +128,18 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
             var extension = new PreallocatedAttributeTargetExtension();
             var context = TestCodeRenderingContext.CreateRuntime();
 
-            var tagHelperBuilder = new DefaultTagHelperDescriptorBuilder(TagHelperConventions.DefaultKind, "FooTagHelper", "Test");
+            var tagHelperBuilder = new DefaultTagHelperDescriptorBuilder(
+                TagHelperConventions.DefaultKind,
+                "FooTagHelper",
+                "Test"
+            );
             tagHelperBuilder.TypeName("FooTagHelper");
 
-            var builder = new DefaultBoundAttributeDescriptorBuilder(tagHelperBuilder, TagHelperConventions.DefaultKind);
-            builder
-                .Name("Foo")
-                .TypeName("System.String")
-                .PropertyName("FooProp");
+            var builder = new DefaultBoundAttributeDescriptorBuilder(
+                tagHelperBuilder,
+                TagHelperConventions.DefaultKind
+            );
+            builder.Name("Foo").TypeName("System.String").PropertyName("FooProp");
 
             var descriptor = builder.Build();
 
@@ -153,11 +161,12 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
             // Assert
             var csharp = context.CodeWriter.GenerateCode();
             Assert.Equal(
-@"__FooTagHelper.FooProp = (string)_tagHelper1.Value;
+                @"__FooTagHelper.FooProp = (string)_tagHelper1.Value;
 __tagHelperExecutionContext.AddTagHelperAttribute(_tagHelper1);
 ",
                 csharp,
-                ignoreLineEndingDifferences: true);
+                ignoreLineEndingDifferences: true
+            );
         }
 
         [Fact]
@@ -167,12 +176,18 @@ __tagHelperExecutionContext.AddTagHelperAttribute(_tagHelper1);
             var extension = new PreallocatedAttributeTargetExtension();
             var context = TestCodeRenderingContext.CreateRuntime();
 
-            var tagHelperBuilder = new DefaultTagHelperDescriptorBuilder(TagHelperConventions.DefaultKind, "FooTagHelper", "Test");
+            var tagHelperBuilder = new DefaultTagHelperDescriptorBuilder(
+                TagHelperConventions.DefaultKind,
+                "FooTagHelper",
+                "Test"
+            );
             tagHelperBuilder.TypeName("FooTagHelper");
 
-            var builder = new DefaultBoundAttributeDescriptorBuilder(tagHelperBuilder, TagHelperConventions.DefaultKind);
-            builder
-                .Name("Foo")
+            var builder = new DefaultBoundAttributeDescriptorBuilder(
+                tagHelperBuilder,
+                TagHelperConventions.DefaultKind
+            );
+            builder.Name("Foo")
                 .TypeName("System.Collections.Generic.Dictionary<System.String, System.String>")
                 .AsDictionaryAttribute("pre-", "System.String")
                 .PropertyName("FooProp");
@@ -199,7 +214,7 @@ __tagHelperExecutionContext.AddTagHelperAttribute(_tagHelper1);
             // Assert
             var csharp = context.CodeWriter.GenerateCode();
             Assert.Equal(
-@"if (__FooTagHelper.FooProp == null)
+                @"if (__FooTagHelper.FooProp == null)
 {
     throw new InvalidOperationException(InvalidTagHelperIndexerAssignment(""pre-Foo"", ""FooTagHelper"", ""FooProp""));
 }
@@ -207,7 +222,8 @@ __FooTagHelper.FooProp[""Foo""] = (string)_tagHelper1.Value;
 __tagHelperExecutionContext.AddTagHelperAttribute(_tagHelper1);
 ",
                 csharp,
-                ignoreLineEndingDifferences: true);
+                ignoreLineEndingDifferences: true
+            );
         }
 
         [Fact]
@@ -217,12 +233,18 @@ __tagHelperExecutionContext.AddTagHelperAttribute(_tagHelper1);
             var extension = new PreallocatedAttributeTargetExtension();
             var context = TestCodeRenderingContext.CreateRuntime();
 
-            var tagHelperBuilder = new DefaultTagHelperDescriptorBuilder(TagHelperConventions.DefaultKind, "FooTagHelper", "Test");
+            var tagHelperBuilder = new DefaultTagHelperDescriptorBuilder(
+                TagHelperConventions.DefaultKind,
+                "FooTagHelper",
+                "Test"
+            );
             tagHelperBuilder.TypeName("FooTagHelper");
 
-            var builder = new DefaultBoundAttributeDescriptorBuilder(tagHelperBuilder, TagHelperConventions.DefaultKind);
-            builder
-                .Name("Foo")
+            var builder = new DefaultBoundAttributeDescriptorBuilder(
+                tagHelperBuilder,
+                TagHelperConventions.DefaultKind
+            );
+            builder.Name("Foo")
                 .TypeName("System.Collections.Generic.Dictionary<System.String, System.String>")
                 .AsDictionaryAttribute("pre-", "System.String")
                 .PropertyName("FooProp");
@@ -261,11 +283,12 @@ __tagHelperExecutionContext.AddTagHelperAttribute(_tagHelper1);
             // Assert
             var csharp = context.CodeWriter.GenerateCode();
             Assert.Equal(
-@"__FooTagHelper.FooProp[""Foo""] = (string)_tagHelper1.Value;
+                @"__FooTagHelper.FooProp[""Foo""] = (string)_tagHelper1.Value;
 __tagHelperExecutionContext.AddTagHelperAttribute(_tagHelper1);
 ",
                 csharp,
-                ignoreLineEndingDifferences: true);
+                ignoreLineEndingDifferences: true
+            );
         }
 
         private static void Push(CodeRenderingContext context, TagHelperIntermediateNode node)

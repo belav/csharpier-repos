@@ -23,16 +23,9 @@ namespace Microsoft.AspNetCore.Mvc
         // Null or empty property names are invalid. (Those containing just whitespace are legal.)
         public static TheoryData<string> NullOrEmptyNames
         {
-            get
-            {
-                return new TheoryData<string>
-                {
-                    null,
-                    string.Empty,
-                };
-            }
+            get { return new TheoryData<string> { null, string.Empty, }; }
         }
-        
+
         [Fact]
         public void IsValidAlwaysReturnsTrue()
         {
@@ -42,7 +35,7 @@ namespace Microsoft.AspNetCore.Mvc
             // Act & Assert
             Assert.True(attribute.IsValid(value: null));
         }
-        
+
         [Fact]
         public void ErrorMessageProperties_HaveExpectedDefaultValues()
         {
@@ -54,7 +47,7 @@ namespace Microsoft.AspNetCore.Mvc
             Assert.Null(attribute.ErrorMessageResourceName);
             Assert.Null(attribute.ErrorMessageResourceType);
         }
-        
+
         [Fact]
         [ReplaceCulture]
         public void FormatErrorMessage_ReturnsDefaultErrorMessage()
@@ -66,11 +59,11 @@ namespace Microsoft.AspNetCore.Mvc
 
             // Act
             var message = attribute.FormatErrorMessage("Property1");
-            
+
             // Assert
             Assert.Equal(expected, message);
         }
-        
+
         [Fact]
         public void FormatErrorMessage_UsesOverriddenErrorMessage()
         {
@@ -87,7 +80,7 @@ namespace Microsoft.AspNetCore.Mvc
             // Assert
             Assert.Equal(expected, message);
         }
-        
+
         [Fact]
         [ReplaceCulture]
         public void FormatErrorMessage_UsesErrorMessageFromResource()
@@ -106,10 +99,12 @@ namespace Microsoft.AspNetCore.Mvc
             // Assert
             Assert.Equal(expected, message);
         }
-        
+
         [Theory]
         [MemberData(nameof(NullOrEmptyNames))]
-        public void FormatAdditionalFieldsForClientValidation_WithInvalidPropertyName_Throws(string property)
+        public void FormatAdditionalFieldsForClientValidation_WithInvalidPropertyName_Throws(
+            string property
+        )
         {
             // Arrange
             var attribute = new TestableRemoteAttributeBase();
@@ -119,7 +114,8 @@ namespace Microsoft.AspNetCore.Mvc
             ExceptionAssert.ThrowsArgument(
                 () => attribute.FormatAdditionalFieldsForClientValidation(property),
                 "property",
-                expectedMessage);
+                expectedMessage
+            );
         }
 
         [Fact]
@@ -141,7 +137,9 @@ namespace Microsoft.AspNetCore.Mvc
 
         [Theory]
         [MemberData(nameof(NullOrEmptyNames))]
-        public void FormatPropertyForClientValidation_WithInvalidPropertyName_Throws(string property)
+        public void FormatPropertyForClientValidation_WithInvalidPropertyName_Throws(
+            string property
+        )
         {
             // Arrange
             var expected = "Value cannot be null or empty.";
@@ -150,9 +148,10 @@ namespace Microsoft.AspNetCore.Mvc
             ExceptionAssert.ThrowsArgument(
                 () => RemoteAttributeBase.FormatPropertyForClientValidation(property),
                 "property",
-                expected);
+                expected
+            );
         }
-        
+
         [Fact]
         public void AddValidation_WithErrorMessage_SetsAttributesAsExpected()
         {
@@ -165,14 +164,18 @@ namespace Microsoft.AspNetCore.Mvc
                 HttpMethod = "POST",
                 ErrorMessage = "Error about '{0}' from override.",
             };
-            
+
             // Act
             attribute.AddValidation(context);
 
             // Assert
             Assert.Collection(
                 context.Attributes,
-                kvp => { Assert.Equal("data-val", kvp.Key); Assert.Equal("true", kvp.Value); },
+                kvp =>
+                {
+                    Assert.Equal("data-val", kvp.Key);
+                    Assert.Equal("true", kvp.Value);
+                },
                 kvp =>
                 {
                     Assert.Equal("data-val-remote", kvp.Key);
@@ -183,10 +186,19 @@ namespace Microsoft.AspNetCore.Mvc
                     Assert.Equal("data-val-remote-additionalfields", kvp.Key);
                     Assert.Equal("*.Length", kvp.Value);
                 },
-                kvp => { Assert.Equal("data-val-remote-type", kvp.Key); Assert.Equal("POST", kvp.Value); },
-                kvp => { Assert.Equal("data-val-remote-url", kvp.Key); Assert.Equal(url, kvp.Value); });
+                kvp =>
+                {
+                    Assert.Equal("data-val-remote-type", kvp.Key);
+                    Assert.Equal("POST", kvp.Value);
+                },
+                kvp =>
+                {
+                    Assert.Equal("data-val-remote-url", kvp.Key);
+                    Assert.Equal(url, kvp.Value);
+                }
+            );
         }
-        
+
         [Fact]
         public void AddValidation_WithErrorMessageAndLocalizerFactory_SetsAttributesAsExpected()
         {
@@ -200,14 +212,18 @@ namespace Microsoft.AspNetCore.Mvc
                 HttpMethod = "POST",
                 ErrorMessage = "Error about '{0}' from override.",
             };
-            
+
             // Act
             attribute.AddValidation(context);
 
             // Assert
             Assert.Collection(
                 context.Attributes,
-                kvp => { Assert.Equal("data-val", kvp.Key); Assert.Equal("true", kvp.Value); },
+                kvp =>
+                {
+                    Assert.Equal("data-val", kvp.Key);
+                    Assert.Equal("true", kvp.Value);
+                },
                 kvp =>
                 {
                     // IStringLocalizerFactory existence alone is insufficient to change error message.
@@ -219,10 +235,19 @@ namespace Microsoft.AspNetCore.Mvc
                     Assert.Equal("data-val-remote-additionalfields", kvp.Key);
                     Assert.Equal("*.Length", kvp.Value);
                 },
-                kvp => { Assert.Equal("data-val-remote-type", kvp.Key); Assert.Equal("POST", kvp.Value); },
-                kvp => { Assert.Equal("data-val-remote-url", kvp.Key); Assert.Equal(url, kvp.Value); });
+                kvp =>
+                {
+                    Assert.Equal("data-val-remote-type", kvp.Key);
+                    Assert.Equal("POST", kvp.Value);
+                },
+                kvp =>
+                {
+                    Assert.Equal("data-val-remote-url", kvp.Key);
+                    Assert.Equal(url, kvp.Value);
+                }
+            );
         }
-        
+
         [Fact]
         public void AddValidation_WithErrorMessageAndLocalizerProvider_SetsAttributesAsExpected()
         {
@@ -236,8 +261,9 @@ namespace Microsoft.AspNetCore.Mvc
                 ErrorMessage = "Error about '{0}' from override.",
             };
 
-            var options = context.ActionContext.HttpContext.RequestServices
-                .GetRequiredService<IOptions<MvcDataAnnotationsLocalizationOptions>>();
+            var options = context.ActionContext.HttpContext.RequestServices.GetRequiredService<
+                IOptions<MvcDataAnnotationsLocalizationOptions>
+            >();
             var localizer = new Mock<IStringLocalizer>(MockBehavior.Strict);
             options.Value.DataAnnotationLocalizerProvider = (type, factory) => localizer.Object;
 
@@ -247,7 +273,11 @@ namespace Microsoft.AspNetCore.Mvc
             // Assert
             Assert.Collection(
                 context.Attributes,
-                kvp => { Assert.Equal("data-val", kvp.Key); Assert.Equal("true", kvp.Value); },
+                kvp =>
+                {
+                    Assert.Equal("data-val", kvp.Key);
+                    Assert.Equal("true", kvp.Value);
+                },
                 kvp =>
                 {
                     // Non-null DataAnnotationLocalizerProvider alone is insufficient to change error message.
@@ -259,10 +289,19 @@ namespace Microsoft.AspNetCore.Mvc
                     Assert.Equal("data-val-remote-additionalfields", kvp.Key);
                     Assert.Equal("*.Length", kvp.Value);
                 },
-                kvp => { Assert.Equal("data-val-remote-type", kvp.Key); Assert.Equal("POST", kvp.Value); },
-                kvp => { Assert.Equal("data-val-remote-url", kvp.Key); Assert.Equal(url, kvp.Value); });
+                kvp =>
+                {
+                    Assert.Equal("data-val-remote-type", kvp.Key);
+                    Assert.Equal("POST", kvp.Value);
+                },
+                kvp =>
+                {
+                    Assert.Equal("data-val-remote-url", kvp.Key);
+                    Assert.Equal(url, kvp.Value);
+                }
+            );
         }
-        
+
         [Fact]
         public void AddValidation_WithErrorMessageLocalizerFactoryAndLocalizerProvider_SetsAttributesAsExpected()
         {
@@ -279,12 +318,12 @@ namespace Microsoft.AspNetCore.Mvc
 
             var localizedString = new LocalizedString("Fred", expected);
             var localizer = new Mock<IStringLocalizer>(MockBehavior.Strict);
-            localizer
-                .Setup(l => l["Error about '{0}' from override.", "Length"])
+            localizer.Setup(l => l["Error about '{0}' from override.", "Length"])
                 .Returns(localizedString)
                 .Verifiable();
-            var options = context.ActionContext.HttpContext.RequestServices
-                .GetRequiredService<IOptions<MvcDataAnnotationsLocalizationOptions>>();
+            var options = context.ActionContext.HttpContext.RequestServices.GetRequiredService<
+                IOptions<MvcDataAnnotationsLocalizationOptions>
+            >();
             options.Value.DataAnnotationLocalizerProvider = (type, factory) => localizer.Object;
 
             // Act
@@ -295,7 +334,11 @@ namespace Microsoft.AspNetCore.Mvc
 
             Assert.Collection(
                 context.Attributes,
-                kvp => { Assert.Equal("data-val", kvp.Key); Assert.Equal("true", kvp.Value); },
+                kvp =>
+                {
+                    Assert.Equal("data-val", kvp.Key);
+                    Assert.Equal("true", kvp.Value);
+                },
                 kvp =>
                 {
                     Assert.Equal("data-val-remote", kvp.Key);
@@ -306,10 +349,19 @@ namespace Microsoft.AspNetCore.Mvc
                     Assert.Equal("data-val-remote-additionalfields", kvp.Key);
                     Assert.Equal("*.Length", kvp.Value);
                 },
-                kvp => { Assert.Equal("data-val-remote-type", kvp.Key); Assert.Equal("POST", kvp.Value); },
-                kvp => { Assert.Equal("data-val-remote-url", kvp.Key); Assert.Equal(url, kvp.Value); });
+                kvp =>
+                {
+                    Assert.Equal("data-val-remote-type", kvp.Key);
+                    Assert.Equal("POST", kvp.Value);
+                },
+                kvp =>
+                {
+                    Assert.Equal("data-val-remote-url", kvp.Key);
+                    Assert.Equal(url, kvp.Value);
+                }
+            );
         }
-        
+
         [Fact]
         [ReplaceCulture]
         public void AddValidation_WithErrorResourcesLocalizerFactoryAndLocalizerProvider_SetsAttributesAsExpected()
@@ -323,13 +375,14 @@ namespace Microsoft.AspNetCore.Mvc
                 ErrorMessageResourceName = nameof(Resources.RemoteAttribute_Error),
                 ErrorMessageResourceType = typeof(Resources),
             };
-            
+
             var localizerFactory = new Mock<IStringLocalizerFactory>(MockBehavior.Strict).Object;
             var context = GetValidationContext(localizerFactory);
 
             var localizer = new Mock<IStringLocalizer>(MockBehavior.Strict);
-            var options = context.ActionContext.HttpContext.RequestServices
-                .GetRequiredService<IOptions<MvcDataAnnotationsLocalizationOptions>>();
+            var options = context.ActionContext.HttpContext.RequestServices.GetRequiredService<
+                IOptions<MvcDataAnnotationsLocalizationOptions>
+            >();
             options.Value.DataAnnotationLocalizerProvider = (type, factory) => localizer.Object;
 
             // Act
@@ -338,7 +391,11 @@ namespace Microsoft.AspNetCore.Mvc
             // Assert
             Assert.Collection(
                 context.Attributes,
-                kvp => { Assert.Equal("data-val", kvp.Key); Assert.Equal("true", kvp.Value); },
+                kvp =>
+                {
+                    Assert.Equal("data-val", kvp.Key);
+                    Assert.Equal("true", kvp.Value);
+                },
                 kvp =>
                 {
                     // Configuring the attribute using ErrorMessageResource* trumps available IStringLocalizer etc.
@@ -350,10 +407,19 @@ namespace Microsoft.AspNetCore.Mvc
                     Assert.Equal("data-val-remote-additionalfields", kvp.Key);
                     Assert.Equal("*.Length", kvp.Value);
                 },
-                kvp => { Assert.Equal("data-val-remote-type", kvp.Key); Assert.Equal("POST", kvp.Value); },
-                kvp => { Assert.Equal("data-val-remote-url", kvp.Key); Assert.Equal(url, kvp.Value); });
+                kvp =>
+                {
+                    Assert.Equal("data-val-remote-type", kvp.Key);
+                    Assert.Equal("POST", kvp.Value);
+                },
+                kvp =>
+                {
+                    Assert.Equal("data-val-remote-url", kvp.Key);
+                    Assert.Equal(url, kvp.Value);
+                }
+            );
         }
-        
+
         [Fact]
         public void AddValidation_WithErrorMessageAndDisplayName_SetsAttributesAsExpected()
         {
@@ -362,24 +428,30 @@ namespace Microsoft.AspNetCore.Mvc
             var url = "/Controller/Action";
 
             var metadataProvider = new TestModelMetadataProvider();
-            metadataProvider
-                .ForProperty(typeof(string), nameof(string.Length))
+            metadataProvider.ForProperty(typeof(string), nameof(string.Length))
                 .DisplayDetails(d => d.DisplayName = () => "Display Length");
-            var context = GetValidationContext(localizerFactory: null, metadataProvider: metadataProvider);
+            var context = GetValidationContext(
+                localizerFactory: null,
+                metadataProvider: metadataProvider
+            );
 
             var attribute = new TestableRemoteAttributeBase(dummyGetUrlReturnValue: url)
             {
                 HttpMethod = "POST",
                 ErrorMessage = "Error about '{0}' from override.",
             };
-            
+
             // Act
             attribute.AddValidation(context);
 
             // Assert
             Assert.Collection(
                 context.Attributes,
-                kvp => { Assert.Equal("data-val", kvp.Key); Assert.Equal("true", kvp.Value); },
+                kvp =>
+                {
+                    Assert.Equal("data-val", kvp.Key);
+                    Assert.Equal("true", kvp.Value);
+                },
                 kvp =>
                 {
                     Assert.Equal("data-val-remote", kvp.Key);
@@ -390,10 +462,19 @@ namespace Microsoft.AspNetCore.Mvc
                     Assert.Equal("data-val-remote-additionalfields", kvp.Key);
                     Assert.Equal("*.Length", kvp.Value);
                 },
-                kvp => { Assert.Equal("data-val-remote-type", kvp.Key); Assert.Equal("POST", kvp.Value); },
-                kvp => { Assert.Equal("data-val-remote-url", kvp.Key); Assert.Equal(url, kvp.Value); });
+                kvp =>
+                {
+                    Assert.Equal("data-val-remote-type", kvp.Key);
+                    Assert.Equal("POST", kvp.Value);
+                },
+                kvp =>
+                {
+                    Assert.Equal("data-val-remote-url", kvp.Key);
+                    Assert.Equal(url, kvp.Value);
+                }
+            );
         }
-        
+
         [Fact]
         public void AddValidation_WithErrorMessageLocalizerFactoryLocalizerProviderAndDisplayName_SetsAttributesAsExpected()
         {
@@ -402,8 +483,7 @@ namespace Microsoft.AspNetCore.Mvc
             var url = "/Controller/Action";
 
             var metadataProvider = new TestModelMetadataProvider();
-            metadataProvider
-                .ForProperty(typeof(string), nameof(string.Length))
+            metadataProvider.ForProperty(typeof(string), nameof(string.Length))
                 .DisplayDetails(d => d.DisplayName = () => "Display Length");
             var localizerFactory = new Mock<IStringLocalizerFactory>(MockBehavior.Strict).Object;
             var context = GetValidationContext(localizerFactory, metadataProvider);
@@ -416,12 +496,12 @@ namespace Microsoft.AspNetCore.Mvc
 
             var localizedString = new LocalizedString("Fred", expected);
             var localizer = new Mock<IStringLocalizer>(MockBehavior.Strict);
-            localizer
-                .Setup(l => l["Error about '{0}' from override.", "Display Length"])
+            localizer.Setup(l => l["Error about '{0}' from override.", "Display Length"])
                 .Returns(localizedString)
                 .Verifiable();
-            var options = context.ActionContext.HttpContext.RequestServices
-                .GetRequiredService<IOptions<MvcDataAnnotationsLocalizationOptions>>();
+            var options = context.ActionContext.HttpContext.RequestServices.GetRequiredService<
+                IOptions<MvcDataAnnotationsLocalizationOptions>
+            >();
             options.Value.DataAnnotationLocalizerProvider = (type, factory) => localizer.Object;
 
             // Act
@@ -432,7 +512,11 @@ namespace Microsoft.AspNetCore.Mvc
 
             Assert.Collection(
                 context.Attributes,
-                kvp => { Assert.Equal("data-val", kvp.Key); Assert.Equal("true", kvp.Value); },
+                kvp =>
+                {
+                    Assert.Equal("data-val", kvp.Key);
+                    Assert.Equal("true", kvp.Value);
+                },
                 kvp =>
                 {
                     Assert.Equal("data-val-remote", kvp.Key);
@@ -443,10 +527,19 @@ namespace Microsoft.AspNetCore.Mvc
                     Assert.Equal("data-val-remote-additionalfields", kvp.Key);
                     Assert.Equal("*.Length", kvp.Value);
                 },
-                kvp => { Assert.Equal("data-val-remote-type", kvp.Key); Assert.Equal("POST", kvp.Value); },
-                kvp => { Assert.Equal("data-val-remote-url", kvp.Key); Assert.Equal(url, kvp.Value); });
+                kvp =>
+                {
+                    Assert.Equal("data-val-remote-type", kvp.Key);
+                    Assert.Equal("POST", kvp.Value);
+                },
+                kvp =>
+                {
+                    Assert.Equal("data-val-remote-url", kvp.Key);
+                    Assert.Equal(url, kvp.Value);
+                }
+            );
         }
-        
+
         [Fact]
         public void AddValidation_WillSetAttributes_ToExpectedValues()
         {
@@ -466,20 +559,38 @@ namespace Microsoft.AspNetCore.Mvc
             // Assert
             Assert.Collection(
                 context.Attributes,
-                kvp => { Assert.Equal("data-val", kvp.Key); Assert.Equal("true", kvp.Value); },
-                kvp => { Assert.Equal("data-val-remote", kvp.Key); Assert.Equal("Error", kvp.Value); },
+                kvp =>
+                {
+                    Assert.Equal("data-val", kvp.Key);
+                    Assert.Equal("true", kvp.Value);
+                },
+                kvp =>
+                {
+                    Assert.Equal("data-val-remote", kvp.Key);
+                    Assert.Equal("Error", kvp.Value);
+                },
                 kvp =>
                 {
                     Assert.Equal("data-val-remote-additionalfields", kvp.Key);
                     Assert.Equal("*.Length,*.Password,*.ConfirmPassword", kvp.Value);
                 },
-                kvp => { Assert.Equal("data-val-remote-type", kvp.Key); Assert.Equal("POST", kvp.Value); },
-                kvp => { Assert.Equal("data-val-remote-url", kvp.Key); Assert.Equal(url, kvp.Value); });
+                kvp =>
+                {
+                    Assert.Equal("data-val-remote-type", kvp.Key);
+                    Assert.Equal("POST", kvp.Value);
+                },
+                kvp =>
+                {
+                    Assert.Equal("data-val-remote-url", kvp.Key);
+                    Assert.Equal(url, kvp.Value);
+                }
+            );
         }
 
         private static ClientModelValidationContext GetValidationContext(
             IStringLocalizerFactory localizerFactory = null,
-            IModelMetadataProvider metadataProvider = null)
+            IModelMetadataProvider metadataProvider = null
+        )
         {
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddOptions();
@@ -489,17 +600,15 @@ namespace Microsoft.AspNetCore.Mvc
             }
 
             var serviceProvider = serviceCollection.BuildServiceProvider();
-            
-            var httpContext = new DefaultHttpContext
-            {
-                RequestServices = serviceProvider,
-            };
-            
+
+            var httpContext = new DefaultHttpContext { RequestServices = serviceProvider, };
+
             var actionContext = new ActionContext(
-                httpContext, 
-                routeData: new Mock<RouteData>().Object, 
-                actionDescriptor: new ActionDescriptor());
-            
+                httpContext,
+                routeData: new Mock<RouteData>().Object,
+                actionDescriptor: new ActionDescriptor()
+            );
+
             var emptyMetadataProvider = new EmptyModelMetadataProvider();
 
             if (metadataProvider == null)
@@ -509,22 +618,23 @@ namespace Microsoft.AspNetCore.Mvc
 
             var metadata = metadataProvider.GetMetadataForProperty(
                 containerType: typeof(string),
-                propertyName: nameof(string.Length));
+                propertyName: nameof(string.Length)
+            );
 
             return new ClientModelValidationContext(
                 actionContext,
                 metadata,
                 metadataProvider,
-                new AttributeDictionary());
+                new AttributeDictionary()
+            );
         }
 
         private class TestableRemoteAttributeBase : RemoteAttributeBase
         {
             private readonly string _dummyGetUrlReturnValue;
 
-            public TestableRemoteAttributeBase()
-            { }
-            
+            public TestableRemoteAttributeBase() { }
+
             public TestableRemoteAttributeBase(string dummyGetUrlReturnValue)
             {
                 _dummyGetUrlReturnValue = dummyGetUrlReturnValue;

@@ -19,10 +19,7 @@ namespace Microsoft.AspNetCore.StaticFiles
             var headers = ctx.Context.Response.GetTypedHeaders();
             if (headers.CacheControl == null)
             {
-                headers.CacheControl = new CacheControlHeaderValue
-                {
-                    NoCache = true
-                };
+                headers.CacheControl = new CacheControlHeaderValue { NoCache = true };
             }
         }
     }

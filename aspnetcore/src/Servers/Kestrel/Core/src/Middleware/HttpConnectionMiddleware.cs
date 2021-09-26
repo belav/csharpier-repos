@@ -15,7 +15,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
         private readonly IHttpApplication<TContext> _application;
         private readonly HttpProtocols _endpointDefaultProtocols;
 
-        public HttpConnectionMiddleware(ServiceContext serviceContext, IHttpApplication<TContext> application, HttpProtocols protocols)
+        public HttpConnectionMiddleware(
+            ServiceContext serviceContext,
+            IHttpApplication<TContext> application,
+            HttpProtocols protocols
+        )
         {
             _serviceContext = serviceContext;
             _application = application;
@@ -28,14 +32,16 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
 
             var httpConnectionContext = new HttpConnectionContext(
                 connectionContext.ConnectionId,
-                connectionContext.Features.Get<HttpProtocolsFeature>()?.HttpProtocols ?? _endpointDefaultProtocols,
+                connectionContext.Features.Get<HttpProtocolsFeature>()?.HttpProtocols
+                    ?? _endpointDefaultProtocols,
                 connectionContext,
                 _serviceContext,
                 connectionContext.Features,
                 memoryPoolFeature?.MemoryPool ?? System.Buffers.MemoryPool<byte>.Shared,
                 connectionContext.LocalEndPoint as IPEndPoint,
                 connectionContext.RemoteEndPoint as IPEndPoint,
-                connectionContext.Transport);
+                connectionContext.Transport
+            );
 
             var connection = new HttpConnection(httpConnectionContext);
 

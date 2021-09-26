@@ -18,7 +18,9 @@ namespace System.Xml.Tests
         private const char ProblematicChar = '\u0300';
         private const string ProblematicCharEntity = "&#x300;";
 
-        private static readonly string s_ExampleSurrogate = new string(new char[2] { SurHighStart, SurLowStart });
+        private static readonly string s_ExampleSurrogate = new string(
+            new char[2] { SurHighStart, SurLowStart }
+        );
         // To convert from surrogate pair to entity hex use following formula:
         // (highChar - 0xD800) * 0x400 + (lowChar - 0xDC00) + 0x10000
         private const string ExampleSurrogateEntity = "&#x10000;";
@@ -46,7 +48,10 @@ namespace System.Xml.Tests
             StreamReader sr = new StreamReader(ms);
             string output = sr.ReadToEnd();
 
-            string expectedOutput = "<?xml version=\"1.0\" encoding=\"us-ascii\"?><test>" + problematicStringAfterFallback + "</test>";
+            string expectedOutput =
+                "<?xml version=\"1.0\" encoding=\"us-ascii\"?><test>"
+                + problematicStringAfterFallback
+                + "</test>";
             Assert.Equal(expectedOutput, output);
         }
 
@@ -64,11 +69,13 @@ namespace System.Xml.Tests
             using (XmlWriter writer = XmlWriter.Create(ms, settings))
             {
                 writer.WriteStartDocument();
-                Assert.Throws<System.Text.EncoderFallbackException>(() =>
+                Assert.Throws<System.Text.EncoderFallbackException>(
+                    () =>
                     {
                         writer.WriteElementString(problematicString, "test");
                         writer.Flush();
-                    });
+                    }
+                );
             }
         }
 
@@ -95,7 +102,10 @@ namespace System.Xml.Tests
             StreamReader sr = new StreamReader(ms);
             string output = sr.ReadToEnd();
 
-            string expectedOutput = "<?xml version=\"1.0\" encoding=\"us-ascii\"?><test>" + problematicStringAfterFallback + "</test>";
+            string expectedOutput =
+                "<?xml version=\"1.0\" encoding=\"us-ascii\"?><test>"
+                + problematicStringAfterFallback
+                + "</test>";
             Assert.Equal(expectedOutput, output);
         }
 
@@ -123,7 +133,10 @@ namespace System.Xml.Tests
             StreamReader sr = new StreamReader(ms);
             string output = sr.ReadToEnd();
 
-            string expectedOutput = "<?xml version=\"1.0\" encoding=\"us-ascii\"?><test>" + problematicStringAfterFallback + "</test>";
+            string expectedOutput =
+                "<?xml version=\"1.0\" encoding=\"us-ascii\"?><test>"
+                + problematicStringAfterFallback
+                + "</test>";
             Assert.Equal(expectedOutput, output);
         }
 
@@ -142,13 +155,19 @@ namespace System.Xml.Tests
             using (XmlWriter writer = XmlWriter.Create(ms, settings))
             {
                 writer.WriteStartDocumentAsync().Wait();
-                Exception exception = Assert.Throws<System.AggregateException>(() =>
+                Exception exception = Assert.Throws<System.AggregateException>(
+                    () =>
                     {
-                        writer.WriteElementStringAsync(null, problematicString, null, "test").Wait();
+                        writer.WriteElementStringAsync(null, problematicString, null, "test")
+                            .Wait();
                         writer.FlushAsync().Wait();
-                    });
+                    }
+                );
 
-                Assert.Equal(typeof(System.Text.EncoderFallbackException), exception.InnerException.GetType());
+                Assert.Equal(
+                    typeof(System.Text.EncoderFallbackException),
+                    exception.InnerException.GetType()
+                );
             }
         }
 
@@ -176,7 +195,10 @@ namespace System.Xml.Tests
             StreamReader sr = new StreamReader(ms);
             string output = sr.ReadToEnd();
 
-            string expectedOutput = "<?xml version=\"1.0\" encoding=\"us-ascii\"?><test>" + problematicStringAfterFallback + "</test>";
+            string expectedOutput =
+                "<?xml version=\"1.0\" encoding=\"us-ascii\"?><test>"
+                + problematicStringAfterFallback
+                + "</test>";
             Assert.Equal(expectedOutput, output);
         }
     }

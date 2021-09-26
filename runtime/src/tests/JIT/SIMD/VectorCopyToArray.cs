@@ -16,7 +16,8 @@ internal partial class VectorTest
         {
             int returnVal = Pass;
 
-            if (size < Vector<T>.Count) size = Vector<T>.Count;
+            if (size < Vector<T>.Count)
+                size = Vector<T>.Count;
             int index = size - Vector<T>.Count;
             T[] inputArray = GetRandomArray<T>(size, random);
 
@@ -30,8 +31,10 @@ internal partial class VectorTest
 
             for (int i = 0; i < Vector<T>.Count; i++)
             {
-                if (!CheckValue(v1[i], outputArray[i])) returnVal = Fail;
-                if (!CheckValue(v2[i], outputArray[i + Vector<T>.Count])) returnVal = Fail;
+                if (!CheckValue(v1[i], outputArray[i]))
+                    returnVal = Fail;
+                if (!CheckValue(v2[i], outputArray[i + Vector<T>.Count]))
+                    returnVal = Fail;
             }
 
             // Test a null input array.
@@ -70,7 +73,9 @@ internal partial class VectorTest
             }
             if (!caught)
             {
-                Console.WriteLine("Failed to throw ArgumentOutOfRangeException for a negative index.");
+                Console.WriteLine(
+                    "Failed to throw ArgumentOutOfRangeException for a negative index."
+                );
                 returnVal = Fail;
             }
 
@@ -90,7 +95,9 @@ internal partial class VectorTest
             }
             if (!caught)
             {
-                Console.WriteLine("Failed to throw ArgumentOutOfRangeException for an out-of-range index.");
+                Console.WriteLine(
+                    "Failed to throw ArgumentOutOfRangeException for an out-of-range index."
+                );
                 returnVal = Fail;
             }
 
@@ -110,7 +117,9 @@ internal partial class VectorTest
             }
             if (!caught)
             {
-                Console.WriteLine("Failed to throw ArgumentException for insufficient range in target array.");
+                Console.WriteLine(
+                    "Failed to throw ArgumentException for insufficient range in target array."
+                );
                 returnVal = Fail;
             }
 
@@ -123,48 +132,88 @@ internal partial class VectorTest
         int returnVal = Pass;
         Random random = new Random(100);
 
-        if (VectorCopyToArrayTest<Single>.VectorCopyToArray(17, random) == Fail) returnVal = Fail;
-        if (VectorCopyToArrayTest<Single>.VectorCopyToArray(12, random) == Fail) returnVal = Fail;
-        if (VectorCopyToArrayTest<Double>.VectorCopyToArray(12, random) == Fail) returnVal = Fail;
-        if (VectorCopyToArrayTest<Double>.VectorCopyToArray(17, random) == Fail) returnVal = Fail;
-        if (VectorCopyToArrayTest<int>.VectorCopyToArray(12, random) == Fail) returnVal = Fail;
-        if (VectorCopyToArrayTest<int>.VectorCopyToArray(17, random) == Fail) returnVal = Fail;
-        if (VectorCopyToArrayTest<long>.VectorCopyToArray(12, random) == Fail) returnVal = Fail;
-        if (VectorCopyToArrayTest<long>.VectorCopyToArray(17, random) == Fail) returnVal = Fail;
-        if (VectorCopyToArrayTest<ushort>.VectorCopyToArray(12, random) == Fail) returnVal = Fail;
-        if (VectorCopyToArrayTest<ushort>.VectorCopyToArray(17, random) == Fail) returnVal = Fail;
-        if (VectorCopyToArrayTest<byte>.VectorCopyToArray(12, random) == Fail) returnVal = Fail;
-        if (VectorCopyToArrayTest<byte>.VectorCopyToArray(17, random) == Fail) returnVal = Fail;
-        if (VectorCopyToArrayTest<short>.VectorCopyToArray(12, random) == Fail) returnVal = Fail;
-        if (VectorCopyToArrayTest<short>.VectorCopyToArray(17, random) == Fail) returnVal = Fail;
-        if (VectorCopyToArrayTest<sbyte>.VectorCopyToArray(12, random) == Fail) returnVal = Fail;
-        if (VectorCopyToArrayTest<sbyte>.VectorCopyToArray(17, random) == Fail) returnVal = Fail;
-        if (VectorCopyToArrayTest<uint>.VectorCopyToArray(12, random) == Fail) returnVal = Fail;
-        if (VectorCopyToArrayTest<uint>.VectorCopyToArray(17, random) == Fail) returnVal = Fail;
-        if (VectorCopyToArrayTest<ulong>.VectorCopyToArray(12, random) == Fail) returnVal = Fail;
-        if (VectorCopyToArrayTest<ulong>.VectorCopyToArray(17, random) == Fail) returnVal = Fail;
+        if (VectorCopyToArrayTest<Single>.VectorCopyToArray(17, random) == Fail)
+            returnVal = Fail;
+        if (VectorCopyToArrayTest<Single>.VectorCopyToArray(12, random) == Fail)
+            returnVal = Fail;
+        if (VectorCopyToArrayTest<Double>.VectorCopyToArray(12, random) == Fail)
+            returnVal = Fail;
+        if (VectorCopyToArrayTest<Double>.VectorCopyToArray(17, random) == Fail)
+            returnVal = Fail;
+        if (VectorCopyToArrayTest<int>.VectorCopyToArray(12, random) == Fail)
+            returnVal = Fail;
+        if (VectorCopyToArrayTest<int>.VectorCopyToArray(17, random) == Fail)
+            returnVal = Fail;
+        if (VectorCopyToArrayTest<long>.VectorCopyToArray(12, random) == Fail)
+            returnVal = Fail;
+        if (VectorCopyToArrayTest<long>.VectorCopyToArray(17, random) == Fail)
+            returnVal = Fail;
+        if (VectorCopyToArrayTest<ushort>.VectorCopyToArray(12, random) == Fail)
+            returnVal = Fail;
+        if (VectorCopyToArrayTest<ushort>.VectorCopyToArray(17, random) == Fail)
+            returnVal = Fail;
+        if (VectorCopyToArrayTest<byte>.VectorCopyToArray(12, random) == Fail)
+            returnVal = Fail;
+        if (VectorCopyToArrayTest<byte>.VectorCopyToArray(17, random) == Fail)
+            returnVal = Fail;
+        if (VectorCopyToArrayTest<short>.VectorCopyToArray(12, random) == Fail)
+            returnVal = Fail;
+        if (VectorCopyToArrayTest<short>.VectorCopyToArray(17, random) == Fail)
+            returnVal = Fail;
+        if (VectorCopyToArrayTest<sbyte>.VectorCopyToArray(12, random) == Fail)
+            returnVal = Fail;
+        if (VectorCopyToArrayTest<sbyte>.VectorCopyToArray(17, random) == Fail)
+            returnVal = Fail;
+        if (VectorCopyToArrayTest<uint>.VectorCopyToArray(12, random) == Fail)
+            returnVal = Fail;
+        if (VectorCopyToArrayTest<uint>.VectorCopyToArray(17, random) == Fail)
+            returnVal = Fail;
+        if (VectorCopyToArrayTest<ulong>.VectorCopyToArray(12, random) == Fail)
+            returnVal = Fail;
+        if (VectorCopyToArrayTest<ulong>.VectorCopyToArray(17, random) == Fail)
+            returnVal = Fail;
 
         JitLog jitLog = new JitLog();
-        if (!jitLog.Check("CopyTo(ref)", "Single")) returnVal = Fail;
-        if (!jitLog.Check("CopyTo(ref,int)", "Single")) returnVal = Fail;
-        if (!jitLog.Check("CopyTo(ref)", "Double")) returnVal = Fail;
-        if (!jitLog.Check("CopyTo(ref,int)", "Double")) returnVal = Fail;
-        if (!jitLog.Check("CopyTo(ref)", "Int32")) returnVal = Fail;
-        if (!jitLog.Check("CopyTo(ref,int)", "Int32")) returnVal = Fail;
-        if (!jitLog.Check("CopyTo(ref)", "Int64")) returnVal = Fail;
-        if (!jitLog.Check("CopyTo(ref,int)", "Int64")) returnVal = Fail;
-        if (!jitLog.Check("CopyTo(ref)", "UInt16")) returnVal = Fail;
-        if (!jitLog.Check("CopyTo(ref,int)", "UInt16")) returnVal = Fail;
-        if (!jitLog.Check("CopyTo(ref)", "Byte")) returnVal = Fail;
-        if (!jitLog.Check("CopyTo(ref,int)", "Byte")) returnVal = Fail;
-        if (!jitLog.Check("CopyTo(ref)", "Int16")) returnVal = Fail;
-        if (!jitLog.Check("CopyTo(ref,int)", "Int16")) returnVal = Fail;
-        if (!jitLog.Check("CopyTo(ref)", "SByte")) returnVal = Fail;
-        if (!jitLog.Check("CopyTo(ref,int)", "SByte")) returnVal = Fail;
-        if (!jitLog.Check("CopyTo(ref)", "UInt32")) returnVal = Fail;
-        if (!jitLog.Check("CopyTo(ref,int)", "UInt32")) returnVal = Fail;
-        if (!jitLog.Check("CopyTo(ref)", "UInt64")) returnVal = Fail;
-        if (!jitLog.Check("CopyTo(ref,int)", "UInt64")) returnVal = Fail;
+        if (!jitLog.Check("CopyTo(ref)", "Single"))
+            returnVal = Fail;
+        if (!jitLog.Check("CopyTo(ref,int)", "Single"))
+            returnVal = Fail;
+        if (!jitLog.Check("CopyTo(ref)", "Double"))
+            returnVal = Fail;
+        if (!jitLog.Check("CopyTo(ref,int)", "Double"))
+            returnVal = Fail;
+        if (!jitLog.Check("CopyTo(ref)", "Int32"))
+            returnVal = Fail;
+        if (!jitLog.Check("CopyTo(ref,int)", "Int32"))
+            returnVal = Fail;
+        if (!jitLog.Check("CopyTo(ref)", "Int64"))
+            returnVal = Fail;
+        if (!jitLog.Check("CopyTo(ref,int)", "Int64"))
+            returnVal = Fail;
+        if (!jitLog.Check("CopyTo(ref)", "UInt16"))
+            returnVal = Fail;
+        if (!jitLog.Check("CopyTo(ref,int)", "UInt16"))
+            returnVal = Fail;
+        if (!jitLog.Check("CopyTo(ref)", "Byte"))
+            returnVal = Fail;
+        if (!jitLog.Check("CopyTo(ref,int)", "Byte"))
+            returnVal = Fail;
+        if (!jitLog.Check("CopyTo(ref)", "Int16"))
+            returnVal = Fail;
+        if (!jitLog.Check("CopyTo(ref,int)", "Int16"))
+            returnVal = Fail;
+        if (!jitLog.Check("CopyTo(ref)", "SByte"))
+            returnVal = Fail;
+        if (!jitLog.Check("CopyTo(ref,int)", "SByte"))
+            returnVal = Fail;
+        if (!jitLog.Check("CopyTo(ref)", "UInt32"))
+            returnVal = Fail;
+        if (!jitLog.Check("CopyTo(ref,int)", "UInt32"))
+            returnVal = Fail;
+        if (!jitLog.Check("CopyTo(ref)", "UInt64"))
+            returnVal = Fail;
+        if (!jitLog.Check("CopyTo(ref,int)", "UInt64"))
+            returnVal = Fail;
         jitLog.Dispose();
 
         return returnVal;

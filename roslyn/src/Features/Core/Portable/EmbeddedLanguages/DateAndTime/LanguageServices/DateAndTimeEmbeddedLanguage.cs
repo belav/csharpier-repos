@@ -24,25 +24,44 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.DateAndTime.LanguageServices
         }
 
         internal async Task<SyntaxToken?> TryGetDateAndTimeTokenAtPositionAsync(
-            Document document, int position, CancellationToken cancellationToken)
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        )
         {
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
 
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
             var token = GetToken(syntaxFacts, root, position);
-            if (!DateAndTimePatternDetector.IsPossiblyDateAndTimeArgumentToken(token, syntaxFacts, out _, out _) &&
-                token.RawKind != syntaxFacts.SyntaxKinds.InterpolatedStringTextToken)
+            if (
+                !DateAndTimePatternDetector.IsPossiblyDateAndTimeArgumentToken(
+                    token,
+                    syntaxFacts,
+                    out _,
+                    out _
+                )
+                && token.RawKind != syntaxFacts.SyntaxKinds.InterpolatedStringTextToken
+            )
             {
                 return null;
             }
 
-            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
             var detector = DateAndTimePatternDetector.TryGetOrCreate(semanticModel, this.Info);
-            return detector != null && detector.IsDateAndTimeToken(token, syntaxFacts, cancellationToken)
-                ? token : (SyntaxToken?)null;
+            return
+                detector != null
+                && detector.IsDateAndTimeToken(token, syntaxFacts, cancellationToken)
+              ? token
+              : (SyntaxToken?)null;
         }
 
-        private static SyntaxToken GetToken(ISyntaxFactsService syntaxFacts, SyntaxNode root, int position)
+        private static SyntaxToken GetToken(
+            ISyntaxFactsService syntaxFacts,
+            SyntaxNode root,
+            int position
+        )
         {
             var token = root.FindToken(position);
             var syntaxKinds = syntaxFacts.SyntaxKinds;

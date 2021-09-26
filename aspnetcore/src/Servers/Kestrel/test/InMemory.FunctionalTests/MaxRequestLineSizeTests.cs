@@ -42,7 +42,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         "hello, world",
                         "0",
                         "",
-                        "");
+                        ""
+                    );
                 }
             }
         }
@@ -65,24 +66,25 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         $"Date: {server.Context.DateHeaderValue}",
                         "Content-Length: 0",
                         "",
-                        "");
+                        ""
+                    );
                 }
             }
         }
 
         private TestServer CreateServer(int maxRequestLineSize)
         {
-            return new TestServer(async httpContext => await httpContext.Response.WriteAsync("hello, world"), new TestServiceContext(LoggerFactory)
-            {
-                ServerOptions = new KestrelServerOptions
+            return new TestServer(
+                async httpContext => await httpContext.Response.WriteAsync("hello, world"),
+                new TestServiceContext(LoggerFactory)
                 {
-                    AddServerHeader = false,
-                    Limits =
+                    ServerOptions = new KestrelServerOptions
                     {
-                        MaxRequestLineSize = maxRequestLineSize
+                        AddServerHeader = false,
+                        Limits = { MaxRequestLineSize = maxRequestLineSize }
                     }
                 }
-            });
+            );
         }
     }
 }

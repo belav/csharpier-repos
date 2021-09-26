@@ -59,7 +59,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
             Assert.Null(result1.Item);
             Assert.Collection(
                 result1.ExpirationTokens,
-                token => Assert.Equal(fileProvider.GetChangeToken(path), token));
+                token => Assert.Equal(fileProvider.GetChangeToken(path), token)
+            );
         }
 
         [Fact]
@@ -80,8 +81,14 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
                 result.ExpirationTokens,
                 token => Assert.Same(fileProvider.GetChangeToken(path), token),
                 token => Assert.Same(fileProvider.GetChangeToken("/_ViewImports.cshtml"), token),
-                token => Assert.Same(fileProvider.GetChangeToken("/file/_ViewImports.cshtml"), token),
-                token => Assert.Same(fileProvider.GetChangeToken("/file/exists/_ViewImports.cshtml"), token));
+                token =>
+                    Assert.Same(fileProvider.GetChangeToken("/file/_ViewImports.cshtml"), token),
+                token =>
+                    Assert.Same(
+                        fileProvider.GetChangeToken("/file/exists/_ViewImports.cshtml"),
+                        token
+                    )
+            );
         }
 
         [Theory]
@@ -98,7 +105,9 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
             var viewCompiler = GetViewCompiler(fileProvider);
 
             // Act - 1
-            var result1 = await viewCompiler.CompileAsync(@"Areas\Finances\Views\Home\Index.cshtml");
+            var result1 = await viewCompiler.CompileAsync(
+                @"Areas\Finances\Views\Home\Index.cshtml"
+            );
 
             // Act - 2
             viewCompiler.Compile = _ => throw new Exception("Can't call me");
@@ -195,11 +204,11 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
             var path = "/Views/Home/Index.cshtml";
             var fileProvider = new TestFileProvider();
             fileProvider.AddFile(path, "some content");
-            var precompiledView = new CompiledViewDescriptor
-            {
-                RelativePath = path,
-            };
-            var viewCompiler = GetViewCompiler(fileProvider, precompiledViews: new[] { precompiledView });
+            var precompiledView = new CompiledViewDescriptor { RelativePath = path, };
+            var viewCompiler = GetViewCompiler(
+                fileProvider,
+                precompiledViews: new[] { precompiledView }
+            );
 
             // Act
             var result = await viewCompiler.CompileAsync(path);
@@ -215,17 +224,19 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
         [InlineData("/views/home/index.cshtml")]
         [InlineData("/VIEWS/HOME/INDEX.CSHTML")]
         [InlineData("/viEws/HoME/inDex.cshtml")]
-        public async Task CompileAsync_PerformsCaseInsensitiveLookupsForPrecompiledViews(string lookupPath)
+        public async Task CompileAsync_PerformsCaseInsensitiveLookupsForPrecompiledViews(
+            string lookupPath
+        )
         {
             // Arrange
             var path = "/Views/Home/Index.cshtml";
             var fileProvider = new TestFileProvider();
             fileProvider.AddFile(path, "some content");
-            var precompiledView = new CompiledViewDescriptor
-            {
-                RelativePath = path,
-            };
-            var viewCompiler = GetViewCompiler(fileProvider, precompiledViews: new[] { precompiledView });
+            var precompiledView = new CompiledViewDescriptor { RelativePath = path, };
+            var viewCompiler = GetViewCompiler(
+                fileProvider,
+                precompiledViews: new[] { precompiledView }
+            );
 
             // Act
             var result = await viewCompiler.CompileAsync(lookupPath);
@@ -241,11 +252,11 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
             var path = "/Views/Home/Index.cshtml";
             var fileProvider = new TestFileProvider();
             fileProvider.AddFile(path, "some content");
-            var precompiledView = new CompiledViewDescriptor
-            {
-                RelativePath = path,
-            };
-            var viewCompiler = GetViewCompiler(fileProvider, precompiledViews: new[] { precompiledView });
+            var precompiledView = new CompiledViewDescriptor { RelativePath = path, };
+            var viewCompiler = GetViewCompiler(
+                fileProvider,
+                precompiledViews: new[] { precompiledView }
+            );
 
             // Act
             var result = await viewCompiler.CompileAsync("Views\\Home\\Index.cshtml");
@@ -266,13 +277,25 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
             var precompiledView = new CompiledViewDescriptor
             {
                 RelativePath = path,
-                Item = new TestRazorCompiledItem(typeof(string), "mvc.1.0.view", path, new object[]
-                {
-                    new RazorSourceChecksumAttribute("sha1", GetChecksum("some content"), "/Views/Some-Other-View"),
-                }),
+                Item = new TestRazorCompiledItem(
+                    typeof(string),
+                    "mvc.1.0.view",
+                    path,
+                    new object[]
+                    {
+                        new RazorSourceChecksumAttribute(
+                            "sha1",
+                            GetChecksum("some content"),
+                            "/Views/Some-Other-View"
+                        ),
+                    }
+                ),
             };
 
-            var viewCompiler = GetViewCompiler(fileProvider, precompiledViews: new[] { precompiledView });
+            var viewCompiler = GetViewCompiler(
+                fileProvider,
+                precompiledViews: new[] { precompiledView }
+            );
 
             // Act - 1
             var result = await viewCompiler.CompileAsync(path);
@@ -304,10 +327,18 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
             var precompiledView = new CompiledViewDescriptor
             {
                 RelativePath = path,
-                Item = new TestRazorCompiledItem(typeof(string), "mvc.1.0.view", path, new object[] { }),
+                Item = new TestRazorCompiledItem(
+                    typeof(string),
+                    "mvc.1.0.view",
+                    path,
+                    new object[] {  }
+                ),
             };
 
-            var viewCompiler = GetViewCompiler(fileProvider, precompiledViews: new[] { precompiledView });
+            var viewCompiler = GetViewCompiler(
+                fileProvider,
+                precompiledViews: new[] { precompiledView }
+            );
 
             // Act - 1
             var result = await viewCompiler.CompileAsync(path);
@@ -339,13 +370,21 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
             var precompiledView = new CompiledViewDescriptor
             {
                 RelativePath = path,
-                Item = new TestRazorCompiledItem(typeof(string), "mvc.1.0.view", path, new object[]
-                {
-                    new RazorSourceChecksumAttribute("SHA1", GetChecksum("some content"), path),
-                }),
+                Item = new TestRazorCompiledItem(
+                    typeof(string),
+                    "mvc.1.0.view",
+                    path,
+                    new object[]
+                    {
+                        new RazorSourceChecksumAttribute("SHA1", GetChecksum("some content"), path),
+                    }
+                ),
             };
 
-            var viewCompiler = GetViewCompiler(fileProvider, precompiledViews: new[] { precompiledView });
+            var viewCompiler = GetViewCompiler(
+                fileProvider,
+                precompiledViews: new[] { precompiledView }
+            );
 
             // Act
             var result = await viewCompiler.CompileAsync(path);
@@ -355,8 +394,9 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
 
             // This view has checksums so it should also have tokens
             Assert.Collection(
-                 result.ExpirationTokens,
-                 token => Assert.Same(fileProvider.GetChangeToken(path), token));
+                result.ExpirationTokens,
+                token => Assert.Same(fileProvider.GetChangeToken(path), token)
+            );
         }
 
         [Fact]
@@ -373,13 +413,25 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
             var precompiledView = new CompiledViewDescriptor
             {
                 RelativePath = path,
-                Item = new TestRazorCompiledItem(typeof(string), "mvc.1.0.view", path, new object[]
-                {
-                    new RazorSourceChecksumAttribute("SHA1", GetChecksum("some other content"), path),
-                }),
+                Item = new TestRazorCompiledItem(
+                    typeof(string),
+                    "mvc.1.0.view",
+                    path,
+                    new object[]
+                    {
+                        new RazorSourceChecksumAttribute(
+                            "SHA1",
+                            GetChecksum("some other content"),
+                            path
+                        ),
+                    }
+                ),
             };
 
-            var viewCompiler = GetViewCompiler(fileProvider, precompiledViews: new[] { precompiledView });
+            var viewCompiler = GetViewCompiler(
+                fileProvider,
+                precompiledViews: new[] { precompiledView }
+            );
             viewCompiler.Compile = _ => expected;
 
             // Act
@@ -401,13 +453,21 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
             var precompiledView = new CompiledViewDescriptor
             {
                 RelativePath = path,
-                Item = new TestRazorCompiledItem(typeof(string), "mvc.1.0.view", path, new object[]
-                {
-                    new RazorSourceChecksumAttribute("SHA1", GetChecksum("some content"), path),
-                }),
+                Item = new TestRazorCompiledItem(
+                    typeof(string),
+                    "mvc.1.0.view",
+                    path,
+                    new object[]
+                    {
+                        new RazorSourceChecksumAttribute("SHA1", GetChecksum("some content"), path),
+                    }
+                ),
             };
 
-            var viewCompiler = GetViewCompiler(fileProvider, precompiledViews: new[] { precompiledView });
+            var viewCompiler = GetViewCompiler(
+                fileProvider,
+                precompiledViews: new[] { precompiledView }
+            );
 
             // Act
             var result = await viewCompiler.CompileAsync(path);
@@ -431,13 +491,21 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
             var precompiledView = new CompiledViewDescriptor
             {
                 RelativePath = path,
-                Item = new TestRazorCompiledItem(typeof(string), "mvc.1.0.view", path, new object[]
-                {
-                    new RazorSourceChecksumAttribute("SHA1", GetChecksum("some content"), path),
-                }),
+                Item = new TestRazorCompiledItem(
+                    typeof(string),
+                    "mvc.1.0.view",
+                    path,
+                    new object[]
+                    {
+                        new RazorSourceChecksumAttribute("SHA1", GetChecksum("some content"), path),
+                    }
+                ),
             };
 
-            var viewCompiler = GetViewCompiler(fileProvider, precompiledViews: new[] { precompiledView });
+            var viewCompiler = GetViewCompiler(
+                fileProvider,
+                precompiledViews: new[] { precompiledView }
+            );
 
             // Act - 1
             var result = await viewCompiler.CompileAsync(path);
@@ -468,13 +536,21 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
             var precompiledView = new CompiledViewDescriptor
             {
                 RelativePath = path,
-                Item = new TestRazorCompiledItem(typeof(string), "mvc.1.0.view", path, new object[]
-                {
-                    new RazorSourceChecksumAttribute("SHA1", GetChecksum("some content"), path),
-                }),
+                Item = new TestRazorCompiledItem(
+                    typeof(string),
+                    "mvc.1.0.view",
+                    path,
+                    new object[]
+                    {
+                        new RazorSourceChecksumAttribute("SHA1", GetChecksum("some content"), path),
+                    }
+                ),
             };
 
-            var viewCompiler = GetViewCompiler(fileProvider, precompiledViews: new[] { precompiledView });
+            var viewCompiler = GetViewCompiler(
+                fileProvider,
+                precompiledViews: new[] { precompiledView }
+            );
 
             // Act - 1
             var result = await viewCompiler.CompileAsync(path);
@@ -504,13 +580,21 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
             var precompiledView = new CompiledViewDescriptor
             {
                 RelativePath = path,
-                Item = new TestRazorCompiledItem(typeof(string), "mvc.1.0.view", path, new object[]
-                {
-                    new RazorSourceChecksumAttribute("SHA1", GetChecksum("some content"), path),
-                }),
+                Item = new TestRazorCompiledItem(
+                    typeof(string),
+                    "mvc.1.0.view",
+                    path,
+                    new object[]
+                    {
+                        new RazorSourceChecksumAttribute("SHA1", GetChecksum("some content"), path),
+                    }
+                ),
             };
 
-            var viewCompiler = GetViewCompiler(fileProvider, precompiledViews: new[] { precompiledView });
+            var viewCompiler = GetViewCompiler(
+                fileProvider,
+                precompiledViews: new[] { precompiledView }
+            );
             viewCompiler.Compile = _ => expected1;
 
             // Act - 1
@@ -544,14 +628,26 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
             var precompiledView = new CompiledViewDescriptor
             {
                 RelativePath = path,
-                Item = new TestRazorCompiledItem(typeof(string), "mvc.1.0.view", path, new object[]
-                {
-                    new RazorSourceChecksumAttribute("SHA1", GetChecksum("some content"), path),
-                    new RazorSourceChecksumAttribute("SHA1", GetChecksum("some import"), importPath),
-                }),
+                Item = new TestRazorCompiledItem(
+                    typeof(string),
+                    "mvc.1.0.view",
+                    path,
+                    new object[]
+                    {
+                        new RazorSourceChecksumAttribute("SHA1", GetChecksum("some content"), path),
+                        new RazorSourceChecksumAttribute(
+                            "SHA1",
+                            GetChecksum("some import"),
+                            importPath
+                        ),
+                    }
+                ),
             };
 
-            var viewCompiler = GetViewCompiler(fileProvider, precompiledViews: new[] { precompiledView });
+            var viewCompiler = GetViewCompiler(
+                fileProvider,
+                precompiledViews: new[] { precompiledView }
+            );
 
             // Act - 1
             var result = await viewCompiler.CompileAsync(path);
@@ -671,12 +767,14 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
 
             // Act
             var task1 = Task.Run(() => compiler.CompileAsync(path));
-            var task2 = Task.Run(() =>
-            {
-                // Event 4
-                Assert.True(resetEvent2.WaitOne(waitDuration));
-                return compiler.CompileAsync(path);
-            });
+            var task2 = Task.Run(
+                () =>
+                {
+                    // Event 4
+                    Assert.True(resetEvent2.WaitOne(waitDuration));
+                    return compiler.CompileAsync(path);
+                }
+            );
 
             // Event 1
             resetEvent1.Set();
@@ -701,14 +799,16 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
 
             // Act and Assert - 1
             var actual = await Assert.ThrowsAsync<InvalidTimeZoneException>(
-                () => compiler.CompileAsync(path));
+                () => compiler.CompileAsync(path)
+            );
             Assert.Same(exception, actual);
 
             // Act and Assert - 2
             compiler.Compile = _ => throw new Exception("Shouldn't be called");
 
             actual = await Assert.ThrowsAsync<InvalidTimeZoneException>(
-                () => compiler.CompileAsync(path));
+                () => compiler.CompileAsync(path)
+            );
             Assert.Same(exception, actual);
         }
 
@@ -716,7 +816,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
         public void Compile_SucceedsForCSharp7()
         {
             // Arrange
-            var content = @"
+            var content =
+                @"
 public class MyTestType
 {
     private string _name;
@@ -728,7 +829,9 @@ public class MyTestType
     }
 }";
             var compiler = GetViewCompiler(new TestFileProvider());
-            var codeDocument = RazorCodeDocument.Create(RazorSourceDocument.Create("razor-content", "filename"));
+            var codeDocument = RazorCodeDocument.Create(
+                RazorSourceDocument.Create("razor-content", "filename")
+            );
 
             // Act
             var result = compiler.CompileAndEmit(codeDocument, content);
@@ -744,15 +847,20 @@ public class MyTestType
             // Arrange
             var viewPath = "some-relative-path";
             var fileContent = "test file content";
-            var content = $@"
+            var content =
+                $@"
 #line 1 ""{viewPath}""
 this should fail";
 
             var compiler = GetViewCompiler(new TestFileProvider());
-            var codeDocument = RazorCodeDocument.Create(RazorSourceDocument.Create(fileContent, viewPath));
+            var codeDocument = RazorCodeDocument.Create(
+                RazorSourceDocument.Create(fileContent, viewPath)
+            );
 
             // Act & Assert
-            var ex = Assert.Throws<CompilationFailedException>(() => compiler.CompileAndEmit(codeDocument, content));
+            var ex = Assert.Throws<CompilationFailedException>(
+                () => compiler.CompileAndEmit(codeDocument, content)
+            );
 
             var compilationFailure = Assert.Single(ex.CompilationFailures);
             Assert.Equal(viewPath, compilationFailure.SourceFilePath);
@@ -768,10 +876,14 @@ this should fail";
             var content = "public class Bad { this should fail }";
 
             var compiler = GetViewCompiler(new TestFileProvider());
-            var codeDocument = RazorCodeDocument.Create(RazorSourceDocument.Create(fileContent, viewPath));
+            var codeDocument = RazorCodeDocument.Create(
+                RazorSourceDocument.Create(fileContent, viewPath)
+            );
 
             // Act & Assert
-            var ex = Assert.Throws<CompilationFailedException>(() => compiler.CompileAndEmit(codeDocument, content));
+            var ex = Assert.Throws<CompilationFailedException>(
+                () => compiler.CompileAndEmit(codeDocument, content)
+            );
 
             var compilationFailure = Assert.Single(ex.CompilationFailures);
             Assert.Equal("Generated Code", compilationFailure.SourceFilePath);
@@ -783,13 +895,19 @@ this should fail";
         {
             // Arrange
             var referenceManager = CreateReferenceManager();
-            var csharpCompiler = new TestCSharpCompiler(referenceManager, Mock.Of<IWebHostEnvironment>())
-            {
-                EmitOptionsSettable = new EmitOptions(debugInformationFormat: DebugInformationFormat.Embedded),
+            var csharpCompiler = new TestCSharpCompiler(
+                referenceManager,
+                Mock.Of<IWebHostEnvironment>()
+            ) {
+                EmitOptionsSettable = new EmitOptions(
+                    debugInformationFormat: DebugInformationFormat.Embedded
+                ),
             };
 
             var compiler = GetViewCompiler(csharpCompiler: csharpCompiler);
-            var codeDocument = RazorCodeDocument.Create(RazorSourceDocument.Create("Hello world", "some-relative-path.cshtml"));
+            var codeDocument = RazorCodeDocument.Create(
+                RazorSourceDocument.Create("Hello world", "some-relative-path.cshtml")
+            );
 
             // Act
             var result = compiler.CompileAndEmit(codeDocument, "public class Test{}");
@@ -803,13 +921,17 @@ this should fail";
         {
             // Arrange
             var referenceManager = CreateReferenceManager();
-            var csharpCompiler = new TestCSharpCompiler(referenceManager, Mock.Of<IWebHostEnvironment>())
-            {
+            var csharpCompiler = new TestCSharpCompiler(
+                referenceManager,
+                Mock.Of<IWebHostEnvironment>()
+            ) {
                 EmitPdbSettable = false,
             };
 
             var compiler = GetViewCompiler(csharpCompiler: csharpCompiler);
-            var codeDocument = RazorCodeDocument.Create(RazorSourceDocument.Create("Hello world", "some-relative-path.cshtml"));
+            var codeDocument = RazorCodeDocument.Create(
+                RazorSourceDocument.Create("Hello world", "some-relative-path.cshtml")
+            );
 
             // Act
             var result = compiler.CompileAndEmit(codeDocument, "public class Test{}");
@@ -822,33 +944,43 @@ this should fail";
             TestFileProvider fileProvider = null,
             RazorReferenceManager referenceManager = null,
             IList<CompiledViewDescriptor> precompiledViews = null,
-            CSharpCompiler csharpCompiler = null)
+            CSharpCompiler csharpCompiler = null
+        )
         {
             fileProvider = fileProvider ?? new TestFileProvider();
-            var options = Options.Create(new MvcRazorRuntimeCompilationOptions
-            {
-                FileProviders = { fileProvider }
-            });
+            var options = Options.Create(
+                new MvcRazorRuntimeCompilationOptions { FileProviders = { fileProvider } }
+            );
             var compilationFileProvider = new RuntimeCompilationFileProvider(options);
-
 
             referenceManager = referenceManager ?? CreateReferenceManager();
             precompiledViews = precompiledViews ?? Array.Empty<CompiledViewDescriptor>();
 
-            var hostingEnvironment = Mock.Of<IWebHostEnvironment>(e => e.ContentRootPath == "BasePath");
-            var fileSystem = new FileProviderRazorProjectFileSystem(compilationFileProvider, hostingEnvironment);
-            var projectEngine = RazorProjectEngine.Create(RazorConfiguration.Default, fileSystem, builder =>
-            {
-                RazorExtensions.Register(builder);
-            });
+            var hostingEnvironment = Mock.Of<IWebHostEnvironment>(
+                e => e.ContentRootPath == "BasePath"
+            );
+            var fileSystem = new FileProviderRazorProjectFileSystem(
+                compilationFileProvider,
+                hostingEnvironment
+            );
+            var projectEngine = RazorProjectEngine.Create(
+                RazorConfiguration.Default,
+                fileSystem,
+                builder =>
+                {
+                    RazorExtensions.Register(builder);
+                }
+            );
 
-            csharpCompiler = csharpCompiler ?? new CSharpCompiler(referenceManager, hostingEnvironment);
+            csharpCompiler =
+                csharpCompiler ?? new CSharpCompiler(referenceManager, hostingEnvironment);
 
             return new TestRazorViewCompiler(
                 fileProvider,
                 projectEngine,
                 csharpCompiler,
-                precompiledViews);
+                precompiledViews
+            );
         }
 
         private static RazorReferenceManager CreateReferenceManager()
@@ -857,7 +989,10 @@ this should fail";
             var assembly = typeof(RuntimeViewCompilerTest).Assembly;
             applicationPartManager.ApplicationParts.Add(new AssemblyPart(assembly));
 
-            return new RazorReferenceManager(applicationPartManager, Options.Create(new MvcRazorRuntimeCompilationOptions()));
+            return new RazorReferenceManager(
+                applicationPartManager,
+                Options.Create(new MvcRazorRuntimeCompilationOptions())
+            );
         }
 
         private class TestRazorViewCompiler : RuntimeViewCompiler
@@ -867,17 +1002,25 @@ this should fail";
                 RazorProjectEngine projectEngine,
                 CSharpCompiler csharpCompiler,
                 IList<CompiledViewDescriptor> precompiledViews,
-                Func<string, CompiledViewDescriptor> compile = null)
-                : base(fileProvider, projectEngine, csharpCompiler, precompiledViews, NullLogger.Instance)
+                Func<string, CompiledViewDescriptor> compile = null
+            )
+                : base(
+                    fileProvider,
+                    projectEngine,
+                    csharpCompiler,
+                    precompiledViews,
+                    NullLogger.Instance
+                )
             {
                 Compile = compile;
                 if (Compile == null)
                 {
-                    Compile = path => new CompiledViewDescriptor
-                    {
-                        RelativePath = path,
-                        Item = CreateForView(path),
-                    };
+                    Compile = path =>
+                        new CompiledViewDescriptor
+                        {
+                            RelativePath = path,
+                            Item = CreateForView(path),
+                        };
                 }
             }
 
@@ -891,10 +1034,10 @@ this should fail";
 
         private class TestCSharpCompiler : CSharpCompiler
         {
-            public TestCSharpCompiler(RazorReferenceManager manager, IWebHostEnvironment hostingEnvironment)
-                : base(manager, hostingEnvironment)
-            {
-            }
+            public TestCSharpCompiler(
+                RazorReferenceManager manager,
+                IWebHostEnvironment hostingEnvironment
+            ) : base(manager, hostingEnvironment) { }
 
             public EmitOptions EmitOptionsSettable { get; set; }
 

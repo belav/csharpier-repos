@@ -29,7 +29,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
                 var valueProvider = new QueryStringValueProvider(
                     BindingSource.Query,
                     query,
-                    CultureInfo.InvariantCulture);
+                    CultureInfo.InvariantCulture
+                );
 
                 context.ValueProviders.Add(valueProvider);
             }

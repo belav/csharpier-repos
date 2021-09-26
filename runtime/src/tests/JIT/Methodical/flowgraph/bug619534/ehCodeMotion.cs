@@ -21,7 +21,10 @@ internal class Program
     private static int Main()
     {
         //Console.WriteLine("Main: " + new C().M());
-        if (new C().M()) return 100; else return 101;
+        if (new C().M())
+            return 100;
+        else
+            return 101;
     }
 }
 
@@ -44,7 +47,7 @@ internal class C
         }
         ret = false;
 
-    Label:
+        Label:
 
         return ret;
     }

@@ -9,24 +9,28 @@ using Microsoft.CodeAnalysis.Structure;
 
 namespace Microsoft.CodeAnalysis.CSharp.Structure
 {
-    internal sealed class StringLiteralExpressionStructureProvider : AbstractSyntaxNodeStructureProvider<LiteralExpressionSyntax>
+    internal sealed class StringLiteralExpressionStructureProvider
+        : AbstractSyntaxNodeStructureProvider<LiteralExpressionSyntax>
     {
         protected override void CollectBlockSpans(
             LiteralExpressionSyntax node,
             ref TemporaryArray<BlockSpan> spans,
             BlockStructureOptionProvider optionProvider,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            if (node.IsKind(SyntaxKind.StringLiteralExpression) &&
-                !node.ContainsDiagnostics)
+            if (node.IsKind(SyntaxKind.StringLiteralExpression) && !node.ContainsDiagnostics)
             {
-                spans.Add(new BlockSpan(
-                    isCollapsible: true,
-                    textSpan: node.Span,
-                    hintSpan: node.Span,
-                    type: BlockTypes.Expression,
-                    autoCollapse: true,
-                    isDefaultCollapsed: false));
+                spans.Add(
+                    new BlockSpan(
+                        isCollapsible: true,
+                        textSpan: node.Span,
+                        hintSpan: node.Span,
+                        type: BlockTypes.Expression,
+                        autoCollapse: true,
+                        isDefaultCollapsed: false
+                    )
+                );
             }
         }
     }

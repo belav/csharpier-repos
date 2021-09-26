@@ -24,7 +24,9 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Util
                 case StringComparison.InvariantCultureIgnoreCase:
                     return StringComparer.InvariantCultureIgnoreCase;
                 default:
-                    throw new InvalidOperationException(SR.Format(SR.UnexpectedStringComparisonType, comparisonType));
+                    throw new InvalidOperationException(
+                        SR.Format(SR.UnexpectedStringComparisonType, comparisonType)
+                    );
             }
         }
     }

@@ -13,18 +13,28 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
 {
     public class TestUtilities
     {
-        public static void CompareAndThrowIfNotEqual<TItem>(TItem expected, TItem actual) where TItem : IEquatable<TItem>
+        public static void CompareAndThrowIfNotEqual<TItem>(TItem expected, TItem actual)
+            where TItem : IEquatable<TItem>
         {
             if (!expected.Equals(actual))
             {
-                throw new Exception("Actual and expected items don't match:" + Environment.NewLine +
-                    "Expected: " + expected.ToString() + Environment.NewLine +
-                    "Actual: " + actual.ToString() + Environment.NewLine);
+                throw new Exception(
+                    "Actual and expected items don't match:"
+                        + Environment.NewLine
+                        + "Expected: "
+                        + expected.ToString()
+                        + Environment.NewLine
+                        + "Actual: "
+                        + actual.ToString()
+                        + Environment.NewLine
+                );
             }
         }
 
-        public static void ThrowIfExpectedItemNotFound<TCollection>(IEnumerable<TCollection> actual, IEnumerable<TCollection> expected)
-            where TCollection : IEquatable<TCollection>
+        public static void ThrowIfExpectedItemNotFound<TCollection>(
+            IEnumerable<TCollection> actual,
+            IEnumerable<TCollection> expected
+        ) where TCollection : IEquatable<TCollection>
         {
             var shouldThrow = false;
             var sb = new StringBuilder();
@@ -45,10 +55,11 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
             }
         }
 
-        public static void ThrowIfExpectedItemNotFound<TCollection>(IEnumerable<TCollection> actual,
+        public static void ThrowIfExpectedItemNotFound<TCollection>(
+            IEnumerable<TCollection> actual,
             IEnumerable<TCollection> expected,
-            IEqualityComparer<TCollection> comparer)
-            where TCollection : IEquatable<TCollection>
+            IEqualityComparer<TCollection> comparer
+        ) where TCollection : IEquatable<TCollection>
         {
             var shouldThrow = false;
             var sb = new StringBuilder();
@@ -69,8 +80,10 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
             }
         }
 
-        public static void ThrowIfExpectedItemNotFoundInOrder<TCollection>(IEnumerable<TCollection> actual, IEnumerable<TCollection> expected)
-            where TCollection : IEquatable<TCollection>
+        public static void ThrowIfExpectedItemNotFoundInOrder<TCollection>(
+            IEnumerable<TCollection> actual,
+            IEnumerable<TCollection> expected
+        ) where TCollection : IEquatable<TCollection>
         {
             var shouldThrow = false;
             var sb = new StringBuilder();
@@ -104,7 +117,10 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
             }
         }
 
-        public static void ThrowIfUnExpectedItemFound<TCollection>(IEnumerable<TCollection> actual, IEnumerable<TCollection> unexpected)
+        public static void ThrowIfUnExpectedItemFound<TCollection>(
+            IEnumerable<TCollection> actual,
+            IEnumerable<TCollection> unexpected
+        )
         {
             var shouldThrow = false;
             var sb = new StringBuilder();
@@ -125,18 +141,25 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
             }
         }
 
-        public static void CompareAsSequenceAndThrowIfNotEqual<TListItem>(IEnumerable<TListItem> expectedList,
+        public static void CompareAsSequenceAndThrowIfNotEqual<TListItem>(
+            IEnumerable<TListItem> expectedList,
             IEnumerable<TListItem> actualList,
-            IEqualityComparer<TListItem> comparer = null)
-            where TListItem : IEquatable<TListItem>
+            IEqualityComparer<TListItem> comparer = null
+        ) where TListItem : IEquatable<TListItem>
         {
             if (!expectedList.SequenceEqual(actualList, comparer))
             {
-                throw new Exception(string.Format("Expected list:\n{0}\nActual list:\n{1}", BuildString(expectedList), BuildString(actualList)));
+                throw new Exception(
+                    string.Format(
+                        "Expected list:\n{0}\nActual list:\n{1}",
+                        BuildString(expectedList),
+                        BuildString(actualList)
+                    )
+                );
             }
         }
 
-        private static string BuildString<TElement>(IEnumerable<TElement> list)
-            => string.Join(Environment.NewLine, list.Select(item => item.ToString()).ToArray());
+        private static string BuildString<TElement>(IEnumerable<TElement> list) =>
+            string.Join(Environment.NewLine, list.Select(item => item.ToString()).ToArray());
     }
 }

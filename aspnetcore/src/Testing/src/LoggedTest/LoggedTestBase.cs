@@ -46,35 +46,63 @@ namespace Microsoft.AspNetCore.Testing
 
         public ITestOutputHelper TestOutputHelper { get; set; }
 
-        public void AddTestLogging(IServiceCollection services) => services.AddSingleton(LoggerFactory);
+        public void AddTestLogging(IServiceCollection services) =>
+            services.AddSingleton(LoggerFactory);
 
         // For back compat
-        [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
-        public IDisposable StartLog(out ILoggerFactory loggerFactory, [CallerMemberName] string testName = null) => StartLog(out loggerFactory, LogLevel.Debug, testName);
+        [SuppressMessage(
+            "ApiDesign",
+            "RS0026:Do not add multiple public overloads with optional parameters",
+            Justification = "Required to maintain compatibility"
+        )]
+        public IDisposable StartLog(
+            out ILoggerFactory loggerFactory,
+            [CallerMemberName] string testName = null
+        ) => StartLog(out loggerFactory, LogLevel.Debug, testName);
 
         // For back compat
-        [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
-        public IDisposable StartLog(out ILoggerFactory loggerFactory, LogLevel minLogLevel, [CallerMemberName] string testName = null)
+        [SuppressMessage(
+            "ApiDesign",
+            "RS0026:Do not add multiple public overloads with optional parameters",
+            Justification = "Required to maintain compatibility"
+        )]
+        public IDisposable StartLog(
+            out ILoggerFactory loggerFactory,
+            LogLevel minLogLevel,
+            [CallerMemberName] string testName = null
+        )
         {
-            return AssemblyTestLog.ForAssembly(GetType().GetTypeInfo().Assembly).StartTestLog(TestOutputHelper, GetType().FullName, out loggerFactory, minLogLevel, testName);
+            return AssemblyTestLog.ForAssembly(GetType().GetTypeInfo().Assembly)
+                .StartTestLog(
+                    TestOutputHelper,
+                    GetType().FullName,
+                    out loggerFactory,
+                    minLogLevel,
+                    testName
+                );
         }
 
-        public virtual void Initialize(TestContext context, MethodInfo methodInfo, object[] testMethodArguments, ITestOutputHelper testOutputHelper)
+        public virtual void Initialize(
+            TestContext context,
+            MethodInfo methodInfo,
+            object[] testMethodArguments,
+            ITestOutputHelper testOutputHelper
+        )
         {
             try
             {
                 TestOutputHelper = testOutputHelper;
 
                 var classType = GetType();
-                var logLevelAttribute = methodInfo.GetCustomAttribute<LogLevelAttribute>()
-                                        ?? methodInfo.DeclaringType.GetCustomAttribute<LogLevelAttribute>()
-                                        ?? methodInfo.DeclaringType.Assembly.GetCustomAttribute<LogLevelAttribute>();
+                var logLevelAttribute =
+                    methodInfo.GetCustomAttribute<LogLevelAttribute>()
+                    ?? methodInfo.DeclaringType.GetCustomAttribute<LogLevelAttribute>()
+                    ?? methodInfo.DeclaringType.Assembly.GetCustomAttribute<LogLevelAttribute>();
 
                 // internal for testing
                 ResolvedTestClassName = context.FileOutput.TestClassName;
 
-                _testLog = AssemblyTestLog
-                    .ForAssembly(classType.GetTypeInfo().Assembly)
+                _testLog = AssemblyTestLog.ForAssembly(classType.GetTypeInfo().Assembly)
                     .StartTestLog(
                         TestOutputHelper,
                         context.FileOutput.TestClassName,
@@ -82,7 +110,8 @@ namespace Microsoft.AspNetCore.Testing
                         logLevelAttribute?.LogLevel ?? LogLevel.Debug,
                         out var resolvedTestName,
                         out var logDirectory,
-                        context.FileOutput.TestName);
+                        context.FileOutput.TestName
+                    );
 
                 ResolvedLogOutputDirectory = logDirectory;
                 ResolvedTestMethodName = resolvedTestName;
@@ -95,15 +124,20 @@ namespace Microsoft.AspNetCore.Testing
                 _initializationException = ExceptionDispatchInfo.Capture(e);
             }
         }
-        
-        public virtual Task InitializeAsync(TestContext context, MethodInfo methodInfo, object[] testMethodArguments, ITestOutputHelper testOutputHelper)
+
+        public virtual Task InitializeAsync(
+            TestContext context,
+            MethodInfo methodInfo,
+            object[] testMethodArguments,
+            ITestOutputHelper testOutputHelper
+        )
         {
             Initialize(context, methodInfo, testMethodArguments, testOutputHelper);
             return InitializeCoreAsync(context);
         }
-        
+
         protected virtual Task InitializeCoreAsync(TestContext context) => Task.CompletedTask;
-        
+
         public virtual void Dispose()
         {
             if (_testLog == null)
@@ -111,21 +145,34 @@ namespace Microsoft.AspNetCore.Testing
                 // It seems like sometimes the MSBuild goop that adds the test framework can end up in a bad state and not actually add it
                 // Not sure yet why that happens but the exception isn't clear so I'm adding this error so we can detect it better.
                 // -anurse
-                throw new InvalidOperationException("LoggedTest base class was used but nothing initialized it! The test framework may not be enabled. Try cleaning your 'obj' directory.");
+                throw new InvalidOperationException(
+                    "LoggedTest base class was used but nothing initialized it! The test framework may not be enabled. Try cleaning your 'obj' directory."
+                );
             }
 
             _initializationException?.Throw();
             _testLog.Dispose();
         }
 
-        Task ITestMethodLifecycle.OnTestStartAsync(TestContext context, CancellationToken cancellationToken)
+        Task ITestMethodLifecycle.OnTestStartAsync(
+            TestContext context,
+            CancellationToken cancellationToken
+        )
         {
-
             Context = context;
-            return InitializeAsync(context, context.TestMethod, context.MethodArguments, context.Output);
+            return InitializeAsync(
+                context,
+                context.TestMethod,
+                context.MethodArguments,
+                context.Output
+            );
         }
 
-        Task ITestMethodLifecycle.OnTestEndAsync(TestContext context, Exception exception, CancellationToken cancellationToken)
+        Task ITestMethodLifecycle.OnTestEndAsync(
+            TestContext context,
+            Exception exception,
+            CancellationToken cancellationToken
+        )
         {
             if (exception is not null)
             {

@@ -22,16 +22,22 @@ namespace Microsoft.AspNetCore.Server.HttpSys
         public async Task RequestBody_ReadSync_Success()
         {
             string address;
-            using (Utilities.CreateHttpServer(out address, httpContext =>
-            {
-                Assert.True(httpContext.Request.CanHaveBody());
-                byte[] input = new byte[100];
-                httpContext.Features.Get<IHttpBodyControlFeature>().AllowSynchronousIO = true;
-                int read = httpContext.Request.Body.Read(input, 0, input.Length);
-                httpContext.Response.ContentLength = read;
-                httpContext.Response.Body.Write(input, 0, read);
-                return Task.FromResult(0);
-            }))
+            using (
+                Utilities.CreateHttpServer(
+                    out address,
+                    httpContext =>
+                    {
+                        Assert.True(httpContext.Request.CanHaveBody());
+                        byte[] input = new byte[100];
+                        httpContext.Features.Get<IHttpBodyControlFeature>().AllowSynchronousIO =
+                            true;
+                        int read = httpContext.Request.Body.Read(input, 0, input.Length);
+                        httpContext.Response.ContentLength = read;
+                        httpContext.Response.Body.Write(input, 0, read);
+                        return Task.FromResult(0);
+                    }
+                )
+            )
             {
                 string response = await SendRequestAsync(address, "Hello World");
                 Assert.Equal("Hello World", response);
@@ -42,14 +48,19 @@ namespace Microsoft.AspNetCore.Server.HttpSys
         public async Task RequestBody_ReadAsync_Success()
         {
             string address;
-            using (Utilities.CreateHttpServer(out address, async httpContext =>
-            {
-                Assert.True(httpContext.Request.CanHaveBody());
-                byte[] input = new byte[100];
-                int read = await httpContext.Request.Body.ReadAsync(input, 0, input.Length);
-                httpContext.Response.ContentLength = read;
-                await httpContext.Response.Body.WriteAsync(input, 0, read);
-            }))
+            using (
+                Utilities.CreateHttpServer(
+                    out address,
+                    async httpContext =>
+                    {
+                        Assert.True(httpContext.Request.CanHaveBody());
+                        byte[] input = new byte[100];
+                        int read = await httpContext.Request.Body.ReadAsync(input, 0, input.Length);
+                        httpContext.Response.ContentLength = read;
+                        await httpContext.Response.Body.WriteAsync(input, 0, read);
+                    }
+                )
+            )
             {
                 string response = await SendRequestAsync(address, "Hello World");
                 Assert.Equal("Hello World", response);
@@ -60,14 +71,23 @@ namespace Microsoft.AspNetCore.Server.HttpSys
         public async Task RequestBody_ReadBeginEnd_Success()
         {
             string address;
-            using (Utilities.CreateHttpServer(out address, httpContext =>
-            {
-                byte[] input = new byte[100];
-                int read = httpContext.Request.Body.EndRead(httpContext.Request.Body.BeginRead(input, 0, input.Length, null, null));
-                httpContext.Response.ContentLength = read;
-                httpContext.Response.Body.EndWrite(httpContext.Response.Body.BeginWrite(input, 0, read, null, null));
-                return Task.FromResult(0);
-            }))
+            using (
+                Utilities.CreateHttpServer(
+                    out address,
+                    httpContext =>
+                    {
+                        byte[] input = new byte[100];
+                        int read = httpContext.Request.Body.EndRead(
+                            httpContext.Request.Body.BeginRead(input, 0, input.Length, null, null)
+                        );
+                        httpContext.Response.ContentLength = read;
+                        httpContext.Response.Body.EndWrite(
+                            httpContext.Response.Body.BeginWrite(input, 0, read, null, null)
+                        );
+                        return Task.FromResult(0);
+                    }
+                )
+            )
             {
                 string response = await SendRequestAsync(address, "Hello World");
                 Assert.Equal("Hello World", response);
@@ -78,19 +98,46 @@ namespace Microsoft.AspNetCore.Server.HttpSys
         public async Task RequestBody_InvalidBuffer_ArgumentException()
         {
             string address;
-            using (Utilities.CreateHttpServer(out address, httpContext =>
-            {
-                httpContext.Features.Get<IHttpBodyControlFeature>().AllowSynchronousIO = true;
-                byte[] input = new byte[100];
-                Assert.Throws<ArgumentNullException>("buffer", () => httpContext.Request.Body.Read(null, 0, 1));
-                Assert.Throws<ArgumentOutOfRangeException>("offset", () => httpContext.Request.Body.Read(input, -1, 1));
-                Assert.Throws<ArgumentOutOfRangeException>("offset", () => httpContext.Request.Body.Read(input, input.Length + 1, 1));
-                Assert.Throws<ArgumentOutOfRangeException>("size", () => httpContext.Request.Body.Read(input, 10, -1));
-                Assert.Throws<ArgumentOutOfRangeException>("size", () => httpContext.Request.Body.Read(input, 0, 0));
-                Assert.Throws<ArgumentOutOfRangeException>("size", () => httpContext.Request.Body.Read(input, 1, input.Length));
-                Assert.Throws<ArgumentOutOfRangeException>("size", () => httpContext.Request.Body.Read(input, 0, input.Length + 1));
-                return Task.FromResult(0);
-            }))
+            using (
+                Utilities.CreateHttpServer(
+                    out address,
+                    httpContext =>
+                    {
+                        httpContext.Features.Get<IHttpBodyControlFeature>().AllowSynchronousIO =
+                            true;
+                        byte[] input = new byte[100];
+                        Assert.Throws<ArgumentNullException>(
+                            "buffer",
+                            () => httpContext.Request.Body.Read(null, 0, 1)
+                        );
+                        Assert.Throws<ArgumentOutOfRangeException>(
+                            "offset",
+                            () => httpContext.Request.Body.Read(input, -1, 1)
+                        );
+                        Assert.Throws<ArgumentOutOfRangeException>(
+                            "offset",
+                            () => httpContext.Request.Body.Read(input, input.Length + 1, 1)
+                        );
+                        Assert.Throws<ArgumentOutOfRangeException>(
+                            "size",
+                            () => httpContext.Request.Body.Read(input, 10, -1)
+                        );
+                        Assert.Throws<ArgumentOutOfRangeException>(
+                            "size",
+                            () => httpContext.Request.Body.Read(input, 0, 0)
+                        );
+                        Assert.Throws<ArgumentOutOfRangeException>(
+                            "size",
+                            () => httpContext.Request.Body.Read(input, 1, input.Length)
+                        );
+                        Assert.Throws<ArgumentOutOfRangeException>(
+                            "size",
+                            () => httpContext.Request.Body.Read(input, 0, input.Length + 1)
+                        );
+                        return Task.FromResult(0);
+                    }
+                )
+            )
             {
                 string response = await SendRequestAsync(address, "Hello World");
                 Assert.Equal(string.Empty, response);
@@ -102,17 +149,23 @@ namespace Microsoft.AspNetCore.Server.HttpSys
         {
             StaggardContent content = new StaggardContent();
             string address;
-            using (Utilities.CreateHttpServer(out address, httpContext =>
-            {
-                byte[] input = new byte[10];
-                httpContext.Features.Get<IHttpBodyControlFeature>().AllowSynchronousIO = true;
-                int read = httpContext.Request.Body.Read(input, 0, input.Length);
-                Assert.Equal(5, read);
-                content.Block.Release();
-                read = httpContext.Request.Body.Read(input, 0, input.Length);
-                Assert.Equal(5, read);
-                return Task.FromResult(0);
-            }))
+            using (
+                Utilities.CreateHttpServer(
+                    out address,
+                    httpContext =>
+                    {
+                        byte[] input = new byte[10];
+                        httpContext.Features.Get<IHttpBodyControlFeature>().AllowSynchronousIO =
+                            true;
+                        int read = httpContext.Request.Body.Read(input, 0, input.Length);
+                        Assert.Equal(5, read);
+                        content.Block.Release();
+                        read = httpContext.Request.Body.Read(input, 0, input.Length);
+                        Assert.Equal(5, read);
+                        return Task.FromResult(0);
+                    }
+                )
+            )
             {
                 string response = await SendRequestAsync(address, content);
                 Assert.Equal(string.Empty, response);
@@ -124,15 +177,20 @@ namespace Microsoft.AspNetCore.Server.HttpSys
         {
             StaggardContent content = new StaggardContent();
             string address;
-            using (Utilities.CreateHttpServer(out address, async httpContext =>
-            {
-                byte[] input = new byte[10];
-                int read = await httpContext.Request.Body.ReadAsync(input, 0, input.Length);
-                Assert.Equal(5, read);
-                content.Block.Release();
-                read = await httpContext.Request.Body.ReadAsync(input, 0, input.Length);
-                Assert.Equal(5, read);
-            }))
+            using (
+                Utilities.CreateHttpServer(
+                    out address,
+                    async httpContext =>
+                    {
+                        byte[] input = new byte[10];
+                        int read = await httpContext.Request.Body.ReadAsync(input, 0, input.Length);
+                        Assert.Equal(5, read);
+                        content.Block.Release();
+                        read = await httpContext.Request.Body.ReadAsync(input, 0, input.Length);
+                        Assert.Equal(5, read);
+                    }
+                )
+            )
             {
                 string response = await SendRequestAsync(address, content);
                 Assert.Equal(string.Empty, response);
@@ -143,16 +201,21 @@ namespace Microsoft.AspNetCore.Server.HttpSys
         public async Task RequestBody_PostWithImidateBody_Success()
         {
             string address;
-            using (Utilities.CreateHttpServer(out address, async httpContext =>
-            {
-                byte[] input = new byte[11];
-                int read = await httpContext.Request.Body.ReadAsync(input, 0, input.Length);
-                Assert.Equal(10, read);
-                read = await httpContext.Request.Body.ReadAsync(input, 0, input.Length);
-                Assert.Equal(0, read);
-                httpContext.Response.ContentLength = 10;
-                await httpContext.Response.Body.WriteAsync(input, 0, 10);
-            }))
+            using (
+                Utilities.CreateHttpServer(
+                    out address,
+                    async httpContext =>
+                    {
+                        byte[] input = new byte[11];
+                        int read = await httpContext.Request.Body.ReadAsync(input, 0, input.Length);
+                        Assert.Equal(10, read);
+                        read = await httpContext.Request.Body.ReadAsync(input, 0, input.Length);
+                        Assert.Equal(0, read);
+                        httpContext.Response.ContentLength = 10;
+                        await httpContext.Response.Body.WriteAsync(input, 0, 10);
+                    }
+                )
+            )
             {
                 string response = await SendSocketRequestAsync(address);
                 string[] lines = response.Split('\r', '\n');
@@ -232,7 +295,10 @@ namespace Microsoft.AspNetCore.Server.HttpSys
 
             public SemaphoreSlim Block { get; private set; }
 
-            protected async override Task SerializeToStreamAsync(Stream stream, TransportContext context)
+            protected async override Task SerializeToStreamAsync(
+                Stream stream,
+                TransportContext context
+            )
             {
                 await stream.WriteAsync(new byte[5], 0, 5);
                 await stream.FlushAsync();

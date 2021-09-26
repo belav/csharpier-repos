@@ -15,14 +15,18 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConflictMarkerResolution
 {
-    using VerifyCS = CSharpCodeFixVerifier<EmptyDiagnosticAnalyzer, CSharpResolveConflictMarkerCodeFixProvider>;
+    using VerifyCS = CSharpCodeFixVerifier<
+        EmptyDiagnosticAnalyzer,
+        CSharpResolveConflictMarkerCodeFixProvider
+    >;
 
     public class ConflictMarkerResolutionTests
     {
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsResolveConflictMarker)]
         public async Task TestTakeTop1()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 namespace N
@@ -47,7 +51,8 @@ namespace N
     }
 {|CS8300:>>>>>>>|} This is theirs!
 }";
-            var fixedSource = @"
+            var fixedSource =
+                @"
 using System;
 
 namespace N
@@ -68,14 +73,16 @@ namespace N
                 FixedCode = fixedSource,
                 NumberOfIncrementalIterations = 1,
                 CodeActionIndex = 0,
-                CodeActionEquivalenceKey = AbstractResolveConflictMarkerCodeFixProvider.TakeTopEquivalenceKey,
+                CodeActionEquivalenceKey =
+                    AbstractResolveConflictMarkerCodeFixProvider.TakeTopEquivalenceKey,
             }.RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsResolveConflictMarker)]
         public async Task TestTakeBottom1()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 namespace N
@@ -100,7 +107,8 @@ namespace N
     }
 {|CS8300:>>>>>>>|} This is theirs!
 }";
-            var fixedSource = @"
+            var fixedSource =
+                @"
 using System;
 
 namespace N
@@ -121,14 +129,16 @@ namespace N
                 FixedCode = fixedSource,
                 NumberOfIncrementalIterations = 1,
                 CodeActionIndex = 1,
-                CodeActionEquivalenceKey = AbstractResolveConflictMarkerCodeFixProvider.TakeBottomEquivalenceKey,
+                CodeActionEquivalenceKey =
+                    AbstractResolveConflictMarkerCodeFixProvider.TakeBottomEquivalenceKey,
             }.RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsResolveConflictMarker)]
         public async Task TestTakeBoth1()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 namespace N
@@ -153,7 +163,8 @@ namespace N
     }
 {|CS8300:>>>>>>>|} This is theirs!
 }";
-            var fixedSource = @"
+            var fixedSource =
+                @"
 using System;
 
 namespace N
@@ -182,14 +193,16 @@ namespace N
                 FixedCode = fixedSource,
                 NumberOfIncrementalIterations = 1,
                 CodeActionIndex = 2,
-                CodeActionEquivalenceKey = AbstractResolveConflictMarkerCodeFixProvider.TakeBothEquivalenceKey,
+                CodeActionEquivalenceKey =
+                    AbstractResolveConflictMarkerCodeFixProvider.TakeBothEquivalenceKey,
             }.RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsResolveConflictMarker)]
         public async Task TestEmptyTop_TakeTop()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 namespace N
@@ -206,7 +219,8 @@ namespace N
     }
 {|CS8300:>>>>>>>|} This is theirs!
 }";
-            var fixedSource = @"
+            var fixedSource =
+                @"
 using System;
 
 namespace N
@@ -219,14 +233,16 @@ namespace N
                 FixedCode = fixedSource,
                 NumberOfIncrementalIterations = 1,
                 CodeActionIndex = 0,
-                CodeActionEquivalenceKey = AbstractResolveConflictMarkerCodeFixProvider.TakeTopEquivalenceKey,
+                CodeActionEquivalenceKey =
+                    AbstractResolveConflictMarkerCodeFixProvider.TakeTopEquivalenceKey,
             }.RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsResolveConflictMarker)]
         public async Task TestEmptyTop_TakeBottom()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 namespace N
@@ -243,7 +259,8 @@ namespace N
     }
 {|CS8300:>>>>>>>|} This is theirs!
 }";
-            var fixedSource = @"
+            var fixedSource =
+                @"
 using System;
 
 namespace N
@@ -264,14 +281,16 @@ namespace N
                 FixedCode = fixedSource,
                 NumberOfIncrementalIterations = 1,
                 CodeActionIndex = 1,
-                CodeActionEquivalenceKey = AbstractResolveConflictMarkerCodeFixProvider.TakeBottomEquivalenceKey,
+                CodeActionEquivalenceKey =
+                    AbstractResolveConflictMarkerCodeFixProvider.TakeBottomEquivalenceKey,
             }.RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsResolveConflictMarker)]
         public async Task TestEmptyBottom_TakeTop()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 namespace N
@@ -288,7 +307,8 @@ namespace N
 {|CS8300:=======|}
 {|CS8300:>>>>>>>|} This is theirs!
 }";
-            var fixedSource = @"
+            var fixedSource =
+                @"
 using System;
 
 namespace N
@@ -309,14 +329,16 @@ namespace N
                 FixedCode = fixedSource,
                 NumberOfIncrementalIterations = 1,
                 CodeActionIndex = 0,
-                CodeActionEquivalenceKey = AbstractResolveConflictMarkerCodeFixProvider.TakeTopEquivalenceKey,
+                CodeActionEquivalenceKey =
+                    AbstractResolveConflictMarkerCodeFixProvider.TakeTopEquivalenceKey,
             }.RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsResolveConflictMarker)]
         public async Task TestEmptyBottom_TakeBottom()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 namespace N
@@ -333,7 +355,8 @@ namespace N
 {|CS8300:=======|}
 {|CS8300:>>>>>>>|} This is theirs!
 }";
-            var fixedSource = @"
+            var fixedSource =
+                @"
 using System;
 
 namespace N
@@ -346,14 +369,16 @@ namespace N
                 FixedCode = fixedSource,
                 NumberOfIncrementalIterations = 1,
                 CodeActionIndex = 1,
-                CodeActionEquivalenceKey = AbstractResolveConflictMarkerCodeFixProvider.TakeBottomEquivalenceKey,
+                CodeActionEquivalenceKey =
+                    AbstractResolveConflictMarkerCodeFixProvider.TakeBottomEquivalenceKey,
             }.RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsResolveConflictMarker)]
         public async Task TestTakeTop_WhitespaceInSection()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 namespace N
@@ -380,7 +405,8 @@ namespace N
     }
 {|CS8300:>>>>>>>|} This is theirs!
 }";
-            var fixedSource = @"
+            var fixedSource =
+                @"
 using System;
 
 namespace N
@@ -403,14 +429,16 @@ namespace N
                 FixedCode = fixedSource,
                 NumberOfIncrementalIterations = 1,
                 CodeActionIndex = 0,
-                CodeActionEquivalenceKey = AbstractResolveConflictMarkerCodeFixProvider.TakeTopEquivalenceKey,
+                CodeActionEquivalenceKey =
+                    AbstractResolveConflictMarkerCodeFixProvider.TakeTopEquivalenceKey,
             }.RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsResolveConflictMarker)]
         public async Task TestTakeBottom1_WhitespaceInSection()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 namespace N
@@ -437,7 +465,8 @@ namespace N
 
 {|CS8300:>>>>>>>|} This is theirs!
 }";
-            var fixedSource = @"
+            var fixedSource =
+                @"
 using System;
 
 namespace N
@@ -460,14 +489,16 @@ namespace N
                 FixedCode = fixedSource,
                 NumberOfIncrementalIterations = 1,
                 CodeActionIndex = 1,
-                CodeActionEquivalenceKey = AbstractResolveConflictMarkerCodeFixProvider.TakeBottomEquivalenceKey,
+                CodeActionEquivalenceKey =
+                    AbstractResolveConflictMarkerCodeFixProvider.TakeBottomEquivalenceKey,
             }.RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsResolveConflictMarker)]
         public async Task TestTakeBoth_WhitespaceInSection()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 namespace N
@@ -496,7 +527,8 @@ namespace N
 
 {|CS8300:>>>>>>>|} This is theirs!
 }";
-            var fixedSource = @"
+            var fixedSource =
+                @"
 using System;
 
 namespace N
@@ -529,7 +561,8 @@ namespace N
                 FixedCode = fixedSource,
                 NumberOfIncrementalIterations = 1,
                 CodeActionIndex = 2,
-                CodeActionEquivalenceKey = AbstractResolveConflictMarkerCodeFixProvider.TakeBothEquivalenceKey,
+                CodeActionEquivalenceKey =
+                    AbstractResolveConflictMarkerCodeFixProvider.TakeBothEquivalenceKey,
             }.RunAsync();
         }
 
@@ -537,7 +570,8 @@ namespace N
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsResolveConflictMarker)]
         public async Task TestTakeTop_TopCommentedOut()
         {
-            var source = @"
+            var source =
+                @"
 public class Class1
 {
     public void M()
@@ -553,7 +587,8 @@ public class Class1
         // */
     }
 }";
-            var fixedSource = @"
+            var fixedSource =
+                @"
 public class Class1
 {
     public void M()
@@ -571,7 +606,8 @@ public class Class1
                 FixedCode = fixedSource,
                 NumberOfIncrementalIterations = 1,
                 CodeActionIndex = 0,
-                CodeActionEquivalenceKey = AbstractResolveConflictMarkerCodeFixProvider.TakeTopEquivalenceKey,
+                CodeActionEquivalenceKey =
+                    AbstractResolveConflictMarkerCodeFixProvider.TakeTopEquivalenceKey,
             }.RunAsync();
         }
 
@@ -579,7 +615,8 @@ public class Class1
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsResolveConflictMarker)]
         public async Task TestTakeTop_MiddleAndBottomCommentedOut()
         {
-            var source = @"
+            var source =
+                @"
 public class Class1
 {
     public void M()
@@ -594,7 +631,8 @@ public class Class1
          */
     }
 }";
-            var fixedSource = @"
+            var fixedSource =
+                @"
 public class Class1
 {
     public void M()
@@ -611,7 +649,8 @@ public class Class1
                 FixedCode = fixedSource,
                 NumberOfIncrementalIterations = 1,
                 CodeActionIndex = 0,
-                CodeActionEquivalenceKey = AbstractResolveConflictMarkerCodeFixProvider.TakeTopEquivalenceKey,
+                CodeActionEquivalenceKey =
+                    AbstractResolveConflictMarkerCodeFixProvider.TakeTopEquivalenceKey,
             }.RunAsync();
         }
 
@@ -619,7 +658,8 @@ public class Class1
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsResolveConflictMarker)]
         public async Task TestTakeTop_TopInString()
         {
-            var source = @"
+            var source =
+                @"
 class X {
   void x() {
     var x = @""
@@ -630,7 +670,8 @@ b"";
 {|CS8300:>>>>>>>|} merge rev
   }
 }";
-            var fixedSource = @"
+            var fixedSource =
+                @"
 class X {
   void x() {
     var x = @""
@@ -644,7 +685,8 @@ a"";
                 FixedCode = fixedSource,
                 NumberOfIncrementalIterations = 1,
                 CodeActionIndex = 0,
-                CodeActionEquivalenceKey = AbstractResolveConflictMarkerCodeFixProvider.TakeTopEquivalenceKey,
+                CodeActionEquivalenceKey =
+                    AbstractResolveConflictMarkerCodeFixProvider.TakeTopEquivalenceKey,
             }.RunAsync();
         }
 
@@ -652,7 +694,8 @@ a"";
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsResolveConflictMarker)]
         public async Task TestTakeBottom_TopInString()
         {
-            var source = @"
+            var source =
+                @"
 class X {
   void x() {
     var x = @""
@@ -663,7 +706,8 @@ b"";
 {|CS8300:>>>>>>>|} merge rev
   }
 }";
-            var fixedSource = @"
+            var fixedSource =
+                @"
 class X {
   void x() {
     var x = @""
@@ -677,7 +721,8 @@ b"";
                 FixedCode = fixedSource,
                 NumberOfIncrementalIterations = 1,
                 CodeActionIndex = 1,
-                CodeActionEquivalenceKey = AbstractResolveConflictMarkerCodeFixProvider.TakeBottomEquivalenceKey,
+                CodeActionEquivalenceKey =
+                    AbstractResolveConflictMarkerCodeFixProvider.TakeBottomEquivalenceKey,
             }.RunAsync();
         }
 
@@ -685,39 +730,34 @@ b"";
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsResolveConflictMarker)]
         public async Task TestMissingWithMiddleMarkerAtTopOfFile()
         {
-            var source = @"{|CS8300:=======|}
+            var source =
+                @"{|CS8300:=======|}
 class X {
 }
 {|CS8300:>>>>>>>|} merge rev";
 
-            await new VerifyCS.Test
-            {
-                TestCode = source,
-                FixedCode = source,
-            }.RunAsync();
+            await new VerifyCS.Test { TestCode = source, FixedCode = source, }.RunAsync();
         }
 
         [WorkItem(23847, "https://github.com/dotnet/roslyn/issues/23847")]
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsResolveConflictMarker)]
         public async Task TestMissingWithMiddleMarkerAtBottomOfFile()
         {
-            var source = @"{|CS8300:<<<<<<<|} working copy
+            var source =
+                @"{|CS8300:<<<<<<<|} working copy
 class X {
 }
 {|CS8300:=======|}";
 
-            await new VerifyCS.Test
-            {
-                TestCode = source,
-                FixedCode = source,
-            }.RunAsync();
+            await new VerifyCS.Test { TestCode = source, FixedCode = source, }.RunAsync();
         }
 
         [WorkItem(21107, "https://github.com/dotnet/roslyn/issues/21107")]
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsResolveConflictMarker)]
         public async Task TestFixAll1()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 namespace N
@@ -742,7 +782,8 @@ namespace N
     }
 {|CS8300:>>>>>>>|} This is theirs!
 }";
-            var fixedSource = @"
+            var fixedSource =
+                @"
 using System;
 
 namespace N
@@ -762,7 +803,8 @@ namespace N
                 FixedCode = fixedSource,
                 NumberOfIncrementalIterations = 2,
                 CodeActionIndex = 0,
-                CodeActionEquivalenceKey = AbstractResolveConflictMarkerCodeFixProvider.TakeTopEquivalenceKey,
+                CodeActionEquivalenceKey =
+                    AbstractResolveConflictMarkerCodeFixProvider.TakeTopEquivalenceKey,
             }.RunAsync();
         }
 
@@ -770,7 +812,8 @@ namespace N
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsResolveConflictMarker)]
         public async Task TestFixAll2()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 namespace N
@@ -795,7 +838,8 @@ namespace N
     }
 {|CS8300:>>>>>>>|} This is theirs!
 }";
-            var fixedSource = @"
+            var fixedSource =
+                @"
 using System;
 
 namespace N
@@ -815,7 +859,8 @@ namespace N
                 FixedCode = fixedSource,
                 NumberOfIncrementalIterations = 2,
                 CodeActionIndex = 1,
-                CodeActionEquivalenceKey = AbstractResolveConflictMarkerCodeFixProvider.TakeBottomEquivalenceKey,
+                CodeActionEquivalenceKey =
+                    AbstractResolveConflictMarkerCodeFixProvider.TakeBottomEquivalenceKey,
             }.RunAsync();
         }
 
@@ -823,7 +868,8 @@ namespace N
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsResolveConflictMarker)]
         public async Task TestFixAll3()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 namespace N
@@ -848,7 +894,8 @@ namespace N
     }
 {|CS8300:>>>>>>>|} This is theirs!
 }";
-            var fixedSource = @"
+            var fixedSource =
+                @"
 using System;
 
 namespace N
@@ -874,7 +921,8 @@ namespace N
                 FixedCode = fixedSource,
                 NumberOfIncrementalIterations = 2,
                 CodeActionIndex = 2,
-                CodeActionEquivalenceKey = AbstractResolveConflictMarkerCodeFixProvider.TakeBothEquivalenceKey,
+                CodeActionEquivalenceKey =
+                    AbstractResolveConflictMarkerCodeFixProvider.TakeBothEquivalenceKey,
             }.RunAsync();
         }
     }

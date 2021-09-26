@@ -10,12 +10,10 @@ namespace System.Reflection.Metadata
         /// By default the stream is disposed when <see cref="MetadataReaderProvider"/> is disposed and sections of the PE image are read lazily.
         /// </summary>
         Default = 0,
-
         /// <summary>
         /// Keep the stream open when the <see cref="MetadataReaderProvider"/> is disposed.
         /// </summary>
         LeaveOpen = 1,
-
         /// <summary>
         /// Reads PDB metadata into memory right away.
         /// </summary>
@@ -30,7 +28,10 @@ namespace System.Reflection.Metadata
     {
         public static bool IsValid(this MetadataStreamOptions options)
         {
-            return (options & ~(MetadataStreamOptions.LeaveOpen | MetadataStreamOptions.PrefetchMetadata)) == 0;
+            return (
+                    options
+                    & ~(MetadataStreamOptions.LeaveOpen | MetadataStreamOptions.PrefetchMetadata)
+                ) == 0;
         }
     }
 }

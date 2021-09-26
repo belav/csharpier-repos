@@ -14,7 +14,10 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
     public class ViewComponentFeatureProvider : IApplicationFeatureProvider<ViewComponentFeature>
     {
         /// <inheritdoc />
-        public void PopulateFeature(IEnumerable<ApplicationPart> parts, ViewComponentFeature feature)
+        public void PopulateFeature(
+            IEnumerable<ApplicationPart> parts,
+            ViewComponentFeature feature
+        )
         {
             if (parts == null)
             {
@@ -26,9 +29,14 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
                 throw new ArgumentNullException(nameof(feature));
             }
 
-            foreach (var type in parts.OfType<IApplicationPartTypeProvider>().SelectMany(p => p.Types))
+            foreach (
+                var type in parts.OfType<IApplicationPartTypeProvider>().SelectMany(p => p.Types)
+            )
             {
-                if (ViewComponentConventions.IsComponent(type) && ! feature.ViewComponents.Contains(type))
+                if (
+                    ViewComponentConventions.IsComponent(type)
+                    && !feature.ViewComponents.Contains(type)
+                )
                 {
                     feature.ViewComponents.Add(type);
                 }

@@ -16,11 +16,11 @@ internal static partial class Interop
             int keyLength,
             int effectivekeyLength,
             ref byte iv,
-            int enc);
+            int enc
+        );
 
         [DllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpCipherCreatePartial")]
-        internal static extern SafeEvpCipherCtxHandle EvpCipherCreatePartial(
-            IntPtr cipher);
+        internal static extern SafeEvpCipherCtxHandle EvpCipherCreatePartial(IntPtr cipher);
 
         [DllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpCipherSetKeyAndIV")]
         [return: MarshalAs(UnmanagedType.Bool)]
@@ -28,19 +28,24 @@ internal static partial class Interop
             SafeEvpCipherCtxHandle ctx,
             ref byte key,
             ref byte iv,
-            EvpCipherDirection direction);
+            EvpCipherDirection direction
+        );
 
         internal static void EvpCipherSetKeyAndIV(
             SafeEvpCipherCtxHandle ctx,
             ReadOnlySpan<byte> key,
             ReadOnlySpan<byte> iv,
-            EvpCipherDirection direction)
+            EvpCipherDirection direction
+        )
         {
-            if (!EvpCipherSetKeyAndIV(
-                ctx,
-                ref MemoryMarshal.GetReference(key),
-                ref MemoryMarshal.GetReference(iv),
-                direction))
+            if (
+                !EvpCipherSetKeyAndIV(
+                    ctx,
+                    ref MemoryMarshal.GetReference(key),
+                    ref MemoryMarshal.GetReference(iv),
+                    direction
+                )
+            )
             {
                 throw CreateOpenSslCryptographicException();
             }
@@ -49,7 +54,9 @@ internal static partial class Interop
         [DllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpCipherSetGcmNonceLength")]
         [return: MarshalAs(UnmanagedType.Bool)]
         private static extern bool CryptoNative_EvpCipherSetGcmNonceLength(
-            SafeEvpCipherCtxHandle ctx, int nonceLength);
+            SafeEvpCipherCtxHandle ctx,
+            int nonceLength
+        );
 
         internal static void EvpCipherSetGcmNonceLength(SafeEvpCipherCtxHandle ctx, int nonceLength)
         {
@@ -62,7 +69,9 @@ internal static partial class Interop
         [DllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpCipherSetCcmNonceLength")]
         [return: MarshalAs(UnmanagedType.Bool)]
         private static extern bool CryptoNative_EvpCipherSetCcmNonceLength(
-            SafeEvpCipherCtxHandle ctx, int nonceLength);
+            SafeEvpCipherCtxHandle ctx,
+            int nonceLength
+        );
 
         internal static void EvpCipherSetCcmNonceLength(SafeEvpCipherCtxHandle ctx, int nonceLength)
         {
@@ -90,20 +99,23 @@ internal static partial class Interop
             ref byte @out,
             out int outl,
             ref byte @in,
-            int inl);
+            int inl
+        );
 
         internal static bool EvpCipherUpdate(
             SafeEvpCipherCtxHandle ctx,
             Span<byte> output,
             out int bytesWritten,
-            ReadOnlySpan<byte> input)
+            ReadOnlySpan<byte> input
+        )
         {
             return EvpCipherUpdate(
                 ctx,
                 ref MemoryMarshal.GetReference(output),
                 out bytesWritten,
                 ref MemoryMarshal.GetReference(input),
-                input.Length);
+                input.Length
+            );
         }
 
         internal static void EvpCipherSetInputLength(SafeEvpCipherCtxHandle ctx, int inputLength)
@@ -120,12 +132,14 @@ internal static partial class Interop
         private static extern bool EvpCipherFinalEx(
             SafeEvpCipherCtxHandle ctx,
             ref byte outm,
-            out int outl);
+            out int outl
+        );
 
         internal static bool EvpCipherFinalEx(
             SafeEvpCipherCtxHandle ctx,
             Span<byte> output,
-            out int bytesWritten)
+            out int bytesWritten
+        )
         {
             return EvpCipherFinalEx(ctx, ref MemoryMarshal.GetReference(output), out bytesWritten);
         }
@@ -135,7 +149,8 @@ internal static partial class Interop
         private static extern bool EvpCipherGetGcmTag(
             SafeEvpCipherCtxHandle ctx,
             ref byte tag,
-            int tagLength);
+            int tagLength
+        );
 
         internal static void EvpCipherGetGcmTag(SafeEvpCipherCtxHandle ctx, Span<byte> tag)
         {
@@ -150,7 +165,8 @@ internal static partial class Interop
         private static extern bool EvpCipherSetGcmTag(
             SafeEvpCipherCtxHandle ctx,
             ref byte tag,
-            int tagLength);
+            int tagLength
+        );
 
         internal static void EvpCipherSetGcmTag(SafeEvpCipherCtxHandle ctx, ReadOnlySpan<byte> tag)
         {
@@ -165,7 +181,8 @@ internal static partial class Interop
         private static extern bool EvpCipherGetCcmTag(
             SafeEvpCipherCtxHandle ctx,
             ref byte tag,
-            int tagLength);
+            int tagLength
+        );
 
         internal static void EvpCipherGetCcmTag(SafeEvpCipherCtxHandle ctx, Span<byte> tag)
         {
@@ -180,7 +197,8 @@ internal static partial class Interop
         private static extern bool EvpCipherSetCcmTag(
             SafeEvpCipherCtxHandle ctx,
             ref byte tag,
-            int tagLength);
+            int tagLength
+        );
 
         internal static void EvpCipherSetCcmTag(SafeEvpCipherCtxHandle ctx, ReadOnlySpan<byte> tag)
         {

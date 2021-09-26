@@ -12,7 +12,9 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.Configurat
     /// Windows CNG algorithms in CBC encryption + HMAC authentication modes.
     /// </summary>
     [SupportedOSPlatform("windows")]
-    public sealed class CngCbcAuthenticatedEncryptorConfiguration : AlgorithmConfiguration, IInternalAlgorithmConfiguration
+    public sealed class CngCbcAuthenticatedEncryptorConfiguration
+        : AlgorithmConfiguration,
+          IInternalAlgorithmConfiguration
     {
         /// <summary>
         /// The name of the algorithm to use for symmetric encryption.
@@ -77,10 +79,14 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.Configurat
         public override IAuthenticatedEncryptorDescriptor CreateNewDescriptor()
         {
             var internalConfiguration = (IInternalAlgorithmConfiguration)this;
-            return internalConfiguration.CreateDescriptorFromSecret(Secret.Random(KDK_SIZE_IN_BYTES));
+            return internalConfiguration.CreateDescriptorFromSecret(
+                Secret.Random(KDK_SIZE_IN_BYTES)
+            );
         }
 
-        IAuthenticatedEncryptorDescriptor IInternalAlgorithmConfiguration.CreateDescriptorFromSecret(ISecret secret)
+        IAuthenticatedEncryptorDescriptor IInternalAlgorithmConfiguration.CreateDescriptorFromSecret(
+            ISecret secret
+        )
         {
             return new CngCbcAuthenticatedEncryptorDescriptor(this, secret);
         }
@@ -94,7 +100,12 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.Configurat
         {
             var factory = new CngCbcAuthenticatedEncryptorFactory(NullLoggerFactory.Instance);
             // Run a sample payload through an encrypt -> decrypt operation to make sure data round-trips properly.
-            using (var encryptor = factory.CreateAuthenticatedEncryptorInstance(Secret.Random(512 / 8), this))
+            using (
+                var encryptor = factory.CreateAuthenticatedEncryptorInstance(
+                    Secret.Random(512 / 8),
+                    this
+                )
+            )
             {
                 encryptor.PerformSelfTest();
             }

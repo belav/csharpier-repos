@@ -10,11 +10,11 @@ namespace Sample
 {
     public class Test
     {
-	static DeltaHelper replacer = DeltaHelper.Make ();
+        static DeltaHelper replacer = DeltaHelper.Make();
 
         public static void Main(string[] args)
         {
-            Console.WriteLine ("Hello, World!");
+            Console.WriteLine("Hello, World!");
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -23,10 +23,10 @@ namespace Sample
             return 128;
         }
 
-	public static void Update()
-	{
-	    Assembly assm = typeof (Test).Assembly;
-	    replacer.Update (assm);
-	}
+        public static void Update()
+        {
+            Assembly assm = typeof(Test).Assembly;
+            replacer.Update(assm);
+        }
     }
 }

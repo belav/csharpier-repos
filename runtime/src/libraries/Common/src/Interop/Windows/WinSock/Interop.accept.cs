@@ -13,6 +13,7 @@ internal static partial class Interop
         internal static extern IntPtr accept(
             SafeSocketHandle socketHandle,
             [Out] byte[] socketAddress,
-            [In, Out] ref int socketAddressSize);
+            [In, Out] ref int socketAddressSize
+        );
     }
 }

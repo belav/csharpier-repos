@@ -35,18 +35,16 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.Common
                 && Code.Equals(other.Code);
         }
 
-        public override bool Equals(object obj)
-            => Equals(obj as Reference);
+        public override bool Equals(object obj) => Equals(obj as Reference);
 
         public override int GetHashCode()
         {
-            return Hash.Combine(FilePath,
-                Hash.Combine(Line,
-                    Hash.Combine(Column,
-                        Hash.Combine(Code, 0))));
+            return Hash.Combine(
+                FilePath,
+                Hash.Combine(Line, Hash.Combine(Column, Hash.Combine(Code, 0)))
+            );
         }
 
-        public override string ToString()
-            => $"{FilePath} ({Line}, {Column}): {Code}";
+        public override string ToString() => $"{FilePath} ({Line}, {Column}): {Code}";
     }
 }

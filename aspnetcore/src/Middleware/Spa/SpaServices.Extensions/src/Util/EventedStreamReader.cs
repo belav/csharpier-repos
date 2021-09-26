@@ -99,7 +99,10 @@ namespace Microsoft.AspNetCore.NodeServices.Util
                 int startPos = 0;
 
                 // get all the newlines
-                while ((lineBreakPos = Array.IndexOf(buf, '\n', startPos, chunkLength - startPos)) >= 0 && startPos < chunkLength)
+                while (
+                    (lineBreakPos = Array.IndexOf(buf, '\n', startPos, chunkLength - startPos)) >= 0
+                    && startPos < chunkLength
+                )
                 {
                     var length = (lineBreakPos + 1) - startPos;
                     _linesBuffer.Append(buf, startPos, length);

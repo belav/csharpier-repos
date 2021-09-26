@@ -27,8 +27,14 @@ namespace CSharpErrors
 
     public class ClassMethods
     {
-        public virtual UnavailableClass ReturnType1() { return null; }
-        public virtual UnavailableClass[] ReturnType2() { return null; }
+        public virtual UnavailableClass ReturnType1()
+        {
+            return null;
+        }
+        public virtual UnavailableClass[] ReturnType2()
+        {
+            return null;
+        }
 
         public virtual void ParameterType1(UnavailableClass u) { }
         public virtual void ParameterType2(UnavailableClass[] u) { }
@@ -47,10 +53,22 @@ namespace CSharpErrors
     {
         public virtual UnavailableClass GetSet1 { get; set; }
         public virtual UnavailableClass[] GetSet2 { get; set; }
-        public virtual UnavailableClass Get1 { get { return null; } }
-        public virtual UnavailableClass[] Get2 { get { return null; } }
-        public virtual UnavailableClass Set1 { set { } }
-        public virtual UnavailableClass[] Set2 { set { } }
+        public virtual UnavailableClass Get1
+        {
+            get { return null; }
+        }
+        public virtual UnavailableClass[] Get2
+        {
+            get { return null; }
+        }
+        public virtual UnavailableClass Set1
+        {
+            set { }
+        }
+        public virtual UnavailableClass[] Set2
+        {
+            set { }
+        }
     }
 
     public interface InterfaceProperties

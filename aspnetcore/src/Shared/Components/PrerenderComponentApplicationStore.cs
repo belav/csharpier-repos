@@ -23,8 +23,10 @@ namespace Microsoft.AspNetCore.Components
                 throw new ArgumentNullException(nameof(existingState));
             }
 
-            ExistingState = JsonSerializer.Deserialize<Dictionary<string, byte[]>>(Convert.FromBase64String(existingState)) ??
-                throw new ArgumentException(nameof(existingState));
+            ExistingState =
+                JsonSerializer.Deserialize<Dictionary<string, byte[]>>(
+                    Convert.FromBase64String(existingState)
+                ) ?? throw new ArgumentException(nameof(existingState));
         }
 
 #nullable enable

@@ -46,7 +46,12 @@ namespace Microsoft.AspNetCore.DataProtection
             // Arrange
             var registryEntries = new Dictionary<string, object>()
             {
-                ["KeyEscrowSinks"] = String.Join(" ;; ; ", new Type[] { typeof(MyKeyEscrowSink1), typeof(MyKeyEscrowSink2) }.Select(t => t.AssemblyQualifiedName))
+                ["KeyEscrowSinks"] = String.Join(
+                    " ;; ; ",
+                    new Type[] { typeof(MyKeyEscrowSink1), typeof(MyKeyEscrowSink2) }.Select(
+                        t => t.AssemblyQualifiedName
+                    )
+                )
             };
 
             // Act
@@ -91,13 +96,26 @@ namespace Microsoft.AspNetCore.DataProtection
             var context = RunTestWithRegValues(registryEntries);
 
             // Assert
-            var actualConfiguration = (CngCbcAuthenticatedEncryptorConfiguration)context.EncryptorConfiguration;
+            var actualConfiguration =
+                (CngCbcAuthenticatedEncryptorConfiguration)context.EncryptorConfiguration;
 
-            Assert.Equal(expectedConfiguration.EncryptionAlgorithm, actualConfiguration.EncryptionAlgorithm);
-            Assert.Equal(expectedConfiguration.EncryptionAlgorithmKeySize, actualConfiguration.EncryptionAlgorithmKeySize);
-            Assert.Equal(expectedConfiguration.EncryptionAlgorithmProvider, actualConfiguration.EncryptionAlgorithmProvider);
+            Assert.Equal(
+                expectedConfiguration.EncryptionAlgorithm,
+                actualConfiguration.EncryptionAlgorithm
+            );
+            Assert.Equal(
+                expectedConfiguration.EncryptionAlgorithmKeySize,
+                actualConfiguration.EncryptionAlgorithmKeySize
+            );
+            Assert.Equal(
+                expectedConfiguration.EncryptionAlgorithmProvider,
+                actualConfiguration.EncryptionAlgorithmProvider
+            );
             Assert.Equal(expectedConfiguration.HashAlgorithm, actualConfiguration.HashAlgorithm);
-            Assert.Equal(expectedConfiguration.HashAlgorithmProvider, actualConfiguration.HashAlgorithmProvider);
+            Assert.Equal(
+                expectedConfiguration.HashAlgorithmProvider,
+                actualConfiguration.HashAlgorithmProvider
+            );
         }
 
         [ConditionalFact]
@@ -127,13 +145,26 @@ namespace Microsoft.AspNetCore.DataProtection
             var context = RunTestWithRegValues(registryEntries);
 
             // Assert
-            var actualConfiguration = (CngCbcAuthenticatedEncryptorConfiguration)context.EncryptorConfiguration;
+            var actualConfiguration =
+                (CngCbcAuthenticatedEncryptorConfiguration)context.EncryptorConfiguration;
 
-            Assert.Equal(expectedConfiguration.EncryptionAlgorithm, actualConfiguration.EncryptionAlgorithm);
-            Assert.Equal(expectedConfiguration.EncryptionAlgorithmKeySize, actualConfiguration.EncryptionAlgorithmKeySize);
-            Assert.Equal(expectedConfiguration.EncryptionAlgorithmProvider, actualConfiguration.EncryptionAlgorithmProvider);
+            Assert.Equal(
+                expectedConfiguration.EncryptionAlgorithm,
+                actualConfiguration.EncryptionAlgorithm
+            );
+            Assert.Equal(
+                expectedConfiguration.EncryptionAlgorithmKeySize,
+                actualConfiguration.EncryptionAlgorithmKeySize
+            );
+            Assert.Equal(
+                expectedConfiguration.EncryptionAlgorithmProvider,
+                actualConfiguration.EncryptionAlgorithmProvider
+            );
             Assert.Equal(expectedConfiguration.HashAlgorithm, actualConfiguration.HashAlgorithm);
-            Assert.Equal(expectedConfiguration.HashAlgorithmProvider, actualConfiguration.HashAlgorithmProvider);
+            Assert.Equal(
+                expectedConfiguration.HashAlgorithmProvider,
+                actualConfiguration.HashAlgorithmProvider
+            );
         }
 
         [ConditionalFact]
@@ -151,11 +182,21 @@ namespace Microsoft.AspNetCore.DataProtection
             var context = RunTestWithRegValues(registryEntries);
 
             // Assert
-            var actualConfiguration = (CngGcmAuthenticatedEncryptorConfiguration)context.EncryptorConfiguration;
+            var actualConfiguration =
+                (CngGcmAuthenticatedEncryptorConfiguration)context.EncryptorConfiguration;
 
-            Assert.Equal(expectedConfiguration.EncryptionAlgorithm, actualConfiguration.EncryptionAlgorithm);
-            Assert.Equal(expectedConfiguration.EncryptionAlgorithmKeySize, actualConfiguration.EncryptionAlgorithmKeySize);
-            Assert.Equal(expectedConfiguration.EncryptionAlgorithmProvider, actualConfiguration.EncryptionAlgorithmProvider);
+            Assert.Equal(
+                expectedConfiguration.EncryptionAlgorithm,
+                actualConfiguration.EncryptionAlgorithm
+            );
+            Assert.Equal(
+                expectedConfiguration.EncryptionAlgorithmKeySize,
+                actualConfiguration.EncryptionAlgorithmKeySize
+            );
+            Assert.Equal(
+                expectedConfiguration.EncryptionAlgorithmProvider,
+                actualConfiguration.EncryptionAlgorithmProvider
+            );
         }
 
         [ConditionalFact]
@@ -181,11 +222,21 @@ namespace Microsoft.AspNetCore.DataProtection
             var context = RunTestWithRegValues(registryEntries);
 
             // Assert
-            var actualConfiguration = (CngGcmAuthenticatedEncryptorConfiguration)context.EncryptorConfiguration;
+            var actualConfiguration =
+                (CngGcmAuthenticatedEncryptorConfiguration)context.EncryptorConfiguration;
 
-            Assert.Equal(expectedConfiguration.EncryptionAlgorithm, actualConfiguration.EncryptionAlgorithm);
-            Assert.Equal(expectedConfiguration.EncryptionAlgorithmKeySize, actualConfiguration.EncryptionAlgorithmKeySize);
-            Assert.Equal(expectedConfiguration.EncryptionAlgorithmProvider, actualConfiguration.EncryptionAlgorithmProvider);
+            Assert.Equal(
+                expectedConfiguration.EncryptionAlgorithm,
+                actualConfiguration.EncryptionAlgorithm
+            );
+            Assert.Equal(
+                expectedConfiguration.EncryptionAlgorithmKeySize,
+                actualConfiguration.EncryptionAlgorithmKeySize
+            );
+            Assert.Equal(
+                expectedConfiguration.EncryptionAlgorithmProvider,
+                actualConfiguration.EncryptionAlgorithmProvider
+            );
         }
 
         [ConditionalFact]
@@ -203,11 +254,21 @@ namespace Microsoft.AspNetCore.DataProtection
             var context = RunTestWithRegValues(registryEntries);
 
             // Assert
-            var actualConfiguration = (ManagedAuthenticatedEncryptorConfiguration)context.EncryptorConfiguration;
+            var actualConfiguration =
+                (ManagedAuthenticatedEncryptorConfiguration)context.EncryptorConfiguration;
 
-            Assert.Equal(expectedConfiguration.EncryptionAlgorithmType, actualConfiguration.EncryptionAlgorithmType);
-            Assert.Equal(expectedConfiguration.EncryptionAlgorithmKeySize, actualConfiguration.EncryptionAlgorithmKeySize);
-            Assert.Equal(expectedConfiguration.ValidationAlgorithmType, actualConfiguration.ValidationAlgorithmType);
+            Assert.Equal(
+                expectedConfiguration.EncryptionAlgorithmType,
+                actualConfiguration.EncryptionAlgorithmType
+            );
+            Assert.Equal(
+                expectedConfiguration.EncryptionAlgorithmKeySize,
+                actualConfiguration.EncryptionAlgorithmKeySize
+            );
+            Assert.Equal(
+                expectedConfiguration.ValidationAlgorithmType,
+                actualConfiguration.ValidationAlgorithmType
+            );
         }
 
         [ConditionalFact]
@@ -233,34 +294,49 @@ namespace Microsoft.AspNetCore.DataProtection
             var context = RunTestWithRegValues(registryEntries);
 
             // Assert
-            var actualConfiguration = (ManagedAuthenticatedEncryptorConfiguration)context.EncryptorConfiguration;
+            var actualConfiguration =
+                (ManagedAuthenticatedEncryptorConfiguration)context.EncryptorConfiguration;
 
-            Assert.Equal(expectedConfiguration.EncryptionAlgorithmType, actualConfiguration.EncryptionAlgorithmType);
-            Assert.Equal(expectedConfiguration.EncryptionAlgorithmKeySize, actualConfiguration.EncryptionAlgorithmKeySize);
-            Assert.Equal(expectedConfiguration.ValidationAlgorithmType, actualConfiguration.ValidationAlgorithmType);
+            Assert.Equal(
+                expectedConfiguration.EncryptionAlgorithmType,
+                actualConfiguration.EncryptionAlgorithmType
+            );
+            Assert.Equal(
+                expectedConfiguration.EncryptionAlgorithmKeySize,
+                actualConfiguration.EncryptionAlgorithmKeySize
+            );
+            Assert.Equal(
+                expectedConfiguration.ValidationAlgorithmType,
+                actualConfiguration.ValidationAlgorithmType
+            );
         }
 
         private static RegistryPolicy RunTestWithRegValues(Dictionary<string, object> regValues)
         {
-            return WithUniqueTempRegKey(registryKey =>
-            {
-                foreach (var entry in regValues)
+            return WithUniqueTempRegKey(
+                registryKey =>
                 {
-                    registryKey.SetValue(entry.Key, entry.Value);
+                    foreach (var entry in regValues)
+                    {
+                        registryKey.SetValue(entry.Key, entry.Value);
+                    }
+
+                    var policyResolver = new RegistryPolicyResolver(
+                        registryKey,
+                        activator: SimpleActivator.DefaultWithoutServices
+                    );
+
+                    return policyResolver.ResolvePolicy();
                 }
-
-                var policyResolver = new RegistryPolicyResolver(
-                    registryKey,
-                    activator: SimpleActivator.DefaultWithoutServices);
-
-                return policyResolver.ResolvePolicy();
-            });
+            );
         }
 
         /// <summary>
         /// Runs a test and cleans up the registry key afterward.
         /// </summary>
-        private static RegistryPolicy WithUniqueTempRegKey(Func<RegistryKey, RegistryPolicy> testCode)
+        private static RegistryPolicy WithUniqueTempRegKey(
+            Func<RegistryKey, RegistryPolicy> testCode
+        )
         {
             string uniqueName = Guid.NewGuid().ToString();
             var uniqueSubkey = LazyHkcuTempKey.Value.CreateSubKey(uniqueName);
@@ -268,6 +344,7 @@ namespace Microsoft.AspNetCore.DataProtection
             {
                 return testCode(uniqueSubkey);
             }
+
             finally
             {
                 // clean up when test is done
@@ -275,22 +352,28 @@ namespace Microsoft.AspNetCore.DataProtection
             }
         }
 
-        private static readonly Lazy<RegistryKey> LazyHkcuTempKey = new Lazy<RegistryKey>(() =>
-        {
-            try
+        private static readonly Lazy<RegistryKey> LazyHkcuTempKey = new Lazy<RegistryKey>(
+            () =>
             {
-                return Registry.CurrentUser.CreateSubKey(@"SOFTWARE\Microsoft\ASP.NET\temp");
+                try
+                {
+                    return Registry.CurrentUser.CreateSubKey(@"SOFTWARE\Microsoft\ASP.NET\temp");
+                }
+                catch
+                {
+                    // swallow all failures
+                    return null;
+                }
             }
-            catch
-            {
-                // swallow all failures
-                return null;
-            }
-        });
+        );
 
         private class ConditionalRunTestOnlyIfHkcuRegistryAvailable : Attribute, ITestCondition
         {
-            public bool IsMet => (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) && LazyHkcuTempKey.Value != null);
+            public bool IsMet =>
+                (
+                    RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+                    && LazyHkcuTempKey.Value != null
+                );
 
             public string SkipReason { get; } = "HKCU registry couldn't be opened.";
         }

@@ -22,50 +22,74 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public InterpolationBraceCompletionService()
-        {
-        }
+        public InterpolationBraceCompletionService() { }
 
         protected override char OpeningBrace => CurlyBrace.OpenCharacter;
 
         protected override char ClosingBrace => CurlyBrace.CloseCharacter;
 
-        public override Task<bool> AllowOverTypeAsync(BraceCompletionContext context, CancellationToken cancellationToken)
-            => AllowOverTypeWithValidClosingTokenAsync(context, cancellationToken);
+        public override Task<bool> AllowOverTypeAsync(
+            BraceCompletionContext context,
+            CancellationToken cancellationToken
+        ) => AllowOverTypeWithValidClosingTokenAsync(context, cancellationToken);
 
         /// <summary>
         /// Only return this service as valid when we're typing curly braces inside an interpolated string.
         /// Otherwise curly braces should be completed using the <see cref="CurlyBraceCompletionService"/>
         /// </summary>
-        public override async Task<bool> CanProvideBraceCompletionAsync(char brace, int openingPosition, Document document, CancellationToken cancellationToken)
-            => OpeningBrace == brace && await IsPositionInInterpolationContextAsync(document, openingPosition, cancellationToken).ConfigureAwait(false);
+        public override async Task<bool> CanProvideBraceCompletionAsync(
+            char brace,
+            int openingPosition,
+            Document document,
+            CancellationToken cancellationToken
+        ) =>
+            OpeningBrace == brace
+            && await IsPositionInInterpolationContextAsync(
+                    document,
+                    openingPosition,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
-        protected override Task<bool> IsValidOpenBraceTokenAtPositionAsync(SyntaxToken token, int position, Document document, CancellationToken cancellationToken)
+        protected override Task<bool> IsValidOpenBraceTokenAtPositionAsync(
+            SyntaxToken token,
+            int position,
+            Document document,
+            CancellationToken cancellationToken
+        )
         {
-            return Task.FromResult(IsValidOpeningBraceToken(token)
-                && token.SpanStart == position);
+            return Task.FromResult(IsValidOpeningBraceToken(token) && token.SpanStart == position);
         }
 
-        protected override bool IsValidOpeningBraceToken(SyntaxToken token)
-            => token.IsKind(SyntaxKind.OpenBraceToken) && token.Parent.IsKind(SyntaxKind.Interpolation);
+        protected override bool IsValidOpeningBraceToken(SyntaxToken token) =>
+            token.IsKind(SyntaxKind.OpenBraceToken)
+            && token.Parent.IsKind(SyntaxKind.Interpolation);
 
-        protected override bool IsValidClosingBraceToken(SyntaxToken token)
-            => token.IsKind(SyntaxKind.CloseBraceToken);
+        protected override bool IsValidClosingBraceToken(SyntaxToken token) =>
+            token.IsKind(SyntaxKind.CloseBraceToken);
 
         /// <summary>
         /// Returns true when the input position could be starting an interpolation expression if a curly brace was typed.
         /// </summary>
-        public static async Task<bool> IsPositionInInterpolationContextAsync(Document document, int position, CancellationToken cancellationToken)
+        public static async Task<bool> IsPositionInInterpolationContextAsync(
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        )
         {
             // First, check to see if the character to the left of the position is an open curly.
             // If it is, we shouldn't complete because the user may be trying to escape a curly.
             // E.g. they are trying to type $"{{"
-            if (await CouldEscapePreviousOpenBraceAsync('{', position, document, cancellationToken).ConfigureAwait(false))
+            if (
+                await CouldEscapePreviousOpenBraceAsync('{', position, document, cancellationToken)
+                    .ConfigureAwait(false)
+            )
             {
                 return false;
             }
 
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
             var token = root.FindTokenOnLeftOfPosition(position);
 
             if (!token.Span.IntersectsWith(position))
@@ -74,7 +98,8 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
             }
 
             // We can be starting an interpolation expression if we're inside an interpolated string.
-            return token.Parent.IsKind(SyntaxKind.InterpolatedStringExpression) || token.Parent.IsParentKind(SyntaxKind.InterpolatedStringExpression);
+            return token.Parent.IsKind(SyntaxKind.InterpolatedStringExpression)
+                || token.Parent.IsParentKind(SyntaxKind.InterpolatedStringExpression);
         }
     }
 }

@@ -30,7 +30,8 @@ namespace System.Net.Mime
         // the encoding should only be done once.
         private readonly bool _shouldEncodeLeadingDots;
 
-        private WriteStateInfoBase WriteState => _writeState ?? (_writeState = new WriteStateInfoBase());
+        private WriteStateInfoBase WriteState =>
+            _writeState ?? (_writeState = new WriteStateInfoBase());
 
         /// <summary>
         /// ctor.
@@ -51,7 +52,13 @@ namespace System.Net.Mime
         /// <param name="count">Count of bytes to write</param>
         /// <param name="callback">Callback to call when write completes</param>
         /// <param name="state">State to pass to callback</param>
-        public override IAsyncResult BeginWrite(byte[] buffer, int offset, int count, AsyncCallback? callback, object? state)
+        public override IAsyncResult BeginWrite(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback? callback,
+            object? state
+        )
         {
             ValidateBufferArguments(buffer, offset, count);
 
@@ -130,12 +137,24 @@ namespace System.Net.Mime
             }
         }
 
-        public int DecodeBytes(byte[] buffer, int offset, int count) { throw new NotImplementedException(); }
+        public int DecodeBytes(byte[] buffer, int offset, int count)
+        {
+            throw new NotImplementedException();
+        }
 
-        public int EncodeBytes(byte[] buffer, int offset, int count) { throw new NotImplementedException(); }
+        public int EncodeBytes(byte[] buffer, int offset, int count)
+        {
+            throw new NotImplementedException();
+        }
 
-        public int EncodeString(string value, Encoding encoding) { throw new NotImplementedException(); }
+        public int EncodeString(string value, Encoding encoding)
+        {
+            throw new NotImplementedException();
+        }
 
-        public string GetEncodedString() { throw new NotImplementedException(); }
+        public string GetEncodedString()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

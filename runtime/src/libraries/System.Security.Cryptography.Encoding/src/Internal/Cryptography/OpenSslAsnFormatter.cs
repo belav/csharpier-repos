@@ -38,7 +38,13 @@ namespace Internal.Cryptography
                     }
 
                     using (SafeBioHandle bio = Interop.Crypto.CreateMemoryBio())
-                    using (SafeX509ExtensionHandle x509Ext = Interop.Crypto.X509ExtensionCreateByObj(asnOid, false, octetString))
+                    using (
+                        SafeX509ExtensionHandle x509Ext = Interop.Crypto.X509ExtensionCreateByObj(
+                            asnOid,
+                            false,
+                            octetString
+                        )
+                    )
                     {
                         if (bio.IsInvalid || x509Ext.IsInvalid)
                         {
@@ -72,6 +78,7 @@ namespace Internal.Cryptography
                     }
                 }
             }
+
             finally
             {
                 // All of the return null paths might have errors that we are ignoring.

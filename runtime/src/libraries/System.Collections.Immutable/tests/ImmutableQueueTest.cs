@@ -137,12 +137,18 @@ namespace System.Collections.Immutable.Tests
         [Fact]
         public void EnqueueDequeueTest()
         {
-            this.EnqueueDequeueTestHelper(new GenericParameterHelper(1), new GenericParameterHelper(2), new GenericParameterHelper(3));
+            this.EnqueueDequeueTestHelper(
+                new GenericParameterHelper(1),
+                new GenericParameterHelper(2),
+                new GenericParameterHelper(3)
+            );
             this.EnqueueDequeueTestHelper<GenericParameterHelper>();
 
             // interface test
-            IImmutableQueue<GenericParameterHelper> queueInterface = ImmutableQueue.Create<GenericParameterHelper>();
-            IImmutableQueue<GenericParameterHelper> populatedQueueInterface = queueInterface.Enqueue(new GenericParameterHelper(5));
+            IImmutableQueue<GenericParameterHelper> queueInterface =
+                ImmutableQueue.Create<GenericParameterHelper>();
+            IImmutableQueue<GenericParameterHelper> populatedQueueInterface =
+                queueInterface.Enqueue(new GenericParameterHelper(5));
             Assert.Equal(new GenericParameterHelper(5), populatedQueueInterface.Peek());
         }
 
@@ -182,25 +188,46 @@ namespace System.Collections.Immutable.Tests
             Assert.False(ImmutableQueue<int>.Empty.Equals(null));
             Assert.False(ImmutableQueue<int>.Empty.Equals("hi"));
             Assert.True(ImmutableQueue<int>.Empty.Equals(ImmutableQueue<int>.Empty));
-            Assert.False(ImmutableQueue<int>.Empty.Enqueue(3).Equals(ImmutableQueue<int>.Empty.Enqueue(3)));
-            Assert.False(ImmutableQueue<int>.Empty.Enqueue(5).Equals(ImmutableQueue<int>.Empty.Enqueue(3)));
-            Assert.False(ImmutableQueue<int>.Empty.Enqueue(3).Enqueue(5).Equals(ImmutableQueue<int>.Empty.Enqueue(3)));
-            Assert.False(ImmutableQueue<int>.Empty.Enqueue(3).Equals(ImmutableQueue<int>.Empty.Enqueue(3).Enqueue(5)));
+            Assert.False(
+                ImmutableQueue<int>.Empty.Enqueue(3).Equals(ImmutableQueue<int>.Empty.Enqueue(3))
+            );
+            Assert.False(
+                ImmutableQueue<int>.Empty.Enqueue(5).Equals(ImmutableQueue<int>.Empty.Enqueue(3))
+            );
+            Assert.False(
+                ImmutableQueue<int>.Empty.Enqueue(3)
+                    .Enqueue(5)
+                    .Equals(ImmutableQueue<int>.Empty.Enqueue(3))
+            );
+            Assert.False(
+                ImmutableQueue<int>.Empty.Enqueue(3)
+                    .Equals(ImmutableQueue<int>.Empty.Enqueue(3).Enqueue(5))
+            );
 
             // Also be sure to compare equality of partially dequeued queues since that moves data to different fields.
-            Assert.False(ImmutableQueue<int>.Empty.Enqueue(3).Enqueue(1).Enqueue(2).Dequeue().Equals(ImmutableQueue<int>.Empty.Enqueue(1).Enqueue(2)));
+            Assert.False(
+                ImmutableQueue<int>.Empty.Enqueue(3)
+                    .Enqueue(1)
+                    .Enqueue(2)
+                    .Dequeue()
+                    .Equals(ImmutableQueue<int>.Empty.Enqueue(1).Enqueue(2))
+            );
         }
 
         [Fact]
         public void PeekEmptyThrows()
         {
-            Assert.Throws<InvalidOperationException>(() => ImmutableQueue<GenericParameterHelper>.Empty.Peek());
+            Assert.Throws<InvalidOperationException>(
+                () => ImmutableQueue<GenericParameterHelper>.Empty.Peek()
+            );
         }
 
         [Fact]
         public void DequeueEmptyThrows()
         {
-            Assert.Throws<InvalidOperationException>(() => ImmutableQueue<GenericParameterHelper>.Empty.Dequeue());
+            Assert.Throws<InvalidOperationException>(
+                () => ImmutableQueue<GenericParameterHelper>.Empty.Dequeue()
+            );
         }
 
         [Fact]
@@ -225,8 +252,14 @@ namespace System.Collections.Immutable.Tests
             Assert.False(queue.IsEmpty);
             Assert.Equal(new[] { 1, 2 }, queue);
 
-            AssertExtensions.Throws<ArgumentNullException>("items", () => ImmutableQueue.CreateRange((IEnumerable<int>)null));
-            AssertExtensions.Throws<ArgumentNullException>("items", () => ImmutableQueue.Create((int[])null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "items",
+                () => ImmutableQueue.CreateRange((IEnumerable<int>)null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "items",
+                () => ImmutableQueue.Create((int[])null)
+            );
         }
 
         [Fact]
@@ -241,8 +274,14 @@ namespace System.Collections.Immutable.Tests
         {
             DebuggerAttributes.ValidateDebuggerDisplayReferences(ImmutableQueue.Create<int>());
             ImmutableQueue<string> queue = ImmutableQueue.Create("One", "Two");
-            DebuggerAttributeInfo info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(queue);
-            PropertyInfo itemProperty = info.Properties.Single(pr => pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State == DebuggerBrowsableState.RootHidden);
+            DebuggerAttributeInfo info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(
+                queue
+            );
+            PropertyInfo itemProperty = info.Properties.Single(
+                pr =>
+                    pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State
+                    == DebuggerBrowsableState.RootHidden
+            );
             string[] items = itemProperty.GetValue(info.Instance) as string[];
             Assert.Equal(queue, items);
         }
@@ -251,17 +290,16 @@ namespace System.Collections.Immutable.Tests
         public static void TestDebuggerAttributes_Null()
         {
             Type proxyType = DebuggerAttributes.GetProxyType(ImmutableQueue.Create<int>());
-            TargetInvocationException tie = Assert.Throws<TargetInvocationException>(() => Activator.CreateInstance(proxyType, (object)null));
+            TargetInvocationException tie = Assert.Throws<TargetInvocationException>(
+                () => Activator.CreateInstance(proxyType, (object)null)
+            );
             Assert.IsType<ArgumentNullException>(tie.InnerException);
         }
 
         [Fact]
         public void PeekRef()
         {
-            var queue = ImmutableQueue<int>.Empty
-                .Enqueue(1)
-                .Enqueue(2)
-                .Enqueue(3);
+            var queue = ImmutableQueue<int>.Empty.Enqueue(1).Enqueue(2).Enqueue(3);
 
             ref readonly var safeRef = ref queue.PeekRef();
             ref var unsafeRef = ref Unsafe.AsRef(safeRef);

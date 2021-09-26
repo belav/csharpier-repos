@@ -14,14 +14,10 @@ namespace System.Xml.Xsl.XsltOld
 
         internal string? Result
         {
-            get
-            {
-                return _result;
-            }
+            get { return _result; }
         }
 
-        internal StringOutput(Processor processor)
-        : base(processor)
+        internal StringOutput(Processor processor) : base(processor)
         {
             _builder = new StringBuilder();
         }
@@ -29,7 +25,6 @@ namespace System.Xml.Xsl.XsltOld
         internal override void Write(char outputChar)
         {
             _builder.Append(outputChar);
-
 #if DEBUG
             _result = _builder.ToString();
 #endif
@@ -38,7 +33,6 @@ namespace System.Xml.Xsl.XsltOld
         internal override void Write(string? outputText)
         {
             _builder.Append(outputText);
-
 #if DEBUG
             _result = _builder.ToString();
 #endif

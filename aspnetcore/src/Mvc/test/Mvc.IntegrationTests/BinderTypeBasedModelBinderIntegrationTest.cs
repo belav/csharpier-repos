@@ -22,11 +22,7 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             var parameter = new ParameterDescriptor()
             {
                 Name = "Parameter1",
-                BindingInfo = new BindingInfo()
-                {
-                    BinderType = typeof(NullModelBinder)
-                },
-
+                BindingInfo = new BindingInfo() { BinderType = typeof(NullModelBinder) },
                 ParameterType = typeof(string)
             };
 
@@ -56,11 +52,7 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             var parameter = new ParameterDescriptor()
             {
                 Name = "Parameter1",
-                BindingInfo = new BindingInfo()
-                {
-                    BinderType = typeof(NullModelNotSetModelBinder)
-                },
-
+                BindingInfo = new BindingInfo() { BinderType = typeof(NullModelNotSetModelBinder) },
                 ParameterType = typeof(string)
             };
 
@@ -98,7 +90,6 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                     BinderType = typeof(SuccessModelBinder),
                     BinderModelName = "CustomParameter"
                 },
-
                 ParameterType = typeof(Person2)
             };
 
@@ -135,14 +126,7 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
 
         public static TheoryData<BindingInfo> NullAndEmptyBindingInfo
         {
-            get
-            {
-                return new TheoryData<BindingInfo>
-                {
-                    null,
-                    new BindingInfo(),
-                };
-            }
+            get { return new TheoryData<BindingInfo> { null, new BindingInfo(), }; }
         }
 
         // Make sure the metadata is honored when a [ModelBinder] attribute is associated with an action parameter's
@@ -152,11 +136,14 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         // This is a regression test for aspnet/Mvc#4652 and aspnet/Mvc#7595
         [Theory]
         [MemberData(nameof(NullAndEmptyBindingInfo))]
-        public async Task BinderTypeOnParameterType_WithData_EmptyPrefix_GetsBound(BindingInfo bindingInfo)
+        public async Task BinderTypeOnParameterType_WithData_EmptyPrefix_GetsBound(
+            BindingInfo bindingInfo
+        )
         {
             // Arrange
             var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
-            var parameters = typeof(TestController).GetMethod(nameof(TestController.Action)).GetParameters();
+            var parameters = typeof(TestController).GetMethod(nameof(TestController.Action))
+                .GetParameters();
             var parameter = new ControllerParameterDescriptor
             {
                 Name = "Parameter1",
@@ -205,7 +192,9 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         // associating [ModelBinder] with a class somewhere in the type hierarchy of an action parameter.)
         [Theory]
         [MemberData(nameof(NullAndEmptyBindingInfo))]
-        public async Task BinderTypeOnProperty_WithData_EmptyPrefix_GetsBound(BindingInfo bindingInfo)
+        public async Task BinderTypeOnProperty_WithData_EmptyPrefix_GetsBound(
+            BindingInfo bindingInfo
+        )
         {
             // Arrange
             var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
@@ -285,10 +274,7 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             var parameter = new ParameterDescriptor()
             {
                 Name = "Parameter1",
-                BindingInfo = new BindingInfo()
-                {
-                    BinderModelName = "CustomParameter"
-                },
+                BindingInfo = new BindingInfo() { BinderModelName = "CustomParameter" },
                 ParameterType = typeof(Person)
             };
 
@@ -337,7 +323,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 bindingContext.ModelState.SetModelValue(
                     ModelNames.CreatePropertyModelName(bindingContext.ModelName, "Street"),
                     new string[] { address.Street },
-                    address.Street);
+                    address.Street
+                );
 
                 bindingContext.Result = ModelBindingResult.Success(address);
                 return Task.CompletedTask;
@@ -365,7 +352,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 bindingContext.ModelState.SetModelValue(
                     ModelNames.CreatePropertyModelName(bindingContext.ModelName, "Street"),
                     new string[] { address.Street },
-                    address.Street);
+                    address.Street
+                );
 
                 bindingContext.Result = ModelBindingResult.Success(address);
                 return Task.CompletedTask;
@@ -386,9 +374,10 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 bindingContext.ModelState.SetModelValue(
                     bindingContext.ModelName,
                     new string[] { model },
-                    model);
+                    model
+                );
 
-                bindingContext.Result =ModelBindingResult.Success(model);
+                bindingContext.Result = ModelBindingResult.Success(model);
                 return Task.CompletedTask;
             }
         }
@@ -403,7 +392,7 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 }
                 Debug.Assert(bindingContext.Result == ModelBindingResult.Failed());
 
-                bindingContext.Result =  ModelBindingResult.Success(model: null);
+                bindingContext.Result = ModelBindingResult.Success(model: null);
                 return Task.CompletedTask;
             }
         }
@@ -425,9 +414,7 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
 
         private class TestController
         {
-            public void Action(Address address)
-            {
-            }
+            public void Action(Address address) { }
         }
     }
 }

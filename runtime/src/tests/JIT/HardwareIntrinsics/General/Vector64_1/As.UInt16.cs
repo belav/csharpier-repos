@@ -41,7 +41,8 @@ namespace JIT.HardwareIntrinsics.General
     {
         private static readonly int LargestVectorSize = 8;
 
-        private static readonly int ElementCount = Unsafe.SizeOf<Vector64<UInt16>>() / sizeof(UInt16);
+        private static readonly int ElementCount =
+            Unsafe.SizeOf<Vector64<UInt16>>() / sizeof(UInt16);
 
         public bool Succeeded { get; set; } = true;
 
@@ -143,78 +144,71 @@ namespace JIT.HardwareIntrinsics.General
             Vector64<UInt16> value;
 
             value = Vector64.Create(TestLibrary.Generator.GetUInt16());
-            object byteResult = typeof(Vector64)
-                                    .GetMethod(nameof(Vector64.AsByte))
-                                    .MakeGenericMethod(typeof(UInt16))
-                                    .Invoke(null, new object[] { value });
+            object byteResult = typeof(Vector64).GetMethod(nameof(Vector64.AsByte))
+                .MakeGenericMethod(typeof(UInt16))
+                .Invoke(null, new object[] { value });
             ValidateResult((Vector64<byte>)(byteResult), value);
 
             value = Vector64.Create(TestLibrary.Generator.GetUInt16());
-            object doubleResult = typeof(Vector64)
-                                    .GetMethod(nameof(Vector64.AsDouble))
-                                    .MakeGenericMethod(typeof(UInt16))
-                                    .Invoke(null, new object[] { value });
+            object doubleResult = typeof(Vector64).GetMethod(nameof(Vector64.AsDouble))
+                .MakeGenericMethod(typeof(UInt16))
+                .Invoke(null, new object[] { value });
             ValidateResult((Vector64<double>)(doubleResult), value);
 
             value = Vector64.Create(TestLibrary.Generator.GetUInt16());
-            object shortResult = typeof(Vector64)
-                                    .GetMethod(nameof(Vector64.AsInt16))
-                                    .MakeGenericMethod(typeof(UInt16))
-                                    .Invoke(null, new object[] { value });
+            object shortResult = typeof(Vector64).GetMethod(nameof(Vector64.AsInt16))
+                .MakeGenericMethod(typeof(UInt16))
+                .Invoke(null, new object[] { value });
             ValidateResult((Vector64<short>)(shortResult), value);
 
             value = Vector64.Create(TestLibrary.Generator.GetUInt16());
-            object intResult = typeof(Vector64)
-                                    .GetMethod(nameof(Vector64.AsInt32))
-                                    .MakeGenericMethod(typeof(UInt16))
-                                    .Invoke(null, new object[] { value });
+            object intResult = typeof(Vector64).GetMethod(nameof(Vector64.AsInt32))
+                .MakeGenericMethod(typeof(UInt16))
+                .Invoke(null, new object[] { value });
             ValidateResult((Vector64<int>)(intResult), value);
 
             value = Vector64.Create(TestLibrary.Generator.GetUInt16());
-            object longResult = typeof(Vector64)
-                                    .GetMethod(nameof(Vector64.AsInt64))
-                                    .MakeGenericMethod(typeof(UInt16))
-                                    .Invoke(null, new object[] { value });
+            object longResult = typeof(Vector64).GetMethod(nameof(Vector64.AsInt64))
+                .MakeGenericMethod(typeof(UInt16))
+                .Invoke(null, new object[] { value });
             ValidateResult((Vector64<long>)(longResult), value);
 
             value = Vector64.Create(TestLibrary.Generator.GetUInt16());
-            object sbyteResult = typeof(Vector64)
-                                    .GetMethod(nameof(Vector64.AsSByte))
-                                    .MakeGenericMethod(typeof(UInt16))
-                                    .Invoke(null, new object[] { value });
+            object sbyteResult = typeof(Vector64).GetMethod(nameof(Vector64.AsSByte))
+                .MakeGenericMethod(typeof(UInt16))
+                .Invoke(null, new object[] { value });
             ValidateResult((Vector64<sbyte>)(sbyteResult), value);
 
             value = Vector64.Create(TestLibrary.Generator.GetUInt16());
-            object floatResult = typeof(Vector64)
-                                    .GetMethod(nameof(Vector64.AsSingle))
-                                    .MakeGenericMethod(typeof(UInt16))
-                                    .Invoke(null, new object[] { value });
+            object floatResult = typeof(Vector64).GetMethod(nameof(Vector64.AsSingle))
+                .MakeGenericMethod(typeof(UInt16))
+                .Invoke(null, new object[] { value });
             ValidateResult((Vector64<float>)(floatResult), value);
 
             value = Vector64.Create(TestLibrary.Generator.GetUInt16());
-            object ushortResult = typeof(Vector64)
-                                    .GetMethod(nameof(Vector64.AsUInt16))
-                                    .MakeGenericMethod(typeof(UInt16))
-                                    .Invoke(null, new object[] { value });
+            object ushortResult = typeof(Vector64).GetMethod(nameof(Vector64.AsUInt16))
+                .MakeGenericMethod(typeof(UInt16))
+                .Invoke(null, new object[] { value });
             ValidateResult((Vector64<ushort>)(ushortResult), value);
 
             value = Vector64.Create(TestLibrary.Generator.GetUInt16());
-            object uintResult = typeof(Vector64)
-                                    .GetMethod(nameof(Vector64.AsUInt32))
-                                    .MakeGenericMethod(typeof(UInt16))
-                                    .Invoke(null, new object[] { value });
+            object uintResult = typeof(Vector64).GetMethod(nameof(Vector64.AsUInt32))
+                .MakeGenericMethod(typeof(UInt16))
+                .Invoke(null, new object[] { value });
             ValidateResult((Vector64<uint>)(uintResult), value);
 
             value = Vector64.Create(TestLibrary.Generator.GetUInt16());
-            object ulongResult = typeof(Vector64)
-                                    .GetMethod(nameof(Vector64.AsUInt64))
-                                    .MakeGenericMethod(typeof(UInt16))
-                                    .Invoke(null, new object[] { value });
+            object ulongResult = typeof(Vector64).GetMethod(nameof(Vector64.AsUInt64))
+                .MakeGenericMethod(typeof(UInt16))
+                .Invoke(null, new object[] { value });
             ValidateResult((Vector64<ulong>)(ulongResult), value);
         }
 
-        private void ValidateResult<T>(Vector64<T> result, Vector64<UInt16> value, [CallerMemberName] string method = "")
-            where T : struct
+        private void ValidateResult<T>(
+            Vector64<T> result,
+            Vector64<UInt16> value,
+            [CallerMemberName] string method = ""
+        ) where T : struct
         {
             UInt16[] resultElements = new UInt16[ElementCount];
             Unsafe.WriteUnaligned(ref Unsafe.As<UInt16, byte>(ref resultElements[0]), result);
@@ -225,7 +219,12 @@ namespace JIT.HardwareIntrinsics.General
             ValidateResult(resultElements, valueElements, typeof(T), method);
         }
 
-        private void ValidateResult(UInt16[] resultElements, UInt16[] valueElements, Type targetType, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            UInt16[] resultElements,
+            UInt16[] valueElements,
+            Type targetType,
+            [CallerMemberName] string method = ""
+        )
         {
             bool succeeded = true;
 
@@ -240,9 +239,15 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"Vector64<UInt16>.As{targetType.Name}: {method} failed:");
-                TestLibrary.TestFramework.LogInformation($"   value: ({string.Join(", ", valueElements)})");
-                TestLibrary.TestFramework.LogInformation($"  result: ({string.Join(", ", resultElements)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector64<UInt16>.As{targetType.Name}: {method} failed:"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"   value: ({string.Join(", ", valueElements)})"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"  result: ({string.Join(", ", resultElements)})"
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

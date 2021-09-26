@@ -11,11 +11,11 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
     public sealed class SkipIfDebugAttribute : Attribute, ITestCondition
     {
         public bool IsMet =>
-        #if DEBUG
+#if DEBUG
             false;
-        #else
+#else
             true;
-        #endif
+#endif
 
         public string SkipReason => "Test cannot be run in Debug mode.";
     }

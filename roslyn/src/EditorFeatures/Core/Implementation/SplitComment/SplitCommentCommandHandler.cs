@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.SplitComment
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public SplitCommentCommandHandler(
             ITextUndoHistoryRegistry undoHistoryRegistry,
-            IEditorOperationsFactoryService editorOperationsFactoryService)
+            IEditorOperationsFactoryService editorOperationsFactoryService
+        )
         {
             _undoHistoryRegistry = undoHistoryRegistry;
             _editorOperationsFactoryService = editorOperationsFactoryService;
@@ -47,8 +48,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.SplitComment
 
         public string DisplayName => EditorFeaturesResources.Split_comment;
 
-        public CommandState GetCommandState(ReturnKeyCommandArgs args)
-            => CommandState.Unspecified;
+        public CommandState GetCommandState(ReturnKeyCommandArgs args) => CommandState.Unspecified;
 
         public bool ExecuteCommand(ReturnKeyCommandArgs args, CommandExecutionContext context)
         {
@@ -80,18 +80,38 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.SplitComment
 
             // Quick check.  If the line doesn't contain a comment in it before the caret,
             // then no point in doing any more expensive synchronous work.
-            if (!LineProbablyContainsComment(splitCommentService, new SnapshotPoint(snapshot, position)))
+            if (
+                !LineProbablyContainsComment(
+                    splitCommentService,
+                    new SnapshotPoint(snapshot, position)
+                )
+            )
                 return false;
 
-            using (context.OperationContext.AddScope(allowCancellation: true, EditorFeaturesResources.Split_comment))
+            using (
+                context.OperationContext.AddScope(
+                    allowCancellation: true,
+                    EditorFeaturesResources.Split_comment
+                )
+            )
             {
                 var cancellationToken = context.OperationContext.UserCancellationToken;
-                var result = SplitCommentAsync(textView, document, new SnapshotSpan(snapshot, selectionSpan), cancellationToken).WaitAndGetResult(cancellationToken);
+                var result = SplitCommentAsync(
+                        textView,
+                        document,
+                        new SnapshotSpan(snapshot, selectionSpan),
+                        cancellationToken
+                    )
+                    .WaitAndGetResult(cancellationToken);
                 if (result == null)
                     return false;
 
                 using var transaction = CaretPreservingEditTransaction.TryCreate(
-                    EditorFeaturesResources.Split_comment, textView, _undoHistoryRegistry, _editorOperationsFactoryService);
+                    EditorFeaturesResources.Split_comment,
+                    textView,
+                    _undoHistoryRegistry,
+                    _editorOperationsFactoryService
+                );
 
                 subjectBuffer.Replace(result.Value.replacementSpan, result.Value.replacementText);
 
@@ -100,7 +120,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.SplitComment
             }
         }
 
-        private static bool LineProbablyContainsComment(ISplitCommentService service, SnapshotPoint position)
+        private static bool LineProbablyContainsComment(
+            ISplitCommentService service,
+            SnapshotPoint position
+        )
         {
             var commentStart = service.CommentStart;
             var line = position.GetContainingLine();
@@ -114,10 +137,14 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.SplitComment
             return false;
         }
 
-        private static bool MatchesCommentStart(string commentStart, SnapshotPoint point)
-            => MatchesCommentStart(commentStart, point.GetContainingLine(), point.Position);
+        private static bool MatchesCommentStart(string commentStart, SnapshotPoint point) =>
+            MatchesCommentStart(commentStart, point.GetContainingLine(), point.Position);
 
-        private static bool MatchesCommentStart(string commentStart, ITextSnapshotLine line, int position)
+        private static bool MatchesCommentStart(
+            string commentStart,
+            ITextSnapshotLine line,
+            int position
+        )
         {
             if (position + commentStart.Length > line.End)
                 return false;
@@ -136,14 +163,16 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.SplitComment
             ITextView textView,
             Document document,
             SnapshotSpan selectionSpan,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var options = await document.GetOptionsAsync(cancellationToken).ConfigureAwait(false);
             var enabled = options.GetOption(SplitCommentOptions.Enabled);
             if (!enabled)
                 return null;
 
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
             var syntaxKinds = document.GetRequiredLanguageService<ISyntaxKindsService>();
             var trivia = root.FindTrivia(selectionSpan.Start);
             if (syntaxKinds.SingleLineCommentTrivia != trivia.RawKind)
@@ -169,11 +198,20 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.SplitComment
             var triviaLine = textSnapshot.GetLineFromPosition(trivia.SpanStart);
 
             var replacementSpan = GetReplacementSpan(triviaLine, selectionSpan);
-            var replacementText = GetReplacementText(textView, options, triviaLine, trivia, selectionSpan.Start);
+            var replacementText = GetReplacementText(
+                textView,
+                options,
+                triviaLine,
+                trivia,
+                selectionSpan.Start
+            );
             return (replacementSpan, replacementText);
         }
 
-        private static bool IsFollowedByComment(SnapshotPoint point, ISplitCommentService splitCommentService)
+        private static bool IsFollowedByComment(
+            SnapshotPoint point,
+            ISplitCommentService splitCommentService
+        )
         {
             var line = point.GetContainingLine();
 
@@ -185,7 +223,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.SplitComment
         }
 
         private static string GetReplacementText(
-            ITextView textView, DocumentOptionSet options, ITextSnapshotLine triviaLine, SyntaxTrivia trivia, int position)
+            ITextView textView,
+            DocumentOptionSet options,
+            ITextSnapshotLine triviaLine,
+            SyntaxTrivia trivia,
+            int position
+        )
         {
             // We're inside a comment.  Instead of inserting just a newline here, insert
             // 1. a newline
@@ -195,21 +238,29 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.SplitComment
             // Then, depending on if the current comment starts with whitespace or not, we will insert those same spaces
             // to match.
 
-            var commentStartColumn = triviaLine.GetColumnFromLineOffset(trivia.SpanStart - triviaLine.Start, textView.Options);
+            var commentStartColumn = triviaLine.GetColumnFromLineOffset(
+                trivia.SpanStart - triviaLine.Start,
+                textView.Options
+            );
 
             var useTabs = options.GetOption(FormattingOptions.UseTabs);
             var tabSize = options.GetOption(FormattingOptions.TabSize);
 
             var prefix = GetCommentPrefix(triviaLine.Snapshot, trivia, position);
-            var replacementText = options.GetOption(FormattingOptions.NewLine) +
-                commentStartColumn.CreateIndentationString(useTabs, tabSize) +
-                prefix +
-                GetWhitespaceAfterCommentPrefix(trivia, triviaLine, prefix, position);
+            var replacementText =
+                options.GetOption(FormattingOptions.NewLine)
+                + commentStartColumn.CreateIndentationString(useTabs, tabSize)
+                + prefix
+                + GetWhitespaceAfterCommentPrefix(trivia, triviaLine, prefix, position);
 
             return replacementText;
         }
 
-        private static string GetCommentPrefix(ITextSnapshot snapshot, SyntaxTrivia trivia, int position)
+        private static string GetCommentPrefix(
+            ITextSnapshot snapshot,
+            SyntaxTrivia trivia,
+            int position
+        )
         {
             // Consume as many of the comment start character as we can.  That way if someone has something like
             // `//// $$Goo` then hitting enter will respect that the next line should start with `////`.
@@ -224,7 +275,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.SplitComment
             return snapshot.GetText(Span.FromBounds(triviaPrefixStart, triviaPrefixEnd));
         }
 
-        private static string GetWhitespaceAfterCommentPrefix(SyntaxTrivia trivia, ITextSnapshotLine triviaLine, string commentPrefix, int position)
+        private static string GetWhitespaceAfterCommentPrefix(
+            SyntaxTrivia trivia,
+            ITextSnapshotLine triviaLine,
+            string commentPrefix,
+            int position
+        )
         {
             var startIndex = trivia.SpanStart + commentPrefix.Length;
             var endIndex = startIndex;

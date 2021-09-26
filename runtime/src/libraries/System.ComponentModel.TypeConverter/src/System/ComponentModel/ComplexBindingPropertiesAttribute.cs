@@ -12,9 +12,7 @@ namespace System.ComponentModel
         /// <summary>
         /// Initializes a new instance of the <see cref='System.ComponentModel.ComplexBindingPropertiesAttribute'/> class.
         /// </summary>
-        public ComplexBindingPropertiesAttribute()
-        {
-        }
+        public ComplexBindingPropertiesAttribute() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref='System.ComponentModel.ComplexBindingPropertiesAttribute'/> class.
@@ -49,13 +47,14 @@ namespace System.ComponentModel
         /// Specifies the default value for the <see cref='System.ComponentModel.ComplexBindingPropertiesAttribute'/>, which is <see langword='null'/>. This
         /// <see langword='static '/>field is read-only.
         /// </summary>
-        public static readonly ComplexBindingPropertiesAttribute Default = new ComplexBindingPropertiesAttribute();
+        public static readonly ComplexBindingPropertiesAttribute Default =
+            new ComplexBindingPropertiesAttribute();
 
         public override bool Equals(object obj)
         {
-            return obj is ComplexBindingPropertiesAttribute other &&
-                   other.DataSource == DataSource &&
-                   other.DataMember == DataMember;
+            return obj is ComplexBindingPropertiesAttribute other
+                && other.DataSource == DataSource
+                && other.DataMember == DataMember;
         }
 
         public override int GetHashCode() => base.GetHashCode();

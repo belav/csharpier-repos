@@ -14,10 +14,23 @@ namespace System.IO.Tests
         {
             // Open with read sharing
             string fileName = GetTestFilePath();
-            using (FileStream fs = CreateFileStream(fileName, FileMode.Create, FileAccess.ReadWrite, FileShare.Read))
+            using (
+                FileStream fs = CreateFileStream(
+                    fileName,
+                    FileMode.Create,
+                    FileAccess.ReadWrite,
+                    FileShare.Read
+                )
+            )
             {
-                using (FileStream reader = CreateFileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite | FileShare.Delete))
-                { }
+                using (
+                    FileStream reader = CreateFileStream(
+                        fileName,
+                        FileMode.Open,
+                        FileAccess.Read,
+                        FileShare.ReadWrite | FileShare.Delete
+                    )
+                ) { }
             }
         }
 
@@ -26,16 +39,30 @@ namespace System.IO.Tests
         {
             // create the file
             string fileName = GetTestFilePath();
-            using (CreateFileStream(fileName, FileMode.Create, FileAccess.ReadWrite, FileShare.None))
-            { }
+            using (
+                CreateFileStream(fileName, FileMode.Create, FileAccess.ReadWrite, FileShare.None)
+            ) { }
 
             Assert.True(File.Exists(fileName));
 
             // Open with read sharing
-            using (FileStream fs = CreateFileStream(fileName, FileMode.Open, FileAccess.ReadWrite, FileShare.Read))
+            using (
+                FileStream fs = CreateFileStream(
+                    fileName,
+                    FileMode.Open,
+                    FileAccess.ReadWrite,
+                    FileShare.Read
+                )
+            )
             {
-                using (FileStream reader = CreateFileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite | FileShare.Delete))
-                { }
+                using (
+                    FileStream reader = CreateFileStream(
+                        fileName,
+                        FileMode.Open,
+                        FileAccess.Read,
+                        FileShare.ReadWrite | FileShare.Delete
+                    )
+                ) { }
             }
         }
 
@@ -46,9 +73,24 @@ namespace System.IO.Tests
             string fileName = GetTestFilePath();
 
             // Open without read sharing
-            using (FileStream fs = CreateFileStream(fileName, FileMode.Create, FileAccess.ReadWrite, FileShare.Write | FileShare.Delete))
+            using (
+                FileStream fs = CreateFileStream(
+                    fileName,
+                    FileMode.Create,
+                    FileAccess.ReadWrite,
+                    FileShare.Write | FileShare.Delete
+                )
+            )
             {
-                FSAssert.ThrowsSharingViolation(() => CreateFileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite | FileShare.Delete));
+                FSAssert.ThrowsSharingViolation(
+                    () =>
+                        CreateFileStream(
+                            fileName,
+                            FileMode.Open,
+                            FileAccess.Read,
+                            FileShare.ReadWrite | FileShare.Delete
+                        )
+                );
             }
         }
     }

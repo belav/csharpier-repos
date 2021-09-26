@@ -11,6 +11,7 @@ namespace Microsoft.AspNetCore.DataProtection.Test.Shared
     {
         public bool IsMet => OSVersionUtil.IsWindows8OrLater();
 
-        public string SkipReason { get; } = "Test requires Windows 8 / Windows Server 2012 or higher.";
+        public string SkipReason { get; } =
+            "Test requires Windows 8 / Windows Server 2012 or higher.";
     }
 }

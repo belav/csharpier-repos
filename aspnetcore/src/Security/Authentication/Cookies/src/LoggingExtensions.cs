@@ -15,19 +15,27 @@ namespace Microsoft.Extensions.Logging
             _authenticationSchemeSignedIn = LoggerMessage.Define<string>(
                 eventId: new EventId(10, "AuthenticationSchemeSignedIn"),
                 logLevel: LogLevel.Information,
-                formatString: "AuthenticationScheme: {AuthenticationScheme} signed in.");
+                formatString: "AuthenticationScheme: {AuthenticationScheme} signed in."
+            );
             _authenticationSchemeSignedOut = LoggerMessage.Define<string>(
                 eventId: new EventId(11, "AuthenticationSchemeSignedOut"),
                 logLevel: LogLevel.Information,
-                formatString: "AuthenticationScheme: {AuthenticationScheme} signed out.");
+                formatString: "AuthenticationScheme: {AuthenticationScheme} signed out."
+            );
         }
 
-        public static void AuthenticationSchemeSignedIn(this ILogger logger, string authenticationScheme)
+        public static void AuthenticationSchemeSignedIn(
+            this ILogger logger,
+            string authenticationScheme
+        )
         {
             _authenticationSchemeSignedIn(logger, authenticationScheme, null);
         }
 
-        public static void AuthenticationSchemeSignedOut(this ILogger logger, string authenticationScheme)
+        public static void AuthenticationSchemeSignedOut(
+            this ILogger logger,
+            string authenticationScheme
+        )
         {
             _authenticationSchemeSignedOut(logger, authenticationScheme, null);
         }

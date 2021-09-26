@@ -9,7 +9,8 @@ using Xunit;
 
 namespace AuthSamples.FunctionalTests
 {
-    public class StaticFilesAuthTests : IClassFixture<WebApplicationFactory<StaticFilesAuth.Startup>>
+    public class StaticFilesAuthTests
+        : IClassFixture<WebApplicationFactory<StaticFilesAuth.Startup>>
     {
         public StaticFilesAuthTests(WebApplicationFactory<StaticFilesAuth.Startup> fixture)
         {
@@ -36,7 +37,10 @@ namespace AuthSamples.FunctionalTests
             var content = await response.Content.ReadAsStringAsync();
 
             Assert.Equal(HttpStatusCode.Redirect, response.StatusCode);
-            Assert.Equal("http://localhost/Account/Login?ReturnUrl=%2F" + scenario, response.Headers.Location.ToString());
+            Assert.Equal(
+                "http://localhost/Account/Login?ReturnUrl=%2F" + scenario,
+                response.Headers.Location.ToString()
+            );
         }
     }
 }

@@ -19,10 +19,8 @@ namespace System.Drawing.Imaging
         /// Initializes a new instance of the <see cref='Metafile'/> class from the specified handle and
         /// <see cref='WmfPlaceableFileHeader'/>.
         /// </summary>
-        public Metafile(IntPtr hmetafile, WmfPlaceableFileHeader wmfHeader) :
-            this(hmetafile, wmfHeader, false)
-        {
-        }
+        public Metafile(IntPtr hmetafile, WmfPlaceableFileHeader wmfHeader)
+            : this(hmetafile, wmfHeader, false) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref='Metafile'/> class from the specified stream.
@@ -34,7 +32,9 @@ namespace System.Drawing.Imaging
                 throw new ArgumentNullException(nameof(stream));
             }
 
-            Gdip.CheckStatus(Gdip.GdipCreateMetafileFromStream(new GPStream(stream), out IntPtr metafile));
+            Gdip.CheckStatus(
+                Gdip.GdipCreateMetafileFromStream(new GPStream(stream), out IntPtr metafile)
+            );
             SetNativeImage(metafile);
         }
 
@@ -43,13 +43,16 @@ namespace System.Drawing.Imaging
         /// </summary>
         public Metafile(IntPtr referenceHdc, EmfType emfType, string? description)
         {
-            Gdip.CheckStatus(Gdip.GdipRecordMetafile(
-                referenceHdc,
-                emfType,
-                IntPtr.Zero,
-                MetafileFrameUnit.GdiCompatible,
-                description,
-                out IntPtr metafile));
+            Gdip.CheckStatus(
+                Gdip.GdipRecordMetafile(
+                    referenceHdc,
+                    emfType,
+                    IntPtr.Zero,
+                    MetafileFrameUnit.GdiCompatible,
+                    description,
+                    out IntPtr metafile
+                )
+            );
 
             SetNativeImage(metafile);
         }
@@ -58,29 +61,41 @@ namespace System.Drawing.Imaging
         /// Initializes a new instance of the <see cref='Metafile'/> class from the specified device context, bounded
         /// by the specified rectangle.
         /// </summary>
-        public Metafile(IntPtr referenceHdc, Rectangle frameRect, MetafileFrameUnit frameUnit, EmfType type, string? desc)
+        public Metafile(
+            IntPtr referenceHdc,
+            Rectangle frameRect,
+            MetafileFrameUnit frameUnit,
+            EmfType type,
+            string? desc
+        )
         {
             IntPtr metafile = IntPtr.Zero;
 
             if (frameRect.IsEmpty)
             {
-                Gdip.CheckStatus(Gdip.GdipRecordMetafile(
-                    referenceHdc,
-                    type,
-                    IntPtr.Zero,
-                    MetafileFrameUnit.GdiCompatible,
-                    desc,
-                    out metafile));
+                Gdip.CheckStatus(
+                    Gdip.GdipRecordMetafile(
+                        referenceHdc,
+                        type,
+                        IntPtr.Zero,
+                        MetafileFrameUnit.GdiCompatible,
+                        desc,
+                        out metafile
+                    )
+                );
             }
             else
             {
-                Gdip.CheckStatus(Gdip.GdipRecordMetafileI(
-                    referenceHdc,
-                    type,
-                    ref frameRect,
-                    frameUnit,
-                    desc,
-                    out metafile));
+                Gdip.CheckStatus(
+                    Gdip.GdipRecordMetafileI(
+                        referenceHdc,
+                        type,
+                        ref frameRect,
+                        frameUnit,
+                        desc,
+                        out metafile
+                    )
+                );
             }
 
             SetNativeImage(metafile);
@@ -94,14 +109,17 @@ namespace System.Drawing.Imaging
             // Called in order to emulate exception behavior from .NET Framework related to invalid file paths.
             Path.GetFullPath(fileName);
 
-            Gdip.CheckStatus(Gdip.GdipRecordMetafileFileName(
-                fileName,
-                referenceHdc,
-                type,
-                IntPtr.Zero,
-                MetafileFrameUnit.GdiCompatible,
-                description,
-                out IntPtr metafile));
+            Gdip.CheckStatus(
+                Gdip.GdipRecordMetafileFileName(
+                    fileName,
+                    referenceHdc,
+                    type,
+                    IntPtr.Zero,
+                    MetafileFrameUnit.GdiCompatible,
+                    description,
+                    out IntPtr metafile
+                )
+            );
 
             SetNativeImage(metafile);
         }
@@ -109,7 +127,14 @@ namespace System.Drawing.Imaging
         /// <summary>
         /// Initializes a new instance of the <see cref='Metafile'/> class with the specified filename.
         /// </summary>
-        public Metafile(string fileName, IntPtr referenceHdc, Rectangle frameRect, MetafileFrameUnit frameUnit, EmfType type, string? description)
+        public Metafile(
+            string fileName,
+            IntPtr referenceHdc,
+            Rectangle frameRect,
+            MetafileFrameUnit frameUnit,
+            EmfType type,
+            string? description
+        )
         {
             // Called in order to emulate exception behavior from .NET Framework related to invalid file paths.
             Path.GetFullPath(fileName);
@@ -118,25 +143,31 @@ namespace System.Drawing.Imaging
 
             if (frameRect.IsEmpty)
             {
-                Gdip.CheckStatus(Gdip.GdipRecordMetafileFileName(
-                    fileName,
-                    referenceHdc,
-                    type,
-                    IntPtr.Zero,
-                    frameUnit,
-                    description,
-                    out metafile));
+                Gdip.CheckStatus(
+                    Gdip.GdipRecordMetafileFileName(
+                        fileName,
+                        referenceHdc,
+                        type,
+                        IntPtr.Zero,
+                        frameUnit,
+                        description,
+                        out metafile
+                    )
+                );
             }
             else
             {
-                Gdip.CheckStatus(Gdip.GdipRecordMetafileFileNameI(
-                    fileName,
-                    referenceHdc,
-                    type,
-                    ref frameRect,
-                    frameUnit,
-                    description,
-                    out metafile));
+                Gdip.CheckStatus(
+                    Gdip.GdipRecordMetafileFileNameI(
+                        fileName,
+                        referenceHdc,
+                        type,
+                        ref frameRect,
+                        frameUnit,
+                        description,
+                        out metafile
+                    )
+                );
             }
 
             SetNativeImage(metafile);
@@ -147,63 +178,89 @@ namespace System.Drawing.Imaging
         /// </summary>
         public Metafile(Stream stream, IntPtr referenceHdc, EmfType type, string? description)
         {
-            Gdip.CheckStatus(Gdip.GdipRecordMetafileStream(
-                new GPStream(stream),
-                referenceHdc,
-                type,
-                IntPtr.Zero,
-                MetafileFrameUnit.GdiCompatible,
-                description,
-                out IntPtr metafile));
-
-            SetNativeImage(metafile);
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref='Metafile'/> class with the specified filename.
-        /// </summary>
-        public Metafile(Stream stream, IntPtr referenceHdc, RectangleF frameRect, MetafileFrameUnit frameUnit, EmfType type, string? description)
-        {
-            Gdip.CheckStatus(Gdip.GdipRecordMetafileStream(
-                new GPStream(stream),
-                referenceHdc,
-                type,
-                ref frameRect,
-                frameUnit,
-                description,
-                out IntPtr metafile));
-
-            SetNativeImage(metafile);
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref='Metafile'/> class with the specified filename.
-        /// </summary>
-        public Metafile(Stream stream, IntPtr referenceHdc, Rectangle frameRect, MetafileFrameUnit frameUnit, EmfType type, string? description)
-        {
-            IntPtr metafile = IntPtr.Zero;
-
-            if (frameRect.IsEmpty)
-            {
-                Gdip.CheckStatus(Gdip.GdipRecordMetafileStream(
+            Gdip.CheckStatus(
+                Gdip.GdipRecordMetafileStream(
                     new GPStream(stream),
                     referenceHdc,
                     type,
                     IntPtr.Zero,
-                    frameUnit,
+                    MetafileFrameUnit.GdiCompatible,
                     description,
-                    out metafile));
-            }
-            else
-            {
-                Gdip.CheckStatus(Gdip.GdipRecordMetafileStreamI(
+                    out IntPtr metafile
+                )
+            );
+
+            SetNativeImage(metafile);
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref='Metafile'/> class with the specified filename.
+        /// </summary>
+        public Metafile(
+            Stream stream,
+            IntPtr referenceHdc,
+            RectangleF frameRect,
+            MetafileFrameUnit frameUnit,
+            EmfType type,
+            string? description
+        )
+        {
+            Gdip.CheckStatus(
+                Gdip.GdipRecordMetafileStream(
                     new GPStream(stream),
                     referenceHdc,
                     type,
                     ref frameRect,
                     frameUnit,
                     description,
-                    out metafile));
+                    out IntPtr metafile
+                )
+            );
+
+            SetNativeImage(metafile);
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref='Metafile'/> class with the specified filename.
+        /// </summary>
+        public Metafile(
+            Stream stream,
+            IntPtr referenceHdc,
+            Rectangle frameRect,
+            MetafileFrameUnit frameUnit,
+            EmfType type,
+            string? description
+        )
+        {
+            IntPtr metafile = IntPtr.Zero;
+
+            if (frameRect.IsEmpty)
+            {
+                Gdip.CheckStatus(
+                    Gdip.GdipRecordMetafileStream(
+                        new GPStream(stream),
+                        referenceHdc,
+                        type,
+                        IntPtr.Zero,
+                        frameUnit,
+                        description,
+                        out metafile
+                    )
+                );
+            }
+            else
+            {
+                Gdip.CheckStatus(
+                    Gdip.GdipRecordMetafileStreamI(
+                        new GPStream(stream),
+                        referenceHdc,
+                        type,
+                        ref frameRect,
+                        frameUnit,
+                        description,
+                        out metafile
+                    )
+                );
             }
 
             SetNativeImage(metafile);
@@ -212,12 +269,12 @@ namespace System.Drawing.Imaging
         /// <summary>
         /// Returns the <see cref='MetafileHeader'/> associated with the specified <see cref='Metafile'/>.
         /// </summary>
-        public static MetafileHeader GetMetafileHeader(IntPtr hmetafile, WmfPlaceableFileHeader wmfHeader)
+        public static MetafileHeader GetMetafileHeader(
+            IntPtr hmetafile,
+            WmfPlaceableFileHeader wmfHeader
+        )
         {
-            MetafileHeader header = new MetafileHeader
-            {
-                wmf = new MetafileHeaderWmf()
-            };
+            MetafileHeader header = new MetafileHeader { wmf = new MetafileHeaderWmf() };
 
             Gdip.CheckStatus(Gdip.GdipGetMetafileHeaderFromWmf(hmetafile, wmfHeader, header.wmf));
             return header;
@@ -228,10 +285,7 @@ namespace System.Drawing.Imaging
         /// </summary>
         public static MetafileHeader GetMetafileHeader(IntPtr henhmetafile)
         {
-            MetafileHeader header = new MetafileHeader
-            {
-                emf = new MetafileHeaderEmf()
-            };
+            MetafileHeader header = new MetafileHeader { emf = new MetafileHeaderEmf() };
 
             Gdip.CheckStatus(Gdip.GdipGetMetafileHeaderFromEmf(henhmetafile, header.emf));
             return header;
@@ -259,20 +313,26 @@ namespace System.Drawing.Imaging
 
                 MetafileType metafileType = (MetafileType)type[0];
 
-                if (metafileType == MetafileType.Wmf ||
-                    metafileType == MetafileType.WmfPlaceable)
+                if (metafileType == MetafileType.Wmf || metafileType == MetafileType.WmfPlaceable)
                 {
                     // WMF header
-                    header.wmf = (MetafileHeaderWmf)Marshal.PtrToStructure(memory, typeof(MetafileHeaderWmf))!;
+                    header.wmf = (MetafileHeaderWmf)Marshal.PtrToStructure(
+                        memory,
+                        typeof(MetafileHeaderWmf)
+                    )!;
                     header.emf = null;
                 }
                 else
                 {
                     // EMF header
                     header.wmf = null;
-                    header.emf = (MetafileHeaderEmf)Marshal.PtrToStructure(memory, typeof(MetafileHeaderEmf))!;
+                    header.emf = (MetafileHeaderEmf)Marshal.PtrToStructure(
+                        memory,
+                        typeof(MetafileHeaderEmf)
+                    )!;
                 }
             }
+
             finally
             {
                 Marshal.FreeHGlobal(memory);
@@ -292,7 +352,9 @@ namespace System.Drawing.Imaging
 
             try
             {
-                Gdip.CheckStatus(Gdip.GdipGetMetafileHeaderFromStream(new GPStream(stream), memory));
+                Gdip.CheckStatus(
+                    Gdip.GdipGetMetafileHeaderFromStream(new GPStream(stream), memory)
+                );
 
                 int[] type = new int[] { 0 };
 
@@ -302,20 +364,26 @@ namespace System.Drawing.Imaging
 
                 header = new MetafileHeader();
 
-                if (metafileType == MetafileType.Wmf ||
-                    metafileType == MetafileType.WmfPlaceable)
+                if (metafileType == MetafileType.Wmf || metafileType == MetafileType.WmfPlaceable)
                 {
                     // WMF header
-                    header.wmf = (MetafileHeaderWmf)Marshal.PtrToStructure(memory, typeof(MetafileHeaderWmf))!;
+                    header.wmf = (MetafileHeaderWmf)Marshal.PtrToStructure(
+                        memory,
+                        typeof(MetafileHeaderWmf)
+                    )!;
                     header.emf = null;
                 }
                 else
                 {
                     // EMF header
                     header.wmf = null;
-                    header.emf = (MetafileHeaderEmf)Marshal.PtrToStructure(memory, typeof(MetafileHeaderEmf))!;
+                    header.emf = (MetafileHeaderEmf)Marshal.PtrToStructure(
+                        memory,
+                        typeof(MetafileHeaderEmf)
+                    )!;
                 }
             }
+
             finally
             {
                 Marshal.FreeHGlobal(memory);
@@ -335,7 +403,9 @@ namespace System.Drawing.Imaging
 
             try
             {
-                Gdip.CheckStatus(Gdip.GdipGetMetafileHeaderFromMetafile(new HandleRef(this, nativeImage), memory));
+                Gdip.CheckStatus(
+                    Gdip.GdipGetMetafileHeaderFromMetafile(new HandleRef(this, nativeImage), memory)
+                );
 
                 int[] type = new int[] { 0 };
 
@@ -345,20 +415,26 @@ namespace System.Drawing.Imaging
 
                 header = new MetafileHeader();
 
-                if (metafileType == MetafileType.Wmf ||
-                    metafileType == MetafileType.WmfPlaceable)
+                if (metafileType == MetafileType.Wmf || metafileType == MetafileType.WmfPlaceable)
                 {
                     // WMF header
-                    header.wmf = (MetafileHeaderWmf)Marshal.PtrToStructure(memory, typeof(MetafileHeaderWmf))!;
+                    header.wmf = (MetafileHeaderWmf)Marshal.PtrToStructure(
+                        memory,
+                        typeof(MetafileHeaderWmf)
+                    )!;
                     header.emf = null;
                 }
                 else
                 {
                     // EMF header
                     header.wmf = null;
-                    header.emf = (MetafileHeaderEmf)Marshal.PtrToStructure(memory, typeof(MetafileHeaderEmf))!;
+                    header.emf = (MetafileHeaderEmf)Marshal.PtrToStructure(
+                        memory,
+                        typeof(MetafileHeaderEmf)
+                    )!;
                 }
             }
+
             finally
             {
                 Marshal.FreeHGlobal(memory);
@@ -372,7 +448,9 @@ namespace System.Drawing.Imaging
         /// </summary>
         public IntPtr GetHenhmetafile()
         {
-            Gdip.CheckStatus(Gdip.GdipGetHemfFromMetafile(new HandleRef(this, nativeImage), out IntPtr hEmf));
+            Gdip.CheckStatus(
+                Gdip.GdipGetHemfFromMetafile(new HandleRef(this, nativeImage), out IntPtr hEmf)
+            );
             return hEmf;
         }
     }

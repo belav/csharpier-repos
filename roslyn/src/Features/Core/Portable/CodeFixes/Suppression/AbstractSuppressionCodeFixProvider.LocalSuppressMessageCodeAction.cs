@@ -26,8 +26,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                 INamedTypeSymbol suppressMessageAttribute,
                 SyntaxNode targetNode,
                 Document document,
-                Diagnostic diagnostic)
-                : base(fixer, FeaturesResources.in_Source_attribute)
+                Diagnostic diagnostic
+            ) : base(fixer, FeaturesResources.in_Source_attribute)
             {
                 _fixer = fixer;
                 _targetSymbol = targetSymbol;
@@ -37,11 +37,18 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                 _diagnostic = diagnostic;
             }
 
-            protected override async Task<Document> GetChangedDocumentAsync(CancellationToken cancellationToken)
+            protected override async Task<Document> GetChangedDocumentAsync(
+                CancellationToken cancellationToken
+            )
             {
                 var newTargetNode = _fixer.AddLocalSuppressMessageAttribute(
-                    _targetNode, _targetSymbol, _suppressMessageAttribute, _diagnostic);
-                var root = await _document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+                    _targetNode,
+                    _targetSymbol,
+                    _suppressMessageAttribute,
+                    _diagnostic
+                );
+                var root = await _document.GetSyntaxRootAsync(cancellationToken)
+                    .ConfigureAwait(false);
                 var newRoot = root.ReplaceNode<SyntaxNode>(_targetNode, newTargetNode);
                 return _document.WithSyntaxRoot(newRoot);
             }

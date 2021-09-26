@@ -25,10 +25,14 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         public CompiledPageRouteModelProvider(
             ApplicationPartManager applicationManager,
             IOptions<RazorPagesOptions> pagesOptionsAccessor,
-            ILogger<CompiledPageRouteModelProvider> logger)
+            ILogger<CompiledPageRouteModelProvider> logger
+        )
         {
-            _applicationManager = applicationManager ?? throw new ArgumentNullException(nameof(applicationManager));
-            _pagesOptions = pagesOptionsAccessor?.Value ?? throw new ArgumentNullException(nameof(pagesOptionsAccessor));
+            _applicationManager =
+                applicationManager ?? throw new ArgumentNullException(nameof(applicationManager));
+            _pagesOptions =
+                pagesOptionsAccessor?.Value
+                ?? throw new ArgumentNullException(nameof(pagesOptionsAccessor));
             _routeModelFactory = new PageRouteModelFactory(_pagesOptions, logger);
         }
 
@@ -52,7 +56,9 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             }
         }
 
-        private IEnumerable<CompiledViewDescriptor> GetViewDescriptors(ApplicationPartManager applicationManager)
+        private IEnumerable<CompiledViewDescriptor> GetViewDescriptors(
+            ApplicationPartManager applicationManager
+        )
         {
             if (applicationManager == null)
             {
@@ -113,7 +119,10 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
                 // only want to allow a page to be associated with the area route.
                 if (relativePath.StartsWith(areaRootDirectory, StringComparison.OrdinalIgnoreCase))
                 {
-                    routeModel = _routeModelFactory.CreateAreaRouteModel(relativePath, routeTemplate);
+                    routeModel = _routeModelFactory.CreateAreaRouteModel(
+                        relativePath,
+                        routeTemplate
+                    );
                 }
                 else if (relativePath.StartsWith(rootDirectory, StringComparison.OrdinalIgnoreCase))
                 {
@@ -131,10 +140,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         {
             if (viewDescriptor.Item != null)
             {
-                return viewDescriptor.Item.Metadata
-                    .OfType<RazorCompiledItemMetadataAttribute>()
-                    .FirstOrDefault(f => f.Key == RouteTemplateKey)
-                    ?.Value;
+                return viewDescriptor.Item.Metadata.OfType<RazorCompiledItemMetadataAttribute>()
+                    .FirstOrDefault(f => f.Key == RouteTemplateKey)?.Value;
             }
 
             return null;

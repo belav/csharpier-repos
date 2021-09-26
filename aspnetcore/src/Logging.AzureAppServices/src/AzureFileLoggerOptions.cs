@@ -9,7 +9,7 @@ namespace Microsoft.Extensions.Logging.AzureAppServices
     /// <summary>
     /// Options for Azure diagnostics file logging.
     /// </summary>
-    public class AzureFileLoggerOptions: BatchingLoggerOptions
+    public class AzureFileLoggerOptions : BatchingLoggerOptions
     {
         private int? _fileSizeLimit = 10 * 1024 * 1024;
         private int? _retainedFileCountLimit = 2;
@@ -27,7 +27,10 @@ namespace Microsoft.Extensions.Logging.AzureAppServices
             {
                 if (value <= 0)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(value), $"{nameof(FileSizeLimit)} must be positive.");
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        $"{nameof(FileSizeLimit)} must be positive."
+                    );
                 }
                 _fileSizeLimit = value;
             }
@@ -44,7 +47,10 @@ namespace Microsoft.Extensions.Logging.AzureAppServices
             {
                 if (value <= 0)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(value), $"{nameof(RetainedFileCountLimit)} must be positive.");
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        $"{nameof(RetainedFileCountLimit)} must be positive."
+                    );
                 }
                 _retainedFileCountLimit = value;
             }

@@ -20,6 +20,7 @@ internal static partial class Interop
             BCRYPT_PBKDF2_ALG_HANDLE = 0x00000331,
         }
 
-        internal static bool PseudoHandlesSupported { get; } = OperatingSystem.IsWindowsVersionAtLeast(10, 0, 0);
+        internal static bool PseudoHandlesSupported { get; } =
+            OperatingSystem.IsWindowsVersionAtLeast(10, 0, 0);
     }
 }

@@ -28,39 +28,62 @@ namespace Microsoft.CodeAnalysis.Rebuild
         private VisualBasicCompilationFactory(
             string assemblyFileName,
             CompilationOptionsReader optionsReader,
-            VisualBasicCompilationOptions compilationOptions)
-            : base(assemblyFileName, optionsReader)
+            VisualBasicCompilationOptions compilationOptions
+        ) : base(assemblyFileName, optionsReader)
         {
             CompilationOptions = compilationOptions;
         }
 
-        internal static new VisualBasicCompilationFactory Create(string assemblyFileName, CompilationOptionsReader optionsReader)
+        internal static new VisualBasicCompilationFactory Create(
+            string assemblyFileName,
+            CompilationOptionsReader optionsReader
+        )
         {
             Debug.Assert(optionsReader.GetLanguageName() == LanguageNames.VisualBasic);
-            var compilationOptions = CreateVisualBasicCompilationOptions(assemblyFileName, optionsReader);
-            return new VisualBasicCompilationFactory(assemblyFileName, optionsReader, compilationOptions);
+            var compilationOptions = CreateVisualBasicCompilationOptions(
+                assemblyFileName,
+                optionsReader
+            );
+            return new VisualBasicCompilationFactory(
+                assemblyFileName,
+                optionsReader,
+                compilationOptions
+            );
         }
 
-        public override SyntaxTree CreateSyntaxTree(string filePath, SourceText sourceText)
-            => VisualBasicSyntaxTree.ParseText(sourceText, ParseOptions, filePath);
+        public override SyntaxTree CreateSyntaxTree(string filePath, SourceText sourceText) =>
+            VisualBasicSyntaxTree.ParseText(sourceText, ParseOptions, filePath);
 
         public override Compilation CreateCompilation(
             ImmutableArray<SyntaxTree> syntaxTrees,
-            ImmutableArray<MetadataReference> metadataReferences)
-            => VisualBasicCompilation.Create(
+            ImmutableArray<MetadataReference> metadataReferences
+        ) =>
+            VisualBasicCompilation.Create(
                 Path.GetFileNameWithoutExtension(AssemblyFileName),
                 syntaxTrees: syntaxTrees,
                 references: metadataReferences,
-                options: CompilationOptions);
+                options: CompilationOptions
+            );
 
-        private static VisualBasicCompilationOptions CreateVisualBasicCompilationOptions(string assemblyFileName, CompilationOptionsReader optionsReader)
+        private static VisualBasicCompilationOptions CreateVisualBasicCompilationOptions(
+            string assemblyFileName,
+            CompilationOptionsReader optionsReader
+        )
         {
             var pdbOptions = optionsReader.GetMetadataCompilationOptions();
 
-            var langVersionString = pdbOptions.GetUniqueOption(CompilationOptionNames.LanguageVersion);
-            pdbOptions.TryGetUniqueOption(CompilationOptionNames.Optimization, out var optimization);
+            var langVersionString = pdbOptions.GetUniqueOption(
+                CompilationOptionNames.LanguageVersion
+            );
+            pdbOptions.TryGetUniqueOption(
+                CompilationOptionNames.Optimization,
+                out var optimization
+            );
             pdbOptions.TryGetUniqueOption(CompilationOptionNames.Platform, out var platform);
-            pdbOptions.TryGetUniqueOption(CompilationOptionNames.GlobalNamespaces, out var globalNamespacesString);
+            pdbOptions.TryGetUniqueOption(
+                CompilationOptionNames.GlobalNamespaces,
+                out var globalNamespacesString
+            );
 
             IEnumerable<GlobalImport>? globalImports = null;
             if (!string.IsNullOrEmpty(globalNamespacesString))
@@ -74,7 +97,11 @@ namespace Microsoft.CodeAnalysis.Rebuild
             IReadOnlyDictionary<string, object>? preprocessorSymbols = null;
             if (pdbOptions.OptionToString(CompilationOptionNames.Define) is string defineString)
             {
-                preprocessorSymbols = VisualBasicCommandLineParser.ParseConditionalCompilationSymbols(defineString, out var diagnostics);
+                preprocessorSymbols =
+                    VisualBasicCommandLineParser.ParseConditionalCompilationSymbols(
+                        defineString,
+                        out var diagnostics
+                    );
                 var diagnostic = diagnostics?.FirstOrDefault(x => x.IsUnsuppressedError);
                 if (diagnostic is object)
                 {
@@ -82,27 +109,31 @@ namespace Microsoft.CodeAnalysis.Rebuild
                 }
             }
 
-            var parseOptions = VisualBasicParseOptions
-                .Default
-                .WithLanguageVersion(langVersion)
+            var parseOptions = VisualBasicParseOptions.Default.WithLanguageVersion(langVersion)
                 .WithPreprocessorSymbols(preprocessorSymbols.ToImmutableArrayOrEmpty());
 
             var (optimizationLevel, plus) = GetOptimizationLevel(optimization);
             var isChecked = pdbOptions.OptionToBool(CompilationOptionNames.Checked) ?? true;
-            var embedVBRuntime = pdbOptions.OptionToBool(CompilationOptionNames.EmbedRuntime) ?? false;
+            var embedVBRuntime =
+                pdbOptions.OptionToBool(CompilationOptionNames.EmbedRuntime) ?? false;
             var rootNamespace = pdbOptions.OptionToString(CompilationOptionNames.RootNamespace);
 
             var compilationOptions = new VisualBasicCompilationOptions(
-                pdbOptions.OptionToEnum<OutputKind>(CompilationOptionNames.OutputKind) ?? OutputKind.DynamicallyLinkedLibrary,
+                pdbOptions.OptionToEnum<OutputKind>(CompilationOptionNames.OutputKind)
+                    ?? OutputKind.DynamicallyLinkedLibrary,
                 moduleName: assemblyFileName,
                 mainTypeName: optionsReader.GetMainTypeName(),
                 scriptClassName: "Script",
                 globalImports: globalImports,
                 rootNamespace: rootNamespace,
-                optionStrict: pdbOptions.OptionToEnum<OptionStrict>(CompilationOptionNames.OptionStrict) ?? OptionStrict.Off,
+                optionStrict: pdbOptions.OptionToEnum<OptionStrict>(
+                    CompilationOptionNames.OptionStrict
+                ) ?? OptionStrict.Off,
                 optionInfer: pdbOptions.OptionToBool(CompilationOptionNames.OptionInfer) ?? false,
-                optionExplicit: pdbOptions.OptionToBool(CompilationOptionNames.OptionExplicit) ?? false,
-                optionCompareText: pdbOptions.OptionToBool(CompilationOptionNames.OptionCompareText) ?? false,
+                optionExplicit: pdbOptions.OptionToBool(CompilationOptionNames.OptionExplicit)
+                    ?? false,
+                optionCompareText: pdbOptions.OptionToBool(CompilationOptionNames.OptionCompareText)
+                    ?? false,
                 parseOptions: parseOptions,
                 embedVbCoreRuntime: embedVBRuntime,
                 optimizationLevel: optimizationLevel,
@@ -123,7 +154,8 @@ namespace Microsoft.CodeAnalysis.Rebuild
                 strongNameProvider: null,
                 publicSign: false,
                 reportSuppressedDiagnostics: false,
-                metadataImportOptions: MetadataImportOptions.Public);
+                metadataImportOptions: MetadataImportOptions.Public
+            );
             compilationOptions.DebugPlusMode = plus;
 
             return compilationOptions;

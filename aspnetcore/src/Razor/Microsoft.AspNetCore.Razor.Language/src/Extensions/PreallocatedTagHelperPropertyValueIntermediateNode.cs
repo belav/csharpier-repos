@@ -7,7 +7,8 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Razor.Language.Extensions
 {
-    internal sealed class PreallocatedTagHelperPropertyValueIntermediateNode : ExtensionIntermediateNode
+    internal sealed class PreallocatedTagHelperPropertyValueIntermediateNode
+        : ExtensionIntermediateNode
     {
         public override IntermediateNodeCollection Children => IntermediateNodeCollection.ReadOnly;
 

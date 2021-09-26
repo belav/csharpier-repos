@@ -37,10 +37,7 @@ namespace Microsoft.AspNetCore.Testing
 
         public string SkipReason
         {
-            get
-            {
-                return $"This test is skipped on helix";
-            }
+            get { return $"This test is skipped on helix"; }
         }
 
         private bool ShouldSkip()
@@ -52,7 +49,10 @@ namespace Microsoft.AspNetCore.Testing
 
             var targetQueue = GetTargetHelixQueue().ToLowerInvariant();
 
-            if (Queues.Contains("All.OSX") && targetQueue.StartsWith("osx", StringComparison.OrdinalIgnoreCase))
+            if (
+                Queues.Contains("All.OSX")
+                && targetQueue.StartsWith("osx", StringComparison.OrdinalIgnoreCase)
+            )
             {
                 return true;
             }

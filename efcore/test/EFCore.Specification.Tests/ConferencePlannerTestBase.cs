@@ -47,7 +47,8 @@ namespace Microsoft.EntityFrameworkCore
 
                     Assert.Equal(21, sessions.Count);
                     Assert.All(sessions, s => Assert.NotEmpty(s.Title));
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -64,7 +65,8 @@ namespace Microsoft.EntityFrameworkCore
                     Assert.All(sessions, s => Assert.NotEmpty(s.Abstract));
                     Assert.All(sessions, s => Assert.NotEmpty(s.Speakers));
                     Assert.All(sessions, s => Assert.NotNull(s.Track));
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -82,7 +84,8 @@ namespace Microsoft.EntityFrameworkCore
                             FirstName = "",
                             LastName = "Discord",
                             UserName = "Discord!"
-                        });
+                        }
+                    );
 
                     Assert.NotEqual(default, result.Id);
                     Assert.Equal("discord@sample.com", result.EmailAddress);
@@ -90,7 +93,8 @@ namespace Microsoft.EntityFrameworkCore
                     Assert.Equal("Discord", result.LastName);
                     Assert.Equal("Discord!", result.UserName);
                     Assert.Null(result.Sessions);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -108,10 +112,12 @@ namespace Microsoft.EntityFrameworkCore
                             FirstName = "Pinkie",
                             LastName = "Pie",
                             UserName = "Pinks"
-                        });
+                        }
+                    );
 
                     Assert.Null(result);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -124,12 +130,12 @@ namespace Microsoft.EntityFrameworkCore
 
                     var pinky = context.Attendees.Single(a => a.UserName == "Pinks");
 
-                    var pinkySessions = context.Sessions
-                        .AsNoTracking()
+                    var pinkySessions = context.Sessions.AsNoTracking()
                         .Where(s => s.SessionAttendees.Any(e => e.Attendee.UserName == "Pinks"))
                         .ToList();
 
-                    var session = context.Sessions.AsNoTracking().Single(e => e.Title == "Hidden gems in .NET Core 3");
+                    var session = context.Sessions.AsNoTracking()
+                        .Single(e => e.Title == "Hidden gems in .NET Core 3");
 
                     Assert.Equal(21, pinkySessions.Count);
 
@@ -150,13 +156,14 @@ namespace Microsoft.EntityFrameworkCore
 
                     Assert.Equal(
                         result.Sessions.Select(r => r.Id).OrderBy(i => i).ToList(),
-                        context.Sessions
-                            .AsNoTracking()
+                        context.Sessions.AsNoTracking()
                             .Where(s => s.SessionAttendees.Any(e => e.Attendee.UserName == "Pinks"))
                             .Select(s => s.Id)
                             .OrderBy(i => i)
-                            .ToList());
-                });
+                            .ToList()
+                    );
+                }
+            );
         }
 
         [ConditionalFact]
@@ -170,7 +177,8 @@ namespace Microsoft.EntityFrameworkCore
                     var result = (string)await controller.AddSession("Pinks", -777);
 
                     Assert.Equal("No session", result);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -181,12 +189,14 @@ namespace Microsoft.EntityFrameworkCore
                 {
                     var controller = new AttendeesController(context);
 
-                    var session = context.Sessions.AsNoTracking().Single(e => e.Title == "Hidden gems in .NET Core 3");
+                    var session = context.Sessions.AsNoTracking()
+                        .Single(e => e.Title == "Hidden gems in .NET Core 3");
 
                     var result = (string)await controller.AddSession("The Stig", session.Id);
 
                     Assert.Equal("No attendee", result);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -197,8 +207,7 @@ namespace Microsoft.EntityFrameworkCore
                 {
                     var controller = new AttendeesController(context);
 
-                    var beforeRemove = context.Sessions
-                        .AsNoTracking()
+                    var beforeRemove = context.Sessions.AsNoTracking()
                         .Where(s => s.SessionAttendees.Any(e => e.Attendee.UserName == "Pinks"))
                         .OrderBy(e => e.Id)
                         .Select(e => e.Id)
@@ -211,8 +220,7 @@ namespace Microsoft.EntityFrameworkCore
 
                     Assert.Equal("Success", result);
 
-                    var afterRemove = context.Sessions
-                        .AsNoTracking()
+                    var afterRemove = context.Sessions.AsNoTracking()
                         .Where(s => s.SessionAttendees.Any(e => e.Attendee.UserName == "Pinks"))
                         .OrderBy(e => e.Id)
                         .Select(e => e.Id)
@@ -221,7 +229,8 @@ namespace Microsoft.EntityFrameworkCore
                     Assert.Equal(20, afterRemove.Count);
                     Assert.DoesNotContain(sessionId, afterRemove);
                     Assert.All(afterRemove, s => Assert.Contains(s, beforeRemove));
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -235,7 +244,8 @@ namespace Microsoft.EntityFrameworkCore
                     var result = await controller.RemoveSession("Pinks", -777);
 
                     Assert.Equal("No session", result);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -246,12 +256,14 @@ namespace Microsoft.EntityFrameworkCore
                 {
                     var controller = new AttendeesController(context);
 
-                    var session = context.Sessions.AsNoTracking().Single(e => e.Title == "Hidden gems in .NET Core 3");
+                    var session = context.Sessions.AsNoTracking()
+                        .Single(e => e.Title == "Hidden gems in .NET Core 3");
 
                     var result = await controller.RemoveSession("The Stig", session.Id);
 
                     Assert.Equal("No attendee", result);
-                });
+                }
+            );
         }
 
         protected class AttendeesController
@@ -265,8 +277,7 @@ namespace Microsoft.EntityFrameworkCore
 
             public async Task<AttendeeResponse> Get(string username)
             {
-                var attendee = await _db.Attendees
-                    .Include(a => a.SessionsAttendees)
+                var attendee = await _db.Attendees.Include(a => a.SessionsAttendees)
                     .ThenInclude(sa => sa.Session)
                     .SingleOrDefaultAsync(a => a.UserName == username);
 
@@ -286,8 +297,7 @@ namespace Microsoft.EntityFrameworkCore
 
             public async Task<AttendeeResponse> Post(Attendee input)
             {
-                var existingAttendee = await _db.Attendees
-                    .Where(a => a.UserName == input.UserName)
+                var existingAttendee = await _db.Attendees.Where(a => a.UserName == input.UserName)
                     .FirstOrDefaultAsync();
 
                 if (existingAttendee != null)
@@ -311,8 +321,7 @@ namespace Microsoft.EntityFrameworkCore
 
             public async Task<object> AddSession(string username, int sessionId)
             {
-                var attendee = await _db.Attendees
-                    .Include(a => a.SessionsAttendees)
+                var attendee = await _db.Attendees.Include(a => a.SessionsAttendees)
                     .ThenInclude(sa => sa.Session)
                     .SingleOrDefaultAsync(a => a.UserName == username);
 
@@ -329,7 +338,8 @@ namespace Microsoft.EntityFrameworkCore
                 }
 
                 attendee.SessionsAttendees.Add(
-                    new SessionAttendee { AttendeeId = attendee.Id, SessionId = sessionId });
+                    new SessionAttendee { AttendeeId = attendee.Id, SessionId = sessionId }
+                );
 
                 await _db.SaveChangesAsync();
 
@@ -338,8 +348,7 @@ namespace Microsoft.EntityFrameworkCore
 
             public async Task<string> RemoveSession(string username, int sessionId)
             {
-                var attendee = await _db.Attendees
-                    .Include(a => a.SessionsAttendees)
+                var attendee = await _db.Attendees.Include(a => a.SessionsAttendees)
                     .SingleOrDefaultAsync(a => a.UserName == username);
 
                 if (attendee == null)
@@ -354,7 +363,9 @@ namespace Microsoft.EntityFrameworkCore
                     return "No session";
                 }
 
-                var sessionAttendee = attendee.SessionsAttendees.FirstOrDefault(sa => sa.SessionId == sessionId);
+                var sessionAttendee = attendee.SessionsAttendees.FirstOrDefault(
+                    sa => sa.SessionId == sessionId
+                );
                 attendee.SessionsAttendees.Remove(sessionAttendee);
 
                 await _db.SaveChangesAsync();
@@ -370,20 +381,24 @@ namespace Microsoft.EntityFrameworkCore
         public virtual async Task SearchController_Search(
             string searchTerm,
             int totalCount,
-            int sessionCount)
+            int sessionCount
+        )
         {
             await ExecuteWithStrategyInTransactionAsync(
                 async context =>
                 {
                     var controller = new SearchController(context);
 
-                    var results = await controller.Search(
-                        new SearchTerm { Query = searchTerm });
+                    var results = await controller.Search(new SearchTerm { Query = searchTerm });
 
                     Assert.Equal(totalCount, results.Count);
 
-                    var sessions = results.Where(r => r.Type == SearchResultType.Session).Select(r => r.Session).ToList();
-                    var speakers = results.Where(r => r.Type == SearchResultType.Speaker).Select(r => r.Speaker).ToList();
+                    var sessions = results.Where(r => r.Type == SearchResultType.Session)
+                        .Select(r => r.Session)
+                        .ToList();
+                    var speakers = results.Where(r => r.Type == SearchResultType.Speaker)
+                        .Select(r => r.Speaker)
+                        .ToList();
 
                     Assert.Equal(sessionCount, sessions.Count);
                     Assert.Equal(totalCount - sessionCount, speakers.Count);
@@ -394,7 +409,8 @@ namespace Microsoft.EntityFrameworkCore
 
                     Assert.All(speakers, s => Assert.NotEqual(default, s.Id));
                     Assert.All(speakers, s => Assert.NotEmpty(s.Sessions));
-                });
+                }
+            );
         }
 
         protected class SearchController
@@ -409,30 +425,40 @@ namespace Microsoft.EntityFrameworkCore
             public async Task<List<SearchResult>> Search(SearchTerm term)
             {
                 var query = term.Query;
-                var sessionResults = await _db.Sessions
-                    .Include(s => s.Track)
+                var sessionResults = await _db.Sessions.Include(s => s.Track)
                     .Include(s => s.SessionSpeakers)
                     .ThenInclude(ss => ss.Speaker)
-                    .Where(
-                        s =>
-                            s.Title.Contains(query) || s.Track.Name.Contains(query)
-                    )
+                    .Where(s => s.Title.Contains(query) || s.Track.Name.Contains(query))
                     .ToListAsync();
 
-                var speakerResults = await _db.Speakers
-                    .Include(s => s.SessionSpeakers)
+                var speakerResults = await _db.Speakers.Include(s => s.SessionSpeakers)
                     .ThenInclude(ss => ss.Session)
                     .Where(
                         s =>
-                            s.Name.Contains(query) || s.Bio.Contains(query) || s.WebSite.Contains(query)
+                            s.Name.Contains(query)
+                            || s.Bio.Contains(query)
+                            || s.WebSite.Contains(query)
                     )
                     .ToListAsync();
 
                 var results = sessionResults.Select(
-                        session => new SearchResult { Type = SearchResultType.Session, Session = session.MapSessionResponse() })
+                        session =>
+                            new SearchResult
+                            {
+                                Type = SearchResultType.Session,
+                                Session = session.MapSessionResponse()
+                            }
+                    )
                     .Concat(
                         speakerResults.Select(
-                            speaker => new SearchResult { Type = SearchResultType.Speaker, Speaker = speaker.MapSpeakerResponse() }));
+                            speaker =>
+                                new SearchResult
+                                {
+                                    Type = SearchResultType.Speaker,
+                                    Speaker = speaker.MapSpeakerResponse()
+                                }
+                        )
+                    );
 
                 return results.ToList();
             }
@@ -453,7 +479,8 @@ namespace Microsoft.EntityFrameworkCore
                     Assert.All(results, s => Assert.NotEqual(default, s.Id));
                     Assert.All(results, s => Assert.NotEmpty(s.Speakers));
                     Assert.All(results, s => Assert.NotNull(s.Track));
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -462,7 +489,8 @@ namespace Microsoft.EntityFrameworkCore
             await ExecuteWithStrategyInTransactionAsync(
                 async context =>
                 {
-                    var session = context.Sessions.AsNoTracking().Single(e => e.Title.StartsWith("C# and Rust: combining "));
+                    var session = context.Sessions.AsNoTracking()
+                        .Single(e => e.Title.StartsWith("C# and Rust: combining "));
 
                     var controller = new SessionsController(context);
 
@@ -471,7 +499,8 @@ namespace Microsoft.EntityFrameworkCore
                     Assert.Equal(session.Id, result.Id);
                     Assert.NotEmpty(result.Speakers);
                     Assert.NotNull(result.Track);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -485,7 +514,8 @@ namespace Microsoft.EntityFrameworkCore
                     var result = await controller.Get(-777);
 
                     Assert.Null(result);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -506,15 +536,18 @@ namespace Microsoft.EntityFrameworkCore
                             StartTime = DateTimeOffset.Now,
                             EndTime = DateTimeOffset.Now.AddHours(1),
                             TrackId = track.Id
-                        });
+                        }
+                    );
 
-                    var newSession = context.Sessions.AsNoTracking().Single(e => e.Title == "Pandas!");
+                    var newSession = context.Sessions.AsNoTracking()
+                        .Single(e => e.Title == "Pandas!");
 
                     Assert.Equal(newSession.Id, result.Id);
                     Assert.Null(result.Speakers);
                     Assert.NotNull(result.Track);
                     Assert.Equal(track.Id, result.Track.Id);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -523,7 +556,8 @@ namespace Microsoft.EntityFrameworkCore
             await ExecuteWithStrategyInTransactionAsync(
                 async context =>
                 {
-                    var session = context.Sessions.AsNoTracking().Single(e => e.Title.StartsWith("C# and Rust: combining "));
+                    var session = context.Sessions.AsNoTracking()
+                        .Single(e => e.Title.StartsWith("C# and Rust: combining "));
 
                     var controller = new SessionsController(context);
 
@@ -537,15 +571,18 @@ namespace Microsoft.EntityFrameworkCore
                             StartTime = session.StartTime,
                             EndTime = session.EndTime,
                             TrackId = session.TrackId
-                        });
+                        }
+                    );
 
                     Assert.Equal("Success", result);
 
-                    var updatedSession = context.Sessions.AsNoTracking().Single(e => e.Id == session.Id);
+                    var updatedSession = context.Sessions.AsNoTracking()
+                        .Single(e => e.Id == session.Id);
 
                     Assert.Equal(session.Id, updatedSession.Id);
                     Assert.StartsWith("F# and Rust: combining ", updatedSession.Title);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -559,7 +596,8 @@ namespace Microsoft.EntityFrameworkCore
                     var result = await controller.Put(-777, new Session());
 
                     Assert.Equal("Not found", result);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -568,7 +606,8 @@ namespace Microsoft.EntityFrameworkCore
             await ExecuteWithStrategyInTransactionAsync(
                 async context =>
                 {
-                    var session = context.Sessions.AsNoTracking().Single(e => e.Title.StartsWith("C# and Rust: combining "));
+                    var session = context.Sessions.AsNoTracking()
+                        .Single(e => e.Title.StartsWith("C# and Rust: combining "));
 
                     var controller = new SessionsController(context);
 
@@ -578,8 +617,11 @@ namespace Microsoft.EntityFrameworkCore
                     Assert.Null(result.Speakers);
                     Assert.NotNull(result.Track);
 
-                    Assert.Null(context.Sessions.AsNoTracking().SingleOrDefault(e => e.Id == session.Id));
-                });
+                    Assert.Null(
+                        context.Sessions.AsNoTracking().SingleOrDefault(e => e.Id == session.Id)
+                    );
+                }
+            );
         }
 
         [ConditionalFact]
@@ -593,7 +635,8 @@ namespace Microsoft.EntityFrameworkCore
                     var result = await controller.Delete(-777);
 
                     Assert.Null(result);
-                });
+                }
+            );
         }
 
         protected class SessionsController
@@ -694,7 +737,8 @@ namespace Microsoft.EntityFrameworkCore
 
                     Assert.All(results, s => Assert.NotEqual(default, s.Id));
                     Assert.All(results, s => Assert.NotEmpty(s.Sessions));
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -703,7 +747,8 @@ namespace Microsoft.EntityFrameworkCore
             await ExecuteWithStrategyInTransactionAsync(
                 async context =>
                 {
-                    var speaker = context.Speakers.AsNoTracking().Single(e => e.Name == "Julie Lerman");
+                    var speaker = context.Speakers.AsNoTracking()
+                        .Single(e => e.Name == "Julie Lerman");
 
                     var controller = new SpeakersController(context);
 
@@ -711,7 +756,8 @@ namespace Microsoft.EntityFrameworkCore
 
                     Assert.Equal(speaker.Id, result.Id);
                     Assert.NotEmpty(result.Sessions);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -725,7 +771,8 @@ namespace Microsoft.EntityFrameworkCore
                     var result = await controller.GetSpeaker(-777);
 
                     Assert.Null(result);
-                });
+                }
+            );
         }
 
         protected class SpeakersController
@@ -759,32 +806,34 @@ namespace Microsoft.EntityFrameworkCore
 
         protected TFixture Fixture { get; }
 
-        protected ApplicationDbContext CreateContext()
-            => Fixture.CreateContext();
+        protected ApplicationDbContext CreateContext() => Fixture.CreateContext();
 
         protected virtual Task ExecuteWithStrategyInTransactionAsync(
             Func<ApplicationDbContext, Task> testOperation,
             Func<ApplicationDbContext, Task> nestedTestOperation1 = null,
             Func<ApplicationDbContext, Task> nestedTestOperation2 = null,
-            Func<ApplicationDbContext, Task> nestedTestOperation3 = null)
-            => TestHelpers.ExecuteWithStrategyInTransactionAsync(
+            Func<ApplicationDbContext, Task> nestedTestOperation3 = null
+        ) =>
+            TestHelpers.ExecuteWithStrategyInTransactionAsync(
                 CreateContext,
                 UseTransaction,
                 testOperation,
                 nestedTestOperation1,
                 nestedTestOperation2,
-                nestedTestOperation3);
+                nestedTestOperation3
+            );
 
-        protected virtual void UseTransaction(DatabaseFacade facade, IDbContextTransaction transaction)
-        {
-        }
+        protected virtual void UseTransaction(
+            DatabaseFacade facade,
+            IDbContextTransaction transaction
+        ) { }
 
-        public abstract class ConferencePlannerFixtureBase : SharedStoreFixtureBase<ApplicationDbContext>
+        public abstract class ConferencePlannerFixtureBase
+            : SharedStoreFixtureBase<ApplicationDbContext>
         {
             protected override string StoreName { get; } = "ConferencePlanner";
 
-            protected override bool UsePooling
-                => false;
+            protected override bool UsePooling => false;
 
             protected override void Seed(ApplicationDbContext context)
             {
@@ -864,15 +913,23 @@ namespace Microsoft.EntityFrameworkCore
                             tracks[roomId] = track;
                         }
 
-                        foreach (var sessionJson in roomJson.GetProperty("sessions").EnumerateArray())
+                        foreach (
+                            var sessionJson in roomJson.GetProperty("sessions").EnumerateArray()
+                        )
                         {
                             var sessionSpeakers = new List<Speaker>();
-                            foreach (var speakerJson in sessionJson.GetProperty("speakers").EnumerateArray())
+                            foreach (
+                                var speakerJson in sessionJson.GetProperty("speakers")
+                                    .EnumerateArray()
+                            )
                             {
                                 var speakerId = speakerJson.GetProperty("id").GetGuid();
                                 if (!speakers.TryGetValue(speakerId, out var speaker))
                                 {
-                                    speaker = new Speaker { Name = speakerJson.GetProperty("name").GetString() };
+                                    speaker = new Speaker
+                                    {
+                                        Name = speakerJson.GetProperty("name").GetString()
+                                    };
 
                                     speakers[speakerId] = speaker;
                                 }
@@ -889,16 +946,23 @@ namespace Microsoft.EntityFrameworkCore
                             };
 
                             session.SessionSpeakers = sessionSpeakers.Select(
-                                s => new SessionSpeaker { Session = session, Speaker = s }).ToList();
+                                    s => new SessionSpeaker { Session = session, Speaker = s }
+                                )
+                                .ToList();
 
                             var trackName = track.Name;
-                            var attendees = trackName.Contains("1") ? attendees1
-                                : trackName.Contains("2") ? attendees2
-                                : trackName.Contains("3") ? attendees3
-                                : attendees1.Concat(attendees2).Concat(attendees3).ToList();
+                            var attendees = trackName.Contains("1")
+                                ? attendees1
+                                : trackName.Contains("2")
+                                    ? attendees2
+                                    : trackName.Contains("3")
+                                        ? attendees3
+                                        : attendees1.Concat(attendees2).Concat(attendees3).ToList();
 
                             session.SessionAttendees = attendees.Select(
-                                a => new SessionAttendee { Session = session, Attendee = a }).ToList();
+                                    a => new SessionAttendee { Session = session, Attendee = a }
+                                )
+                                .ToList();
 
                             track.Sessions.Add(session);
                         }

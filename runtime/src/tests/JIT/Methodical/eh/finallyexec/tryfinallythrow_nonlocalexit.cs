@@ -17,7 +17,6 @@ namespace hello
 {
     class Class1
     {
-
         private static TestUtil.TestLog testLog;
 
         static Class1()
@@ -39,18 +38,20 @@ namespace hello
         {
             try
             {
-                if (i == 0) goto done;
+                if (i == 0)
+                    goto done;
                 Console.WriteLine("in try");
             }
+
             finally
             {
                 Console.WriteLine("in finally");
-                if (i == 0) throw new Exception();
+                if (i == 0)
+                    throw new Exception();
             }
             Console.WriteLine("after finally");
             done:
             Console.WriteLine("done");
-
         }
 
         static public int Main(string[] args)

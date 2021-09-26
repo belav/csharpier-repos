@@ -7,7 +7,11 @@ namespace System
 {
     public sealed partial class TimeZoneInfo
     {
-        private static unsafe bool TryConvertIanaIdToWindowsId(string ianaId, bool allocate, out string? windowsId)
+        private static unsafe bool TryConvertIanaIdToWindowsId(
+            string ianaId,
+            bool allocate,
+            out string? windowsId
+        )
         {
             if (GlobalizationMode.Invariant || GlobalizationMode.UseNls || ianaId is null)
             {
@@ -38,7 +42,12 @@ namespace System
             return false;
         }
 
-        private static unsafe bool TryConvertWindowsIdToIanaId(string windowsId, string? region, bool allocate,  out string? ianaId)
+        private static unsafe bool TryConvertWindowsIdToIanaId(
+            string windowsId,
+            string? region,
+            bool allocate,
+            out string? ianaId
+        )
         {
             // This functionality is not enabled in the browser for the sake of size reduction.
             if (GlobalizationMode.Invariant || GlobalizationMode.UseNls || windowsId is null)
@@ -76,6 +85,5 @@ namespace System
             ianaId = null;
             return false;
         }
-
     }
 }

@@ -24,17 +24,23 @@ namespace Wasm.Build.Tests
         private RunHost _host;
         private object?[] _parameters;
 
-        public BuildAndRunAttribute(bool aot=false, RunHost host = RunHost.All, params object?[] parameters)
+        public BuildAndRunAttribute(
+            bool aot = false,
+            RunHost host = RunHost.All,
+            params object?[] parameters
+        )
         {
             this._aot = aot;
             this._host = host;
             this._parameters = parameters;
         }
 
-        public override IEnumerable<object?[]> GetData(MethodInfo testMethod)
-            => BuildTestBase.ConfigWithAOTData(_aot)
-                    .Multiply(_parameters)
-                    .WithRunHosts(_host)
-                    .UnwrapItemsAsArrays().ToList().Dump();
+        public override IEnumerable<object?[]> GetData(MethodInfo testMethod) =>
+            BuildTestBase.ConfigWithAOTData(_aot)
+                .Multiply(_parameters)
+                .WithRunHosts(_host)
+                .UnwrapItemsAsArrays()
+                .ToList()
+                .Dump();
     }
 }

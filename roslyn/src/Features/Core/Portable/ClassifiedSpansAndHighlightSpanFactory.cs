@@ -15,35 +15,54 @@ namespace Microsoft.CodeAnalysis.Classification
     internal static class ClassifiedSpansAndHighlightSpanFactory
     {
         public static async Task<DocumentSpan> GetClassifiedDocumentSpanAsync(
-            Document document, TextSpan sourceSpan, CancellationToken cancellationToken)
+            Document document,
+            TextSpan sourceSpan,
+            CancellationToken cancellationToken
+        )
         {
-            var classifiedSpans = await ClassifyAsync(
-                document, sourceSpan, cancellationToken).ConfigureAwait(false);
+            var classifiedSpans = await ClassifyAsync(document, sourceSpan, cancellationToken)
+                .ConfigureAwait(false);
 
             var properties = ImmutableDictionary<string, object>.Empty.Add(
-                ClassifiedSpansAndHighlightSpan.Key, classifiedSpans);
+                ClassifiedSpansAndHighlightSpan.Key,
+                classifiedSpans
+            );
 
             return new DocumentSpan(document, sourceSpan, properties);
         }
 
         public static async Task<ClassifiedSpansAndHighlightSpan> ClassifyAsync(
-            DocumentSpan documentSpan, CancellationToken cancellationToken)
+            DocumentSpan documentSpan,
+            CancellationToken cancellationToken
+        )
         {
             // If the document span is providing us with the classified spans up front, then we
             // can just use that.  Otherwise, go back and actually classify the text for the line
             // the document span is on.
-            if (documentSpan.Properties != null &&
-                documentSpan.Properties.TryGetValue(ClassifiedSpansAndHighlightSpan.Key, out var value))
+            if (
+                documentSpan.Properties != null
+                && documentSpan.Properties.TryGetValue(
+                    ClassifiedSpansAndHighlightSpan.Key,
+                    out var value
+                )
+            )
             {
                 return (ClassifiedSpansAndHighlightSpan)value;
             }
 
             return await ClassifyAsync(
-                documentSpan.Document, documentSpan.SourceSpan, cancellationToken).ConfigureAwait(false);
+                    documentSpan.Document,
+                    documentSpan.SourceSpan,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
         }
 
         private static async Task<ClassifiedSpansAndHighlightSpan> ClassifyAsync(
-            Document document, TextSpan sourceSpan, CancellationToken cancellationToken)
+            Document document,
+            TextSpan sourceSpan,
+            CancellationToken cancellationToken
+        )
         {
             var sourceText = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
 
@@ -51,11 +70,19 @@ namespace Microsoft.CodeAnalysis.Classification
             var lineSpan = GetLineSpanForReference(sourceText, narrowSpan);
 
             var taggedLineParts = await GetTaggedTextForDocumentRegionAsync(
-                document, narrowSpan, lineSpan, cancellationToken).ConfigureAwait(false);
+                    document,
+                    narrowSpan,
+                    lineSpan,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             return taggedLineParts;
         }
 
-        private static TextSpan GetLineSpanForReference(SourceText sourceText, TextSpan referenceSpan)
+        private static TextSpan GetLineSpanForReference(
+            SourceText sourceText,
+            TextSpan referenceSpan
+        )
         {
             var sourceLine = sourceText.Lines.GetLineFromPosition(referenceSpan.Start);
             var firstNonWhitespacePosition = sourceLine.GetFirstNonWhitespacePosition().Value;
@@ -64,22 +91,40 @@ namespace Microsoft.CodeAnalysis.Classification
         }
 
         private static async Task<ClassifiedSpansAndHighlightSpan> GetTaggedTextForDocumentRegionAsync(
-            Document document, TextSpan narrowSpan, TextSpan widenedSpan, CancellationToken cancellationToken)
+            Document document,
+            TextSpan narrowSpan,
+            TextSpan widenedSpan,
+            CancellationToken cancellationToken
+        )
         {
             var highlightSpan = new TextSpan(
                 start: narrowSpan.Start - widenedSpan.Start,
-                length: narrowSpan.Length);
+                length: narrowSpan.Length
+            );
 
             var classifiedSpans = await GetClassifiedSpansAsync(
-                document, narrowSpan, widenedSpan, cancellationToken).ConfigureAwait(false);
+                    document,
+                    narrowSpan,
+                    widenedSpan,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             return new ClassifiedSpansAndHighlightSpan(classifiedSpans, highlightSpan);
         }
 
         private static async Task<ImmutableArray<ClassifiedSpan>> GetClassifiedSpansAsync(
-            Document document, TextSpan narrowSpan, TextSpan widenedSpan, CancellationToken cancellationToken)
+            Document document,
+            TextSpan narrowSpan,
+            TextSpan widenedSpan,
+            CancellationToken cancellationToken
+        )
         {
             var result = await ClassifierHelper.GetClassifiedSpansAsync(
-                document, widenedSpan, cancellationToken).ConfigureAwait(false);
+                    document,
+                    widenedSpan,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             if (!result.IsDefault)
             {
                 return result;
@@ -89,9 +134,16 @@ namespace Microsoft.CodeAnalysis.Classification
             // item as plain text. Break the text into three spans so that we can properly
             // highlight the 'narrow-span' later on when we display the item.
             return ImmutableArray.Create(
-                new ClassifiedSpan(ClassificationTypeNames.Text, TextSpan.FromBounds(widenedSpan.Start, narrowSpan.Start)),
+                new ClassifiedSpan(
+                    ClassificationTypeNames.Text,
+                    TextSpan.FromBounds(widenedSpan.Start, narrowSpan.Start)
+                ),
                 new ClassifiedSpan(ClassificationTypeNames.Text, narrowSpan),
-                new ClassifiedSpan(ClassificationTypeNames.Text, TextSpan.FromBounds(narrowSpan.End, widenedSpan.End)));
+                new ClassifiedSpan(
+                    ClassificationTypeNames.Text,
+                    TextSpan.FromBounds(narrowSpan.End, widenedSpan.End)
+                )
+            );
         }
     }
 }

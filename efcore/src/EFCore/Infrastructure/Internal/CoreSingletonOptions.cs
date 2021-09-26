@@ -31,7 +31,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure.Internal
         /// </summary>
         public virtual void Initialize(IDbContextOptions options)
         {
-            var coreOptions = options.FindExtension<CoreOptionsExtension>() ?? new CoreOptionsExtension();
+            var coreOptions =
+                options.FindExtension<CoreOptionsExtension>() ?? new CoreOptionsExtension();
 
             AreDetailedErrorsEnabled = coreOptions.DetailedErrorsEnabled;
             IsConcurrencyDetectionEnabled = coreOptions.ConcurrencyDetectionEnabled;
@@ -45,26 +46,37 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure.Internal
         /// </summary>
         public virtual void Validate(IDbContextOptions options)
         {
-            var coreOptions = options.FindExtension<CoreOptionsExtension>() ?? new CoreOptionsExtension();
+            var coreOptions =
+                options.FindExtension<CoreOptionsExtension>() ?? new CoreOptionsExtension();
 
             if (AreDetailedErrorsEnabled != coreOptions.DetailedErrorsEnabled)
             {
-                Check.DebugAssert(coreOptions.InternalServiceProvider != null, "InternalServiceProvider is null");
+                Check.DebugAssert(
+                    coreOptions.InternalServiceProvider != null,
+                    "InternalServiceProvider is null"
+                );
 
                 throw new InvalidOperationException(
                     CoreStrings.SingletonOptionChanged(
                         nameof(DbContextOptionsBuilder.EnableDetailedErrors),
-                        nameof(DbContextOptionsBuilder.UseInternalServiceProvider)));
+                        nameof(DbContextOptionsBuilder.UseInternalServiceProvider)
+                    )
+                );
             }
 
             if (IsConcurrencyDetectionEnabled != coreOptions.ConcurrencyDetectionEnabled)
             {
-                Check.DebugAssert(coreOptions.InternalServiceProvider != null, "InternalServiceProvider is null");
+                Check.DebugAssert(
+                    coreOptions.InternalServiceProvider != null,
+                    "InternalServiceProvider is null"
+                );
 
                 throw new InvalidOperationException(
                     CoreStrings.SingletonOptionChanged(
                         nameof(DbContextOptionsBuilder.DisableConcurrencyDetection),
-                        nameof(DbContextOptionsBuilder.UseInternalServiceProvider)));
+                        nameof(DbContextOptionsBuilder.UseInternalServiceProvider)
+                    )
+                );
             }
         }
 

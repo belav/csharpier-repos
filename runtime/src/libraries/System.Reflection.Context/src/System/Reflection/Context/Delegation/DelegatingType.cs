@@ -19,7 +19,9 @@ namespace System.Reflection.Context.Delegation
             _typeInfo = type.GetTypeInfo();
             if (_typeInfo == null)
             {
-                throw new InvalidOperationException(SR.Format(SR.InvalidOperation_NoTypeInfoForThisType, type.FullName));
+                throw new InvalidOperationException(
+                    SR.Format(SR.InvalidOperation_NoTypeInfoForThisType, type.FullName)
+                );
             }
         }
 
@@ -233,7 +235,11 @@ namespace System.Reflection.Context.Delegation
             return _typeInfo.GetInterfaceMap(interfaceType);
         }
 
-        public override MemberInfo[] GetMember(string name, MemberTypes type, BindingFlags bindingAttr)
+        public override MemberInfo[] GetMember(
+            string name,
+            MemberTypes type,
+            BindingFlags bindingAttr
+        )
         {
             return _typeInfo.GetMember(name, type, bindingAttr);
         }
@@ -296,7 +302,13 @@ namespace System.Reflection.Context.Delegation
             return _typeInfo.Attributes;
         }
 
-        protected override ConstructorInfo GetConstructorImpl(BindingFlags bindingAttr, Binder binder, CallingConventions callConvention, Type[] types, ParameterModifier[] modifiers)
+        protected override ConstructorInfo GetConstructorImpl(
+            BindingFlags bindingAttr,
+            Binder binder,
+            CallingConventions callConvention,
+            Type[] types,
+            ParameterModifier[] modifiers
+        )
         {
             return _typeInfo.GetConstructor(bindingAttr, binder, callConvention, types, modifiers);
         }
@@ -346,12 +358,19 @@ namespace System.Reflection.Context.Delegation
             return _typeInfo.GetMembers(bindingAttr);
         }
 
-        protected override MethodInfo GetMethodImpl(string name, BindingFlags bindingAttr, Binder binder, CallingConventions callConvention, Type[] types, ParameterModifier[] modifiers)
+        protected override MethodInfo GetMethodImpl(
+            string name,
+            BindingFlags bindingAttr,
+            Binder binder,
+            CallingConventions callConvention,
+            Type[] types,
+            ParameterModifier[] modifiers
+        )
         {
             // Unfortunately we cannot directly call the protected GetMethodImpl on _typeInfo.
-            return (types == null) ?
-                _typeInfo.GetMethod(name, bindingAttr) :
-                _typeInfo.GetMethod(name, bindingAttr, binder, callConvention, types, modifiers);
+            return (types == null)
+              ? _typeInfo.GetMethod(name, bindingAttr)
+              : _typeInfo.GetMethod(name, bindingAttr, binder, callConvention, types, modifiers);
         }
 
         public override MethodInfo[] GetMethods(BindingFlags bindingAttr)
@@ -374,7 +393,14 @@ namespace System.Reflection.Context.Delegation
             return _typeInfo.GetProperties(bindingAttr);
         }
 
-        protected override PropertyInfo GetPropertyImpl(string name, BindingFlags bindingAttr, Binder binder, Type returnType, Type[] types, ParameterModifier[] modifiers)
+        protected override PropertyInfo GetPropertyImpl(
+            string name,
+            BindingFlags bindingAttr,
+            Binder binder,
+            Type returnType,
+            Type[] types,
+            ParameterModifier[] modifiers
+        )
         {
             // Unfortunately we cannot directly call the protected GetPropertyImpl on _typeInfo.
             PropertyInfo property;
@@ -391,14 +417,24 @@ namespace System.Reflection.Context.Delegation
                     // Ideally we should call a GetProperty overload that takes name, returnType, and bindingAttr, but not types.
                     // But such an overload doesn't exist. On the other hand, this also guarantees that bindingAttr will be
                     // the default lookup flags if types is null but returnType is not.
-                    Debug.Assert(bindingAttr == (BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public));
+                    Debug.Assert(
+                        bindingAttr
+                            == (BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public)
+                    );
 
                     property = _typeInfo.GetProperty(name, returnType);
                 }
             }
             else
             {
-                property = _typeInfo.GetProperty(name, bindingAttr, binder, returnType, types, modifiers);
+                property = _typeInfo.GetProperty(
+                    name,
+                    bindingAttr,
+                    binder,
+                    returnType,
+                    types,
+                    modifiers
+                );
             }
 
             return property;
@@ -409,9 +445,27 @@ namespace System.Reflection.Context.Delegation
             return _typeInfo.HasElementType;
         }
 
-        public override object InvokeMember(string name, BindingFlags invokeAttr, Binder binder, object target, object[] args, ParameterModifier[] modifiers, CultureInfo culture, string[] namedParameters)
+        public override object InvokeMember(
+            string name,
+            BindingFlags invokeAttr,
+            Binder binder,
+            object target,
+            object[] args,
+            ParameterModifier[] modifiers,
+            CultureInfo culture,
+            string[] namedParameters
+        )
         {
-            return _typeInfo.InvokeMember(name, invokeAttr, binder, target, args, modifiers, culture, namedParameters);
+            return _typeInfo.InvokeMember(
+                name,
+                invokeAttr,
+                binder,
+                target,
+                args,
+                modifiers,
+                culture,
+                namedParameters
+            );
         }
 
         protected override bool IsArrayImpl()

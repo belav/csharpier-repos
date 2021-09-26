@@ -17,9 +17,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
 {
     internal sealed class ContainsChildrenGraphQuery : IGraphQuery
     {
-        public async Task<GraphBuilder> GetGraphAsync(Solution solution, IGraphContext context, CancellationToken cancellationToken)
+        public async Task<GraphBuilder> GetGraphAsync(
+            Solution solution,
+            IGraphContext context,
+            CancellationToken cancellationToken
+        )
         {
-            var graphBuilder = await GraphBuilder.CreateForInputNodesAsync(solution, context.InputNodes, cancellationToken).ConfigureAwait(false);
+            var graphBuilder = await GraphBuilder.CreateForInputNodesAsync(
+                    solution,
+                    context.InputNodes,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             foreach (var node in context.InputNodes)
             {
@@ -30,7 +39,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                     if (symbol != null)
                     {
                         var containsChildren = SymbolContainment.GetContainedSymbols(symbol).Any();
-                        graphBuilder.AddDeferredPropertySet(node, DgmlNodeProperties.ContainsChildren, containsChildren);
+                        graphBuilder.AddDeferredPropertySet(
+                            node,
+                            DgmlNodeProperties.ContainsChildren,
+                            containsChildren
+                        );
                     }
                     else if (node.HasCategory(CodeNodeCategories.File))
                     {
@@ -38,8 +51,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
 
                         if (document != null)
                         {
-                            var childNodes = await SymbolContainment.GetContainedSyntaxNodesAsync(document, cancellationToken).ConfigureAwait(false);
-                            graphBuilder.AddDeferredPropertySet(node, DgmlNodeProperties.ContainsChildren, childNodes.Any());
+                            var childNodes = await SymbolContainment.GetContainedSyntaxNodesAsync(
+                                    document,
+                                    cancellationToken
+                                )
+                                .ConfigureAwait(false);
+                            graphBuilder.AddDeferredPropertySet(
+                                node,
+                                DgmlNodeProperties.ContainsChildren,
+                                childNodes.Any()
+                            );
                         }
                         else
                         {
@@ -47,12 +68,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                             if (uri != null)
                             {
                                 // Since a solution load is not yet completed, there is no document available to answer this query.
-                                // The solution explorer presumes that if somebody doesn't answer for a file, they never will. 
+                                // The solution explorer presumes that if somebody doesn't answer for a file, they never will.
                                 // See Providers\GraphContextAttachedCollectionSource.cs for more. Therefore we should answer by setting
                                 // ContainsChildren property to either true or false, so any following updates will be tractable.
                                 // We will set it to false since the solution explorer assumes the default for this query response is 'false'.
 
-                                // Todo: we may need fallback to check if this node actually represents a C# or VB language 
+                                // Todo: we may need fallback to check if this node actually represents a C# or VB language
                                 // even when its extension fails to say so. One option would be to call DTEWrapper.IsRegisteredForLangService,
                                 // which may not be called here however since deadlock could happen.
 
@@ -70,9 +91,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                                 // could check for illegal path characters directly first, but then
                                 // that check would actually happen twice because GetExtension will
                                 // also perform the check.
-                                if (path.EndsWith(".cs", StringComparison.OrdinalIgnoreCase) || path.EndsWith(".vb", StringComparison.OrdinalIgnoreCase))
+                                if (
+                                    path.EndsWith(".cs", StringComparison.OrdinalIgnoreCase)
+                                    || path.EndsWith(".vb", StringComparison.OrdinalIgnoreCase)
+                                )
                                 {
-                                    graphBuilder.AddDeferredPropertySet(node, DgmlNodeProperties.ContainsChildren, false);
+                                    graphBuilder.AddDeferredPropertySet(
+                                        node,
+                                        DgmlNodeProperties.ContainsChildren,
+                                        false
+                                    );
                                 }
                             }
                         }

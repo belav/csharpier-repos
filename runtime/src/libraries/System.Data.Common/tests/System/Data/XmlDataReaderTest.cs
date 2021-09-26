@@ -38,8 +38,9 @@ namespace System.Data.Tests
         {
             var ds = new DataSet();
 
-            ds.ReadXmlSchema(new StringReader(
-                @"<?xml version=""1.0"" standalone=""yes""?>
+            ds.ReadXmlSchema(
+                new StringReader(
+                    @"<?xml version=""1.0"" standalone=""yes""?>
                     <xs:schema id=""NewDataSet"" xmlns="""" xmlns:xs=""http://www.w3.org/2001/XMLSchema"" xmlns:msdata=""urn:schemas-microsoft-com:xml-msdata"">
                       <xs:element name=""NewDataSet"" msdata:IsDataSet=""true"" msdata:MainDataTable=""DESC"" msdata:UseCurrentLocale=""true"">
                         <xs:complexType>
@@ -68,10 +69,13 @@ namespace System.Data.Tests
                           <xs:field xpath=""ColumnName"" />
                         </xs:unique>
                       </xs:element>
-                    </xs:schema>"));
+                    </xs:schema>"
+                )
+            );
 
-            ds.ReadXml(new StringReader(
-                @"<?xml version=""1.0"" standalone=""yes""?>
+            ds.ReadXml(
+                new StringReader(
+                    @"<?xml version=""1.0"" standalone=""yes""?>
                     <DocumentElement>
                       <DESC>
                         <ColumnName>ColumnName</ColumnName>
@@ -183,62 +187,121 @@ namespace System.Data.Tests
                         <IsUnique>false</IsUnique>
                         <ColumnSize>0</ColumnSize>
                       </DESC>
-                    </DocumentElement>"));
+                    </DocumentElement>"
+                )
+            );
         }
 
         // Test for Bug #377146
         [Fact]
         public void XmlLoadCustomTypesTest()
         {
-            string xml = "<CustomTypesData>" + Environment.NewLine +
-                        "<CustomTypesTable>" + Environment.NewLine +
-                        "<Dummy>99</Dummy>" + Environment.NewLine +
-                        "<FuncXml> " + Environment.NewLine +
-                        "<Func Name=\"CUT_IntPassiveIn()\" Direction=\"PASSIVE_MOCK\">" + Environment.NewLine +
-                        "<Param Name=\"paramLen\" Type=\"int\" Len=\"1\" InOut=\"IN\" Union=\"FALSE\" " + Environment.NewLine +
-                        "Callback=\"\" CSharpType=\"int\" Value=\"\" ExpectedValue=\"1\" IsExpGetRef=\"\" " + Environment.NewLine +
-                        "IsGetRef=\"\" IsSetRef=\"\" ChildSelected=\"FALSE\" UnionIndex=\"-1\" HandleInput=\"DEC\" " + Environment.NewLine +
-                        "Enum=\"\">" + Environment.NewLine +
-                        "</Param>" + Environment.NewLine + Environment.NewLine +
-                        "<Param Name=\"single\" Type=\"int\" Len=\"1\" InOut=\"IN\" Union=\"FALSE\" " + Environment.NewLine +
-                        "Callback=\"\" CSharpType=\"int\" Value=\"\" ExpectedValue=\"16\" IsExpGetRef=\"\" " + Environment.NewLine +
-                        "IsGetRef=\"\" IsSetRef=\"\" ChildSelected=\"FALSE\" UnionIndex=\"-1\" HandleInput=\"DEC\" " + Environment.NewLine +
-                        "Enum=\"\">" + Environment.NewLine +
-                        "</Param>" + Environment.NewLine + Environment.NewLine +
-                        "<Param Name=\"arraySizeParam\" Type=\"int*\" Len=\"4\" InOut=\"IN\" " + Environment.NewLine +
-                        "Union=\"FALSE\" Callback=\"\" CSharpType=\"int\" Value=\"\" ExpectedValue=\"\" " + Environment.NewLine +
-                        "IsExpGetRef=\"\" IsGetRef=\"\" IsSetRef=\"\" ChildSelected=\"FALSE\" UnionIndex=\"-1\" " + Environment.NewLine +
-                        "HandleInput=\"HEX\" Enum=\"\">" + Environment.NewLine + Environment.NewLine +
-                        "<Param1 Name=\"arraySizeParam0\" Type=\"int\" Len=\"0\" InOut=\"IN\" " + Environment.NewLine +
-                        "Union=\"FALSE\" Callback=\"\" CSharpType=\"int\" Value=\"\" ExpectedValue=\"1\" " + Environment.NewLine +
-                        "IsExpGetRef=\"\" IsGetRef=\"\" IsSetRef=\"\" ChildSelected=\"FALSE\" UnionIndex=\"-1\" " + Environment.NewLine +
-                        "HandleInput=\"DEC\" Enum=\"\">" + Environment.NewLine +
-                        "</Param1>" + Environment.NewLine + Environment.NewLine +
-                        "<Param1 Name=\"arraySizeParam1\" Type=\"int\" Len=\"0\" InOut=\"IN\" " + Environment.NewLine +
-                        "Union=\"FALSE\" Callback=\"\" CSharpType=\"int\" Value=\"\" ExpectedValue=\"\" " + Environment.NewLine +
-                        "IsExpGetRef=\"\" IsGetRef=\"\" IsSetRef=\"\" ChildSelected=\"FALSE\" UnionIndex=\"-1\" " + Environment.NewLine +
-                        "HandleInput=\"HEX\" Enum=\"\">" + Environment.NewLine +
-                        "</Param1>" + Environment.NewLine + Environment.NewLine +
-                        "<Param1 Name=\"arraySizeParam2\" Type=\"int\" Len=\"0\" InOut=\"IN\" " + Environment.NewLine +
-                        "Union=\"FALSE\" Callback=\"\" CSharpType=\"int\" Value=\"\" ExpectedValue=\"\" " + Environment.NewLine +
-                        "IsExpGetRef=\"\" IsGetRef=\"\" IsSetRef=\"\" ChildSelected=\"FALSE\" UnionIndex=\"-1\" " + Environment.NewLine +
-                        "HandleInput=\"HEX\" Enum=\"\">" + Environment.NewLine +
-                        "</Param1>" + Environment.NewLine + Environment.NewLine +
-                        "<Param1 Name=\"arraySizeParam3\" Type=\"int\" Len=\"0\" InOut=\"IN\" " + Environment.NewLine +
-                        "Union=\"FALSE\" Callback=\"\" CSharpType=\"int\" Value=\"\" ExpectedValue=\"\" " + Environment.NewLine +
-                        "IsExpGetRef=\"\" IsGetRef=\"\" IsSetRef=\"\" ChildSelected=\"FALSE\" UnionIndex=\"-1\" " + Environment.NewLine +
-                        "HandleInput=\"HEX\" Enum=\"\">" + Environment.NewLine +
-                        "</Param1>" + Environment.NewLine + Environment.NewLine +
-                        "</Param>" + Environment.NewLine +
-                        "<Return Name=\"retVal\" Type=\"int\" Len=\"1\" InOut=\"OUT\" Union=\"FALSE\" " + Environment.NewLine +
-                        "Callback=\"\" CSharpType=\"int\" Value=\"1\" ExpectedValue=\"\" IsExpGetRef=\"\" " + Environment.NewLine +
-                        "IsGetRef=\"\" IsSetRef=\"\" ChildSelected=\"FALSE\" UnionIndex=\"-1\" HandleInput=\"DEC\" " + Environment.NewLine +
-                        "Enum=\"\">" + Environment.NewLine +
-                        "</Return>" + Environment.NewLine +
-                        "</Func>" + Environment.NewLine +
-                        "</FuncXml>" + Environment.NewLine +
-                        "</CustomTypesTable>" + Environment.NewLine +
-                        "</CustomTypesData>" + Environment.NewLine;
+            string xml =
+                "<CustomTypesData>"
+                + Environment.NewLine
+                + "<CustomTypesTable>"
+                + Environment.NewLine
+                + "<Dummy>99</Dummy>"
+                + Environment.NewLine
+                + "<FuncXml> "
+                + Environment.NewLine
+                + "<Func Name=\"CUT_IntPassiveIn()\" Direction=\"PASSIVE_MOCK\">"
+                + Environment.NewLine
+                + "<Param Name=\"paramLen\" Type=\"int\" Len=\"1\" InOut=\"IN\" Union=\"FALSE\" "
+                + Environment.NewLine
+                + "Callback=\"\" CSharpType=\"int\" Value=\"\" ExpectedValue=\"1\" IsExpGetRef=\"\" "
+                + Environment.NewLine
+                + "IsGetRef=\"\" IsSetRef=\"\" ChildSelected=\"FALSE\" UnionIndex=\"-1\" HandleInput=\"DEC\" "
+                + Environment.NewLine
+                + "Enum=\"\">"
+                + Environment.NewLine
+                + "</Param>"
+                + Environment.NewLine
+                + Environment.NewLine
+                + "<Param Name=\"single\" Type=\"int\" Len=\"1\" InOut=\"IN\" Union=\"FALSE\" "
+                + Environment.NewLine
+                + "Callback=\"\" CSharpType=\"int\" Value=\"\" ExpectedValue=\"16\" IsExpGetRef=\"\" "
+                + Environment.NewLine
+                + "IsGetRef=\"\" IsSetRef=\"\" ChildSelected=\"FALSE\" UnionIndex=\"-1\" HandleInput=\"DEC\" "
+                + Environment.NewLine
+                + "Enum=\"\">"
+                + Environment.NewLine
+                + "</Param>"
+                + Environment.NewLine
+                + Environment.NewLine
+                + "<Param Name=\"arraySizeParam\" Type=\"int*\" Len=\"4\" InOut=\"IN\" "
+                + Environment.NewLine
+                + "Union=\"FALSE\" Callback=\"\" CSharpType=\"int\" Value=\"\" ExpectedValue=\"\" "
+                + Environment.NewLine
+                + "IsExpGetRef=\"\" IsGetRef=\"\" IsSetRef=\"\" ChildSelected=\"FALSE\" UnionIndex=\"-1\" "
+                + Environment.NewLine
+                + "HandleInput=\"HEX\" Enum=\"\">"
+                + Environment.NewLine
+                + Environment.NewLine
+                + "<Param1 Name=\"arraySizeParam0\" Type=\"int\" Len=\"0\" InOut=\"IN\" "
+                + Environment.NewLine
+                + "Union=\"FALSE\" Callback=\"\" CSharpType=\"int\" Value=\"\" ExpectedValue=\"1\" "
+                + Environment.NewLine
+                + "IsExpGetRef=\"\" IsGetRef=\"\" IsSetRef=\"\" ChildSelected=\"FALSE\" UnionIndex=\"-1\" "
+                + Environment.NewLine
+                + "HandleInput=\"DEC\" Enum=\"\">"
+                + Environment.NewLine
+                + "</Param1>"
+                + Environment.NewLine
+                + Environment.NewLine
+                + "<Param1 Name=\"arraySizeParam1\" Type=\"int\" Len=\"0\" InOut=\"IN\" "
+                + Environment.NewLine
+                + "Union=\"FALSE\" Callback=\"\" CSharpType=\"int\" Value=\"\" ExpectedValue=\"\" "
+                + Environment.NewLine
+                + "IsExpGetRef=\"\" IsGetRef=\"\" IsSetRef=\"\" ChildSelected=\"FALSE\" UnionIndex=\"-1\" "
+                + Environment.NewLine
+                + "HandleInput=\"HEX\" Enum=\"\">"
+                + Environment.NewLine
+                + "</Param1>"
+                + Environment.NewLine
+                + Environment.NewLine
+                + "<Param1 Name=\"arraySizeParam2\" Type=\"int\" Len=\"0\" InOut=\"IN\" "
+                + Environment.NewLine
+                + "Union=\"FALSE\" Callback=\"\" CSharpType=\"int\" Value=\"\" ExpectedValue=\"\" "
+                + Environment.NewLine
+                + "IsExpGetRef=\"\" IsGetRef=\"\" IsSetRef=\"\" ChildSelected=\"FALSE\" UnionIndex=\"-1\" "
+                + Environment.NewLine
+                + "HandleInput=\"HEX\" Enum=\"\">"
+                + Environment.NewLine
+                + "</Param1>"
+                + Environment.NewLine
+                + Environment.NewLine
+                + "<Param1 Name=\"arraySizeParam3\" Type=\"int\" Len=\"0\" InOut=\"IN\" "
+                + Environment.NewLine
+                + "Union=\"FALSE\" Callback=\"\" CSharpType=\"int\" Value=\"\" ExpectedValue=\"\" "
+                + Environment.NewLine
+                + "IsExpGetRef=\"\" IsGetRef=\"\" IsSetRef=\"\" ChildSelected=\"FALSE\" UnionIndex=\"-1\" "
+                + Environment.NewLine
+                + "HandleInput=\"HEX\" Enum=\"\">"
+                + Environment.NewLine
+                + "</Param1>"
+                + Environment.NewLine
+                + Environment.NewLine
+                + "</Param>"
+                + Environment.NewLine
+                + "<Return Name=\"retVal\" Type=\"int\" Len=\"1\" InOut=\"OUT\" Union=\"FALSE\" "
+                + Environment.NewLine
+                + "Callback=\"\" CSharpType=\"int\" Value=\"1\" ExpectedValue=\"\" IsExpGetRef=\"\" "
+                + Environment.NewLine
+                + "IsGetRef=\"\" IsSetRef=\"\" ChildSelected=\"FALSE\" UnionIndex=\"-1\" HandleInput=\"DEC\" "
+                + Environment.NewLine
+                + "Enum=\"\">"
+                + Environment.NewLine
+                + "</Return>"
+                + Environment.NewLine
+                + "</Func>"
+                + Environment.NewLine
+                + "</FuncXml>"
+                + Environment.NewLine
+                + "</CustomTypesTable>"
+                + Environment.NewLine
+                + "</CustomTypesData>"
+                + Environment.NewLine;
 
             StringReader sr = new StringReader(xml);
             XmlTextReader xr = new XmlTextReader(sr);
@@ -260,9 +323,7 @@ namespace System.Data.Tests
         public class CustomTypeXml : IXmlSerializable
         {
             #region Constructors
-            public CustomTypeXml()
-            {
-            }
+            public CustomTypeXml() { }
 
             public CustomTypeXml(string str)
             {
@@ -294,11 +355,26 @@ namespace System.Data.Tests
                 // On function level
                 if (doc.DocumentElement.Name == "Func")
                 {
-                    try { doc.DocumentElement.Attributes.Remove(doc.DocumentElement.Attributes["ReturnType"]); }
+                    try
+                    {
+                        doc.DocumentElement.Attributes.Remove(
+                            doc.DocumentElement.Attributes["ReturnType"]
+                        );
+                    }
                     catch { }
-                    try { doc.DocumentElement.Attributes.Remove(doc.DocumentElement.Attributes["ReturnTId"]); }
+                    try
+                    {
+                        doc.DocumentElement.Attributes.Remove(
+                            doc.DocumentElement.Attributes["ReturnTId"]
+                        );
+                    }
                     catch { }
-                    try { doc.DocumentElement.Attributes.Remove(doc.DocumentElement.Attributes["CSharpType"]); }
+                    try
+                    {
+                        doc.DocumentElement.Attributes.Remove(
+                            doc.DocumentElement.Attributes["CSharpType"]
+                        );
+                    }
                     catch { }
                 }
                 else
@@ -343,15 +419,30 @@ namespace System.Data.Tests
             private void UpgradeSchema(XmlNode xNode)
             {
                 // Attribute removals (cleanup)
-                try { xNode.Attributes.Remove(xNode.Attributes["TId"]); }
+                try
+                {
+                    xNode.Attributes.Remove(xNode.Attributes["TId"]);
+                }
                 catch { }
-                try { xNode.Attributes.Remove(xNode.Attributes["OnError"]); }
+                try
+                {
+                    xNode.Attributes.Remove(xNode.Attributes["OnError"]);
+                }
                 catch { }
-                try { xNode.Attributes.Remove(xNode.Attributes["Check"]); }
+                try
+                {
+                    xNode.Attributes.Remove(xNode.Attributes["Check"]);
+                }
                 catch { }
-                try { xNode.Attributes.Remove(xNode.Attributes["ParamType"]); }
+                try
+                {
+                    xNode.Attributes.Remove(xNode.Attributes["ParamType"]);
+                }
                 catch { }
-                try { xNode.Attributes.Remove(xNode.Attributes["RealLen"]); }
+                try
+                {
+                    xNode.Attributes.Remove(xNode.Attributes["RealLen"]);
+                }
                 catch { }
 
                 // Attribute removals (order)

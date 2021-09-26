@@ -115,8 +115,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
             var overlapEnd = Math.Min(End, span.End);
 
             return overlapStart < overlapEnd
-                ? FromBounds(overlapStart, overlapEnd)
-                : (TextSpan?)null;
+              ? FromBounds(overlapStart, overlapEnd)
+              : (TextSpan?)null;
         }
 
         /// <summary>
@@ -166,8 +166,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
             var intersectEnd = Math.Min(End, span.End);
 
             return intersectStart <= intersectEnd
-                ? FromBounds(intersectStart, intersectEnd)
-                : (TextSpan?)null;
+              ? FromBounds(intersectStart, intersectEnd)
+              : (TextSpan?)null;
         }
 
         /// <summary>
@@ -186,7 +186,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
 
             if (end < start)
             {
-                throw new ArgumentOutOfRangeException(nameof(end), "end must not be less than start");
+                throw new ArgumentOutOfRangeException(
+                    nameof(end),
+                    "end must not be less than start"
+                );
             }
 
             return new TextSpan(start, end - start);

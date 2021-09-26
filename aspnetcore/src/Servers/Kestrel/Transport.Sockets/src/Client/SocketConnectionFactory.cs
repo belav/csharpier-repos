@@ -24,7 +24,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets
         private readonly PipeOptions _outputOptions;
         private readonly SocketSenderPool _socketSenderPool;
 
-        public SocketConnectionFactory(IOptions<SocketTransportOptions> options, ILoggerFactory loggerFactory)
+        public SocketConnectionFactory(
+            IOptions<SocketTransportOptions> options,
+            ILoggerFactory loggerFactory
+        )
         {
             if (options == null)
             {
@@ -38,30 +41,55 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets
 
             _options = options.Value;
             _memoryPool = options.Value.MemoryPoolFactory();
-            var logger = loggerFactory.CreateLogger("Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.Client");
+            var logger = loggerFactory.CreateLogger(
+                "Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.Client"
+            );
             _trace = new SocketsTrace(logger);
 
             var maxReadBufferSize = _options.MaxReadBufferSize ?? 0;
             var maxWriteBufferSize = _options.MaxWriteBufferSize ?? 0;
 
             // These are the same, it's either the thread pool or inline
-            var applicationScheduler = _options.UnsafePreferInlineScheduling ? PipeScheduler.Inline : PipeScheduler.ThreadPool;
+            var applicationScheduler = _options.UnsafePreferInlineScheduling
+                ? PipeScheduler.Inline
+                : PipeScheduler.ThreadPool;
             var transportScheduler = applicationScheduler;
             // https://github.com/aspnet/KestrelHttpServer/issues/2573
-            var awaiterScheduler = OperatingSystem.IsWindows() ? transportScheduler : PipeScheduler.Inline;
+            var awaiterScheduler = OperatingSystem.IsWindows()
+                ? transportScheduler
+                : PipeScheduler.Inline;
 
-            _inputOptions = new PipeOptions(_memoryPool, applicationScheduler, transportScheduler, maxReadBufferSize, maxReadBufferSize / 2, useSynchronizationContext: false);
-            _outputOptions = new PipeOptions(_memoryPool, transportScheduler, applicationScheduler, maxWriteBufferSize, maxWriteBufferSize / 2, useSynchronizationContext: false);
+            _inputOptions = new PipeOptions(
+                _memoryPool,
+                applicationScheduler,
+                transportScheduler,
+                maxReadBufferSize,
+                maxReadBufferSize / 2,
+                useSynchronizationContext: false
+            );
+            _outputOptions = new PipeOptions(
+                _memoryPool,
+                transportScheduler,
+                applicationScheduler,
+                maxWriteBufferSize,
+                maxWriteBufferSize / 2,
+                useSynchronizationContext: false
+            );
             _socketSenderPool = new SocketSenderPool(awaiterScheduler);
         }
 
-        public async ValueTask<ConnectionContext> ConnectAsync(EndPoint endpoint, CancellationToken cancellationToken = default)
+        public async ValueTask<ConnectionContext> ConnectAsync(
+            EndPoint endpoint,
+            CancellationToken cancellationToken = default
+        )
         {
             var ipEndPoint = endpoint as IPEndPoint;
 
             if (ipEndPoint is null)
             {
-                throw new NotSupportedException("The SocketConnectionFactory only supports IPEndPoints for now.");
+                throw new NotSupportedException(
+                    "The SocketConnectionFactory only supports IPEndPoints for now."
+                );
             }
 
             var socket = new Socket(ipEndPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp)
@@ -79,7 +107,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets
                 _socketSenderPool,
                 _inputOptions,
                 _outputOptions,
-                _options.WaitForDataBeforeAllocatingBuffer);
+                _options.WaitForDataBeforeAllocatingBuffer
+            );
 
             socketConnection.Start();
             return socketConnection;

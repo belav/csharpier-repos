@@ -70,7 +70,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// </param>
         /// <param name="fromDataAnnotation"> Indicates whether the configuration was specified using a data annotation. </param>
         /// <returns> The configured value. </returns>
-        ValueGenerated? SetValueGenerated(ValueGenerated? valueGenerated, bool fromDataAnnotation = false);
+        ValueGenerated? SetValueGenerated(
+            ValueGenerated? valueGenerated,
+            bool fromDataAnnotation = false
+        );
 
         /// <summary>
         ///     Returns the configuration source for <see cref="IReadOnlyProperty.ValueGenerated" />.
@@ -103,25 +106,25 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     Returns a value indicating whether the property was created implicitly and isn't based on the CLR model.
         /// </summary>
         /// <returns> A value indicating whether the property was created implicitly and isn't based on the CLR model. </returns>
-        bool IsImplicitlyCreated()
-            => (IsShadowProperty() || (DeclaringEntityType.IsPropertyBag && IsIndexerProperty()))
-                && GetConfigurationSource() == ConfigurationSource.Convention;
+        bool IsImplicitlyCreated() =>
+            (IsShadowProperty() || (DeclaringEntityType.IsPropertyBag && IsIndexerProperty()))
+            && GetConfigurationSource() == ConfigurationSource.Convention;
 
         /// <summary>
         ///     Finds the first principal property that the given property is constrained by
         ///     if the given property is part of a foreign key.
         /// </summary>
         /// <returns> The first associated principal property, or <see langword="null" /> if none exists. </returns>
-        new IConventionProperty? FindFirstPrincipal()
-            => (IConventionProperty?)((IReadOnlyProperty)this).FindFirstPrincipal();
+        new IConventionProperty? FindFirstPrincipal() =>
+            (IConventionProperty?)((IReadOnlyProperty)this).FindFirstPrincipal();
 
         /// <summary>
         ///     Finds the list of principal properties including the given property that the given property is constrained by
         ///     if the given property is part of a foreign key.
         /// </summary>
         /// <returns> The list of all associated principal properties including the given property. </returns>
-        new IReadOnlyList<IConventionProperty> GetPrincipals()
-            => ((IReadOnlyProperty)this).GetPrincipals().Cast<IConventionProperty>().ToList();
+        new IReadOnlyList<IConventionProperty> GetPrincipals() =>
+            ((IReadOnlyProperty)this).GetPrincipals().Cast<IConventionProperty>().ToList();
 
         /// <summary>
         ///     Gets all foreign keys that use this property (including composite foreign keys in which this property
@@ -148,8 +151,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <returns>
         ///     The primary that use this property, or <see langword="null" /> if it is not part of the primary key.
         /// </returns>
-        new IConventionKey? FindContainingPrimaryKey()
-            => (IConventionKey?)((IReadOnlyProperty)this).FindContainingPrimaryKey();
+        new IConventionKey? FindContainingPrimaryKey() =>
+            (IConventionKey?)((IReadOnlyProperty)this).FindContainingPrimaryKey();
 
         /// <summary>
         ///     Gets all primary or alternate keys that use this property (including composite keys in which this property
@@ -165,7 +168,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// </summary>
         /// <param name="typeMapping"> The <see cref="CoreTypeMapping" /> for this property. </param>
         /// <param name="fromDataAnnotation"> Indicates whether the configuration was specified using a data annotation. </param>
-        CoreTypeMapping? SetTypeMapping(CoreTypeMapping typeMapping, bool fromDataAnnotation = false);
+        CoreTypeMapping? SetTypeMapping(
+            CoreTypeMapping typeMapping,
+            bool fromDataAnnotation = false
+        );
 
         /// <summary>
         ///     Gets the <see cref="ConfigurationSource" /> for <see cref="CoreTypeMapping" /> of the property.
@@ -180,7 +186,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <param name="maxLength"> The maximum length of data that is allowed in this property. </param>
         /// <param name="fromDataAnnotation"> Indicates whether the configuration was specified using a data annotation. </param>
         /// <returns> The configured property. </returns>
-        int? SetMaxLength( int? maxLength, bool fromDataAnnotation = false);
+        int? SetMaxLength(int? maxLength, bool fromDataAnnotation = false);
 
         /// <summary>
         ///     Returns the configuration source for <see cref="IReadOnlyProperty.GetMaxLength" />.
@@ -256,7 +262,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// </param>
         /// <param name="fromDataAnnotation"> Indicates whether the configuration was specified using a data annotation. </param>
         /// <returns> The configured value. </returns>
-        PropertySaveBehavior? SetBeforeSaveBehavior(PropertySaveBehavior? beforeSaveBehavior, bool fromDataAnnotation = false);
+        PropertySaveBehavior? SetBeforeSaveBehavior(
+            PropertySaveBehavior? beforeSaveBehavior,
+            bool fromDataAnnotation = false
+        );
 
         /// <summary>
         ///     Returns the configuration source for <see cref="IReadOnlyProperty.GetBeforeSaveBehavior" />.
@@ -284,7 +293,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// </param>
         /// <param name="fromDataAnnotation"> Indicates whether the configuration was specified using a data annotation. </param>
         /// <returns> The configured value. </returns>
-        PropertySaveBehavior? SetAfterSaveBehavior(PropertySaveBehavior? afterSaveBehavior, bool fromDataAnnotation = false);
+        PropertySaveBehavior? SetAfterSaveBehavior(
+            PropertySaveBehavior? afterSaveBehavior,
+            bool fromDataAnnotation = false
+        );
 
         /// <summary>
         ///     Returns the configuration source for <see cref="IReadOnlyProperty.GetAfterSaveBehavior" />.
@@ -309,7 +321,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <returns> The configured value. </returns>
         Func<IProperty, IEntityType, ValueGenerator>? SetValueGeneratorFactory(
             Func<IProperty, IEntityType, ValueGenerator> valueGeneratorFactory,
-            bool fromDataAnnotation = false);
+            bool fromDataAnnotation = false
+        );
 
         /// <summary>
         ///     Returns the configuration source for <see cref="IReadOnlyProperty.GetValueGeneratorFactory" />.
@@ -323,7 +336,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <param name="converter"> The converter, or <see langword="null" /> to remove any previously set converter. </param>
         /// <param name="fromDataAnnotation"> Indicates whether the configuration was specified using a data annotation. </param>
         /// <returns> The configured value. </returns>
-        ValueConverter? SetValueConverter(ValueConverter? converter,  bool fromDataAnnotation = false);
+        ValueConverter? SetValueConverter(
+            ValueConverter? converter,
+            bool fromDataAnnotation = false
+        );
 
         /// <summary>
         ///     Returns the configuration source for <see cref="IReadOnlyProperty.GetValueConverter" />.

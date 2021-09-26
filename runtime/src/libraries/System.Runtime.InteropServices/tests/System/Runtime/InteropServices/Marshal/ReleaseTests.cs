@@ -23,6 +23,7 @@ namespace System.Runtime.InteropServices.Tests
                 Marshal.AddRef(iUnknown);
                 Assert.Equal(1, Marshal.Release(iUnknown));
             }
+
             finally
             {
                 Assert.Equal(0, Marshal.Release(iUnknown));
@@ -32,7 +33,10 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void Release_ZeroPointer_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("pUnk", () => Marshal.Release(IntPtr.Zero));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "pUnk",
+                () => Marshal.Release(IntPtr.Zero)
+            );
         }
     }
 }

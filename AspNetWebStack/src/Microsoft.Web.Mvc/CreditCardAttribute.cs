@@ -13,13 +13,15 @@ namespace Microsoft.Web.Mvc
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
     public sealed class CreditCardAttribute : DataTypeAttribute, IClientValidatable
     {
-        public CreditCardAttribute()
-            : base("creditcard")
+        public CreditCardAttribute() : base("creditcard")
         {
             ErrorMessage = MvcResources.CreditCardAttribute_Invalid;
         }
 
-        public IEnumerable<ModelClientValidationRule> GetClientValidationRules(ModelMetadata metadata, ControllerContext context)
+        public IEnumerable<ModelClientValidationRule> GetClientValidationRules(
+            ModelMetadata metadata,
+            ControllerContext context
+        )
         {
             yield return new ModelClientValidationRule
             {

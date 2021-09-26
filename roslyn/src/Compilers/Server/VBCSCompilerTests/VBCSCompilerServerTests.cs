@@ -54,10 +54,20 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
                 Logger = new XunitCompilerServerLogger(testOutputHelper);
             }
 
-            private Task<int> RunShutdownAsync(string pipeName, bool waitForProcess = true, TimeSpan? timeout = null, CancellationToken cancellationToken = default(CancellationToken))
+            private Task<int> RunShutdownAsync(
+                string pipeName,
+                bool waitForProcess = true,
+                TimeSpan? timeout = null,
+                CancellationToken cancellationToken = default(CancellationToken)
+            )
             {
                 var appSettings = new NameValueCollection();
-                return new BuildServerController(appSettings, Logger).RunShutdownAsync(pipeName, waitForProcess, timeout, cancellationToken);
+                return new BuildServerController(appSettings, Logger).RunShutdownAsync(
+                    pipeName,
+                    waitForProcess,
+                    timeout,
+                    cancellationToken
+                );
             }
 
             [Fact]
@@ -71,7 +81,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
                 var listener = await serverData.ServerTask;
                 Assert.Equal(
                     new CompletionData(CompletionReason.RequestCompleted, shutdownRequested: true),
-                    listener.CompletionDataList.Single());
+                    listener.CompletionDataList.Single()
+                );
             }
 
             /// <summary>
@@ -99,22 +110,30 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
                     bool created = false;
                     bool connected = false;
 
-                    var thread = new Thread(() =>
-                    {
-                        using (var mutex = new Mutex(initiallyOwned: true, name: mutexName, createdNew: out created))
-                        using (var stream = NamedPipeUtil.CreateServer(pipeName))
+                    var thread = new Thread(
+                        () =>
                         {
-                            readyMre.Set();
+                            using (
+                                var mutex = new Mutex(
+                                    initiallyOwned: true,
+                                    name: mutexName,
+                                    createdNew: out created
+                                )
+                            )
+                            using (var stream = NamedPipeUtil.CreateServer(pipeName))
+                            {
+                                readyMre.Set();
 
-                            // Get a client connection and then immediately close it.  Don't give any response.
-                            stream.WaitForConnection();
-                            connected = true;
-                            stream.Close();
+                                // Get a client connection and then immediately close it.  Don't give any response.
+                                stream.WaitForConnection();
+                                connected = true;
+                                stream.Close();
 
-                            doneMre.WaitOne();
-                            mutex.ReleaseMutex();
+                                doneMre.WaitOne();
+                                mutex.ReleaseMutex();
+                            }
                         }
-                    });
+                    );
 
                     // Block until the mutex and named pipe is setup.
                     thread.Start();
@@ -149,25 +168,31 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
                     bool created = false;
                     bool connected = false;
 
-                    var thread = new Thread(() =>
-                    {
-                        using (var stream = NamedPipeUtil.CreateServer(pipeName))
+                    var thread = new Thread(
+                        () =>
                         {
-                            var mutex = new Mutex(initiallyOwned: true, name: mutexName, createdNew: out created);
-                            readyMre.Set();
+                            using (var stream = NamedPipeUtil.CreateServer(pipeName))
+                            {
+                                var mutex = new Mutex(
+                                    initiallyOwned: true,
+                                    name: mutexName,
+                                    createdNew: out created
+                                );
+                                readyMre.Set();
 
-                            stream.WaitForConnection();
-                            connected = true;
+                                stream.WaitForConnection();
+                                connected = true;
 
-                            // Client is waiting for a response.  Close the mutex now.  Then close the connection 
-                            // so the client gets an error.
-                            mutex.ReleaseMutex();
-                            mutex.Dispose();
-                            stream.Close();
+                                // Client is waiting for a response.  Close the mutex now.  Then close the connection
+                                // so the client gets an error.
+                                mutex.ReleaseMutex();
+                                mutex.Dispose();
+                                stream.Close();
 
-                            doneMre.WaitOne();
+                                doneMre.WaitOne();
+                            }
                         }
-                    });
+                    );
 
                     // Block until the mutex and named pipe is setup.
                     thread.Start();
@@ -195,21 +220,26 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
                 using var startedMre = new ManualResetEvent(initialState: false);
                 using var finishedMre = new ManualResetEvent(initialState: false);
 
-                // Create a compilation that is guaranteed to complete after the shutdown is seen. 
-                var compilerServerHost = new TestableCompilerServerHost((request, cancellationToken) =>
-                {
-                    startedMre.Set();
-                    finishedMre.WaitOne();
-                    return ProtocolUtil.EmptyBuildResponse;
-                });
+                // Create a compilation that is guaranteed to complete after the shutdown is seen.
+                var compilerServerHost = new TestableCompilerServerHost(
+                    (request, cancellationToken) =>
+                    {
+                        startedMre.Set();
+                        finishedMre.WaitOne();
+                        return ProtocolUtil.EmptyBuildResponse;
+                    }
+                );
 
-                using var serverData = await ServerUtil.CreateServer(Logger, compilerServerHost: compilerServerHost);
+                using var serverData = await ServerUtil.CreateServer(
+                    Logger,
+                    compilerServerHost: compilerServerHost
+                );
 
                 // Get the server to the point that it is running the compilation.
                 var compileTask = serverData.SendAsync(ProtocolUtil.EmptyCSharpBuildRequest);
                 startedMre.WaitOne();
 
-                // The compilation is now in progress, send the shutdown and verify that the 
+                // The compilation is now in progress, send the shutdown and verify that the
                 // compilation is still running.
                 await serverData.SendShutdownAsync();
                 Assert.False(compileTask.IsCompleted);
@@ -234,21 +264,26 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
                 using var startedMre = new ManualResetEvent(initialState: false);
                 using var finishedMre = new ManualResetEvent(initialState: false);
 
-                // Create a compilation that is guaranteed to complete after the shutdown is seen. 
-                var compilerServerHost = new TestableCompilerServerHost((request, cancellationToken) =>
-                {
-                    startedMre.Set();
-                    finishedMre.WaitOne();
-                    return ProtocolUtil.EmptyBuildResponse;
-                });
+                // Create a compilation that is guaranteed to complete after the shutdown is seen.
+                var compilerServerHost = new TestableCompilerServerHost(
+                    (request, cancellationToken) =>
+                    {
+                        startedMre.Set();
+                        finishedMre.WaitOne();
+                        return ProtocolUtil.EmptyBuildResponse;
+                    }
+                );
 
-                using var serverData = await ServerUtil.CreateServer(Logger, compilerServerHost: compilerServerHost);
+                using var serverData = await ServerUtil.CreateServer(
+                    Logger,
+                    compilerServerHost: compilerServerHost
+                );
 
                 // Get the server to the point that it is running the compilation.
                 var compileTask = serverData.SendAsync(ProtocolUtil.EmptyCSharpBuildRequest);
                 startedMre.WaitOne();
 
-                // The compilation is now in progress, send the shutdown and verify that the 
+                // The compilation is now in progress, send the shutdown and verify that the
                 // compilation is still running.
                 await serverData.SendShutdownAsync();
                 await serverData.SendShutdownAsync();
@@ -280,11 +315,14 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
             [Fact]
             public async Task NoConnections()
             {
-                var compilerServerHost = new TestableCompilerServerHost((request, cancellationToken) => ProtocolUtil.EmptyBuildResponse);
+                var compilerServerHost = new TestableCompilerServerHost(
+                    (request, cancellationToken) => ProtocolUtil.EmptyBuildResponse
+                );
                 using var serverData = await ServerUtil.CreateServer(
                     Logger,
                     keepAlive: TimeSpan.FromSeconds(3),
-                    compilerServerHost: compilerServerHost);
+                    compilerServerHost: compilerServerHost
+                );
 
                 // Don't use Complete here because we want to see the server shutdown naturally
                 var listener = await serverData.ServerTask;
@@ -295,21 +333,33 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
             /// <summary>
             /// Ensure server respects keep alive and shuts down after processing a single connection.
             /// </summary>
-            [ConditionalTheory(typeof(WindowsOnly), Reason = "https://github.com/dotnet/roslyn/issues/46447")]
+            [ConditionalTheory(
+                typeof(WindowsOnly),
+                Reason = "https://github.com/dotnet/roslyn/issues/46447"
+            )]
             [InlineData(1)]
             [InlineData(2)]
             [InlineData(3)]
             public async Task SimpleCases(int connectionCount)
             {
-                var compilerServerHost = new TestableCompilerServerHost((request, cancellationToken) => ProtocolUtil.EmptyBuildResponse);
-                using var serverData = await ServerUtil.CreateServer(Logger, compilerServerHost: compilerServerHost);
+                var compilerServerHost = new TestableCompilerServerHost(
+                    (request, cancellationToken) => ProtocolUtil.EmptyBuildResponse
+                );
+                using var serverData = await ServerUtil.CreateServer(
+                    Logger,
+                    compilerServerHost: compilerServerHost
+                );
                 var workingDirectory = TempRoot.CreateDirectory().Path;
 
                 for (var i = 0; i < connectionCount; i++)
                 {
-                    var request = i + 1 >= connectionCount
-                        ? ProtocolUtil.CreateEmptyCSharpWithKeepAlive(TimeSpan.FromSeconds(3), workingDirectory)
-                        : ProtocolUtil.EmptyCSharpBuildRequest;
+                    var request =
+                        i + 1 >= connectionCount
+                            ? ProtocolUtil.CreateEmptyCSharpWithKeepAlive(
+                                  TimeSpan.FromSeconds(3),
+                                  workingDirectory
+                              )
+                            : ProtocolUtil.EmptyCSharpBuildRequest;
                     await serverData.SendAsync(request);
                 }
 
@@ -317,25 +367,36 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
                 var listener = await serverData.ServerTask;
                 Assert.True(listener.KeepAliveHit);
                 Assert.Equal(connectionCount, listener.CompletionDataList.Count);
-                Assert.All(listener.CompletionDataList, cd => Assert.Equal(CompletionReason.RequestCompleted, cd.Reason));
+                Assert.All(
+                    listener.CompletionDataList,
+                    cd => Assert.Equal(CompletionReason.RequestCompleted, cd.Reason)
+                );
             }
 
             /// <summary>
             /// Ensure server respects keep alive and shuts down after processing simultaneous connections.
             /// </summary>
-            [ConditionalTheory(typeof(WindowsOnly), Reason = "https://github.com/dotnet/roslyn/issues/46447")]
+            [ConditionalTheory(
+                typeof(WindowsOnly),
+                Reason = "https://github.com/dotnet/roslyn/issues/46447"
+            )]
             [InlineData(2)]
             [InlineData(3)]
             public async Task SimultaneousConnections(int connectionCount)
             {
                 using var readyMre = new ManualResetEvent(initialState: false);
-                var compilerServerHost = new TestableCompilerServerHost((request, cancellationToken) =>
-                {
-                    readyMre.WaitOne();
-                    return ProtocolUtil.EmptyBuildResponse;
-                });
+                var compilerServerHost = new TestableCompilerServerHost(
+                    (request, cancellationToken) =>
+                    {
+                        readyMre.WaitOne();
+                        return ProtocolUtil.EmptyBuildResponse;
+                    }
+                );
 
-                using var serverData = await ServerUtil.CreateServer(Logger, compilerServerHost: compilerServerHost);
+                using var serverData = await ServerUtil.CreateServer(
+                    Logger,
+                    compilerServerHost: compilerServerHost
+                );
                 var list = new List<Task>();
                 for (var i = 0; i < connectionCount; i++)
                 {
@@ -345,14 +406,22 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
                 readyMre.Set();
 
                 var workingDirectory = TempRoot.CreateDirectory().Path;
-                await serverData.SendAsync(ProtocolUtil.CreateEmptyCSharpWithKeepAlive(TimeSpan.FromSeconds(3), workingDirectory));
+                await serverData.SendAsync(
+                    ProtocolUtil.CreateEmptyCSharpWithKeepAlive(
+                        TimeSpan.FromSeconds(3),
+                        workingDirectory
+                    )
+                );
                 await Task.WhenAll(list);
 
                 // Don't use Complete here because we want to see the server shutdown naturally
                 var listener = await serverData.ServerTask;
                 Assert.True(listener.KeepAliveHit);
                 Assert.Equal(connectionCount + 1, listener.CompletionDataList.Count);
-                Assert.All(listener.CompletionDataList, cd => Assert.Equal(CompletionReason.RequestCompleted, cd.Reason));
+                Assert.All(
+                    listener.CompletionDataList,
+                    cd => Assert.Equal(CompletionReason.RequestCompleted, cd.Reason)
+                );
             }
         }
 
@@ -369,12 +438,17 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
             public async Task CompilationExceptionShouldShutdown()
             {
                 var hitCompilation = false;
-                var compilerServerHost = new TestableCompilerServerHost(delegate
-                {
-                    hitCompilation = true;
-                    throw new Exception("");
-                });
-                using var serverData = await ServerUtil.CreateServer(Logger, compilerServerHost: compilerServerHost);
+                var compilerServerHost = new TestableCompilerServerHost(
+                    delegate
+                    {
+                        hitCompilation = true;
+                        throw new Exception("");
+                    }
+                );
+                using var serverData = await ServerUtil.CreateServer(
+                    Logger,
+                    compilerServerHost: compilerServerHost
+                );
 
                 var response = await serverData.SendAsync(ProtocolUtil.EmptyBasicBuildRequest);
                 Assert.True(response is RejectedBuildResponse);
@@ -389,12 +463,19 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
             [Fact]
             public async Task AnalyzerInconsistencyShouldShutdown()
             {
-                var compilerServerHost = new TestableCompilerServerHost(delegate
-                {
-                    return new AnalyzerInconsistencyBuildResponse(new ReadOnlyCollection<string>(Array.Empty<string>()));
-                });
+                var compilerServerHost = new TestableCompilerServerHost(
+                    delegate
+                    {
+                        return new AnalyzerInconsistencyBuildResponse(
+                            new ReadOnlyCollection<string>(Array.Empty<string>())
+                        );
+                    }
+                );
 
-                using var serverData = await ServerUtil.CreateServer(Logger, compilerServerHost: compilerServerHost);
+                using var serverData = await ServerUtil.CreateServer(
+                    Logger,
+                    compilerServerHost: compilerServerHost
+                );
 
                 var response = await serverData.SendAsync(ProtocolUtil.EmptyBasicBuildRequest);
                 Assert.True(response is AnalyzerInconsistencyBuildResponse);

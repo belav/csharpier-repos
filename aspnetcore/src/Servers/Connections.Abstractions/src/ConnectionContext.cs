@@ -32,6 +32,11 @@ namespace Microsoft.AspNetCore.Connections
         /// <summary>
         /// Aborts the underlying connection.
         /// </summary>
-        public override void Abort() => Abort(new ConnectionAbortedException("The connection was aborted by the application via ConnectionContext.Abort()."));
+        public override void Abort() =>
+            Abort(
+                new ConnectionAbortedException(
+                    "The connection was aborted by the application via ConnectionContext.Abort()."
+                )
+            );
     }
 }

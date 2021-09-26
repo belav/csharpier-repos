@@ -25,7 +25,8 @@ namespace Microsoft.AspNetCore.TestHost
 
         public override bool CanWrite => _inner.CanWrite;
 
-        public override long Length => throw new NotSupportedException("The stream is not seekable.");
+        public override long Length =>
+            throw new NotSupportedException("The stream is not seekable.");
 
         public override long Position
         {
@@ -48,23 +49,39 @@ namespace Microsoft.AspNetCore.TestHost
         {
             if (!_allowSynchronousIO())
             {
-                throw new InvalidOperationException("Synchronous operations are disallowed. Call ReadAsync or set AllowSynchronousIO to true.");
+                throw new InvalidOperationException(
+                    "Synchronous operations are disallowed. Call ReadAsync or set AllowSynchronousIO to true."
+                );
             }
 
             return _inner.Read(buffer, offset, count);
         }
 
-        public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override Task<int> ReadAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             return _inner.ReadAsync(buffer, offset, count, cancellationToken);
         }
 
-        public override ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken = default)
+        public override ValueTask<int> ReadAsync(
+            Memory<byte> buffer,
+            CancellationToken cancellationToken = default
+        )
         {
             return _inner.ReadAsync(buffer, cancellationToken);
         }
 
-        public override IAsyncResult BeginRead(byte[] buffer, int offset, int count, AsyncCallback? callback, object? state)
+        public override IAsyncResult BeginRead(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback? callback,
+            object? state
+        )
         {
             return _inner.BeginRead(buffer, offset, count, callback, state);
         }
@@ -88,13 +105,21 @@ namespace Microsoft.AspNetCore.TestHost
         {
             if (!_allowSynchronousIO())
             {
-                throw new InvalidOperationException("Synchronous operations are disallowed. Call WriteAsync or set AllowSynchronousIO to true.");
+                throw new InvalidOperationException(
+                    "Synchronous operations are disallowed. Call WriteAsync or set AllowSynchronousIO to true."
+                );
             }
 
             _inner.Write(buffer, offset, count);
         }
 
-        public override IAsyncResult BeginWrite(byte[] buffer, int offset, int count, AsyncCallback? callback, object? state)
+        public override IAsyncResult BeginWrite(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback? callback,
+            object? state
+        )
         {
             return _inner.BeginWrite(buffer, offset, count, callback, state);
         }
@@ -104,12 +129,20 @@ namespace Microsoft.AspNetCore.TestHost
             _inner.EndWrite(asyncResult);
         }
 
-        public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override Task WriteAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             return _inner.WriteAsync(buffer, offset, count, cancellationToken);
         }
 
-        public override ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken = default)
+        public override ValueTask WriteAsync(
+            ReadOnlyMemory<byte> buffer,
+            CancellationToken cancellationToken = default
+        )
         {
             return _inner.WriteAsync(buffer, cancellationToken);
         }

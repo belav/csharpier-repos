@@ -17,27 +17,22 @@ namespace Microsoft.CodeAnalysis
         /// An .exe with an entry point and a console.
         /// </summary>
         ConsoleApplication = 0,
-
         /// <summary>
         /// An .exe with an entry point but no console.
         /// </summary>
         WindowsApplication = 1,
-
         /// <summary>
         /// A .dll file.
         /// </summary>
         DynamicallyLinkedLibrary = 2,
-
         /// <summary>
         /// A .netmodule file.
         /// </summary>
         NetModule = 3,
-
         /// <summary>
         /// A .winmdobj file.
         /// </summary>
         WindowsRuntimeMetadata = 4,
-
         /// <summary>
         /// An .exe that can run in an app container.
         /// </summary>
@@ -53,7 +48,8 @@ namespace Microsoft.CodeAnalysis
     {
         internal static bool IsValid(this OutputKind value)
         {
-            return value >= OutputKind.ConsoleApplication && value <= OutputKind.WindowsRuntimeApplication;
+            return value >= OutputKind.ConsoleApplication
+                && value <= OutputKind.WindowsRuntimeApplication;
         }
 
         internal static string GetDefaultExtension(this OutputKind kind)

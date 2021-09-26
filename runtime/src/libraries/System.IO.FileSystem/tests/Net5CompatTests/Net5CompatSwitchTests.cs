@@ -15,8 +15,7 @@ namespace System.IO.Tests
 
             using (FileStream fileStream = File.Create(filePath))
             {
-                object strategy = fileStream
-                    .GetType()
+                object strategy = fileStream.GetType()
                     .GetField("_strategy", BindingFlags.NonPublic | BindingFlags.Instance)
                     .GetValue(fileStream);
 

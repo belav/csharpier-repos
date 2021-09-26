@@ -34,7 +34,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
             ICosmosClientWrapper cosmosClient,
             IDesignTimeModel designTimeModel,
             IUpdateAdapterFactory updateAdapterFactory,
-            IDatabase database)
+            IDatabase database
+        )
         {
             _cosmosClient = cosmosClient;
             _designTimeModel = designTimeModel;
@@ -58,7 +59,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
                 {
                     created |= _cosmosClient.CreateContainerIfNotExists(
                         containerName,
-                        GetPartitionKeyStoreName(entityType));
+                        GetPartitionKeyStoreName(entityType)
+                    );
                 }
             }
 
@@ -76,7 +78,9 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual async Task<bool> EnsureCreatedAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<bool> EnsureCreatedAsync(
+            CancellationToken cancellationToken = default
+        )
         {
             var created = await _cosmosClient.CreateDatabaseIfNotExistsAsync(cancellationToken)
                 .ConfigureAwait(false);
@@ -88,7 +92,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
                     created |= await _cosmosClient.CreateContainerIfNotExistsAsync(
                             containerName,
                             GetPartitionKeyStoreName(entityType),
-                            cancellationToken)
+                            cancellationToken
+                        )
                         .ConfigureAwait(false);
                 }
             }
@@ -150,8 +155,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual bool EnsureDeleted()
-            => _cosmosClient.DeleteDatabase();
+        public virtual bool EnsureDeleted() => _cosmosClient.DeleteDatabase();
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -159,8 +163,9 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual Task<bool> EnsureDeletedAsync(CancellationToken cancellationToken = default)
-            => _cosmosClient.DeleteDatabaseAsync(cancellationToken);
+        public virtual Task<bool> EnsureDeletedAsync(
+            CancellationToken cancellationToken = default
+        ) => _cosmosClient.DeleteDatabaseAsync(cancellationToken);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -168,8 +173,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual bool CanConnect()
-            => throw new NotSupportedException(CosmosStrings.CanConnectNotSupported);
+        public virtual bool CanConnect() =>
+            throw new NotSupportedException(CosmosStrings.CanConnectNotSupported);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -177,8 +182,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual Task<bool> CanConnectAsync(CancellationToken cancellationToken = default)
-            => throw new NotSupportedException(CosmosStrings.CanConnectNotSupported);
+        public virtual Task<bool> CanConnectAsync(CancellationToken cancellationToken = default) =>
+            throw new NotSupportedException(CosmosStrings.CanConnectNotSupported);
 
         /// <summary>
         ///     Returns the store name of the property that is used to store the partition key.

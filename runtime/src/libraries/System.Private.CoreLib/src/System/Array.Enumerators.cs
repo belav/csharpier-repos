@@ -12,8 +12,8 @@ namespace System
         private readonly Array array;
         private int index;
         private readonly int endIndex;
-        private readonly int startIndex;    // Save for Reset.
-        private readonly int[] _indices;    // The current position in a multidim array
+        private readonly int startIndex; // Save for Reset.
+        private readonly int[] _indices; // The current position in a multidim array
         private bool _complete;
 
         internal ArrayEnumerator(Array array, int index, int count)
@@ -23,7 +23,7 @@ namespace System
             startIndex = index;
             endIndex = index + count;
             _indices = new int[array.Rank];
-            int checkForZero = 1;  // Check for dimensions of size 0.
+            int checkForZero = 1; // Check for dimensions of size 0.
             for (int i = 0; i < array.Rank; i++)
             {
                 _indices[i] = array.GetLowerBound(i);
@@ -84,8 +84,10 @@ namespace System
         {
             get
             {
-                if (index < startIndex) ThrowHelper.ThrowInvalidOperationException_InvalidOperation_EnumNotStarted();
-                if (_complete) ThrowHelper.ThrowInvalidOperationException_InvalidOperation_EnumEnded();
+                if (index < startIndex)
+                    ThrowHelper.ThrowInvalidOperationException_InvalidOperation_EnumNotStarted();
+                if (_complete)
+                    ThrowHelper.ThrowInvalidOperationException_InvalidOperation_EnumEnded();
                 return array.GetValue(_indices);
             }
         }
@@ -113,7 +115,10 @@ namespace System
 
         internal SZArrayEnumerator(Array array)
         {
-            Debug.Assert(array.Rank == 1 && array.GetLowerBound(0) == 0, "SZArrayEnumerator only works on single dimension arrays w/ a lower bound of zero.");
+            Debug.Assert(
+                array.Rank == 1 && array.GetLowerBound(0) == 0,
+                "SZArrayEnumerator only works on single dimension arrays w/ a lower bound of zero."
+            );
 
             _array = array;
             _index = -1;
@@ -161,7 +166,8 @@ namespace System
         // Array.Empty is intentionally omitted here, since we don't want to pay for generic instantiations that
         // wouldn't have otherwise been used.
 #pragma warning disable CA1825
-        internal static readonly SZGenericArrayEnumerator<T> Empty = new SZGenericArrayEnumerator<T>(new T[0]);
+        internal static readonly SZGenericArrayEnumerator<T> Empty =
+            new SZGenericArrayEnumerator<T>(new T[0]);
 #pragma warning restore CA1825
 
         internal SZGenericArrayEnumerator(T[] array)
@@ -204,8 +210,6 @@ namespace System
 
         void IEnumerator.Reset() => _index = -1;
 
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
     }
 }

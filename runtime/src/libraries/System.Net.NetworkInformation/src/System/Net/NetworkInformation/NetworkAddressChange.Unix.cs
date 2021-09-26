@@ -14,7 +14,8 @@ namespace System.Net.NetworkInformation
         private static volatile int s_socket;
         // Lock controlling access to delegate subscriptions, socket initialization, availability-changed state and timer.
         private static readonly object s_gate = new object();
-        private static readonly Interop.Sys.NetworkChangeEvent s_networkChangeCallback = ProcessEvent;
+        private static readonly Interop.Sys.NetworkChangeEvent s_networkChangeCallback =
+            ProcessEvent;
 
         // The "leniency" window for NetworkAvailabilityChanged socket events.
         // All socket events received within this duration will be coalesced into a
@@ -22,7 +23,8 @@ namespace System.Net.NetworkInformation
         // and we are not interested in all of them, just the fact that network availability
         // has potentially changed as a result.
         private const int AvailabilityTimerWindowMilliseconds = 150;
-        private static readonly TimerCallback s_availabilityTimerFiredCallback = OnAvailabilityTimerFired;
+        private static readonly TimerCallback s_availabilityTimerFiredCallback =
+            OnAvailabilityTimerFired;
         private static Timer? s_availabilityTimer;
         private static bool s_availabilityHasChanged;
 
@@ -49,15 +51,23 @@ namespace System.Net.NetworkInformation
                 {
                     lock (s_gate)
                     {
-                        if (s_addressChangedSubscribers.Count == 0 && s_availabilityChangedSubscribers.Count == 0)
+                        if (
+                            s_addressChangedSubscribers.Count == 0
+                            && s_availabilityChangedSubscribers.Count == 0
+                        )
                         {
-                            Debug.Assert(s_socket == 0,
-                                "s_socket != 0, but there are no subscribers to NetworkAddressChanged or NetworkAvailabilityChanged.");
+                            Debug.Assert(
+                                s_socket == 0,
+                                "s_socket != 0, but there are no subscribers to NetworkAddressChanged or NetworkAvailabilityChanged."
+                            );
                             return;
                         }
 
                         s_addressChangedSubscribers.Remove(value);
-                        if (s_addressChangedSubscribers.Count == 0 && s_availabilityChangedSubscribers.Count == 0)
+                        if (
+                            s_addressChangedSubscribers.Count == 0
+                            && s_availabilityChangedSubscribers.Count == 0
+                        )
                         {
                             CloseSocket();
                         }
@@ -91,8 +101,14 @@ namespace System.Net.NetworkInformation
                                     restoreFlow = true;
                                 }
 
-                                s_availabilityTimer = new Timer(s_availabilityTimerFiredCallback, null, Timeout.Infinite, Timeout.Infinite);
+                                s_availabilityTimer = new Timer(
+                                    s_availabilityTimerFiredCallback,
+                                    null,
+                                    Timeout.Infinite,
+                                    Timeout.Infinite
+                                );
                             }
+
                             finally
                             {
                                 // Restore the current ExecutionContext
@@ -111,10 +127,15 @@ namespace System.Net.NetworkInformation
                 {
                     lock (s_gate)
                     {
-                        if (s_addressChangedSubscribers.Count == 0 && s_availabilityChangedSubscribers.Count == 0)
+                        if (
+                            s_addressChangedSubscribers.Count == 0
+                            && s_availabilityChangedSubscribers.Count == 0
+                        )
                         {
-                            Debug.Assert(s_socket == 0,
-                                "s_socket != 0, but there are no subscribers to NetworkAddressChanged or NetworkAvailabilityChanged.");
+                            Debug.Assert(
+                                s_socket == 0,
+                                "s_socket != 0, but there are no subscribers to NetworkAddressChanged or NetworkAvailabilityChanged."
+                            );
                             return;
                         }
 
@@ -140,7 +161,10 @@ namespace System.Net.NetworkInformation
 
         private static void CreateSocket()
         {
-            Debug.Assert(s_socket == 0, "s_socket != 0, must close existing socket before opening another.");
+            Debug.Assert(
+                s_socket == 0,
+                "s_socket != 0, must close existing socket before opening another."
+            );
             int newSocket;
             Interop.Error result = Interop.Sys.CreateNetworkChangeListenerSocket(out newSocket);
             if (result != Interop.Error.SUCCESS)
@@ -218,20 +242,30 @@ namespace System.Net.NetworkInformation
 
         private static void OnAddressChanged()
         {
-            Dictionary<NetworkAddressChangedEventHandler, ExecutionContext?>? addressChangedSubscribers = null;
+            Dictionary<
+                NetworkAddressChangedEventHandler,
+                ExecutionContext?
+            >? addressChangedSubscribers = null;
 
             lock (s_gate)
             {
                 if (s_addressChangedSubscribers.Count > 0)
                 {
-                    addressChangedSubscribers = new Dictionary<NetworkAddressChangedEventHandler, ExecutionContext?>(s_addressChangedSubscribers);
+                    addressChangedSubscribers = new Dictionary<
+                        NetworkAddressChangedEventHandler,
+                        ExecutionContext?
+                    >(s_addressChangedSubscribers);
                 }
             }
 
             if (addressChangedSubscribers != null)
             {
-                foreach (KeyValuePair<NetworkAddressChangedEventHandler, ExecutionContext?>
-                    subscriber in addressChangedSubscribers)
+                foreach (
+                    KeyValuePair<
+                        NetworkAddressChangedEventHandler,
+                        ExecutionContext?
+                    > subscriber in addressChangedSubscribers
+                )
                 {
                     NetworkAddressChangedEventHandler handler = subscriber.Key;
                     ExecutionContext? ec = subscriber.Value;
@@ -250,7 +284,10 @@ namespace System.Net.NetworkInformation
 
         private static void OnAvailabilityTimerFired(object? state)
         {
-            Dictionary<NetworkAvailabilityChangedEventHandler, ExecutionContext?>? availabilityChangedSubscribers = null;
+            Dictionary<
+                NetworkAvailabilityChangedEventHandler,
+                ExecutionContext?
+            >? availabilityChangedSubscribers = null;
 
             lock (s_gate)
             {
@@ -259,9 +296,10 @@ namespace System.Net.NetworkInformation
                     s_availabilityHasChanged = false;
                     if (s_availabilityChangedSubscribers.Count > 0)
                     {
-                        availabilityChangedSubscribers =
-                            new Dictionary<NetworkAvailabilityChangedEventHandler, ExecutionContext?>(
-                                s_availabilityChangedSubscribers);
+                        availabilityChangedSubscribers = new Dictionary<
+                            NetworkAvailabilityChangedEventHandler,
+                            ExecutionContext?
+                        >(s_availabilityChangedSubscribers);
                     }
                 }
             }
@@ -269,11 +307,19 @@ namespace System.Net.NetworkInformation
             if (availabilityChangedSubscribers != null)
             {
                 bool isAvailable = NetworkInterface.GetIsNetworkAvailable();
-                NetworkAvailabilityEventArgs args = isAvailable ? s_availableEventArgs : s_notAvailableEventArgs;
-                ContextCallback callbackContext = isAvailable ? s_runHandlerAvailable : s_runHandlerNotAvailable;
+                NetworkAvailabilityEventArgs args = isAvailable
+                    ? s_availableEventArgs
+                    : s_notAvailableEventArgs;
+                ContextCallback callbackContext = isAvailable
+                    ? s_runHandlerAvailable
+                    : s_runHandlerNotAvailable;
 
-                foreach (KeyValuePair<NetworkAvailabilityChangedEventHandler, ExecutionContext?>
-                    subscriber in availabilityChangedSubscribers)
+                foreach (
+                    KeyValuePair<
+                        NetworkAvailabilityChangedEventHandler,
+                        ExecutionContext?
+                    > subscriber in availabilityChangedSubscribers
+                )
                 {
                     NetworkAvailabilityChangedEventHandler handler = subscriber.Key;
                     ExecutionContext? ec = subscriber.Value;

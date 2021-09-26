@@ -20,19 +20,48 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         {
             get
             {
-                yield return new object[] {
-                    "Details", "Product", new { isprint = "true", showreviews = "true" }, "https", "www.contoso.com", "h1",
-                    new { p1 = "p1-value" } };
-                yield return new object[] {
-                    "Details", "Product", new { isprint = "true", showreviews = "true" }, "https", "www.contoso.com", null, null };
-                yield return new object[] {
-                    "Details", "Product", new { isprint = "true", showreviews = "true" }, "https", null, null, null };
-                yield return new object[] {
-                    "Details", "Product", new { isprint = "true", showreviews = "true" }, null, null, null, null };
-                yield return new object[] {
-                    "Details", "Product", null, null, null, null, null };
-                yield return new object[] {
-                    null, null, null, null, null, null, null };
+                yield return new object[]
+                {
+                    "Details",
+                    "Product",
+                    new { isprint = "true", showreviews = "true" },
+                    "https",
+                    "www.contoso.com",
+                    "h1",
+                    new { p1 = "p1-value" }
+                };
+                yield return new object[]
+                {
+                    "Details",
+                    "Product",
+                    new { isprint = "true", showreviews = "true" },
+                    "https",
+                    "www.contoso.com",
+                    null,
+                    null
+                };
+                yield return new object[]
+                {
+                    "Details",
+                    "Product",
+                    new { isprint = "true", showreviews = "true" },
+                    "https",
+                    null,
+                    null,
+                    null
+                };
+                yield return new object[]
+                {
+                    "Details",
+                    "Product",
+                    new { isprint = "true", showreviews = "true" },
+                    null,
+                    null,
+                    null,
+                    null
+                };
+                yield return new object[] { "Details", "Product", null, null, null, null, null };
+                yield return new object[] { null, null, null, null, null, null, null };
             }
         }
 
@@ -45,7 +74,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             string protocol,
             string hostname,
             string fragment,
-            object htmlAttributes)
+            object htmlAttributes
+        )
         {
             //Arrange
             var expectedLink = string.Format(
@@ -57,21 +87,25 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
                 action,
                 GetRouteValuesAsString(routeValues),
                 fragment,
-                GetHtmlAttributesAsString(htmlAttributes));
+                GetHtmlAttributesAsString(htmlAttributes)
+            );
             expectedLink = expectedLink.Replace("HtmlEncode[[]]", string.Empty);
 
             var urlHelper = new Mock<IUrlHelper>();
             urlHelper.Setup(h => h.Action(It.IsAny<UrlActionContext>()))
-                .Returns<UrlActionContext>((actionContext) =>
-                    string.Format(
-                    CultureInfo.InvariantCulture,
-                    "{0}{1}{2}{3}{4}{5}",
-                    actionContext.Protocol,
-                    actionContext.Host,
-                    actionContext.Controller,
-                    actionContext.Action,
-                    GetRouteValuesAsString(actionContext.Values),
-                    actionContext.Fragment));
+                .Returns<UrlActionContext>(
+                    (actionContext) =>
+                        string.Format(
+                            CultureInfo.InvariantCulture,
+                            "{0}{1}{2}{3}{4}{5}",
+                            actionContext.Protocol,
+                            actionContext.Host,
+                            actionContext.Controller,
+                            actionContext.Action,
+                            GetRouteValuesAsString(actionContext.Values),
+                            actionContext.Fragment
+                        )
+                );
 
             var htmlHelper = DefaultTemplatesUtilities.GetHtmlHelper(urlHelper.Object);
 
@@ -84,7 +118,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
                 hostname: hostname,
                 fragment: fragment,
                 routeValues: routeValues,
-                htmlAttributes: htmlAttributes);
+                htmlAttributes: htmlAttributes
+            );
 
             // Assert
             Assert.Equal(expectedLink, HtmlContentUtilities.HtmlContentToString(actualLink));
@@ -94,17 +129,43 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         {
             get
             {
-                yield return new object[] {
-                    "default", new { isprint = "true", showreviews = "true" }, "https", "www.contoso.com", "h1",
-                    new { p1 = "p1-value" } };
-                yield return new object[] {
-                    "default", new { isprint = "true", showreviews = "true" }, "https", "www.contoso.com", null, null };
-                yield return new object[] {
-                    "default", new { isprint = "true", showreviews = "true" }, "https", null, null, null };
-                yield return new object[] {
-                    "default", new { isprint = "true", showreviews = "true" }, null, null, null, null };
-                yield return new object[] {
-                    "default", null, null, null, null, null };
+                yield return new object[]
+                {
+                    "default",
+                    new { isprint = "true", showreviews = "true" },
+                    "https",
+                    "www.contoso.com",
+                    "h1",
+                    new { p1 = "p1-value" }
+                };
+                yield return new object[]
+                {
+                    "default",
+                    new { isprint = "true", showreviews = "true" },
+                    "https",
+                    "www.contoso.com",
+                    null,
+                    null
+                };
+                yield return new object[]
+                {
+                    "default",
+                    new { isprint = "true", showreviews = "true" },
+                    "https",
+                    null,
+                    null,
+                    null
+                };
+                yield return new object[]
+                {
+                    "default",
+                    new { isprint = "true", showreviews = "true" },
+                    null,
+                    null,
+                    null,
+                    null
+                };
+                yield return new object[] { "default", null, null, null, null, null };
             }
         }
 
@@ -116,7 +177,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             string protocol,
             string hostname,
             string fragment,
-            object htmlAttributes)
+            object htmlAttributes
+        )
         {
             //Arrange
             var expectedLink = string.Format(
@@ -126,20 +188,23 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
                 hostname,
                 GetRouteValuesAsString(routeValues),
                 fragment,
-                GetHtmlAttributesAsString(htmlAttributes));
+                GetHtmlAttributesAsString(htmlAttributes)
+            );
             expectedLink = expectedLink.Replace("HtmlEncode[[]]", string.Empty);
 
             var urlHelper = new Mock<IUrlHelper>();
-            urlHelper
-                .Setup(
-                    h => h.RouteUrl(It.IsAny<UrlRouteContext>())).Returns<UrlRouteContext>((context) =>
+            urlHelper.Setup(h => h.RouteUrl(It.IsAny<UrlRouteContext>()))
+                .Returns<UrlRouteContext>(
+                    (context) =>
                         string.Format(
-                        CultureInfo.InvariantCulture,
-                        "{0}{1}{2}{3}",
-                        context.Protocol,
-                        context.Host,
-                        GetRouteValuesAsString(context.Values),
-                        context.Fragment));
+                            CultureInfo.InvariantCulture,
+                            "{0}{1}{2}{3}",
+                            context.Protocol,
+                            context.Host,
+                            GetRouteValuesAsString(context.Values),
+                            context.Fragment
+                        )
+                );
 
             var htmlHelper = DefaultTemplatesUtilities.GetHtmlHelper(urlHelper.Object);
 
@@ -151,7 +216,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
                 hostName: hostname,
                 fragment: fragment,
                 routeValues: routeValues,
-                htmlAttributes: htmlAttributes);
+                htmlAttributes: htmlAttributes
+            );
 
             // Assert
             Assert.Equal(expectedLink, HtmlContentUtilities.HtmlContentToString(actualLink));
@@ -160,13 +226,35 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         private string GetRouteValuesAsString(object routeValues)
         {
             var dict = PropertyHelper.ObjectToDictionary(routeValues);
-            return string.Join(string.Empty, dict.Select(kvp => string.Format(CultureInfo.InvariantCulture, "{0}={1}", kvp.Key, kvp.Value.ToString())));
+            return string.Join(
+                string.Empty,
+                dict.Select(
+                    kvp =>
+                        string.Format(
+                            CultureInfo.InvariantCulture,
+                            "{0}={1}",
+                            kvp.Key,
+                            kvp.Value.ToString()
+                        )
+                )
+            );
         }
 
         private string GetHtmlAttributesAsString(object routeValues)
         {
             var dict = PropertyHelper.ObjectToDictionary(routeValues);
-            return string.Join(string.Empty, dict.Select(kvp => string.Format(CultureInfo.InvariantCulture, " {0}=\"HtmlEncode[[{1}]]\"", kvp.Key, kvp.Value.ToString())));
+            return string.Join(
+                string.Empty,
+                dict.Select(
+                    kvp =>
+                        string.Format(
+                            CultureInfo.InvariantCulture,
+                            " {0}=\"HtmlEncode[[{1}]]\"",
+                            kvp.Key,
+                            kvp.Value.ToString()
+                        )
+                )
+            );
         }
     }
 }

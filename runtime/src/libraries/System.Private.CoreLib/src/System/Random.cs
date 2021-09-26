@@ -191,17 +191,26 @@ namespace System
         }
 
         private static void ThrowMaxValueMustBeNonNegative() =>
-            throw new ArgumentOutOfRangeException("maxValue", SR.Format(SR.ArgumentOutOfRange_NeedNonNegNum, "maxValue"));
+            throw new ArgumentOutOfRangeException(
+                "maxValue",
+                SR.Format(SR.ArgumentOutOfRange_NeedNonNegNum, "maxValue")
+            );
 
         private static void ThrowMinMaxValueSwapped() =>
-            throw new ArgumentOutOfRangeException("minValue", SR.Format(SR.Argument_MinMaxValue, "minValue", "maxValue"));
+            throw new ArgumentOutOfRangeException(
+                "minValue",
+                SR.Format(SR.Argument_MinMaxValue, "minValue", "maxValue")
+            );
 
         [Conditional("DEBUG")]
         private static void AssertInRange(long result, long minInclusive, long maxExclusive)
         {
             if (maxExclusive > minInclusive)
             {
-                Debug.Assert(result >= minInclusive && result < maxExclusive, $"Expected {minInclusive} <= {result} < {maxExclusive}");
+                Debug.Assert(
+                    result >= minInclusive && result < maxExclusive,
+                    $"Expected {minInclusive} <= {result} < {maxExclusive}"
+                );
             }
             else
             {

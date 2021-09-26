@@ -21,7 +21,8 @@ using Microsoft.VisualStudio.Text.Editor.Commanding;
 
 namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
 {
-    internal abstract class AbstractGoToCommandHandler<TLanguageService, TCommandArgs> : ICommandHandler<TCommandArgs>
+    internal abstract class AbstractGoToCommandHandler<TLanguageService, TCommandArgs>
+        : ICommandHandler<TCommandArgs>
         where TLanguageService : class, ILanguageService
         where TCommandArgs : EditorCommandArgs
     {
@@ -30,7 +31,8 @@ namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
 
         public AbstractGoToCommandHandler(
             IThreadingContext threadingContext,
-            IStreamingFindUsagesPresenter streamingPresenter)
+            IStreamingFindUsagesPresenter streamingPresenter
+        )
         {
             _threadingContext = threadingContext;
             _streamingPresenter = streamingPresenter;
@@ -39,16 +41,20 @@ namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
         public abstract string DisplayName { get; }
         protected abstract string ScopeDescription { get; }
         protected abstract FunctionId FunctionId { get; }
-        protected abstract Task FindActionAsync(TLanguageService service, Document document, int caretPosition, IFindUsagesContext context);
+        protected abstract Task FindActionAsync(
+            TLanguageService service,
+            Document document,
+            int caretPosition,
+            IFindUsagesContext context
+        );
 
         public CommandState GetCommandState(TCommandArgs args)
         {
             // Because this is expensive to compute, we just always say yes as long as the language allows it.
-            var document = args.SubjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var document =
+                args.SubjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
             var findUsagesService = document?.GetLanguageService<TLanguageService>();
-            return findUsagesService != null
-                ? CommandState.Available
-                : CommandState.Unspecified;
+            return findUsagesService != null ? CommandState.Available : CommandState.Unspecified;
         }
 
         public bool ExecuteCommand(TCommandArgs args, CommandExecutionContext context)
@@ -63,12 +69,17 @@ namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
                 if (!subjectBuffer.TryGetWorkspace(out var workspace))
                     return false;
 
-                var service = workspace.Services.GetLanguageServices(args.SubjectBuffer)?.GetService<TLanguageService>();
+                var service = workspace.Services.GetLanguageServices(
+                    args.SubjectBuffer
+                )?.GetService<TLanguageService>();
                 if (service == null)
                     return false;
 
-                var document = subjectBuffer.CurrentSnapshot.GetFullyLoadedOpenDocumentInCurrentContextWithChanges(
-                    context.OperationContext, _threadingContext);
+                var document =
+                    subjectBuffer.CurrentSnapshot.GetFullyLoadedOpenDocumentInCurrentContextWithChanges(
+                        context.OperationContext,
+                        _threadingContext
+                    );
                 if (document == null)
                     return false;
 
@@ -78,9 +89,11 @@ namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
         }
 
         private void ExecuteCommand(
-           Document document, int caretPosition,
-           TLanguageService service,
-           CommandExecutionContext context)
+            Document document,
+            int caretPosition,
+            TLanguageService service,
+            CommandExecutionContext context
+        )
         {
             if (service != null)
             {
@@ -88,23 +101,38 @@ namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
                 string messageToShow = null;
 
                 var userCancellationToken = context.OperationContext.UserCancellationToken;
-                using (Logger.LogBlock(FunctionId, KeyValueLogMessage.Create(LogType.UserAction), userCancellationToken))
+                using (
+                    Logger.LogBlock(
+                        FunctionId,
+                        KeyValueLogMessage.Create(LogType.UserAction),
+                        userCancellationToken
+                    )
+                )
                 {
-                    messageToShow = _threadingContext.JoinableTaskFactory.Run(() =>
-                        NavigateToOrPresentResultsAsync(document, caretPosition, service, userCancellationToken));
+                    messageToShow = _threadingContext.JoinableTaskFactory.Run(
+                        () =>
+                            NavigateToOrPresentResultsAsync(
+                                document,
+                                caretPosition,
+                                service,
+                                userCancellationToken
+                            )
+                    );
                 }
 
                 if (messageToShow != null)
                 {
                     // We are about to show a modal UI dialog so we should take over the command execution
-                    // wait context. That means the command system won't attempt to show its own wait dialog 
+                    // wait context. That means the command system won't attempt to show its own wait dialog
                     // and also will take it into consideration when measuring command handling duration.
                     context.OperationContext.TakeOwnership();
-                    var notificationService = document.Project.Solution.Workspace.Services.GetService<INotificationService>();
+                    var notificationService =
+                        document.Project.Solution.Workspace.Services.GetService<INotificationService>();
                     notificationService.SendNotification(
                         message: messageToShow,
                         title: DisplayName,
-                        severity: NotificationSeverity.Information);
+                        severity: NotificationSeverity.Information
+                    );
                 }
             }
         }
@@ -113,11 +141,12 @@ namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
             Document document,
             int caretPosition,
             TLanguageService service,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            // We create our own context object, simply to capture all the definitions reported by 
-            // the individual TLanguageService.  Once we get the results back we'll then decide 
-            // what to do with them.  If we get only a single result back, then we'll just go 
+            // We create our own context object, simply to capture all the definitions reported by
+            // the individual TLanguageService.  Once we get the results back we'll then decide
+            // what to do with them.  If we get only a single result back, then we'll just go
             // directly to it.  Otherwise, we'll present the results in the IStreamingFindUsagesPresenter.
             var context = new SimpleFindUsagesContext(cancellationToken);
 
@@ -126,7 +155,13 @@ namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
                 return context.Message;
 
             await _streamingPresenter.TryNavigateToOrPresentItemsAsync(
-                _threadingContext, document.Project.Solution.Workspace, context.SearchTitle, context.GetDefinitions(), cancellationToken).ConfigureAwait(false);
+                    _threadingContext,
+                    document.Project.Solution.Workspace,
+                    context.SearchTitle,
+                    context.GetDefinitions(),
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             return null;
         }
     }

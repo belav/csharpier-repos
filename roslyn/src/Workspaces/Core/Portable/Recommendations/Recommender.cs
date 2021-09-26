@@ -17,22 +17,39 @@ namespace Microsoft.CodeAnalysis.Recommendations
             int position,
             Workspace workspace,
             OptionSet? options = null,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             options ??= workspace.Options;
-            var languageRecommender = workspace.Services.GetLanguageServices(semanticModel.Language).GetRequiredService<IRecommendationService>();
+            var languageRecommender = workspace.Services.GetLanguageServices(semanticModel.Language)
+                .GetRequiredService<IRecommendationService>();
 
-            return languageRecommender.GetRecommendedSymbolsAtPosition(workspace, semanticModel, position, options, cancellationToken).NamedSymbols;
+            return languageRecommender.GetRecommendedSymbolsAtPosition(
+                workspace,
+                semanticModel,
+                position,
+                options,
+                cancellationToken
+            ).NamedSymbols;
         }
 
         public static Task<IEnumerable<ISymbol>> GetRecommendedSymbolsAtPositionAsync(
-             SemanticModel semanticModel,
-             int position,
-             Workspace workspace,
-             OptionSet? options = null,
-             CancellationToken cancellationToken = default)
+            SemanticModel semanticModel,
+            int position,
+            Workspace workspace,
+            OptionSet? options = null,
+            CancellationToken cancellationToken = default
+        )
         {
-            return Task.FromResult(GetRecommendedSymbolsAtPosition(semanticModel, position, workspace, options, cancellationToken));
+            return Task.FromResult(
+                GetRecommendedSymbolsAtPosition(
+                    semanticModel,
+                    position,
+                    workspace,
+                    options,
+                    cancellationToken
+                )
+            );
         }
     }
 }

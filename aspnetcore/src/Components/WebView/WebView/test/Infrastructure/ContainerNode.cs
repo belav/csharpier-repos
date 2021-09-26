@@ -50,7 +50,9 @@ namespace Microsoft.AspNetCore.Components.WebView.Document
                 // Array.prototype.indexOf to determine its previous sibling index).
                 // But again, since there's not currently any scenario that would use it, we would not
                 // have any test coverage for such an implementation.
-                throw new NotSupportedException("Not implemented: moving existing logical children");
+                throw new NotSupportedException(
+                    "Not implemented: moving existing logical children"
+                );
             }
 
             if (childIndex < Children.Count)

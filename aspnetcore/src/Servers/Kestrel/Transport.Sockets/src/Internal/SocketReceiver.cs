@@ -10,9 +10,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.Internal
 {
     internal sealed class SocketReceiver : SocketAwaitableEventArgs
     {
-        public SocketReceiver(PipeScheduler ioScheduler) : base(ioScheduler)
-        {
-        }
+        public SocketReceiver(PipeScheduler ioScheduler) : base(ioScheduler) { }
 
         public ValueTask<int> WaitForDataAsync(Socket socket)
         {
@@ -26,9 +24,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.Internal
             var bytesTransferred = BytesTransferred;
             var error = SocketError;
 
-            return error == SocketError.Success ?
-                new ValueTask<int>(bytesTransferred) :
-               ValueTask.FromException<int>(CreateException(error));
+            return error == SocketError.Success
+              ? new ValueTask<int>(bytesTransferred)
+              : ValueTask.FromException<int>(CreateException(error));
         }
 
         public ValueTask<int> ReceiveAsync(Socket socket, Memory<byte> buffer)
@@ -43,9 +41,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.Internal
             var bytesTransferred = BytesTransferred;
             var error = SocketError;
 
-            return error == SocketError.Success ?
-                new ValueTask<int>(bytesTransferred) :
-               ValueTask.FromException<int>(CreateException(error));
+            return error == SocketError.Success
+              ? new ValueTask<int>(bytesTransferred)
+              : ValueTask.FromException<int>(CreateException(error));
         }
     }
 }

@@ -23,8 +23,7 @@ namespace Microsoft.EntityFrameworkCore
             ExecuteWithStrategyInTransaction(
                 context =>
                 {
-                    var root = context
-                        .Set<SharedFkRoot>()
+                    var root = context.Set<SharedFkRoot>()
                         .Include(e => e.Parents)
                         .Include(e => e.Dependants)
                         .Single();
@@ -97,8 +96,7 @@ namespace Microsoft.EntityFrameworkCore
                 {
                     if (!Fixture.ForceClientNoAction)
                     {
-                        var root = context
-                            .Set<SharedFkRoot>()
+                        var root = context.Set<SharedFkRoot>()
                             .Include(e => e.Parents)
                             .Include(e => e.Dependants)
                             .Single();
@@ -114,19 +112,21 @@ namespace Microsoft.EntityFrameworkCore
                         Assert.Equal(root.Id, parent.RootId);
                         Assert.Null(parent.DependantId);
                     }
-                });
+                }
+            );
         }
 
         [ConditionalTheory]
         [InlineData(false)]
         [InlineData(true)]
-        public virtual void Avoid_nulling_shared_FK_property_when_nulling_navigation(bool nullPrincipal)
+        public virtual void Avoid_nulling_shared_FK_property_when_nulling_navigation(
+            bool nullPrincipal
+        )
         {
             ExecuteWithStrategyInTransaction(
                 context =>
                 {
-                    var root = context
-                        .Set<SharedFkRoot>()
+                    var root = context.Set<SharedFkRoot>()
                         .Include(e => e.Parents)
                         .Include(e => e.Dependants)
                         .Single();
@@ -186,8 +186,7 @@ namespace Microsoft.EntityFrameworkCore
                 },
                 context =>
                 {
-                    var root = context
-                        .Set<SharedFkRoot>()
+                    var root = context.Set<SharedFkRoot>()
                         .Include(e => e.Parents)
                         .Include(e => e.Dependants)
                         .Single();
@@ -205,7 +204,8 @@ namespace Microsoft.EntityFrameworkCore
                     Assert.Equal(root.Id, dependent.RootId);
                     Assert.Equal(root.Id, parent.RootId);
                     Assert.Null(parent.DependantId);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -223,9 +223,16 @@ namespace Microsoft.EntityFrameworkCore
                     propertyEntry.CurrentValue = nameof(OptionalSingle1MoreDerived);
 
                     Assert.Equal(
-                        CoreStrings.PropertyReadOnlyAfterSave("Discriminator", nameof(OptionalSingle1Derived)),
-                        Assert.Throws<InvalidOperationException>(() => context.SaveChanges()).Message);
-                });
+                        CoreStrings.PropertyReadOnlyAfterSave(
+                            "Discriminator",
+                            nameof(OptionalSingle1Derived)
+                        ),
+                        Assert.Throws<InvalidOperationException>(
+                            () => context.SaveChanges()
+                        ).Message
+                    );
+                }
+            );
         }
 
         [ConditionalFact]
@@ -253,14 +260,17 @@ namespace Microsoft.EntityFrameworkCore
 
                     Assert.IsType<OptionalSingle2>(instance);
                     Assert.Equal(1, propertyEntry.CurrentValue.Value);
-                });
+                }
+            );
         }
 
         [ConditionalTheory]
         [InlineData((int)ChangeMechanism.Fk)]
         [InlineData((int)ChangeMechanism.Dependent)]
         [InlineData((int)(ChangeMechanism.Dependent | ChangeMechanism.Fk))]
-        public virtual void Changes_to_Added_relationships_are_picked_up(ChangeMechanism changeMechanism)
+        public virtual void Changes_to_Added_relationships_are_picked_up(
+            ChangeMechanism changeMechanism
+        )
         {
             var id = 0;
 
@@ -306,11 +316,14 @@ namespace Microsoft.EntityFrameworkCore
                 },
                 context =>
                 {
-                    var entity = context.Set<OptionalSingle1>().Include(e => e.Root).Single(e => e.Id == id);
+                    var entity = context.Set<OptionalSingle1>()
+                        .Include(e => e.Root)
+                        .Single(e => e.Id == id);
 
                     Assert.Null(entity.Root);
                     Assert.Null(entity.RootId);
-                });
+                }
+            );
         }
 
         [ConditionalTheory]
@@ -324,7 +337,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(true, null)]
         public virtual void New_FK_is_not_cleared_on_old_dependent_delete(
             bool loadNewParent,
-            CascadeTiming? deleteOrphansTiming)
+            CascadeTiming? deleteOrphansTiming
+        )
         {
             var removedId = 0;
             var childId = 0;
@@ -333,15 +347,19 @@ namespace Microsoft.EntityFrameworkCore
             ExecuteWithStrategyInTransaction(
                 context =>
                 {
-                    context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming ?? CascadeTiming.Never;
+                    context.ChangeTracker.DeleteOrphansTiming =
+                        deleteOrphansTiming ?? CascadeTiming.Never;
 
                     var removed = context.Set<Optional1>().OrderBy(e => e.Id).First();
-                    var child = context.Set<Optional2>().OrderBy(e => e.Id).First(e => e.ParentId == removed.Id);
+                    var child = context.Set<Optional2>()
+                        .OrderBy(e => e.Id)
+                        .First(e => e.ParentId == removed.Id);
 
                     removedId = removed.Id;
                     childId = child.Id;
 
-                    newFk = context.Set<Optional1>().AsNoTracking().Single(e => e.Id != removed.Id).Id;
+                    newFk =
+                        context.Set<Optional1>().AsNoTracking().Single(e => e.Id != removed.Id).Id;
 
                     var newParent = loadNewParent ? context.Set<Optional1>().Find(newFk) : null;
 
@@ -377,8 +395,7 @@ namespace Microsoft.EntityFrameworkCore
                 },
                 context =>
                 {
-                    if (!Fixture.ForceClientNoAction
-                        && !Fixture.NoStoreCascades)
+                    if (!Fixture.ForceClientNoAction && !Fixture.NoStoreCascades)
                     {
                         Assert.Null(context.Set<Optional1>().Find(removedId));
 
@@ -399,7 +416,8 @@ namespace Microsoft.EntityFrameworkCore
 
                         Assert.False(context.ChangeTracker.HasChanges());
                     }
-                });
+                }
+            );
         }
 
         [ConditionalTheory]
@@ -407,8 +425,7 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(CascadeTiming.Immediate)]
         [InlineData(CascadeTiming.Never)]
         [InlineData(null)]
-        public virtual void No_fixup_to_Deleted_entities(
-            CascadeTiming? deleteOrphansTiming)
+        public virtual void No_fixup_to_Deleted_entities(CascadeTiming? deleteOrphansTiming)
         {
             using var context = CreateContext();
             context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming ?? CascadeTiming.Never;
@@ -455,12 +472,18 @@ namespace Microsoft.EntityFrameworkCore
                     Assert.False(context.ChangeTracker.HasChanges());
 
                     Assert.Equal(EntityState.Unchanged, context.Entry(produce).State);
-                    Assert.NotEqual(Guid.Empty, context.Entry(produce).Property(e => e.ProduceId).OriginalValue);
+                    Assert.NotEqual(
+                        Guid.Empty,
+                        context.Entry(produce).Property(e => e.ProduceId).OriginalValue
+                    );
                     Assert.Equal(77, context.Entry(produce).Property(e => e.BarCode).OriginalValue);
 
                     context.Remove(produce);
                     Assert.Equal(EntityState.Deleted, context.Entry(produce).State);
-                    Assert.NotEqual(Guid.Empty, context.Entry(produce).Property(e => e.ProduceId).OriginalValue);
+                    Assert.NotEqual(
+                        Guid.Empty,
+                        context.Entry(produce).Property(e => e.ProduceId).OriginalValue
+                    );
                     Assert.Equal(77, context.Entry(produce).Property(e => e.BarCode).OriginalValue);
 
                     Assert.True(context.ChangeTracker.HasChanges());
@@ -470,7 +493,8 @@ namespace Microsoft.EntityFrameworkCore
                     Assert.False(context.ChangeTracker.HasChanges());
 
                     Assert.Equal(EntityState.Detached, context.Entry(produce).State);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -546,7 +570,8 @@ namespace Microsoft.EntityFrameworkCore
                         Assert.Null(poost1.Bloog);
                         Assert.Null(poost2.Bloog);
                     }
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -639,7 +664,8 @@ namespace Microsoft.EntityFrameworkCore
                     Assert.True(root.OptionalChildrenAk.All(e => e.Parent != null));
                     Assert.True(root.RequiredChildrenAk.All(e => e.Parent != null));
                     Assert.True(root.RequiredCompositeChildren.All(e => e.Parent != null));
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -725,7 +751,9 @@ namespace Microsoft.EntityFrameworkCore
                     context.Entry(optionalChildAk).State = EntityState.Detached;
                     context.Entry(requieredChildAk).State = EntityState.Detached;
 
-                    foreach (var overlappingEntry in context.ChangeTracker.Entries<OptionalOverlapping2>())
+                    foreach (
+                        var overlappingEntry in context.ChangeTracker.Entries<OptionalOverlapping2>()
+                    )
                     {
                         overlappingEntry.State = EntityState.Detached;
                     }
@@ -775,7 +803,8 @@ namespace Microsoft.EntityFrameworkCore
                     Assert.Contains(optionalChildAk, root.OptionalChildrenAk);
                     Assert.Contains(requieredChildAk, root.RequiredChildrenAk);
                     Assert.Contains(requiredCompositeChild, root.RequiredCompositeChildren);
-                });
+                }
+            );
         }
 
         [ConditionalTheory]
@@ -791,7 +820,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(null, null)]
         public virtual void Re_childing_parent_to_new_child_with_delete(
             CascadeTiming? cascadeDeleteTiming,
-            CascadeTiming? deleteOrphansTiming)
+            CascadeTiming? deleteOrphansTiming
+        )
         {
             var oldId = 0;
             var newId = 0;
@@ -799,10 +829,14 @@ namespace Microsoft.EntityFrameworkCore
             ExecuteWithStrategyInTransaction(
                 context =>
                 {
-                    context.ChangeTracker.CascadeDeleteTiming = cascadeDeleteTiming ?? CascadeTiming.Never;
-                    context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming ?? CascadeTiming.Never;
+                    context.ChangeTracker.CascadeDeleteTiming =
+                        cascadeDeleteTiming ?? CascadeTiming.Never;
+                    context.ChangeTracker.DeleteOrphansTiming =
+                        deleteOrphansTiming ?? CascadeTiming.Never;
 
-                    var parent = context.Set<ParentAsAChild>().Include(p => p.ChildAsAParent).Single();
+                    var parent = context.Set<ParentAsAChild>()
+                        .Include(p => p.ChildAsAParent)
+                        .Single();
 
                     var oldChild = parent.ChildAsAParent;
                     oldId = oldChild.Id;
@@ -835,12 +869,15 @@ namespace Microsoft.EntityFrameworkCore
                 },
                 context =>
                 {
-                    var parent = context.Set<ParentAsAChild>().Include(p => p.ChildAsAParent).Single();
+                    var parent = context.Set<ParentAsAChild>()
+                        .Include(p => p.ChildAsAParent)
+                        .Single();
 
                     Assert.Equal(newId, parent.ChildAsAParentId);
                     Assert.Equal(newId, parent.ChildAsAParent.Id);
                     Assert.Null(context.Set<ChildAsAParent>().Find(oldId));
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -879,7 +916,8 @@ namespace Microsoft.EntityFrameworkCore
                     Assert.Null(dependent.BadCustomerId);
                     Assert.Null(dependent.BadCustomer);
                     Assert.Empty(principal.BadOrders);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -908,7 +946,8 @@ namespace Microsoft.EntityFrameworkCore
                     Assert.Same(quizTask.Choices.Single(), context.Set<TaskChoice>().Single());
 
                     Assert.Empty(context.Set<HiddenAreaTask>().Include(e => e.Choices));
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -930,14 +969,20 @@ namespace Microsoft.EntityFrameworkCore
                 },
                 context =>
                 {
-                    var hiddenAreaTask = context.Set<HiddenAreaTask>().Include(e => e.Choices).Single();
+                    var hiddenAreaTask = context.Set<HiddenAreaTask>()
+                        .Include(e => e.Choices)
+                        .Single();
 
                     Assert.Equal(hiddenAreaTask.Id, hiddenAreaTask.Choices.Single().QuestTaskId);
 
-                    Assert.Same(hiddenAreaTask.Choices.Single(), context.Set<TaskChoice>().Single());
+                    Assert.Same(
+                        hiddenAreaTask.Choices.Single(),
+                        context.Set<TaskChoice>().Single()
+                    );
 
                     Assert.Empty(context.Set<QuizTask>().Include(e => e.Choices));
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -967,7 +1012,9 @@ namespace Microsoft.EntityFrameworkCore
                 context =>
                 {
                     var quizTask = context.Set<QuizTask>().Include(e => e.Choices).Single();
-                    var hiddenAreaTask = context.Set<HiddenAreaTask>().Include(e => e.Choices).Single();
+                    var hiddenAreaTask = context.Set<HiddenAreaTask>()
+                        .Include(e => e.Choices)
+                        .Single();
 
                     Assert.Equal(2, quizTask.Choices.Count);
                     foreach (var quizTaskChoice in quizTask.Choices)
@@ -986,9 +1033,11 @@ namespace Microsoft.EntityFrameworkCore
                         Assert.Equal(
                             1,
                             quizTask.Choices.Count(e => e.Id == taskChoice.Id)
-                            + hiddenAreaTask.Choices.Count(e => e.Id == taskChoice.Id));
+                                + hiddenAreaTask.Choices.Count(e => e.Id == taskChoice.Id)
+                        );
                     }
-                });
+                }
+            );
         }
     }
 }

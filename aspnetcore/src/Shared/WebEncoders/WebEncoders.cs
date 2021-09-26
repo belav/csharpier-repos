@@ -96,7 +96,13 @@ namespace Microsoft.Extensions.Internal
         /// The input must not contain any whitespace or padding characters.
         /// Throws <see cref="FormatException"/> if the input is malformed.
         /// </remarks>
-        public static byte[] Base64UrlDecode(string input, int offset, char[] buffer, int bufferOffset, int count)
+        public static byte[] Base64UrlDecode(
+            string input,
+            int offset,
+            char[] buffer,
+            int bufferOffset,
+            int count
+        )
         {
             if (input == null)
             {
@@ -122,7 +128,10 @@ namespace Microsoft.Extensions.Internal
 
             var paddingCharsToAdd = GetNumBase64PaddingCharsToAddForDecode(count);
             var arraySizeRequired = checked(count + paddingCharsToAdd);
-            Debug.Assert(arraySizeRequired % 4 == 0, "Invariant: Array length must be a multiple of 4.");
+            Debug.Assert(
+                arraySizeRequired % 4 == 0,
+                "Invariant: Array length must be a multiple of 4."
+            );
 
             if (buffer.Length - bufferOffset < arraySizeRequired)
             {
@@ -132,8 +141,10 @@ namespace Microsoft.Extensions.Internal
                         EncoderResources.WebEncoders_InvalidCountOffsetOrLength,
                         nameof(count),
                         nameof(bufferOffset),
-                        nameof(input)),
-                    nameof(count));
+                        nameof(input)
+                    ),
+                    nameof(count)
+                );
             }
 
             // Copy input into buffer, fixing up '-' -> '+' and '_' -> '/'.
@@ -232,7 +243,13 @@ namespace Microsoft.Extensions.Internal
             }
 
             var buffer = new char[GetArraySizeRequiredToEncode(count)];
-            var numBase64Chars = Base64UrlEncode(input, offset, buffer, outputOffset: 0, count: count);
+            var numBase64Chars = Base64UrlEncode(
+                input,
+                offset,
+                buffer,
+                outputOffset: 0,
+                count: count
+            );
 
             return new string(buffer, startIndex: 0, length: numBase64Chars);
 #endif
@@ -256,7 +273,13 @@ namespace Microsoft.Extensions.Internal
         /// <returns>
         /// The number of characters written to <paramref name="output"/>, less any padding characters.
         /// </returns>
-        public static int Base64UrlEncode(byte[] input, int offset, char[] output, int outputOffset, int count)
+        public static int Base64UrlEncode(
+            byte[] input,
+            int offset,
+            char[] output,
+            int outputOffset,
+            int count
+        )
         {
             if (input == null)
             {
@@ -282,8 +305,10 @@ namespace Microsoft.Extensions.Internal
                         EncoderResources.WebEncoders_InvalidCountOffsetOrLength,
                         nameof(count),
                         nameof(outputOffset),
-                        nameof(output)),
-                    nameof(count));
+                        nameof(output)
+                    ),
+                    nameof(count)
+                );
             }
 
 #if NETCOREAPP
@@ -298,7 +323,13 @@ namespace Microsoft.Extensions.Internal
             // Use base64url encoding with no padding characters. See RFC 4648, Sec. 5.
 
             // Start with default Base64 encoding.
-            var numBase64Chars = Convert.ToBase64CharArray(input, offset, count, output, outputOffset);
+            var numBase64Chars = Convert.ToBase64CharArray(
+                input,
+                offset,
+                count,
+                output,
+                outputOffset
+            );
 
             // Fix up '+' -> '-' and '/' -> '_'. Drop padding characters.
             for (var i = outputOffset; i - outputOffset < numBase64Chars; i++)
@@ -353,9 +384,10 @@ namespace Microsoft.Extensions.Internal
             int bufferSize = GetArraySizeRequiredToEncode(input.Length);
 
             char[]? bufferToReturnToPool = null;
-            Span<char> buffer = bufferSize <= 128
-                ? stackalloc char[bufferSize]
-                : bufferToReturnToPool = ArrayPool<char>.Shared.Rent(bufferSize);
+            Span<char> buffer =
+                bufferSize <= 128
+                    ? stackalloc char[bufferSize]
+                    : bufferToReturnToPool = ArrayPool<char>.Shared.Rent(bufferSize);
 
             var numBase64Chars = Base64UrlEncode(input, buffer);
             var base64Url = new string(buffer.Slice(0, numBase64Chars));
@@ -419,11 +451,18 @@ namespace Microsoft.Extensions.Internal
                         string.Format(
                             CultureInfo.CurrentCulture,
                             EncoderResources.WebEncoders_MalformedInput,
-                            inputLength));
+                            inputLength
+                        )
+                    );
             }
         }
 
-        private static void ValidateParameters(int bufferLength, string inputName, int offset, int count)
+        private static void ValidateParameters(
+            int bufferLength,
+            string inputName,
+            int offset,
+            int count
+        )
         {
             if (offset < 0)
             {
@@ -441,8 +480,10 @@ namespace Microsoft.Extensions.Internal
                         EncoderResources.WebEncoders_InvalidCountOffsetOrLength,
                         nameof(count),
                         nameof(offset),
-                        inputName),
-                    nameof(count));
+                        inputName
+                    ),
+                    nameof(count)
+                );
             }
         }
     }

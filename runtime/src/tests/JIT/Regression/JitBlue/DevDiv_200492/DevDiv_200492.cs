@@ -58,7 +58,8 @@ internal class Program
 
         public TestUlongAttribute(int i)
         {
-            checked {
+            checked
+            {
                 // Need to clear any garbage in the top half
                 // of i's register before passing to Store.
                 Store((ulong)i);
@@ -80,15 +81,18 @@ internal class Program
     {
         int errors = 0;
 
-        if (!Program.DoubleTest()) {
+        if (!Program.DoubleTest())
+        {
             errors += 1;
         }
 
-        if (!Program.UlongTest()) {
+        if (!Program.UlongTest())
+        {
             errors += 1;
         }
 
-        if (errors > 0) {
+        if (errors > 0)
+        {
             Console.WriteLine("Fail");
         }
         else

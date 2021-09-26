@@ -16,8 +16,12 @@ namespace BasicWebSite.Controllers.ContentNegotiation
             if (result != null)
             {
                 result.Formatters.Add(new PlainTextFormatter());
-                result.Formatters.Add(new CustomFormatter("application/custom_ProducesContentBaseController"));
-                result.Formatters.Add(new CustomFormatter("application/custom_ProducesContentBaseController_Action"));
+                result.Formatters.Add(
+                    new CustomFormatter("application/custom_ProducesContentBaseController")
+                );
+                result.Formatters.Add(
+                    new CustomFormatter("application/custom_ProducesContentBaseController_Action")
+                );
             }
 
             base.OnActionExecuted(context);

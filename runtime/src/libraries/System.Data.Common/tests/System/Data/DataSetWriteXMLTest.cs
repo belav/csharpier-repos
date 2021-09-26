@@ -13,7 +13,8 @@ namespace System.Data.Tests
         [Fact]
         public void WriteSimpleAuto()
         {
-            string sampleXml = @"<NewDataSet>
+            string sampleXml =
+                @"<NewDataSet>
                 <xs:schema id='NewDataSet' xmlns='' xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:msdata='urn:schemas-microsoft-com:xml-msdata'>
                     <xs:element name='NewDataSet' msdata:IsDataSet='true' msdata:UseCurrentLocale='true'>
                         <xs:complexType>
@@ -39,19 +40,25 @@ namespace System.Data.Tests
             ds.ReadXml(xmlSR, XmlReadMode.ReadSchema);
             Text.StringBuilder sb = new System.Text.StringBuilder();
 
-            using (XmlWriter xw = XmlWriter.Create(sb, new XmlWriterSettings() { }))
+            using (XmlWriter xw = XmlWriter.Create(sb, new XmlWriterSettings() {  }))
             {
                 ds.WriteXml(xw, XmlWriteMode.WriteSchema);
             }
             Assert.Equal(@"ServerName", ds.Tables[0].Columns[0].ColumnName);
-            Assert.Equal(@"MACHINENAME", ds.Tables[0].Rows[0].Field<string>(ds.Tables[0].Columns[0]));
+            Assert.Equal(
+                @"MACHINENAME",
+                ds.Tables[0].Rows[0].Field<string>(ds.Tables[0].Columns[0])
+            );
 
             using (StringWriter sw = new StringWriter(sb))
             {
                 ds.WriteXml(sw, XmlWriteMode.WriteSchema);
             }
             Assert.Equal(@"ServerName", ds.Tables[0].Columns[0].ColumnName);
-            Assert.Equal(@"MACHINENAME", ds.Tables[0].Rows[0].Field<string>(ds.Tables[0].Columns[0]));
+            Assert.Equal(
+                @"MACHINENAME",
+                ds.Tables[0].Rows[0].Field<string>(ds.Tables[0].Columns[0])
+            );
         }
     }
 }

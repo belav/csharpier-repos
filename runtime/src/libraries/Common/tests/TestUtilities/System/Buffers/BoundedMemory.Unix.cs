@@ -5,7 +5,10 @@ namespace System.Buffers
 {
     public static partial class BoundedMemory
     {
-        private static UnixImplementation<T> AllocateWithoutDataPopulationUnix<T>(int elementCount, PoisonPagePlacement placement) where T : unmanaged
+        private static UnixImplementation<T> AllocateWithoutDataPopulationUnix<T>(
+            int elementCount,
+            PoisonPagePlacement placement
+        ) where T : unmanaged
         {
             // On non-Windows platforms, we don't yet have support for changing the permissions of individual pages.
             return new UnixImplementation<T>(elementCount);

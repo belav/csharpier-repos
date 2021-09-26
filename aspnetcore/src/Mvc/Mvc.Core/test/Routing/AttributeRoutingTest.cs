@@ -31,13 +31,15 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             var action = CreateAction("InvalidTemplate", "{" + value + "}");
 
             var expectedMessage =
-                "The following errors occurred with attribute routing information:" + Environment.NewLine +
-                Environment.NewLine +
-                "For action: 'InvalidTemplate'" + Environment.NewLine +
-                "Error: The route parameter name 'a/dkfk' is invalid. Route parameter names must be non-empty and " +
-                "cannot contain these characters: '{', '}', '/'. The '?' character marks a parameter as optional, " +
-                "and can occur only at the end of the parameter. The '*' character marks a parameter as catch-all, " +
-                "and can occur only at the start of the parameter. (Parameter 'routeTemplate')";
+                "The following errors occurred with attribute routing information:"
+                + Environment.NewLine
+                + Environment.NewLine
+                + "For action: 'InvalidTemplate'"
+                + Environment.NewLine
+                + "Error: The route parameter name 'a/dkfk' is invalid. Route parameter names must be non-empty and "
+                + "cannot contain these characters: '{', '}', '/'. The '?' character marks a parameter as optional, "
+                + "and can occur only at the end of the parameter. The '*' character marks a parameter as catch-all, "
+                + "and can occur only at the start of the parameter. (Parameter 'routeTemplate')";
 
             var services = CreateServices(action);
 
@@ -45,7 +47,9 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             var routeContext = new RouteContext(new DefaultHttpContext());
 
             // Act & Assert
-            var ex = await Assert.ThrowsAsync<RouteCreationException>(() => route.RouteAsync(routeContext));
+            var ex = await Assert.ThrowsAsync<RouteCreationException>(
+                () => route.RouteAsync(routeContext)
+            );
 
             Assert.Equal(expectedMessage, ex.Message);
         }
@@ -58,21 +62,25 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             action.RouteValues.Add("foo", "bleh");
 
             var expectedMessage =
-                "The following errors occurred with attribute routing information:" + Environment.NewLine +
-                Environment.NewLine +
-                "For action: 'DisallowedParameter'" + Environment.NewLine +
-                "Error: The attribute route '{foo}/{action}' cannot contain a parameter named '{foo}'. " +
-                "Use '[foo]' in the route template to insert the value 'bleh'.";
+                "The following errors occurred with attribute routing information:"
+                + Environment.NewLine
+                + Environment.NewLine
+                + "For action: 'DisallowedParameter'"
+                + Environment.NewLine
+                + "Error: The attribute route '{foo}/{action}' cannot contain a parameter named '{foo}'. "
+                + "Use '[foo]' in the route template to insert the value 'bleh'.";
 
             var services = CreateServices(action);
 
             var route = AttributeRouting.CreateAttributeMegaRoute(services);
 
             // Act & Assert
-            var ex = await Assert.ThrowsAsync<RouteCreationException>(async () =>
-            {
-                await route.RouteAsync(new RouteContext(new DefaultHttpContext()));
-            });
+            var ex = await Assert.ThrowsAsync<RouteCreationException>(
+                async () =>
+                {
+                    await route.RouteAsync(new RouteContext(new DefaultHttpContext()));
+                }
+            );
 
             Assert.Equal(expectedMessage, ex.Message);
         }
@@ -88,25 +96,31 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             action2.RouteValues.Add("action", "hey");
 
             var expectedMessage =
-                "The following errors occurred with attribute routing information:" + Environment.NewLine +
-                Environment.NewLine +
-                "For action: 'DisallowedParameter1'" + Environment.NewLine +
-                "Error: The attribute route '{foo}/{action}' cannot contain a parameter named '{foo}'. " +
-                "Use '[foo]' in the route template to insert the value 'bleh'." + Environment.NewLine +
-                Environment.NewLine +
-                "For action: 'DisallowedParameter2'" + Environment.NewLine +
-                "Error: The attribute route 'cool/{action}' cannot contain a parameter named '{action}'. " +
-                "Use '[action]' in the route template to insert the value 'hey'.";
+                "The following errors occurred with attribute routing information:"
+                + Environment.NewLine
+                + Environment.NewLine
+                + "For action: 'DisallowedParameter1'"
+                + Environment.NewLine
+                + "Error: The attribute route '{foo}/{action}' cannot contain a parameter named '{foo}'. "
+                + "Use '[foo]' in the route template to insert the value 'bleh'."
+                + Environment.NewLine
+                + Environment.NewLine
+                + "For action: 'DisallowedParameter2'"
+                + Environment.NewLine
+                + "Error: The attribute route 'cool/{action}' cannot contain a parameter named '{action}'. "
+                + "Use '[action]' in the route template to insert the value 'hey'.";
 
             var services = CreateServices(action1, action2);
 
             var route = AttributeRouting.CreateAttributeMegaRoute(services);
 
             // Act & Assert
-            var ex = await Assert.ThrowsAsync<RouteCreationException>(async () =>
-            {
-                await route.RouteAsync(new RouteContext(new DefaultHttpContext()));
-            });
+            var ex = await Assert.ThrowsAsync<RouteCreationException>(
+                async () =>
+                {
+                    await route.RouteAsync(new RouteContext(new DefaultHttpContext()));
+                }
+            );
 
             Assert.Equal(expectedMessage, ex.Message);
         }
@@ -119,7 +133,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             var actionMethod = controllerType.GetMethod("Index");
 
             var action = new ControllerActionDescriptor();
-            action.DisplayName = "Microsoft.AspNetCore.Mvc.Routing.AttributeRoutingTest+HomeController.Index";
+            action.DisplayName =
+                "Microsoft.AspNetCore.Mvc.Routing.AttributeRoutingTest+HomeController.Index";
             action.MethodInfo = actionMethod;
             action.RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
             {
@@ -130,21 +145,25 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             action.AttributeRouteInfo.Template = "{controller}/{action}";
 
             var expectedMessage =
-                "The following errors occurred with attribute routing information:" + Environment.NewLine +
-                Environment.NewLine +
-                "For action: 'Microsoft.AspNetCore.Mvc.Routing.AttributeRoutingTest+HomeController.Index'" + Environment.NewLine +
-                "Error: The attribute route '{controller}/{action}' cannot contain a parameter named '{controller}'. " +
-                "Use '[controller]' in the route template to insert the value 'Home'.";
+                "The following errors occurred with attribute routing information:"
+                + Environment.NewLine
+                + Environment.NewLine
+                + "For action: 'Microsoft.AspNetCore.Mvc.Routing.AttributeRoutingTest+HomeController.Index'"
+                + Environment.NewLine
+                + "Error: The attribute route '{controller}/{action}' cannot contain a parameter named '{controller}'. "
+                + "Use '[controller]' in the route template to insert the value 'Home'.";
 
             var services = CreateServices(action);
 
             var route = AttributeRouting.CreateAttributeMegaRoute(services);
 
             // Act & Assert
-            var ex = await Assert.ThrowsAsync<RouteCreationException>(async () =>
-            {
-                await route.RouteAsync(new RouteContext(new DefaultHttpContext()));
-            });
+            var ex = await Assert.ThrowsAsync<RouteCreationException>(
+                async () =>
+                {
+                    await route.RouteAsync(new RouteContext(new DefaultHttpContext()));
+                }
+            );
 
             Assert.Equal(expectedMessage, ex.Message);
         }
@@ -164,19 +183,19 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             var collection = new ActionDescriptorCollection(actions, version: 0);
 
             var actionDescriptorProvider = new Mock<IActionDescriptorCollectionProvider>();
-            actionDescriptorProvider
-                .Setup(a => a.ActionDescriptors)
-                .Returns(collection);
+            actionDescriptorProvider.Setup(a => a.ActionDescriptors).Returns(collection);
 
             var routeOptions = new Mock<IOptions<RouteOptions>>();
-            routeOptions
-                .SetupGet(o => o.Value)
-                .Returns(new RouteOptions());
+            routeOptions.SetupGet(o => o.Value).Returns(new RouteOptions());
 
-            var inlineConstraintResolver = new DefaultInlineConstraintResolver(routeOptions.Object, Mock.Of<IServiceProvider>());
+            var inlineConstraintResolver = new DefaultInlineConstraintResolver(
+                routeOptions.Object,
+                Mock.Of<IServiceProvider>()
+            );
 
-            var services = new ServiceCollection()
-                .AddSingleton<IInlineConstraintResolver>(inlineConstraintResolver);
+            var services = new ServiceCollection().AddSingleton<IInlineConstraintResolver>(
+                inlineConstraintResolver
+            );
 
             services.AddRouting();
             services.AddOptions();

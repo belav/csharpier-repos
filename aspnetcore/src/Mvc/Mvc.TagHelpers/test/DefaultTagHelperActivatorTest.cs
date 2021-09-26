@@ -19,7 +19,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Internal
     // Tests to verify that script, link and image tag helper use the size limited instance of MemoryCache.
     public class DefaultTagHelperActivatorTest
     {
-        private readonly TagHelperMemoryCacheProvider CacheProvider = new TagHelperMemoryCacheProvider();
+        private readonly TagHelperMemoryCacheProvider CacheProvider =
+            new TagHelperMemoryCacheProvider();
         private readonly IMemoryCache MemoryCache = new MemoryCache(new MemoryCacheOptions());
         private readonly IWebHostEnvironment HostingEnvironment = Mock.Of<IWebHostEnvironment>();
         private readonly IFileVersionProvider FileVersionProvider = Mock.Of<IFileVersionProvider>();
@@ -54,8 +55,7 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Internal
 
         private ViewContext CreateViewContext()
         {
-            var services = new ServiceCollection()
-                .AddSingleton(HostingEnvironment)
+            var services = new ServiceCollection().AddSingleton(HostingEnvironment)
                 .AddSingleton(MemoryCache)
                 .AddSingleton(CacheProvider)
                 .AddSingleton(HtmlEncoder.Default)
@@ -66,10 +66,7 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Internal
 
             var viewContext = new ViewContext
             {
-                HttpContext = new DefaultHttpContext
-                {
-                    RequestServices = services,
-                }
+                HttpContext = new DefaultHttpContext { RequestServices = services, }
             };
 
             return viewContext;

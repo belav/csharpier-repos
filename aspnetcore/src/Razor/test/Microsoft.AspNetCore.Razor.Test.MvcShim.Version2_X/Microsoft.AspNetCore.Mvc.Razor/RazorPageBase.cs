@@ -51,27 +51,21 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             throw new NotImplementedException();
         }
 
-        protected virtual void PushWriter(TextWriter writer)
-        {
-        }
+        protected virtual void PushWriter(TextWriter writer) { }
 
         protected virtual TextWriter PopWriter()
         {
             throw new NotImplementedException();
         }
 
-        public void StartTagHelperWritingScope(HtmlEncoder encoder)
-        {
-        }
+        public void StartTagHelperWritingScope(HtmlEncoder encoder) { }
 
         public TagHelperContent EndTagHelperWritingScope()
         {
             throw new NotImplementedException();
         }
 
-        public void BeginWriteTagHelperAttribute()
-        {
-        }
+        public void BeginWriteTagHelperAttribute() { }
 
         public string EndWriteTagHelperAttribute()
         {
@@ -84,21 +78,13 @@ namespace Microsoft.AspNetCore.Mvc.Razor
         }
 
         // Compatibility for 1.X projects
-        protected void DefineSection(string name, Func<object, Task> section)
-        {
-        }
+        protected void DefineSection(string name, Func<object, Task> section) { }
 
-        public virtual void DefineSection(string name, RenderAsyncDelegate section)
-        {
-        }
+        public virtual void DefineSection(string name, RenderAsyncDelegate section) { }
 
-        public virtual void Write(object value)
-        {
-        }
+        public virtual void Write(object value) { }
 
-        public virtual void WriteLiteral(object value)
-        {
-        }
+        public virtual void WriteLiteral(object value) { }
 
         public virtual void BeginWriteAttribute(
             string name,
@@ -106,9 +92,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             int prefixOffset,
             string suffix,
             int suffixOffset,
-            int attributeValuesCount)
-        {
-        }
+            int attributeValuesCount
+        ) { }
 
         public void WriteAttributeValue(
             string prefix,
@@ -116,21 +101,17 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             object value,
             int valueOffset,
             int valueLength,
-            bool isLiteral)
-        {
-        }
+            bool isLiteral
+        ) { }
 
-        public virtual void EndWriteAttribute()
-        {
-        }
+        public virtual void EndWriteAttribute() { }
 
         public void BeginAddHtmlAttributeValues(
             TagHelperExecutionContext executionContext,
             string attributeName,
             int attributeValuesCount,
-            HtmlAttributeValueStyle attributeValueStyle)
-        {
-        }
+            HtmlAttributeValueStyle attributeValueStyle
+        ) { }
 
         public void AddHtmlAttributeValue(
             string prefix,
@@ -138,13 +119,10 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             object value,
             int valueOffset,
             int valueLength,
-            bool isLiteral)
-        {
-        }
+            bool isLiteral
+        ) { }
 
-        public void EndAddHtmlAttributeValues(TagHelperExecutionContext executionContext)
-        {
-        }
+        public void EndAddHtmlAttributeValues(TagHelperExecutionContext executionContext) { }
 
         public virtual Task<HtmlString> FlushAsync()
         {

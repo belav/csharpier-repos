@@ -49,14 +49,14 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
 
         public bool StartOfLine { get; set; } = true;
 
-        public AcceptedCharactersInternal LastAcceptedCharacters { get; set; } = AcceptedCharactersInternal.None;
+        public AcceptedCharactersInternal LastAcceptedCharacters { get; set; } =
+            AcceptedCharactersInternal.None;
 
         public bool EndOfFile
         {
             get { return Source.Peek() == -1; }
         }
     }
-
     // Debug Helpers
 
 #if DEBUG
@@ -89,7 +89,9 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                     _infiniteLoopGuardCount++;
                     if (_infiniteLoopGuardCount > InfiniteLoopCountThreshold)
                     {
-                        Debug.Fail("An internal parser error is causing an infinite loop at this location.");
+                        Debug.Fail(
+                            "An internal parser error is causing an infinite loop at this location."
+                        );
 
                         return true;
                     }

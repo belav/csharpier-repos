@@ -11,7 +11,6 @@ namespace System.Net
         SwitchingProtocols = 101,
         Processing = 102,
         EarlyHints = 103,
-
         // Successful 2xx
         OK = 200,
         Created = 201,
@@ -22,9 +21,7 @@ namespace System.Net
         PartialContent = 206,
         MultiStatus = 207,
         AlreadyReported = 208,
-
         IMUsed = 226,
-
         // Redirection 3xx
         MultipleChoices = 300,
         Ambiguous = 300,
@@ -40,7 +37,6 @@ namespace System.Net
         TemporaryRedirect = 307,
         RedirectKeepVerb = 307,
         PermanentRedirect = 308,
-
         // Client Error 4xx
         BadRequest = 400,
         Unauthorized = 401,
@@ -69,16 +65,11 @@ namespace System.Net
         UnprocessableEntity = 422,
         Locked = 423,
         FailedDependency = 424,
-
         UpgradeRequired = 426,
-
         PreconditionRequired = 428,
         TooManyRequests = 429,
-
         RequestHeaderFieldsTooLarge = 431,
-
         UnavailableForLegalReasons = 451,
-
         // Server Error 5xx
         InternalServerError = 500,
         NotImplemented = 501,
@@ -89,7 +80,6 @@ namespace System.Net
         VariantAlsoNegotiates = 506,
         InsufficientStorage = 507,
         LoopDetected = 508,
-
         NotExtended = 510,
         NetworkAuthenticationRequired = 511
     }

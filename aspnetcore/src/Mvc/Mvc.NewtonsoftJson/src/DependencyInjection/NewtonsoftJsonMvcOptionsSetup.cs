@@ -29,7 +29,8 @@ namespace Microsoft.Extensions.DependencyInjection
             ILoggerFactory loggerFactory,
             IOptions<MvcNewtonsoftJsonOptions> jsonOptions,
             ArrayPool<char> charPool,
-            ObjectPoolProvider objectPoolProvider)
+            ObjectPoolProvider objectPoolProvider
+        )
         {
             if (loggerFactory == null)
             {
@@ -60,34 +61,54 @@ namespace Microsoft.Extensions.DependencyInjection
         public void Configure(MvcOptions options)
         {
             options.OutputFormatters.RemoveType<SystemTextJsonOutputFormatter>();
-            options.OutputFormatters.Add(new NewtonsoftJsonOutputFormatter(_jsonOptions.SerializerSettings, _charPool, options));
+            options.OutputFormatters.Add(
+                new NewtonsoftJsonOutputFormatter(
+                    _jsonOptions.SerializerSettings,
+                    _charPool,
+                    options
+                )
+            );
 
             options.InputFormatters.RemoveType<SystemTextJsonInputFormatter>();
             // Register JsonPatchInputFormatter before JsonInputFormatter, otherwise
             // JsonInputFormatter would consume "application/json-patch+json" requests
             // before JsonPatchInputFormatter gets to see them.
-            var jsonInputPatchLogger = _loggerFactory.CreateLogger<NewtonsoftJsonPatchInputFormatter>();
-            options.InputFormatters.Add(new NewtonsoftJsonPatchInputFormatter(
-                jsonInputPatchLogger,
-                _jsonOptions.SerializerSettings,
-                _charPool,
-                _objectPoolProvider,
-                options,
-                _jsonOptions));
+            var jsonInputPatchLogger =
+                _loggerFactory.CreateLogger<NewtonsoftJsonPatchInputFormatter>();
+            options.InputFormatters.Add(
+                new NewtonsoftJsonPatchInputFormatter(
+                    jsonInputPatchLogger,
+                    _jsonOptions.SerializerSettings,
+                    _charPool,
+                    _objectPoolProvider,
+                    options,
+                    _jsonOptions
+                )
+            );
 
             var jsonInputLogger = _loggerFactory.CreateLogger<NewtonsoftJsonInputFormatter>();
-            options.InputFormatters.Add(new NewtonsoftJsonInputFormatter(
-                jsonInputLogger,
-                _jsonOptions.SerializerSettings,
-                _charPool,
-                _objectPoolProvider,
-                options,
-                _jsonOptions));
+            options.InputFormatters.Add(
+                new NewtonsoftJsonInputFormatter(
+                    jsonInputLogger,
+                    _jsonOptions.SerializerSettings,
+                    _charPool,
+                    _objectPoolProvider,
+                    options,
+                    _jsonOptions
+                )
+            );
 
-            options.FormatterMappings.SetMediaTypeMappingForFormat("json", MediaTypeHeaderValues.ApplicationJson);
+            options.FormatterMappings.SetMediaTypeMappingForFormat(
+                "json",
+                MediaTypeHeaderValues.ApplicationJson
+            );
 
-            options.ModelMetadataDetailsProviders.Add(new SuppressChildValidationMetadataProvider(typeof(IJsonPatchDocument)));
-            options.ModelMetadataDetailsProviders.Add(new SuppressChildValidationMetadataProvider(typeof(JToken)));
+            options.ModelMetadataDetailsProviders.Add(
+                new SuppressChildValidationMetadataProvider(typeof(IJsonPatchDocument))
+            );
+            options.ModelMetadataDetailsProviders.Add(
+                new SuppressChildValidationMetadataProvider(typeof(JToken))
+            );
         }
     }
 }

@@ -20,11 +20,14 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             var context = new TestModelBinderProviderContext(modelType);
 
             // Act & Assert
-            var exception = Assert.Throws<InvalidOperationException>(() => provider.GetBinder(context));
+            var exception = Assert.Throws<InvalidOperationException>(
+                () => provider.GetBinder(context)
+            );
 
             Assert.Equal(
                 $"The '{typeof(FormCollectionModelBinder).FullName}' cannot bind to a model of type '{modelType.FullName}'. Change the model type to '{typeof(IFormCollection).FullName}' instead.",
-                exception.Message);
+                exception.Message
+            );
         }
 
         [Theory]

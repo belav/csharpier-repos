@@ -21,11 +21,16 @@ namespace Microsoft.AspNetCore.Analyzers
             Analyses = new ConcurrentBag<object>();
             ConfigureServicesMethods = new ConcurrentBag<IMethodSymbol>();
             ConfigureMethods = new ConcurrentBag<IMethodSymbol>();
-            StartupAnalyzer.ServicesAnalysisCompleted += (sender, analysis) => Analyses.Add(analysis);
-            StartupAnalyzer.OptionsAnalysisCompleted += (sender, analysis) => Analyses.Add(analysis);
-            StartupAnalyzer.MiddlewareAnalysisCompleted += (sender, analysis) => Analyses.Add(analysis);
-            StartupAnalyzer.ConfigureServicesMethodFound += (sender, method) => ConfigureServicesMethods.Add(method);
-            StartupAnalyzer.ConfigureMethodFound += (sender, method) => ConfigureMethods.Add(method);
+            StartupAnalyzer.ServicesAnalysisCompleted += (sender, analysis) =>
+                Analyses.Add(analysis);
+            StartupAnalyzer.OptionsAnalysisCompleted += (sender, analysis) =>
+                Analyses.Add(analysis);
+            StartupAnalyzer.MiddlewareAnalysisCompleted += (sender, analysis) =>
+                Analyses.Add(analysis);
+            StartupAnalyzer.ConfigureServicesMethodFound += (sender, method) =>
+                ConfigureServicesMethods.Add(method);
+            StartupAnalyzer.ConfigureMethodFound += (sender, method) =>
+                ConfigureMethods.Add(method);
         }
 
         private StartupAnalyzer StartupAnalyzer { get; }
@@ -50,7 +55,10 @@ namespace Microsoft.AspNetCore.Analyzers
             // Assert
             Assert.Empty(diagnostics);
 
-            Assert.Collection(ConfigureServicesMethods, m => Assert.Equal("ConfigureServices", m.Name));
+            Assert.Collection(
+                ConfigureServicesMethods,
+                m => Assert.Equal("ConfigureServices", m.Name)
+            );
             Assert.Collection(ConfigureMethods, m => Assert.Equal("Configure", m.Name));
         }
 
@@ -68,12 +76,14 @@ namespace Microsoft.AspNetCore.Analyzers
 
             Assert.Collection(
                 ConfigureServicesMethods.OrderBy(m => m.Name),
-                m => Assert.Equal("ConfigureServices", m.Name));
+                m => Assert.Equal("ConfigureServices", m.Name)
+            );
 
             Assert.Collection(
                 ConfigureMethods.OrderBy(m => m.Name),
                 m => Assert.Equal("Configure", m.Name),
-                m => Assert.Equal("ConfigureProduction", m.Name));
+                m => Assert.Equal("ConfigureProduction", m.Name)
+            );
         }
 
         [Fact]
@@ -100,7 +110,9 @@ namespace Microsoft.AspNetCore.Analyzers
         public async Task StartupAnalyzer_MvcOptionsAnalysis_AddMvcOptions_FindsEndpointRoutingDisabled()
         {
             // Arrange
-            var source = Read("MvcOptions_UseMvcWithDefaultRouteAndAddMvcOptionsEndpointRoutingDisabled");
+            var source = Read(
+                "MvcOptions_UseMvcWithDefaultRouteAndAddMvcOptionsEndpointRoutingDisabled"
+            );
 
             // Act
             var diagnostics = await Runner.GetDiagnosticsAsync(source.Source);
@@ -120,7 +132,10 @@ namespace Microsoft.AspNetCore.Analyzers
         [InlineData("MvcOptions_UseMvc", "UseMvc")]
         [InlineData("MvcOptions_UseMvcAndConfiguredRoutes", "UseMvc")]
         [InlineData("MvcOptions_UseMvcWithDefaultRoute", "UseMvcWithDefaultRoute")]
-        public async Task StartupAnalyzer_MvcOptionsAnalysis_FindsEndpointRoutingEnabled(string sourceFileName, string mvcMiddlewareName)
+        public async Task StartupAnalyzer_MvcOptionsAnalysis_FindsEndpointRoutingEnabled(
+            string sourceFileName,
+            string mvcMiddlewareName
+        )
         {
             // Arrange
             var source = Read(sourceFileName);
@@ -140,9 +155,16 @@ namespace Microsoft.AspNetCore.Analyzers
                 diagnostics,
                 diagnostic =>
                 {
-                    Assert.Same(StartupAnalyzer.Diagnostics.UnsupportedUseMvcWithEndpointRouting, diagnostic.Descriptor);
-                    AnalyzerAssert.DiagnosticLocation(source.DefaultMarkerLocation, diagnostic.Location);
-                });
+                    Assert.Same(
+                        StartupAnalyzer.Diagnostics.UnsupportedUseMvcWithEndpointRouting,
+                        diagnostic.Descriptor
+                    );
+                    AnalyzerAssert.DiagnosticLocation(
+                        source.DefaultMarkerLocation,
+                        diagnostic.Location
+                    );
+                }
+            );
         }
 
         [Fact]
@@ -166,15 +188,23 @@ namespace Microsoft.AspNetCore.Analyzers
                 item => Assert.Equal("UseMiddleware", item.UseMethod.Name),
                 item => Assert.Equal("UseMvc", item.UseMethod.Name),
                 item => Assert.Equal("UseRouting", item.UseMethod.Name),
-                item => Assert.Equal("UseEndpoints", item.UseMethod.Name));
+                item => Assert.Equal("UseEndpoints", item.UseMethod.Name)
+            );
 
             Assert.Collection(
                 diagnostics,
                 diagnostic =>
                 {
-                    Assert.Same(StartupAnalyzer.Diagnostics.UnsupportedUseMvcWithEndpointRouting, diagnostic.Descriptor);
-                    AnalyzerAssert.DiagnosticLocation(source.DefaultMarkerLocation, diagnostic.Location);
-                });
+                    Assert.Same(
+                        StartupAnalyzer.Diagnostics.UnsupportedUseMvcWithEndpointRouting,
+                        diagnostic.Descriptor
+                    );
+                    AnalyzerAssert.DiagnosticLocation(
+                        source.DefaultMarkerLocation,
+                        diagnostic.Location
+                    );
+                }
+            );
         }
 
         [Fact]
@@ -194,19 +224,38 @@ namespace Microsoft.AspNetCore.Analyzers
                 diagnostics,
                 diagnostic =>
                 {
-                    Assert.Same(StartupAnalyzer.Diagnostics.UnsupportedUseMvcWithEndpointRouting, diagnostic.Descriptor);
-                    AnalyzerAssert.DiagnosticLocation(source.MarkerLocations["MM1"], diagnostic.Location);
+                    Assert.Same(
+                        StartupAnalyzer.Diagnostics.UnsupportedUseMvcWithEndpointRouting,
+                        diagnostic.Descriptor
+                    );
+                    AnalyzerAssert.DiagnosticLocation(
+                        source.MarkerLocations["MM1"],
+                        diagnostic.Location
+                    );
                 },
                 diagnostic =>
                 {
-                    Assert.Same(StartupAnalyzer.Diagnostics.UnsupportedUseMvcWithEndpointRouting, diagnostic.Descriptor);
-                    AnalyzerAssert.DiagnosticLocation(source.MarkerLocations["MM2"], diagnostic.Location);
+                    Assert.Same(
+                        StartupAnalyzer.Diagnostics.UnsupportedUseMvcWithEndpointRouting,
+                        diagnostic.Descriptor
+                    );
+                    AnalyzerAssert.DiagnosticLocation(
+                        source.MarkerLocations["MM2"],
+                        diagnostic.Location
+                    );
                 },
                 diagnostic =>
                 {
-                    Assert.Same(StartupAnalyzer.Diagnostics.UnsupportedUseMvcWithEndpointRouting, diagnostic.Descriptor);
-                    AnalyzerAssert.DiagnosticLocation(source.MarkerLocations["MM3"], diagnostic.Location);
-                });
+                    Assert.Same(
+                        StartupAnalyzer.Diagnostics.UnsupportedUseMvcWithEndpointRouting,
+                        diagnostic.Descriptor
+                    );
+                    AnalyzerAssert.DiagnosticLocation(
+                        source.MarkerLocations["MM3"],
+                        diagnostic.Location
+                    );
+                }
+            );
         }
 
         [Fact]
@@ -221,12 +270,20 @@ namespace Microsoft.AspNetCore.Analyzers
             // Assert
             var servicesAnalysis = Assert.Single(Analyses.OfType<ServicesAnalysis>());
             Assert.NotEmpty(servicesAnalysis.Services);
-            Assert.Collection(diagnostics,
+            Assert.Collection(
+                diagnostics,
                 diagnostic =>
                 {
-                    Assert.Same(StartupAnalyzer.Diagnostics.BuildServiceProviderShouldNotCalledInConfigureServicesMethod, diagnostic.Descriptor);
-                    AnalyzerAssert.DiagnosticLocation(source.MarkerLocations["MM1"], diagnostic.Location);
-                });
+                    Assert.Same(
+                        StartupAnalyzer.Diagnostics.BuildServiceProviderShouldNotCalledInConfigureServicesMethod,
+                        diagnostic.Descriptor
+                    );
+                    AnalyzerAssert.DiagnosticLocation(
+                        source.MarkerLocations["MM1"],
+                        diagnostic.Location
+                    );
+                }
+            );
         }
 
         [Fact]
@@ -249,7 +306,9 @@ namespace Microsoft.AspNetCore.Analyzers
         {
             // Regression test for https://github.com/dotnet/aspnetcore/issues/15203
             // Arrange
-            var source = Read(nameof(TestFiles.StartupAnalyzerTest.UseAuthConfiguredCorrectlyChained));
+            var source = Read(
+                nameof(TestFiles.StartupAnalyzerTest.UseAuthConfiguredCorrectlyChained)
+            );
 
             // Act
             var diagnostics = await Runner.GetDiagnosticsAsync(source.Source);
@@ -287,12 +346,20 @@ namespace Microsoft.AspNetCore.Analyzers
             // Assert
             var middlewareAnalysis = Assert.Single(Analyses.OfType<MiddlewareAnalysis>());
             Assert.NotEmpty(middlewareAnalysis.Middleware);
-            Assert.Collection(diagnostics,
+            Assert.Collection(
+                diagnostics,
                 diagnostic =>
                 {
-                    Assert.Same(StartupAnalyzer.Diagnostics.IncorrectlyConfiguredAuthorizationMiddleware, diagnostic.Descriptor);
-                    AnalyzerAssert.DiagnosticLocation(source.DefaultMarkerLocation, diagnostic.Location);
-                });
+                    Assert.Same(
+                        StartupAnalyzer.Diagnostics.IncorrectlyConfiguredAuthorizationMiddleware,
+                        diagnostic.Descriptor
+                    );
+                    AnalyzerAssert.DiagnosticLocation(
+                        source.DefaultMarkerLocation,
+                        diagnostic.Location
+                    );
+                }
+            );
         }
 
         [Fact]
@@ -324,12 +391,20 @@ namespace Microsoft.AspNetCore.Analyzers
             // Assert
             var middlewareAnalysis = Assert.Single(Analyses.OfType<MiddlewareAnalysis>());
             Assert.NotEmpty(middlewareAnalysis.Middleware);
-            Assert.Collection(diagnostics,
+            Assert.Collection(
+                diagnostics,
                 diagnostic =>
                 {
-                    Assert.Same(StartupAnalyzer.Diagnostics.IncorrectlyConfiguredAuthorizationMiddleware, diagnostic.Descriptor);
-                    AnalyzerAssert.DiagnosticLocation(source.DefaultMarkerLocation, diagnostic.Location);
-                });
+                    Assert.Same(
+                        StartupAnalyzer.Diagnostics.IncorrectlyConfiguredAuthorizationMiddleware,
+                        diagnostic.Descriptor
+                    );
+                    AnalyzerAssert.DiagnosticLocation(
+                        source.DefaultMarkerLocation,
+                        diagnostic.Location
+                    );
+                }
+            );
         }
 
         [Fact]

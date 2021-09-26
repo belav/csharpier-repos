@@ -26,20 +26,12 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
         private readonly Socket _socket;
         private readonly NetworkStream _stream;
 
-        public TestConnection(int port)
-            : this(port, AddressFamily.InterNetwork)
-        {
-        }
+        public TestConnection(int port) : this(port, AddressFamily.InterNetwork) { }
 
         public TestConnection(int port, AddressFamily addressFamily)
-            : this(CreateConnectedLoopbackSocket(port, addressFamily), ownsSocket: true)
-        {
-        }
+            : this(CreateConnectedLoopbackSocket(port, addressFamily), ownsSocket: true) { }
 
-        public TestConnection(Socket socket)
-            : this(socket, ownsSocket: false)
-        {
-        }
+        public TestConnection(Socket socket) : this(socket, ownsSocket: false) { }
 
         private TestConnection(Socket socket, bool ownsSocket)
         {
@@ -98,7 +90,11 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
 
         public async Task<Memory<byte>> ReceiveChunk()
         {
-            var length = int.Parse(await ReadLineAsync(), System.Globalization.NumberStyles.HexNumber, CultureInfo.InvariantCulture);
+            var length = int.Parse(
+                await ReadLineAsync(),
+                System.Globalization.NumberStyles.HexNumber,
+                CultureInfo.InvariantCulture
+            );
 
             var bytes = await Receive(length);
 
@@ -146,10 +142,11 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
             catch (TimeoutException ex) when (offset != 0)
             {
                 throw new TimeoutException(
-                    $"Did not receive a complete response within {Timeout}.{Environment.NewLine}{Environment.NewLine}" +
-                    $"Expected:{Environment.NewLine}{length} bytes of data{Environment.NewLine}{Environment.NewLine}" +
-                    $"Actual:{Environment.NewLine}{Encoding.ASCII.GetString(actual, 0, offset)}{Environment.NewLine}",
-                    ex);
+                    $"Did not receive a complete response within {Timeout}.{Environment.NewLine}{Environment.NewLine}"
+                        + $"Expected:{Environment.NewLine}{length} bytes of data{Environment.NewLine}{Environment.NewLine}"
+                        + $"Actual:{Environment.NewLine}{Encoding.ASCII.GetString(actual, 0, offset)}{Environment.NewLine}",
+                    ex
+                );
             }
 
             return actual.AsMemory(0, offset);
@@ -230,22 +227,32 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
             }
             else
             {
-                tcs.SetException(new IOException(
-                    $"Expected connection close, received data instead: \"{Encoding.ASCII.GetString(e.Buffer, 0, e.BytesTransferred)}\""));
+                tcs.SetException(
+                    new IOException(
+                        $"Expected connection close, received data instead: \"{Encoding.ASCII.GetString(e.Buffer, 0, e.BytesTransferred)}\""
+                    )
+                );
             }
         }
 
         public static Socket CreateConnectedLoopbackSocket(int port, AddressFamily addressFamily)
         {
-            if (addressFamily != AddressFamily.InterNetwork && addressFamily != AddressFamily.InterNetworkV6)
+            if (
+                addressFamily != AddressFamily.InterNetwork
+                && addressFamily != AddressFamily.InterNetworkV6
+            )
             {
-                throw new ArgumentException($"TestConnection does not support address family of type {addressFamily}", nameof(addressFamily));
+                throw new ArgumentException(
+                    $"TestConnection does not support address family of type {addressFamily}",
+                    nameof(addressFamily)
+                );
             }
 
             var socket = new Socket(addressFamily, SocketType.Stream, ProtocolType.Tcp);
-            var address = addressFamily == AddressFamily.InterNetworkV6
-                ? IPAddress.IPv6Loopback
-                : IPAddress.Loopback;
+            var address =
+                addressFamily == AddressFamily.InterNetworkV6
+                    ? IPAddress.IPv6Loopback
+                    : IPAddress.Loopback;
             socket.Connect(new IPEndPoint(address, port));
             return socket;
         }

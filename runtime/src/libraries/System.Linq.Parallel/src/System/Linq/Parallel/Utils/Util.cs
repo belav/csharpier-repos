@@ -99,7 +99,8 @@ namespace System.Linq.Parallel
             }
         }
 
-        private static readonly FastDateTimeComparer s_fastDateTimeComparer = new FastDateTimeComparer();
+        private static readonly FastDateTimeComparer s_fastDateTimeComparer =
+            new FastDateTimeComparer();
 
         private sealed class FastDateTimeComparer : Comparer<DateTime>
         {

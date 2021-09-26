@@ -13,7 +13,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             string content = "Default content",
             string physicalPath = null,
             string relativePhysicalPath = null,
-            string basePath = "/")
+            string basePath = "/"
+        )
         {
             FilePath = filePath;
             PhysicalPath = physicalPath;

@@ -5,12 +5,20 @@ namespace System.Text.Json.Serialization.Converters
 {
     internal sealed class StringConverter : JsonConverter<string>
     {
-        public override string? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override string? Read(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
             return reader.GetString();
         }
 
-        public override void Write(Utf8JsonWriter writer, string? value, JsonSerializerOptions options)
+        public override void Write(
+            Utf8JsonWriter writer,
+            string? value,
+            JsonSerializerOptions options
+        )
         {
             // For performance, lift up the writer implementation.
             if (value == null)
@@ -28,7 +36,12 @@ namespace System.Text.Json.Serialization.Converters
             return reader.GetString()!;
         }
 
-        internal override void WriteWithQuotes(Utf8JsonWriter writer, string value, JsonSerializerOptions options, ref WriteStack state)
+        internal override void WriteWithQuotes(
+            Utf8JsonWriter writer,
+            string value,
+            JsonSerializerOptions options,
+            ref WriteStack state
+        )
         {
             if (options.DictionaryKeyPolicy != null && !state.Current.IgnoreDictionaryKeyPolicy)
             {
@@ -36,7 +49,9 @@ namespace System.Text.Json.Serialization.Converters
 
                 if (value == null)
                 {
-                    ThrowHelper.ThrowInvalidOperationException_NamingPolicyReturnNull(options.DictionaryKeyPolicy);
+                    ThrowHelper.ThrowInvalidOperationException_NamingPolicyReturnNull(
+                        options.DictionaryKeyPolicy
+                    );
                 }
             }
 

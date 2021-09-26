@@ -66,13 +66,18 @@ namespace Microsoft.Extensions.DependencyInjection
             // Ensure the TempData basics are registered.
             AddViewServices(builder.Services);
 
-            var descriptor = ServiceDescriptor.Singleton(typeof(ITempDataProvider), typeof(CookieTempDataProvider));
+            var descriptor = ServiceDescriptor.Singleton(
+                typeof(ITempDataProvider),
+                typeof(CookieTempDataProvider)
+            );
             builder.Services.Replace(descriptor);
 
             return builder;
         }
 
-        internal static void AddViewComponentApplicationPartsProviders(ApplicationPartManager manager)
+        internal static void AddViewComponentApplicationPartsProviders(
+            ApplicationPartManager manager
+        )
         {
             if (!manager.FeatureProviders.OfType<ViewComponentFeatureProvider>().Any())
             {
@@ -88,7 +93,8 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <returns>The <see cref="IMvcCoreBuilder"/>.</returns>
         public static IMvcCoreBuilder AddViews(
             this IMvcCoreBuilder builder,
-            Action<MvcViewOptions> setupAction)
+            Action<MvcViewOptions> setupAction
+        )
         {
             if (builder == null)
             {
@@ -118,7 +124,8 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <returns>The <see cref="IMvcCoreBuilder"/>.</returns>
         public static IMvcCoreBuilder AddCookieTempDataProvider(
             this IMvcCoreBuilder builder,
-            Action<CookieTempDataProviderOptions> setupAction)
+            Action<CookieTempDataProviderOptions> setupAction
+        )
         {
             if (builder == null)
             {
@@ -144,7 +151,8 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <returns>The <see cref="IMvcCoreBuilder"/>.</returns>
         public static IMvcCoreBuilder ConfigureViews(
             this IMvcCoreBuilder builder,
-            Action<MvcViewOptions> setupAction)
+            Action<MvcViewOptions> setupAction
+        )
         {
             if (builder == null)
             {
@@ -168,21 +176,35 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddWebEncoders();
 
             services.TryAddEnumerable(
-                ServiceDescriptor.Transient<IConfigureOptions<MvcViewOptions>, MvcViewOptionsSetup>());
+                ServiceDescriptor.Transient<
+                    IConfigureOptions<MvcViewOptions>,
+                    MvcViewOptionsSetup
+                >()
+            );
             services.TryAddEnumerable(
-                ServiceDescriptor.Transient<IConfigureOptions<MvcOptions>, TempDataMvcOptionsSetup>());
+                ServiceDescriptor.Transient<
+                    IConfigureOptions<MvcOptions>,
+                    TempDataMvcOptionsSetup
+                >()
+            );
 
             //
             // View Engine and related infrastructure
             //
             services.TryAddSingleton<ICompositeViewEngine, CompositeViewEngine>();
             services.TryAddSingleton<IActionResultExecutor<ViewResult>, ViewResultExecutor>();
-            services.TryAddSingleton<IActionResultExecutor<PartialViewResult>, PartialViewResultExecutor>();
+            services.TryAddSingleton<
+                IActionResultExecutor<PartialViewResult>,
+                PartialViewResultExecutor
+            >();
 
             // Support for activating ViewDataDictionary
             services.TryAddEnumerable(
-                ServiceDescriptor
-                    .Transient<IControllerPropertyActivator, ViewDataDictionaryControllerPropertyActivator>());
+                ServiceDescriptor.Transient<
+                    IControllerPropertyActivator,
+                    ViewDataDictionaryControllerPropertyActivator
+                >()
+            );
 
             //
             // HTML Helper
@@ -192,8 +214,13 @@ namespace Microsoft.Extensions.DependencyInjection
             services.TryAddSingleton<IHtmlGenerator, DefaultHtmlGenerator>();
             services.TryAddSingleton<ModelExpressionProvider>();
             // ModelExpressionProvider caches results. Ensure that it's re-used when the requested type is IModelExpressionProvider.
-            services.TryAddSingleton<IModelExpressionProvider>(s => s.GetRequiredService<ModelExpressionProvider>());
-            services.TryAddSingleton<ValidationHtmlAttributeProvider, DefaultValidationHtmlAttributeProvider>();
+            services.TryAddSingleton<IModelExpressionProvider>(
+                s => s.GetRequiredService<ModelExpressionProvider>()
+            );
+            services.TryAddSingleton<
+                ValidationHtmlAttributeProvider,
+                DefaultValidationHtmlAttributeProvider
+            >();
 
             services.TryAddSingleton<IJsonHelper, SystemTextJsonHelper>();
 
@@ -213,21 +240,39 @@ namespace Microsoft.Extensions.DependencyInjection
             services.TryAddSingleton<IViewComponentActivator, DefaultViewComponentActivator>();
             services.TryAddSingleton<
                 IViewComponentDescriptorCollectionProvider,
-                DefaultViewComponentDescriptorCollectionProvider>();
-            services.TryAddSingleton<IActionResultExecutor<ViewComponentResult>, ViewComponentResultExecutor>();
+                DefaultViewComponentDescriptorCollectionProvider
+            >();
+            services.TryAddSingleton<
+                IActionResultExecutor<ViewComponentResult>,
+                ViewComponentResultExecutor
+            >();
 
             services.TryAddSingleton<ViewComponentInvokerCache>();
-            services.TryAddTransient<IViewComponentDescriptorProvider, DefaultViewComponentDescriptorProvider>();
-            services.TryAddSingleton<IViewComponentInvokerFactory, DefaultViewComponentInvokerFactory>();
+            services.TryAddTransient<
+                IViewComponentDescriptorProvider,
+                DefaultViewComponentDescriptorProvider
+            >();
+            services.TryAddSingleton<
+                IViewComponentInvokerFactory,
+                DefaultViewComponentInvokerFactory
+            >();
             services.TryAddTransient<IViewComponentHelper, DefaultViewComponentHelper>();
 
             //
             // Temp Data
             //
             services.TryAddEnumerable(
-                ServiceDescriptor.Transient<IApplicationModelProvider, TempDataApplicationModelProvider>());
+                ServiceDescriptor.Transient<
+                    IApplicationModelProvider,
+                    TempDataApplicationModelProvider
+                >()
+            );
             services.TryAddEnumerable(
-                ServiceDescriptor.Transient<IApplicationModelProvider, ViewDataAttributeApplicationModelProvider>());
+                ServiceDescriptor.Transient<
+                    IApplicationModelProvider,
+                    ViewDataAttributeApplicationModelProvider
+                >()
+            );
             services.TryAddSingleton<SaveTempDataFilter>();
 
             //
@@ -240,7 +285,9 @@ namespace Microsoft.Extensions.DependencyInjection
             services.TryAddScoped<IJSRuntime, UnsupportedJavaScriptRuntime>();
             services.TryAddScoped<INavigationInterception, UnsupportedNavigationInterception>();
             services.TryAddScoped<ComponentApplicationLifetime>();
-            services.TryAddScoped<ComponentApplicationState>(sp => sp.GetRequiredService<ComponentApplicationLifetime>().State);
+            services.TryAddScoped<ComponentApplicationState>(
+                sp => sp.GetRequiredService<ComponentApplicationLifetime>().State
+            );
             services.TryAddScoped<IErrorBoundaryLogger, PrerenderingErrorBoundaryLogger>();
 
             services.TryAddTransient<ControllerSaveTempDataPropertyFilter>();

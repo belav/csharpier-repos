@@ -47,7 +47,10 @@ namespace System.Xml
 
         // Concatenates values of textual nodes of the current content, ignoring comments and PIs, expanding entity references,
         // and converts the content to the requested type. Stops at start tags and end tags.
-        public virtual async Task<object> ReadContentAsAsync(Type returnType, IXmlNamespaceResolver? namespaceResolver)
+        public virtual async Task<object> ReadContentAsAsync(
+            Type returnType,
+            IXmlNamespaceResolver? namespaceResolver
+        )
         {
             if (!CanReadContentAs())
             {
@@ -63,15 +66,33 @@ namespace System.Xml
             {
                 try
                 {
-                    return XmlUntypedConverter.Untyped.ChangeType(strContentValue, returnType, (namespaceResolver == null ? this as IXmlNamespaceResolver : namespaceResolver));
+                    return XmlUntypedConverter.Untyped.ChangeType(
+                        strContentValue,
+                        returnType,
+                        (
+                            namespaceResolver == null
+                                ? this as IXmlNamespaceResolver
+                                : namespaceResolver
+                        )
+                    );
                 }
                 catch (FormatException e)
                 {
-                    throw new XmlException(SR.Xml_ReadContentAsFormatException, returnType.ToString(), e, this as IXmlLineInfo);
+                    throw new XmlException(
+                        SR.Xml_ReadContentAsFormatException,
+                        returnType.ToString(),
+                        e,
+                        this as IXmlLineInfo
+                    );
                 }
                 catch (InvalidCastException e)
                 {
-                    throw new XmlException(SR.Xml_ReadContentAsFormatException, returnType.ToString(), e, this as IXmlLineInfo);
+                    throw new XmlException(
+                        SR.Xml_ReadContentAsFormatException,
+                        returnType.ToString(),
+                        e,
+                        this as IXmlLineInfo
+                    );
                 }
             }
         }
@@ -79,7 +100,10 @@ namespace System.Xml
         // Returns the content of the current element as the most appropriate type. Moves to the node following the element's end tag.
         public virtual async Task<object> ReadElementContentAsObjectAsync()
         {
-            if (await SetupReadElementContentAsXxxAsync("ReadElementContentAsObject").ConfigureAwait(false))
+            if (
+                await SetupReadElementContentAsXxxAsync("ReadElementContentAsObject")
+                    .ConfigureAwait(false)
+            )
             {
                 object value = await ReadContentAsObjectAsync().ConfigureAwait(false);
                 await FinishReadElementContentAsXxxAsync().ConfigureAwait(false);
@@ -91,7 +115,10 @@ namespace System.Xml
         // Returns the content of the current element as a string. Moves to the node following the element's end tag.
         public virtual async Task<string> ReadElementContentAsStringAsync()
         {
-            if (await SetupReadElementContentAsXxxAsync("ReadElementContentAsString").ConfigureAwait(false))
+            if (
+                await SetupReadElementContentAsXxxAsync("ReadElementContentAsString")
+                    .ConfigureAwait(false)
+            )
             {
                 string value = await ReadContentAsStringAsync().ConfigureAwait(false);
                 await FinishReadElementContentAsXxxAsync().ConfigureAwait(false);
@@ -101,15 +128,24 @@ namespace System.Xml
         }
 
         // Returns the content of the current element as the requested type. Moves to the node following the element's end tag.
-        public virtual async Task<object> ReadElementContentAsAsync(Type returnType, IXmlNamespaceResolver namespaceResolver)
+        public virtual async Task<object> ReadElementContentAsAsync(
+            Type returnType,
+            IXmlNamespaceResolver namespaceResolver
+        )
         {
-            if (await SetupReadElementContentAsXxxAsync("ReadElementContentAs").ConfigureAwait(false))
+            if (
+                await SetupReadElementContentAsXxxAsync("ReadElementContentAs")
+                    .ConfigureAwait(false)
+            )
             {
-                object value = await ReadContentAsAsync(returnType, namespaceResolver).ConfigureAwait(false);
+                object value = await ReadContentAsAsync(returnType, namespaceResolver)
+                    .ConfigureAwait(false);
                 await FinishReadElementContentAsXxxAsync().ConfigureAwait(false);
                 return value;
             }
-            return (returnType == typeof(string)) ? string.Empty : XmlUntypedConverter.Untyped.ChangeType(string.Empty, returnType, namespaceResolver);
+            return (returnType == typeof(string))
+              ? string.Empty
+              : XmlUntypedConverter.Untyped.ChangeType(string.Empty, returnType, namespaceResolver);
         }
 
         // Moving through the Stream
@@ -133,25 +169,41 @@ namespace System.Xml
         // Returns decoded bytes of the current base64 text content. Call this methods until it returns 0 to get all the data.
         public virtual Task<int> ReadContentAsBase64Async(byte[] buffer, int index, int count)
         {
-            throw new NotSupportedException(SR.Format(SR.Xml_ReadBinaryContentNotSupported, "ReadContentAsBase64"));
+            throw new NotSupportedException(
+                SR.Format(SR.Xml_ReadBinaryContentNotSupported, "ReadContentAsBase64")
+            );
         }
 
         // Returns decoded bytes of the current base64 element content. Call this methods until it returns 0 to get all the data.
-        public virtual Task<int> ReadElementContentAsBase64Async(byte[] buffer, int index, int count)
+        public virtual Task<int> ReadElementContentAsBase64Async(
+            byte[] buffer,
+            int index,
+            int count
+        )
         {
-            throw new NotSupportedException(SR.Format(SR.Xml_ReadBinaryContentNotSupported, "ReadElementContentAsBase64"));
+            throw new NotSupportedException(
+                SR.Format(SR.Xml_ReadBinaryContentNotSupported, "ReadElementContentAsBase64")
+            );
         }
 
         // Returns decoded bytes of the current binhex text content. Call this methods until it returns 0 to get all the data.
         public virtual Task<int> ReadContentAsBinHexAsync(byte[] buffer, int index, int count)
         {
-            throw new NotSupportedException(SR.Format(SR.Xml_ReadBinaryContentNotSupported, "ReadContentAsBinHex"));
+            throw new NotSupportedException(
+                SR.Format(SR.Xml_ReadBinaryContentNotSupported, "ReadContentAsBinHex")
+            );
         }
 
         // Returns decoded bytes of the current binhex element content. Call this methods until it returns 0 to get all the data.
-        public virtual Task<int> ReadElementContentAsBinHexAsync(byte[] buffer, int index, int count)
+        public virtual Task<int> ReadElementContentAsBinHexAsync(
+            byte[] buffer,
+            int index,
+            int count
+        )
         {
-            throw new NotSupportedException(SR.Format(SR.Xml_ReadBinaryContentNotSupported, "ReadElementContentAsBinHex"));
+            throw new NotSupportedException(
+                SR.Format(SR.Xml_ReadBinaryContentNotSupported, "ReadElementContentAsBinHex")
+            );
         }
 
         // Returns a chunk of the value of the current node. Call this method in a loop to get all the data.
@@ -213,6 +265,7 @@ namespace System.Xml
                     await this.WriteNodeAsync(xtw, false).ConfigureAwait(false);
                 }
             }
+
             finally
             {
                 xtw.Close();
@@ -256,7 +309,12 @@ namespace System.Xml
                         xtw.WriteProcessingInstruction(this.Name, this.Value);
                         break;
                     case XmlNodeType.DocumentType:
-                        xtw.WriteDocType(this.Name, this.GetAttribute("PUBLIC"), this.GetAttribute("SYSTEM"), this.Value);
+                        xtw.WriteDocType(
+                            this.Name,
+                            this.GetAttribute("PUBLIC"),
+                            this.GetAttribute("SYSTEM"),
+                            this.Value
+                        );
                         break;
                     case XmlNodeType.Comment:
                         xtw.WriteComment(this.Value);
@@ -301,6 +359,7 @@ namespace System.Xml
                     xtw.WriteNode(this, false);
                 }
             }
+
             finally
             {
                 xtw.Close();
@@ -381,9 +440,13 @@ namespace System.Xml
                     default:
                         goto ReturnContent;
                 }
-            } while ((this.AttributeCount != 0) ? this.ReadAttributeValue() : await this.ReadAsync().ConfigureAwait(false));
+            } while (
+                (this.AttributeCount != 0)
+                    ? this.ReadAttributeValue()
+                    : await this.ReadAsync().ConfigureAwait(false)
+            );
 
-        ReturnContent:
+            ReturnContent:
             return (sb == null) ? value : sb.ToString();
         }
 
@@ -412,7 +475,11 @@ namespace System.Xml
             }
             else if (nodeType == XmlNodeType.Element)
             {
-                throw new XmlException(SR.Xml_MixedReadElementContentAs, string.Empty, this as IXmlLineInfo);
+                throw new XmlException(
+                    SR.Xml_MixedReadElementContentAs,
+                    string.Empty,
+                    this as IXmlLineInfo
+                );
             }
             return true;
         }

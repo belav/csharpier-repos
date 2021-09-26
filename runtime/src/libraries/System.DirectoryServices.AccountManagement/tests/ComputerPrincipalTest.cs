@@ -20,36 +20,63 @@ namespace System.DirectoryServices.AccountManagement.Tests
         public void Ctor_NullContext_ThrowsArgumentException()
         {
             AssertExtensions.Throws<ArgumentException>(null, () => new ComputerPrincipal(null));
-            AssertExtensions.Throws<ArgumentException>(null, () => new ComputerPrincipal(null, "samAccountName", "password", enabled: true));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new ComputerPrincipal(null, "samAccountName", "password", enabled: true)
+            );
         }
 
         [Fact]
         public void Ctor_NullSamAccountName_ThrowsArgumentException()
         {
             var context = new PrincipalContext(ContextType.Machine);
-            AssertExtensions.Throws<ArgumentException>(null, () => new ComputerPrincipal(context, null, "password", enabled: true));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new ComputerPrincipal(context, null, "password", enabled: true)
+            );
         }
 
         [Fact]
         public void Ctor_EmptySamAccountName_ThrowsArgumentNullException()
         {
             var context = new PrincipalContext(ContextType.Machine);
-            AssertExtensions.Throws<ArgumentNullException>("value", null, () => new ComputerPrincipal(context, string.Empty, "password", enabled: true));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                null,
+                () => new ComputerPrincipal(context, string.Empty, "password", enabled: true)
+            );
         }
 
         [Fact]
         public void Ctor_NullPassword_ThrowsArgumentException()
         {
             var context = new PrincipalContext(ContextType.Machine);
-            AssertExtensions.Throws<ArgumentException>(null, () => new ComputerPrincipal(context, "samAccountName", null, enabled: true));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new ComputerPrincipal(context, "samAccountName", null, enabled: true)
+            );
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotWindowsNanoNorServerCore), nameof(PlatformDetection.IsNotWindowsIoTCore))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/34442", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotWindowsNanoNorServerCore),
+            nameof(PlatformDetection.IsNotWindowsIoTCore)
+        )]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/34442",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         public void Ctor_MachineContext_NoException()
         {
             var context = new PrincipalContext(ContextType.Machine);
-            var principal = new ComputerPrincipal(context, "samAccountName", "password", enabled: true);
+            var principal = new ComputerPrincipal(
+                context,
+                "samAccountName",
+                "password",
+                enabled: true
+            );
             Assert.Equal(ContextType.Machine, principal.ContextType);
         }
 

@@ -7,7 +7,7 @@
 // 2) double array greater than 1000 elements is on large object heap
 // 3) non-double array greater than 1000 elements but less than 85K is NOT on large object heap
 // 4) new arrays allocated in large object heap is of generation 2
-// 5) new arrays NOT allocated in large object heap is of generation 0 
+// 5) new arrays NOT allocated in large object heap is of generation 0
 // 6) the threshold can be set by registry key DoubleArrayToLargeObjectHeap
 
 
@@ -273,6 +273,7 @@ internal class DblArray
             GC.TryStartNoGCRegion(500_000);
             f();
         }
+
         finally
         {
             GC.EndNoGCRegion();
@@ -320,13 +321,15 @@ internal class DblArray
             Console.WriteLine(e.StackTrace);
             Console.WriteLine("FAILED");
             Console.WriteLine();
-            Console.WriteLine(@"// Goal: Test arrays of doubles are allocated on large object heap and therefore 8 byte aligned
+            Console.WriteLine(
+                @"// Goal: Test arrays of doubles are allocated on large object heap and therefore 8 byte aligned
 // Assumptions:
 // 1) large object heap is always 8 byte aligned
 // 2) double array greater than 1000 elements is on large object heap
 // 3) non-double array greater than 1000 elements but less than 85K is NOT on large object heap
 // 4) new arrays allocated in large object heap is of generation 2
-// 5) new arrays NOT allocated in large object heap is of generation 0 ");
+// 5) new arrays NOT allocated in large object heap is of generation 0 "
+            );
 
             return -1;
         }

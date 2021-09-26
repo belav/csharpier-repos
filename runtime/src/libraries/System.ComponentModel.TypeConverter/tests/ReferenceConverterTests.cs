@@ -40,7 +40,6 @@ namespace System.ComponentModel.Tests
 {
     public class ReferenceConverterTests : TypeConverterTestBase
     {
-
         public override TypeConverter Converter => new ReferenceConverter(typeof(ITestInterface));
 
         public override bool StandardValuesExclusive => true;
@@ -69,7 +68,8 @@ namespace System.ComponentModel.Tests
                     return null;
                 }
             };
-            yield return ConvertTest.Valid("reference name", null).WithContext(nullReferenceServiceContext);
+            yield return ConvertTest.Valid("reference name", null)
+                .WithContext(nullReferenceServiceContext);
 
             var invalidReferenceServiceContext = new MockTypeDescriptorContext
             {
@@ -79,7 +79,8 @@ namespace System.ComponentModel.Tests
                     return new object();
                 }
             };
-            yield return ConvertTest.Valid("reference name", null).WithContext(invalidReferenceServiceContext);
+            yield return ConvertTest.Valid("reference name", null)
+                .WithContext(invalidReferenceServiceContext);
 
             var component1 = new TestComponent();
             var component2 = new TestComponent();
@@ -96,11 +97,16 @@ namespace System.ComponentModel.Tests
                     return referenceService;
                 }
             };
-            yield return ConvertTest.Valid("reference name", component1).WithContext(validReferenceServiceContext);
-            yield return ConvertTest.Valid("  reference name  ", component1).WithContext(validReferenceServiceContext);
-            yield return ConvertTest.Valid(string.Empty, component2).WithContext(validReferenceServiceContext);
-            yield return ConvertTest.Valid("non component", nonComponent).WithContext(validReferenceServiceContext);
-            yield return ConvertTest.Valid("no such reference", null).WithContext(validReferenceServiceContext);
+            yield return ConvertTest.Valid("reference name", component1)
+                .WithContext(validReferenceServiceContext);
+            yield return ConvertTest.Valid("  reference name  ", component1)
+                .WithContext(validReferenceServiceContext);
+            yield return ConvertTest.Valid(string.Empty, component2)
+                .WithContext(validReferenceServiceContext);
+            yield return ConvertTest.Valid("non component", nonComponent)
+                .WithContext(validReferenceServiceContext);
+            yield return ConvertTest.Valid("no such reference", null)
+                .WithContext(validReferenceServiceContext);
 
             // IContainer.
             var containerComponent1 = new TestComponent();
@@ -110,9 +116,12 @@ namespace System.ComponentModel.Tests
             container.Add(containerComponent2, string.Empty);
             var contextWithContainer = new MockTypeDescriptorContext { Container = container };
 
-            yield return ConvertTest.Valid("reference name", containerComponent1).WithContext(contextWithContainer);
-            yield return ConvertTest.Valid(string.Empty, containerComponent2).WithContext(contextWithContainer);
-            yield return ConvertTest.Valid("no such reference", null).WithContext(contextWithContainer);
+            yield return ConvertTest.Valid("reference name", containerComponent1)
+                .WithContext(contextWithContainer);
+            yield return ConvertTest.Valid(string.Empty, containerComponent2)
+                .WithContext(contextWithContainer);
+            yield return ConvertTest.Valid("no such reference", null)
+                .WithContext(contextWithContainer);
 
             yield return ConvertTest.CantConvertFrom(1);
             yield return ConvertTest.CantConvertFrom(new object());
@@ -127,7 +136,9 @@ namespace System.ComponentModel.Tests
 
             // No Context.
             yield return ConvertTest.Valid(null, "(none)").WithInvariantRemoteInvokeCulture();
-            yield return ConvertTest.Valid(null, "(none)").WithContext(null).WithInvariantRemoteInvokeCulture();
+            yield return ConvertTest.Valid(null, "(none)")
+                .WithContext(null)
+                .WithInvariantRemoteInvokeCulture();
             yield return ConvertTest.Valid(string.Empty, string.Empty).WithContext(null);
 
             // IReferenceCollection.
@@ -139,8 +150,10 @@ namespace System.ComponentModel.Tests
                     return null;
                 }
             };
-            yield return ConvertTest.Valid(component1, string.Empty).WithContext(nullReferenceServiceContext);
-            yield return ConvertTest.Valid(new Component(), string.Empty).WithContext(nullReferenceServiceContext);
+            yield return ConvertTest.Valid(component1, string.Empty)
+                .WithContext(nullReferenceServiceContext);
+            yield return ConvertTest.Valid(new Component(), string.Empty)
+                .WithContext(nullReferenceServiceContext);
 
             var invalidReferenceServiceContext = new MockTypeDescriptorContext
             {
@@ -150,8 +163,10 @@ namespace System.ComponentModel.Tests
                     return new object();
                 }
             };
-            yield return ConvertTest.Valid(component1, string.Empty).WithContext(invalidReferenceServiceContext);
-            yield return ConvertTest.Valid(new Component(), string.Empty).WithContext(invalidReferenceServiceContext);
+            yield return ConvertTest.Valid(component1, string.Empty)
+                .WithContext(invalidReferenceServiceContext);
+            yield return ConvertTest.Valid(new Component(), string.Empty)
+                .WithContext(invalidReferenceServiceContext);
 
             var referenceService = new MockReferenceService();
             referenceService.AddReference("reference name", component1);
@@ -166,11 +181,16 @@ namespace System.ComponentModel.Tests
                     return referenceService;
                 }
             };
-            yield return ConvertTest.Valid(component1, "reference name").WithContext(validReferenceServiceContext);
-            yield return ConvertTest.Valid(component2, string.Empty).WithContext(validReferenceServiceContext);
-            yield return ConvertTest.Valid(component3, string.Empty).WithContext(validReferenceServiceContext);
-            yield return ConvertTest.Valid(nonComponent, "non component").WithContext(validReferenceServiceContext);
-            yield return ConvertTest.Valid(new Component(), string.Empty).WithContext(validReferenceServiceContext);
+            yield return ConvertTest.Valid(component1, "reference name")
+                .WithContext(validReferenceServiceContext);
+            yield return ConvertTest.Valid(component2, string.Empty)
+                .WithContext(validReferenceServiceContext);
+            yield return ConvertTest.Valid(component3, string.Empty)
+                .WithContext(validReferenceServiceContext);
+            yield return ConvertTest.Valid(nonComponent, "non component")
+                .WithContext(validReferenceServiceContext);
+            yield return ConvertTest.Valid(new Component(), string.Empty)
+                .WithContext(validReferenceServiceContext);
 
             // IContainer.
             var containerComponent1 = new TestComponent();
@@ -180,9 +200,12 @@ namespace System.ComponentModel.Tests
             container.Add(containerComponent2, string.Empty);
             var contextWithContainer = new MockTypeDescriptorContext { Container = container };
 
-            yield return ConvertTest.Valid(containerComponent1, "reference name").WithContext(contextWithContainer);
-            yield return ConvertTest.Valid(containerComponent2, string.Empty).WithContext(contextWithContainer);
-            yield return ConvertTest.Valid(new Component(), string.Empty).WithContext(contextWithContainer);
+            yield return ConvertTest.Valid(containerComponent1, "reference name")
+                .WithContext(contextWithContainer);
+            yield return ConvertTest.Valid(containerComponent2, string.Empty)
+                .WithContext(contextWithContainer);
+            yield return ConvertTest.Valid(new Component(), string.Empty)
+                .WithContext(contextWithContainer);
 
             yield return ConvertTest.CantConvertTo(1, typeof(int));
         }
@@ -215,7 +238,10 @@ namespace System.ComponentModel.Tests
 
             TypeConverter.StandardValuesCollection values1 = converter.GetStandardValues(context);
             Assert.Equal(1, callCount);
-            Assert.Equal(new object[] { component1, component2, component2, null }, values1.Cast<object>());
+            Assert.Equal(
+                new object[] { component1, component2, component2, null },
+                values1.Cast<object>()
+            );
 
             // Call again to test caching behavior.
             TypeConverter.StandardValuesCollection values2 = converter.GetStandardValues(context);
@@ -267,7 +293,9 @@ namespace System.ComponentModel.Tests
 
         [Theory]
         [MemberData(nameof(GetStandardValues_IReferenceServiceInvalid_TestData))]
-        public void GetStandardValues_IReferenceServiceInvalid_ReturnsExpected(object referenceService)
+        public void GetStandardValues_IReferenceServiceInvalid_ReturnsExpected(
+            object referenceService
+        )
         {
             var converter = new ReferenceConverter(typeof(TestComponent));
             int callCount = 0;
@@ -439,9 +467,7 @@ namespace System.ComponentModel.Tests
             public object Instance => null;
             public PropertyDescriptor PropertyDescriptor => null;
 
-            public void OnComponentChanged()
-            {
-            }
+            public void OnComponentChanged() { }
 
             public bool OnComponentChanging() => true;
 
@@ -450,7 +476,8 @@ namespace System.ComponentModel.Tests
 
         public class MockReferenceService : IReferenceService
         {
-            public Dictionary<string, object> References { get; set; } = new Dictionary<string, object>();
+            public Dictionary<string, object> References { get; set; } =
+                new Dictionary<string, object>();
 
             public void AddReference(string name, object reference)
             {

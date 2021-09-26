@@ -9,12 +9,18 @@ internal class NullableTest
 {
     private static bool BoxUnboxToNQ(object o)
     {
-        return Helper.Compare((NotEmptyStructQA)(ValueType)o, Helper.Create(default(NotEmptyStructQA)));
+        return Helper.Compare(
+            (NotEmptyStructQA)(ValueType)o,
+            Helper.Create(default(NotEmptyStructQA))
+        );
     }
 
     private static bool BoxUnboxToQ(object o)
     {
-        return Helper.Compare((NotEmptyStructQA?)(ValueType)o, Helper.Create(default(NotEmptyStructQA)));
+        return Helper.Compare(
+            (NotEmptyStructQA?)(ValueType)o,
+            Helper.Create(default(NotEmptyStructQA))
+        );
     }
 
     private static int Main()

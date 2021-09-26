@@ -6,7 +6,8 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.Extensions.Logging.Console.Test
 {
-    internal class TestFormatterOptionsMonitor<TOptions> : IOptionsMonitor<TOptions> where TOptions : ConsoleFormatterOptions
+    internal class TestFormatterOptionsMonitor<TOptions> : IOptionsMonitor<TOptions>
+        where TOptions : ConsoleFormatterOptions
     {
         private TOptions _options;
         private event Action<TOptions, string> _onChange;
@@ -19,8 +20,8 @@ namespace Microsoft.Extensions.Logging.Console.Test
 
         public IDisposable OnChange(Action<TOptions, string> listener)
         {
-                _onChange += listener;
-                return null;
+            _onChange += listener;
+            return null;
         }
 
         public TOptions CurrentValue => _options;

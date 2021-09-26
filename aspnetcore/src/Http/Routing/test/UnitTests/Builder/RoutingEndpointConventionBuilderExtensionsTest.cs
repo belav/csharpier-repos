@@ -117,10 +117,13 @@ namespace Microsoft.AspNetCore.Builder
 
         private TestEndpointConventionBuilder CreateBuilder()
         {
-            var conventionBuilder = new DefaultEndpointConventionBuilder(new RouteEndpointBuilder(
-                TestConstants.EmptyRequestDelegate,
-                RoutePatternFactory.Parse("/test"),
-                order: 0));
+            var conventionBuilder = new DefaultEndpointConventionBuilder(
+                new RouteEndpointBuilder(
+                    TestConstants.EmptyRequestDelegate,
+                    RoutePatternFactory.Parse("/test"),
+                    order: 0
+                )
+            );
 
             return new TestEndpointConventionBuilder(conventionBuilder);
         }
@@ -130,7 +133,9 @@ namespace Microsoft.AspNetCore.Builder
             private DefaultEndpointConventionBuilder _endpointConventionBuilder;
             public bool TestProperty { get; } = true;
 
-            public TestEndpointConventionBuilder(DefaultEndpointConventionBuilder endpointConventionBuilder)
+            public TestEndpointConventionBuilder(
+                DefaultEndpointConventionBuilder endpointConventionBuilder
+            )
             {
                 _endpointConventionBuilder = endpointConventionBuilder;
             }

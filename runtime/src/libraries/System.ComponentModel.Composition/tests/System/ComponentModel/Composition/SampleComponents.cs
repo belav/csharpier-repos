@@ -20,15 +20,24 @@ namespace System.ComponentModel.Composition
         public string PublicField = PublicFieldExpectedValue;
         public const string PublicPropertyExpectedValue = "PublicProperty";
         [Export("PublicProperty")]
-        public string PublicProperty { get { return PublicPropertyExpectedValue; } }
+        public string PublicProperty
+        {
+            get { return PublicPropertyExpectedValue; }
+        }
         public const string PublicMethodExpectedValue = "PublicMethod";
         [Export("PublicDelegate")]
-        public string PublicMethod() { return PublicMethodExpectedValue; }
+        public string PublicMethod()
+        {
+            return PublicMethodExpectedValue;
+        }
         public const string PublicNestedClassExpectedValue = "PublicNestedClass";
         [Export("PublicIGetString")]
         public class PublicNestedClass : IGetString
         {
-            public string GetString() { return PublicNestedClassExpectedValue; }
+            public string GetString()
+            {
+                return PublicNestedClassExpectedValue;
+            }
         }
     }
 
@@ -46,10 +55,22 @@ namespace System.ComponentModel.Composition
 
         public void VerifyIsBound()
         {
-            Assert.Equal(PublicComponentWithPublicExports.PublicFieldExpectedValue, PublicImportPublicField);
-            Assert.Equal(PublicComponentWithPublicExports.PublicPropertyExpectedValue, PublicImportPublicProperty);
-            Assert.Equal(PublicComponentWithPublicExports.PublicMethodExpectedValue, PublicImportPublicMethod());
-            Assert.Equal(PublicComponentWithPublicExports.PublicNestedClassExpectedValue, PublicImportPublicNestedClass.GetString());
+            Assert.Equal(
+                PublicComponentWithPublicExports.PublicFieldExpectedValue,
+                PublicImportPublicField
+            );
+            Assert.Equal(
+                PublicComponentWithPublicExports.PublicPropertyExpectedValue,
+                PublicImportPublicProperty
+            );
+            Assert.Equal(
+                PublicComponentWithPublicExports.PublicMethodExpectedValue,
+                PublicImportPublicMethod()
+            );
+            Assert.Equal(
+                PublicComponentWithPublicExports.PublicNestedClassExpectedValue,
+                PublicImportPublicNestedClass.GetString()
+            );
         }
     }
 
@@ -67,10 +88,22 @@ namespace System.ComponentModel.Composition
 
         public void VerifyIsBound()
         {
-            Assert.Equal(PublicComponentWithPublicExports.PublicFieldExpectedValue, InternalImportPublicField);
-            Assert.Equal(PublicComponentWithPublicExports.PublicPropertyExpectedValue, InternalImportPublicProperty);
-            Assert.Equal(PublicComponentWithPublicExports.PublicMethodExpectedValue, InternalImportPublicMethod());
-            Assert.Equal(PublicComponentWithPublicExports.PublicNestedClassExpectedValue, InternalImportPublicNestedClass.GetString());
+            Assert.Equal(
+                PublicComponentWithPublicExports.PublicFieldExpectedValue,
+                InternalImportPublicField
+            );
+            Assert.Equal(
+                PublicComponentWithPublicExports.PublicPropertyExpectedValue,
+                InternalImportPublicProperty
+            );
+            Assert.Equal(
+                PublicComponentWithPublicExports.PublicMethodExpectedValue,
+                InternalImportPublicMethod()
+            );
+            Assert.Equal(
+                PublicComponentWithPublicExports.PublicNestedClassExpectedValue,
+                InternalImportPublicNestedClass.GetString()
+            );
         }
     }
 
@@ -81,15 +114,24 @@ namespace System.ComponentModel.Composition
         internal string InternalField = InternalFieldExpectedValue;
         public const string InternalPropertyExpectedValue = "InternalProperty";
         [Export("InternalProperty")]
-        internal string InternalProperty { get { return InternalPropertyExpectedValue; } }
+        internal string InternalProperty
+        {
+            get { return InternalPropertyExpectedValue; }
+        }
         public const string InternalMethodExpectedValue = "InternalMethod";
         [Export("InternalDelegate")]
-        internal string InternalMethod() { return InternalMethodExpectedValue; }
+        internal string InternalMethod()
+        {
+            return InternalMethodExpectedValue;
+        }
         public const string InternalNestedClassExpectedValue = "InternalNestedClass";
         [Export("InternalIGetString")]
         internal class InternalNestedClass : IGetString
         {
-            public string GetString() { return InternalNestedClassExpectedValue; }
+            public string GetString()
+            {
+                return InternalNestedClassExpectedValue;
+            }
         }
     }
 
@@ -107,10 +149,22 @@ namespace System.ComponentModel.Composition
 
         public void VerifyIsBound()
         {
-            Assert.Equal(PublicComponentWithInternalExports.InternalFieldExpectedValue, PublicImportInternalField);
-            Assert.Equal(PublicComponentWithInternalExports.InternalPropertyExpectedValue, PublicImportInternalProperty);
-            Assert.Equal(PublicComponentWithInternalExports.InternalMethodExpectedValue, PublicImportInternalMethod());
-            Assert.Equal(PublicComponentWithInternalExports.InternalNestedClassExpectedValue, PublicImportInternalNestedClass.GetString());
+            Assert.Equal(
+                PublicComponentWithInternalExports.InternalFieldExpectedValue,
+                PublicImportInternalField
+            );
+            Assert.Equal(
+                PublicComponentWithInternalExports.InternalPropertyExpectedValue,
+                PublicImportInternalProperty
+            );
+            Assert.Equal(
+                PublicComponentWithInternalExports.InternalMethodExpectedValue,
+                PublicImportInternalMethod()
+            );
+            Assert.Equal(
+                PublicComponentWithInternalExports.InternalNestedClassExpectedValue,
+                PublicImportInternalNestedClass.GetString()
+            );
         }
     }
 
@@ -128,10 +182,22 @@ namespace System.ComponentModel.Composition
 
         public void VerifyIsBound()
         {
-            Assert.Equal(PublicComponentWithInternalExports.InternalFieldExpectedValue, InternalImportInternalField);
-            Assert.Equal(PublicComponentWithInternalExports.InternalPropertyExpectedValue, InternalImportInternalProperty);
-            Assert.Equal(PublicComponentWithInternalExports.InternalMethodExpectedValue, InternalImportInternalMethod());
-            Assert.Equal(PublicComponentWithInternalExports.InternalNestedClassExpectedValue, InternalImportInternalNestedClass.GetString());
+            Assert.Equal(
+                PublicComponentWithInternalExports.InternalFieldExpectedValue,
+                InternalImportInternalField
+            );
+            Assert.Equal(
+                PublicComponentWithInternalExports.InternalPropertyExpectedValue,
+                InternalImportInternalProperty
+            );
+            Assert.Equal(
+                PublicComponentWithInternalExports.InternalMethodExpectedValue,
+                InternalImportInternalMethod()
+            );
+            Assert.Equal(
+                PublicComponentWithInternalExports.InternalNestedClassExpectedValue,
+                InternalImportInternalNestedClass.GetString()
+            );
         }
     }
 
@@ -142,15 +208,24 @@ namespace System.ComponentModel.Composition
         protected string ProtectedField = ProtectedFieldExpectedValue;
         public const string ProtectedPropertyExpectedValue = "ProtectedProperty";
         [Export("ProtectedProperty")]
-        protected string ProtectedProperty { get { return ProtectedPropertyExpectedValue; } }
+        protected string ProtectedProperty
+        {
+            get { return ProtectedPropertyExpectedValue; }
+        }
         public const string ProtectedMethodExpectedValue = "ProtectedMethod";
         [Export("ProtectedDelegate")]
-        protected string ProtectedMethod() { return ProtectedMethodExpectedValue; }
+        protected string ProtectedMethod()
+        {
+            return ProtectedMethodExpectedValue;
+        }
         public const string ProtectedNestedClassExpectedValue = "ProtectedNestedClass";
         [Export("ProtectedIGetString")]
         protected class ProtectedNestedClass : IGetString
         {
-            public string GetString() { return ProtectedNestedClassExpectedValue; }
+            public string GetString()
+            {
+                return ProtectedNestedClassExpectedValue;
+            }
         }
     }
 
@@ -168,10 +243,22 @@ namespace System.ComponentModel.Composition
 
         public void VerifyIsBound()
         {
-            Assert.Equal(PublicComponentWithProtectedExports.ProtectedFieldExpectedValue, PublicImportProtectedField);
-            Assert.Equal(PublicComponentWithProtectedExports.ProtectedPropertyExpectedValue, PublicImportProtectedProperty);
-            Assert.Equal(PublicComponentWithProtectedExports.ProtectedMethodExpectedValue, PublicImportProtectedMethod());
-            Assert.Equal(PublicComponentWithProtectedExports.ProtectedNestedClassExpectedValue, PublicImportProtectedNestedClass.GetString());
+            Assert.Equal(
+                PublicComponentWithProtectedExports.ProtectedFieldExpectedValue,
+                PublicImportProtectedField
+            );
+            Assert.Equal(
+                PublicComponentWithProtectedExports.ProtectedPropertyExpectedValue,
+                PublicImportProtectedProperty
+            );
+            Assert.Equal(
+                PublicComponentWithProtectedExports.ProtectedMethodExpectedValue,
+                PublicImportProtectedMethod()
+            );
+            Assert.Equal(
+                PublicComponentWithProtectedExports.ProtectedNestedClassExpectedValue,
+                PublicImportProtectedNestedClass.GetString()
+            );
         }
     }
 
@@ -189,10 +276,22 @@ namespace System.ComponentModel.Composition
 
         public void VerifyIsBound()
         {
-            Assert.Equal(PublicComponentWithProtectedExports.ProtectedFieldExpectedValue, InternalImportProtectedField);
-            Assert.Equal(PublicComponentWithProtectedExports.ProtectedPropertyExpectedValue, InternalImportProtectedProperty);
-            Assert.Equal(PublicComponentWithProtectedExports.ProtectedMethodExpectedValue, InternalImportProtectedMethod());
-            Assert.Equal(PublicComponentWithProtectedExports.ProtectedNestedClassExpectedValue, InternalImportProtectedNestedClass.GetString());
+            Assert.Equal(
+                PublicComponentWithProtectedExports.ProtectedFieldExpectedValue,
+                InternalImportProtectedField
+            );
+            Assert.Equal(
+                PublicComponentWithProtectedExports.ProtectedPropertyExpectedValue,
+                InternalImportProtectedProperty
+            );
+            Assert.Equal(
+                PublicComponentWithProtectedExports.ProtectedMethodExpectedValue,
+                InternalImportProtectedMethod()
+            );
+            Assert.Equal(
+                PublicComponentWithProtectedExports.ProtectedNestedClassExpectedValue,
+                InternalImportProtectedNestedClass.GetString()
+            );
         }
     }
 
@@ -203,15 +302,25 @@ namespace System.ComponentModel.Composition
         protected internal string ProtectedInternalField = ProtectedInternalFieldExpectedValue;
         public const string ProtectedInternalPropertyExpectedValue = "ProtectedInternalProperty";
         [Export("ProtectedInternalProperty")]
-        protected internal string ProtectedInternalProperty { get { return ProtectedInternalPropertyExpectedValue; } }
+        protected internal string ProtectedInternalProperty
+        {
+            get { return ProtectedInternalPropertyExpectedValue; }
+        }
         public const string ProtectedInternalMethodExpectedValue = "ProtectedInternalMethod";
         [Export("ProtectedInternalDelegate")]
-        protected internal string ProtectedInternalMethod() { return ProtectedInternalMethodExpectedValue; }
-        public const string ProtectedInternalNestedClassExpectedValue = "ProtectedInternalNestedClass";
+        protected internal string ProtectedInternalMethod()
+        {
+            return ProtectedInternalMethodExpectedValue;
+        }
+        public const string ProtectedInternalNestedClassExpectedValue =
+            "ProtectedInternalNestedClass";
         [Export("ProtectedInternalIGetString")]
         protected internal class ProtectedInternalNestedClass : IGetString
         {
-            public string GetString() { return ProtectedInternalNestedClassExpectedValue; }
+            public string GetString()
+            {
+                return ProtectedInternalNestedClassExpectedValue;
+            }
         }
     }
 
@@ -229,10 +338,22 @@ namespace System.ComponentModel.Composition
 
         public void VerifyIsBound()
         {
-            Assert.Equal(PublicComponentWithProtectedInternalExports.ProtectedInternalFieldExpectedValue, PublicImportProtectedInternalField);
-            Assert.Equal(PublicComponentWithProtectedInternalExports.ProtectedInternalPropertyExpectedValue, PublicImportProtectedInternalProperty);
-            Assert.Equal(PublicComponentWithProtectedInternalExports.ProtectedInternalMethodExpectedValue, PublicImportProtectedInternalMethod());
-            Assert.Equal(PublicComponentWithProtectedInternalExports.ProtectedInternalNestedClassExpectedValue, PublicImportProtectedInternalNestedClass.GetString());
+            Assert.Equal(
+                PublicComponentWithProtectedInternalExports.ProtectedInternalFieldExpectedValue,
+                PublicImportProtectedInternalField
+            );
+            Assert.Equal(
+                PublicComponentWithProtectedInternalExports.ProtectedInternalPropertyExpectedValue,
+                PublicImportProtectedInternalProperty
+            );
+            Assert.Equal(
+                PublicComponentWithProtectedInternalExports.ProtectedInternalMethodExpectedValue,
+                PublicImportProtectedInternalMethod()
+            );
+            Assert.Equal(
+                PublicComponentWithProtectedInternalExports.ProtectedInternalNestedClassExpectedValue,
+                PublicImportProtectedInternalNestedClass.GetString()
+            );
         }
     }
 
@@ -250,10 +371,22 @@ namespace System.ComponentModel.Composition
 
         public void VerifyIsBound()
         {
-            Assert.Equal(PublicComponentWithProtectedInternalExports.ProtectedInternalFieldExpectedValue, InternalImportProtectedInternalField);
-            Assert.Equal(PublicComponentWithProtectedInternalExports.ProtectedInternalPropertyExpectedValue, InternalImportProtectedInternalProperty);
-            Assert.Equal(PublicComponentWithProtectedInternalExports.ProtectedInternalMethodExpectedValue, InternalImportProtectedInternalMethod());
-            Assert.Equal(PublicComponentWithProtectedInternalExports.ProtectedInternalNestedClassExpectedValue, InternalImportProtectedInternalNestedClass.GetString());
+            Assert.Equal(
+                PublicComponentWithProtectedInternalExports.ProtectedInternalFieldExpectedValue,
+                InternalImportProtectedInternalField
+            );
+            Assert.Equal(
+                PublicComponentWithProtectedInternalExports.ProtectedInternalPropertyExpectedValue,
+                InternalImportProtectedInternalProperty
+            );
+            Assert.Equal(
+                PublicComponentWithProtectedInternalExports.ProtectedInternalMethodExpectedValue,
+                InternalImportProtectedInternalMethod()
+            );
+            Assert.Equal(
+                PublicComponentWithProtectedInternalExports.ProtectedInternalNestedClassExpectedValue,
+                InternalImportProtectedInternalNestedClass.GetString()
+            );
         }
     }
 
@@ -262,15 +395,24 @@ namespace System.ComponentModel.Composition
         public const string PrivateFieldExpectedValue = "PrivateField";
         public const string PrivatePropertyExpectedValue = "PrivateProperty";
         [Export("PrivateProperty")]
-        private string PrivateProperty { get { return PrivatePropertyExpectedValue; } }
+        private string PrivateProperty
+        {
+            get { return PrivatePropertyExpectedValue; }
+        }
         public const string PrivateMethodExpectedValue = "PrivateMethod";
         [Export("PrivateDelegate")]
-        private string PrivateMethod() { return PrivateMethodExpectedValue; }
+        private string PrivateMethod()
+        {
+            return PrivateMethodExpectedValue;
+        }
         public const string PrivateNestedClassExpectedValue = "PrivateNestedClass";
         [Export("PrivateIGetString")]
         private class PrivateNestedClass : IGetString
         {
-            public string GetString() { return PrivateNestedClassExpectedValue; }
+            public string GetString()
+            {
+                return PrivateNestedClassExpectedValue;
+            }
         }
     }
 
@@ -288,10 +430,22 @@ namespace System.ComponentModel.Composition
 
         public void VerifyIsBound()
         {
-            Assert.Equal(PublicComponentWithPrivateExports.PrivateFieldExpectedValue, PublicImportPrivateField);
-            Assert.Equal(PublicComponentWithPrivateExports.PrivatePropertyExpectedValue, PublicImportPrivateProperty);
-            Assert.Equal(PublicComponentWithPrivateExports.PrivateMethodExpectedValue, PublicImportPrivateMethod());
-            Assert.Equal(PublicComponentWithPrivateExports.PrivateNestedClassExpectedValue, PublicImportPrivateNestedClass.GetString());
+            Assert.Equal(
+                PublicComponentWithPrivateExports.PrivateFieldExpectedValue,
+                PublicImportPrivateField
+            );
+            Assert.Equal(
+                PublicComponentWithPrivateExports.PrivatePropertyExpectedValue,
+                PublicImportPrivateProperty
+            );
+            Assert.Equal(
+                PublicComponentWithPrivateExports.PrivateMethodExpectedValue,
+                PublicImportPrivateMethod()
+            );
+            Assert.Equal(
+                PublicComponentWithPrivateExports.PrivateNestedClassExpectedValue,
+                PublicImportPrivateNestedClass.GetString()
+            );
         }
     }
 
@@ -309,10 +463,22 @@ namespace System.ComponentModel.Composition
 
         public void VerifyIsBound()
         {
-            Assert.Equal(PublicComponentWithPrivateExports.PrivateFieldExpectedValue, InternalImportPrivateField);
-            Assert.Equal(PublicComponentWithPrivateExports.PrivatePropertyExpectedValue, InternalImportPrivateProperty);
-            Assert.Equal(PublicComponentWithPrivateExports.PrivateMethodExpectedValue, InternalImportPrivateMethod());
-            Assert.Equal(PublicComponentWithPrivateExports.PrivateNestedClassExpectedValue, InternalImportPrivateNestedClass.GetString());
+            Assert.Equal(
+                PublicComponentWithPrivateExports.PrivateFieldExpectedValue,
+                InternalImportPrivateField
+            );
+            Assert.Equal(
+                PublicComponentWithPrivateExports.PrivatePropertyExpectedValue,
+                InternalImportPrivateProperty
+            );
+            Assert.Equal(
+                PublicComponentWithPrivateExports.PrivateMethodExpectedValue,
+                InternalImportPrivateMethod()
+            );
+            Assert.Equal(
+                PublicComponentWithPrivateExports.PrivateNestedClassExpectedValue,
+                InternalImportPrivateNestedClass.GetString()
+            );
         }
     }
 
@@ -412,9 +578,7 @@ namespace System.ComponentModel.Composition
         }
 
         [Export("ActionWith0Args")]
-        public void MyAction0()
-        {
-        }
+        public void MyAction0() { }
 
         [Export("ActionWith1Arg")]
         public void MyAction1(int i1)
@@ -479,7 +643,10 @@ namespace System.ComponentModel.Composition
     public static class StaticExportClass
     {
         [Export("StaticString")]
-        public static string StaticString { get { return "StaticString"; } }
+        public static string StaticString
+        {
+            get { return "StaticString"; }
+        }
     }
 
     [Export]
@@ -621,7 +788,10 @@ namespace System.ComponentModel.Composition
         public int One = 1;
 
         [Export("Two")]
-        public int Two { get { return 2; } }
+        public int Two
+        {
+            get { return 2; }
+        }
 
         [Export("Add")]
         [ExportableTest(Var1 = "sub")]
@@ -634,7 +804,10 @@ namespace System.ComponentModel.Composition
         public int One = 1;
 
         [Export("Two")]
-        public int Two { get { return 2; } }
+        public int Two
+        {
+            get { return 2; }
+        }
 
         [Export("Add")]
         [ExportMetadata("Var1", "add")]
@@ -687,7 +860,6 @@ namespace System.ComponentModel.Composition
     {
         [Import("derived")]
         public DerivedExport Export;
-
     }
 
     public class DerivedExportsImporter
@@ -699,7 +871,10 @@ namespace System.ComponentModel.Composition
     [Export]
     public class NotSoUniqueName
     {
-        public int MyIntProperty { get { return 23; } }
+        public int MyIntProperty
+        {
+            get { return 23; }
+        }
     }
 
     public class NotSoUniqueName2
@@ -707,7 +882,10 @@ namespace System.ComponentModel.Composition
         [Export]
         public class NotSoUniqueName
         {
-            public virtual string MyStringProperty { get { return "MyStringProperty"; } }
+            public virtual string MyStringProperty
+            {
+                get { return "MyStringProperty"; }
+            }
         }
     }
 
@@ -734,7 +912,10 @@ namespace System.ComponentModel.Composition
     public class ExportThatCantBeActivated
     {
         [Export("ExportMyString")]
-        public string MyString { get { return "MyString"; } }
+        public string MyString
+        {
+            get { return "MyString"; }
+        }
 
         [Import("ContractThatShouldNotexist")]
         public string MissingImport { get; set; }
@@ -767,11 +948,14 @@ namespace System.ComponentModel.Composition
         }
     }
 
-    public class GenericContract7 :
-        GenericContract4<string, string>.GenericContract5<int, int>.GenericContract6<double, double>
-    { }
+    public class GenericContract7
+        : GenericContract4<string, string>.GenericContract5<int, int>.GenericContract6<
+              double,
+              double
+          > { }
 
-    public class GenericContract8<T> : GenericContract1<string>.GenericContract2.GenericContract3<T> { }
+    public class GenericContract8<T>
+        : GenericContract1<string>.GenericContract2.GenericContract3<T> { }
 
     public class NestedParent
     {
@@ -906,7 +1090,6 @@ namespace System.ComponentModel.Composition
     {
         [Import]
         public CycleWithSharedPartAndNonSharedPart NonSharedPart { get; set; }
-
     }
 
     [InheritedExport]
@@ -917,7 +1100,10 @@ namespace System.ComponentModel.Composition
     public class ExportWithGenericParameterOfInt
     {
         [Export]
-        public ExportWithGenericParameter<int> GenericExport { get { return new ExportWithGenericParameter<int>(); } }
+        public ExportWithGenericParameter<int> GenericExport
+        {
+            get { return new ExportWithGenericParameter<int>(); }
+        }
     }
 
     [Export]
@@ -928,7 +1114,6 @@ namespace System.ComponentModel.Composition
     [Export]
     public class ExportWhichInheritsFromGeneric : ExportWithGenericParameter<string>
     {
-
     }
 
     [Export]
@@ -944,7 +1129,7 @@ namespace System.ComponentModel.Composition
     public class SimpleConstructorInjectedObject
     {
         [ImportingConstructor]
-        public SimpleConstructorInjectedObject([Import("CISimpleValue")]int value)
+        public SimpleConstructorInjectedObject([Import("CISimpleValue")] int value)
         {
             CISimpleValue = value;
         }
@@ -978,16 +1163,17 @@ namespace System.ComponentModel.Composition
     [Export]
     public class BaseExportForImportingConstructors
     {
-
     }
 
-    public class ClassWithOnlyHasImportingConstructorButInherits : BaseExportForImportingConstructors
+    public class ClassWithOnlyHasImportingConstructorButInherits
+        : BaseExportForImportingConstructors
     {
         [ImportingConstructor]
         public ClassWithOnlyHasImportingConstructorButInherits(int blah) { }
     }
 
-    public class ClassWithOnlyHasMultipleImportingConstructorButInherits : BaseExportForImportingConstructors
+    public class ClassWithOnlyHasMultipleImportingConstructorButInherits
+        : BaseExportForImportingConstructors
     {
         [ImportingConstructor]
         public ClassWithOnlyHasMultipleImportingConstructorButInherits(int blah) { }
@@ -1064,9 +1250,7 @@ namespace System.ComponentModel.Composition
         public double Argument3 { get; set; }
         public string Argument4 { get; set; }
 
-        public ThisIsMyMetadataMetadataAttribute()
-        {
-        }
+        public ThisIsMyMetadataMetadataAttribute() { }
 
         public ThisIsMyMetadataMetadataAttribute(string Argument1, int Argument2)
         {
@@ -1083,7 +1267,6 @@ namespace System.ComponentModel.Composition
 
     public class Int32CollectionImporter
     {
-
         public Int32CollectionImporter()
         {
             Values = new Collection<int>();
@@ -1096,7 +1279,6 @@ namespace System.ComponentModel.Composition
     [PartNotDiscoverable]
     public class Int32Exporter
     {
-
         public Int32Exporter(int value)
         {
             Value = value;
@@ -1104,13 +1286,11 @@ namespace System.ComponentModel.Composition
 
         [Export("Value")]
         public int Value { get; set; }
-
     }
 
     [PartNotDiscoverable]
     public class Int32ExporterInternal
     {
-
         public Int32ExporterInternal(int value)
         {
             Value = value;
@@ -1118,15 +1298,11 @@ namespace System.ComponentModel.Composition
 
         [Export("Value")]
         public int Value { get; set; }
-
     }
 
     public class Int32Importer
     {
-
-        public Int32Importer()
-        {
-        }
+        public Int32Importer() { }
 
         [Import("Value", AllowRecomposition = true)]
         public int Value { get; set; }
@@ -1134,13 +1310,9 @@ namespace System.ComponentModel.Composition
 
     public class Int32ImporterInternal
     {
-
-        public Int32ImporterInternal()
-        {
-        }
+        public Int32ImporterInternal() { }
 
         [Import("Value")]
         public int Value { get; set; }
     }
-
 }

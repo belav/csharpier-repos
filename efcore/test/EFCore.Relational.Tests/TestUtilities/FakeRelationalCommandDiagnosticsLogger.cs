@@ -13,7 +13,8 @@ using Microsoft.EntityFrameworkCore.Storage;
 namespace Microsoft.EntityFrameworkCore.TestUtilities
 {
     public class FakeRelationalCommandDiagnosticsLogger
-        : FakeDiagnosticsLogger<DbLoggerCategory.Database.Command>, IRelationalCommandDiagnosticsLogger
+        : FakeDiagnosticsLogger<DbLoggerCategory.Database.Command>,
+          IRelationalCommandDiagnosticsLogger
     {
         public InterceptionResult<DbCommand> CommandCreating(
             IRelationalConnection connection,
@@ -21,8 +22,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             DbContext? context,
             Guid commandId,
             Guid connectionId,
-            DateTimeOffset startTime)
-            => default;
+            DateTimeOffset startTime
+        ) => default;
 
         public DbCommand CommandCreated(
             IRelationalConnection connection,
@@ -32,8 +33,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             Guid commandId,
             Guid connectionId,
             DateTimeOffset startTime,
-            TimeSpan duration)
-            => command;
+            TimeSpan duration
+        ) => command;
 
         public InterceptionResult<DbDataReader> CommandReaderExecuting(
             IRelationalConnection connection,
@@ -41,8 +42,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             DbContext? context,
             Guid commandId,
             Guid connectionId,
-            DateTimeOffset startTime)
-            => default;
+            DateTimeOffset startTime
+        ) => default;
 
         public InterceptionResult<object> CommandScalarExecuting(
             IRelationalConnection connection,
@@ -50,8 +51,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             DbContext? context,
             Guid commandId,
             Guid connectionId,
-            DateTimeOffset startTime)
-            => default;
+            DateTimeOffset startTime
+        ) => default;
 
         /// <summary>
         ///     Logs for the <see cref="RelationalEventId.CommandExecuting" /> event.
@@ -69,8 +70,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             DbContext? context,
             Guid commandId,
             Guid connectionId,
-            DateTimeOffset startTime)
-            => default;
+            DateTimeOffset startTime
+        ) => default;
 
         public ValueTask<InterceptionResult<DbDataReader>> CommandReaderExecutingAsync(
             IRelationalConnection connection,
@@ -79,8 +80,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             Guid commandId,
             Guid connectionId,
             DateTimeOffset startTime,
-            CancellationToken cancellationToken = default)
-            => default;
+            CancellationToken cancellationToken = default
+        ) => default;
 
         public ValueTask<InterceptionResult<object>> CommandScalarExecutingAsync(
             IRelationalConnection connection,
@@ -89,8 +90,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             Guid commandId,
             Guid connectionId,
             DateTimeOffset startTime,
-            CancellationToken cancellationToken = default)
-            => default;
+            CancellationToken cancellationToken = default
+        ) => default;
 
         public ValueTask<InterceptionResult<int>> CommandNonQueryExecutingAsync(
             IRelationalConnection connection,
@@ -99,8 +100,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             Guid commandId,
             Guid connectionId,
             DateTimeOffset startTime,
-            CancellationToken cancellationToken = default)
-            => default;
+            CancellationToken cancellationToken = default
+        ) => default;
 
         public DbDataReader CommandReaderExecuted(
             IRelationalConnection connection,
@@ -110,8 +111,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             Guid connectionId,
             DbDataReader methodResult,
             DateTimeOffset startTime,
-            TimeSpan duration)
-            => methodResult;
+            TimeSpan duration
+        ) => methodResult;
 
         public object? CommandScalarExecuted(
             IRelationalConnection connection,
@@ -121,8 +122,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             Guid connectionId,
             object? methodResult,
             DateTimeOffset startTime,
-            TimeSpan duration)
-            => methodResult;
+            TimeSpan duration
+        ) => methodResult;
 
         public int CommandNonQueryExecuted(
             IRelationalConnection connection,
@@ -132,8 +133,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             Guid connectionId,
             int methodResult,
             DateTimeOffset startTime,
-            TimeSpan duration)
-            => methodResult;
+            TimeSpan duration
+        ) => methodResult;
 
         public ValueTask<DbDataReader> CommandReaderExecutedAsync(
             IRelationalConnection connection,
@@ -144,8 +145,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             DbDataReader methodResult,
             DateTimeOffset startTime,
             TimeSpan duration,
-            CancellationToken cancellationToken = default)
-            => new(methodResult);
+            CancellationToken cancellationToken = default
+        ) => new(methodResult);
 
         public ValueTask<object?> CommandScalarExecutedAsync(
             IRelationalConnection connection,
@@ -156,8 +157,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             object? methodResult,
             DateTimeOffset startTime,
             TimeSpan duration,
-            CancellationToken cancellationToken = default)
-            => new(methodResult);
+            CancellationToken cancellationToken = default
+        ) => new(methodResult);
 
         public ValueTask<int> CommandNonQueryExecutedAsync(
             IRelationalConnection connection,
@@ -168,8 +169,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             int methodResult,
             DateTimeOffset startTime,
             TimeSpan duration,
-            CancellationToken cancellationToken = default)
-            => new(methodResult);
+            CancellationToken cancellationToken = default
+        ) => new(methodResult);
 
         public void CommandError(
             IRelationalConnection connection,
@@ -180,9 +181,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             Guid connectionId,
             Exception exception,
             DateTimeOffset startTime,
-            TimeSpan duration)
-        {
-        }
+            TimeSpan duration
+        ) { }
 
         public Task CommandErrorAsync(
             IRelationalConnection connection,
@@ -194,8 +194,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             Exception exception,
             DateTimeOffset startTime,
             TimeSpan duration,
-            CancellationToken cancellationToken = default)
-            => Task.CompletedTask;
+            CancellationToken cancellationToken = default
+        ) => Task.CompletedTask;
 
         public InterceptionResult DataReaderDisposing(
             IRelationalConnection connection,
@@ -205,16 +205,13 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             int recordsAffected,
             int readCount,
             DateTimeOffset startTime,
-            TimeSpan duration)
-            => default;
+            TimeSpan duration
+        ) => default;
 
-        public bool ShouldLogCommandCreate(DateTimeOffset now)
-            => true;
+        public bool ShouldLogCommandCreate(DateTimeOffset now) => true;
 
-        public bool ShouldLogCommandExecute(DateTimeOffset now)
-            => true;
+        public bool ShouldLogCommandExecute(DateTimeOffset now) => true;
 
-        public bool ShouldLogDataReaderDispose(DateTimeOffset now)
-            => true;
+        public bool ShouldLogDataReaderDispose(DateTimeOffset now) => true;
     }
 }

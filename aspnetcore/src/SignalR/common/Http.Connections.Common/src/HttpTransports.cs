@@ -11,6 +11,9 @@ namespace Microsoft.AspNetCore.Http.Connections
         /// <summary>
         /// A bitmask combining all available <see cref="HttpTransportType"/> values.
         /// </summary>
-        public static readonly HttpTransportType All = HttpTransportType.WebSockets | HttpTransportType.ServerSentEvents | HttpTransportType.LongPolling;
+        public static readonly HttpTransportType All =
+            HttpTransportType.WebSockets
+            | HttpTransportType.ServerSentEvents
+            | HttpTransportType.LongPolling;
     }
 }

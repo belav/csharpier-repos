@@ -26,16 +26,18 @@ class Program
                 Console.WriteLine("ERROR: i = " + i);
                 returnVal = -1;
             }
-            p = 1; q = 2;
+            p = 1;
+            q = 2;
         }
     }
 
     static int Main(string[] args)
     {
-        for(int i = 0; i < s.Length; i++) s[i] = new byte[2];
+        for (int i = 0; i < s.Length; i++)
+            s[i] = new byte[2];
 
         List<Task> tasks = new List<Task>();
-        for(int i = 0; i < 5; i++)
+        for (int i = 0; i < 5; i++)
         {
             tasks.Add(Task.Run(Work));
         }

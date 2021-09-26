@@ -19,12 +19,12 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests.Account
         public ExternalLogin(
             HttpClient client,
             IHtmlDocument externalLogin,
-            DefaultUIContext context)
-            : base(client, externalLogin, context)
+            DefaultUIContext context
+        ) : base(client, externalLogin, context)
         {
             _emailForm = HtmlAssert.HasForm(Document);
             Title = HtmlAssert.HasElement("#external-login-title", Document);
-            Description = HtmlAssert.HasElement("#external-login-description",Document);
+            Description = HtmlAssert.HasElement("#external-login-description", Document);
         }
 
         public IHtmlElement Title { get; }
@@ -32,29 +32,40 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests.Account
 
         public async Task<Index> SendEmailAsync(string email)
         {
-            var response = await Client.SendAsync(_emailForm, new Dictionary<string, string>
-            {
-                ["Input_Email"] = email
-            });
+            var response = await Client.SendAsync(
+                _emailForm,
+                new Dictionary<string, string> { ["Input_Email"] = email }
+            );
             var redirect = ResponseAssert.IsRedirect(response);
             var indexResponse = await Client.GetAsync(redirect);
             var index = await ResponseAssert.IsHtmlDocumentAsync(indexResponse);
             return new Index(Client, index, Context.WithAuthenticatedUser());
         }
 
-        public async Task<RegisterConfirmation> SendEmailWithConfirmationAsync(string email, bool hasRealEmail)
+        public async Task<RegisterConfirmation> SendEmailWithConfirmationAsync(
+            string email,
+            bool hasRealEmail
+        )
         {
-            var response = await Client.SendAsync(_emailForm, new Dictionary<string, string>
-            {
-                ["Input_Email"] = email
-            });
+            var response = await Client.SendAsync(
+                _emailForm,
+                new Dictionary<string, string> { ["Input_Email"] = email }
+            );
             var redirect = ResponseAssert.IsRedirect(response);
-            Assert.Equal(RegisterConfirmation.Path + "?email=" + email, redirect.ToString(), StringComparer.OrdinalIgnoreCase);
+            Assert.Equal(
+                RegisterConfirmation.Path + "?email=" + email,
+                redirect.ToString(),
+                StringComparer.OrdinalIgnoreCase
+            );
 
             var registerResponse = await Client.GetAsync(redirect);
             var register = await ResponseAssert.IsHtmlDocumentAsync(registerResponse);
 
-            return new RegisterConfirmation(Client, register, hasRealEmail ? Context.WithRealEmailSender() : Context);
+            return new RegisterConfirmation(
+                Client,
+                register,
+                hasRealEmail ? Context.WithRealEmailSender() : Context
+            );
         }
     }
 }

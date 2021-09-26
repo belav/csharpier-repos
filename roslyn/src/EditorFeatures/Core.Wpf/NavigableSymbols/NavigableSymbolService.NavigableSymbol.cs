@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.Editor.NavigableSymbols
                 Document document,
                 IThreadingContext threadingContext,
                 IStreamingFindUsagesPresenter streamingPresenter,
-                IWaitIndicator waitIndicator)
+                IWaitIndicator waitIndicator
+            )
             {
                 Contract.ThrowIfFalse(definitions.Length > 0);
 
@@ -47,7 +48,9 @@ namespace Microsoft.CodeAnalysis.Editor.NavigableSymbols
             public SnapshotSpan SymbolSpan { get; }
 
             public IEnumerable<INavigableRelationship> Relationships =>
-                SpecializedCollections.SingletonEnumerable(PredefinedNavigableRelationships.Definition);
+                SpecializedCollections.SingletonEnumerable(
+                    PredefinedNavigableRelationships.Definition
+                );
 
             public void Navigate(INavigableRelationship relationship) =>
                 _waitIndicator.Wait(
@@ -55,13 +58,16 @@ namespace Microsoft.CodeAnalysis.Editor.NavigableSymbols
                     message: EditorFeaturesResources.Navigating_to_definition,
                     allowCancel: true,
                     showProgress: false,
-                    action: context => GoToDefinitionHelpers.TryGoToDefinition(
-                        _definitions,
-                        _document.Project.Solution,
-                        _definitions[0].NameDisplayParts.GetFullText(),
-                        _threadingContext,
-                        _presenter,
-                        context.CancellationToken));
+                    action: context =>
+                        GoToDefinitionHelpers.TryGoToDefinition(
+                            _definitions,
+                            _document.Project.Solution,
+                            _definitions[0].NameDisplayParts.GetFullText(),
+                            _threadingContext,
+                            _presenter,
+                            context.CancellationToken
+                        )
+                );
         }
     }
 }

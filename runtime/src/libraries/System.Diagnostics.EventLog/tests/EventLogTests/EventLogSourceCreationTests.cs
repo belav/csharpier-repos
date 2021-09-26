@@ -19,10 +19,11 @@ namespace System.Diagnostics.Tests
                 EventLog.CreateEventSource(source, log);
                 Assert.True(EventLog.SourceExists(source));
             }
+
             finally
             {
                 EventLog.DeleteEventSource(source);
-                Helpers.Retry(() => EventLog.Delete(log));  // unlike other tests, throw if delete fails
+                Helpers.Retry(() => EventLog.Delete(log)); // unlike other tests, throw if delete fails
             }
 
             Assert.False(EventLog.SourceExists(source));
@@ -46,6 +47,7 @@ namespace System.Diagnostics.Tests
                 EventLog.CreateEventSource(secondSource, secondLog);
                 Assert.True(EventLog.SourceExists(secondSource));
             }
+
             finally
             {
                 EventLog.DeleteEventSource(firstSource);
@@ -69,8 +71,11 @@ namespace System.Diagnostics.Tests
             {
                 EventLog.CreateEventSource(firstSource, firstLog);
                 Assert.True(EventLog.SourceExists(firstSource));
-                Assert.Throws<ArgumentException>(() => EventLog.CreateEventSource(secondSource, secondLog));
+                Assert.Throws<ArgumentException>(
+                    () => EventLog.CreateEventSource(secondSource, secondLog)
+                );
             }
+
             finally
             {
                 EventLog.DeleteEventSource(firstSource);
@@ -98,7 +103,9 @@ namespace System.Diagnostics.Tests
         [ConditionalFact(typeof(Helpers), nameof(Helpers.IsElevatedAndSupportsEventLogs))]
         public void DeleteUnregisteredSource()
         {
-            Assert.Throws<ArgumentException>(() => EventLog.DeleteEventSource(Guid.NewGuid().ToString("N")));
+            Assert.Throws<ArgumentException>(
+                () => EventLog.DeleteEventSource(Guid.NewGuid().ToString("N"))
+            );
         }
 
         [ConditionalFact(typeof(Helpers), nameof(Helpers.IsElevatedAndSupportsEventLogs))]
@@ -112,6 +119,7 @@ namespace System.Diagnostics.Tests
                 Assert.True(EventLog.SourceExists(source));
                 Assert.Equal("Application", EventLog.LogNameFromSourceName(source, "."));
             }
+
             finally
             {
                 EventLog.DeleteEventSource(source);
@@ -156,6 +164,7 @@ namespace System.Diagnostics.Tests
                 Assert.True(EventLog.SourceExists(source));
                 Assert.Throws<ArgumentException>(() => EventLog.CreateEventSource(source, log));
             }
+
             finally
             {
                 EventLog.DeleteEventSource(source);

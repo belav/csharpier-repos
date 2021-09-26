@@ -26,7 +26,11 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
         public void IsNameMatch_WithAny_AlwaysReturnsTrue(string name, string conventionName)
         {
             // Act
-            var result = IsNameMatch(name, conventionName, SymbolApiConventionNameMatchBehavior.Any);
+            var result = IsNameMatch(
+                name,
+                conventionName,
+                SymbolApiConventionNameMatchBehavior.Any
+            );
 
             // Assert
             Assert.True(result);
@@ -40,7 +44,11 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             var conventionName = "name";
 
             // Act
-            var result = IsNameMatch(name, conventionName, SymbolApiConventionNameMatchBehavior.Exact);
+            var result = IsNameMatch(
+                name,
+                conventionName,
+                SymbolApiConventionNameMatchBehavior.Exact
+            );
 
             // Assert
             Assert.False(result);
@@ -54,7 +62,11 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             var conventionName = "Different";
 
             // Act
-            var result = IsNameMatch(name, conventionName, SymbolApiConventionNameMatchBehavior.Exact);
+            var result = IsNameMatch(
+                name,
+                conventionName,
+                SymbolApiConventionNameMatchBehavior.Exact
+            );
 
             // Assert
             Assert.False(result);
@@ -68,7 +80,11 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             var conventionName = "Regular";
 
             // Act
-            var result = IsNameMatch(name, conventionName, SymbolApiConventionNameMatchBehavior.Exact);
+            var result = IsNameMatch(
+                name,
+                conventionName,
+                SymbolApiConventionNameMatchBehavior.Exact
+            );
 
             // Assert
             Assert.False(result);
@@ -82,7 +98,11 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             var conventionName = "RegularName";
 
             // Act
-            var result = IsNameMatch(name, conventionName, SymbolApiConventionNameMatchBehavior.Exact);
+            var result = IsNameMatch(
+                name,
+                conventionName,
+                SymbolApiConventionNameMatchBehavior.Exact
+            );
 
             // Assert
             Assert.False(result);
@@ -96,7 +116,11 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             var conventionName = "parameterName";
 
             // Act
-            var result = IsNameMatch(name, conventionName, SymbolApiConventionNameMatchBehavior.Exact);
+            var result = IsNameMatch(
+                name,
+                conventionName,
+                SymbolApiConventionNameMatchBehavior.Exact
+            );
 
             // Assert
             Assert.True(result);
@@ -110,7 +134,11 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             var conventionName = "PostPerson";
 
             // Act
-            var result = IsNameMatch(name, conventionName, SymbolApiConventionNameMatchBehavior.Prefix);
+            var result = IsNameMatch(
+                name,
+                conventionName,
+                SymbolApiConventionNameMatchBehavior.Prefix
+            );
 
             // Assert
             Assert.True(result);
@@ -124,7 +152,11 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             var conventionName = "Post";
 
             // Act
-            var result = IsNameMatch(name, conventionName, SymbolApiConventionNameMatchBehavior.Prefix);
+            var result = IsNameMatch(
+                name,
+                conventionName,
+                SymbolApiConventionNameMatchBehavior.Prefix
+            );
 
             // Assert
             Assert.True(result);
@@ -138,7 +170,11 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             var conventionName = "Post";
 
             // Act
-            var result = IsNameMatch(name, conventionName, SymbolApiConventionNameMatchBehavior.Prefix);
+            var result = IsNameMatch(
+                name,
+                conventionName,
+                SymbolApiConventionNameMatchBehavior.Prefix
+            );
 
             // Assert
             Assert.False(result);
@@ -152,7 +188,11 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             var conventionName = "post";
 
             // Act
-            var result = IsNameMatch(name, conventionName, SymbolApiConventionNameMatchBehavior.Prefix);
+            var result = IsNameMatch(
+                name,
+                conventionName,
+                SymbolApiConventionNameMatchBehavior.Prefix
+            );
 
             // Assert
             Assert.False(result);
@@ -166,7 +206,11 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             var conventionName = "Post";
 
             // Act
-            var result = IsNameMatch(name, conventionName, SymbolApiConventionNameMatchBehavior.Prefix);
+            var result = IsNameMatch(
+                name,
+                conventionName,
+                SymbolApiConventionNameMatchBehavior.Prefix
+            );
 
             // Assert
             Assert.False(result);
@@ -180,7 +224,11 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             var conventionName = "Post";
 
             // Act
-            var result = IsNameMatch(name, conventionName, SymbolApiConventionNameMatchBehavior.Prefix);
+            var result = IsNameMatch(
+                name,
+                conventionName,
+                SymbolApiConventionNameMatchBehavior.Prefix
+            );
 
             // Assert
             Assert.False(result);
@@ -194,7 +242,11 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             var conventionName = "diff";
 
             // Act
-            var result = IsNameMatch(name, conventionName, SymbolApiConventionNameMatchBehavior.Suffix);
+            var result = IsNameMatch(
+                name,
+                conventionName,
+                SymbolApiConventionNameMatchBehavior.Suffix
+            );
 
             // Assert
             Assert.False(result);
@@ -208,7 +260,11 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             var conventionName = "idx";
 
             // Act
-            var result = IsNameMatch(name, conventionName, SymbolApiConventionNameMatchBehavior.Suffix);
+            var result = IsNameMatch(
+                name,
+                conventionName,
+                SymbolApiConventionNameMatchBehavior.Suffix
+            );
 
             // Assert
             Assert.False(result);
@@ -222,7 +278,11 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             var conventionName = "test";
 
             // Act
-            var result = IsNameMatch(name, conventionName, SymbolApiConventionNameMatchBehavior.Suffix);
+            var result = IsNameMatch(
+                name,
+                conventionName,
+                SymbolApiConventionNameMatchBehavior.Suffix
+            );
 
             // Assert
             Assert.True(result);
@@ -236,7 +296,11 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             var conventionName = "Test";
 
             // Act
-            var result = IsNameMatch(name, conventionName, SymbolApiConventionNameMatchBehavior.Suffix);
+            var result = IsNameMatch(
+                name,
+                conventionName,
+                SymbolApiConventionNameMatchBehavior.Suffix
+            );
 
             // Assert
             Assert.False(result);
@@ -250,7 +314,11 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             var conventionName = "id";
 
             // Act
-            var result = IsNameMatch(name, conventionName, SymbolApiConventionNameMatchBehavior.Suffix);
+            var result = IsNameMatch(
+                name,
+                conventionName,
+                SymbolApiConventionNameMatchBehavior.Suffix
+            );
 
             // Assert
             Assert.True(result);
@@ -259,10 +327,17 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
         [Theory]
         [InlineData("candid", "id")]
         [InlineData("canDid", "id")]
-        public void IsNameMatch_WithSuffix_ReturnFalse_IfNameIsNotProperSuffix(string name, string conventionName)
+        public void IsNameMatch_WithSuffix_ReturnFalse_IfNameIsNotProperSuffix(
+            string name,
+            string conventionName
+        )
         {
             // Act
-            var result = IsNameMatch(name, conventionName, SymbolApiConventionNameMatchBehavior.Suffix);
+            var result = IsNameMatch(
+                name,
+                conventionName,
+                SymbolApiConventionNameMatchBehavior.Suffix
+            );
 
             // Assert
             Assert.False(result);
@@ -280,7 +355,11 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             var conventionTypeSymbol = compilation.GetTypeByMetadataName(conventionType.FullName);
 
             // Act
-            var result = IsTypeMatch(typeSymbol, conventionTypeSymbol, SymbolApiConventionTypeMatchBehavior.Any);
+            var result = IsTypeMatch(
+                typeSymbol,
+                conventionTypeSymbol,
+                SymbolApiConventionTypeMatchBehavior.Any
+            );
 
             // Assert
             Assert.True(result);
@@ -296,7 +375,11 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             var conventionType = compilation.GetTypeByMetadataName(BaseTypeName);
 
             // Act
-            var result = IsTypeMatch(type, conventionType, SymbolApiConventionTypeMatchBehavior.AssignableFrom);
+            var result = IsTypeMatch(
+                type,
+                conventionType,
+                SymbolApiConventionTypeMatchBehavior.AssignableFrom
+            );
 
             // Assert
             Assert.True(result);
@@ -311,9 +394,12 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             var type = compilation.GetTypeByMetadataName(DerivedTypeName);
             var conventionType = compilation.GetTypeByMetadataName(BaseTypeName);
 
-
             // Act
-            var result = IsTypeMatch(type, conventionType, SymbolApiConventionTypeMatchBehavior.AssignableFrom);
+            var result = IsTypeMatch(
+                type,
+                conventionType,
+                SymbolApiConventionTypeMatchBehavior.AssignableFrom
+            );
 
             // Assert
             Assert.True(result);
@@ -329,7 +415,11 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             var conventionType = compilation.GetTypeByMetadataName(DerivedTypeName);
 
             // Act
-            var result = IsTypeMatch(type, conventionType, SymbolApiConventionTypeMatchBehavior.AssignableFrom);
+            var result = IsTypeMatch(
+                type,
+                conventionType,
+                SymbolApiConventionTypeMatchBehavior.AssignableFrom
+            );
 
             // Assert
             Assert.False(result);
@@ -345,7 +435,11 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             var conventionType = compilation.GetTypeByMetadataName(BaseTypeName);
 
             // Act
-            var result = IsTypeMatch(type, conventionType, SymbolApiConventionTypeMatchBehavior.AssignableFrom);
+            var result = IsTypeMatch(
+                type,
+                conventionType,
+                SymbolApiConventionTypeMatchBehavior.AssignableFrom
+            );
 
             // Assert
             Assert.False(result);
@@ -428,7 +522,11 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             return RunMatchTest(methodName, conventionMethodName, expected);
         }
 
-        private async Task RunMatchTest(string methodName, string conventionMethodName, bool expected)
+        private async Task RunMatchTest(
+            string methodName,
+            string conventionMethodName,
+            bool expected
+        )
         {
             var compilation = await GetCompilationAsync();
             Assert.True(ApiControllerSymbolCache.TryCreate(compilation, out var symbolCache));
@@ -436,7 +534,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             var testController = compilation.GetTypeByMetadataName(TestControllerName);
             var testConvention = compilation.GetTypeByMetadataName(TestConventionName);
             var method = (IMethodSymbol)testController.GetMembers(methodName).First();
-            var conventionMethod = (IMethodSymbol)testConvention.GetMembers(conventionMethodName).First();
+            var conventionMethod = (IMethodSymbol)testConvention.GetMembers(conventionMethodName)
+                .First();
 
             // Act
             var result = IsMatch(symbolCache, method, conventionMethod);
@@ -454,7 +553,10 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             Assert.True(ApiControllerSymbolCache.TryCreate(compilation, out var symbolCache));
 
             var testConvention = compilation.GetTypeByMetadataName(TestConventionName);
-            var method = testConvention.GetMembers(nameof(TestConvention.MethodWithoutMatchBehavior)).First();
+            var method = testConvention.GetMembers(
+                    nameof(TestConvention.MethodWithoutMatchBehavior)
+                )
+                .First();
 
             // Act
             var result = GetNameMatchBehavior(symbolCache, method);
@@ -472,7 +574,10 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             Assert.True(ApiControllerSymbolCache.TryCreate(compilation, out var symbolCache));
 
             var testConvention = compilation.GetTypeByMetadataName(TestConventionName);
-            var method = testConvention.GetMembers(nameof(TestConvention.MethodWithRandomAttributes)).First();
+            var method = testConvention.GetMembers(
+                    nameof(TestConvention.MethodWithRandomAttributes)
+                )
+                .First();
 
             // Act
             var result = GetNameMatchBehavior(symbolCache, method);
@@ -508,7 +613,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             Assert.True(ApiControllerSymbolCache.TryCreate(compilation, out var symbolCache));
 
             var testConvention = compilation.GetTypeByMetadataName(TestConventionName);
-            var method = (IMethodSymbol)testConvention.GetMembers(nameof(TestConvention.Get)).First();
+            var method = (IMethodSymbol)testConvention.GetMembers(nameof(TestConvention.Get))
+                .First();
             var parameter = method.Parameters[0];
 
             // Act
@@ -527,7 +633,10 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             Assert.True(ApiControllerSymbolCache.TryCreate(compilation, out var symbolCache));
 
             var testConvention = compilation.GetTypeByMetadataName(TestConventionName);
-            var method = (IMethodSymbol)testConvention.GetMembers(nameof(TestConvention.MethodParameterWithRandomAttributes)).First();
+            var method = (IMethodSymbol)testConvention.GetMembers(
+                    nameof(TestConvention.MethodParameterWithRandomAttributes)
+                )
+                .First();
             var parameter = method.Parameters[0];
 
             // Act
@@ -546,7 +655,10 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             Assert.True(ApiControllerSymbolCache.TryCreate(compilation, out var symbolCache));
 
             var testConvention = compilation.GetTypeByMetadataName(TestConventionName);
-            var method = (IMethodSymbol)testConvention.GetMembers(nameof(TestConvention.MethodWithAnyTypeMatchBehaviorParameter)).First();
+            var method = (IMethodSymbol)testConvention.GetMembers(
+                    nameof(TestConvention.MethodWithAnyTypeMatchBehaviorParameter)
+                )
+                .First();
             var parameter = method.Parameters[0];
 
             // Act
@@ -556,10 +668,15 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             Assert.Equal(expected, result);
         }
 
-        private Task<Compilation> GetCompilationAsync(string test = "SymbolApiConventionMatcherTestFile")
+        private Task<Compilation> GetCompilationAsync(
+            string test = "SymbolApiConventionMatcherTestFile"
+        )
         {
             var testSource = MvcTestSource.Read(GetType().Name, test);
-            var project = MvcDiagnosticAnalyzerRunner.CreateProjectWithReferencesInBinDir(GetType().Assembly, new[] { testSource.Source });
+            var project = MvcDiagnosticAnalyzerRunner.CreateProjectWithReferencesInBinDir(
+                GetType().Assembly,
+                new[] { testSource.Source }
+            );
 
             return project.GetCompilationAsync();
         }

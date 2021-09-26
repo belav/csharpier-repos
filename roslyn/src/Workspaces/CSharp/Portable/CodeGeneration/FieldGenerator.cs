@@ -20,11 +20,12 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
     {
         private static MemberDeclarationSyntax LastField(
             SyntaxList<MemberDeclarationSyntax> members,
-            FieldDeclarationSyntax fieldDeclaration)
+            FieldDeclarationSyntax fieldDeclaration
+        )
         {
             var lastConst = members.OfType<FieldDeclarationSyntax>()
-                                   .Where(f => f.Modifiers.Any(SyntaxKind.ConstKeyword))
-                                   .LastOrDefault();
+                .Where(f => f.Modifiers.Any(SyntaxKind.ConstKeyword))
+                .LastOrDefault();
 
             // Place a const after the last existing const.  If we don't have a last const
             // we'll just place the const before the first member in the type.
@@ -34,32 +35,43 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             }
 
             var lastReadOnly = members.OfType<FieldDeclarationSyntax>()
-                                      .Where(f => f.Modifiers.Any(SyntaxKind.ReadOnlyKeyword))
-                                      .LastOrDefault();
+                .Where(f => f.Modifiers.Any(SyntaxKind.ReadOnlyKeyword))
+                .LastOrDefault();
 
             var lastNormal = members.OfType<FieldDeclarationSyntax>()
-                                    .Where(f => !f.Modifiers.Any(SyntaxKind.ReadOnlyKeyword) && !f.Modifiers.Any(SyntaxKind.ConstKeyword))
-                                    .LastOrDefault();
+                .Where(
+                    f =>
+                        !f.Modifiers.Any(SyntaxKind.ReadOnlyKeyword)
+                        && !f.Modifiers.Any(SyntaxKind.ConstKeyword)
+                )
+                .LastOrDefault();
 
             // Place a readonly field after the last readonly field if we have one.  Otherwise
             // after the last field/const.
             return fieldDeclaration.Modifiers.Any(SyntaxKind.ReadOnlyKeyword)
-                ? lastReadOnly ?? lastConst ?? lastNormal
-                : lastNormal ?? lastReadOnly ?? lastConst;
+              ? lastReadOnly ?? lastConst ?? lastNormal
+              : lastNormal ?? lastReadOnly ?? lastConst;
         }
 
         internal static CompilationUnitSyntax AddFieldTo(
             CompilationUnitSyntax destination,
             IFieldSymbol field,
             CodeGenerationOptions options,
-            IList<bool> availableIndices)
+            IList<bool> availableIndices
+        )
         {
             var declaration = GenerateFieldDeclaration(field, options);
 
             // Place the field after the last field or const, or at the start of the type
             // declaration.
-            var members = Insert(destination.Members, declaration, options, availableIndices,
-                after: m => LastField(m, declaration), before: FirstMember);
+            var members = Insert(
+                destination.Members,
+                declaration,
+                options,
+                availableIndices,
+                after: m => LastField(m, declaration),
+                before: FirstMember
+            );
             return destination.WithMembers(members.ToSyntaxList());
         }
 
@@ -67,28 +79,43 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             TypeDeclarationSyntax destination,
             IFieldSymbol field,
             CodeGenerationOptions options,
-            IList<bool> availableIndices)
+            IList<bool> availableIndices
+        )
         {
             var declaration = GenerateFieldDeclaration(field, options);
 
             // Place the field after the last field or const, or at the start of the type
             // declaration.
-            var members = Insert(destination.Members, declaration, options, availableIndices,
-                after: m => LastField(m, declaration), before: FirstMember);
+            var members = Insert(
+                destination.Members,
+                declaration,
+                options,
+                availableIndices,
+                after: m => LastField(m, declaration),
+                before: FirstMember
+            );
 
             return AddMembersTo(destination, members);
         }
 
         public static FieldDeclarationSyntax GenerateFieldDeclaration(
-            IFieldSymbol field, CodeGenerationOptions options)
+            IFieldSymbol field,
+            CodeGenerationOptions options
+        )
         {
-            var reusableSyntax = GetReuseableSyntaxNodeForSymbol<VariableDeclaratorSyntax>(field, options);
+            var reusableSyntax = GetReuseableSyntaxNodeForSymbol<VariableDeclaratorSyntax>(
+                field,
+                options
+            );
             if (reusableSyntax != null)
             {
                 if (reusableSyntax.Parent is VariableDeclarationSyntax variableDeclaration)
                 {
-                    var newVariableDeclaratorsList = new SeparatedSyntaxList<VariableDeclaratorSyntax>().Add(reusableSyntax);
-                    var newVariableDeclaration = variableDeclaration.WithVariables(newVariableDeclaratorsList);
+                    var newVariableDeclaratorsList =
+                        new SeparatedSyntaxList<VariableDeclaratorSyntax>().Add(reusableSyntax);
+                    var newVariableDeclaration = variableDeclaration.WithVariables(
+                        newVariableDeclaratorsList
+                    );
                     if (variableDeclaration.Parent is FieldDeclarationSyntax fieldDecl)
                     {
                         return fieldDecl.WithDeclaration(newVariableDeclaration);
@@ -96,7 +123,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 }
             }
 
-            var initializer = CodeGenerationFieldInfo.GetInitializer(field) is ExpressionSyntax initializerNode
+            var initializer = CodeGenerationFieldInfo.GetInitializer(field)
+                is ExpressionSyntax initializerNode
                 ? SyntaxFactory.EqualsValueClause(initializerNode)
                 : GenerateEqualsValue(field);
 
@@ -106,28 +134,54 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 SyntaxFactory.VariableDeclaration(
                     field.Type.GenerateTypeSyntax(),
                     SyntaxFactory.SingletonSeparatedList(
-                        AddAnnotationsTo(field, SyntaxFactory.VariableDeclarator(field.Name.ToIdentifierToken(), null, initializer)))));
+                        AddAnnotationsTo(
+                            field,
+                            SyntaxFactory.VariableDeclarator(
+                                field.Name.ToIdentifierToken(),
+                                null,
+                                initializer
+                            )
+                        )
+                    )
+                )
+            );
 
             return AddFormatterAndCodeGeneratorAnnotationsTo(
-                ConditionallyAddDocumentationCommentTo(fieldDeclaration, field, options));
+                ConditionallyAddDocumentationCommentTo(fieldDeclaration, field, options)
+            );
         }
 
         private static EqualsValueClauseSyntax GenerateEqualsValue(IFieldSymbol field)
         {
             if (field.HasConstantValue)
             {
-                var canUseFieldReference = field.Type != null && !field.Type.Equals(field.ContainingType);
-                return SyntaxFactory.EqualsValueClause(ExpressionGenerator.GenerateExpression(field.Type, field.ConstantValue, canUseFieldReference));
+                var canUseFieldReference =
+                    field.Type != null && !field.Type.Equals(field.ContainingType);
+                return SyntaxFactory.EqualsValueClause(
+                    ExpressionGenerator.GenerateExpression(
+                        field.Type,
+                        field.ConstantValue,
+                        canUseFieldReference
+                    )
+                );
             }
 
             return null;
         }
 
-        private static SyntaxTokenList GenerateModifiers(IFieldSymbol field, CodeGenerationOptions options)
+        private static SyntaxTokenList GenerateModifiers(
+            IFieldSymbol field,
+            CodeGenerationOptions options
+        )
         {
             var tokens = ArrayBuilder<SyntaxToken>.GetInstance();
 
-            AddAccessibilityModifiers(field.DeclaredAccessibility, tokens, options, Accessibility.Private);
+            AddAccessibilityModifiers(
+                field.DeclaredAccessibility,
+                tokens,
+                options,
+                Accessibility.Private
+            );
             if (field.IsConst)
             {
                 tokens.Add(SyntaxFactory.Token(SyntaxKind.ConstKeyword));

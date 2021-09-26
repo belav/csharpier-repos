@@ -23,8 +23,12 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Cached value for empty <see cref="DiagnosticOptions"/>.
         /// </summary>
-        protected internal static readonly ImmutableDictionary<string, ReportDiagnostic> EmptyDiagnosticOptions =
-            ImmutableDictionary.Create<string, ReportDiagnostic>(CaseInsensitiveComparison.Comparer);
+        protected internal static readonly ImmutableDictionary<
+            string,
+            ReportDiagnostic
+        > EmptyDiagnosticOptions = ImmutableDictionary.Create<string, ReportDiagnostic>(
+            CaseInsensitiveComparison.Comparer
+        );
 
         private ImmutableArray<byte> _lazyChecksum;
         private SourceHashAlgorithm _lazyHashAlgorithm;
@@ -61,10 +65,7 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         public ParseOptions Options
         {
-            get
-            {
-                return this.OptionsCore;
-            }
+            get { return this.OptionsCore; }
         }
 
         /// <summary>
@@ -79,8 +80,12 @@ namespace Microsoft.CodeAnalysis
         /// A map from diagnostic ID to diagnostic reporting level. The diagnostic
         /// ID string may be case insensitive depending on the language.
         /// </returns>
-        [Obsolete("Obsolete due to performance problems, use CompilationOptions.SyntaxTreeOptionsProvider instead", error: false)]
-        public virtual ImmutableDictionary<string, ReportDiagnostic> DiagnosticOptions => EmptyDiagnosticOptions;
+        [Obsolete(
+            "Obsolete due to performance problems, use CompilationOptions.SyntaxTreeOptionsProvider instead",
+            error: false
+        )]
+        public virtual ImmutableDictionary<string, ReportDiagnostic> DiagnosticOptions =>
+            EmptyDiagnosticOptions;
 
         /// <summary>
         /// The length of the text of the syntax tree.
@@ -111,7 +116,9 @@ namespace Microsoft.CodeAnalysis
         /// </remarks>
         public virtual Task<SourceText> GetTextAsync(CancellationToken cancellationToken = default)
         {
-            return Task.FromResult(this.TryGetText(out SourceText? text) ? text : this.GetText(cancellationToken));
+            return Task.FromResult(
+                this.TryGetText(out SourceText? text) ? text : this.GetText(cancellationToken)
+            );
         }
 
         /// <summary>
@@ -151,7 +158,11 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Gets the root node of the syntax tree asynchronously.
         /// </summary>
-        [SuppressMessage("Style", "VSTHRD200:Use \"Async\" suffix for async methods", Justification = "Public API.")]
+        [SuppressMessage(
+            "Style",
+            "VSTHRD200:Use \"Async\" suffix for async methods",
+            Justification = "Public API."
+        )]
         protected abstract Task<SyntaxNode> GetRootAsyncCore(CancellationToken cancellationToken);
 
         /// <summary>
@@ -168,7 +179,9 @@ namespace Microsoft.CodeAnalysis
         /// This method does not filter diagnostics based on #pragmas and compiler options
         /// like nowarn, warnaserror etc.
         /// </summary>
-        public abstract IEnumerable<Diagnostic> GetDiagnostics(CancellationToken cancellationToken = default);
+        public abstract IEnumerable<Diagnostic> GetDiagnostics(
+            CancellationToken cancellationToken = default
+        );
 
         /// <summary>
         /// Gets a list of all the diagnostics in the sub tree that has the specified node as its root.
@@ -208,7 +221,10 @@ namespace Microsoft.CodeAnalysis
         /// A valid <see cref="FileLinePositionSpan"/> that contains path, line and column information.
         /// The values are not affected by line mapping directives (<c>#line</c>).
         /// </returns>
-        public abstract FileLinePositionSpan GetLineSpan(TextSpan span, CancellationToken cancellationToken = default);
+        public abstract FileLinePositionSpan GetLineSpan(
+            TextSpan span,
+            CancellationToken cancellationToken = default
+        );
 
         /// <summary>
         /// Gets the location in terms of path, line and column after applying source line mapping directives 
@@ -225,14 +241,20 @@ namespace Microsoft.CodeAnalysis
         /// A location path is considered mapped if the first <c>#line</c> directive that precedes it and that 
         /// either specifies an explicit file path or is <c>#line default</c> exists and specifies an explicit path.
         /// </returns>
-        public abstract FileLinePositionSpan GetMappedLineSpan(TextSpan span, CancellationToken cancellationToken = default);
+        public abstract FileLinePositionSpan GetMappedLineSpan(
+            TextSpan span,
+            CancellationToken cancellationToken = default
+        );
 
         /// <summary>
         /// Returns the visibility for the line at the given position.
         /// </summary>
         /// <param name="position">The position to check.</param>
-        /// <param name="cancellationToken">The cancellation token.</param> 
-        public virtual LineVisibility GetLineVisibility(int position, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken">The cancellation token.</param>
+        public virtual LineVisibility GetLineVisibility(
+            int position,
+            CancellationToken cancellationToken = default
+        )
         {
             return LineVisibility.Visible;
         }
@@ -246,7 +268,10 @@ namespace Microsoft.CodeAnalysis
         /// <param name="isHiddenPosition">Returns a boolean indicating whether this span is considered hidden or not.</param>
         /// <remarks>This function is being called only in the context of sequence point creation and therefore interprets the 
         /// LineVisibility accordingly (BeforeFirstRemappingDirective -> Visible).</remarks>
-        internal virtual FileLinePositionSpan GetMappedLineSpanAndVisibility(TextSpan span, out bool isHiddenPosition)
+        internal virtual FileLinePositionSpan GetMappedLineSpanAndVisibility(
+            TextSpan span,
+            out bool isHiddenPosition
+        )
         {
             isHiddenPosition = GetLineVisibility(span.Start) == LineVisibility.Hidden;
             return GetMappedLineSpan(span);
@@ -270,7 +295,10 @@ namespace Microsoft.CodeAnalysis
                 return mappedSpan.Path;
             }
 
-            return resolver.NormalizePath(mappedSpan.Path, baseFilePath: mappedSpan.HasMappedPath ? FilePath : null) ?? mappedSpan.Path;
+            return resolver.NormalizePath(
+                    mappedSpan.Path,
+                    baseFilePath: mappedSpan.HasMappedPath ? FilePath : null
+                ) ?? mappedSpan.Path;
         }
 
         /// <summary>
@@ -369,8 +397,13 @@ namespace Microsoft.CodeAnalysis
         /// A mapping from diagnostic id to diagnostic reporting level. The diagnostic ID may be case-sensitive depending
         /// on the language.
         /// </param>
-        [Obsolete("Obsolete due to performance problems, use CompilationOptions.SyntaxTreeOptionsProvider instead", error: false)]
-        public virtual SyntaxTree WithDiagnosticOptions(ImmutableDictionary<string, ReportDiagnostic> options)
+        [Obsolete(
+            "Obsolete due to performance problems, use CompilationOptions.SyntaxTreeOptionsProvider instead",
+            error: false
+        )]
+        public virtual SyntaxTree WithDiagnosticOptions(
+            ImmutableDictionary<string, ReportDiagnostic> options
+        )
         {
             throw new NotImplementedException();
         }

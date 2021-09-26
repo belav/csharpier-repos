@@ -37,14 +37,16 @@ namespace Microsoft.Extensions.ApiDescription.Client
             string projectFileName,
             string[] targetNames,
             IDictionary globalProperties,
-            IDictionary targetOutputs) => false;
+            IDictionary targetOutputs
+        ) => false;
 
         public bool BuildProjectFile(
             string projectFileName,
             string[] targetNames,
             IDictionary globalProperties,
             IDictionary targetOutputs,
-            string toolsVersion) => false;
+            string toolsVersion
+        ) => false;
 
         public bool BuildProjectFilesInParallel(
             string[] projectFileNames,
@@ -53,7 +55,8 @@ namespace Microsoft.Extensions.ApiDescription.Client
             IDictionary[] targetOutputsPerProject,
             string[] toolsVersion,
             bool useResultsCache,
-            bool unloadProjectsOnCompletion) => false;
+            bool unloadProjectsOnCompletion
+        ) => false;
 
         public BuildEngineResult BuildProjectFilesInParallel(
             string[] projectFileNames,
@@ -61,7 +64,8 @@ namespace Microsoft.Extensions.ApiDescription.Client
             IDictionary[] globalProperties,
             IList<string>[] undefineProperties,
             string[] toolsVersion,
-            bool includeTargetOutputs) => new BuildEngineResult(false, null);
+            bool includeTargetOutputs
+        ) => new BuildEngineResult(false, null);
 
         public void LogErrorEvent(BuildErrorEventArgs eventArgs)
         {
@@ -91,12 +95,8 @@ namespace Microsoft.Extensions.ApiDescription.Client
             }
         }
 
-        public void Reacquire()
-        {
-        }
+        public void Reacquire() { }
 
-        public void Yield()
-        {
-        }
+        public void Yield() { }
     }
 }

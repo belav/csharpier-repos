@@ -10,7 +10,8 @@ namespace AutoMapper
     /// <typeparam name="TSource">Source type for this member</typeparam>
     /// <typeparam name="TMember">Type for this member</typeparam>
     /// <typeparam name="TDestination">Destination type for this map</typeparam>
-    public interface IMemberConfigurationExpression<TSource, TDestination, TMember> : IProjectionMemberConfiguration<TSource, TDestination, TMember>
+    public interface IMemberConfigurationExpression<TSource, TDestination, TMember>
+        : IProjectionMemberConfiguration<TSource, TDestination, TMember>
     {
         /// <summary>
         /// Do not precompute the execution plan for this member, just map it at runtime.
@@ -22,15 +23,23 @@ namespace AutoMapper
         /// </summary>
         /// <remarks>Not used for LINQ projection (ProjectTo)</remarks>
         /// <typeparam name="TValueResolver">Value resolver type</typeparam>
-        void MapFrom<TValueResolver>() where TValueResolver : IValueResolver<TSource, TDestination, TMember>;
+        void MapFrom<TValueResolver>()
+            where TValueResolver : IValueResolver<TSource, TDestination, TMember>;
         /// <summary>
         /// Map destination member using a custom member value resolver supplied with a source member
         /// </summary>
         /// <remarks>Not used for LINQ projection (ProjectTo)</remarks>
         /// <typeparam name="TValueResolver">Value resolver type</typeparam>
         /// <typeparam name="TSourceMember">Source member to supply</typeparam>
-        void MapFrom<TValueResolver, TSourceMember>(Expression<Func<TSource, TSourceMember>> sourceMember) 
-            where TValueResolver : IMemberValueResolver<TSource, TDestination, TSourceMember, TMember>;
+        void MapFrom<TValueResolver, TSourceMember>(
+            Expression<Func<TSource, TSourceMember>> sourceMember
+        )
+            where TValueResolver : IMemberValueResolver<
+                    TSource,
+                    TDestination,
+                    TSourceMember,
+                    TMember
+                >;
         /// <summary>
         /// Map destination member using a custom member value resolver supplied from a source member name
         /// </summary>
@@ -38,8 +47,13 @@ namespace AutoMapper
         /// <typeparam name="TValueResolver">Value resolver type</typeparam>
         /// <typeparam name="TSourceMember">Source member to supply</typeparam>
         /// <param name="sourceMemberName">Source member name</param>
-        void MapFrom<TValueResolver, TSourceMember>(string sourceMemberName) 
-            where TValueResolver : IMemberValueResolver<TSource, TDestination, TSourceMember, TMember>;
+        void MapFrom<TValueResolver, TSourceMember>(string sourceMemberName)
+            where TValueResolver : IMemberValueResolver<
+                    TSource,
+                    TDestination,
+                    TSourceMember,
+                    TMember
+                >;
         /// <summary>
         /// Map destination member using a custom value resolver instance
         /// </summary>
@@ -52,7 +66,10 @@ namespace AutoMapper
         /// <remarks>Not used for LINQ projection (ProjectTo)</remarks>
         /// <param name="valueResolver">Value resolver instance to use</param>
         /// <param name="sourceMember">Source member to supply to value resolver</param>
-        void MapFrom<TSourceMember>(IMemberValueResolver<TSource, TDestination, TSourceMember, TMember> valueResolver, Expression<Func<TSource, TSourceMember>> sourceMember);
+        void MapFrom<TSourceMember>(
+            IMemberValueResolver<TSource, TDestination, TSourceMember, TMember> valueResolver,
+            Expression<Func<TSource, TSourceMember>> sourceMember
+        );
         /// <summary>
         /// Map destination member using a custom function. Access both the source and destination object.
         /// </summary>
@@ -70,7 +87,9 @@ namespace AutoMapper
         /// </summary>
         /// <remarks>Not used for LINQ projection (ProjectTo)</remarks>
         /// <param name="mappingFunction">Function to map to destination member</param>
-        void MapFrom<TResult>(Func<TSource, TDestination, TMember, ResolutionContext, TResult> mappingFunction);
+        void MapFrom<TResult>(
+            Func<TSource, TDestination, TMember, ResolutionContext, TResult> mappingFunction
+        );
         /// <summary>
         /// Specify the source member(s) to map from.
         /// </summary>
@@ -93,7 +112,9 @@ namespace AutoMapper
         /// Conditionally map this member against the source, destination, source and destination members
         /// </summary>
         /// <param name="condition">Condition to evaluate using the source object</param>
-        void Condition(Func<TSource, TDestination, TMember, TMember, ResolutionContext, bool> condition);
+        void Condition(
+            Func<TSource, TDestination, TMember, TMember, ResolutionContext, bool> condition
+        );
         /// <summary>
         /// Conditionally map this member
         /// </summary>
@@ -147,7 +168,8 @@ namespace AutoMapper
         /// </remarks>
         /// <typeparam name="TValueConverter">Value converter type</typeparam>
         /// <typeparam name="TSourceMember">Source member type</typeparam>
-        void ConvertUsing<TValueConverter, TSourceMember>() where TValueConverter : IValueConverter<TSourceMember, TMember>;
+        void ConvertUsing<TValueConverter, TSourceMember>()
+            where TValueConverter : IValueConverter<TSourceMember, TMember>;
         /// <summary>
         /// Specify a value converter to convert from the specified source member to the destination member
         /// </summary>
@@ -158,7 +180,9 @@ namespace AutoMapper
         /// <typeparam name="TValueConverter">Value converter type</typeparam>
         /// <typeparam name="TSourceMember">Source member type</typeparam>
         /// <param name="sourceMember">Source member to supply to the value converter</param>
-        void ConvertUsing<TValueConverter, TSourceMember>(Expression<Func<TSource, TSourceMember>> sourceMember) where TValueConverter : IValueConverter<TSourceMember, TMember>;
+        void ConvertUsing<TValueConverter, TSourceMember>(
+            Expression<Func<TSource, TSourceMember>> sourceMember
+        ) where TValueConverter : IValueConverter<TSourceMember, TMember>;
         /// <summary>
         /// Specify a value converter to convert from the specified source member name to the destination member
         /// </summary>
@@ -169,7 +193,8 @@ namespace AutoMapper
         /// <typeparam name="TValueConverter">Value converter type</typeparam>
         /// <typeparam name="TSourceMember">Source member type</typeparam>
         /// <param name="sourceMemberName">Source member name to supply to the value converter</param>
-        void ConvertUsing<TValueConverter, TSourceMember>(string sourceMemberName) where TValueConverter : IValueConverter<TSourceMember, TMember>;
+        void ConvertUsing<TValueConverter, TSourceMember>(string sourceMemberName)
+            where TValueConverter : IValueConverter<TSourceMember, TMember>;
         /// <summary>
         /// Specify a value converter instance to convert from the matching source member to the destination member
         /// </summary>
@@ -190,7 +215,10 @@ namespace AutoMapper
         /// <typeparam name="TSourceMember">Source member type</typeparam>
         /// <param name="valueConverter">Value converter instance</param>
         /// <param name="sourceMember">Source member to supply to the value converter</param>
-        void ConvertUsing<TSourceMember>(IValueConverter<TSourceMember, TMember> valueConverter, Expression<Func<TSource, TSourceMember>> sourceMember);
+        void ConvertUsing<TSourceMember>(
+            IValueConverter<TSourceMember, TMember> valueConverter,
+            Expression<Func<TSource, TSourceMember>> sourceMember
+        );
         /// <summary>
         /// Specify a value converter instance to convert from the specified source member name to the destination member
         /// </summary>
@@ -201,12 +229,16 @@ namespace AutoMapper
         /// <typeparam name="TSourceMember">Source member type</typeparam>
         /// <param name="valueConverter">Value converter instance</param>
         /// <param name="sourceMemberName">Source member name to supply to the value converter</param>
-        void ConvertUsing<TSourceMember>(IValueConverter<TSourceMember, TMember> valueConverter, string sourceMemberName);
+        void ConvertUsing<TSourceMember>(
+            IValueConverter<TSourceMember, TMember> valueConverter,
+            string sourceMemberName
+        );
     }
     /// <summary>
     /// Configuration options for an individual member
     /// </summary>
-    public interface IMemberConfigurationExpression : IMemberConfigurationExpression<object, object, object>
+    public interface IMemberConfigurationExpression
+        : IMemberConfigurationExpression<object, object, object>
     {
         /// <summary>
         /// Map destination member using a custom value resolver. Used when the value resolver is not known at compile-time
@@ -227,7 +259,10 @@ namespace AutoMapper
         /// <remarks>Not used for LINQ projection (ProjectTo)</remarks>
         /// <param name="valueResolver">Value resolver instance to use</param>
         /// <param name="sourceMemberName">Source member to supply to value resolver</param>
-        void MapFrom<TSource, TDestination, TSourceMember, TDestMember>(IMemberValueResolver<TSource, TDestination, TSourceMember, TDestMember> valueResolver, string sourceMemberName);
+        void MapFrom<TSource, TDestination, TSourceMember, TDestMember>(
+            IMemberValueResolver<TSource, TDestination, TSourceMember, TDestMember> valueResolver,
+            string sourceMemberName
+        );
         /// <summary>
         /// Specify a value converter type to convert from the matching source member to the destination member
         /// </summary>
@@ -258,7 +293,10 @@ namespace AutoMapper
         /// <typeparam name="TDestinationMember">Destination member type</typeparam>
         /// <param name="valueConverter">Value converter instance</param>
         /// <param name="sourceMemberName">Source member name to supply to the value converter</param>
-        void ConvertUsing<TSourceMember, TDestinationMember>(IValueConverter<TSourceMember, TDestinationMember> valueConverter, string sourceMemberName);
+        void ConvertUsing<TSourceMember, TDestinationMember>(
+            IValueConverter<TSourceMember, TDestinationMember> valueConverter,
+            string sourceMemberName
+        );
     }
     /// <summary>
     /// Member configuration options
@@ -329,13 +367,23 @@ namespace AutoMapper
         /// <param name="destMember">Destination member</param>
         /// <param name="context">The context of the mapping</param>
         /// <returns>Result, typically build from the source resolution result</returns>
-        TDestMember Resolve(TSource source, TDestination destination, TDestMember destMember, ResolutionContext context);
+        TDestMember Resolve(
+            TSource source,
+            TDestination destination,
+            TDestMember destMember,
+            ResolutionContext context
+        );
     }
 
     /// <summary>
     /// Extension point to provide custom resolution for a destination value
     /// </summary>
-    public interface IMemberValueResolver<in TSource, in TDestination, in TSourceMember, TDestMember>
+    public interface IMemberValueResolver<
+        in TSource,
+        in TDestination,
+        in TSourceMember,
+        TDestMember
+    >
     {
         /// <summary>
         /// Implementors use source object to provide a destination object.
@@ -346,6 +394,12 @@ namespace AutoMapper
         /// <param name="destMember">Destination member</param>
         /// <param name="context">The context of the mapping</param>
         /// <returns>Result, typically build from the source resolution result</returns>
-        TDestMember Resolve(TSource source, TDestination destination, TSourceMember sourceMember, TDestMember destMember, ResolutionContext context);
+        TDestMember Resolve(
+            TSource source,
+            TDestination destination,
+            TSourceMember sourceMember,
+            TDestMember destMember,
+            ResolutionContext context
+        );
     }
 }

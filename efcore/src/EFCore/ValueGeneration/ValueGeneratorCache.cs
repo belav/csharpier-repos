@@ -38,7 +38,11 @@ namespace Microsoft.EntityFrameworkCore.ValueGeneration
 
         private readonly struct CacheKey : IEquatable<CacheKey>
         {
-            public CacheKey(IProperty property, IEntityType entityType, Func<IProperty, IEntityType, ValueGenerator> factory)
+            public CacheKey(
+                IProperty property,
+                IEntityType entityType,
+                Func<IProperty, IEntityType, ValueGenerator> factory
+            )
             {
                 Property = property;
                 EntityType = entityType;
@@ -51,14 +55,13 @@ namespace Microsoft.EntityFrameworkCore.ValueGeneration
 
             public Func<IProperty, IEntityType, ValueGenerator> Factory { get; }
 
-            public bool Equals(CacheKey other)
-                => Property.Equals(other.Property) && EntityType.Equals(other.EntityType);
+            public bool Equals(CacheKey other) =>
+                Property.Equals(other.Property) && EntityType.Equals(other.EntityType);
 
-            public override bool Equals(object? obj)
-                => obj is CacheKey cacheKey && Equals(cacheKey);
+            public override bool Equals(object? obj) =>
+                obj is CacheKey cacheKey && Equals(cacheKey);
 
-            public override int GetHashCode()
-                => HashCode.Combine(Property, EntityType);
+            public override int GetHashCode() => HashCode.Combine(Property, EntityType);
         }
 
         /// <summary>
@@ -75,12 +78,16 @@ namespace Microsoft.EntityFrameworkCore.ValueGeneration
         public virtual ValueGenerator GetOrAdd(
             IProperty property,
             IEntityType entityType,
-            Func<IProperty, IEntityType, ValueGenerator> factory)
+            Func<IProperty, IEntityType, ValueGenerator> factory
+        )
         {
             Check.NotNull(property, nameof(property));
             Check.NotNull(factory, nameof(factory));
 
-            return _cache.GetOrAdd(new CacheKey(property, entityType, factory), ck => ck.Factory(ck.Property, ck.EntityType));
+            return _cache.GetOrAdd(
+                new CacheKey(property, entityType, factory),
+                ck => ck.Factory(ck.Property, ck.EntityType)
+            );
         }
     }
 }

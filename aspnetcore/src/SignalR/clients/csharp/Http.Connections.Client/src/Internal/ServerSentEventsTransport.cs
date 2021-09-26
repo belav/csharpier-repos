@@ -23,7 +23,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Client.Internal
         private volatile Exception? _error;
         private readonly CancellationTokenSource _transportCts = new CancellationTokenSource();
         private readonly CancellationTokenSource _inputCts = new CancellationTokenSource();
-        private readonly ServerSentEventsMessageParser _parser = new ServerSentEventsMessageParser();
+        private readonly ServerSentEventsMessageParser _parser =
+            new ServerSentEventsMessageParser();
         private IDuplexPipe? _transport;
         private IDuplexPipe? _application;
 
@@ -33,9 +34,7 @@ namespace Microsoft.AspNetCore.Http.Connections.Client.Internal
 
         public PipeWriter Output => _transport!.Output;
 
-        public ServerSentEventsTransport(HttpClient httpClient)
-            : this(httpClient, null)
-        { }
+        public ServerSentEventsTransport(HttpClient httpClient) : this(httpClient, null) { }
 
         public ServerSentEventsTransport(HttpClient httpClient, ILoggerFactory? loggerFactory)
         {
@@ -45,14 +44,23 @@ namespace Microsoft.AspNetCore.Http.Connections.Client.Internal
             }
 
             _httpClient = httpClient;
-            _logger = (loggerFactory ?? NullLoggerFactory.Instance).CreateLogger<ServerSentEventsTransport>();
+            _logger = (
+                loggerFactory ?? NullLoggerFactory.Instance
+            ).CreateLogger<ServerSentEventsTransport>();
         }
 
-        public async Task StartAsync(Uri url, TransferFormat transferFormat, CancellationToken cancellationToken = default)
+        public async Task StartAsync(
+            Uri url,
+            TransferFormat transferFormat,
+            CancellationToken cancellationToken = default
+        )
         {
             if (transferFormat != TransferFormat.Text)
             {
-                throw new ArgumentException($"The '{transferFormat}' transfer format is not supported by this transport.", nameof(transferFormat));
+                throw new ArgumentException(
+                    $"The '{transferFormat}' transfer format is not supported by this transport.",
+                    nameof(transferFormat)
+                );
             }
 
             Log.StartTransport(_logger, transferFormat);
@@ -64,7 +72,11 @@ namespace Microsoft.AspNetCore.Http.Connections.Client.Internal
 
             try
             {
-                response = await _httpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, cancellationToken);
+                response = await _httpClient.SendAsync(
+                    request,
+                    HttpCompletionOption.ResponseHeadersRead,
+                    cancellationToken
+                );
                 response.EnsureSuccessStatusCode();
             }
             catch
@@ -97,7 +109,13 @@ namespace Microsoft.AspNetCore.Http.Connections.Client.Internal
 
             // Start sending and polling (ask for binary if the server supports it)
             var receiving = ProcessEventStream(response, _transportCts.Token);
-            var sending = SendUtils.SendMessages(url, _application, _httpClient, _logger, _inputCts.Token);
+            var sending = SendUtils.SendMessages(
+                url,
+                _application,
+                _httpClient,
+                _logger,
+                _inputCts.Token
+            );
 
             // Wait for send or receive to complete
             var trigger = await Task.WhenAny(receiving, sending);
@@ -129,7 +147,10 @@ namespace Microsoft.AspNetCore.Http.Connections.Client.Internal
             }
         }
 
-        private async Task ProcessEventStream(HttpResponseMessage response, CancellationToken cancellationToken)
+        private async Task ProcessEventStream(
+            HttpResponseMessage response,
+            CancellationToken cancellationToken
+        )
         {
             Debug.Assert(_application != null);
 
@@ -165,7 +186,12 @@ namespace Microsoft.AspNetCore.Http.Connections.Client.Internal
                             {
                                 Log.ParsingSSE(_logger, buffer.Length);
 
-                                var parseResult = _parser.ParseMessage(buffer, out consumed, out examined, out var message);
+                                var parseResult = _parser.ParseMessage(
+                                    buffer,
+                                    out consumed,
+                                    out examined,
+                                    out var message
+                                );
                                 FlushResult flushResult = default;
 
                                 switch (parseResult)
@@ -198,6 +224,7 @@ namespace Microsoft.AspNetCore.Http.Connections.Client.Internal
                                 break;
                             }
                         }
+
                         finally
                         {
                             reader.AdvanceTo(consumed, examined);

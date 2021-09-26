@@ -11,19 +11,12 @@ namespace System.Diagnostics
         public SourceSwitch(string name) : base(name, string.Empty) { }
 
         public SourceSwitch(string displayName, string defaultSwitchValue)
-            : base(displayName, string.Empty, defaultSwitchValue)
-        { }
+            : base(displayName, string.Empty, defaultSwitchValue) { }
 
         public SourceLevels Level
         {
-            get
-            {
-                return (SourceLevels)SwitchSetting;
-            }
-            set
-            {
-                SwitchSetting = (int)value;
-            }
+            get { return (SourceLevels)SwitchSetting; }
+            set { SwitchSetting = (int)value; }
         }
 
         public bool ShouldTrace(TraceEventType eventType)

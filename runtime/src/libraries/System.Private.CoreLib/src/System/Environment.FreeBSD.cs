@@ -7,6 +7,7 @@ namespace System
 {
     public static partial class Environment
     {
-        public static unsafe long WorkingSet => Interop.Process.GetProcInfo(ProcessId, true, out _)->ki_rssize;
+        public static unsafe long WorkingSet =>
+            Interop.Process.GetProcInfo(ProcessId, true, out _)->ki_rssize;
     }
 }

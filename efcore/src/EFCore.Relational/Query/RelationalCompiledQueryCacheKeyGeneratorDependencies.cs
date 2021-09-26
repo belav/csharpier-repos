@@ -56,7 +56,9 @@ namespace Microsoft.EntityFrameworkCore.Query
         ///     </para>
         /// </summary>
         [EntityFrameworkInternal]
-        public RelationalCompiledQueryCacheKeyGeneratorDependencies(IDbContextOptions contextOptions)
+        public RelationalCompiledQueryCacheKeyGeneratorDependencies(
+            IDbContextOptions contextOptions
+        )
         {
             Check.NotNull(contextOptions, nameof(contextOptions));
 

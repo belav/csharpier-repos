@@ -124,7 +124,10 @@ namespace Microsoft.AspNetCore.Mvc
             // SingleRegistrationServiceTypes_AreNotRegistered_MultipleTimes already checks that no other
             // ApplicationPartManager (but manager) is registered.
             Assert.Same(manager, builder.PartManager);
-            Assert.Contains(manager.FeatureProviders, provider => provider is ControllerFeatureProvider);
+            Assert.Contains(
+                manager.FeatureProviders,
+                provider => provider is ControllerFeatureProvider
+            );
         }
 
         // Regression test for aspnet/Mvc#5554.
@@ -144,7 +147,10 @@ namespace Microsoft.AspNetCore.Mvc
 
             // Assert
             Assert.Same(manager, builder.PartManager);
-            Assert.Contains(manager.FeatureProviders, provider => provider is ControllerFeatureProvider);
+            Assert.Contains(
+                manager.FeatureProviders,
+                provider => provider is ControllerFeatureProvider
+            );
         }
 
         [Fact]
@@ -162,7 +168,10 @@ namespace Microsoft.AspNetCore.Mvc
             // Assert
             Assert.NotNull(builder.PartManager);
             Assert.Empty(builder.PartManager.ApplicationParts);
-            Assert.Contains(builder.PartManager.FeatureProviders, provider => provider is ControllerFeatureProvider);
+            Assert.Contains(
+                builder.PartManager.FeatureProviders,
+                provider => provider is ControllerFeatureProvider
+            );
 
             environment.VerifyAll();
         }
@@ -186,7 +195,10 @@ namespace Microsoft.AspNetCore.Mvc
             // Assert
             Assert.NotNull(builder.PartManager);
             Assert.Empty(builder.PartManager.ApplicationParts);
-            Assert.Contains(builder.PartManager.FeatureProviders, provider => provider is ControllerFeatureProvider);
+            Assert.Contains(
+                builder.PartManager.FeatureProviders,
+                provider => provider is ControllerFeatureProvider
+            );
 
             environment.VerifyAll();
         }
@@ -209,8 +221,12 @@ namespace Microsoft.AspNetCore.Mvc
             Assert.NotNull(builder.PartManager);
             Assert.Contains(
                 builder.PartManager.ApplicationParts,
-                part => string.Equals(assemblyName.Name, part.Name, StringComparison.Ordinal));
-            Assert.Contains(builder.PartManager.FeatureProviders, provider => provider is ControllerFeatureProvider);
+                part => string.Equals(assemblyName.Name, part.Name, StringComparison.Ordinal)
+            );
+            Assert.Contains(
+                builder.PartManager.FeatureProviders,
+                provider => provider is ControllerFeatureProvider
+            );
 
             environment.VerifyAll();
         }
@@ -223,8 +239,9 @@ namespace Microsoft.AspNetCore.Mvc
                 MvcCoreServiceCollectionExtensions.AddMvcCoreServices(services);
 
                 var multiRegistrationServiceTypes = MultiRegistrationServiceTypes;
-                return services
-                    .Where(sd => !multiRegistrationServiceTypes.Keys.Contains(sd.ServiceType))
+                return services.Where(
+                        sd => !multiRegistrationServiceTypes.Keys.Contains(sd.ServiceType)
+                    )
                     .Select(sd => sd.ServiceType);
             }
         }
@@ -237,73 +254,40 @@ namespace Microsoft.AspNetCore.Mvc
                 {
                     {
                         typeof(IConfigureOptions<MvcOptions>),
-                        new Type[]
-                        {
-                            typeof(MvcCoreMvcOptionsSetup),
-                        }
+                        new Type[] { typeof(MvcCoreMvcOptionsSetup), }
                     },
                     {
                         typeof(IPostConfigureOptions<MvcOptions>),
-                        new Type[]
-                        {
-                            typeof(MvcCoreMvcOptionsSetup),
-                        }
+                        new Type[] { typeof(MvcCoreMvcOptionsSetup), }
                     },
                     {
                         typeof(IConfigureOptions<RouteOptions>),
-                        new Type[]
-                        {
-                            typeof(MvcCoreRouteOptionsSetup),
-                        }
+                        new Type[] { typeof(MvcCoreRouteOptionsSetup), }
                     },
                     {
                         typeof(IConfigureOptions<ApiBehaviorOptions>),
-                        new Type[]
-                        {
-                            typeof(ApiBehaviorOptionsSetup),
-                        }
+                        new Type[] { typeof(ApiBehaviorOptionsSetup), }
                     },
                     {
                         typeof(IActionConstraintProvider),
-                        new Type[]
-                        {
-                            typeof(DefaultActionConstraintProvider),
-                        }
+                        new Type[] { typeof(DefaultActionConstraintProvider), }
                     },
                     {
                         typeof(IActionDescriptorProvider),
-                        new Type[]
-                        {
-                            typeof(ControllerActionDescriptorProvider),
-                        }
+                        new Type[] { typeof(ControllerActionDescriptorProvider), }
                     },
                     {
                         typeof(IActionInvokerProvider),
-                        new Type[]
-                        {
-                            typeof(ControllerActionInvokerProvider),
-                        }
+                        new Type[] { typeof(ControllerActionInvokerProvider), }
                     },
                     {
                         typeof(IRequestDelegateFactory),
-                        new Type[]
-                        {
-                            typeof(ControllerRequestDelegateFactory)
-                        }
+                        new Type[] { typeof(ControllerRequestDelegateFactory) }
                     },
-                    {
-                        typeof(IFilterProvider),
-                        new Type[]
-                        {
-                            typeof(DefaultFilterProvider),
-                        }
-                    },
+                    { typeof(IFilterProvider), new Type[] { typeof(DefaultFilterProvider), } },
                     {
                         typeof(IControllerPropertyActivator),
-                        new Type[]
-                        {
-                            typeof(DefaultControllerPropertyActivator),
-                        }
+                        new Type[] { typeof(DefaultControllerPropertyActivator), }
                     },
                     {
                         typeof(IApplicationModelProvider),
@@ -315,10 +299,7 @@ namespace Microsoft.AspNetCore.Mvc
                     },
                     {
                         typeof(IStartupFilter),
-                        new Type[]
-                        {
-                            typeof(MiddlewareFilterBuilderStartupFilter)
-                        }
+                        new Type[] { typeof(MiddlewareFilterBuilderStartupFilter) }
                     },
                     {
                         typeof(MatcherPolicy),
@@ -336,39 +317,46 @@ namespace Microsoft.AspNetCore.Mvc
         private void AssertServiceCountEquals(
             IServiceCollection services,
             Type serviceType,
-            int expectedServiceRegistrationCount)
+            int expectedServiceRegistrationCount
+        )
         {
-            var serviceDescriptors = services.Where(serviceDescriptor => serviceDescriptor.ServiceType == serviceType);
+            var serviceDescriptors = services.Where(
+                serviceDescriptor => serviceDescriptor.ServiceType == serviceType
+            );
             var actual = serviceDescriptors.Count();
 
             Assert.True(
                 (expectedServiceRegistrationCount == actual),
-                $"Expected service type '{serviceType}' to be registered {expectedServiceRegistrationCount}" +
-                $" time(s) but was actually registered {actual} time(s).");
+                $"Expected service type '{serviceType}' to be registered {expectedServiceRegistrationCount}"
+                    + $" time(s) but was actually registered {actual} time(s)."
+            );
         }
 
         private void AssertContainsSingle(
             IServiceCollection services,
             Type serviceType,
-            Type implementationType)
+            Type implementationType
+        )
         {
-            var matches = services
-                .Where(sd =>
-                    sd.ServiceType == serviceType &&
-                    sd.ImplementationType == implementationType)
+            var matches = services.Where(
+                    sd =>
+                        sd.ServiceType == serviceType && sd.ImplementationType == implementationType
+                )
                 .ToArray();
 
             if (matches.Length == 0)
             {
                 Assert.True(
                     false,
-                    $"Could not find an instance of {implementationType} registered as {serviceType}");
+                    $"Could not find an instance of {implementationType} registered as {serviceType}"
+                );
             }
             else if (matches.Length > 1)
             {
                 Assert.True(
                     false,
-                    $"Found multiple instances of {implementationType} registered as {serviceType}");
+                    $"Found multiple instances of {implementationType} registered as {serviceType}"
+                );
             }
         }
     }

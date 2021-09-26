@@ -34,17 +34,19 @@ namespace Microsoft.AspNetCore.Builder
         /// <param name="app"></param>
         /// <param name="enableDirectoryBrowsing">Should directory browsing be enabled?</param>
         /// <returns></returns>
-        public static IApplicationBuilder UseFileServer(this IApplicationBuilder app, bool enableDirectoryBrowsing)
+        public static IApplicationBuilder UseFileServer(
+            this IApplicationBuilder app,
+            bool enableDirectoryBrowsing
+        )
         {
             if (app == null)
             {
                 throw new ArgumentNullException(nameof(app));
             }
 
-            return app.UseFileServer(new FileServerOptions
-            {
-                EnableDirectoryBrowsing = enableDirectoryBrowsing
-            });
+            return app.UseFileServer(
+                new FileServerOptions { EnableDirectoryBrowsing = enableDirectoryBrowsing }
+            );
         }
 
         /// <summary>
@@ -53,7 +55,10 @@ namespace Microsoft.AspNetCore.Builder
         /// <param name="app"></param>
         /// <param name="requestPath">The relative request path.</param>
         /// <returns></returns>
-        public static IApplicationBuilder UseFileServer(this IApplicationBuilder app, string requestPath)
+        public static IApplicationBuilder UseFileServer(
+            this IApplicationBuilder app,
+            string requestPath
+        )
         {
             if (app == null)
             {
@@ -65,10 +70,9 @@ namespace Microsoft.AspNetCore.Builder
                 throw new ArgumentNullException(nameof(requestPath));
             }
 
-            return app.UseFileServer(new FileServerOptions
-            {
-                RequestPath = new PathString(requestPath)
-            });
+            return app.UseFileServer(
+                new FileServerOptions { RequestPath = new PathString(requestPath) }
+            );
         }
 
         /// <summary>
@@ -77,7 +81,10 @@ namespace Microsoft.AspNetCore.Builder
         /// <param name="app"></param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public static IApplicationBuilder UseFileServer(this IApplicationBuilder app, FileServerOptions options)
+        public static IApplicationBuilder UseFileServer(
+            this IApplicationBuilder app,
+            FileServerOptions options
+        )
         {
             if (app == null)
             {

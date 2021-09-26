@@ -4,15 +4,13 @@
 
 using System;
 
-
 namespace BoxTest
 {
     internal class Test
     {
         protected object Fibonacci(object num, object flag)
         {
-            if (num.GetType() != typeof(int) ||
-                flag.GetType() != typeof(bool))
+            if (num.GetType() != typeof(int) || flag.GetType() != typeof(bool))
                 throw new Exception();
 
             return Fibonacci2(num, flag);

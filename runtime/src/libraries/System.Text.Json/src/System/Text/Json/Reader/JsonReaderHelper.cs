@@ -68,14 +68,21 @@ namespace System.Text.Json
         public static int IndexOfQuoteOrAnyControlOrBackSlash(this ReadOnlySpan<byte> span)
         {
             return IndexOfOrLessThan(
-                    ref MemoryMarshal.GetReference(span),
-                    JsonConstants.Quote,
-                    JsonConstants.BackSlash,
-                    lessThan: 32,   // Space ' '
-                    span.Length);
+                ref MemoryMarshal.GetReference(span),
+                JsonConstants.Quote,
+                JsonConstants.BackSlash,
+                lessThan: 32, // Space ' '
+                span.Length
+            );
         }
 
-        private static unsafe int IndexOfOrLessThan(ref byte searchSpace, byte value0, byte value1, byte lessThan, int length)
+        private static unsafe int IndexOfOrLessThan(
+            ref byte searchSpace,
+            byte value0,
+            byte value1,
+            byte lessThan,
+            int length
+        )
         {
             Debug.Assert(length >= 0);
 
@@ -90,7 +97,7 @@ namespace System.Text.Json
                 int unaligned = (int)Unsafe.AsPointer(ref searchSpace) & (Vector<byte>.Count - 1);
                 nLength = (IntPtr)((Vector<byte>.Count - unaligned) & (Vector<byte>.Count - 1));
             }
-        SequentialScan:
+            SequentialScan:
             uint lookUp;
             while ((byte*)nLength >= (byte*)8)
             {
@@ -166,13 +173,17 @@ namespace System.Text.Json
 
                 while ((byte*)nLength > (byte*)index)
                 {
-                    Vector<byte> vData = Unsafe.ReadUnaligned<Vector<byte>>(ref Unsafe.AddByteOffset(ref searchSpace, index));
+                    Vector<byte> vData = Unsafe.ReadUnaligned<Vector<byte>>(
+                        ref Unsafe.AddByteOffset(ref searchSpace, index)
+                    );
 
                     var vMatches = Vector.BitwiseOr(
-                                    Vector.BitwiseOr(
-                                        Vector.Equals(vData, values0),
-                                        Vector.Equals(vData, values1)),
-                                    Vector.LessThan(vData, valuesLessThan));
+                        Vector.BitwiseOr(
+                            Vector.Equals(vData, values0),
+                            Vector.Equals(vData, values1)
+                        ),
+                        Vector.LessThan(vData, valuesLessThan)
+                    );
 
                     if (Vector<byte>.Zero.Equals(vMatches))
                     {
@@ -190,21 +201,21 @@ namespace System.Text.Json
                 }
             }
             return -1;
-        Found: // Workaround for https://github.com/dotnet/runtime/issues/8795
+            Found: // Workaround for https://github.com/dotnet/runtime/issues/8795
             return (int)(byte*)index;
-        Found1:
+            Found1:
             return (int)(byte*)(index + 1);
-        Found2:
+            Found2:
             return (int)(byte*)(index + 2);
-        Found3:
+            Found3:
             return (int)(byte*)(index + 3);
-        Found4:
+            Found4:
             return (int)(byte*)(index + 4);
-        Found5:
+            Found5:
             return (int)(byte*)(index + 5);
-        Found6:
+            Found6:
             return (int)(byte*)(index + 6);
-        Found7:
+            Found7:
             return (int)(byte*)(index + 7);
         }
 
@@ -238,13 +249,16 @@ namespace System.Text.Json
             return (int)((powerOfTwoFlag * XorPowerOfTwoToHighByte) >> 57);
         }
 
-        private const ulong XorPowerOfTwoToHighByte = (0x07ul |
-                                               0x06ul << 8 |
-                                               0x05ul << 16 |
-                                               0x04ul << 24 |
-                                               0x03ul << 32 |
-                                               0x02ul << 40 |
-                                               0x01ul << 48) + 1;
+        private const ulong XorPowerOfTwoToHighByte =
+            (
+                0x07ul
+                | 0x06ul << 8
+                | 0x05ul << 16
+                | 0x04ul << 24
+                | 0x03ul << 32
+                | 0x02ul << 40
+                | 0x01ul << 48
+            ) + 1;
 
         public static bool TryGetEscapedDateTime(ReadOnlySpan<byte> source, out DateTime value)
         {
@@ -260,8 +274,10 @@ namespace System.Text.Json
             sourceUnescaped = sourceUnescaped.Slice(0, written);
             Debug.Assert(!sourceUnescaped.IsEmpty);
 
-            if (sourceUnescaped.Length <= JsonConstants.MaximumDateTimeOffsetParseLength
-                && JsonHelpers.TryParseAsISO(sourceUnescaped, out DateTime tmp))
+            if (
+                sourceUnescaped.Length <= JsonConstants.MaximumDateTimeOffsetParseLength
+                && JsonHelpers.TryParseAsISO(sourceUnescaped, out DateTime tmp)
+            )
             {
                 value = tmp;
                 return true;
@@ -271,7 +287,10 @@ namespace System.Text.Json
             return false;
         }
 
-        public static bool TryGetEscapedDateTimeOffset(ReadOnlySpan<byte> source, out DateTimeOffset value)
+        public static bool TryGetEscapedDateTimeOffset(
+            ReadOnlySpan<byte> source,
+            out DateTimeOffset value
+        )
         {
             int backslash = source.IndexOf(JsonConstants.BackSlash);
             Debug.Assert(backslash != -1);
@@ -285,8 +304,10 @@ namespace System.Text.Json
             sourceUnescaped = sourceUnescaped.Slice(0, written);
             Debug.Assert(!sourceUnescaped.IsEmpty);
 
-            if (sourceUnescaped.Length <= JsonConstants.MaximumDateTimeOffsetParseLength
-                && JsonHelpers.TryParseAsISO(sourceUnescaped, out DateTimeOffset tmp))
+            if (
+                sourceUnescaped.Length <= JsonConstants.MaximumDateTimeOffsetParseLength
+                && JsonHelpers.TryParseAsISO(sourceUnescaped, out DateTimeOffset tmp)
+            )
             {
                 value = tmp;
                 return true;
@@ -311,8 +332,10 @@ namespace System.Text.Json
             utf8Unescaped = utf8Unescaped.Slice(0, written);
             Debug.Assert(!utf8Unescaped.IsEmpty);
 
-            if (utf8Unescaped.Length == JsonConstants.MaximumFormatGuidLength
-                && Utf8Parser.TryParse(utf8Unescaped, out Guid tmp, out _, 'D'))
+            if (
+                utf8Unescaped.Length == JsonConstants.MaximumFormatGuidLength
+                && Utf8Parser.TryParse(utf8Unescaped, out Guid tmp, out _, 'D')
+            )
             {
                 value = tmp;
                 return true;
